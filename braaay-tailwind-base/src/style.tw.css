@@ -554,6 +554,36 @@ video {
   --tw-contain-style:  ;
 }
 
+.btn {
+  border-radius: 9999px;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(227 227 227 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-family: Roboto, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.1em;
+  --tw-text-opacity: 1;
+  color: rgb(33 38 57 / var(--tw-text-opacity));
+}
+
+.btn:hover {
+  opacity: 0.5;
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(160 160 160 / var(--tw-ring-opacity));
+}
+
+.btn:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -650,12 +680,32 @@ video {
   height: 2rem;
 }
 
-.h-9 {
-  height: 2.25rem;
+.h-\[38px\] {
+  height: 38px;
 }
 
 .h-\[45px\] {
   height: 45px;
+}
+
+.h-\[90px\] {
+  height: 90px;
+}
+
+.h-\[10px\] {
+  height: 10px;
+}
+
+.h-0 {
+  height: 0px;
+}
+
+.h-\[20px\] {
+  height: 20px;
+}
+
+.h-\[50px\] {
+  height: 50px;
 }
 
 .w-5 {
@@ -797,6 +847,21 @@ video {
   padding-bottom: 1.5rem;
 }
 
+.py-\[45px\] {
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+
+.py-\[30px\] {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.py-\[5px\] {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .py-7 {
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
@@ -814,6 +879,10 @@ video {
   padding-left: 1.5rem;
 }
 
+.pr-2 {
+  padding-right: 0.5rem;
+}
+
 .pr-3 {
   padding-right: 0.75rem;
 }
@@ -824,6 +893,14 @@ video {
 
 .pr-8 {
   padding-right: 2rem;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.font-roboto {
+  font-family: Roboto, sans-serif;
 }
 
 .text-base {
@@ -840,8 +917,8 @@ video {
   font-weight: 600;
 }
 
-.leading-6 {
-  line-height: 1.5rem;
+.uppercase {
+  text-transform: uppercase;
 }
 
 .leading-7 {
@@ -852,6 +929,88 @@ video {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-inner {
+  --tw-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: inset 0 2px 4px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-\[inset_0_2px_1px_rgba\(0\2c 0\2c 0\2c 0\.025\)\] {
+  --tw-shadow: inset 0 2px 1px rgba(0,0,0,0.025);
+  --tw-shadow-colored: inset 0 2px 1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.placeholder\:font-light::-moz-placeholder {
+  font-weight: 300;
+}
+
+.placeholder\:font-light::placeholder {
+  font-weight: 300;
+}
+
+.placeholder\:italic::-moz-placeholder {
+  font-style: italic;
+}
+
+.placeholder\:italic::placeholder {
+  font-style: italic;
+}
+
+.placeholder\:tracking-widest::-moz-placeholder {
+  letter-spacing: 0.1em;
+}
+
+.placeholder\:tracking-widest::placeholder {
+  letter-spacing: 0.1em;
+}
+
+.placeholder\:tracking-wider::-moz-placeholder {
+  letter-spacing: 0.05em;
+}
+
+.placeholder\:tracking-wider::placeholder {
+  letter-spacing: 0.05em;
+}
+
+.placeholder\:tracking-wide::-moz-placeholder {
+  letter-spacing: 0.025em;
+}
+
+.placeholder\:tracking-wide::placeholder {
+  letter-spacing: 0.025em;
+}
+
+.placeholder\:text-grey-lighter::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(227 227 227 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-grey-lighter::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(227 227 227 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-grey-light::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(195 195 195 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-grey-light::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(195 195 195 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-grey-medium::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(160 160 160 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-grey-medium::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(160 160 160 / var(--tw-text-opacity));
 }
 
 .focus\:ring-0:focus {
