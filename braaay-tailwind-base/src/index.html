@@ -12,44 +12,39 @@
         />
         <!-- icons -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" defer />
-
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
         <link href="./style.tw.css" rel="stylesheet" />
-        <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            clifford: "#da373d",
-                        },
-                    },
-                },
-            };
-        </script>
-        <style type="text/tailwindcss">
-            @layer utilities {
-                /* .content-auto {
-                    content-visibility: auto;
-                } */
-            }
-        </style> -->
     </head>
     <body class="bg-grey-background">
-        <header class="bg-white">
-            <nav class="mx-auto flex max-w-screen-lg items-center justify-between h-[90px]" aria-label="Global">
+        <header x-data="{ isOpen: false }" class="bg-white">
+            <nav
+                class="mx-[30px] lg:mx-auto flex max-w-screen-lg items-center justify-between h-[63px] lg:h-[90px]"
+                aria-label="Global"
+            >
+                <!-- logo -->
                 <div class="flex lg:flex-none pr-8">
-                    <a href="#" class="-m-1.5 p-1.5">
+                    <a href="#" class="">
                         <span class="sr-only">Braaay</span>
-                        <img class="h-[38px] w-auto" src="./images/logo-braaay-new.svg" alt="braaay-logo" />
+                        <img
+                            class="h-[38px] w-auto hidden lg:block"
+                            src="./images/logo-braaay-desktop.svg"
+                            alt="braaay-logo-desktop"
+                        />
+                        <img
+                            class="h-[21px] w-auto lg:hidden"
+                            src="./images/logo-braaay-mobile.svg"
+                            alt="braaay-logo-mobile"
+                        />
                     </a>
                 </div>
-
-                <div class="flex lg:hidden">
+                <!-- Mobile Menu Hamburger -->
+                <div class="flex lg:hidden hidden">
                     <button
+                        @click="isOpen = !isOpen"
                         type="button"
                         class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
                     >
-                        <span class="sr-only">Open main menu</span>
+                        <span class="sr-only">Abrir menu principal</span>
                         <svg
                             class="h-6 w-6"
                             fill="none"
@@ -91,25 +86,35 @@
                         Minha conta
                     </a>
                 </div>
+                <a href="#" class="bry-cart relative h-[45px] uppercase flex items-center">
+                    <i class="fa fa-bag"></i>
+                    <span
+                        class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
+                    >
+                        0
+                    </span>
+                </a>
             </nav>
 
             <!-- Mobile menu, show/hide based on menu open state. -->
             <div class="lg:hidden" role="dialog" aria-modal="true">
                 <!-- Background backdrop, show/hide based on slide-over state. -->
-                <div class="fixed inset-0 z-10"></div>
+                <div x-show="isOpen" x-cloak class="fixed inset-0 z-10"></div>
                 <div
+                    x-show="isOpen"
+                    x-cloak
                     class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
                 >
                     <div class="flex items-center justify-between">
                         <a href="#" class="-m-1.5 p-1.5">
-                            <span class="sr-only">Your Company</span>
+                            <span class="sr-only">BRAAAY</span>
                             <img
                                 class="h-8 w-auto"
                                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                                 alt=""
                             />
                         </a>
-                        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+                        <button @click="isOpen = !isOpen" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
                             <span class="sr-only">Close menu</span>
                             <svg
                                 class="h-6 w-6"
@@ -136,10 +141,10 @@
                                     >
                                         Product
                                         <!--
-                        Expand/collapse icon, toggle classes based on menu open state.
-      
-                        Open: "rotate-180", Closed: ""
-                      -->
+                                            Expand/collapse icon, toggle classes based on menu open state.
+                        
+                                            Open: "rotate-180", Closed: ""
+                                        -->
                                         <svg
                                             class="h-5 w-5 flex-none"
                                             viewBox="0 0 20 20"

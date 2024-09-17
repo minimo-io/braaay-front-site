@@ -4,6 +4,34 @@
 
 @layer components {
     .btn {
-        @apply py-2 px-5 bg-white text-blue rounded-full border border-grey-lighter focus:outline-none  hover:opacity-50 hover:ring-grey-medium font-roboto text-xs tracking-widest;
+        @apply py-2 px-5 bg-white text-blue rounded-full border border-grey-lighter focus:outline-none   hover:ring-grey-medium font-roboto text-xs tracking-widest;
+    }
+}
+
+@layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+    .bry-cart .fa-bag::before {
+        content: "";
+        display: block;
+        height: 36px;
+        background-image: url(./images/cart-braaay.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        width: 29px;
+    }
+    @media (max-width: 959px) {
+        .bry-cart .fa-bag::before {
+            height: 30px !important;
+            width: 24px !important;
+        }
+    }
+    .bry-cart {
+        @apply ml-5;
+    }
+    a:hover {
+        @apply opacity-50;
     }
 }
