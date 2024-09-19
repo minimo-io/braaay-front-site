@@ -7,7 +7,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "minify": "lightningcss --minify --bundle --targets '>= 0.25%' ./src/style.css -o ./src/style.min.css",
         "minify:tailwind": "tailwindcss -o build.css --minify",
-        "tw": "tailwindcss -i ./src/style.css -o ./src/style.tw.css --watch"
+        "tw": "tailwindcss -i ./src/style.css -o ./src/bry.build.css  --minify --watch"
     },
     "author": "nostr:npub1wujhdsytm3w6g0mpsqh8v7ezx83jcm64dlkwuqgm5v8lv0pds55ssudkw0",
     "license": "ISC",

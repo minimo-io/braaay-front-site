@@ -35,3 +35,8 @@
         @apply opacity-50;
     }
 }
+
+#bry-secondary-menu a {
+    @apply text-blue font-roboto font-light tracking-wider;
+    @apply text-[17px] tracking-[0.02em];
+}
