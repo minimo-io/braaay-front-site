@@ -22,20 +22,6 @@
         <!-- theme files -->
         <script src="./bry.build.js" defer></script>
         <link href="./bry.build.css" rel="stylesheet" />
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                new Glide(".glide", {
-                    type: "carousel", // Enable horizontal scrolling
-                    startAt: 0,
-                    perView: 6, // Adjust this number to control how many items are visible at once
-                    gap: 0,
-                    autoplay: false, // Prevent auto-scrolling since it's a menu
-                    swipeThreshold: 80, // Customize swipe sensitivity
-                    dragThreshold: 120, // Customize drag sensitivity
-                }).mount();
-            });
-        </script>
     </head>
     <body class="bg-grey-background">
         <header x-data="{ isOpen: false }" class="bg-white">
@@ -119,75 +105,64 @@
             </nav>
 
             <!-- Secondary menu -->
-            <div id="bry-secondary-menu" class="glide bg-gray-800 border-t border-t-grey-lighter">
-                <nav class="container max-w-screen-lg mx-auto py-3">
-                    <div class="glide__track" data-glide-el="track">
-                        <ul class="glide__slides flex space-x-4">
-                            <li class="glide__slide relative group transition-all duration-300">
-                                <a
-                                    href="/vinhos/"
-                                    class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
-                                >
-                                    <i class="fa fa-calendar mr-2"></i>
-                                    Vinhos
-                                </a>
-                            </li>
-                            <li class="glide__slide relative group transition-all duration-300">
-                                <a
-                                    href="https://braaay.com/experiencias/"
-                                    class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
-                                >
-                                    <i class="fa fa-calendar mr-2"></i>
-                                    Experiências
-                                </a>
-                            </li>
-                            <li class="glide__slide relative group transition-all duration-300">
-                                <a
-                                    href="/kits/"
-                                    class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
-                                >
-                                    <i class="fa fa-gift mr-2"></i>
-                                    Presentes
-                                </a>
-                            </li>
-                            <li class="glide__slide relative group transition-all duration-300">
-                                <a
-                                    href="/tag/premiados/"
-                                    class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
-                                >
-                                    <i class="fa fa-trophy mr-2"></i>
-                                    Premiados
-                                </a>
-                            </li>
-                            <li class="glide__slide relative group transition-all duration-300">
-                                <a
-                                    href="/tag/oportunidades/"
-                                    class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
-                                >
-                                    <i class="fa fa-calendar mr-2"></i>
-                                    Oportunidades
-                                </a>
-                            </li>
-                            <li class="glide__slide relative group transition-all duration-300">
-                                <a
-                                    href="/em-breve/"
-                                    class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
-                                >
-                                    <i class="fa fa-graduation-cap mr-2"></i>
-                                    Cursos
-                                </a>
-                            </li>
-                            <li class="glide__slide relative group transition-all duration-300">
-                                <a
-                                    href="/blog/"
-                                    class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
-                                >
-                                    <i class="fa fa-newspaper-o mr-2"></i>
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+            <div id="bry-secondary-menu" class="bg-gray-800 border-t border-t-grey-lighter">
+                <nav class="container max-w-screen-lg mx-auto py-2">
+                    <ul class="flex space-x-4">
+                        <li class="relative group transition-all duration-300">
+                            <a href="/vinhos/" class="flex items-center pr-4 py-2 hover:bg-gray-700 transition-colors">
+                                <i class="fa fa-calendar mr-2"></i>
+                                Vinhos
+                            </a>
+                        </li>
+                        <li class="relative group transition-all duration-300">
+                            <a
+                                href="https://braaay.com/experiencias/"
+                                class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
+                            >
+                                <i class="fa fa-calendar mr-2"></i>
+                                Experiências
+                            </a>
+                        </li>
+                        <li class="relative group transition-all duration-300">
+                            <a href="/kits/" class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors">
+                                <i class="fa fa-gift mr-2"></i>
+                                Presentes
+                            </a>
+                        </li>
+                        <li class="relative group transition-all duration-300">
+                            <a
+                                href="/tag/premiados/"
+                                class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
+                            >
+                                <i class="fa fa-trophy mr-2"></i>
+                                Premiados
+                            </a>
+                        </li>
+                        <li class="relative group transition-all duration-300">
+                            <a
+                                href="/tag/oportunidades/"
+                                class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
+                            >
+                                <i class="fa fa-calendar mr-2"></i>
+                                Oportunidades
+                            </a>
+                        </li>
+                        <li class="relative group transition-all duration-300">
+                            <a
+                                href="/em-breve/"
+                                class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
+                            >
+                                <i class="fa fa-graduation-cap mr-2"></i>
+                                Cursos
+                            </a>
+                        </li>
+                        <li class="relative group transition-all duration-300">
+                            <a href="/blog/" class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors">
+                                <i class="fa fa-newspaper-o mr-2"></i>
+                                Blog
+                            </a>
+                        </li>
+                    </ul>
                 </nav>
             </div>
 

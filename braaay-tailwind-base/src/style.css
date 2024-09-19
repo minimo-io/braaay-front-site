@@ -40,3 +40,38 @@
     @apply text-blue font-roboto font-light tracking-wider;
     @apply text-[17px] tracking-[0.02em];
 }
+
+#bry-secondary-menu {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+#bry-secondary-menu ul {
+    display: flex;
+    gap: 0px; /* Space between items */
+    scroll-snap-type: x mandatory; /* Enable scroll snapping */
+    padding: 0 1px;
+}
+
+#bry-secondary-menu li {
+    scroll-snap-align: start; /* Snap to the start of each item */
+    flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+#bry-secondary-menu a {
+    white-space: nowrap; /* Ensure text doesn't wrap inside menu items */
+}
+
+#bry-secondary-menu::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for a cleaner look */
+}
+
+@media (min-width: 1024px) {
+    #bry-secondary-menu {
+        overflow-x: visible; /* Disable scroll behavior on larger screens */
+    }
+
+    #bry-secondary-menu ul {
+        gap: 0rem; /* Restore original spacing for desktop */
+    }
+}
