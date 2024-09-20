@@ -12,12 +12,13 @@
             href="https://fonts.googleapis.com/css2?family=Prata&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
             rel="stylesheet"
         />
-        <!-- external css -->
+        <!-- css -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" defer />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.5.1/dist/css/glide.core.min.css" />
 
-        <!-- js: included in our bry.build.js (to be minified) -->
-        <!-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script> -->
+        <!-- js -->
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide" defer></script>
 
         <!-- theme files -->
         <script src="./bry.build.js" defer></script>
@@ -106,10 +107,10 @@
 
             <!-- Secondary menu -->
             <div id="bry-secondary-menu" class="bg-gray-800 border-t border-t-grey-lighter">
-                <nav class="container max-w-screen-lg mx-auto py-2">
+                <nav class="container max-w-screen-lg py-2 mx-[30px] lg:mx-auto">
                     <ul class="flex space-x-4">
                         <li class="relative group transition-all duration-300">
-                            <a href="/vinhos/" class="flex items-center pr-4 py-2 hover:bg-gray-700 transition-colors">
+                            <a href="/vinhos/" class="flex items-center pr-3 py-2 hover:bg-gray-700 transition-colors">
                                 <i class="fa fa-calendar mr-2"></i>
                                 Vinhos
                             </a>
@@ -117,14 +118,14 @@
                         <li class="relative group transition-all duration-300">
                             <a
                                 href="https://braaay.com/experiencias/"
-                                class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
+                                class="flex items-center px-3 py-2 hover:bg-gray-700 transition-colors"
                             >
                                 <i class="fa fa-calendar mr-2"></i>
                                 Experiências
                             </a>
                         </li>
                         <li class="relative group transition-all duration-300">
-                            <a href="/kits/" class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors">
+                            <a href="/kits/" class="flex items-center px-3 py-2 hover:bg-gray-700 transition-colors">
                                 <i class="fa fa-gift mr-2"></i>
                                 Presentes
                             </a>
@@ -132,7 +133,7 @@
                         <li class="relative group transition-all duration-300">
                             <a
                                 href="/tag/premiados/"
-                                class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
+                                class="flex items-center px-3 py-2 hover:bg-gray-700 transition-colors"
                             >
                                 <i class="fa fa-trophy mr-2"></i>
                                 Premiados
@@ -141,7 +142,7 @@
                         <li class="relative group transition-all duration-300">
                             <a
                                 href="/tag/oportunidades/"
-                                class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
+                                class="flex items-center px-3 py-2 hover:bg-gray-700 transition-colors"
                             >
                                 <i class="fa fa-calendar mr-2"></i>
                                 Oportunidades
@@ -150,14 +151,14 @@
                         <li class="relative group transition-all duration-300">
                             <a
                                 href="/em-breve/"
-                                class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors"
+                                class="flex items-center px-3 py-2 hover:bg-gray-700 transition-colors"
                             >
                                 <i class="fa fa-graduation-cap mr-2"></i>
                                 Cursos
                             </a>
                         </li>
                         <li class="relative group transition-all duration-300">
-                            <a href="/blog/" class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors">
+                            <a href="/blog/" class="flex items-center px-3 py-2 hover:bg-gray-700 transition-colors">
                                 <i class="fa fa-newspaper-o mr-2"></i>
                                 Blog
                             </a>
@@ -306,5 +307,131 @@
                 </div>
             </div>
         </header>
+
+        <main>
+            <!-- Carrousel mobile -->
+            <div id="glide-carousel" class="glide">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        <li class="glide__slide w-full">
+                            <a href="#">
+                                <img
+                                    src="./images/carousel/placeholder.webp"
+                                    alt="Image 1"
+                                    class="carousel-image w-full"
+                                    data-desktop="braaay-carousel-desktop-0.png"
+                                    data-mobile="braaay-carousel-mobile-0.png"
+                                    width="500"
+                                    height="500"
+                                />
+                            </a>
+                        </li>
+                        <li class="glide__slide w-full">
+                            <a href="#">
+                                <img
+                                    src="./images/carousel/placeholder.webp"
+                                    alt="Image 2"
+                                    class="carousel-image w-full"
+                                    data-desktop="braaay-carousel-desktop-1.webp"
+                                    data-mobile="braaay-carousel-mobile-1.png"
+                                    width="800"
+                                    height="600"
+                                />
+                            </a>
+                        </li>
+                        <li class="glide__slide w-full">
+                            <a href="#">
+                                <img
+                                    src="./images/carousel/placeholder.webp"
+                                    alt="Image 3"
+                                    class="carousel-image w-full"
+                                    data-desktop="braaay-carousel-desktop-2.webp"
+                                    data-mobile="braaay-carousel-mobile-2.png"
+                                    width="800"
+                                    height="600"
+                                />
+                            </a>
+                        </li>
+                        <!-- Add more slides as needed -->
+                    </ul>
+                </div>
+                <!-- Dots for Slide Navigation -->
+                <div
+                    class="glide__bullets absolute bottom-4 left-1/2 transform -translate-x-1/2"
+                    data-glide-el="controls[nav]"
+                >
+                    <button class="glide__bullet" data-glide-dir="=0"></button>
+                    <button class="glide__bullet" data-glide-dir="=1"></button>
+                    <button class="glide__bullet" data-glide-dir="=2"></button>
+                    <!-- Add more bullets based on the number of slides -->
+                </div>
+            </div>
+        </main>
+
+        <footer></footer>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const imageElements = document.querySelectorAll(".carousel-image");
+
+                function updateCarouselImages() {
+                    const isDesktop = window.innerWidth >= 1024;
+                    // 1536 × 322
+                    imageElements.forEach((img) => {
+                        img.src = isDesktop
+                            ? "./images/carousel/" + img.dataset.desktop
+                            : "./images/carousel/" + img.dataset.mobile;
+                        if (isDesktop) {
+                            img.setAttribute("width", "1536px");
+                            img.setAttribute("height", "322px");
+                        } else {
+                            img.setAttribute("width", "500px");
+                            img.setAttribute("height", "500px");
+                        }
+                    });
+                }
+
+                function createBullets() {
+                    const bulletContainer = document.querySelector('[data-glide-el="controls[nav]"]');
+                    bulletContainer.innerHTML = ""; // Clear any existing bullets
+                    imageElements.forEach((_, index) => {
+                        const bullet = document.createElement("button");
+                        bullet.classList.add("glide__bullet");
+                        bullet.dataset.glideDir = `=${index}`;
+                        bulletContainer.appendChild(bullet);
+                    });
+                }
+
+                // Debounce function
+                function debounce(func, wait) {
+                    let timeout;
+                    return function (...args) {
+                        const context = this;
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => func.apply(context, args), wait);
+                    };
+                }
+
+                // Initial update on page load
+                updateCarouselImages();
+                createBullets();
+
+                // Update images and bullets on window resize
+                const debouncedResize = debounce(() => {
+                    updateCarouselImages();
+                    createBullets();
+                }, 250);
+                window.addEventListener("resize", debouncedResize);
+
+                // Initialize the Glide.js carousel
+                new Glide("#glide-carousel", {
+                    type: "carousel",
+                    perView: 1,
+                    autoplay: 3000,
+                    hoverpause: true,
+                    gap: 0,
+                }).mount();
+            });
+        </script>
     </body>
 </html>
