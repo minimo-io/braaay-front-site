@@ -38,7 +38,7 @@
 
 #bry-secondary-menu a {
     @apply text-blue font-roboto font-light tracking-wider;
-    @apply text-[17px] tracking-[0.02em];
+    @apply text-[15px] lg:text-[17px] tracking-[0.02em];
 }
 
 #bry-secondary-menu {
