@@ -5,6 +5,11 @@
 @layer components {
     .btn {
         @apply py-2 px-5 bg-white text-blue rounded-full border border-grey-lighter focus:outline-none   hover:ring-grey-medium font-roboto text-xs tracking-widest;
+        @screen sm {
+            .btn {
+                @apply py-1 px-3 mt-5 text-[9px];
+            }
+        }
     }
 }
 
