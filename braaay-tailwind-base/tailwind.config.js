@@ -9,7 +9,11 @@ module.exports = {
             xl: "1280px",
             "2xl": "1536px",
         },
-        extend: {},
+        extend: {
+            maxWidth: {
+                "screen-lg-2x": "1100px",
+            },
+        },
         colors: {
             transparent: "transparent",
             black: "#000",
@@ -26,7 +30,6 @@ module.exports = {
             grey: {
                 background: "#fafafa",
                 "page-primary": "#303239",
-
                 lighter: "#e3e3e3",
                 light: "#c3c3c3",
                 medium: "#a0a0a0",
@@ -34,6 +37,8 @@ module.exports = {
                 dark: "#303133",
                 darkest: "#1d1d1d",
             },
+
+            yellow: "#F3A633",
         },
 
         fontFamily: {

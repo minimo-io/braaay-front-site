@@ -2,20 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-    .btn {
-        @apply py-2 px-5 bg-white text-blue rounded-full border border-grey-lighter focus:outline-none   hover:ring-grey-medium font-roboto text-xs tracking-widest;
-        @screen sm {
-            .btn {
-                @apply py-1 px-3 mt-5 text-[9px];
-            }
-        }
-    }
-}
-
 @layer base {
+    :root {
+        --page-current-color: #bd8836;
+    }
     [x-cloak] {
         display: none !important;
+    }
+    @keyframes pulse-border {
+        0% {
+            transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+            opacity: 0;
+        }
     }
     .bry-cart .fa-bag::before {
         content: "";
@@ -36,8 +38,94 @@
     .bry-cart {
         @apply ml-5;
     }
-    a:hover {
+    a:hover:not(.not-hover-effect) {
         @apply opacity-50;
+    }
+}
+@layer components {
+    .btn {
+        @apply py-2 px-5 bg-white text-blue rounded-full border border-grey-lighter focus:outline-none   hover:ring-grey-medium font-roboto text-xs tracking-widest;
+        @screen sm {
+            .btn {
+                @apply py-1 px-3 mt-5 text-[9px];
+            }
+        }
+    }
+
+    .play-button {
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        box-sizing: content-box;
+        display: block;
+        border-radius: 50%;
+        padding: 5px 20px 5px 24px;
+        /* padding: 5px 20px 5px 28px; */
+        /* width: 32px;
+        height: 44px; */
+    }
+    .play-button:before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        display: block;
+        width: 80px;
+        height: 80px;
+        background: var(--page-current-color);
+        border-radius: 50%;
+        animation: pulse-border 1500ms ease-out infinite;
+    }
+    .play-button:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        display: block;
+        /* width: 80px;
+        height: 80px; */
+        width: 70px;
+        height: 70px;
+        background: var(--page-current-color);
+        border-radius: 50%;
+        transition: all 200ms;
+    }
+    .play-button span {
+        display: block;
+        position: relative;
+        z-index: 3;
+        width: 0;
+        height: 0;
+        border-left: 17px solid #fff;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+    }
+    .bry-product-list {
+        @apply container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6;
+    }
+    .bry-product-list > .wine {
+        @apply bg-[#EFEFEF] rounded-lg shadow-sm p-4 text-center relative h-full flex flex-col;
+    }
+    .bry-product-list > .wine .wine-button {
+        @apply bg-white block mt-4 px-4 py-2 rounded-full border border-grey-light text-xs;
+    }
+    .bry-product-list > .wine .wine-title {
+        @apply text-sm lg:text-base font-prata leading-tight;
+    }
+    .bry-product-list > .wine .wine-price {
+        @apply text-base lg:text-xl font-bold mt-2 border-b-2 w-fit border-sun mx-auto;
+    }
+    .bry-product-list > .wine .wine-stars {
+        @apply text-base text-grey-medium-dark;
+    }
+    .bry-product-list > .wine .wine-stars > span {
+        @apply text-yellow;
     }
 }
 
