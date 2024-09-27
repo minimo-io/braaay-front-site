@@ -116,7 +116,7 @@
         @apply bg-white block mt-4 px-4 py-2 rounded-full border border-grey-light text-xs;
     }
     .bry-product-list > .wine .wine-title {
-        @apply text-sm lg:text-base font-prata leading-tight;
+        @apply text-sm lg:text-base font-prata leading-tight two-lines;
     }
     .bry-product-list > .wine .wine-price {
         @apply text-base lg:text-xl font-bold mt-2 border-b-2 w-fit border-sun mx-auto;
@@ -126,6 +126,15 @@
     }
     .bry-product-list > .wine .wine-stars > span {
         @apply text-yellow;
+    }
+}
+@layer utilities {
+    .two-lines {
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Limit to 2 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
