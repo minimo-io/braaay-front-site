@@ -15,7 +15,8 @@
             opacity: 1;
         }
         100% {
-            transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+            transform: translateX(-50%) translateY(-50%) translateZ(0)
+                scale(1.5);
             opacity: 0;
         }
     }
@@ -127,6 +128,47 @@
     .bry-product-list > .wine .wine-stars > span {
         @apply text-yellow;
     }
+
+    .bry-partners-list {
+        @apply flex flex-wrap justify-start lg:justify-between items-center gap-[15px] mt-10 mb-8 w-full px-[30px] lg:px-0 max-w-screen-lg mx-auto;
+    }
+    .bry-partners-list > div {
+        @apply w-[105px] h-[105px] rounded-full bg-grey-background flex justify-center items-center;
+    }
+    /* Footer featured box */
+    .bry-footer-features {
+        @apply grid grid-cols-1 md:grid-cols-3 gap-8 mb-0;
+    }
+    .bry-footer-features > div {
+        @apply py-[32px] px-[48px] border border-grey-light bg-white rounded-lg mx-5 lg:mx-auto;
+    }
+    .bry-footer-features > div > h2 {
+        @apply text-grey-dark text-center text-[28px] font-roboto font-semibold mb-4 leading-8 partial-border;
+    }
+    .bry-footer-features > div > p {
+        @apply text-grey-page-primary font-light leading-5 text-[15px] mt-8 font-roboto;
+    }
+
+    /* Footer grid of columns */
+    .bry-footer-grid {
+        /* @apply grid grid-cols-2 md:grid-cols-4 gap-8 md:w-2/3; */
+        /* @apply grid grid-cols-2 md:grid-cols-3 gap-8 md:flex-1; */
+    }
+    .bry-footer-grid > div {
+        /* @apply border border-sun; */
+    }
+    .bry-footer-grid > div > h3 {
+        @apply font-semibold mb-4 font-prata;
+    }
+    .bry-footer-grid > div > ul {
+        /* @apply space-y-2; */
+    }
+    .bry-footer-grid > div > ul > li {
+        @apply leading-5 mb-0;
+    }
+    .bry-footer-grid > div > ul > li > a {
+        @apply text-grey-medium text-[0.8rem] uppercase;
+    }
 }
 @layer utilities {
     .two-lines {
@@ -135,6 +177,19 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+    .partial-border {
+        position: relative;
+    }
+    .partial-border:after {
+        content: "";
+        position: absolute;
+        bottom: -1rem;
+        right: 0;
+        width: 100%;
+        height: 2px;
+        border-bottom: 4px solid #000;
+        @apply border-sun;
     }
 }
 
