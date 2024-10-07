@@ -20,7 +20,7 @@
             opacity: 0;
         }
     }
-    .bry-cart .fa-bag::before {
+    .bry-cart .bry-bag::before {
         content: "";
         display: block;
         height: 36px;
@@ -31,7 +31,7 @@
         width: 29px;
     }
     @media (max-width: 959px) {
-        .bry-cart .fa-bag::before {
+        .bry-cart .bry-bag::before {
             height: 30px !important;
             width: 24px !important;
         }
@@ -190,6 +190,13 @@
         height: 2px;
         border-bottom: 4px solid #000;
         @apply border-sun;
+    }
+
+    .lucide-menu {
+        @apply mr-1 h-[18px] md:h-[19px] leading-none;
+    }
+    .lucide-button {
+        @apply mr-1 h-[14px];
     }
 }
 

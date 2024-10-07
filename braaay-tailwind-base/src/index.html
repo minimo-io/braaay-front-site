@@ -13,11 +13,11 @@
             rel="stylesheet"
         />
         <!-- css -->
-        <link
+        <!-- <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
             defer
-        />
+        /> -->
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.5.1/dist/css/glide.core.min.css"
@@ -30,6 +30,10 @@
         ></script>
         <script
             src="https://cdn.jsdelivr.net/npm/@glidejs/glide"
+            defer
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/lucide@0.447.0/dist/umd/lucide.min.js"
             defer
         ></script>
 
@@ -110,9 +114,10 @@
                 <div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
                     <a
                         href="#"
-                        class="btn h-[45px] uppercase flex items-center"
+                        class="btn h-[45px] uppercase flex items-center justify-center"
                     >
-                        <i class="fa fa-user pr-2"></i>
+                        <!-- <i class="fa fa-user pr-2"></i> -->
+                        <i data-lucide="user" class="lucide-button"></i>
                         Minha conta
                     </a>
                 </div>
@@ -120,7 +125,7 @@
                     href="#"
                     class="bry-cart relative h-[45px] uppercase flex items-center"
                 >
-                    <i class="fa fa-bag"></i>
+                    <i class="bry-bag"></i>
                     <span
                         class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
                     >
@@ -136,8 +141,12 @@
                     method="get"
                     class="w-full flex items-center relative flex-align-items-center"
                 >
-                    <i
+                    <!-- <i
                         class="fa fa-search mr-2 absolute top-1/2 -translate-y-1/2 left-[30px]"
+                    ></i> -->
+                    <i
+                        data-lucide="search"
+                        class="mr-1 h-[16px] absolute top-1/2 -translate-y-1/2 left-[30px]"
                     ></i>
                     <input
                         type="search"
@@ -165,7 +174,8 @@
                                 href="/vinhos/"
                                 class="flex items-center pr-2 lg:pr-3 py-2 hover:bg-gray-700 transition-colors"
                             >
-                                <i class="fa fa-calendar mr-2"></i>
+                                <!-- <i class="fa fa-calendar mr-2"></i> -->
+                                <i data-lucide="wine" class="lucide-menu"></i>
                                 Vinhos
                             </a>
                         </li>
@@ -174,7 +184,11 @@
                                 href="https://braaay.com/experiencias/"
                                 class="flex items-center px-2 lg:px-3 py-2 hover:bg-gray-700 transition-colors"
                             >
-                                <i class="fa fa-calendar mr-2"></i>
+                                <!-- <i class="fa fa-calendar mr-2"></i> -->
+                                <i
+                                    data-lucide="calendar-days"
+                                    class="lucide-menu"
+                                ></i>
                                 Experiências
                             </a>
                         </li>
@@ -183,7 +197,8 @@
                                 href="/kits/"
                                 class="flex items-center px-2 lg:px-3 py-2 hover:bg-gray-700 transition-colors"
                             >
-                                <i class="fa fa-gift mr-2"></i>
+                                <!-- <i class="fa fa-gift mr-2"></i> -->
+                                <i data-lucide="gift" class="lucide-menu"></i>
                                 Presentes
                             </a>
                         </li>
@@ -192,7 +207,8 @@
                                 href="/tag/premiados/"
                                 class="flex items-center px-2 lg:px-3 py-2 hover:bg-gray-700 transition-colors"
                             >
-                                <i class="fa fa-trophy mr-2"></i>
+                                <!-- <i class="fa fa-trophy mr-2"></i> -->
+                                <i data-lucide="award" class="lucide-menu"></i>
                                 Premiados
                             </a>
                         </li>
@@ -201,7 +217,11 @@
                                 href="/tag/oportunidades/"
                                 class="flex items-center px-2 lg:px-3 py-2 hover:bg-gray-700 transition-colors"
                             >
-                                <i class="fa fa-calendar mr-2"></i>
+                                <!-- <i class="fa fa-calendar mr-2"></i> -->
+                                <i
+                                    data-lucide="award"
+                                    class="lucide-menu badge-percent"
+                                ></i>
                                 Oportunidades
                             </a>
                         </li>
@@ -210,7 +230,11 @@
                                 href="/em-breve/"
                                 class="flex items-center px-2 lg:px-3 py-2 hover:bg-gray-700 transition-colors"
                             >
-                                <i class="fa fa-graduation-cap mr-2"></i>
+                                <!-- <i class="fa fa-graduation-cap mr-2"></i> -->
+                                <i
+                                    data-lucide="graduation-cap"
+                                    class="lucide-menu badge-percent"
+                                ></i>
                                 Cursos
                             </a>
                         </li>
@@ -219,7 +243,11 @@
                                 href="/blog/"
                                 class="flex items-center px-2 lg:px-3 py-2 hover:bg-gray-700 transition-colors"
                             >
-                                <i class="fa fa-newspaper-o mr-2"></i>
+                                <!-- <i class="fa fa-newspaper-o mr-2"></i> -->
+                                <i
+                                    data-lucide="newspaper"
+                                    class="lucide-menu badge-percent"
+                                ></i>
                                 Blog
                             </a>
                         </li>
@@ -468,10 +496,12 @@
                         href="#"
                         class="btn bg-yellow-600 text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3"
                     >
-                        <i
+                        <!-- <i
                             class="fa fa-calendar mr-1 pt-px"
                             aria-hidden="true"
-                        ></i>
+                        ></i> -->
+                        <i data-lucide="calendar" class="lucide-button"></i>
+
                         Reserve sua experiência
                     </a>
                 </div>
@@ -1034,6 +1064,8 @@
             document.addEventListener("DOMContentLoaded", function () {
                 const imageElements =
                     document.querySelectorAll(".carousel-image");
+
+                lucide.createIcons();
 
                 function updateCarouselImages() {
                     const isDesktop = window.innerWidth >= 1024;
