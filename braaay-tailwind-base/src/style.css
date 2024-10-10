@@ -130,10 +130,10 @@
     }
 
     .bry-partners-list {
-        @apply flex flex-wrap justify-start lg:justify-between items-center gap-[15px] mt-10 mb-8 w-full px-[30px] lg:px-0 max-w-screen-lg mx-auto;
+        @apply flex flex-wrap justify-center lg:justify-start items-center gap-3 md:gap-6 mt-10 mb-8 w-full px-[30px] lg:px-0 max-w-screen-lg mx-auto;
     }
     .bry-partners-list > div {
-        @apply w-[105px] h-[105px] rounded-full bg-grey-background flex justify-center items-center;
+        @apply w-[90px] h-[90px] md:w-[105px] md:h-[105px] rounded-full bg-grey-background flex justify-center items-center;
     }
     /* Footer featured box */
     .bry-footer-features {
@@ -163,11 +163,14 @@
     .bry-footer-grid > div > ul {
         /* @apply space-y-2; */
     }
+    .bry-footer-grid h3 {
+        @apply text-center md:text-left;
+    }
     .bry-footer-grid > div > ul > li {
-        @apply leading-5 mb-0;
+        @apply leading-5 mb-0 text-center md:text-left;
     }
     .bry-footer-grid > div > ul > li > a {
-        @apply text-grey-medium text-[0.8rem] uppercase;
+        @apply text-grey-dark text-[0.8rem] uppercase self-center md:self-start;
     }
 }
 @layer utilities {

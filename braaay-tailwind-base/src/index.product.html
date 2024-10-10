@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <title>Product</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -409,105 +410,6 @@
         </header>
 
         <main>
-            <!-- Carrousel mobile -->
-            <div id="glide-carousel" class="glide">
-                <div class="glide__track" data-glide-el="track">
-                    <ul class="glide__slides">
-                        <li class="glide__slide w-full">
-                            <a href="#">
-                                <img
-                                    src="./images/carousel/placeholder.webp"
-                                    alt="Image 1"
-                                    class="carousel-image w-full"
-                                    data-desktop="braaay-carousel-desktop-0.png"
-                                    data-mobile="braaay-carousel-mobile-0.png"
-                                    width="500"
-                                    height="500"
-                                />
-                            </a>
-                        </li>
-                        <li class="glide__slide w-full">
-                            <a href="#">
-                                <img
-                                    src="./images/carousel/placeholder.webp"
-                                    alt="Image 2"
-                                    class="carousel-image w-full"
-                                    data-desktop="braaay-carousel-desktop-1.webp"
-                                    data-mobile="braaay-carousel-mobile-1.png"
-                                    width="800"
-                                    height="600"
-                                />
-                            </a>
-                        </li>
-                        <li class="glide__slide w-full">
-                            <a href="#">
-                                <img
-                                    src="./images/carousel/placeholder.webp"
-                                    alt="Image 3"
-                                    class="carousel-image w-full"
-                                    data-desktop="braaay-carousel-desktop-2.webp"
-                                    data-mobile="braaay-carousel-mobile-2.png"
-                                    width="800"
-                                    height="600"
-                                />
-                            </a>
-                        </li>
-                        <!-- Add more slides as needed -->
-                    </ul>
-                </div>
-                <!-- Dots for Slide Navigation -->
-                <div
-                    class="glide__bullets absolute bottom-4 left-1/2 transform -translate-x-1/2"
-                    data-glide-el="controls[nav]"
-                >
-                    <button class="glide__bullet" data-glide-dir="=0"></button>
-                    <button class="glide__bullet" data-glide-dir="=1"></button>
-                    <button class="glide__bullet" data-glide-dir="=2"></button>
-                    <!-- Add more bullets based on the number of slides -->
-                </div>
-            </div>
-
-            <!-- Header section -->
-            <div
-                class="max-w-screen-lg flex flex-col lg:flex-row justify-between items-center py-10 px-0 mx-[30px] lg:mx-auto mt-5"
-            >
-                <!-- Left section -->
-                <div class="lg:w-[65%]">
-                    <h4
-                        class="text-[13px] lg:text-[15px] text-gray-500 font-light font-roboto tracking-wide uppercase border-b-2 inline-block border-bra"
-                    >
-                        Showroom
-                    </h4>
-                    <h2
-                        class="text-[18px] lg:text-[26px] font-prata text-black mt-3 uppercase tracking-wide"
-                    >
-                        Encontros & Jantares
-                    </h2>
-                    <p
-                        class="text-[13px] lg:text-[16px] tracking-[1px] text-grey-page-primary mt-2 lg:mt-0 leading-tight"
-                    >
-                        Venha descobrir o inesperado em nosso showroom e
-                        prepare-se para eventos inesquecíveis.
-                    </p>
-                </div>
-
-                <!-- Right section -->
-                <div class="self-start lg:self-auto">
-                    <a
-                        href="#"
-                        class="btn bg-yellow-600 text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3"
-                    >
-                        <!-- <i
-                            class="fa fa-calendar mr-1 pt-px"
-                            aria-hidden="true"
-                        ></i> -->
-                        <i data-lucide="calendar" class="lucide-button"></i>
-
-                        Reserve sua experiência
-                    </a>
-                </div>
-            </div>
-
             <!-- Home images -->
             <div
                 class="max-w-screen-lg-2x mx-[30px] lg:mx-auto items-center flex justify-between"
@@ -627,9 +529,7 @@
                                 Pizzato Merlot de Merlots 2022
                             </h5>
                             <p class="wine-price">R$ 150</p>
-                            <a href="./index.product.html" class="wine-button"
-                                >VER DETALHES</a
-                            >
+                            <a href="#" class="wine-button">VER DETALHES</a>
                         </div>
 
                         <!-- Wine Box 2 -->
@@ -836,118 +736,59 @@
                             href="#"
                             class="btn bg-yellow-600 text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3"
                         >
-                            Ver todos
+                            Ver parceiros
                         </a>
                     </div>
                 </div>
                 <section class="bry-partners-list">
                     <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/vina-eden-logo.webp"
-                                alt="Viña Edén"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
+                        <img
+                            src="./images/partners/artesana-logo-3.webp"
+                            alt="Artesana"
+                            class="w-full h-full object-contain"
+                        />
                     </div>
                     <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/artesana-logo-3.webp"
-                                alt="Artesana"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
+                        <img
+                            src="./images/partners/capoani-logo-3.webp"
+                            alt="Manus Logo"
+                            class="w-full h-full object-contain"
+                        />
                     </div>
                     <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/capoani-logo-3.webp"
-                                alt="Manus Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
+                        <img
+                            src="./images/partners/cerro-del-toro-logo-2.webp"
+                            alt="AC Logo"
+                            class="w-full h-full object-contain"
+                        />
                     </div>
                     <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/cerro-del-toro-logo-2.webp"
-                                alt="AC Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
+                        <img
+                            src="./images/partners/don-pascual-logo-2.webp"
+                            alt="Coroa Acheira Logo"
+                            class="w-full h-full object-contain"
+                        />
                     </div>
                     <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/don-pascual-logo-2.webp"
-                                alt="Coroa Acheira Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
+                        <img
+                            src="./images/partners/familia-deicas-uruguai.webp"
+                            alt="Pizzato Logo"
+                            class="w-full h-full object-contain"
+                        />
                     </div>
                     <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/familia-deicas-uruguai.webp"
-                                alt="Pizzato Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
+                        <img
+                            src="./images/partners/pizzato-logo.webp"
+                            alt="Casa Eva Logo"
+                            class="w-full h-full object-contain"
+                        />
                     </div>
                     <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/pizzato-logo.webp"
-                                alt="Casa Eva Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/vinicola-manus-logo.webp"
-                                alt="Anina Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/garzon-logo-2.webp"
-                                alt="Anina Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/giaretta-logo-2.webp"
-                                alt="Anina Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/casa-eva-logo-2.webp"
-                                alt="Anina Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/casa-da-coheleira-logo-3.webp"
-                                alt="Anina Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
+                        <img
+                            src="./images/partners/vinicola-manus-logo.webp"
+                            alt="Anina Logo"
+                            class="w-full h-full object-contain"
+                        />
                     </div>
                 </section>
             </section>
