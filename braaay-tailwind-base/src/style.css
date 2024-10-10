@@ -4,11 +4,16 @@
 
 @layer base {
     :root {
-        --page-current-color: #bd8836;
+        --bry-sun: #bd8836;
+        /* For the main button. Used with gradient for products. */
+        --bry-current-color: #303133;
+        --bry-current-gradient-start: #d1d1d0;
+        --bry-current-gradient-end: #b5b5b3;
     }
-    [x-cloak] {
-        display: none !important;
-    }
+    /* body {
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+    } */
     @keyframes pulse-border {
         0% {
             transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
@@ -77,7 +82,7 @@
         display: block;
         width: 80px;
         height: 80px;
-        background: var(--page-current-color);
+        background: var(--bry-sun);
         border-radius: 50%;
         animation: pulse-border 1500ms ease-out infinite;
     }
@@ -93,7 +98,7 @@
         height: 80px; */
         width: 70px;
         height: 70px;
-        background: var(--page-current-color);
+        background: var(--bry-sun);
         border-radius: 50%;
         transition: all 200ms;
     }
@@ -146,7 +151,7 @@
         @apply text-grey-dark text-center text-[28px] font-roboto font-semibold mb-4 leading-8 partial-border;
     }
     .bry-footer-features > div > p {
-        @apply text-grey-page-primary font-light leading-5 text-[15px] mt-8 font-roboto;
+        @apply text-grey-blueish font-light leading-5 text-[15px] mt-8 font-roboto;
     }
 
     /* Footer grid of columns */
@@ -203,17 +208,16 @@
     }
 }
 
-#bry-secondary-menu a {
-    @apply text-blue font-roboto font-light tracking-wider;
-    @apply text-[15px] lg:text-[17px] tracking-[0.02em];
-}
-
 #bry-secondary-menu {
+    /* box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05); */
     overflow-x: auto; /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     scroll-behavior: smooth; /* Smooth scroll behavior */
 }
-
+#bry-secondary-menu a {
+    @apply text-blue font-roboto font-light tracking-wider;
+    @apply text-[15px] lg:text-[17px] tracking-[0.02em];
+}
 #bry-secondary-menu ul {
     display: flex;
     gap: 0px; /* Space between items */

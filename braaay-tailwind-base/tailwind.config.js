@@ -29,7 +29,7 @@ module.exports = {
 
             grey: {
                 background: "#fafafa",
-                "page-primary": "#303239",
+                blueish: "#303239",
                 lighter: "#e3e3e3",
                 light: "#c3c3c3",
                 medium: "#a0a0a0",
