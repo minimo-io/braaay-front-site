@@ -10,10 +10,11 @@
         --bry-current-gradient-start: #d1d1d0;
         --bry-current-gradient-end: #b5b5b3;
     }
-    /* body {
-        -webkit-font-smoothing: antialiased;
-        font-smoothing: antialiased;
-    } */
+    ::selection {
+        background: #212639;
+        color: #ffffff !important;
+    }
+
     @keyframes pulse-border {
         0% {
             transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
@@ -24,6 +25,12 @@
                 scale(1.5);
             opacity: 0;
         }
+    }
+    p {
+        @apply antialiased;
+    }
+    button {
+        @apply hover:opacity-50 transition-opacity;
     }
     .bry-cart .bry-bag::before {
         content: "";
@@ -177,6 +184,25 @@
     .bry-footer-grid > div > ul > li > a {
         @apply text-grey-dark text-[0.8rem] uppercase self-center md:self-start;
     }
+    /* Accordion */
+    .bry-product-accordion {
+        @apply border-t border-t-grey-lighter pt-0 mt-6;
+    }
+    .bry-product-accordion .lucide-icon {
+        @apply text-grey-dark mr-2 h-[18px] w-[18px];
+    }
+    .bry-product-accordion > div {
+        @apply border-b border-b-grey-lighter py-3;
+    }
+    .bry-product-accordion > div > div {
+        @apply text-grey-dark;
+    }
+    .bry-product-accordion > div > div > div {
+        @apply text-[12px] lg:text-[13px] font-roboto font-semibold tracking-widest uppercase text-grey-blueish;
+    }
+    .bry-product-accordion p {
+        @apply text-grey-blueish text-[15px] font-roboto leading-[22px] tracking-[0.5px];
+    }
 }
 @layer utilities {
     .two-lines {
@@ -199,7 +225,15 @@
         border-bottom: 4px solid #000;
         @apply border-sun;
     }
-
+    .bry-product-title {
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
+        @apply mb-4 border-0 font-prata font-medium leading-[30px] text-[26px];
+    }
+    .lucide-icon {
+        @apply mr-1;
+    }
     .lucide-menu {
         @apply mr-1 h-[18px] md:h-[19px] leading-none;
     }
@@ -208,34 +242,35 @@
     }
 }
 
-#bry-secondary-menu {
-    /* box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05); */
+.bry-secondary-menu {
     overflow-x: auto; /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     scroll-behavior: smooth; /* Smooth scroll behavior */
+    @apply border-t border-t-grey-lighter;
 }
-#bry-secondary-menu a {
+.bry-secondary-menu a {
     @apply text-blue font-roboto font-light tracking-wider;
     @apply text-[15px] lg:text-[17px] tracking-[0.02em];
 }
-#bry-secondary-menu ul {
+.bry-secondary-menu ul {
     display: flex;
     gap: 0px; /* Space between items */
     scroll-snap-type: x mandatory; /* Enable scroll snapping */
     padding: 0 1px;
 }
 
-#bry-secondary-menu li {
+.bry-secondary-menu li {
     scroll-snap-align: start; /* Snap to the start of each item */
     flex-shrink: 0; /* Prevent items from shrinking */
     transition: transform 0.3s ease-in-out;
 }
 
-#bry-secondary-menu a {
+.bry-secondary-menu a {
+    @apply flex items-center py-2 hover:opacity-50 px-2 lg:px-3;
     white-space: nowrap; /* Ensure text doesn't wrap inside menu items */
 }
 
-#bry-secondary-menu::-webkit-scrollbar {
+.bry-secondary-menu::-webkit-scrollbar {
     display: none; /* Hide scrollbar for a cleaner look */
 }
 .glide__bullets {
@@ -263,11 +298,11 @@
     background-color: #666; /* Active dot color */
 }
 @media (min-width: 1024px) {
-    #bry-secondary-menu {
+    .bry-secondary-menu {
         overflow-x: visible; /* Disable scroll behavior on larger screens */
     }
 
-    #bry-secondary-menu ul {
+    .bry-secondary-menu ul {
         gap: 0rem; /* Restore original spacing for desktop */
     }
 }
