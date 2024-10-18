@@ -26,8 +26,13 @@
             opacity: 0;
         }
     }
-    p {
+    p,
+    article {
         @apply antialiased;
+    }
+    article a {
+        color: var(--bry-current-color);
+        @apply font-bold leading-normal border-b;
     }
     button {
         @apply hover:opacity-50 transition-opacity;
@@ -202,6 +207,25 @@
     }
     .bry-product-accordion p {
         @apply text-grey-blueish text-[15px] font-roboto leading-[22px] tracking-[0.5px];
+    }
+
+    /* Header for Product & Blog */
+    .bry-header {
+    }
+    .bry-header-title {
+        @apply w-full text-white font-light font-prata text-[2rem] mx-auto text-center absolute pt-3 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase;
+    }
+    .bry-header-deck {
+        @apply w-full text-white font-roboto text-[12px] mx-auto text-center absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase;
+    }
+    .bry-header-deck a {
+        @apply border-b-2 pb-1;
+    }
+    .bry-header-author {
+        @apply absolute bottom-[-6.5rem] left-1/2 transform -translate-x-1/2 z-30 text-center;
+    }
+    .bry-header-author img {
+        @apply rounded-full w-20 h-20 mt-4 mx-auto;
     }
 }
 @layer utilities {
