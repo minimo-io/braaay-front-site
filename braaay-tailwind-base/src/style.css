@@ -227,6 +227,16 @@
     .bry-header-author img {
         @apply rounded-full w-20 h-20 mt-4 mx-auto;
     }
+
+    /* Bry hr bulleted line */
+    /* .bry-bullet-blue */
+    .bry-divider {
+        @apply border-b border-b-grey-light my-9 flex justify-center relative;
+    }
+    .bry-divider::after {
+        @apply bg-[url('./images/divider-blue.svg')];
+        @apply bg-cover content-[""] absolute w-[18px] h-[18px]  -bottom-[10px];
+    }
 }
 @layer utilities {
     .two-lines {
