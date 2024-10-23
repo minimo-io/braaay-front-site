@@ -213,10 +213,10 @@
     .bry-header {
     }
     .bry-header-title {
-        @apply w-full text-white font-light font-prata text-[2rem] mx-auto text-center absolute pt-3 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase;
+        @apply w-full text-white font-light font-prata text-[2rem] mx-auto px-10 md:px-0 leading-[2.1rem] md:leading-normal text-center absolute pt-3 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase;
     }
     .bry-header-deck {
-        @apply w-full text-white font-roboto text-[12px] mx-auto text-center absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase;
+        @apply w-full text-white font-roboto text-[12px] mx-auto pb-4 md:pb-0 text-center absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase;
     }
     .bry-header-deck a {
         @apply border-b-2 pb-1;
@@ -226,6 +226,23 @@
     }
     .bry-header-author img {
         @apply rounded-full w-20 h-20 mt-4 mx-auto;
+    }
+
+    /* Article */
+    .bry-article-content {
+        @apply flex flex-col md:flex-row relative;
+    }
+    .bry-article-content h2 {
+        @apply mb-3 mt-4 font-roboto font-semibold leading-7 text-[1.3rem] uppercase;
+    }
+    .bry-article-content h3 {
+        @apply mb-3 mt-4 font-roboto font-medium leading-7 text-[1.1rem] uppercase;
+    }
+    .bry-article-content p {
+        @apply font-roboto text-[16px] tracking-[.5px] leading-[23px] font-light antialiased my-3;
+    }
+    .bry-article-content img {
+        @apply rounded-2xl my-2 relative;
     }
 
     /* Bry hr bulleted line */
