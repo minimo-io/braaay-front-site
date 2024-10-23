@@ -6,4 +6,5 @@ Yo be used as the css library for Svelte (mobile & desktop) & Woocommerce front-
 
 ## To Do
 
+-   Add schema for product page.
 -   Glide carrousel is still sub-optimal (uses a placeholder that is fixed), why not use srcset for the placeholder and THEN conditionally load the image?
