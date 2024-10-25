@@ -2,14 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --bry-sun: #bd8836;
+    /* For the main button. Used with gradient for products. */
+    --bry-current-color: #303133;
+    --bry-current-gradient-start: #d1d1d0;
+    --bry-current-gradient-end: #b5b5b3;
+}
+*:focus {
+    outline: 2px solid var(--bry-current-color);
+    outline-offset: 0px;
+}
 @layer base {
-    :root {
-        --bry-sun: #bd8836;
-        /* For the main button. Used with gradient for products. */
-        --bry-current-color: #303133;
-        --bry-current-gradient-start: #d1d1d0;
-        --bry-current-gradient-end: #b5b5b3;
-    }
     ::selection {
         background: #212639;
         color: #ffffff !important;
@@ -62,7 +66,7 @@
 }
 @layer components {
     .btn {
-        @apply py-2 px-5 bg-white text-blue rounded-full border border-grey-lighter focus:outline-none   hover:ring-grey-medium font-roboto text-xs tracking-widest;
+        @apply py-2 px-5 bg-white text-blue rounded-full border border-grey-lighter hover:ring-grey-medium font-roboto text-xs tracking-widest;
         @screen sm {
             .btn {
                 @apply py-1 px-3 mt-5 text-[9px];
