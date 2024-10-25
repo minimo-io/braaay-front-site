@@ -92,15 +92,21 @@
 
                 <!-- Desktop & Mobile menu -->
                 <div class="hidden lg:flex flex-1 lg:gap-x-12">
+                    <!-- Search form -->
                     <form
                         action="https://braaay.com/"
                         method="get"
                         class="w-full"
+                        x-data="search_hotkeys()"
                     >
                         <div
                             class="px-5 border-r border-r-1 border-r-grey-lighter h-[45px]"
                         >
                             <input
+                                id="search"
+                                x-ref="q"
+                                @keydown.window.prevent.cmd.k="search()"
+                                @keydown.window.prevent.ctrl.k="search()"
                                 type="search"
                                 minlength="3"
                                 class="rounded-3xl focus:ring-0 focus-visible:outline-none w-full text-sm h-[45px] placeholder:tracking-wide placeholder:text-grey-medium border border-grey-lighter px-5 py-2.5 font-roboto placeholder:font-light shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]"
@@ -109,7 +115,6 @@
                                 name="s"
                                 title="Procurar:"
                             />
-                            <i class="fa fa-search3"></i>
                         </div>
                     </form>
                 </div>
@@ -1171,7 +1176,32 @@
                     hoverpause: true,
                     gap: 0,
                 }).mount();
+                // Search stuff
+                let searchInput = document.getElementById("search");
+                if (searchInput) {
+                    const userAgent = window.navigator.userAgent;
+                    let addPlaceholder = "";
+                    if (
+                        userAgent.includes("Windows") ||
+                        userAgent.includes("Linux")
+                    ) {
+                        addPlaceholder = " (ctrl + k)";
+                    } else if (userAgent.includes("Macintosh")) {
+                        addPlaceholder = " (cmd + k)";
+                    }
+                    searchInput.placeholder += addPlaceholder;
+                }
             });
+
+            function search_hotkeys() {
+                return {
+                    search() {
+                        setTimeout(() => {
+                            this.$refs.q.focus();
+                        }, 100);
+                    },
+                };
+            }
         </script>
     </body>
 </html>
