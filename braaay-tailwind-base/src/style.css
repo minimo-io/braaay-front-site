@@ -9,6 +9,17 @@
     --bry-current-gradient-start: #d1d1d0;
     --bry-current-gradient-end: #b5b5b3;
 }
+/* For dark mode transition effect */
+* {
+    @apply transition-colors duration-200;
+}
+/* Just to check outlines out */
+*,
+*::after,
+*::before {
+    /* outline: 2px solid lime; */
+}
+/* For accesibility outline colors */
 *:focus {
     outline: 2px solid var(--bry-current-color);
     outline-offset: 0px;
