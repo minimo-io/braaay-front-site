@@ -282,6 +282,14 @@
     .bry-bullet-green::after {
         @apply bg-[url('./images/divider-green.svg')];
     }
+
+    /* Cart */
+    .bry-cart-item-quantity {
+        @apply flex flex-1 items-center space-x-3 pr-10;
+    }
+    .bry-cart-item-quantity button {
+        @apply flex items-center justify-center w-7 h-7 rounded-full bg-grey-blueish text-white font-bold;
+    }
 }
 @layer utilities {
     .two-lines {
@@ -325,7 +333,8 @@
     overflow-x: auto; /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     scroll-behavior: smooth; /* Smooth scroll behavior */
-    @apply border-t border-t-grey-lighter;
+    @apply border-t border-t-grey-lighter border-b border-b-grey-lighter;
+    /* @apply shadow-sm; */
 }
 .bry-secondary-menu a {
     @apply text-blue font-roboto font-light tracking-wider;

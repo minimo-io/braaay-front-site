@@ -136,7 +136,7 @@
                     </a>
                 </div>
                 <a
-                    href="#"
+                    href="./cart.html"
                     class="bry-cart relative h-[45px] uppercase flex items-center"
                 >
                     <i class="bry-bag"></i>
@@ -401,19 +401,6 @@
             <div id="glide-carousel" class="glide">
                 <div class="glide__track" data-glide-el="track">
                     <ul class="glide__slides">
-                        <li class="glide__slide w-full">
-                            <a href="#">
-                                <img
-                                    src="./images/carousel/placeholder.webp"
-                                    alt="Image 1"
-                                    class="carousel-image w-full"
-                                    data-desktop="braaay-carousel-desktop-0.png"
-                                    data-mobile="braaay-carousel-mobile-0.png"
-                                    width="500"
-                                    height="500"
-                                />
-                            </a>
-                        </li>
                         <li class="glide__slide w-full">
                             <a href="#">
                                 <img
@@ -1184,6 +1171,9 @@
                     gap: 0,
                 }).mount();
                 // Search stuff
+                let kbdAbbrElem = document.querySelector(
+                    ".bry-search-kbd > abbr",
+                );
                 if (kbdAbbrElem) {
                     const userAgent = window.navigator.userAgent;
                     let addPlaceholder = "";
