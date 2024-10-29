@@ -14,10 +14,6 @@
 *::before {
     transition: opacity 0.2s linear;
 }
-*:focus {
-    outline: 2px solid var(--bry-current-color);
-    outline-offset: 0px;
-}
 @layer base {
     ::selection {
         background: #212639;
@@ -67,6 +63,11 @@
     }
     a:hover:not(.not-hover-effect) {
         @apply opacity-50;
+    }
+    #search:focus {
+        /* outline: 2px solid var(--bry-current-color); */
+        outline: 1px solid var(--bry-sun);
+        outline-offset: 0px;
     }
 }
 @layer components {
