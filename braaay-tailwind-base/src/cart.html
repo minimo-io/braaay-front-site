@@ -478,7 +478,7 @@
                         <div class="relative">
                             <a
                                 href="#"
-                                class="not-hover-effect hidden md:inline-block relative"
+                                class="not-hover-effect hidden md:block relative"
                             >
                                 <picture>
                                     <!-- Tailwind's sm breakpoint for mobile (640px and below) -->
@@ -501,12 +501,12 @@
                                         src="/src/images/carousel/braaay-carousel-desktop-1.webp"
                                     />
                                 </picture>
-                                <span
+                                <div
                                     href="#"
-                                    class="btn absolute not-hover-effect hover:opacity-90 transition-all scale-90 bottom-2 right-2 border-0 text-white bg-blue uppercase flex md:items-center text-center mt-3 lg:mt-0 self-center"
+                                    class="btn block absolute not-hover-effect hover:opacity-90 transition-all scale-90 bottom-2 right-2 border-0 text-white bg-blue uppercase md:items-center text-center mt-3 lg:mt-0 self-center"
                                 >
                                     ADICIONAR AO CARRINHO
-                                </span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -643,7 +643,7 @@
                                 />
                             </picture>
                         </a>
-                        <div class="my-36"></div>
+                        <div class="hidden md:block md:my-36"></div>
                     </div>
                 </div>
             </div>
@@ -651,7 +651,7 @@
 
         <!-- Footer -->
         <footer
-            class="fixed bottom-0 bg-white py-0 mt-10 border-t border-t-grey-lighter w-full"
+            class="md:fixed bottom-0 bg-white py-0 mt-10 border-t border-t-grey-lighter w-full"
         >
             <!-- Cart Footer -->
             <div
