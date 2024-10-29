@@ -9,17 +9,11 @@
     --bry-current-gradient-start: #d1d1d0;
     --bry-current-gradient-end: #b5b5b3;
 }
-/* For dark mode transition effect */
-* {
-    @apply transition-colors duration-200;
-}
-/* Just to check outlines out */
 *,
 *::after,
 *::before {
-    /* outline: 2px solid lime; */
+    transition: opacity 0.2s linear;
 }
-/* For accesibility outline colors */
 *:focus {
     outline: 2px solid var(--bry-current-color);
     outline-offset: 0px;
@@ -84,7 +78,9 @@
             }
         }
     }
-
+    .bry-search-kbd {
+        @apply px-2 py-1 bg-grey-background rounded-xl text-grey-medium border border-grey-lighter font-roboto text-xs absolute top-1/2 transform -translate-y-1/2 right-8;
+    }
     .play-button {
         position: absolute;
         z-index: 10;

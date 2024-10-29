@@ -107,7 +107,7 @@
                         x-data="search_hotkeys()"
                     >
                         <div
-                            class="px-5 border-r border-r-1 border-r-grey-lighter h-[45px]"
+                            class="relative px-5 border-r border-r-1 border-r-grey-lighter h-[45px]"
                         >
                             <input
                                 id="search"
@@ -122,7 +122,13 @@
                                 name="s"
                                 title="Procurar:"
                             />
-                            <i class="fa fa-search3"></i>
+                            <!-- KBD -->
+                            <kbd class="bry-search-kbd"
+                                ><abbr title="Command" class="no-underline"
+                                    >⌘</abbr
+                                >
+                                K</kbd
+                            >
                         </div>
                     </form>
                 </div>
@@ -454,12 +460,13 @@
                     </p>
 
                     <div class="flex items-center mb-4">
-                        <button
+                        <a
+                            href="./cart.html"
                             style="background-color: var(--bry-current-color)"
                             class="px-8 py-2 text-white rounded-sm uppercase font-roboto text-[13px] tracking-[2.5px]"
                         >
                             ADICIONAR À SACOLA
-                        </button>
+                        </a>
                     </div>
 
                     <!-- Enhanced Alpine.js Accordion with Slide Effect -->
@@ -1585,19 +1592,21 @@
                     };
                 }
                 // Search stuff
-                let searchInput = document.getElementById("search");
-                if (searchInput) {
+                let kbdAbbrElem = document.querySelector(
+                    ".bry-search-kbd > abbr",
+                );
+                if (kbdAbbrElem) {
                     const userAgent = window.navigator.userAgent;
                     let addPlaceholder = "";
                     if (
                         userAgent.includes("Windows") ||
                         userAgent.includes("Linux")
                     ) {
-                        addPlaceholder = " (ctrl + k)";
+                        addPlaceholder = "CTRL +";
                     } else if (userAgent.includes("Macintosh")) {
-                        addPlaceholder = " (cmd + k)";
+                        addPlaceholder = "⌘";
                     }
-                    searchInput.placeholder += addPlaceholder;
+                    kbdAbbrElem.innerHTML = addPlaceholder;
                 }
             });
             function search_hotkeys() {
