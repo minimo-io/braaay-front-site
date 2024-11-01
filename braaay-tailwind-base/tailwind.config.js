@@ -46,6 +46,24 @@ module.exports = {
             roboto: ["Roboto", "sans-serif"],
         },
     },
-    plugins: [require("@tailwindcss/aspect-ratio")],
+    plugins: [
+        require("@tailwindcss/aspect-ratio"),
+        function ({ addUtilities }) {
+            const newUtilities = {
+                ".full-width-r": {
+                    position: "absolute",
+                    width: "100vw",
+                    "margin-right": "-50vw",
+                    left: "50%",
+                    right: "50%",
+                    transform: "translate(-15%)",
+                    top: 0,
+                },
+            };
+
+            // Apply the custom utility classes at all breakpoints
+            addUtilities(newUtilities, ["responsive"]);
+        },
+    ],
     darkMode: "class",
 };
