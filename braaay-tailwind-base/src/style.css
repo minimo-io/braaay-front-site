@@ -138,10 +138,10 @@
         border-bottom: 12px solid transparent;
     }
     .bry-product-list {
-        @apply container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6;
+        @apply container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4;
     }
     .bry-product-list > .wine {
-        @apply bg-[#EFEFEF] rounded-lg shadow-sm p-4 text-center relative h-full flex flex-col;
+        @apply bg-[#EFEFEF] rounded-md shadow-sm p-4 text-center relative h-full flex flex-col;
     }
     .bry-product-list > .wine .wine-button {
         @apply bg-white block mt-4 px-4 py-2 rounded-full border border-grey-light text-xs;

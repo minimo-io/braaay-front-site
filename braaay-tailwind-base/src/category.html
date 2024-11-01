@@ -406,37 +406,191 @@
             </div>
         </header>
 
-        <main class="w-full mx-auto bg-white">
-            <!-- Category Header -->
-            <div class="max-w-screen-lg border-sky bg-gray-100 md:mx-auto">
-                <div
-                    class="flex flex-col md:flex-row items-center md:min-h-48 relative"
-                >
+        <main class="w-full mx-auto">
+            <!-- Header menu -->
+            <div class="bg-white border-b border-b-grey-lighter">
+                <!-- Category Header -->
+                <div class="max-w-screen-lg border-sky bg-gray-100 md:mx-auto">
                     <div
-                        class="flex justify-between items-center text-right md:text-left md:items-start md:justify-normal flex-row md:flex-col w-full md:w-[55%] py-4 md:py-[20px] mx-[30px] px-[30px] md:pl-3"
+                        class="flex flex-col md:flex-row items-center md:min-h-40 relative"
                     >
-                        <h1
-                            class="font-prata uppercase text-[25px] my-1 font-light text-grey-dark tracking-wider antialiased"
-                        >
-                            Uruguai
-                        </h1>
                         <div
-                            class="flex flex-col md:flex-row text-grey-medium-dark font-roboto text-[14px] antialiased"
+                            class="flex justify-between items-center text-right md:text-left md:items-start md:justify-normal flex-row md:flex-col w-full md:w-[55%] py-4 md:py-[20px] mx-[30px] px-[30px] md:pl-0"
                         >
-                            <span>36 produtos</span>
-                            <button
-                                class="font-roboto text-grey-medium-dark font-[11px] text-xs border border-grey-light py-[3px] px-[7px] antialiased ml-2 rounded-md"
+                            <h1
+                                class="font-prata uppercase text-[25px] my-1 font-light text-grey-dark tracking-wider antialiased"
                             >
-                                CONHEÇA MAIS
-                            </button>
+                                Uruguai
+                            </h1>
+                            <div
+                                class="flex flex-col md:flex-row text-grey-medium-dark font-roboto text-[14px] antialiased"
+                            >
+                                <span>36 produtos</span>
+                                <button
+                                    class="font-roboto text-grey-medium-dark font-[11px] text-xs border border-grey-light py-[3px] px-[7px] antialiased ml-2 rounded-md"
+                                >
+                                    CONHEÇA MAIS
+                                </button>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <img
+                                src="./images/uruguai.webp"
+                                alt="Uruguai Image"
+                                class="md:min-h-40 md:max-h-40 max-h-40 h-40 md:full-width-r object-cover"
+                            />
                         </div>
                     </div>
-                    <div class="order-last md:order-none">
-                        <img
-                            src="./images/uruguai.webp"
-                            alt="Uruguai Image"
-                            class="min-h-48 md:full-width-r object-cover"
-                        />
+                </div>
+            </div>
+
+            <!-- Filtering menu -->
+
+            <div class="bry-filtering-inline"></div>
+
+            <!-- Product list -->
+            <div class="max-w-screen-lg mx-[1.5rem] md:mx-auto my-[1.5rem]">
+                <div class="bry-product-list">
+                    <!-- Wine Box 1 -->
+                    <div class="wine !bg-white">
+                        <div class="mb-3 flex-grow">
+                            <img
+                                src="./images/wines/Deica-2-1.webp"
+                                alt="Pizzato Merlot de Merlots 2022"
+                                class="mx-auto"
+                            />
+                        </div>
+                        <div class="absolute top-4 left-4">
+                            <div class="wine-stars">
+                                <span>★</span>
+                                4.5
+                            </div>
+                        </div>
+                        <h5 class="wine-title">
+                            Pizzato Merlot de Merlots 2022
+                        </h5>
+                        <p class="wine-price">R$ 150</p>
+                        <a href="./product.html" class="wine-button"
+                            >VER DETALHES</a
+                        >
+                    </div>
+
+                    <!-- Wine Box 2 -->
+                    <div class="wine">
+                        <div class="mb-3 flex-grow">
+                            <img
+                                src="./images/wines/PIZZATO-concentus.webp"
+                                alt="Artesana Cabernet Franc/Merlot Reserva"
+                                class="mx-auto"
+                            />
+                        </div>
+                        <div class="absolute top-4 left-4">
+                            <div class="wine-stars">
+                                <span>★</span>
+                                4.5
+                            </div>
+                        </div>
+                        <h5 class="wine-title">
+                            Artesana Cabernet Franc/Merlot Reserva
+                        </h5>
+                        <p class="wine-price">R$ 100</p>
+                        <a href="#" class="wine-button">VER DETALHES</a>
+                    </div>
+
+                    <!-- Wine Box 3 -->
+                    <div class="wine">
+                        <div class="mb-3 flex-grow">
+                            <img
+                                src="./images/wines/Pizzato-Legno-Chardonnay.webp"
+                                alt="Pizzato Chardonnay de Chardonnays"
+                                class="mx-auto"
+                            />
+                        </div>
+                        <div class="absolute top-4 left-4">
+                            <div class="wine-stars">
+                                <span>★</span>
+                                4.5
+                            </div>
+                        </div>
+                        <h5 class="wine-title">
+                            Pizzato Chardonnay de Chardonnays
+                        </h5>
+                        <p class="wine-price">R$ 119</p>
+                        <a href="#" class="wine-button">VER DETALHES</a>
+                    </div>
+
+                    <!-- Wine Box 4 -->
+                    <div class="wine">
+                        <div class="mb-3 flex-grow">
+                            <img
+                                src="./images/wines/vinho-don-pascual-cabernet-merlot.webp"
+                                alt="Mayos Jovem Branco da Basso"
+                                class="mx-auto"
+                            />
+                        </div>
+                        <div class="absolute top-4 left-4">
+                            <div class="wine-stars">
+                                <span>★</span>
+                                4.5
+                            </div>
+                        </div>
+                        <h5 class="wine-title">Mayos Jovem Branco da Basso</h5>
+                        <p class="wine-price">R$ 43</p>
+                        <a href="#" class="wine-button">VER DETALHES</a>
+                    </div>
+
+                    <!-- Wine Box 5 (with discount) -->
+                    <div class="wine">
+                        <div class="mb-3 flex-grow">
+                            <img
+                                src="./images/wines/vinho-mayos-jovem-branco.webp"
+                                alt="Artesana Cabernet Franc/Merlot Reserva"
+                                class="mx-auto"
+                            />
+                        </div>
+                        <div class="absolute top-4 left-4">
+                            <div class="wine-stars">
+                                <span>★</span>
+                                4.5
+                            </div>
+                        </div>
+                        <h5 class="wine-title">
+                            Artesana Cabernet Franc/Merlot Reserva
+                        </h5>
+                        <p class="wine-price">R$ 100</p>
+                        <a href="#" class="wine-button">VER DETALHES</a>
+                        <div
+                            class="absolute top-4 right-4 bg-black text-white px-2 py-1 text-xs rounded-lg"
+                        >
+                            55% OFF
+                        </div>
+                    </div>
+
+                    <!-- Wine Box 6 (with discount) -->
+                    <div class="wine">
+                        <div class="mb-3 flex-grow">
+                            <img
+                                src="./images/wines/vinho-mayos-jovem-branco.webp"
+                                alt="Artesana Cabernet Franc/Merlot Reserva"
+                                class="mx-auto"
+                            />
+                        </div>
+                        <div class="absolute top-4 left-4">
+                            <div class="wine-stars">
+                                <span>★</span>
+                                4.5
+                            </div>
+                        </div>
+                        <h5 class="wine-title">
+                            Artesana Cabernet Franc/Merlot Reserva
+                        </h5>
+                        <p class="wine-price">R$ 100</p>
+                        <a href="#" class="wine-button">VER DETALHES</a>
+                        <div
+                            class="absolute top-4 right-4 bg-black text-white px-2 py-1 text-xs rounded-lg"
+                        >
+                            55% OFF
+                        </div>
                     </div>
                 </div>
             </div>
