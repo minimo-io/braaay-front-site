@@ -287,7 +287,7 @@
 
     /* Cart */
     .bry-cart-item-quantity {
-        @apply flex flex-1 items-center space-x-3 pr-10;
+        @apply flex flex-1 items-center space-x-3 pr-0 md:pr-10  justify-center md:justify-start my-3 md:my-0;
     }
     .bry-cart-item-quantity button {
         @apply flex items-center justify-center w-7 h-7 rounded-full bg-grey-blueish text-white font-bold;
