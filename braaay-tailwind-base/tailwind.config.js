@@ -56,7 +56,7 @@ module.exports = {
                     "margin-right": "-50vw",
                     left: "50%",
                     right: "50%",
-                    transform: "translate(-15%)",
+                    transform: "translate(-6%)",
                     top: 0,
                 },
             };

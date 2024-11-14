@@ -58,7 +58,7 @@
             >
                 <!-- logo -->
                 <div class="flex lg:flex-none pr-8">
-                    <a href="./" class="">
+                    <a href="./">
                         <span class="sr-only">Braaay</span>
                         <img
                             class="h-[38px] w-auto hidden lg:block"
@@ -444,15 +444,144 @@
                 </div>
             </div>
 
-            <!-- Filtering menu -->
+            <div class="pb-8 border-b border-b-grey-lighter">
+                <!-- Filtering menu -->
+                <div class="bry-filtering-inline">
+                    <!-- All Filters Button -->
+                    <button class="!bg-sun !text-white !border-sun">
+                        <i
+                            data-lucide="sliders-horizontal"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                        Todos os filtros
+                    </button>
 
-            <div class="bry-filtering-inline"></div>
+                    <!-- Varietal Button -->
+                    <button>
+                        <i
+                            data-lucide="grape"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                        Variedade
+                        <i
+                            data-lucide="chevron-down"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                    </button>
+
+                    <!-- Region Button -->
+                    <button>
+                        <i
+                            data-lucide="globe"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                        País
+                        <i
+                            data-lucide="chevron-down"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                    </button>
+
+                    <!-- Price Button -->
+                    <button>
+                        <i
+                            data-lucide="dollar-sign"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                        Preço
+                        <i
+                            data-lucide="chevron-down"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                    </button>
+
+                    <!-- Rating Button -->
+                    <button>
+                        <i
+                            data-lucide="star"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                        Avaliação
+                        <i
+                            data-lucide="chevron-down"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                    </button>
+
+                    <!-- Ships Anytime Button -->
+                    <button>
+                        <i
+                            data-lucide="truck"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                        Envío
+                        <i
+                            data-lucide="chevron-down"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                    </button>
+
+                    <!-- Reviewed By Button -->
+                    <!-- <button>
+                        <i
+                            data-lucide="book-open"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                        Resenhado por
+                        <i
+                            data-lucide="chevron-down"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                    </button> -->
+
+                    <!-- Size & Type Button -->
+                    <button>
+                        <i
+                            data-lucide="wine"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                        Tamanho
+                        <i
+                            data-lucide="chevron-down"
+                            class="lucide-button w-5 h-5 mr-2"
+                        ></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sorting/View menu -->
+            <div class="bry-sorting">
+                <!-- Sorting Button -->
+                <span class="text-xs mr-1 text-grey-blueish uppercase"
+                    >Ordenação:</span
+                >
+                <button>
+                    <i
+                        data-lucide="arrow-down-wide-narrow"
+                        class="lucide-button w-5 h-5"
+                    ></i>
+                    Mais interessante
+                </button>
+                <!-- Columns -->
+                <button>
+                    <i
+                        data-lucide="layout-grid"
+                        class="lucide-button w-5 h-5 mr-2"
+                    ></i>
+                    Grade
+                </button>
+                <!-- Map Button -->
+                <!-- <button>
+                    <i data-lucide="map" class="lucide-button w-5 h-5 mr-2"></i>
+                    Mapa
+                </button> -->
+            </div>
 
             <!-- Product list -->
-            <div class="max-w-screen-lg mx-[1.5rem] md:mx-auto my-[1.5rem]">
+            <div class="max-w-screen-lg mx-[1.5rem] md:mx-auto mt-1 mb-[2rem]">
                 <div class="bry-product-list">
                     <!-- Wine Box 1 -->
-                    <div class="wine !bg-white">
+                    <div class="wine wine-transparent">
                         <div class="mb-3 flex-grow">
                             <img
                                 src="./images/wines/Deica-2-1.webp"
@@ -476,7 +605,7 @@
                     </div>
 
                     <!-- Wine Box 2 -->
-                    <div class="wine">
+                    <div class="wine wine-transparent">
                         <div class="mb-3 flex-grow">
                             <img
                                 src="./images/wines/PIZZATO-concentus.webp"
@@ -498,7 +627,7 @@
                     </div>
 
                     <!-- Wine Box 3 -->
-                    <div class="wine">
+                    <div class="wine wine-transparent">
                         <div class="mb-3 flex-grow">
                             <img
                                 src="./images/wines/Pizzato-Legno-Chardonnay.webp"
@@ -520,7 +649,7 @@
                     </div>
 
                     <!-- Wine Box 4 -->
-                    <div class="wine">
+                    <div class="wine wine-transparent">
                         <div class="mb-3 flex-grow">
                             <img
                                 src="./images/wines/vinho-don-pascual-cabernet-merlot.webp"
@@ -539,35 +668,8 @@
                         <a href="#" class="wine-button">VER DETALHES</a>
                     </div>
 
-                    <!-- Wine Box 5 (with discount) -->
-                    <div class="wine">
-                        <div class="mb-3 flex-grow">
-                            <img
-                                src="./images/wines/vinho-mayos-jovem-branco.webp"
-                                alt="Artesana Cabernet Franc/Merlot Reserva"
-                                class="mx-auto"
-                            />
-                        </div>
-                        <div class="absolute top-4 left-4">
-                            <div class="wine-stars">
-                                <span>★</span>
-                                4.5
-                            </div>
-                        </div>
-                        <h5 class="wine-title">
-                            Artesana Cabernet Franc/Merlot Reserva
-                        </h5>
-                        <p class="wine-price">R$ 100</p>
-                        <a href="#" class="wine-button">VER DETALHES</a>
-                        <div
-                            class="absolute top-4 right-4 bg-black text-white px-2 py-1 text-xs rounded-lg"
-                        >
-                            55% OFF
-                        </div>
-                    </div>
-
                     <!-- Wine Box 6 (with discount) -->
-                    <div class="wine">
+                    <div class="wine wine-transparent !bg-white">
                         <div class="mb-3 flex-grow">
                             <img
                                 src="./images/wines/vinho-mayos-jovem-branco.webp"
