@@ -306,8 +306,9 @@
     }
 
     .bry-filtering-inline > button,
+    .bry-filtering-inline > div > button,
     .bry-sorting > button {
-        @apply flex items-center px-4 py-2 rounded-full border border-grey-light text-grey-dark shadow-sm font-roboto text-sm bg-white;
+        @apply flex items-center px-4 py-2 rounded-full border border-grey-lighter text-grey-dark shadow-sm font-roboto text-sm bg-white;
     }
     .bry-sorting > button {
         @apply rounded-full px-3 py-[0.3rem] bg-grey-lighter text-grey-dark  md:mr-1 border-0;

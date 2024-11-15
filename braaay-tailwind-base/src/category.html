@@ -196,6 +196,7 @@
                                 Vinhos
                             </a>
                         </li>
+
                         <li class="relative group transition-all duration-300">
                             <a href="https://braaay.com/experiencias/">
                                 <!-- <i class="fa fa-calendar mr-2"></i> -->
@@ -446,7 +447,7 @@
 
             <div class="pb-8 border-b border-b-grey-lighter">
                 <!-- Filtering menu -->
-                <div class="bry-filtering-inline">
+                <div class="bry-filtering-inline relative">
                     <!-- All Filters Button -->
                     <button class="!bg-sun !text-white !border-sun">
                         <i
@@ -456,96 +457,486 @@
                         Todos os filtros
                     </button>
 
-                    <!-- Varietal Button -->
-                    <button>
-                        <i
-                            data-lucide="grape"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                        Variedade
-                        <i
-                            data-lucide="chevron-down"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                    </button>
+                    <!-- Menu button -->
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open">
+                            <i
+                                data-lucide="grape"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                            Variedade
+                            <i
+                                data-lucide="chevron-down"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                        </button>
+                        <div
+                            x-show="open"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95"
+                            @click.outside="open = false"
+                            class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-y-auto"
+                            style="max-height: calc(55vh - 170px)"
+                        >
+                            <div class="text-xs px-3 flex flex-col">
+                                <a
+                                    href="#"
+                                    class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle"
+                                >
+                                    <span class="text-left self-center"
+                                        >Vinho Tinto</span
+                                    >
+                                    <div
+                                        class="text-grey-medium flex flex-row align-middle self-center"
+                                    >
+                                        <span class="self-center mr-3 text-xs"
+                                            >251</span
+                                        >
+                                        <i
+                                            data-lucide="chevron-right"
+                                            class="w-4 aspect-1 text-grey-dark"
+                                        ></i>
+                                    </div>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle"
+                                >
+                                    <span class="text-left self-center"
+                                        >Espumantes</span
+                                    >
+                                    <div
+                                        class="text-grey-medium flex flex-row align-middle self-center"
+                                    >
+                                        <span class="self-center mr-3 text-xs"
+                                            >142</span
+                                        >
+                                        <i
+                                            data-lucide="chevron-right"
+                                            class="w-4 aspect-1 text-grey-dark"
+                                        ></i>
+                                    </div>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle"
+                                >
+                                    <span class="text-left self-center"
+                                        >Vinho Branco</span
+                                    >
+                                    <div
+                                        class="text-grey-medium flex flex-row align-middle self-center"
+                                    >
+                                        <span class="self-center mr-3 text-xs"
+                                            >89</span
+                                        >
+                                        <i
+                                            data-lucide="chevron-right"
+                                            class="w-4 aspect-1 text-grey-dark"
+                                        ></i>
+                                    </div>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle"
+                                >
+                                    <span class="text-left self-center"
+                                        >Frisantes</span
+                                    >
+                                    <div
+                                        class="text-grey-medium flex flex-row align-middle self-center"
+                                    >
+                                        <span class="self-center mr-3 text-xs"
+                                            >142</span
+                                        >
+                                        <i
+                                            data-lucide="chevron-right"
+                                            class="w-4 aspect-1 text-grey-dark"
+                                        ></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Region Button -->
-                    <button>
-                        <i
-                            data-lucide="globe"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                        País
-                        <i
-                            data-lucide="chevron-down"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                    </button>
+                    <!-- Menu button -->
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open">
+                            <i
+                                data-lucide="globe"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                            País
+                            <i
+                                data-lucide="chevron-down"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                        </button>
+                        <div
+                            x-show="open"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95"
+                            @click.outside="open = false"
+                            class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-y-auto"
+                            style="max-height: calc(55vh - 170px)"
+                        >
+                            <div class="text-xs px-3 flex flex-col">
+                                <a
+                                    href="#"
+                                    class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle"
+                                >
+                                    <div
+                                        class="text-left self-center flex align-middle justify-center"
+                                    >
+                                        <img
+                                            class="w-4 h-4 self-center mr-2"
+                                            src="./images/flags/uruguay.png"
+                                            alt="uruguay-flag"
+                                        /><span class="self-center"
+                                            >Uruguay</span
+                                        >
+                                    </div>
+                                    <div
+                                        class="text-grey-medium flex flex-row align-middle self-center"
+                                    >
+                                        <span class="self-center mr-3 text-xs"
+                                            >251</span
+                                        >
+                                        <i
+                                            data-lucide="chevron-right"
+                                            class="w-4 aspect-1 text-grey-dark"
+                                        ></i>
+                                    </div>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle"
+                                >
+                                    <div
+                                        class="text-left self-center flex align-middle justify-center"
+                                    >
+                                        <img
+                                            class="w-4 h-4 self-center mr-2"
+                                            src="./images/flags/brazil.png"
+                                            alt="uruguay-flag"
+                                        /><span class="self-center"
+                                            >Brasil</span
+                                        >
+                                    </div>
+                                    <div
+                                        class="text-grey-medium flex flex-row align-middle self-center"
+                                    >
+                                        <span class="self-center mr-3 text-xs"
+                                            >142</span
+                                        >
+                                        <i
+                                            data-lucide="chevron-right"
+                                            class="w-4 aspect-1 text-grey-dark"
+                                        ></i>
+                                    </div>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle"
+                                >
+                                    <div
+                                        class="text-left self-center flex align-middle justify-center"
+                                    >
+                                        <img
+                                            class="w-4 h-4 self-center mr-2"
+                                            src="./images/flags/chile.png"
+                                            alt="uruguay-flag"
+                                        /><span class="self-center">Chile</span>
+                                    </div>
+                                    <div
+                                        class="text-grey-medium flex flex-row align-middle self-center"
+                                    >
+                                        <span class="self-center mr-3 text-xs"
+                                            >89</span
+                                        >
+                                        <i
+                                            data-lucide="chevron-right"
+                                            class="w-4 aspect-1 text-grey-dark"
+                                        ></i>
+                                    </div>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle"
+                                >
+                                    <div
+                                        class="text-left self-center flex align-middle justify-center"
+                                    >
+                                        <img
+                                            class="w-4 h-4 self-center mr-2"
+                                            src="./images/flags/argentina.png"
+                                            alt="uruguay-flag"
+                                        /><span class="self-center"
+                                            >Argentina</span
+                                        >
+                                    </div>
+                                    <div
+                                        class="text-grey-medium flex flex-row align-middle self-center"
+                                    >
+                                        <span class="self-center mr-3 text-xs"
+                                            >142</span
+                                        >
+                                        <i
+                                            data-lucide="chevron-right"
+                                            class="w-4 aspect-1 text-grey-dark"
+                                        ></i>
+                                    </div>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle"
+                                >
+                                    <div
+                                        class="text-left self-center flex align-middle justify-center"
+                                    >
+                                        <img
+                                            class="w-4 h-4 self-center mr-2"
+                                            src="./images/flags/portugal.png"
+                                            alt="portugal-flag"
+                                        /><span class="self-center"
+                                            >Portugal</span
+                                        >
+                                    </div>
+                                    <div
+                                        class="text-grey-medium flex flex-row align-middle self-center"
+                                    >
+                                        <span class="self-center mr-3 text-xs"
+                                            >142</span
+                                        >
+                                        <i
+                                            data-lucide="chevron-right"
+                                            class="w-4 aspect-1 text-grey-dark"
+                                        ></i>
+                                    </div>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle"
+                                >
+                                    <div
+                                        class="text-left self-center flex align-middle justify-center"
+                                    >
+                                        <img
+                                            class="w-4 h-4 self-center mr-2"
+                                            src="./images/flags/italy.png"
+                                            alt="italy-flag"
+                                        /><span class="self-center"
+                                            >Italia</span
+                                        >
+                                    </div>
+                                    <div
+                                        class="text-grey-medium flex flex-row align-middle self-center"
+                                    >
+                                        <span class="self-center mr-3 text-xs"
+                                            >142</span
+                                        >
+                                        <i
+                                            data-lucide="chevron-right"
+                                            class="w-4 aspect-1 text-grey-dark"
+                                        ></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Price Button -->
-                    <button>
-                        <i
-                            data-lucide="dollar-sign"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                        Preço
-                        <i
-                            data-lucide="chevron-down"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                    </button>
+                    <!-- Menu button -->
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open">
+                            <i
+                                data-lucide="dollar-sign"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                            Preço
+                            <i
+                                data-lucide="chevron-down"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                        </button>
+                        <div
+                            x-show="open"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95"
+                            @click.outside="open = false"
+                            class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-y-auto px-10 py-5"
+                            style="max-height: calc(55vh - 170px)"
+                        >
+                            <div class="relative mb-6">
+                                <label for="labels-range-input" class="sr-only"
+                                    >Labels range</label
+                                >
+                                <input
+                                    id="labels-range-input"
+                                    type="range"
+                                    value="0"
+                                    min="10"
+                                    max="500"
+                                    class="w-full fill-black h-2 bg-grey-light rounded-lg appearance-none cursor-pointer"
+                                />
+                                <span
+                                    class="text-xs text-grey-medium absolute start-0 -bottom-6"
+                                    >R$10</span
+                                >
+                                <span
+                                    class="text-xs text-grey-medium absolute end-0 -bottom-6"
+                                    >R$500</span
+                                >
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Rating Button -->
-                    <button>
-                        <i
-                            data-lucide="star"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                        Avaliação
-                        <i
-                            data-lucide="chevron-down"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                    </button>
+                    <!-- Menu button -->
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open">
+                            <i
+                                data-lucide="star"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                            Avaliação
+                            <i
+                                data-lucide="chevron-down"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                        </button>
+                        <div
+                            x-show="open"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95"
+                            @click.outside="open = false"
+                            class="absolute bg-white border border-grey-light z-50 shadow-lg mt-2 rounded-lg w-48"
+                        >
+                            <ul class="text-xs p-3">
+                                <li class="px-4 py-2 hover:bg-gray-100">
+                                    Chardonnay
+                                </li>
+                                <li class="px-4 py-2 hover:bg-gray-100">
+                                    Cabernet Sauvignon
+                                </li>
+                                <li class="px-4 py-2 hover:bg-gray-100">
+                                    Merlot
+                                </li>
+                                <li class="px-4 py-2 hover:bg-gray-100">
+                                    Syrah
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-                    <!-- Ships Anytime Button -->
-                    <button>
-                        <i
-                            data-lucide="truck"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                        Envío
-                        <i
-                            data-lucide="chevron-down"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                    </button>
+                    <!-- Menu button -->
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open">
+                            <i
+                                data-lucide="truck"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                            Envío
+                            <i
+                                data-lucide="chevron-down"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                        </button>
+                        <div
+                            x-show="open"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95"
+                            @click.outside="open = false"
+                            class="absolute bg-white border border-grey-light z-50 shadow-lg mt-2 rounded-lg w-48"
+                        >
+                            <div class="flex items-center space-x-3">
+                                <input
+                                    type="radio"
+                                    id="option1"
+                                    name="options"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 rounded-full"
+                                />
+                                <label
+                                    for="option1"
+                                    class="text-gray-700 font-medium"
+                                    >Option 1</label
+                                >
+                            </div>
 
-                    <!-- Reviewed By Button -->
-                    <!-- <button>
-                        <i
-                            data-lucide="book-open"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                        Resenhado por
-                        <i
-                            data-lucide="chevron-down"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                    </button> -->
+                            <div class="flex items-center space-x-3 mt-2">
+                                <input
+                                    type="radio"
+                                    id="option2"
+                                    name="options"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 rounded-full"
+                                />
+                                <label
+                                    for="option2"
+                                    class="text-gray-700 font-medium"
+                                    >Option 2</label
+                                >
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Size & Type Button -->
-                    <button>
-                        <i
-                            data-lucide="wine"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                        Tamanho
-                        <i
-                            data-lucide="chevron-down"
-                            class="lucide-button w-5 h-5 mr-2"
-                        ></i>
-                    </button>
+                    <!-- Menu button -->
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open">
+                            <i
+                                data-lucide="ruler"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                            Tamanho
+                            <i
+                                data-lucide="chevron-down"
+                                class="lucide-button w-5 h-5 mr-2"
+                            ></i>
+                        </button>
+                        <div
+                            x-show="open"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95"
+                            @click.outside="open = false"
+                            class="absolute bg-white border border-grey-light z-50 shadow-lg mt-2 rounded-lg w-48"
+                        >
+                            <ul class="text-xs p-3">
+                                <li class="px-4 py-2 hover:bg-gray-100">
+                                    Chardonnay
+                                </li>
+                                <li class="px-4 py-2 hover:bg-gray-100">
+                                    Cabernet Sauvignon
+                                </li>
+                                <li class="px-4 py-2 hover:bg-gray-100">
+                                    Merlot
+                                </li>
+                                <li class="px-4 py-2 hover:bg-gray-100">
+                                    Syrah
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
