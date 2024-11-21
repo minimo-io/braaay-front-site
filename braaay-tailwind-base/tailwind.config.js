@@ -18,7 +18,6 @@ module.exports = {
             transparent: "transparent",
             black: "#000",
             white: "#ffffff",
-
             map: "#293E3F",
             bra: "#226246",
             sky: "#226246",
