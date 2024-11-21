@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>Braaay - Inicio</title>
+        <title>Category</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,8 +29,15 @@
         <!-- theme files -->
         <script src="./bry.build.js" defer></script>
         <link href="./bry.build.css" rel="stylesheet" />
+        <style>
+            :root {
+                --bry-current-color: #211a2e;
+                --bry-current-gradient-start: #847f87;
+                --bry-current-gradient-end: #77747d;
+            }
+        </style>
     </head>
-    <body class="bg-grey-background">
+    <body class="bg-grey-background overflow-x-hidden">
         <!-- Top header -->
         <header x-data="{ isOpen: false }" class="bg-white">
             <nav
@@ -39,7 +46,7 @@
             >
                 <!-- logo -->
                 <div class="flex lg:flex-none pr-8">
-                    <a href="./" class="">
+                    <a href="./">
                         <span class="sr-only">Braaay</span>
                         <img
                             class="h-[38px] w-auto hidden lg:block"
@@ -90,7 +97,7 @@
                                 @keydown.window.prevent.ctrl.k="search()"
                                 type="search"
                                 minlength="3"
-                                class="rounded-3xl focus:ring-1 ring-sun w-full text-sm h-[45px] placeholder:tracking-wide placeholder:text-grey-medium border border-grey-lighter px-5 py-2.5 font-roboto placeholder:font-light shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]"
+                                class="rounded-3xl focus:ring-1 w-full text-sm h-[45px] placeholder:tracking-wide placeholder:text-grey-medium border border-grey-lighter px-5 py-2.5 font-roboto placeholder:font-light shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]"
                                 placeholder="Pesquisar…"
                                 value=""
                                 name="s"
@@ -105,7 +112,7 @@
                     </form>
                 </div>
                 <div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
-                    <a href="#" class="btn h-[45px] uppercase flex items-center justify-center">
+                    <a href="#" class="btn h-[45px] uppercase flex items-center justify-center focus:ring-1">
                         <!-- <i class="fa fa-user pr-2"></i> -->
                         <i data-lucide="user" class="lucide-button"></i>
                         Minha conta
@@ -154,6 +161,7 @@
                                 Vinhos
                             </a>
                         </li>
+
                         <li class="relative group transition-all duration-300">
                             <a href="https://braaay.com/experiencias/">
                                 <!-- <i class="fa fa-calendar mr-2"></i> -->
@@ -341,504 +349,53 @@
             </div>
         </header>
 
-        <main>
-            <!-- Carrousel mobile -->
-            <div id="glide-carousel" class="glide">
-                <div class="glide__track" data-glide-el="track">
-                    <ul class="glide__slides">
-                        <li class="glide__slide w-full">
-                            <a href="#">
-                                <img
-                                    src="./images/carousel/placeholder.webp"
-                                    alt="Image 2"
-                                    class="carousel-image w-full"
-                                    data-desktop="braaay-carousel-desktop-1.webp"
-                                    data-mobile="braaay-carousel-mobile-1.png"
-                                    width="800"
-                                    height="600"
-                                />
-                            </a>
-                        </li>
-                        <li class="glide__slide w-full">
-                            <a href="#">
-                                <img
-                                    src="./images/carousel/placeholder.webp"
-                                    alt="Image 3"
-                                    class="carousel-image w-full"
-                                    data-desktop="braaay-carousel-desktop-2.webp"
-                                    data-mobile="braaay-carousel-mobile-2.png"
-                                    width="800"
-                                    height="600"
-                                />
-                            </a>
-                        </li>
-                        <!-- Add more slides as needed -->
-                    </ul>
-                </div>
-                <!-- Dots for Slide Navigation -->
-                <div
-                    class="glide__bullets absolute bottom-4 left-1/2 transform -translate-x-1/2"
-                    data-glide-el="controls[nav]"
-                >
-                    <button class="glide__bullet" data-glide-dir="=0"></button>
-                    <button class="glide__bullet" data-glide-dir="=1"></button>
-                    <button class="glide__bullet" data-glide-dir="=2"></button>
-                    <!-- Add more bullets based on the number of slides -->
-                </div>
-            </div>
-
-            <!-- Header section -->
-            <div
-                class="max-w-screen-lg flex flex-col lg:flex-row justify-between items-center py-10 px-0 mx-[30px] lg:mx-auto mt-5"
-            >
-                <!-- Left section -->
-                <div class="lg:w-[65%]">
-                    <h4
-                        class="text-[13px] lg:text-[15px] text-gray-500 font-light font-roboto tracking-wide uppercase border-b-2 inline-block border-bra"
-                    >
-                        Showroom
-                    </h4>
-                    <h2 class="text-[18px] lg:text-[26px] font-prata text-black mt-3 uppercase tracking-wide">
-                        Encontros & Jantares
-                    </h2>
-                    <p class="text-[13px] lg:text-[16px] tracking-[1px] text-grey-blueish mt-2 lg:mt-0 leading-tight">
-                        Venha descobrir o inesperado em nosso showroom e prepare-se para eventos inesquecíveis.
-                    </p>
-                </div>
-
-                <!-- Right section -->
-                <div class="self-start lg:self-auto">
-                    <a
-                        href="#"
-                        class="btn bg-yellow-600 text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3"
-                    >
-                        <!-- <i
-                            class="fa fa-calendar mr-1 pt-px"
-                            aria-hidden="true"
-                        ></i> -->
-                        <i data-lucide="calendar" class="lucide-button"></i>
-
-                        Reserve sua experiência
-                    </a>
-                </div>
-            </div>
-
-            <!-- Home images -->
-            <div class="max-w-screen-lg-2x mx-[30px] lg:mx-auto items-center flex justify-between">
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-                    <!-- Image 1 with play button overlay -->
-                    <div class="relative">
-                        <img
-                            src="./images/home-video-braaay-erika.png"
-                            alt="Image 1 description"
-                            class="rounded-lg w-full h-auto"
-                        />
-                        <a href="#" class="play-button not-hover-effect">
-                            <span></span>
-                        </a>
-                    </div>
-
-                    <!-- Image 2 -->
-                    <div>
-                        <img
-                            src="./images/home-braaay-2-2.webp"
-                            alt="Image 2 description"
-                            class="rounded-lg w-full h-auto"
-                        />
-                    </div>
-
-                    <!-- Image 3 -->
-                    <div>
-                        <img
-                            src="./images/braaay-homepage-3.webp"
-                            alt="Image 3 description"
-                            class="rounded-lg w-full h-auto"
-                        />
-                    </div>
-
-                    <!-- Image 4 -->
-                    <div>
-                        <img
-                            src="./images/home-braaay-4-2.webp"
-                            alt="Image 4 description"
-                            class="rounded-lg w-full h-auto"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section with white background and divider -->
-            <section class="relative bg-white py-10 mt-14">
-                <!-- SVG Divider Dot -->
-                <div class="absolute inset-x-0 -top-3 flex justify-center">
+        <main class="w-full mx-auto Xbg-white">
+            <div class="max-w-screen-lg mx-auto flex flex-row lg:flex-rowrounded-md overflow-hidden py-10">
+                <!-- Image Section -->
+                <div class="lg:w-1/2">
                     <img
-                        src="./images/divider-green.svg"
-                        width="23px"
-                        height="23px"
-                        alt="divider"
-                        class="w-[20px] h-[20px] lg:w-[23px] lg:h-[23px]"
+                        src="./images/Geleia-de-Vinho.jpg"
+                        alt="Receita de Geleia de Vinho"
+                        class="w-full h-full object-cover rounded-2xl"
                     />
                 </div>
 
-                <!-- Header section -->
-                <div
-                    class="max-w-screen-lg flex flex-col lg:flex-row justify-between items-center pt-0 px-0 mx-[30px] lg:mx-auto mt-5"
-                >
-                    <!-- Left section -->
-                    <div class="lg:w-[65%]">
-                        <h4
-                            class="text-[13px] lg:text-[15px] text-gray-500 font-light font-roboto tracking-wide uppercase border-b-2 inline-block border-bra"
-                        >
-                            E-Commerce
-                        </h4>
-                        <h2 class="text-[18px] lg:text-[26px] font-prata text-black mt-3 uppercase tracking-wide">
-                            Vinhos & Presentes
-                        </h2>
-                        <p
-                            class="text-[13px] lg:text-[16px] tracking-[1px] text-grey-blueish mt-2 lg:mt-0 leading-tight"
-                        >
-                            Dê uma olhada em nossa seleção com os melhores vinhos uruguaios e brasileiros e nossas
-                            sugestões para presentes empresariais
-                        </p>
+                <!-- Text Content Section -->
+                <div class="lg:w-1/2 pl-6 py-6">
+                    <!-- Metadata -->
+                    <div class="text-sm flex items-center space-x-2 mb-2">
+                        <span class="font-medium flex align-middle justify-center">
+                            <img
+                                src="./images/erika-96x96.jpeg"
+                                alt="erika"
+                                class="self-center rounded-full w-10 h-10 mr-2"
+                            />
+                            <span class="self-center text-lg">Erika Bezerra</span>
+                        </span>
+                        <span>•</span>
+                        <span class="text-grey-medium">12 de agosto 2024 (atualizado)</span>
                     </div>
 
-                    <!-- Right section -->
-                    <div class="self-start lg:self-auto">
-                        <a
-                            href="#"
-                            class="btn bg-yellow-600 text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3"
-                        >
-                            Ver todos
-                        </a>
+                    <!-- Title -->
+                    <h2 class="text-3xl mb-4 font-prata mt-5">
+                        <a href="./article.html">RECEITA DE GELEIA DE VINHO</a>
+                    </h2>
+
+                    <!-- Description -->
+                    <p class="text-grey-medium-darkest text-[19px] font-roboto mb-4">
+                        Se você é um amante de vinho vai adorar essa iguaria: Geleia de Vinho. Descubra, nesse artigo da
+                        DiVinho, como preparar uma deliciosa receita de Geleia de Vinho! Como preparar a Geleia de
+                        vinho?
+                    </p>
+
+                    <!-- Tags -->
+                    <div class="text-sm text-grey-medium-dark flex items-center space-x-2">
+                        <span class="text-sun font-bold py-1 rounded">Dica do Chef</span>
+                        <span>•</span>
+                        <span>Leitura em 6 min</span>
                     </div>
                 </div>
-
-                <!-- Wine list -->
-                <section class="bg-white max-w-screen-lg-2x py-12 mx-[20px] lg:mx-auto">
-                    <div class="bry-product-list">
-                        <!-- Wine Box 1 -->
-                        <div class="wine">
-                            <div class="mb-3 flex-grow">
-                                <img
-                                    src="./images/wines/Deica-2-1.webp"
-                                    alt="Pizzato Merlot de Merlots 2022"
-                                    class="mx-auto"
-                                />
-                            </div>
-                            <div class="absolute top-4 left-4">
-                                <div class="wine-stars">
-                                    <span>★</span>
-                                    4.5
-                                </div>
-                            </div>
-                            <h5 class="wine-title">Pizzato Merlot de Merlots 2022</h5>
-                            <p class="wine-price">R$ 150</p>
-                            <a href="./product.html" class="wine-button">VER DETALHES</a>
-                        </div>
-
-                        <!-- Wine Box 2 -->
-                        <div class="wine">
-                            <div class="mb-3 flex-grow">
-                                <img
-                                    src="./images/wines/PIZZATO-concentus.webp"
-                                    alt="Artesana Cabernet Franc/Merlot Reserva"
-                                    class="mx-auto"
-                                />
-                            </div>
-                            <div class="absolute top-4 left-4">
-                                <div class="wine-stars">
-                                    <span>★</span>
-                                    4.5
-                                </div>
-                            </div>
-                            <h5 class="wine-title">Artesana Cabernet Franc/Merlot Reserva</h5>
-                            <p class="wine-price">R$ 100</p>
-                            <a href="#" class="wine-button">VER DETALHES</a>
-                        </div>
-
-                        <!-- Wine Box 3 -->
-                        <div class="wine">
-                            <div class="mb-3 flex-grow">
-                                <img
-                                    src="./images/wines/Pizzato-Legno-Chardonnay.webp"
-                                    alt="Pizzato Chardonnay de Chardonnays"
-                                    class="mx-auto"
-                                />
-                            </div>
-                            <div class="absolute top-4 left-4">
-                                <div class="wine-stars">
-                                    <span>★</span>
-                                    4.5
-                                </div>
-                            </div>
-                            <h5 class="wine-title">Pizzato Chardonnay de Chardonnays</h5>
-                            <p class="wine-price">R$ 119</p>
-                            <a href="#" class="wine-button">VER DETALHES</a>
-                        </div>
-
-                        <!-- Wine Box 4 -->
-                        <div class="wine">
-                            <div class="mb-3 flex-grow">
-                                <img
-                                    src="./images/wines/vinho-don-pascual-cabernet-merlot.webp"
-                                    alt="Mayos Jovem Branco da Basso"
-                                    class="mx-auto"
-                                />
-                            </div>
-                            <div class="absolute top-4 left-4">
-                                <div class="wine-stars">
-                                    <span>★</span>
-                                    4.5
-                                </div>
-                            </div>
-                            <h5 class="wine-title">Mayos Jovem Branco da Basso</h5>
-                            <p class="wine-price">R$ 43</p>
-                            <a href="#" class="wine-button">VER DETALHES</a>
-                        </div>
-
-                        <!-- Wine Box 5 (with discount) -->
-                        <div class="wine">
-                            <div class="mb-3 flex-grow">
-                                <img
-                                    src="./images/wines/vinho-mayos-jovem-branco.webp"
-                                    alt="Artesana Cabernet Franc/Merlot Reserva"
-                                    class="mx-auto"
-                                />
-                            </div>
-                            <div class="absolute top-4 left-4">
-                                <div class="wine-stars">
-                                    <span>★</span>
-                                    4.5
-                                </div>
-                            </div>
-                            <h5 class="wine-title">Artesana Cabernet Franc/Merlot Reserva</h5>
-                            <p class="wine-price">R$ 100</p>
-                            <a href="#" class="wine-button">VER DETALHES</a>
-                            <div class="absolute top-4 right-4 bg-black text-white px-2 py-1 text-xs rounded-lg">
-                                55% OFF
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Header section: Harmonizacoes -->
-                <div
-                    class="max-w-screen-lg flex flex-col lg:flex-row justify-between items-center pt-0 px-0 mx-[30px] lg:mx-auto mt-5"
-                >
-                    <!-- Left section -->
-                    <div class="lg:w-[65%]">
-                        <h4
-                            class="text-[13px] lg:text-[15px] text-gray-500 font-light font-roboto tracking-wide uppercase border-b-2 inline-block border-bra"
-                        >
-                            Revista
-                        </h4>
-                        <h2 class="text-[18px] lg:text-[26px] font-prata text-black mt-3 uppercase tracking-wide">
-                            HARMONIZAÇÕES
-                        </h2>
-                        <p
-                            class="text-[13px] lg:text-[16px] tracking-[1px] text-grey-blueish mt-2 lg:mt-0 leading-tight"
-                        >
-                            Acompanhe aqui uma seleção dos nossos melhores vinhos e espumantes uruguaios e brasileiros
-                            para harmonizar com seus pratos favoritos.
-                        </p>
-                    </div>
-
-                    <!-- Right section -->
-                    <div class="self-start lg:self-auto">
-                        <a
-                            href="#"
-                            class="btn bg-yellow-600 text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3"
-                        >
-                            Ver todas
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Harmonizacoes -->
-                <div class="max-w-screen-lg-2x mx-[30px] mt-12 mb-5 lg:mx-auto items-center flex justify-between">
-                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-                        <!-- Image 1 with play button overlay -->
-                        <div class="relative">
-                            <img
-                                src="./images/harmonizacoes/carnes-vermelhas-2.webp"
-                                alt="Image 1 description"
-                                class="rounded-lg w-full h-auto"
-                            />
-                        </div>
-
-                        <!-- Image 2 -->
-                        <div>
-                            <img
-                                src="./images/harmonizacoes/harmonizacoes-vegetariano.png"
-                                alt="Image 2 description"
-                                class="rounded-lg w-full h-auto"
-                            />
-                        </div>
-
-                        <!-- Image 3 -->
-                        <div>
-                            <img
-                                src="./images/harmonizacoes/culinaria-japonesa-2.webp"
-                                alt="Image 3 description"
-                                class="rounded-lg w-full h-auto"
-                            />
-                        </div>
-
-                        <!-- Image 4 -->
-                        <div>
-                            <img
-                                src="./images/harmonizacoes/harmonizacao-carnes-brancas.webp"
-                                alt="Image 4 description"
-                                class="rounded-lg w-full h-auto"
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Header section: Parceiros -->
-                <div
-                    class="max-w-screen-lg flex flex-col lg:flex-row justify-between items-center pt-0 px-0 mx-[30px] lg:mx-auto mt-14"
-                >
-                    <!-- Left section -->
-                    <div class="lg:w-[65%]">
-                        <h4
-                            class="text-[13px] lg:text-[15px] text-gray-500 font-light font-roboto tracking-wide uppercase border-b-2 inline-block border-bra"
-                        >
-                            Produtores
-                        </h4>
-                        <h2 class="text-[18px] lg:text-[26px] font-prata text-black mt-3 uppercase tracking-wide">
-                            PARCEIROS DESTACADOS
-                        </h2>
-                        <p
-                            class="text-[13px] lg:text-[16px] tracking-[1px] text-grey-blueish mt-2 lg:mt-0 leading-tight"
-                        >
-                            Os melhores produtores do Uruguai e Brasil estão na Braaay compartilhando suas experiências.
-                        </p>
-                    </div>
-
-                    <!-- Right section -->
-                    <div class="self-start lg:self-auto">
-                        <a
-                            href="#"
-                            class="btn bg-yellow-600 text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3"
-                        >
-                            Ver todos
-                        </a>
-                    </div>
-                </div>
-                <section class="bry-partners-list">
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/vina-eden-logo.webp"
-                                alt="Viña Edén"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/artesana-logo-3.webp"
-                                alt="Artesana"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/capoani-logo-3.webp"
-                                alt="Manus Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/cerro-del-toro-logo-2.webp"
-                                alt="AC Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/don-pascual-logo-2.webp"
-                                alt="Coroa Acheira Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/familia-deicas-uruguai.webp"
-                                alt="Pizzato Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/pizzato-logo.webp"
-                                alt="Casa Eva Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/vinicola-manus-logo.webp"
-                                alt="Anina Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/garzon-logo-2.webp"
-                                alt="Anina Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/giaretta-logo-2.webp"
-                                alt="Anina Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/casa-eva-logo-2.webp"
-                                alt="Anina Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img
-                                src="./images/partners/casa-da-coheleira-logo-3.webp"
-                                alt="Anina Logo"
-                                class="w-full h-full object-contain"
-                            />
-                        </a>
-                    </div>
-                </section>
-            </section>
-
-            <!-- <div class="py-10"></div> -->
+            </div>
         </main>
 
         <!-- Footer -->
@@ -979,37 +536,7 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const imageElements = document.querySelectorAll(".carousel-image");
-
                 lucide.createIcons();
-
-                function updateCarouselImages() {
-                    const isDesktop = window.innerWidth >= 1024;
-                    // 1536 × 322
-                    imageElements.forEach((img) => {
-                        img.src = isDesktop
-                            ? "./images/carousel/" + img.dataset.desktop
-                            : "./images/carousel/" + img.dataset.mobile;
-                        if (isDesktop) {
-                            img.setAttribute("width", "1536px");
-                            img.setAttribute("height", "322px");
-                        } else {
-                            img.setAttribute("width", "500px");
-                            img.setAttribute("height", "500px");
-                        }
-                    });
-                }
-
-                function createBullets() {
-                    const bulletContainer = document.querySelector('[data-glide-el="controls[nav]"]');
-                    bulletContainer.innerHTML = ""; // Clear any existing bullets
-                    imageElements.forEach((_, index) => {
-                        const bullet = document.createElement("button");
-                        bullet.classList.add("glide__bullet");
-                        bullet.dataset.glideDir = `=${index}`;
-                        bulletContainer.appendChild(bullet);
-                    });
-                }
 
                 // Debounce function
                 function debounce(func, wait) {
@@ -1020,26 +547,6 @@
                         timeout = setTimeout(() => func.apply(context, args), wait);
                     };
                 }
-
-                // Initial update on page load
-                updateCarouselImages();
-                createBullets();
-
-                // Update images and bullets on window resize
-                const debouncedResize = debounce(() => {
-                    updateCarouselImages();
-                    createBullets();
-                }, 250);
-                window.addEventListener("resize", debouncedResize);
-
-                // Initialize the Glide.js carousel
-                new Glide("#glide-carousel", {
-                    type: "carousel",
-                    perView: 1,
-                    autoplay: 3000,
-                    hoverpause: true,
-                    gap: 0,
-                }).mount();
                 // Search stuff
                 let kbdAbbrElem = document.querySelector(".bry-search-kbd > abbr");
                 if (kbdAbbrElem) {
@@ -1053,7 +560,6 @@
                     kbdAbbrElem.innerHTML = addPlaceholder;
                 }
             });
-
             function search_hotkeys() {
                 return {
                     search() {
