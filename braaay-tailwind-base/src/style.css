@@ -261,10 +261,10 @@
         opacity: 0.5;
     }
     .bry-article-content h2 {
-        @apply mb-3 mt-4 font-roboto font-semibold leading-7 text-[1.3rem] uppercase;
+        @apply mb-3 mt-4 font-prata font-normal leading-7 text-[1.3rem] uppercase;
     }
     .bry-article-content h3 {
-        @apply mb-3 mt-4 font-roboto font-medium leading-7 text-[1.1rem] uppercase;
+        @apply mb-3 mt-4 font-prata font-normal leading-7 text-[1.1rem] uppercase;
     }
     .bry-article-content p {
         @apply font-roboto text-[15px] md:text-[17px] tracking-[.4px] leading-[21px] md:leading-[25px] font-light antialiased my-4 text-grey-blueish;
