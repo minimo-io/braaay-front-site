@@ -6,6 +6,8 @@ Yo be used as the css library for Svelte (mobile & desktop) & Woocommerce front-
 
 ## To Do
 
+- Search page
+- My account
 - There is no way to access your account on mobile (hamburger menu?).
 - Search typing results
 - Add shrinking top menu on scroll.
