@@ -9,6 +9,7 @@ Yo be used as the css library for Svelte (mobile & desktop) & Woocommerce front-
 - Order confirmed page.
 - Landing page.
 - Add schema for product page.
+- Menu superior de blog
 
 ### On Svelte
 
