@@ -37,7 +37,16 @@ module.exports = {
                 darkest: "#1d1d1d",
             },
 
-            yellow: "#F3A633",
+            green: {
+                light: "#F9FDF7",
+                medium: "#43aa9b",
+                dark: "#36b376",
+            },
+
+            yellow: {
+                dark: "#F3A633",
+                light: "#FEFDE9",
+            },
         },
 
         fontFamily: {

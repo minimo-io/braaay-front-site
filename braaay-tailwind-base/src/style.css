@@ -159,7 +159,7 @@
         @apply text-base text-grey-medium-dark;
     }
     .bry-product-list > .wine .wine-stars > span {
-        @apply text-yellow;
+        @apply text-yellow-dark;
     }
 
     .bry-partners-list {
@@ -312,6 +312,10 @@
     }
     .bry-sorting > button {
         @apply rounded-full px-3 py-[0.3rem] bg-grey-lighter text-grey-dark  md:mr-1 border-0;
+    }
+
+    .bry-dashed-line {
+        @apply block my-2 border-b border-dashed border-b-grey-light;
     }
 }
 @layer utilities {
