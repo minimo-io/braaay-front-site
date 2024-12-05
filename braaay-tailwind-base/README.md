@@ -7,7 +7,7 @@ Yo be used as the css library for Svelte (mobile & desktop) & Woocommerce front-
 ## To Do
 
 - Order confirmed page.
-- Landing page.
+
 - Add schema for product page.
 
 ### On Svelte
@@ -16,6 +16,14 @@ Yo be used as the css library for Svelte (mobile & desktop) & Woocommerce front-
 - Catalog filter menu.
 - There is no way to access your account on mobile (hamburger menu?).
 - Search typing results
+
+### (v2)
+
+- Landing page.
+- Checkout: Add testimonials.
+- Wine.com has a functionality in which, no matter where you are, a popup appears, and you can apply a discount coupon, with reflects on the listings of all wines.
+- Add shrinking top menu on scroll.
+- Glide carrousel is still sub-optimal (uses a placeholder that is fixed), why not use srcset for the placeholder and THEN conditionally load the image?
 
 ### Components to Not Forget!
 
@@ -51,10 +59,3 @@ Yo be used as the css library for Svelte (mobile & desktop) & Woocommerce front-
                             </a>
                         </div>
 ```
-
-### (v2)
-
-- Checkout: Add testimonials.
-- Wine.com has a functionality in which, no matter where you are, a popup appears, and you can apply a discount coupon, with reflects on the listings of all wines.
-- Add shrinking top menu on scroll.
-- Glide carrousel is still sub-optimal (uses a placeholder that is fixed), why not use srcset for the placeholder and THEN conditionally load the image?
