@@ -1,0 +1,49 @@
+# START YOAST BLOCK
+# ---------------------------
+User-agent: *
+Crawl-delay: 5 #1 page per 10 seconds
+
+# User-Agent:  FacebookBot
+
+
+Disallow: /wp-admin/
+Disallow: /wp-json/
+Disallow: /produtores-de-vinho/los-lirios/
+Disallow: /*?*
+# Disallow: /?s=*
+# Disallow: /*/?filter_pais=*
+# Disallow: /*/?filter_produtores-de-vinho=*
+# Disallow: /*/?max_price=*
+# Disallow: /*/?filter_pais=*
+# Disallow: /*/?tax_uva=*
+# Disallow: /*/?filter_produtores-de-vinho=*
+
+Sitemap: https://braaay.com/sitemap_index.xml
+Sitemap: https://braaay.com/uy/sitemap_index.xml
+# ---------------------------
+# END YOAST BLOCK
+
+# banned bots.
+User-agent: Vegi bot
+User-agent: seostats
+User-agent: MauiBot
+User-agent: TechSEO360
+User-agent: AhrefsBot
+User-agent: MJ12bot
+User-agent: dotbot
+User-agent: serpstatbot
+User-agent: Amazonbot
+User-agent: Nuclei
+User-agent: WikiDo
+User-agent: Riddler
+User-agent: PetalBot
+User-agent: Zoominfobot
+User-agent: Go-http-client
+User-agent: Node/simplecrawler
+User-agent: CazoodleBot
+User-agent: dotbot/1.0
+User-agent: Gigabot
+User-agent: Barkrowler
+User-agent: BLEXBot
+User-agent: magpie-crawler
+Disallow: /
