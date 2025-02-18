@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { User } from 'lucide-svelte';
+</script>
+
 <!-- Top header -->
 <header class="bg-white">
 	<nav
@@ -69,8 +73,7 @@
 		</div>
 		<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
 			<a href="./account.html" class="btn h-[45px] uppercase flex items-center justify-center">
-				<!-- <i class="fa fa-user pr-2"></i> -->
-				<i data-lucide="user" class="lucide-button"></i>
+				<User class="lucide-button" />
 				Minha conta
 			</a>
 		</div>
