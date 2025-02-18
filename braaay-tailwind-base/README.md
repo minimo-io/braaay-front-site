@@ -7,7 +7,6 @@ Yo be used as the css library for Svelte (mobile & desktop) & Woocommerce front-
 ## To Do
 
 - Order confirmed page.
-
 - Add schema for product page.
 
 ### On Svelte
@@ -16,6 +15,7 @@ Yo be used as the css library for Svelte (mobile & desktop) & Woocommerce front-
 - Catalog filter menu.
 - There is no way to access your account on mobile (hamburger menu?).
 - Search typing results
+- Mini-cart
 
 ### (v2)
 
