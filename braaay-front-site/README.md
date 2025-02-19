@@ -22,4 +22,5 @@ npx sv create my-app
 
 ## Notes
 
-Take this reference for project structure: [https://github.com/huggingface/chat-ui](https://github.com/huggingface/chat-ui)
+- Take this reference for project structure: [https://github.com/huggingface/chat-ui](https://github.com/huggingface/chat-ui)
+- Take this reference for a wine store: [https://primalwine.com/](https://primalwine.com/)
