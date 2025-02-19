@@ -14,17 +14,11 @@ npx sv create
 npx sv create my-app
 ```
 
-## Developing
+## To Do
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- Continue with other Tailwind-Base pages.
+- Mobile menu, needs to improve (no current place for cashback or account buttons)
 
 ## Notes
 
-Take this reference for project structure: https://github.com/huggingface/chat-ui
+Take this reference for project structure: [https://github.com/huggingface/chat-ui](https://github.com/huggingface/chat-ui)

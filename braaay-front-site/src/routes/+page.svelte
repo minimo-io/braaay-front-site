@@ -2,6 +2,7 @@
 	import Header from '$components/layout/Header.svelte';
 	import Footer from '$components/layout/Footer.svelte';
 	import Carrousel from '$components/ui/Carrousel.svelte';
+	import { Calendar } from 'lucide-svelte';
 </script>
 
 <Header />
@@ -33,12 +34,7 @@
 		<!-- Right section -->
 		<div class="self-start lg:self-auto">
 			<a href="/" class="btn text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3">
-				<!-- <i
-                    class="fa fa-calendar mr-1 pt-px"
-                    aria-hidden="true"
-                ></i> -->
-				<i data-lucide="calendar" class="lucide-button"></i>
-
+				<Calendar class="lucide-button" />
 				Reserve sua experiência
 			</a>
 		</div>

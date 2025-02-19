@@ -1,5 +1,17 @@
 <script lang="ts">
-	import { User } from 'lucide-svelte';
+	import {
+		User,
+		Wine,
+		CalendarDays,
+		Gift,
+		Award,
+		Leaf,
+		PackageOpen,
+		// Newspaper,
+		Search,
+		Coins
+		// BadgePercent
+	} from 'lucide-svelte';
 </script>
 
 <!-- Top header -->
@@ -24,31 +36,8 @@
 				/>
 			</a>
 		</div>
-		<!-- Mobile Menu Hamburger -->
-		<div class="flex lg:hidden hidden">
-			<button
-				type="button"
-				class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-			>
-				<span class="sr-only">Abrir menu principal</span>
-				<svg
-					class="h-6 w-6"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					aria-hidden="true"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-					/>
-				</svg>
-			</button>
-		</div>
 
-		<!-- Desktop & Mobile menu -->
+		<!-- Search-->
 		<div class="hidden lg:flex flex-1 lg:gap-x-12">
 			<!-- Search form -->
 			<form action="./search.html" method="get" class="w-full">
@@ -71,12 +60,29 @@
 				</div>
 			</form>
 		</div>
+
 		<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
+			<!-- My account -->
 			<a href="./account.html" class="btn h-[45px] uppercase flex items-center justify-center">
 				<User class="lucide-button" />
-				Minha conta
+				Conta
+			</a>
+			<!-- Cashback -->
+			<a
+				href="./cashback.html"
+				class="btn h-[35px] lg:h-[45px] text-blue uppercase relative flex items-center justify-center ml-3 border"
+			>
+				<Coins class="h-[15px] text-sun" fill="#BD8836" />
+				<span class="lg:mt-1">R$124</span>
+				<span
+					class="hidden md:flex pt-[2px] absolute md:-top-[10px] bg-white border border-grey-lighter hover:ring-grey-medium text-blue font-bold antialiased px-2 py-0 text-[8px] rounded-xl"
+				>
+					CASHBACK
+				</span>
 			</a>
 		</div>
+
+		<!-- Bag -->
 		<a href="./cart.html" class="bry-cart relative h-[45px] uppercase flex items-center">
 			<i class="bry-bag"></i>
 			<span
@@ -94,11 +100,7 @@
 			method="get"
 			class="w-full flex items-center relative flex-align-items-center"
 		>
-			<!-- <i
-                class="fa fa-search mr-2 absolute top-1/2 -translate-y-1/2 left-[30px]"
-            ></i> -->
-			<i data-lucide="search" class="mr-1 h-[16px] absolute top-1/2 -translate-y-1/2 left-[30px]"
-			></i>
+			<Search class="mr-1 h-[16px] absolute top-1/2 -translate-y-1/2 left-[30px]" />
 			<input
 				type="search"
 				minlength="3"
@@ -117,50 +119,70 @@
 			<ul class="flex space-x-4">
 				<li class="relative group transition-all duration-300">
 					<a href="./category.html" class="!pr-2 !lg:pr-3 !pl-0">
-						<i data-lucide="wine" class="lucide-menu"></i>
+						<Wine class="lucide-menu" />
 						Vinhos
 					</a>
 				</li>
 				<li class="relative group transition-all duration-300">
-					<a href="https://braaay.com/experiencias/">
-						<!-- <i class="fa fa-calendar mr-2"></i> -->
-						<i data-lucide="calendar-days" class="lucide-menu"></i>
-						Experiências
-					</a>
-				</li>
-				<li class="relative group transition-all duration-300">
 					<a href="/kits/">
-						<!-- <i class="fa fa-gift mr-2"></i> -->
-						<i data-lucide="gift" class="lucide-menu"></i>
+						<Gift class="lucide-menu" />
 						Presentes
 					</a>
 				</li>
 				<li class="relative group transition-all duration-300">
+					<a href="/kits/">
+						<PackageOpen class="lucide-menu" />
+						Kits
+					</a>
+				</li>
+				<li class="relative group transition-all duration-300">
+					<a href="https://braaay.com/experiencias/">
+						<CalendarDays class="lucide-menu" />
+						Experiências
+					</a>
+				</li>
+				<li class="self-center text-grey-medium antialiased">|</li>
+				<li class="relative group transition-all duration-300">
+					<a href="/tag/oportunidades/" class="font-bold">
+						<span class="Xtext-green-dark flex Xfont-medium self-center">
+							<Leaf class="lucide-menu self-center" />
+							Orgânicos
+						</span>
+					</a>
+				</li>
+				<li class="relative group transition-all duration-300">
 					<a href="/tag/premiados/">
-						<!-- <i class="fa fa-trophy mr-2"></i> -->
-						<i data-lucide="award" class="lucide-menu"></i>
+						<Award class="lucide-menu" />
 						Premiados
 					</a>
 				</li>
-				<li class="relative group transition-all duration-300">
-					<a href="/tag/oportunidades/">
-						<!-- <i class="fa fa-calendar mr-2"></i> -->
-						<i data-lucide="target" class="lucide-menu badge-percent"></i>
-						Oportunidades
-					</a>
-				</li>
-				<li class="relative group transition-all duration-300">
+
+				<!-- <li class="relative group transition-all duration-300">
 					<a href="/em-breve/">
-						<!-- <i class="fa fa-graduation-cap mr-2"></i> -->
-						<i data-lucide="graduation-cap" class="lucide-menu badge-percent"></i>
+						<GraduationCap class="lucide-menu badge-percent" />
 						Cursos
 					</a>
-				</li>
-				<li class="relative group transition-all duration-300">
-					<a href="./blog.html" class="!pr-5">
-						<!-- <i class="fa fa-newspaper-o mr-2"></i> -->
-						<i data-lucide="newspaper" class="lucide-menu badge-percent"></i>
+				</li> -->
+				<!-- <li class="relative group transition-all duration-300">
+					<a href="./blog.html">
+						<Newspaper class="lucide-menu badge-percent" />
 						Blog
+					</a>
+				</li> -->
+				<li class="relative group transition-all duration-300">
+					<a href="./blog.html" class="!py-0 !pr-5 h-full">
+						<!-- <BadgePercent class="lucide-menu badge-percent" color="white" fill="#000" /> -->
+						<img
+							src="/images/badge-offer.png"
+							alt="sale-badge"
+							width="40px"
+							height="40px"
+							class="pr-3"
+						/>
+						<div class="flex flex-col gap-0 self-center">
+							<span class="text-xs text-left leading-none">Compre por</span>
+							<span class="text-sm font-bold text-left leading-5">R$30 ou menos</span>
+						</div>
 					</a>
 				</li>
 			</ul>
