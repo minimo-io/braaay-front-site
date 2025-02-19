@@ -20,6 +20,10 @@ npx sv create my-app
 - Create the svelte this repo as a standalone project to use it with Vercel or Netlify.
 - Mobile menu, needs to improve (no current place for cashback or account buttons)
 
+### v2
+
+- Be able to add favorite wines (I would use this, to explore and remember my favorite wines!).
+
 ## Notes
 
 - Take this reference for project structure: [https://github.com/huggingface/chat-ui](https://github.com/huggingface/chat-ui)
