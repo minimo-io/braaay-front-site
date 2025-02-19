@@ -142,10 +142,10 @@
 					</a>
 				</li>
 				<li class="self-center text-grey-medium antialiased">|</li>
-				<li class="relative group transition-all duration-300">
+				<li class="relative group transition-all duration-300 animate__animated animate__swing">
 					<a href="/tag/oportunidades/" class="font-bold">
-						<span class="Xtext-green-dark flex Xfont-medium self-center">
-							<Leaf class="lucide-menu self-center" />
+						<span class="text-bra flex self-center">
+							<Leaf class="lucide-menu self-center text-bra" />
 							Orgânicos
 						</span>
 					</a>
