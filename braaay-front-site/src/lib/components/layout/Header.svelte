@@ -1,6 +1,5 @@
 <script lang="ts">
 	import {
-		User,
 		Wine,
 		CalendarDays,
 		Gift,
@@ -9,8 +8,9 @@
 		PackageOpen,
 		// Newspaper,
 		Search,
-		Coins
-		// BadgePercent
+		Coins,
+		ChevronDown,
+		CircleUser
 	} from 'lucide-svelte';
 </script>
 
@@ -63,9 +63,13 @@
 
 		<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
 			<!-- My account -->
-			<a href="./account.html" class="btn h-[45px] uppercase flex items-center justify-center">
-				<User class="lucide-button" />
-				Conta
+			<a
+				href="./account.html"
+				class="btn bg-blue !border-0 text-white h-[45px] uppercase flex items-center justify-center pr-3 pl-3"
+			>
+				<CircleUser class="lucide-button h-[10px]" />
+
+				Conta<ChevronDown class="lucide-button !mx-0 !px-0" />
 			</a>
 			<!-- Cashback -->
 			<a
