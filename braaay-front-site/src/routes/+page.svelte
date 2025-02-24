@@ -2,43 +2,34 @@
 	import Header from '$components/layout/Header.svelte';
 	import Footer from '$components/layout/Footer.svelte';
 	import Carrousel from '$components/ui/Carrousel.svelte';
-	import { Calendar } from 'lucide-svelte';
+	import TitleSection from '$components/ui/TitleSection.svelte';
+
+	import { Calendar, ChefHat } from 'lucide-svelte';
 </script>
+
+<svelte:head>
+	<title>Braaay - 🍷Vinhos boutique e Orgânicos & 🍻Cervejas locais</title>
+	<meta
+		name="description"
+		content="Para quem aprecia vinhos autênticos, culturas e experiências enriquecedoras. Especialistas em vinhos uruguaios, nacionais & kits e presentes."
+	/>
+</svelte:head>
 
 <Header />
 
 <main>
 	<Carrousel />
 
-	<!-- Header section -->
-	<div
-		class="max-w-screen-lg flex flex-col lg:flex-row justify-between items-center py-10 px-0 mx-[30px] lg:mx-auto mt-5"
+	<TitleSection
+		buttonText="Reserve sua experiência"
+		title="Encontros & Jantares"
+		subTitle="Showroom"
+		description="Venha descobrir o inesperado em nosso showroom e prepare-se para eventos inesquecíveis."
 	>
-		<!-- Left section -->
-		<div class="lg:w-[65%]">
-			<h4
-				class="text-[13px] lg:text-[15px] text-gray-500 font-light font-roboto tracking-wide uppercase border-b-2 inline-block border-bra"
-			>
-				Showroom
-			</h4>
-			<h2 class="text-[18px] lg:text-[26px] font-prata text-black mt-3 uppercase tracking-wide">
-				Encontros & Jantares
-			</h2>
-			<p
-				class="text-[13px] lg:text-[16px] tracking-[1px] text-grey-blueish mt-2 lg:mt-0 leading-tight"
-			>
-				Venha descobrir o inesperado em nosso showroom e prepare-se para eventos inesquecíveis.
-			</p>
-		</div>
-
-		<!-- Right section -->
-		<div class="self-start lg:self-auto">
-			<a href="/" class="btn text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3">
-				<Calendar class="lucide-button" />
-				Reserve sua experiência
-			</a>
-		</div>
-	</div>
+		{#snippet icon()}
+			<Calendar class="lucide-button" />
+		{/snippet}
+	</TitleSection>
 
 	<!-- Home images -->
 	<div class="max-w-screen-lg-2x mx-[30px] lg:mx-auto items-center flex justify-between">
@@ -50,7 +41,7 @@
 					alt="1 description"
 					class="rounded-lg w-full h-auto"
 				/>
-				<a href="/" class="play-button not-hover-effect" aria-label="button">
+				<a href="/" class="play-button not-hover-effect" aria-label="play-button" role="button">
 					<span></span>
 				</a>
 			</div>
@@ -97,38 +88,13 @@
 			/>
 		</div>
 
-		<!-- Header section -->
-		<div
-			class="max-w-screen-lg flex flex-col lg:flex-row justify-between items-center pt-0 px-0 mx-[30px] lg:mx-auto mt-5"
-		>
-			<!-- Left section -->
-			<div class="lg:w-[65%]">
-				<h4
-					class="text-[13px] lg:text-[15px] text-gray-500 font-light font-roboto tracking-wide uppercase border-b-2 inline-block border-bra"
-				>
-					E-Commerce
-				</h4>
-				<h2 class="text-[18px] lg:text-[26px] font-prata text-black mt-3 uppercase tracking-wide">
-					Vinhos & Presentes
-				</h2>
-				<p
-					class="text-[13px] lg:text-[16px] tracking-[1px] text-grey-blueish mt-2 lg:mt-0 leading-tight"
-				>
-					Dê uma olhada em nossa seleção com os melhores vinhos uruguaios e brasileiros e nossas
-					sugestões para presentes empresariais
-				</p>
-			</div>
-
-			<!-- Right section -->
-			<div class="self-start lg:self-auto">
-				<a
-					href="/"
-					class="btn text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3"
-				>
-					Ver todos
-				</a>
-			</div>
-		</div>
+		<TitleSection
+			buttonText="Ver todos"
+			title="Vinhos & Presentes"
+			subTitle="E-Commerce"
+			description="Dê uma olhada em nossa seleção com os melhores vinhos uruguaios e brasileiros e nossas
+			sugestões para presentes empresariais."
+		></TitleSection>
 
 		<!-- Wine list -->
 		<section class="bg-white max-w-screen-lg-2x py-12 mx-[20px] lg:mx-auto">
@@ -239,37 +205,17 @@
 		</section>
 
 		<!-- Header section: Harmonizacoes -->
-		<div
-			class="max-w-screen-lg flex flex-col lg:flex-row justify-between items-center pt-0 px-0 mx-[30px] lg:mx-auto mt-5"
+		<TitleSection
+			buttonText="Ver todas"
+			title="Harmonizações"
+			subTitle="Revista"
+			description="Acompanhe aqui uma seleção dos nossos melhores vinhos e espumantes uruguaios e brasileiros
+			para harmonizar com seus pratos favoritos."
 		>
-			<!-- Left section -->
-			<div class="lg:w-[65%]">
-				<h4
-					class="text-[13px] lg:text-[15px] text-gray-500 font-light font-roboto tracking-wide uppercase border-b-2 inline-block border-bra"
-				>
-					Revista
-				</h4>
-				<h2 class="text-[18px] lg:text-[26px] font-prata text-black mt-3 uppercase tracking-wide">
-					HARMONIZAÇÕES
-				</h2>
-				<p
-					class="text-[13px] lg:text-[16px] tracking-[1px] text-grey-blueish mt-2 lg:mt-0 leading-tight"
-				>
-					Acompanhe aqui uma seleção dos nossos melhores vinhos e espumantes uruguaios e brasileiros
-					para harmonizar com seus pratos favoritos.
-				</p>
-			</div>
-
-			<!-- Right section -->
-			<div class="self-start lg:self-auto">
-				<a
-					href="/"
-					class="btn text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3"
-				>
-					Ver todas
-				</a>
-			</div>
-		</div>
+			{#snippet icon()}
+				<ChefHat class="lucide-button" />
+			{/snippet}
+		</TitleSection>
 
 		<!-- Harmonizacoes -->
 		<div
@@ -315,37 +261,14 @@
 		</div>
 
 		<!-- Header section: Parceiros -->
-		<div
-			class="max-w-screen-lg flex flex-col lg:flex-row justify-between items-center pt-0 px-0 mx-[30px] lg:mx-auto mt-14"
-		>
-			<!-- Left section -->
-			<div class="lg:w-[65%]">
-				<h4
-					class="text-[13px] lg:text-[15px] text-gray-500 font-light font-roboto tracking-wide uppercase border-b-2 inline-block border-bra"
-				>
-					Produtores
-				</h4>
-				<h2 class="text-[18px] lg:text-[26px] font-prata text-black mt-3 uppercase tracking-wide">
-					PARCEIROS DESTACADOS
-				</h2>
-				<p
-					class="text-[13px] lg:text-[16px] tracking-[1px] text-grey-blueish mt-2 lg:mt-0 leading-tight"
-				>
-					Os melhores produtores do Uruguai e Brasil estão na Braaay compartilhando suas
-					experiências.
-				</p>
-			</div>
+		<TitleSection
+			buttonText="Ver todos"
+			title="Parceiros destacados"
+			subTitle="Produtores"
+			description="	Os melhores produtores do Uruguai e do Brasil estão na Braaay compartilhando suas
+			experiências."
+		></TitleSection>
 
-			<!-- Right section -->
-			<div class="self-start lg:self-auto">
-				<a
-					href="/"
-					class="btn text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3"
-				>
-					Ver todos
-				</a>
-			</div>
-		</div>
 		<section class="bry-partners-list">
 			<div>
 				<a href="/">
@@ -457,8 +380,6 @@
 			</div>
 		</section>
 	</section>
-
-	<!-- <div class="py-10"></div> -->
 </main>
 
 <Footer />

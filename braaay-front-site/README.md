@@ -16,6 +16,7 @@ npx sv create my-app
 
 ## To Do
 
+- Glidejs: Tenemos que poder cargar estas imagenes mobile. Tag Picture?
 - Continue with other Tailwind-Base pages.
 - Create the svelte this repo as a standalone project to use it with Vercel or Netlify.
 - Mobile menu, needs to improve (no current place for cashback or account buttons)

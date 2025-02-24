@@ -1,11 +1,29 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import Glide from '@glidejs/glide';
+	import '@glidejs/glide/dist/css/glide.core.css';
+
+	onMount(async () => {
+		let glide = new Glide('#glide-carousel', {
+			type: 'carousel',
+			perView: 1,
+			autoplay: 3000,
+			hoverpause: true,
+			gap: 0
+		});
+
+		glide.mount();
+	});
+</script>
+
 <!-- Carrousel -->
 <div id="glide-carousel" class="glide">
 	<div class="glide__track" data-glide-el="track">
 		<ul class="glide__slides">
 			<li class="glide__slide w-full">
-				<a href="./">
+				<a href="./" class="not-hover-effect">
 					<img
-						src="/images/carousel/placeholder.webp"
+						src="/images/carousel/braaay-carousel-desktop-1.webp"
 						alt="placeholder 2"
 						class="carousel-image w-full"
 						data-desktop="braaay-carousel-desktop-1.webp"
@@ -16,9 +34,9 @@
 				</a>
 			</li>
 			<li class="glide__slide w-full">
-				<a href="/">
+				<a href="/" class="not-hover-effect">
 					<img
-						src="/images/carousel/placeholder.webp"
+						src="/images/carousel/braaay-carousel-desktop-2.webp"
 						alt="placeholder 3"
 						class="carousel-image w-full"
 						data-desktop="braaay-carousel-desktop-2.webp"
@@ -38,7 +56,7 @@
 	>
 		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=0"></button>
 		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=1"></button>
-		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=2"></button>
+		<!-- <button class="glide__bullet" aria-label="bullet" data-glide-dir="=2"></button> -->
 		<!-- Add more bullets based on the number of slides -->
 	</div>
 </div>

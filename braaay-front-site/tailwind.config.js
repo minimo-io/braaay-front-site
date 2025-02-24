@@ -51,7 +51,7 @@ export default {
 
 		fontFamily: {
 			prata: ['Prata', 'serif'],
-			roboto: ['Roboto', 'sans-serif']
+			roboto: ['Open Sans Variable', 'sans-serif']
 		}
 	},
 	plugins: [

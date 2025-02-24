@@ -141,8 +141,8 @@
 						Experiências
 					</a>
 				</li>
-				<li class="self-center text-grey-medium antialiased">|</li>
-				<li class="relative group transition-all duration-300 animate__animated animate__swing">
+				<li class="self-center text-grey-medium antialiased">/</li>
+				<li class="relative group transition-all duration-300">
 					<a href="/tag/oportunidades/" class="font-bold">
 						<span class="text-bra flex self-center">
 							<Leaf class="lucide-menu self-center text-bra" />
@@ -169,7 +169,7 @@
 						Blog
 					</a>
 				</li> -->
-				<li class="relative group transition-all duration-300">
+				<li class="relative group transition-all duration-300 animate__animated animate__swing">
 					<a href="./blog.html" class="!py-0 !pr-5 h-full">
 						<!-- <BadgePercent class="lucide-menu badge-percent" color="white" fill="#000" /> -->
 						<img

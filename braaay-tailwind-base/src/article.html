@@ -1,691 +1,644 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>Artículo</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Artículo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 
-        <!-- fonts -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Prata&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-            rel="stylesheet"
-        />
-        <!-- css -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.5.1/dist/css/glide.core.min.css" />
-        <style>
-            [x-cloak] {
-                display: none !important;
-            }
-        </style>
+    <!-- fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prata&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.5.1/dist/css/glide.core.min.css" />
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
 
-        <!-- js -->
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/lucide@0.447.0/dist/umd/lucide.min.js" defer></script>
+    <!-- js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.447.0/dist/umd/lucide.min.js" defer></script>
 
-        <!-- theme files -->
-        <script src="./bry.build.js" defer></script>
-        <link href="./bry.build.css" rel="stylesheet" />
-        <style>
-            :root {
-                --bry-current-color: #211a2e;
-                --bry-current-gradient-start: #847f87;
-                --bry-current-gradient-end: #77747d;
-            }
-        </style>
-    </head>
-    <body class="bg-grey-background overflow-x-hidden">
-        <!-- Top header -->
-        <header x-data="{ isOpen: false }" class="bg-white">
-            <nav
-                class="mx-[30px] lg:mx-auto flex max-w-screen-lg items-center justify-between h-[63px] lg:h-[90px]"
-                aria-label="Global"
+    <!-- theme files -->
+    <script src="./bry.build.js" defer></script>
+    <link href="./bry.build.css" rel="stylesheet" />
+    <style>
+      :root {
+        --bry-current-color: #211a2e;
+        --bry-current-gradient-start: #847f87;
+        --bry-current-gradient-end: #77747d;
+      }
+    </style>
+  </head>
+  <body class="bg-grey-background overflow-x-hidden">
+    <!-- Top header -->
+    <header x-data="{ isOpen: false }" class="bg-white">
+      <nav
+        class="mx-[30px] lg:mx-auto flex max-w-screen-lg items-center justify-between h-[63px] lg:h-[90px]"
+        aria-label="Global"
+      >
+        <!-- logo -->
+        <div class="flex lg:flex-none pr-8">
+          <a href="./">
+            <span class="sr-only">Braaay</span>
+            <img
+              class="h-[38px] w-auto hidden lg:block"
+              src="./images/logo-braaay-desktop.svg"
+              alt="braaay-logo-desktop"
+            />
+            <img class="h-[21px] w-auto lg:hidden" src="./images/logo-braaay-mobile.svg" alt="braaay-logo-mobile" />
+          </a>
+        </div>
+        <!-- Mobile Menu Hamburger -->
+        <div class="flex lg:hidden hidden">
+          <button
+            @click="isOpen = !isOpen"
+            type="button"
+            class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+          >
+            <span class="sr-only">Abrir menu principal</span>
+            <svg
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
             >
-                <!-- logo -->
-                <div class="flex lg:flex-none pr-8">
-                    <a href="./">
-                        <span class="sr-only">Braaay</span>
-                        <img
-                            class="h-[38px] w-auto hidden lg:block"
-                            src="./images/logo-braaay-desktop.svg"
-                            alt="braaay-logo-desktop"
-                        />
-                        <img
-                            class="h-[21px] w-auto lg:hidden"
-                            src="./images/logo-braaay-mobile.svg"
-                            alt="braaay-logo-mobile"
-                        />
-                    </a>
-                </div>
-                <!-- Mobile Menu Hamburger -->
-                <div class="flex lg:hidden hidden">
-                    <button
-                        @click="isOpen = !isOpen"
-                        type="button"
-                        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-                    >
-                        <span class="sr-only">Abrir menu principal</span>
-                        <svg
-                            class="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                            />
-                        </svg>
-                    </button>
-                </div>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
 
-                <!-- Desktop & Mobile menu -->
-                <div class="hidden lg:flex flex-1 lg:gap-x-12">
-                    <!-- Search form -->
-                    <form action="https://braaay.com/" method="get" class="w-full" x-data="search_hotkeys()">
-                        <div class="relative px-5 border-r border-r-1 border-r-grey-lighter h-[45px]">
-                            <input
-                                id="search"
-                                x-ref="q"
-                                @keydown.window.prevent.cmd.k="search()"
-                                @keydown.window.prevent.ctrl.k="search()"
-                                type="search"
-                                minlength="3"
-                                class="rounded-3xl focus:ring-1 w-full text-sm h-[45px] placeholder:tracking-wide placeholder:text-grey-medium border border-grey-lighter px-5 py-2.5 font-roboto placeholder:font-light shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]"
-                                placeholder="Pesquisar…"
-                                value=""
-                                name="s"
-                                title="Procurar:"
-                            />
-                            <!-- KBD -->
-                            <kbd class="bry-search-kbd">
-                                <abbr title="Command" class="no-underline">⌘</abbr>
-                                K
-                            </kbd>
-                        </div>
-                    </form>
-                </div>
-                <div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
-                    <a
-                        href="./account.html"
-                        class="btn h-[45px] uppercase flex items-center justify-center focus:ring-1"
-                    >
-                        <!-- <i class="fa fa-user pr-2"></i> -->
-                        <i data-lucide="user" class="lucide-button"></i>
-                        Minha conta
-                    </a>
-                </div>
-                <a href="./cart.html" class="bry-cart relative h-[45px] uppercase flex items-center">
-                    <i class="bry-bag"></i>
-                    <span
-                        class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
-                    >
-                        0
-                    </span>
-                </a>
-            </nav>
+        <!-- Desktop & Mobile menu -->
+        <div class="hidden lg:flex flex-1 lg:gap-x-12">
+          <!-- Search form -->
+          <form action="https://braaay.com/" method="get" class="w-full" x-data="search_hotkeys()">
+            <div class="relative px-5 border-r border-r-1 border-r-grey-lighter h-[45px]">
+              <input
+                id="search"
+                x-ref="q"
+                @keydown.window.prevent.cmd.k="search()"
+                @keydown.window.prevent.ctrl.k="search()"
+                type="search"
+                minlength="3"
+                class="rounded-3xl focus:ring-1 w-full text-sm h-[45px] placeholder:tracking-wide placeholder:text-grey-medium border border-grey-lighter px-5 py-2.5 font-roboto placeholder:font-light shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]"
+                placeholder="Pesquisar…"
+                value=""
+                name="s"
+                title="Procurar:"
+              />
+              <!-- KBD -->
+              <kbd class="bry-search-kbd">
+                <abbr title="Command" class="no-underline">⌘</abbr>
+                K
+              </kbd>
+            </div>
+          </form>
+        </div>
+        <div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
+          <a href="./account.html" class="btn h-[45px] uppercase flex items-center justify-center focus:ring-1">
+            <!-- <i class="fa fa-user pr-2"></i> -->
+            <i data-lucide="user" class="lucide-button"></i>
+            Minha conta
+          </a>
+        </div>
+        <a href="./cart.html" class="bry-cart relative h-[45px] uppercase flex items-center">
+          <i class="bry-bag"></i>
+          <span
+            class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
+          >
+            0
+          </span>
+        </a>
+      </nav>
 
-            <!-- Mobile search -->
-            <div class="lg:hidden h-[50px]">
-                <form
-                    action="https://braaay.com/"
-                    method="get"
-                    class="w-full flex items-center relative flex-align-items-center"
-                >
-                    <!-- <i
+      <!-- Mobile search -->
+      <div class="lg:hidden h-[50px]">
+        <form
+          action="https://braaay.com/"
+          method="get"
+          class="w-full flex items-center relative flex-align-items-center"
+        >
+          <!-- <i
                         class="fa fa-search mr-2 absolute top-1/2 -translate-y-1/2 left-[30px]"
                     ></i> -->
-                    <i data-lucide="search" class="mr-1 h-[16px] absolute top-1/2 -translate-y-1/2 left-[30px]"></i>
-                    <input
-                        type="search"
-                        minlength="3"
-                        class="h-[50px] focus:ring-0 focus-visible:outline-none w-full text-sm placeholder:tracking-wide placeholder:text-grey-medium border-t border-grey-lighter pl-[60px] pr-[30px] py-2.5 font-roboto placeholder:font-light Xshadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]"
-                        placeholder="Pesquisar…"
-                        value=""
-                        name="s"
-                        title="Procurar:"
-                    />
-                </form>
-            </div>
+          <i data-lucide="search" class="mr-1 h-[16px] absolute top-1/2 -translate-y-1/2 left-[30px]"></i>
+          <input
+            type="search"
+            minlength="3"
+            class="h-[50px] focus:ring-0 focus-visible:outline-none w-full text-sm placeholder:tracking-wide placeholder:text-grey-medium border-t border-grey-lighter pl-[60px] pr-[30px] py-2.5 font-roboto placeholder:font-light Xshadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]"
+            placeholder="Pesquisar…"
+            value=""
+            name="s"
+            title="Procurar:"
+          />
+        </form>
+      </div>
 
-            <!-- Secondary menu -->
-            <div class="bry-secondary-menu">
-                <nav class="container max-w-screen-lg py-2 mx-[30px] lg:mx-auto">
-                    <ul class="flex space-x-4">
-                        <li class="relative group transition-all duration-300">
-                            <a href="./category.html" class="!pr-2 !lg:pr-3 !pl-0">
-                                <i data-lucide="wine" class="lucide-menu"></i>
-                                Vinhos
-                            </a>
-                        </li>
+      <!-- Secondary menu -->
+      <div class="bry-secondary-menu">
+        <nav class="container max-w-screen-lg py-2 mx-[30px] lg:mx-auto">
+          <ul class="flex space-x-4">
+            <li class="relative group transition-all duration-300">
+              <a href="./category.html" class="!pr-2 !lg:pr-3 !pl-0">
+                <i data-lucide="wine" class="lucide-menu"></i>
+                Vinhos
+              </a>
+            </li>
 
-                        <li class="relative group transition-all duration-300">
-                            <a href="https://braaay.com/experiencias/">
-                                <!-- <i class="fa fa-calendar mr-2"></i> -->
-                                <i data-lucide="calendar-days" class="lucide-menu"></i>
-                                Experiências
-                            </a>
-                        </li>
-                        <li class="relative group transition-all duration-300">
-                            <a href="/kits/">
-                                <!-- <i class="fa fa-gift mr-2"></i> -->
-                                <i data-lucide="gift" class="lucide-menu"></i>
-                                Presentes
-                            </a>
-                        </li>
-                        <li class="relative group transition-all duration-300">
-                            <a href="/tag/premiados/">
-                                <!-- <i class="fa fa-trophy mr-2"></i> -->
-                                <i data-lucide="award" class="lucide-menu"></i>
-                                Premiados
-                            </a>
-                        </li>
-                        <li class="relative group transition-all duration-300">
-                            <a href="/tag/oportunidades/">
-                                <!-- <i class="fa fa-calendar mr-2"></i> -->
-                                <i data-lucide="target" class="lucide-menu badge-percent"></i>
-                                Oportunidades
-                            </a>
-                        </li>
-                        <li class="relative group transition-all duration-300">
-                            <a href="/em-breve/">
-                                <!-- <i class="fa fa-graduation-cap mr-2"></i> -->
-                                <i data-lucide="graduation-cap" class="lucide-menu badge-percent"></i>
-                                Cursos
-                            </a>
-                        </li>
-                        <li class="relative group transition-all duration-300">
-                            <a href="./blog.html" class="!pr-5">
-                                <!-- <i class="fa fa-newspaper-o mr-2"></i> -->
-                                <i data-lucide="newspaper" class="lucide-menu badge-percent"></i>
-                                Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <li class="relative group transition-all duration-300">
+              <a href="https://braaay.com/experiencias/">
+                <!-- <i class="fa fa-calendar mr-2"></i> -->
+                <i data-lucide="calendar-days" class="lucide-menu"></i>
+                Experiências
+              </a>
+            </li>
+            <li class="relative group transition-all duration-300">
+              <a href="/kits/">
+                <!-- <i class="fa fa-gift mr-2"></i> -->
+                <i data-lucide="gift" class="lucide-menu"></i>
+                Presentes
+              </a>
+            </li>
+            <li class="relative group transition-all duration-300">
+              <a href="/tag/premiados/">
+                <!-- <i class="fa fa-trophy mr-2"></i> -->
+                <i data-lucide="award" class="lucide-menu"></i>
+                Premiados
+              </a>
+            </li>
+            <li class="relative group transition-all duration-300">
+              <a href="/tag/oportunidades/">
+                <!-- <i class="fa fa-calendar mr-2"></i> -->
+                <i data-lucide="target" class="lucide-menu badge-percent"></i>
+                Oportunidades
+              </a>
+            </li>
+            <li class="relative group transition-all duration-300">
+              <a href="/em-breve/">
+                <!-- <i class="fa fa-graduation-cap mr-2"></i> -->
+                <i data-lucide="graduation-cap" class="lucide-menu badge-percent"></i>
+                Cursos
+              </a>
+            </li>
+            <li class="relative group transition-all duration-300">
+              <a href="./blog.html" class="!pr-5">
+                <!-- <i class="fa fa-newspaper-o mr-2"></i> -->
+                <i data-lucide="newspaper" class="lucide-menu badge-percent"></i>
+                Blog
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-            <!-- Mobile toggled menu, show/hide based on menu open state. -->
-            <div class="lg:hidden" role="dialog" aria-modal="true">
-                <!-- Background backdrop, show/hide based on slide-over state. -->
-                <div x-show="isOpen" x-cloak class="fixed inset-0 z-10"></div>
-                <div
-                    x-show="isOpen"
-                    x-cloak
-                    class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
-                >
-                    <div class="flex items-center justify-between">
-                        <a href="#" class="-m-1.5 p-1.5">
-                            <span class="sr-only">BRAAAY</span>
-                            <img
-                                class="h-8 w-auto"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                alt=""
-                            />
-                        </a>
-                        <button @click="isOpen = !isOpen" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
-                            <span class="sr-only">Close menu</span>
-                            <svg
-                                class="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
+      <!-- Mobile toggled menu, show/hide based on menu open state. -->
+      <div class="lg:hidden" role="dialog" aria-modal="true">
+        <!-- Background backdrop, show/hide based on slide-over state. -->
+        <div x-show="isOpen" x-cloak class="fixed inset-0 z-10"></div>
+        <div
+          x-show="isOpen"
+          x-cloak
+          class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+        >
+          <div class="flex items-center justify-between">
+            <a href="#" class="-m-1.5 p-1.5">
+              <span class="sr-only">BRAAAY</span>
+              <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+            </a>
+            <button @click="isOpen = !isOpen" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+              <span class="sr-only">Close menu</span>
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
 
-                    <div class="mt-6 flow-root">
-                        <div class="-my-6 divide-y divide-gray-500/10">
-                            <div class="space-y-2 py-6">
-                                <div class="-mx-3">
-                                    <button
-                                        type="button"
-                                        class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                        aria-controls="disclosure-1"
-                                        aria-expanded="false"
-                                    >
-                                        Product
-                                        <!--
+          <div class="mt-6 flow-root">
+            <div class="-my-6 divide-y divide-gray-500/10">
+              <div class="space-y-2 py-6">
+                <div class="-mx-3">
+                  <button
+                    type="button"
+                    class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    aria-controls="disclosure-1"
+                    aria-expanded="false"
+                  >
+                    Product
+                    <!--
                                             Expand/collapse icon, toggle classes based on menu open state.
 
                                             Open: "rotate-180", Closed: ""
                                         -->
-                                        <svg
-                                            class="h-5 w-5 flex-none"
-                                            viewBox="0 0 20 20"
-                                            fill="currentColor"
-                                            aria-hidden="true"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                    </button>
-                                    <!-- 'Product' sub-menu, show/hide based on menu state. -->
-                                    <div class="mt-2 space-y-2" id="disclosure-1">
-                                        <a
-                                            href="#"
-                                            class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                        >
-                                            Analytics
-                                        </a>
-                                        <a
-                                            href="#"
-                                            class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                        >
-                                            Engagement
-                                        </a>
-                                        <a
-                                            href="#"
-                                            class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                        >
-                                            Security
-                                        </a>
-                                        <a
-                                            href="#"
-                                            class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                        >
-                                            Integrations
-                                        </a>
-                                        <a
-                                            href="#"
-                                            class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                        >
-                                            Automations
-                                        </a>
-                                        <a
-                                            href="#"
-                                            class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                        >
-                                            Watch demo
-                                        </a>
-                                        <a
-                                            href="#"
-                                            class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                        >
-                                            Contact sales
-                                        </a>
-                                    </div>
-                                </div>
-                                <a
-                                    href="#"
-                                    class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                >
-                                    Features
-                                </a>
-                                <a
-                                    href="#"
-                                    class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                >
-                                    Marketplace
-                                </a>
-                                <a
-                                    href="#"
-                                    class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                >
-                                    Company
-                                </a>
-                            </div>
-                            <div class="py-6">
-                                <a
-                                    href="#"
-                                    class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                >
-                                    Log in
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <svg class="h-5 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  <!-- 'Product' sub-menu, show/hide based on menu state. -->
+                  <div class="mt-2 space-y-2" id="disclosure-1">
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Analytics
+                    </a>
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Engagement
+                    </a>
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Security
+                    </a>
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Integrations
+                    </a>
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Automations
+                    </a>
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Watch demo
+                    </a>
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Contact sales
+                    </a>
+                  </div>
                 </div>
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Features
+                </a>
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Marketplace
+                </a>
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Company
+                </a>
+              </div>
+              <div class="py-6">
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Log in
+                </a>
+              </div>
             </div>
-        </header>
+          </div>
+        </div>
+      </div>
+    </header>
 
-        <main class="w-full mx-auto">
-            <article class="relative bg-white pb-10 mt-0">
-                <div class="mx-auto relative">
-                    <!-- General title header -->
-                    <div class="bry-header w-full h-[250px] max-h-[250px] bg-[#d1d1d0] relative mb-36">
-                        <div
-                            class="absolute inset-0 opacity-70 z-0"
-                            style="
-                                background-size: cover;
-                                background-image: url(./images/Geleia-de-Vinho.jpg),
-                                    linear-gradient(to bottom, var(--bry-current-color), var(--bry-current-color));
-                                background-blend-mode: multiply;
-                            "
-                        ></div>
-                        <!-- Header deck -->
-                        <!-- <h3 class="bry-header-deck">
+    <main class="w-full mx-auto">
+      <article class="relative bg-white pb-10 mt-0">
+        <div class="mx-auto relative">
+          <!-- General title header -->
+          <div class="bry-header w-full h-[250px] max-h-[250px] bg-[#d1d1d0] relative mb-36">
+            <div
+              class="absolute inset-0 opacity-70 z-0"
+              style="
+                background-size: cover;
+                background-image: url(./images/Geleia-de-Vinho.jpg),
+                  linear-gradient(to bottom, var(--bry-current-color), var(--bry-current-color));
+                background-blend-mode: multiply;
+              "
+            ></div>
+            <!-- Header deck -->
+            <!-- <h3 class="bry-header-deck">
                             <a href="#" style="border-color: var(--bry-current-color)">Blog</a>
                         </h3> -->
-                        <!-- Header title -->
-                        <h2 class="bry-header-title max-w-screen-lg !pt-0">
-                            Vinhos brasileiros premiados que vão te surpreender
-                        </h2>
-                        <!-- Header author -->
-                        <div class="bry-header-author">
-                            <img src="./images/erika-96x96.jpeg" alt="Erika Bezerra" />
-                            <p class="text-lg font-bold mt-2 text-grey-darkest">Erika Bezerra</p>
-                            <p class="text-sm mt-0 text-grey-darkest italic font-thin">Sommelier</p>
-                        </div>
-                    </div>
-
-                    <!-- Article content -->
-                    <div class="md:px-32 px-[30px] max-w-screen-lg mx-auto">
-                        <h2
-                            class="text-[1.2rem] md:text-[1.3rem] leading-[1.75] uppercase text-center font-prata tracking-wider font-thin mb-6"
-                        >
-                            Sobre esse
-                            <i>blend</i>
-                            perfeito do Uruguai
-                        </h2>
-                        <p class="bry-article-main-p">
-                            Se você é um entusiasta de vinhos em busca de uma experiência para o seu paladar, o Don
-                            Pascual Tannat Merlot é uma parada quase obrigatória em sua jornada. Este
-                            <a href="/pais/uruguai/">vinho uruguaio</a>
-                            cativa todos os seus sentidos de maneira surpreendente, desde a visão até o último gole.
-                            Vamos embarcar juntos nesta aventura, explorando o que faz deste vinho uma escolha tão
-                            interessante.
-                        </p>
-                        <div class="bry-divider bry-bullet-blue"></div>
-                        <img src="./images/Geleia-de-Vinho.jpg" alt="article-image" class="rounded-xl" />
-                        <div class="bry-divider bry-bullet-green mb-2"></div>
-                        <div class="bry-article-content">
-                            <div class="w-full">
-                                <p>
-                                    As uvas tannat e merlot são muito diferentes entre si. E daí a magia deste vinho
-                                    uruguaio que nos traz o melhor de dois mundos de sabores diferentes.
-                                </p>
-                                <p>
-                                    O Tannat por um lado é responsável por vinhos que abraçam uma abordagem mais
-                                    rústica, carregando consigo uma robustez cativante e taninos audaciosos. Em
-                                    contraste, encontramos a Merlot, outra variedade originária de solo francês, mais
-                                    precisamente de Bordeaux presenteia os tintos com uma suavidade envolvente, uma
-                                    textura aveludada que dança delicadamente pelo paladar, resultando em vinhos que são
-                                    verdadeiros abraços gustativos.
-                                </p>
-                                <p>
-                                    <strong>🗣️ DICA:</strong>
-                                    Se quiser saber ainda mais sobre esses vinhos tannat, especialidade uruguaia, em
-                                    algumas versões mais puras, é interessante considerar outras opções mais robustas
-                                    como o
-                                    <strong>
-                                        <a href="https://braaay.com/produto/vinho-tinto-uruguai-cerro-del-toro-tannat/">
-                                            Tannat da vinícola Cerro del Toro
-                                        </a>
-                                    </strong>
-                                    ou o excelente vinho reserva
-                                    <a
-                                        href="https://braaay.com/produto/vinho-uruguaio-artesana-tannat-zinfandel-reserva/"
-                                    >
-                                        <strong>tannat da</strong>
-                                        Artesana
-                                    </a>
-                                    em um blend com a uva Zinfandel.
-                                </p>
-
-                                <p>
-                                    Neste encontro de Tannat e Merlot, a Don Pascual (uma marca de vinho em homenagem ao
-                                    imigrante basco-francês que foi o primeiro a levar a uva tannat para o Uruguai)
-                                    promete atingir um
-                                    <em>equilíbrio único</em>
-                                    , um ponto de fusão onde as características de cada uva se entrelaçam
-                                    harmoniosamente. Não se aventura aos extremos – não é um vinho que se inclina
-                                    excessivamente para a leveza ou pesadez. É um convite para a mesa farta, um vinho
-                                    para compartilhar entre amigos. Mas, ao mesmo tempo, ele sorri para o happy hour,
-                                    trazendo consigo a versatilidade que o torna bem-vindo em diferentes ocasiões.
-                                </p>
-                                <h3>Visual: Uma Tela de Cores Vibrantes</h3>
-                                <blockquote class="border-l-4 border-blue-500 pl-4 italic text-gray-700">
-                                    “This is a sample blockquote that emphasizes a quote from a source.”
-                                </blockquote>
-                                <p>
-                                    A jornada começa com o sentido da visão, onde somos recebidos por uma tapeçaria de
-                                    cores profundas e vibrantes. O Don Pascual Tannat Merlot apresenta um tom rubi
-                                    intenso, revelando sua personalidade rica e ousada. Ao inclinar a taça, você notará
-                                    suas lágrimas que escorrem lentamente, indicando sua textura encorpada. A visão
-                                    deste vinho convida você a mergulhar mais profundamente na experiência que está
-                                    prestes a desfrutar.
-                                </p>
-                                <h2>Aroma do Don Pascual Tannat Merlot</h2>
-                                <p>
-                                    Ao aproximar o nariz da taça, um abraço perfumado e acolhedor é oferecido pelo Don
-                                    Pascual Tannat Merlot.
-                                </p>
-                                <p>
-                                    Notas de frutas vermelhas maduras, como cerejas e ameixas, dançam elegantemente com
-                                    toques sutis de especiarias, criando uma sinfonia aromática que desperta a
-                                    curiosidade.
-                                </p>
-                                <p>
-                                    A presença do Merlot traz uma suavidade delicada, enquanto o Tannat adiciona uma
-                                    pitada de ousadia e complexidade. Este aroma convida você a explorar ainda mais,
-                                    preparando o paladar para a jornada de sabores que está por vir.
-                                </p>
-                                <h2>Paladar: Uma Dança de Sabores</h2>
-                                <p>
-                                    No momento tão aguardado do primeiro gole, o Don Pascual Tannat Merlot revela sua
-                                    verdadeira personalidade no paladar. Uma dança de sabores intrigantes acontece, onde
-                                    a fruta suculenta do Merlot se mistura com a estrutura robusta do Tannat. O encontro
-                                    de cerejas maduras e um toque sutil de baunilha proporciona uma experiência
-                                    equilibrada e envolvente. Os taninos firmes do Tannat adicionam uma textura
-                                    aveludada que envolve a língua, criando uma sensação de profundidade e complexidade.
-                                    Este é um vinho que mantém sua promessa, entregando uma experiência de sabor
-                                    gratificante.
-                                </p>
-                                <h2>Harmonização: O Parceiro Perfeito</h2>
-                                <p>
-                                    A busca pelo parceiro perfeito para o Don Pascual Tannat Merlot leva a um universo
-                                    de possibilidades culinárias. Sua estrutura versátil o torna um excelente
-                                    acompanhamento para uma variedade de pratos. Experimente com carnes grelhadas, como
-                                    um suculento bife de cordeiro ou um saboroso hambúrguer caseiro. Queijos de média
-                                    intensidade, como gouda ou cheddar, também encontram um equilíbrio elegante com o
-                                    caráter deste vinho. A experiência de harmonização com Don Pascual Tannat Merlot é
-                                    uma aventura gastronômica em si mesma, onde cada mordida e gole se complementam
-                                    harmoniosamente.
-                                </p>
-                                <h2>Conclusão sobre o vinho Don Pascual Tannat Merlot</h2>
-                                <p>
-                                    O Don Pascual Tannat Merlot é mais do que apenas um vinho – é uma jornada sensorial
-                                    inesquecível que celebra os sentidos de maneira encantadora. Desde a visão
-                                    hipnotizante até o último gole satisfatório, este vinho uruguaio oferece uma
-                                    experiência que envolve todos os aspectos da apreciação vinícola. Combinando a
-                                    intensidade do Tannat com a suavidade do Merlot, o Don Pascual Tannat Merlot é uma
-                                    verdadeira celebração de sabores e aromas que cativará tanto o novato quanto o
-                                    entusiasta de vinhos experiente. Então, pegue sua taça, reúna os amigos e desfrute
-                                    desta jóia vinícola que nos leva em uma jornada deliciosa através dos sentidos.
-                                </p>
-                                <p>Saúde!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </main>
-
-        <!-- Footer -->
-        <footer class="relative bg-grey-background py-0 mt-0">
-            <div class="absolute inset-x-0 -top-3 flex justify-center">
-                <img
-                    src="./images/divider-blue.svg"
-                    width="23px"
-                    height="23px"
-                    alt="divider"
-                    class="w-[20px] h-[20px] lg:w-[23px] lg:h-[23px]"
-                />
+            <!-- Header title -->
+            <h2 class="bry-header-title max-w-screen-lg !pt-0">Vinhos brasileiros premiados que vão te surpreender</h2>
+            <!-- Header author -->
+            <div class="bry-header-author">
+              <img src="./images/erika-96x96.jpeg" alt="Erika Bezerra" />
+              <p class="text-lg font-bold mt-2 text-grey-darkest">Erika Bezerra</p>
+              <p class="text-sm mt-0 text-grey-darkest italic font-thin">Sommelier</p>
             </div>
-            <div class="max-w-screen-lg mx-auto px-[30px] lg:px-0">
-                <!-- Logo -->
-                <div class="flex justify-center mb-12">
-                    <img
-                        src="./images/logo-braaay-desktop.svg"
-                        alt="BRAAAY Logo"
-                        class="h-10 lg:h-9 object-contain mt-14"
-                    />
-                </div>
+          </div>
 
-                <!-- Features Grid -->
-                <div class="bry-footer-features">
-                    <!-- Feature 1 -->
-                    <div>
-                        <h2 class="partial-border">Especialistas em 🇺🇾 e 🇧🇷</h2>
-                        <p>
-                            Viajamos, conhecemos, nos aventuramos e trazemos a melhor seleção de vinhos uruguaios e
-                            nacionais.
-                        </p>
-                    </div>
+          <!-- Article content -->
+          <div class="md:px-32 px-[30px] max-w-screen-lg mx-auto">
+            <h2
+              class="text-[1.2rem] md:text-[1.3rem] leading-[1.75] uppercase text-center font-prata tracking-wider font-thin mb-6"
+            >
+              Sobre esse
+              <i>blend</i>
+              perfeito do Uruguai
+            </h2>
+            <p class="bry-article-main-p">
+              Se você é um entusiasta de vinhos em busca de uma experiência para o seu paladar, o Don Pascual Tannat
+              Merlot é uma parada quase obrigatória em sua jornada. Este
+              <a href="/pais/uruguai/">vinho uruguaio</a>
+              cativa todos os seus sentidos de maneira surpreendente, desde a visão até o último gole. Vamos embarcar
+              juntos nesta aventura, explorando o que faz deste vinho uma escolha tão interessante.
+            </p>
+            <div class="bry-divider bry-bullet-blue"></div>
+            <img src="./images/Geleia-de-Vinho.jpg" alt="article-image" class="rounded-xl" />
+            <div class="bry-divider bry-bullet-green mb-2"></div>
+            <div class="bry-article-content">
+              <div class="w-full">
+                <p>
+                  As uvas tannat e merlot são muito diferentes entre si. E daí a magia deste vinho uruguaio que nos traz
+                  o melhor de dois mundos de sabores diferentes.
+                </p>
+                <p>
+                  O Tannat por um lado é responsável por vinhos que abraçam uma abordagem mais rústica, carregando
+                  consigo uma robustez cativante e taninos audaciosos. Em contraste, encontramos a Merlot, outra
+                  variedade originária de solo francês, mais precisamente de Bordeaux presenteia os tintos com uma
+                  suavidade envolvente, uma textura aveludada que dança delicadamente pelo paladar, resultando em vinhos
+                  que são verdadeiros abraços gustativos.
+                </p>
+                <p>
+                  <strong>🗣️ DICA:</strong>
+                  Se quiser saber ainda mais sobre esses vinhos tannat, especialidade uruguaia, em algumas versões mais
+                  puras, é interessante considerar outras opções mais robustas como o
+                  <strong>
+                    <a href="https://braaay.com/produto/vinho-tinto-uruguai-cerro-del-toro-tannat/">
+                      Tannat da vinícola Cerro del Toro
+                    </a>
+                  </strong>
+                  ou o excelente vinho reserva
+                  <a href="https://braaay.com/produto/vinho-uruguaio-artesana-tannat-zinfandel-reserva/">
+                    <strong>tannat da</strong>
+                    Artesana
+                  </a>
+                  em um blend com a uva Zinfandel.
+                </p>
 
-                    <!-- Feature 2 -->
-                    <div>
-                        <h2 class="text-xl font-semibold mb-4">Pagamento em até 4x</h2>
-                        <p>
-                            Você pode pagar no cartão sem juros com parcela mínima de R$50, no boleto, PIX ou usar sua
-                            e-Wallet preferida.
-                        </p>
-                    </div>
-
-                    <!-- Feature 3 -->
-                    <div>
-                        <h2 class="text-xl font-semibold mb-4">Experiências além da taça</h2>
-                        <p>
-                            Venha explorar e conhecer o showroom, participe dos workshops ou faça parte do grupo de
-                            viagens e aventuras!
-                        </p>
-                    </div>
-                </div>
-
-                <hr class="border-b-1 border-grey-lighter my-10 w-full relative" />
-
-                <!-- App Section and Footer Grid Container -->
-                <div class="flex flex-col md:flex-row md:gap-8 justify-center items-center">
-                    <!-- App Section -->
-                    <div class="mb-8 md:mb-0 w-full md:w-1/3">
-                        <h3
-                            class="text-grey-medium text-center md:text-left font-medium italic font-prata text-[20px] mb-0"
-                        >
-                            Faça parte do clube!
-                        </h3>
-                        <h2 class="text-2xl font-bold mb-4 text-center md:text-left">APP DE CASHBACK</h2>
-                        <div class="flex gap-4 justify-center md:justify-start">
-                            <a href="#">
-                                <img src="./images/store-appstore.png" alt="apple-store" width="130" height="27" />
-                            </a>
-                            <a href="#">
-                                <img src="./images/store-googleplay.png" alt="apple-store" width="130" height="27" />
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Footer Grid -->
-                    <div
-                        class="bry-footer-grid grid flex-shrink-0 grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 md:flex-1 mx-auto justify-center items-center"
-                    >
-                        <div class="text-center">
-                            <h3>SUPORTE</h3>
-                            <ul>
-                                <li>
-                                    <a
-                                        href="https://wa.me/5511947530340"
-                                        rel="nofollow noreferrer"
-                                        target="_blank"
-                                        class="!text-black font-bold"
-                                    >
-                                        +55 11 94753-0340
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="!text-black font-bold" href="mailto:contato@braaay.com">
-                                        contato@braaay.com
-                                    </a>
-                                </li>
-                                <li><a href="#">POLÍTICA DE FRETES</a></li>
-                                <li><a href="#">TROCAS E DEVOLUÇÕES</a></li>
-                            </ul>
-                        </div>
-                        <!-- Company Links -->
-                        <div class="md:block text-center">
-                            <h3>BRAAAY</h3>
-                            <ul>
-                                <li><a href="#">SOBRE NÓS</a></li>
-                                <li><a href="#">AFILIADOS</a></li>
-                                <li><a href="#">BLOG</a></li>
-                                <li><a href="#">SHOWROOM</a></li>
-                            </ul>
-                        </div>
-                        <!-- Social Media -->
-                        <div class="hidden md:block text-center">
-                            <h3>REDES SOCIAIS</h3>
-                            <ul>
-                                <li><a href="#">INSTAGRAM</a></li>
-                                <li><a href="#">YOUTUBE</a></li>
-                                <li><a href="#">TIKTOK</a></li>
-                                <li><a href="#">FACEBOOK</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="border-b-1 border-grey-lighter mt-10 mb-5 w-full relative" />
-
-                <div class="mx-auto px-[30px] text-center text-[14px] leading-5 font-roboto text-grey-medium mb-5">
-                    <p>
-                        A venda de bebidas alcoólicas é proibida para menores de 18 anos © 2024 Braaay – CNPJ:
-                        50.260.091/0001-72. • CEP: 05411-000. Todos os direitos reservados. Conheça nossas:
-                        <a href="#" class="text-black font-medium">Trocas e devoluções</a>
-                        |
-                        <a href="#" class="text-black font-medium">*Frete Grátis: Confira as regras</a>
-                    </p>
-                </div>
+                <p>
+                  Neste encontro de Tannat e Merlot, a Don Pascual (uma marca de vinho em homenagem ao imigrante
+                  basco-francês que foi o primeiro a levar a uva tannat para o Uruguai) promete atingir um
+                  <em>equilíbrio único</em>
+                  , um ponto de fusão onde as características de cada uva se entrelaçam harmoniosamente. Não se aventura
+                  aos extremos – não é um vinho que se inclina excessivamente para a leveza ou pesadez. É um convite
+                  para a mesa farta, um vinho para compartilhar entre amigos. Mas, ao mesmo tempo, ele sorri para o
+                  happy hour, trazendo consigo a versatilidade que o torna bem-vindo em diferentes ocasiões.
+                </p>
+                <h3>Visual: Uma Tela de Cores Vibrantes</h3>
+                <blockquote class="border-l-4 border-blue-500 pl-4 italic text-gray-700">
+                  “This is a sample blockquote that emphasizes a quote from a source.”
+                </blockquote>
+                <p>
+                  A jornada começa com o sentido da visão, onde somos recebidos por uma tapeçaria de cores profundas e
+                  vibrantes. O Don Pascual Tannat Merlot apresenta um tom rubi intenso, revelando sua personalidade rica
+                  e ousada. Ao inclinar a taça, você notará suas lágrimas que escorrem lentamente, indicando sua textura
+                  encorpada. A visão deste vinho convida você a mergulhar mais profundamente na experiência que está
+                  prestes a desfrutar.
+                </p>
+                <h2>Aroma do Don Pascual Tannat Merlot</h2>
+                <p>
+                  Ao aproximar o nariz da taça, um abraço perfumado e acolhedor é oferecido pelo Don Pascual Tannat
+                  Merlot.
+                </p>
+                <p>
+                  Notas de frutas vermelhas maduras, como cerejas e ameixas, dançam elegantemente com toques sutis de
+                  especiarias, criando uma sinfonia aromática que desperta a curiosidade.
+                </p>
+                <p>
+                  A presença do Merlot traz uma suavidade delicada, enquanto o Tannat adiciona uma pitada de ousadia e
+                  complexidade. Este aroma convida você a explorar ainda mais, preparando o paladar para a jornada de
+                  sabores que está por vir.
+                </p>
+                <h2>Paladar: Uma Dança de Sabores</h2>
+                <p>
+                  No momento tão aguardado do primeiro gole, o Don Pascual Tannat Merlot revela sua verdadeira
+                  personalidade no paladar. Uma dança de sabores intrigantes acontece, onde a fruta suculenta do Merlot
+                  se mistura com a estrutura robusta do Tannat. O encontro de cerejas maduras e um toque sutil de
+                  baunilha proporciona uma experiência equilibrada e envolvente. Os taninos firmes do Tannat adicionam
+                  uma textura aveludada que envolve a língua, criando uma sensação de profundidade e complexidade. Este
+                  é um vinho que mantém sua promessa, entregando uma experiência de sabor gratificante.
+                </p>
+                <h2>Harmonização: O Parceiro Perfeito</h2>
+                <p>
+                  A busca pelo parceiro perfeito para o Don Pascual Tannat Merlot leva a um universo de possibilidades
+                  culinárias. Sua estrutura versátil o torna um excelente acompanhamento para uma variedade de pratos.
+                  Experimente com carnes grelhadas, como um suculento bife de cordeiro ou um saboroso hambúrguer
+                  caseiro. Queijos de média intensidade, como gouda ou cheddar, também encontram um equilíbrio elegante
+                  com o caráter deste vinho. A experiência de harmonização com Don Pascual Tannat Merlot é uma aventura
+                  gastronômica em si mesma, onde cada mordida e gole se complementam harmoniosamente.
+                </p>
+                <h2>Conclusão sobre o vinho Don Pascual Tannat Merlot</h2>
+                <p>
+                  O Don Pascual Tannat Merlot é mais do que apenas um vinho – é uma jornada sensorial inesquecível que
+                  celebra os sentidos de maneira encantadora. Desde a visão hipnotizante até o último gole satisfatório,
+                  este vinho uruguaio oferece uma experiência que envolve todos os aspectos da apreciação vinícola.
+                  Combinando a intensidade do Tannat com a suavidade do Merlot, o Don Pascual Tannat Merlot é uma
+                  verdadeira celebração de sabores e aromas que cativará tanto o novato quanto o entusiasta de vinhos
+                  experiente. Então, pegue sua taça, reúna os amigos e desfrute desta jóia vinícola que nos leva em uma
+                  jornada deliciosa através dos sentidos.
+                </p>
+                <p>Saúde!</p>
+              </div>
             </div>
-        </footer>
+          </div>
+        </div>
+      </article>
+    </main>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                lucide.createIcons();
+    <!-- Footer -->
+    <footer class="relative bg-grey-background py-0 mt-0">
+      <div class="absolute inset-x-0 -top-3 flex justify-center">
+        <img
+          src="./images/divider-blue.svg"
+          width="23px"
+          height="23px"
+          alt="divider"
+          class="w-[20px] h-[20px] lg:w-[23px] lg:h-[23px]"
+        />
+      </div>
+      <div class="max-w-screen-lg mx-auto px-[30px] lg:px-0">
+        <!-- Logo -->
+        <div class="flex justify-center mb-12">
+          <img src="./images/logo-braaay-desktop.svg" alt="BRAAAY Logo" class="h-10 lg:h-9 object-contain mt-14" />
+        </div>
 
-                // Debounce function
-                function debounce(func, wait) {
-                    let timeout;
-                    return function (...args) {
-                        const context = this;
-                        clearTimeout(timeout);
-                        timeout = setTimeout(() => func.apply(context, args), wait);
-                    };
-                }
-                // Search stuff
-                let kbdAbbrElem = document.querySelector(".bry-search-kbd > abbr");
-                if (kbdAbbrElem) {
-                    const userAgent = window.navigator.userAgent;
-                    let addPlaceholder = "";
-                    if (userAgent.includes("Windows") || userAgent.includes("Linux")) {
-                        addPlaceholder = "CTRL +";
-                    } else if (userAgent.includes("Macintosh")) {
-                        addPlaceholder = "⌘";
-                    }
-                    kbdAbbrElem.innerHTML = addPlaceholder;
-                }
-            });
-            function search_hotkeys() {
-                return {
-                    search() {
-                        setTimeout(() => {
-                            this.$refs.q.focus();
-                        }, 100);
-                    },
-                };
-            }
-        </script>
-    </body>
+        <!-- Features Grid -->
+        <div class="bry-footer-features">
+          <!-- Feature 1 -->
+          <div>
+            <h2 class="partial-border">Especialistas em 🇺🇾 e 🇧🇷</h2>
+            <p>Viajamos, conhecemos, nos aventuramos e trazemos a melhor seleção de vinhos uruguaios e nacionais.</p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div>
+            <h2 class="text-xl font-semibold mb-4">Pagamento em até 4x</h2>
+            <p>
+              Você pode pagar no cartão sem juros com parcela mínima de R$50, no boleto, PIX ou usar sua e-Wallet
+              preferida.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div>
+            <h2 class="text-xl font-semibold mb-4">Experiências além da taça</h2>
+            <p>
+              Venha explorar e conhecer o showroom, participe dos workshops ou faça parte do grupo de viagens e
+              aventuras!
+            </p>
+          </div>
+        </div>
+
+        <hr class="border-b-1 border-grey-lighter my-10 w-full relative" />
+
+        <!-- App Section and Footer Grid Container -->
+        <div class="flex flex-col md:flex-row md:gap-8 justify-center items-center">
+          <!-- App Section -->
+          <div class="mb-8 md:mb-0 w-full md:w-1/3">
+            <h3 class="text-grey-medium text-center md:text-left font-medium italic font-prata text-[20px] mb-0">
+              Faça parte do clube!
+            </h3>
+            <h2 class="text-2xl font-bold mb-4 text-center md:text-left">APP DE CASHBACK</h2>
+            <div class="flex gap-4 justify-center md:justify-start">
+              <a href="#">
+                <img src="./images/store-appstore.png" alt="apple-store" width="130" height="27" />
+              </a>
+              <a href="#">
+                <img src="./images/store-googleplay.png" alt="apple-store" width="130" height="27" />
+              </a>
+            </div>
+          </div>
+
+          <!-- Footer Grid -->
+          <div
+            class="bry-footer-grid grid flex-shrink-0 grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 md:flex-1 mx-auto justify-center items-center"
+          >
+            <div class="text-center">
+              <h3>SUPORTE</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://wa.me/5511947530340"
+                    rel="nofollow noreferrer"
+                    target="_blank"
+                    class="!text-black font-bold"
+                  >
+                    +55 11 94753-0340
+                  </a>
+                </li>
+                <li>
+                  <a class="!text-black font-bold" href="mailto:contato@braaay.com"> contato@braaay.com </a>
+                </li>
+                <li><a href="#">POLÍTICA DE FRETES</a></li>
+                <li><a href="#">TROCAS E DEVOLUÇÕES</a></li>
+              </ul>
+            </div>
+            <!-- Company Links -->
+            <div class="md:block text-center">
+              <h3>BRAAAY</h3>
+              <ul>
+                <li><a href="#">SOBRE NÓS</a></li>
+                <li><a href="#">AFILIADOS</a></li>
+                <li><a href="#">BLOG</a></li>
+                <li><a href="#">SHOWROOM</a></li>
+              </ul>
+            </div>
+            <!-- Social Media -->
+            <div class="hidden md:block text-center">
+              <h3>REDES SOCIAIS</h3>
+              <ul>
+                <li><a href="#">INSTAGRAM</a></li>
+                <li><a href="#">YOUTUBE</a></li>
+                <li><a href="#">TIKTOK</a></li>
+                <li><a href="#">FACEBOOK</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <hr class="border-b-1 border-grey-lighter mt-10 mb-5 w-full relative" />
+
+        <div class="mx-auto px-[30px] text-center text-[14px] leading-5 font-roboto text-grey-medium mb-5">
+          <p>
+            A venda de bebidas alcoólicas é proibida para menores de 18 anos © 2024 Braaay – CNPJ: 50.260.091/0001-72. •
+            CEP: 05411-000. Todos os direitos reservados. Conheça nossas:
+            <a href="#" class="text-black font-medium">Trocas e devoluções</a>
+            |
+            <a href="#" class="text-black font-medium">*Frete Grátis: Confira as regras</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        lucide.createIcons();
+
+        // Debounce function
+        function debounce(func, wait) {
+          let timeout;
+          return function (...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+          };
+        }
+        // Search stuff
+        let kbdAbbrElem = document.querySelector(".bry-search-kbd > abbr");
+        if (kbdAbbrElem) {
+          const userAgent = window.navigator.userAgent;
+          let addPlaceholder = "";
+          if (userAgent.includes("Windows") || userAgent.includes("Linux")) {
+            addPlaceholder = "CTRL +";
+          } else if (userAgent.includes("Macintosh")) {
+            addPlaceholder = "⌘";
+          }
+          kbdAbbrElem.innerHTML = addPlaceholder;
+        }
+      });
+      function search_hotkeys() {
+        return {
+          search() {
+            setTimeout(() => {
+              this.$refs.q.focus();
+            }, 100);
+          },
+        };
+      }
+    </script>
+  </body>
 </html>

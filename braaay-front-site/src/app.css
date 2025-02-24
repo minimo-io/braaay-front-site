@@ -33,7 +33,7 @@
 	}
 	p,
 	article {
-		@apply antialiased;
+		@apply antialiased font-roboto;
 	}
 	article a {
 		color: var(--bry-current-color);
@@ -363,7 +363,7 @@
 	/* @apply shadow-sm; */
 }
 .bry-secondary-menu a {
-	@apply text-blue font-roboto font-light tracking-wider;
+	@apply text-blue font-roboto  font-light tracking-wider;
 	@apply text-[15px] lg:text-[17px] tracking-[0.02em];
 }
 .bry-secondary-menu ul {
@@ -411,6 +411,7 @@
 .glide__bullet--active {
 	background-color: #666; /* Active dot color */
 }
+
 @media (min-width: 1024px) {
 	.bry-secondary-menu {
 		overflow-x: visible; /* Disable scroll behavior on larger screens */
