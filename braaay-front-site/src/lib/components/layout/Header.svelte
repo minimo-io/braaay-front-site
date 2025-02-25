@@ -121,8 +121,8 @@
 	<div class="bry-secondary-menu">
 		<nav class="container max-w-screen-lg py-2 mx-[30px] lg:mx-auto">
 			<ul class="flex space-x-4">
-				<li class="relative group transition-all duration-300">
-					<a href="./category.html" class="!pr-2 !lg:pr-3 !pl-0">
+				<li class="md:!ml-0 relative group transition-all duration-300">
+					<a href="./category.html" class="!pr-2 !lg:pr-3 md:!pl-0">
 						<Wine class="lucide-menu" />
 						Vinhos
 					</a>
@@ -155,7 +155,7 @@
 					</a>
 				</li>
 				<li class="relative group transition-all duration-300">
-					<a href="/tag/premiados/">
+					<a href="/tag/premiados/" class="!pr-5">
 						<Award class="lucide-menu" />
 						Premiados
 					</a>
@@ -173,8 +173,10 @@
 						Blog
 					</a>
 				</li> -->
-				<li class="relative group transition-all duration-300 animate__animated animate__swing">
-					<a href="./blog.html" class="!py-0 !pr-5 h-full">
+				<li
+					class="!ml-0 md:!ml-5 relative group transition-all duration-300 animate__animated animate__swing order-first md:order-none"
+				>
+					<a href="./blog.html" class="!py-0 !pr-5 !pl-0 h-full">
 						<!-- <BadgePercent class="lucide-menu badge-percent" color="white" fill="#000" /> -->
 						<img
 							src="/images/badge-offer.png"
