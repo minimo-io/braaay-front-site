@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Header from '$components/layout/Header.svelte';
-	import Footer from '$components/layout/Footer.svelte';
 	import Carrousel from '$components/ui/Carrousel.svelte';
 	import TitleSection from '$components/ui/TitleSection.svelte';
 
@@ -14,8 +12,6 @@
 		content="Para quem aprecia vinhos autênticos, culturas e experiências enriquecedoras. Especialistas em vinhos uruguaios, nacionais & kits e presentes."
 	/>
 </svelte:head>
-
-<Header />
 
 <main>
 	<Carrousel />
@@ -381,8 +377,6 @@
 		</section>
 	</section>
 </main>
-
-<Footer />
 
 <style>
 </style>

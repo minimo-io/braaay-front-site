@@ -14,7 +14,7 @@
 
 <!-- Header section -->
 <div
-	class="max-w-screen-lg flex flex-col lg:flex-row justify-between items-center py-10 px-0 mx-[30px] lg:mx-auto mt-5"
+	class="max-w-screen-lg flex flex-col lg:flex-row justify-between items-center py-5 md:py-10 px-0 mx-[30px] lg:mx-auto mt-2 md:mt-5"
 >
 	<!-- Left section -->
 	<div class="lg:w-[65%]">
