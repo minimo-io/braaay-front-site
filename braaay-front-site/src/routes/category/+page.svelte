@@ -12,8 +12,12 @@
 		ArrowDownUp,
 		LayoutGrid
 	} from 'lucide-svelte';
-	import { Rule } from 'postcss';
 </script>
+
+<svelte:head>
+	<title>Vinhos do Uruguai - Braaay</title>
+	<meta name="description" content="" />
+</svelte:head>
 
 <main>
 	<!-- Header menu -->
