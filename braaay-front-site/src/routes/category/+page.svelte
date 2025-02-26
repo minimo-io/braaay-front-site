@@ -1,6 +1,6 @@
 <script>
 	import { ArrowDownUp, LayoutGrid } from 'lucide-svelte';
-	import { smoothScroll } from '$lib/utils/smoothScroll.ts';
+	import { smoothScroll } from '$lib/utils/smoothScroll';
 
 	import FilteringMenu from '$components/ui/FilteringMenu.svelte';
 </script>
