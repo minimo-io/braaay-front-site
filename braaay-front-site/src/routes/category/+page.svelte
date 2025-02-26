@@ -1,5 +1,7 @@
 <script>
 	import { ArrowDownUp, LayoutGrid } from 'lucide-svelte';
+	import { smoothScroll } from '$lib/utils/smoothScroll.ts';
+
 	import FilteringMenu from '$components/ui/FilteringMenu.svelte';
 </script>
 
@@ -34,6 +36,8 @@
 					>
 						<span>36 produtos</span>
 						<button
+							use:smoothScroll
+							href="#article"
 							class="font-roboto text-grey-medium-dark font-[11px] text-xs border border-grey-light py-[3px] px-[7px] antialiased ml-2 rounded-md"
 						>
 							CONHEÇA MAIS
@@ -194,7 +198,7 @@
 			class="w-[20px] h-[20px] lg:w-[23px] lg:h-[23px]"
 		/>
 	</div>
-	<div class="max-w-screen-lg mx-auto relative">
+	<div id="article" class="max-w-screen-lg mx-auto relative">
 		<!-- General title header -->
 		<div
 			class="bry-header Xmax-w-[750px] mx-auto h-[200px] max-h-[200px] bg-[#d1d1d0] relative md:rounded-2xl mb-36"
