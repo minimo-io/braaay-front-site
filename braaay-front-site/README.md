@@ -16,9 +16,13 @@ npx sv create my-app
 
 ## To Do
 
-- Continue with other Tailwind-Base pages.
+- Continue with other Tailwind-Base pages:
+  - Cart must have totally different Header and Footer.
+- On modal we need hover with white opacity in the BG, like https://v3.tailwindcss.com/docs/installation (open menu)
+  Also when clicked in category > All filters
 - Add accesibility with tab button to <main> like in Minimo.
 - Create button component
+- When articles have final routes, they must have the Blog Secondary Menu.
 
 - Create the svelte this repo as a standalone project to use it with Vercel or Netlify.
 - Mobile menu, needs to improve (no current place for cashback or account buttons)

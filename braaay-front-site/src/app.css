@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+	/* Defaults */
 	--bry-sun: #bd8836;
 	/* For the main button. Used with gradient for products. */
 	--bry-current-color: #303133;

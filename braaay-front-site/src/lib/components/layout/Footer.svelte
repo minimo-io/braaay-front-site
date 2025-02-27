@@ -103,7 +103,7 @@
 					<ul>
 						<li><a href="/">SOBRE NÓS</a></li>
 						<li><a href="/">AFILIADOS</a></li>
-						<li><a href="/">BLOG</a></li>
+						<li><a href="/blog">BLOG</a></li>
 						<li><a href="/">SHOWROOM</a></li>
 					</ul>
 				</div>
