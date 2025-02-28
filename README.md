@@ -1,6 +1,6 @@
 # Braaay Front Site
 
-![Braaay Screenshot](static/images/screenshot.png)
+![Braaay Screenshot](./static/images/screenshot.png)
 
 Everything you need to build the Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
