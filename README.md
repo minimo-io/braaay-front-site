@@ -27,6 +27,7 @@ npm run dev -- --open
 - SCREEN: Cashback
 - LOGIN
   - Must be a dynamic popup
+- MARKETING POPUP: like primal.
 
 ### Bugs
 
