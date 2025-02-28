@@ -1,6 +1,6 @@
 # Braaay Front Site
 
-![Braaay Screenshot](./static/images/screenshot.png)
+![Braaay Screenshot](https://raw.githubusercontent.com/minimo-io/braaay-front-site/main/static/images/snapshot.png)
 
 Everything you need to build the Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
