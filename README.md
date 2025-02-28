@@ -30,6 +30,7 @@ npm run dev -- --open
 - Mobile menu, needs to improve (no current place for cashback or account buttons)
 - PRODUCT PAGE:
   - We need than when you hover down, and loose sight of "Buy button" a fixed div appears below.
+  - Show price with PIX discount (or lowest possible price)
 - SCREEN: Cashback
 - LOGIN
   - Must be a dynamic popup
