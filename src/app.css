@@ -47,7 +47,7 @@
 		content: '';
 		display: block;
 		height: 36px;
-		background-image: url(./images/cart-braaay.png);
+		background-image: url(/images/cart-braaay.png);
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
