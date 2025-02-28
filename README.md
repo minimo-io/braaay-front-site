@@ -4,9 +4,7 @@
 
 Everything you need to build the Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+## Running the project
 
 ```bash
 # run the project
