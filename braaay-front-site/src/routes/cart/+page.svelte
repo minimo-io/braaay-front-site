@@ -26,7 +26,7 @@
 						<div class="flex flex-col md:flex-row justify-between align-middle">
 							<div class="flex w-full md:w-[50%] md:pr-10">
 								<img
-									src="./images/wines/Pizzato-Legno-Chardonnay.webp"
+									src="/images/wines/Pizzato-Legno-Chardonnay.webp"
 									alt="Product"
 									class="w-16 mr-4"
 								/>
@@ -239,7 +239,7 @@
 						</div>
 					</div>
 					<a
-						href="./checkout.html"
+						href="/checkout"
 						class="bg-sun block text-center font-roboto hover:bg-blue-700 text-white py-2 px-4 rounded-full w-full my-4 mb-1"
 					>
 						FINALIZAR COMPRA

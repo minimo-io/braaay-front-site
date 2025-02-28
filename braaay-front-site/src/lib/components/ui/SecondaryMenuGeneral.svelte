@@ -52,7 +52,7 @@
 					</a>
 				</li> -->
 			<!-- <li class="relative group transition-all duration-300">
-					<a href="./blog.html">
+					<a href="/blog">
 						<Newspaper class="lucide-menu badge-percent" />
 						Blog
 					</a>
@@ -60,7 +60,7 @@
 			<li
 				class="!ml-0 md:!ml-5 relative group transition-all duration-300 animate__animated animate__swing order-first md:order-none"
 			>
-				<a href="./blog.html" class="!py-0 !pr-5 !pl-0 h-full">
+				<a href="/blog" class="!py-0 !pr-5 !pl-0 h-full">
 					<!-- <BadgePercent class="lucide-menu badge-percent" color="white" fill="#000" /> -->
 					<img
 						src="/images/badge-offer.png"

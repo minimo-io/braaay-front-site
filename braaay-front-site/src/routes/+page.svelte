@@ -112,7 +112,7 @@
 					</div>
 					<h5 class="wine-title">Pizzato Merlot de Merlots 2022</h5>
 					<p class="wine-price">R$ 150</p>
-					<a href="./product.html" class="wine-button">VER DETALHES</a>
+					<a href="/product" class="wine-button">VER DETALHES</a>
 				</div>
 
 				<!-- Wine Box 2 -->
