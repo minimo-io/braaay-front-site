@@ -28,6 +28,8 @@ npm run dev -- --open
 - When articles have final routes, they must have the Blog Secondary Menu.
 - Create the svelte this repo as a standalone project to use it with Vercel or Netlify.
 - Mobile menu, needs to improve (no current place for cashback or account buttons)
+- PRODUCT PAGE:
+  - We need than when you hover down, and loose sight of "Buy button" a fixed div appears below.
 - SCREEN: Cashback
 - LOGIN
   - Must be a dynamic popup
