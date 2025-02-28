@@ -45,5 +45,6 @@ npm run dev -- --open
 - Take this reference for project structure: [https://github.com/huggingface/chat-ui](https://github.com/huggingface/chat-ui)
 - Wine store references:
   - [https://primalwine.com/](https://primalwine.com/) - BRAND VIBES
+  - [https://www.vineria9.com.br/](https://www.vineria9.com.br/) - BR LOCAL E-COMMERCE
   - [https://www.wine.com/](https://www.wine.com/) - ECOMMERCE, FILTERS, SALES, DYAMIC ELEMENTS
   - [https://bacan.uy/](https://bacan.uy/) - UY
