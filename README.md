@@ -17,10 +17,10 @@ npm run dev -- --open
 
 ## To Do
 
+- Add a lightweight component library (for popups)
+- Continue creating sub-components for product.
+  - There are (not-yet-designed types of products), kits, presentes & experiences.
 - Filtering menu in search should receive a payload will selecteed filters, and pre-select a country for example.
-- Product page we must hide and toggle accordion (think to do this after UI framework install).
-- Continue with other Tailwind-Base pages:
-  - Cart must have totally different Header and Footer
 - On modal we need hover with white opacity in the BG, like https://v3.tailwindcss.com/docs/installation (open menu)
   Also when clicked in category > All filters
 - Add accesibility with tab button to <main> like in Minimo.
