@@ -1,33 +1,12 @@
 <script>
-	import FilteringMenu from '$components/ui/FilteringMenu.svelte';
-	import { ArrowDownUp, Grape, LayoutGrid } from 'lucide-svelte';
+	import FilteringMenu from '$components/ui/menues/FilteringMenu.svelte';
+	import SortingMenu from '$components/ui/menues/SortingMenu.svelte';
 </script>
 
 <main class="w-full mx-auto">
-	<div class="pb-8 border-b border-b-grey-lighter">
-		<!-- Filtering menu -->
-		<FilteringMenu />
-	</div>
+	<FilteringMenu />
 
-	<!-- Sorting/View menu -->
-	<div class="bry-sorting">
-		<!-- Sorting Button -->
-		<span class="text-xs mr-1 text-grey-blueish uppercase">Ordenação:</span>
-		<button>
-			<ArrowDownUp class="lucide-button w-5 h-5" />
-			Mais relevante
-		</button>
-		<!-- Columns -->
-		<button>
-			<LayoutGrid class="lucide-button w-5 h-5 mr-2" />
-			Grade
-		</button>
-		<!-- Map Button -->
-		<!-- <button>
-            <Map class="lucide-button w-5 h-5 mr-2" />
-            Mapa
-        </button> -->
-	</div>
+	<SortingMenu />
 
 	<!-- Product list -->
 	<div class="max-w-screen-lg mx-[1.5rem] md:mx-auto mt-1 mb-[2rem]">

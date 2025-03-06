@@ -50,9 +50,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- <div
-                class="max-w-screen-xl mx-auto bry-divider bry-bullet-blue"
-            ></div> -->
 </main>
 
 <!-- Section with white background and divider -->

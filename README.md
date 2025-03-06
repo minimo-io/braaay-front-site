@@ -17,9 +17,22 @@ npm run dev -- --open
 
 ## To Do
 
+- Continuar con los wineboxes <WineBox />
+- En algunos lugares tenemos esto:
+
+```
+	:root {
+		--bry-current-color: #211a2e;
+		--bry-current-gradient-start: #847f87;
+		--bry-current-gradient-end: #77747d;
+	}
+```
+
+- Some articles share elements that are duplicated, (componentize!)
 - Add a lightweight component library (for popups)
 - Continue creating sub-components for product.
-  - There are (not-yet-designed types of products), kits, presentes & experiences.
+- ORODUCTS: There are (not-yet-designed types of products), kits, presentes & experiences.
+- Add component for schema.
 - Filtering menu in search should receive a payload will selecteed filters, and pre-select a country for example.
 - On modal we need hover with white opacity in the BG, like https://v3.tailwindcss.com/docs/installation (open menu)
   Also when clicked in category > All filters

@@ -1,4 +1,5 @@
 <script>
+	import Divider from '$components/ui/Divider.svelte';
 	import { Check, CircleChevronDown, CircleUserRound, ShoppingBag, Sparkle } from 'lucide-svelte';
 </script>
 
@@ -55,7 +56,7 @@
 					</form>
 
 					<div>
-						<div class="bry-divider bry-bullet-blue !border-b-grey-lighter my-7"></div>
+						<Divider color="blue" extraClasses="!border-b-grey-lighter my-7" />
 					</div>
 
 					<!-- Step Done -->
@@ -455,7 +456,7 @@
                                 CALCULAR
                             </a>
                         </div> -->
-						<div class="bry-divider bry-bullet-blue my-4 !border-b-grey-lighter"></div>
+						<Divider color="blue" extraClasses="my-4 !border-b-grey-lighter" />
 						<div class="flex justify-between pt-1 mb-2">
 							<p class="font-roboto font-bold">Valor total</p>
 							<div class="flex flex-col font-roboto text-right">

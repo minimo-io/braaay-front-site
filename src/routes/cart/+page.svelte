@@ -1,4 +1,5 @@
 <script>
+	import Divider from '$components/ui/Divider.svelte';
 	import { Gift, Minus, Plus, Sparkle, Truck } from 'lucide-svelte';
 </script>
 
@@ -225,7 +226,8 @@
 							CALCULAR
 						</a>
 					</div>
-					<div class="bry-divider bry-bullet-blue my-4 !border-b-grey-lighter"></div>
+
+					<Divider color="blue" extraClasses="my-4 !border-b-grey-lighter" />
 					<div class="flex justify-between pt-1 mb-2">
 						<p class="font-roboto font-bold">Valor total</p>
 						<div class="flex flex-col font-roboto text-right">

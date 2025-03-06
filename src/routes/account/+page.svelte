@@ -1,4 +1,5 @@
 <script>
+	import Divider from '$components/ui/Divider.svelte';
 	import { User } from 'lucide-svelte';
 </script>
 
@@ -126,7 +127,7 @@
 					</form>
 				</div>
 
-				<div class="bry-divider bry-bullet-blue !my-0"></div>
+				<Divider color="blue" extraClasses="!my-0" />
 
 				<!-- Change Email Section -->
 				<div class="">
@@ -145,7 +146,7 @@
 					</form>
 				</div>
 
-				<div class="bry-divider bry-bullet-green !my-0"></div>
+				<Divider color="green" extraClasses="!my-0" />
 
 				<!-- Change Password Section -->
 				<div>

@@ -9,8 +9,8 @@
 		CircleUser
 	} from 'lucide-svelte';
 
-	import SecondaryMenuGeneral from '$components/ui/SecondaryMenuGeneral.svelte';
-	import SecondaryMenuBlog from '$components/ui/SecondaryMenuBlog.svelte';
+	import SecondaryMenuGeneral from '$components/ui/menues/SecondaryMenuGeneral.svelte';
+	import SecondaryMenuBlog from '$components/ui/menues/SecondaryMenuBlog.svelte';
 
 	// Using runes for reactive state
 	let SecondaryMenuComponent = $state(

@@ -1,3 +1,7 @@
+<script>
+	import Divider from '$components/ui/Divider.svelte';
+</script>
+
 <main class="w-full mx-auto">
 	<article class="relative bg-white pb-10 mt-0">
 		<div class="mx-auto relative">
@@ -44,9 +48,11 @@
 					cativa todos os seus sentidos de maneira surpreendente, desde a visão até o último gole. Vamos
 					embarcar juntos nesta aventura, explorando o que faz deste vinho uma escolha tão interessante.
 				</p>
-				<div class="bry-divider bry-bullet-blue"></div>
+				<Divider color="blue" />
 				<img src="/images/Geleia-de-Vinho.jpg" alt="article" class="rounded-xl" />
-				<div class="bry-divider bry-bullet-green mb-2"></div>
+
+				<Divider color="green" extraClasses="mb-2" />
+
 				<div class="bry-article-content">
 					<div class="w-full">
 						<p>
