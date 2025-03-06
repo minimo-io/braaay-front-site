@@ -282,10 +282,10 @@
 		@apply bg-cover content-[""] absolute w-[18px] h-[18px]  -bottom-[10px];
 	}
 	.bry-bullet-blue::after {
-		@apply bg-[url('./images/divider-blue.svg')];
+		@apply bg-[url('/images/divider-blue.svg')];
 	}
 	.bry-bullet-green::after {
-		@apply bg-[url('./images/divider-green.svg')];
+		@apply bg-[url('/images/divider-green.svg')];
 	}
 
 	/* Cart */
