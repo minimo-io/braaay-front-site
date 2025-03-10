@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Carrousel from '$components/ui/Carrousel.svelte';
 	import TitleSection from '$components/ui/TitleSection.svelte';
+	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
+	import WineBox from '$components/ui/products/WineBox.svelte';
 
 	import { Calendar, ChefHat } from 'lucide-svelte';
 </script>
@@ -16,16 +18,18 @@
 <main>
 	<Carrousel />
 
-	<TitleSection
-		buttonText="Reserve sua experiência"
-		title="Encontros & Jantares"
-		subTitle="Showroom"
-		description="Venha descobrir o inesperado em nosso showroom e prepare-se para eventos inesquecíveis."
-	>
-		{#snippet icon()}
-			<Calendar class="lucide-button" />
-		{/snippet}
-	</TitleSection>
+	<div class="my-5">
+		<TitleSection
+			buttonText="Reserve sua experiência"
+			title="Encontros & Jantares"
+			subTitle="Showroom"
+			description="Venha descobrir o inesperado em nosso showroom e prepare-se para eventos inesquecíveis."
+		>
+			{#snippet icon()}
+				<Calendar class="lucide-button" />
+			{/snippet}
+		</TitleSection>
+	</div>
 
 	<!-- Home images -->
 	<div class="max-w-screen-lg-2x mx-[30px] lg:mx-auto items-center flex justify-between">
@@ -73,16 +77,7 @@
 
 	<!-- Section with white background and divider -->
 	<section class="relative bg-white py-10 mt-14">
-		<!-- SVG Divider Dot -->
-		<div class="absolute inset-x-0 -top-3 flex justify-center">
-			<img
-				src="/images/divider-green.svg"
-				width="23px"
-				height="23px"
-				alt="divider"
-				class="w-[20px] h-[20px] lg:w-[23px] lg:h-[23px]"
-			/>
-		</div>
+		<SectionDivider color="green" />
 
 		<TitleSection
 			buttonText="Ver todos"
@@ -93,110 +88,87 @@
 		></TitleSection>
 
 		<!-- Wine list -->
-		<section class="bg-white max-w-screen-lg-2x py-12 mx-[20px] lg:mx-auto">
+		<section class="bg-white max-w-screen-lg-2x py-10 mx-[20px] lg:mx-auto">
 			<div class="bry-product-list">
+				<!-- Wine Box 0 -->
+				<WineBox
+					image={{
+						src: '/images/wines/vinho-don-pascual-tannat-merlot.webp'
+					}}
+					wine={{
+						title: 'Don Pascual Cabernet Franc',
+						price: 150.0,
+						url: '/product',
+						score: 4.5
+					}}
+				/>
+
 				<!-- Wine Box 1 -->
-				<div class="wine">
-					<div class="mb-3 flex-grow">
-						<img
-							src="/images/wines/Deica-2-1.webp"
-							alt="Pizzato Merlot de Merlots 2022"
-							class="mx-auto"
-						/>
-					</div>
-					<div class="absolute top-4 left-4">
-						<div class="wine-stars">
-							<span>★</span>
-							4.5
-						</div>
-					</div>
-					<h5 class="wine-title">Pizzato Merlot de Merlots 2022</h5>
-					<p class="wine-price">R$ 150</p>
-					<a href="/product" class="wine-button">VER DETALHES</a>
-				</div>
+				<WineBox
+					image={{
+						src: '/images/wines/Deica-2-1.webp'
+					}}
+					wine={{
+						title: 'Pizzato Merlot de Merlots 2022',
+						price: 150.0,
+						url: '/product',
+						score: 4.5
+					}}
+				/>
 
 				<!-- Wine Box 2 -->
-				<div class="wine">
-					<div class="mb-3 flex-grow">
-						<img
-							src="/images/wines/PIZZATO-concentus.webp"
-							alt="Artesana Cabernet Franc/Merlot Reserva"
-							class="mx-auto"
-						/>
-					</div>
-					<div class="absolute top-4 left-4">
-						<div class="wine-stars">
-							<span>★</span>
-							4.5
-						</div>
-					</div>
-					<h5 class="wine-title">Artesana Cabernet Franc/Merlot Reserva</h5>
-					<p class="wine-price">R$ 100</p>
-					<a href="/" class="wine-button">VER DETALHES</a>
-				</div>
+				<WineBox
+					image={{
+						src: './images/wines/PIZZATO-concentus.webp'
+					}}
+					wine={{
+						title: 'Artesana Cabernet Franc/Merlot Reserva',
+						price: 100.0,
+						url: '/',
+						score: 4.5
+					}}
+				/>
 
 				<!-- Wine Box 3 -->
-				<div class="wine">
-					<div class="mb-3 flex-grow">
-						<img
-							src="/images/wines/Pizzato-Legno-Chardonnay.webp"
-							alt="Pizzato Chardonnay de Chardonnays"
-							class="mx-auto"
-						/>
-					</div>
-					<div class="absolute top-4 left-4">
-						<div class="wine-stars">
-							<span>★</span>
-							4.5
-						</div>
-					</div>
-					<h5 class="wine-title">Pizzato Chardonnay de Chardonnays</h5>
-					<p class="wine-price">R$ 119</p>
-					<a href="/" class="wine-button">VER DETALHES</a>
-				</div>
+				<WineBox
+					image={{
+						src: './images/wines/Pizzato-Legno-Chardonnay.webp'
+					}}
+					wine={{
+						title: 'Pizzato Chardonnay de Chardonnays',
+						price: 119.0,
+						url: '/',
+						score: 4.5
+					}}
+				/>
 
 				<!-- Wine Box 4 -->
-				<div class="wine">
-					<div class="mb-3 flex-grow">
-						<img
-							src="/images/wines/vinho-don-pascual-cabernet-merlot.webp"
-							alt="Mayos Jovem Branco da Basso"
-							class="mx-auto"
-						/>
-					</div>
-					<div class="absolute top-4 left-4">
-						<div class="wine-stars">
-							<span>★</span>
-							4.5
-						</div>
-					</div>
-					<h5 class="wine-title">Mayos Jovem Branco da Basso</h5>
-					<p class="wine-price">R$ 43</p>
-					<a href="/" class="wine-button">VER DETALHES</a>
-				</div>
+				<WineBox
+					image={{
+						src: './images/wines/vinho-don-pascual-cabernet-merlot.webp'
+					}}
+					wine={{
+						title: 'Mayos Jovem Branco da Basso',
+						price: 43.0,
+						url: '/',
+						score: 4.5
+					}}
+				/>
 
-				<!-- Wine Box 5 (with discount) -->
-				<div class="wine">
-					<div class="mb-3 flex-grow">
-						<img
-							src="/images/wines/vinho-mayos-jovem-branco.webp"
-							alt="Artesana Cabernet Franc/Merlot Reserva"
-							class="mx-auto"
-						/>
-					</div>
-					<div class="absolute top-4 left-4">
-						<div class="wine-stars">
-							<span>★</span>
-							4.5
-						</div>
-					</div>
-					<h5 class="wine-title">Artesana Cabernet Franc/Merlot Reserva</h5>
-					<p class="wine-price">R$ 100</p>
-					<a href="/" class="wine-button">VER DETALHES</a>
-					<div class="absolute top-4 right-4 bg-black text-white px-2 py-1 text-xs rounded-lg">
-						55% OFF
-					</div>
-				</div>
+				<!-- Wine Box 6 (with discount) -->
+				<WineBox
+					image={{
+						src: './images/wines/vinho-mayos-jovem-branco.webp',
+						alt: 'Artesana Cabernet Franc/Merlot Reserva'
+					}}
+					wine={{
+						title: 'Artesana Cabernet Franc/Merlot Reserva',
+						price: 100.0,
+						url: '/',
+						score: 4.5
+					}}
+					discount={'50%'}
+				/>
 			</div>
 		</section>
 
@@ -214,9 +186,7 @@
 		</TitleSection>
 
 		<!-- Harmonizacoes -->
-		<div
-			class="max-w-screen-lg-2x mx-[30px] mt-12 mb-5 lg:mx-auto items-center flex justify-between"
-		>
+		<div class="max-w-screen-lg-2x mx-[30px] my-10 lg:mx-auto items-center flex justify-between">
 			<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
 				<!-- Image 1 with play button overlay -->
 				<div class="relative">
@@ -257,6 +227,7 @@
 		</div>
 
 		<!-- Header section: Parceiros -->
+
 		<TitleSection
 			buttonText="Ver todos"
 			title="Parceiros destacados"

@@ -16,3 +16,11 @@
 {@render children()}
 
 <Footer />
+
+<style global>
+	:root {
+		--bry-current-color: #211a2e;
+		--bry-current-gradient-start: #847f87;
+		--bry-current-gradient-end: #77747d;
+	}
+</style>

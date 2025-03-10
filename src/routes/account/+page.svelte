@@ -1,5 +1,5 @@
 <script>
-	import Divider from '$components/ui/Divider.svelte';
+	import Divider from '$components/ui/dividers/Divider.svelte';
 	import { User } from 'lucide-svelte';
 </script>
 

@@ -1,36 +1,13 @@
 <script>
-	import Divider from '$components/ui/Divider.svelte';
+	import Divider from '$components/ui/dividers/Divider.svelte';
+	import ArticleHeader from '$components/ui/headers/ArticleHeader.svelte';
 </script>
 
 <main class="w-full mx-auto">
 	<article class="relative bg-white pb-10 mt-0">
 		<div class="mx-auto relative">
-			<!-- General title header -->
-			<div class="bry-header w-full h-[250px] max-h-[250px] bg-[#d1d1d0] relative mb-36">
-				<div
-					class="absolute inset-0 opacity-70 z-0"
-					style="
-                background-size: cover;
-                background-image: url(/images/Geleia-de-Vinho.jpg),
-                  linear-gradient(to bottom, var(--bry-current-color), var(--bry-current-color));
-                background-blend-mode: multiply;
-              "
-				></div>
-				<!-- Header deck -->
-				<!-- <h3 class="bry-header-deck">
-                            <a href="#" style="border-color: var(--bry-current-color)">Blog</a>
-                        </h3> -->
-				<!-- Header title -->
-				<h2 class="bry-header-title max-w-screen-lg !pt-0">
-					Vinhos brasileiros premiados que vão te surpreender
-				</h2>
-				<!-- Header author -->
-				<div class="bry-header-author">
-					<img src="/images/erika-96x96.jpeg" alt="Erika Bezerra" />
-					<p class="text-lg font-bold mt-2 text-grey-darkest">Erika Bezerra</p>
-					<p class="text-sm mt-0 text-grey-darkest italic font-thin">Sommelier</p>
-				</div>
-			</div>
+			<!-- General article header -->
+			<ArticleHeader />
 
 			<!-- Article content -->
 			<div class="md:px-32 px-[30px] max-w-screen-lg mx-auto">
@@ -162,11 +139,3 @@
 		</div>
 	</article>
 </main>
-
-<style global>
-	:root {
-		--bry-current-color: #211a2e;
-		--bry-current-gradient-start: #847f87;
-		--bry-current-gradient-end: #77747d;
-	}
-</style>

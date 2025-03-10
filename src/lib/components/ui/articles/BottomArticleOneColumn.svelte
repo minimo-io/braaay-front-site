@@ -1,17 +1,11 @@
+<!-- Used eg. category pages -->
 <script>
-	import Divider from '../Divider.svelte';
+	import Divider from '$components/ui/dividers/Divider.svelte';
+	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 </script>
 
 <article class="relative bg-white py-10 mt-14">
-	<div class="absolute inset-x-0 -top-3 flex justify-center">
-		<img
-			src="./images/divider-green.svg"
-			width="23px"
-			height="23px"
-			alt="divider"
-			class="w-[20px] h-[20px] lg:w-[23px] lg:h-[23px]"
-		/>
-	</div>
+	<SectionDivider color="green" />
 	<div id="article" class="max-w-screen-lg mx-auto relative">
 		<!-- General title header -->
 		<div
@@ -55,6 +49,7 @@
 				cativa todos os seus sentidos de maneira surpreendente, desde a visão até o último gole. Vamos
 				embarcar juntos nesta aventura, explorando o que faz deste vinho uma escolha tão interessante.
 			</p>
+
 			<Divider color="blue" />
 
 			<div class="bry-article-content">

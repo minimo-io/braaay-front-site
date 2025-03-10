@@ -15,19 +15,20 @@ Everything you need to build the Svelte project, powered by [`sv`](https://githu
 npm run dev -- --open
 ```
 
-## To Do
+## To Do: Speed & UI/UX
 
-- Continuar con los wineboxes <WineBox />
-- En algunos lugares tenemos esto:
-
-```
+- There is conflict with : Use in layout
+<style global>
 	:root {
 		--bry-current-color: #211a2e;
 		--bry-current-gradient-start: #847f87;
 		--bry-current-gradient-end: #77747d;
 	}
-```
+</style>
 
+- Components on /blog
+- Adicionar boton en /blog -- abajo de dica do chef
+- Create a loader
 - Some articles share elements that are duplicated, (componentize!)
 - Add a lightweight component library (for popups)
 - Continue creating sub-components for product.
@@ -55,6 +56,16 @@ npm run dev -- --open
   Probablemente también causa en el checkout (mismo footer).
 
 ### v2
+
+- En algunos lugares tenemos esto, utilizarlo para cambiar el color:
+
+```
+	:root {
+		--bry-current-color: #211a2e;
+		--bry-current-gradient-start: #847f87;
+		--bry-current-gradient-end: #77747d;
+	}
+```
 
 - Aviso para Pedidos Express: Pedidos hasta el medio día (envío express) se envía en el mismo día, ou se for final de semana, no próximo dia util da Braaay.
 - Be able to add favorite wines (I would use this, to explore and remember my favorite wines!).

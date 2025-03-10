@@ -1,13 +1,9 @@
+<script>
+	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
+</script>
+
 <footer class="relative bg-grey-background py-0 mt-0">
-	<div class="absolute inset-x-0 -top-3 flex justify-center">
-		<img
-			src="/images/divider-blue.svg"
-			width="23px"
-			height="23px"
-			alt="divider"
-			class="w-[20px] h-[20px] lg:w-[23px] lg:h-[23px]"
-		/>
-	</div>
+	<SectionDivider color="blue" />
 	<div class="max-w-screen-lg mx-auto px-[30px] lg:px-0">
 		<!-- Logo -->
 		<div class="flex justify-center mb-12">
