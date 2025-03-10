@@ -17,6 +17,7 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
+- Pensar en writables para modal: https://chatgpt.com/c/67cf781f-2bc8-8011-8575-98cb9ea53790
 - Adicionar boton en /blog -- abajo de dica do chef
 - ARTICLE: - Header debe ser igual que el blog -> Ver que sea una propiedad global configurable.
 - COMPONENT LIBRARY:
