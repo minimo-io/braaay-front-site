@@ -5,12 +5,11 @@
 		title: string;
 		subTitle?: string;
 		description: string;
-		buttonText: string;
 		verticalSpace?: boolean;
-		icon?: Snippet;
+		button?: Snippet;
 	}
 
-	let { title, subTitle, description, buttonText, verticalSpace = true, icon }: Props = $props();
+	let { title, subTitle, description, verticalSpace = true, button }: Props = $props();
 </script>
 
 <!-- Header section -->
@@ -43,12 +42,8 @@
 
 	<!-- Right section -->
 	<div class="self-start lg:self-auto">
-		<a href="/" class="btn text-white bg-sun uppercase flex lg:items-right mt-3 lg:mt-0 lg:py-3">
-			{#if icon}
-				{@render icon()}
-			{/if}
-
-			{buttonText}
-		</a>
+		{#if button}
+			{@render button()}
+		{/if}
 	</div>
 </div>

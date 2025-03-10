@@ -1,6 +1,6 @@
 <script>
 	import FilteringMenu from '$components/ui/menues/FilteringMenu.svelte';
-	import BottomArticleOneColumn from '$components/ui/articles/BottomArticleOneColumn.svelte';
+	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 	import SortingMenu from '$components/ui/menues/SortingMenu.svelte';
 	import CategoryHeader from '$components/ui/headers/CategoryHeader.svelte';
 	import WineBox from '$components/ui/products/WineBox.svelte';
@@ -105,4 +105,4 @@
 </main>
 
 <!-- Category article -->
-<BottomArticleOneColumn />
+<BottomArticle twoColumns={false} />

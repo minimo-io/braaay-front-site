@@ -1,4 +1,5 @@
 <script>
+	import Button from '$components/ui/buttons/Button.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import { Gift, Minus, Plus, Sparkle, Truck } from 'lucide-svelte';
 </script>
@@ -157,9 +158,18 @@
 								Com cashbacks entre 5 e 10% em toda compra, 3 vinhos top todo mês + fretes grátis! Além
 								de experiências com outros Passport e compras coletivas!
 							</p>
-							<button class="bg-sun text-white font-medium py-1 px-4 rounded-full mt-4">
+							<!-- <button class="bg-sun text-white font-medium py-1 px-4 rounded-full mt-4">
 								Adicionar ao carrinho
-							</button>
+							</button> -->
+							<div class="w-1/3 py-2 mx-auto">
+								<Button
+									title="Adicionar ao carrinho"
+									type="sun"
+									url="/cart"
+									tracking="normal"
+									bold={false}
+								/>
+							</div>
 							<p class="text-xs text-gray-500 mt-2">
 								<a href="/" class="text-blue-500 underline">Saiba mais</a>
 							</p>
@@ -207,24 +217,48 @@
 					<div class="my-4 border-t border-t-grey-lighter"></div>
 					<div class="flex justify-between">
 						<p class="font-light text-[15px] self-center">Cupom de desconto</p>
-						<a
+						<!-- <a
 							href="/"
 							class="btn !px-3 w-[130px] text-grey-blueish bg-grey-background uppercase flex lg:items-right mt-3 lg:mt-0 self-center"
 						>
 							<Gift class="lucide-button" />
 							ADICIONAR
-						</a>
+						</a> -->
+						<Button
+							title="ADICIONAR"
+							width130px={true}
+							url="/cart"
+							size="sm-short"
+							type="grey"
+							borderDark={true}
+						>
+							{#snippet icon()}
+								<Gift class="lucide-button" />
+							{/snippet}
+						</Button>
 					</div>
 					<div class="my-4 border-t border-t-grey-lighter"></div>
 					<div class="flex justify-between">
 						<p class="font-light text-[15px] self-center">Frete</p>
-						<a
+						<!-- <a
 							href="/"
 							class="btn !px-3 w-[130px] text-grey-blueish bg-grey-background uppercase flex lg:items-right mt-3 lg:mt-0 self-center"
 						>
 							<Truck class="lucide-button" />
 							CALCULAR
-						</a>
+						</a> -->
+						<Button
+							title="CALCULAR"
+							url="/cart"
+							size="sm-short"
+							width130px={true}
+							type="grey"
+							borderDark={true}
+						>
+							{#snippet icon()}
+								<Truck class="lucide-button" />
+							{/snippet}
+						</Button>
 					</div>
 
 					<Divider color="blue" extraClasses="my-4 !border-b-grey-lighter" />
@@ -240,12 +274,23 @@
 							</span>
 						</div>
 					</div>
-					<a
+					<!-- <a
 						href="/checkout"
 						class="bg-sun block text-center font-roboto hover:bg-blue-700 text-white py-2 px-4 rounded-full w-full my-4 mb-1"
 					>
 						FINALIZAR COMPRA
-					</a>
+					</a> -->
+					<div class="my-4 mb-1">
+						<Button
+							type="sun"
+							url="/checkout"
+							title="FINALIZAR COMPRA"
+							size="xl"
+							tracking="normal"
+							font="xl"
+							bold={true}
+						/>
+					</div>
 				</div>
 
 				<!-- Promo clube lateral -->
@@ -267,9 +312,10 @@
 							Com cashbacks entre 5 e 10% em toda compra, 3 vinhos top todo mês + fretes grátis! Além
 							de experiências com outros Passport e compras coletivas!
 						</p>
-						<button class="bg-sun text-white font-medium py-1 px-4 rounded-full mt-4">
-							Adicionar ao carrinho
-						</button>
+						<div class="mx-11 py-2">
+							<Button title="Adicionar ao carrinho" type="sun" url="/cart" tracking="normal" />
+						</div>
+
 						<p class="text-xs text-gray-500 mt-2">
 							<a href="/" class="text-blue-500 underline">Saiba mais</a>
 						</p>
@@ -295,11 +341,13 @@
 							</span>
 						</div>
 					</div>
-					<div class="py-2 mt-2 px-5 border border-grey-lighter rounded-full bg-white">
-						<a href="./" class="mt-0 block text-sm font-roboto hover:underline text-center"
-							>Continuar comprando</a
-						>
-					</div>
+					<Button
+						title="Continuar comprando"
+						size="sm"
+						type="light"
+						url="/category"
+						tracking="normal"
+					/>
 				</div>
 
 				<div class="hidden md:block md:my-36"></div>

@@ -17,22 +17,21 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
-- There is conflict with : Use in layout
-<style global>
-	:root {
-		--bry-current-color: #211a2e;
-		--bry-current-gradient-start: #847f87;
-		--bry-current-gradient-end: #77747d;
-	}
-</style>
-
-- Components on /blog
+- Componentizar botones
+  - Falta button del producto y mini botones de la categoría (crear otro)
+  - Por algun motivo en el header, el botón de CONTA no tiene shine effect
+  - Botones en el checkout
+  - My account
 - Adicionar boton en /blog -- abajo de dica do chef
 - Create a loader
 - Some articles share elements that are duplicated, (componentize!)
-- Add a lightweight component library (for popups)
+- ARTICLE:
+  - Header debe ser igual que el blog -> Ver que sea una propiedad global configurable.
+- COMPONENT LIBRARY:
+  - Add a lightweight component library (for popups)
+  - Precisamos toasts, ejemplo para notificaciones.
 - Continue creating sub-components for product.
-- ORODUCTS: There are (not-yet-designed types of products), kits, presentes & experiences.
+- PRODUCTS: There are (not-yet-designed types of products), kits, presentes & experiences.
 - Add component for schema.
 - Filtering menu in search should receive a payload will selecteed filters, and pre-select a country for example.
 - On modal we need hover with white opacity in the BG, like https://v3.tailwindcss.com/docs/installation (open menu)
@@ -67,6 +66,8 @@ npm run dev -- --open
 	}
 ```
 
+- Para el BottomArticle, si es twoColumn=true poder pasar un snippet.
+- Pagination for blog
 - Aviso para Pedidos Express: Pedidos hasta el medio día (envío express) se envía en el mismo día, ou se for final de semana, no próximo dia util da Braaay.
 - Be able to add favorite wines (I would use this, to explore and remember my favorite wines!).
 - Components could have a config value. When present we can take that value for header & footer components choosing.

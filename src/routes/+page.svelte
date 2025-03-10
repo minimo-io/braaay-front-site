@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Carrousel from '$components/ui/Carrousel.svelte';
+	import PartnersList from '$components/ui/PartnersList.svelte';
 	import TitleSection from '$components/ui/TitleSection.svelte';
+	import Button from '$components/ui/buttons/Button.svelte';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 	import WineBox from '$components/ui/products/WineBox.svelte';
 
@@ -20,13 +22,16 @@
 
 	<div class="my-5">
 		<TitleSection
-			buttonText="Reserve sua experiência"
 			title="Encontros & Jantares"
 			subTitle="Showroom"
 			description="Venha descobrir o inesperado em nosso showroom e prepare-se para eventos inesquecíveis."
 		>
-			{#snippet icon()}
-				<Calendar class="lucide-button" />
+			{#snippet button()}
+				<Button title="Reserve sua experiência" size="md" type="sun" url="/">
+					{#snippet icon()}
+						<Calendar class="lucide-button" />
+					{/snippet}
+				</Button>
 			{/snippet}
 		</TitleSection>
 	</div>
@@ -80,12 +85,15 @@
 		<SectionDivider color="green" />
 
 		<TitleSection
-			buttonText="Ver todos"
 			title="Vinhos & Presentes"
 			subTitle="E-Commerce"
 			description="Dê uma olhada em nossa seleção com os melhores vinhos uruguaios e brasileiros e nossas
 			sugestões para presentes empresariais."
-		></TitleSection>
+		>
+			{#snippet button()}
+				<Button title="Ver todos" size="md" type="sun" url="/category"></Button>
+			{/snippet}
+		</TitleSection>
 
 		<!-- Wine list -->
 		<section class="bg-white max-w-screen-lg-2x py-10 mx-[20px] lg:mx-auto">
@@ -174,14 +182,17 @@
 
 		<!-- Header section: Harmonizacoes -->
 		<TitleSection
-			buttonText="Ver todas"
 			title="Harmonizações"
 			subTitle="Revista"
 			description="Acompanhe aqui uma seleção dos nossos melhores vinhos e espumantes uruguaios e brasileiros
 			para harmonizar com seus pratos favoritos."
 		>
-			{#snippet icon()}
-				<ChefHat class="lucide-button" />
+			{#snippet button()}
+				<Button title="Ver todas" size="md" type="sun" url="/">
+					{#snippet icon()}
+						<ChefHat class="lucide-button" />
+					{/snippet}
+				</Button>
 			{/snippet}
 		</TitleSection>
 
@@ -229,123 +240,17 @@
 		<!-- Header section: Parceiros -->
 
 		<TitleSection
-			buttonText="Ver todos"
 			title="Parceiros destacados"
 			subTitle="Produtores"
 			description="	Os melhores produtores do Uruguai e do Brasil estão na Braaay compartilhando suas
 			experiências."
-		></TitleSection>
+		>
+			{#snippet button()}
+				<Button title="Ver todos" size="md" type="sun" url="/"></Button>
+			{/snippet}
+		</TitleSection>
 
-		<section class="bry-partners-list">
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/vina-eden-logo.webp"
-						alt="Viña Edén"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/artesana-logo-3.webp"
-						alt="Artesana"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/capoani-logo-3.webp"
-						alt="Manus Logo"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/cerro-del-toro-logo-2.webp"
-						alt="AC Logo"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/don-pascual-logo-2.webp"
-						alt="Coroa Acheira Logo"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/familia-deicas-uruguai.webp"
-						alt="Pizzato Logo"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/pizzato-logo.webp"
-						alt="Casa Eva Logo"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/vinicola-manus-logo.webp"
-						alt="Anina Logo"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/garzon-logo-2.webp"
-						alt="Anina Logo"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/giaretta-logo-2.webp"
-						alt="Anina Logo"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/casa-eva-logo-2.webp"
-						alt="Anina Logo"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="/">
-					<img
-						src="/images/partners/casa-da-coheleira-logo-3.webp"
-						alt="Anina Logo"
-						class="w-full h-full object-contain"
-					/>
-				</a>
-			</div>
-		</section>
+		<PartnersList />
 	</section>
 </main>
 

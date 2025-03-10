@@ -1,5 +1,6 @@
 <script>
 	import { Headset } from 'lucide-svelte';
+	import { Button } from '$components/ui/buttons/index';
 </script>
 
 <header class="bg-white border-b border-b-grey-lighter">
@@ -46,13 +47,14 @@
 			</form>
 		</div>
 		<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
-			<a href="/" class="btn uppercase flex items-center justify-center mt-1">
-				<Headset class="lucide-button" />
-				Atendimento
-			</a>
+			<Button title="Atendimento" type="light" size="sm" url="/">
+				{#snippet icon()}
+					<Headset class="lucide-button" />
+				{/snippet}
+			</Button>
 		</div>
 		<img
-			src="./images/safe-env.png"
+			src="/images/safe-env.png"
 			alt="ambiente-seguro"
 			height="35"
 			class="h-[30px] md:h-[35px] ml-8"

@@ -11,6 +11,8 @@
 
 	import SecondaryMenuGeneral from '$components/ui/menues/SecondaryMenuGeneral.svelte';
 	import SecondaryMenuBlog from '$components/ui/menues/SecondaryMenuBlog.svelte';
+	import Button from '$components/ui/buttons/Button.svelte';
+	import CashbackButton from '../buttons/CashbackButton.svelte';
 
 	// Using runes for reactive state
 	let SecondaryMenuComponent = $state(
@@ -73,27 +75,14 @@
 
 		<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
 			<!-- My account -->
-			<a
-				href="/account"
-				class="btn bg-blue !border-0 text-white h-[45px] uppercase flex items-center justify-center pr-3 pl-3"
-			>
-				<CircleUser class="lucide-button h-[10px]" />
+			<Button chevron={true} title="Conta" url="/account" type="blue" size="xl">
+				{#snippet icon()}
+					<CircleUser class="lucide-button h-[10px]" />
+				{/snippet}
+			</Button>
 
-				Conta<ChevronDown class="lucide-button !mx-0 !px-0" />
-			</a>
 			<!-- Cashback -->
-			<a
-				href="/cashback"
-				class="btn h-[35px] lg:h-[45px] text-blue uppercase relative flex items-center justify-center ml-3 border"
-			>
-				<Coins class="h-[15px] text-sun" fill="#BD8836" />
-				<span class="lg:mt-1">R$124</span>
-				<span
-					class="hidden md:flex pt-[2px] absolute md:-top-[10px] bg-white border border-grey-lighter hover:ring-grey-medium text-blue font-bold antialiased px-2 py-0 text-[8px] rounded-xl"
-				>
-					CASHBACK
-				</span>
-			</a>
+			<CashbackButton title="Cashback" currency="R$" value={123.42} />
 		</div>
 
 		<!-- Bag -->

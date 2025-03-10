@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Wine } from '$lib/types';
+	import Button from '../buttons/Button.svelte';
 
 	interface Props {
 		wine: Wine;
@@ -28,7 +29,17 @@
 	</div>
 	<h5 class="wine-title">{props.wine.title}</h5>
 	<p class="wine-price">R$ {props.wine.price}</p>
-	<a href={props.wine.url} class="wine-button">VER DETALHES</a>
+
+	<!-- <a href={props.wine.url} class="wine-button">VER DETALHES</a> -->
+	<div class="mt-2">
+		<Button
+			title="VER DETALHES"
+			type="light"
+			url={props.wine.url}
+			borderDark={true}
+			tracking="normal"
+		></Button>
+	</div>
 	{#if props.discount}
 		<div class="absolute top-4 right-4 bg-black text-white px-2 py-1 text-xs rounded-lg">
 			{props.discount} OFF

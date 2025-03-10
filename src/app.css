@@ -17,6 +17,39 @@
 	/* outline: 2px solid lime; */
 }
 @layer base {
+	.shine-effect {
+		--shine-deg: 45deg;
+		position: relative;
+		/* overflow: hidden; */
+
+		background-repeat: no-repeat;
+		background-position:
+			-100% 0,
+			0 0;
+
+		background-image: linear-gradient(
+			var(--shine-deg),
+			transparent 20%,
+			transparent 40%,
+			rgb(68, 68, 68, 0.2) 50%,
+			rgb(68, 68, 68, 0.2) 55%,
+			transparent 70%,
+			transparent 100%
+		);
+
+		background-size:
+			250% 250%,
+			100% 100%;
+		transition: background-position 0s ease;
+	}
+
+	.shine-effect:hover {
+		background-position:
+			200%0,
+			0 0;
+		transition-duration: 0.8s;
+	}
+
 	::selection {
 		background: #212639;
 		color: #ffffff !important;
@@ -73,7 +106,7 @@
 }
 @layer components {
 	.btn {
-		@apply py-2 px-5 bg-white text-blue rounded-full border border-grey-lighter hover:ring-grey-medium font-roboto text-xs tracking-widest;
+		@apply py-2 px-5 bg-white text-blue rounded-full border border-grey-lighter transition-all duration-100 hover:ring-grey-medium font-roboto text-xs tracking-widest;
 		@screen sm {
 			.btn {
 				@apply py-1 px-3 mt-5 text-[9px];

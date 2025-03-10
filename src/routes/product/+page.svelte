@@ -1,5 +1,5 @@
 <script>
-	import BottomArticleTwoColumns from '$components/ui/articles/BottomArticleTwoColumns.svelte';
+	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 	import ProductDetails from '$components/ui/products/ProductDetails.svelte';
 	import ProductImage from '$components/ui/products/ProductImage.svelte';
 </script>
@@ -16,12 +16,4 @@
 </main>
 
 <!-- Product Article -->
-<BottomArticleTwoColumns />
-
-<!-- <style global>
-	:root {
-		--bry-current-color: #211a2e;
-		--bry-current-gradient-start: #847f87;
-		--bry-current-gradient-end: #77747d;
-	}
-</style> -->
+<BottomArticle twoColumns={true} />
