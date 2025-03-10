@@ -18,12 +18,9 @@ npm run dev -- --open
 ## To Do: Speed & UI/UX
 
 - Adicionar boton en /blog -- abajo de dica do chef
-- Create a loader
-- Some articles share elements that are duplicated, (componentize!)
-- ARTICLE:
-  - Header debe ser igual que el blog -> Ver que sea una propiedad global configurable.
+- ARTICLE: - Header debe ser igual que el blog -> Ver que sea una propiedad global configurable.
 - COMPONENT LIBRARY:
-  - Add a lightweight component library (for popups)
+  - Add a lightweight component library (for popups > Login, Frete, etc)
   - Precisamos toasts, ejemplo para notificaciones.
 - Continue creating sub-components for product.
 - PRODUCTS: There are (not-yet-designed types of products), kits, presentes & experiences.
@@ -50,9 +47,12 @@ npm run dev -- --open
   - Should accept url, click or submit. There is already an action param
 
 - CASHBACK:
+
   - Debo completar desafíos para ganar puntos de cashback
     - Desafíos:
       - Link de "Convide amigos": Invitar a tres amigos desde mi link de afiliados, ganha 50% de cashback dos amigos
+
+- Create a loader
 
 ### Bugs
 
