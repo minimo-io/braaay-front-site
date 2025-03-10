@@ -50,12 +50,12 @@
 			<!-- Wine Box 2 -->
 			<WineBox
 				image={{
-					src: './images/wines/PIZZATO-concentus.webp'
+					src: '/images/wines/PIZZATO-concentus.webp'
 				}}
 				wine={{
 					title: 'Artesana Cabernet Franc/Merlot Reserva',
 					price: 100.0,
-					url: '/',
+					url: '/product',
 					score: 4.5
 				}}
 			/>
@@ -63,12 +63,12 @@
 			<!-- Wine Box 3 -->
 			<WineBox
 				image={{
-					src: './images/wines/Pizzato-Legno-Chardonnay.webp'
+					src: '/images/wines/Pizzato-Legno-Chardonnay.webp'
 				}}
 				wine={{
 					title: 'Pizzato Chardonnay de Chardonnays',
 					price: 119.0,
-					url: '/',
+					url: '/product',
 					score: 4.5
 				}}
 			/>
@@ -76,12 +76,12 @@
 			<!-- Wine Box 4 -->
 			<WineBox
 				image={{
-					src: './images/wines/vinho-don-pascual-cabernet-merlot.webp'
+					src: '/images/wines/vinho-don-pascual-cabernet-merlot.webp'
 				}}
 				wine={{
 					title: 'Mayos Jovem Branco da Basso',
 					price: 43.0,
-					url: '/',
+					url: '/product',
 					score: 4.5
 				}}
 			/>
@@ -89,13 +89,13 @@
 			<!-- Wine Box 6 (with discount) -->
 			<WineBox
 				image={{
-					src: './images/wines/vinho-mayos-jovem-branco.webp',
+					src: '/images/wines/vinho-mayos-jovem-branco.webp',
 					alt: 'Artesana Cabernet Franc/Merlot Reserva'
 				}}
 				wine={{
 					title: 'Artesana Cabernet Franc/Merlot Reserva',
 					price: 100.0,
-					url: '/',
+					url: '/product',
 					score: 4.5
 				}}
 				discount={'50%'}

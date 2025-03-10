@@ -1,4 +1,6 @@
 <script>
+	import Button from '$components/ui/buttons/Button.svelte';
+	import MoreInfoButton from '$components/ui/buttons/MoreInfoButton.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import { User } from 'lucide-svelte';
 </script>
@@ -26,11 +28,12 @@
 						class="flex flex-col gap-1 md:flex-row text-grey-medium-dark font-roboto text-[14px] antialiased"
 					>
 						<span>3641 pontos</span>
-						<button
-							class="font-roboto text-grey-medium-dark font-[11px] text-xs border border-grey-light py-[3px] px-[7px] antialiased ml-2 rounded-md"
-						>
-							SAIBA MAIS
-						</button>
+						<MoreInfoButton
+							title="SAIBA MAIS"
+							action={() => {
+								alert('Popup!');
+							}}
+						/>
 					</div>
 				</div>
 				<div class="block">
@@ -78,7 +81,7 @@
 							<div class="border-t border-grey-lighter my-5"></div>
 						</li>
 						<li class="border-b md:border-b-none border-grey-lighter pb-5">
-							<a href="/" class="btn block text-center text-sm text-grey-blueish">Sair da conta</a>
+							<Button title="Sair da conta" url="/logout" type="light" />
 						</li>
 					</ul>
 				</div>
@@ -123,7 +126,18 @@
 								/>
 							</div>
 						</div>
-						<button type="submit" class="bg-sun text-white py-2 px-4 rounded">Guardar</button>
+						<Button
+							type="sun"
+							action={() => {
+								alert('Submit');
+							}}
+							url="#"
+							title="GUARDAR"
+							size="md"
+							rounded="lg"
+							font="md"
+							width="fit"
+						></Button>
 					</form>
 				</div>
 
@@ -142,7 +156,18 @@
 								class="w-full mt-1 p-2 border border-grey-light rounded"
 							/>
 						</div>
-						<button type="submit" class="bg-sun text-white py-2 px-4 rounded">Alterar</button>
+						<Button
+							type="sun"
+							action={() => {
+								alert('Submit');
+							}}
+							url="#"
+							title="Alterar"
+							size="md"
+							rounded="lg"
+							font="md"
+							width="fit"
+						></Button>
 					</form>
 				</div>
 
@@ -172,7 +197,16 @@
 								class="w-full mt-1 p-2 border border-grey-light rounded"
 							/>
 						</div>
-						<button type="submit" class="bg-sun text-white py-2 px-4 rounded">Alterar</button>
+						<Button
+							type="sun"
+							action={() => alert('Submit')}
+							url="#"
+							title="Alterar"
+							size="md"
+							rounded="lg"
+							font="md"
+							width="fit"
+						></Button>
 					</form>
 				</div>
 			</div>

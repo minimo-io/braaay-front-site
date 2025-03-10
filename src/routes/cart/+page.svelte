@@ -217,20 +217,16 @@
 					<div class="my-4 border-t border-t-grey-lighter"></div>
 					<div class="flex justify-between">
 						<p class="font-light text-[15px] self-center">Cupom de desconto</p>
-						<!-- <a
-							href="/"
-							class="btn !px-3 w-[130px] text-grey-blueish bg-grey-background uppercase flex lg:items-right mt-3 lg:mt-0 self-center"
-						>
-							<Gift class="lucide-button" />
-							ADICIONAR
-						</a> -->
 						<Button
 							title="ADICIONAR"
-							width130px={true}
+							width="130px"
 							url="/cart"
 							size="sm-short"
 							type="grey"
 							borderDark={true}
+							action={() => {
+								alert('Popup. Adicionar cupom');
+							}}
 						>
 							{#snippet icon()}
 								<Gift class="lucide-button" />
@@ -240,20 +236,17 @@
 					<div class="my-4 border-t border-t-grey-lighter"></div>
 					<div class="flex justify-between">
 						<p class="font-light text-[15px] self-center">Frete</p>
-						<!-- <a
-							href="/"
-							class="btn !px-3 w-[130px] text-grey-blueish bg-grey-background uppercase flex lg:items-right mt-3 lg:mt-0 self-center"
-						>
-							<Truck class="lucide-button" />
-							CALCULAR
-						</a> -->
+
 						<Button
 							title="CALCULAR"
 							url="/cart"
 							size="sm-short"
-							width130px={true}
+							width="130px"
 							type="grey"
 							borderDark={true}
+							action={() => {
+								alert('Popup. Calcular frete');
+							}}
 						>
 							{#snippet icon()}
 								<Truck class="lucide-button" />
@@ -274,12 +267,6 @@
 							</span>
 						</div>
 					</div>
-					<!-- <a
-						href="/checkout"
-						class="bg-sun block text-center font-roboto hover:bg-blue-700 text-white py-2 px-4 rounded-full w-full my-4 mb-1"
-					>
-						FINALIZAR COMPRA
-					</a> -->
 					<div class="my-4 mb-1">
 						<Button
 							type="sun"
@@ -288,7 +275,7 @@
 							size="xl"
 							tracking="normal"
 							font="xl"
-							bold={true}
+							bold={false}
 						/>
 					</div>
 				</div>

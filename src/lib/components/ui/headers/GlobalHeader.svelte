@@ -12,7 +12,7 @@
 	import SecondaryMenuGeneral from '$components/ui/menues/SecondaryMenuGeneral.svelte';
 	import SecondaryMenuBlog from '$components/ui/menues/SecondaryMenuBlog.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
-	import CashbackButton from '../buttons/CashbackButton.svelte';
+	import { CashbackButton } from '$components/ui/buttons/index';
 
 	// Using runes for reactive state
 	let SecondaryMenuComponent = $state(
@@ -34,7 +34,7 @@
 	>
 		<!-- logo -->
 		<div class="flex lg:flex-none pr-8">
-			<a href="./" class="">
+			<a href="/" class="">
 				<span class="sr-only">Braaay</span>
 				<img
 					class="h-[38px] w-auto hidden lg:block"

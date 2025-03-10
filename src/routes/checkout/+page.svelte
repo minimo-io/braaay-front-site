@@ -1,6 +1,8 @@
 <script>
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import { Check, CircleChevronDown, CircleUserRound, ShoppingBag, Sparkle } from 'lucide-svelte';
+	import Button from '$components/ui/buttons/Button.svelte';
+	import PrevNextButton from '$components/ui/buttons/PrevNextButton.svelte';
 </script>
 
 <main>
@@ -70,12 +72,7 @@
 								>
 								Conta
 							</h2>
-							<a
-								href="/"
-								class="btn py-1 !bg-white !px-3 text-grey-blueish uppercase flex lg:items-right lg:mt-0 self-center"
-							>
-								Alterar
-							</a>
+							<Button title="Alterar" type="light" url="/" size="xs" />
 						</div>
 
 						<form class="space-y-4 text-sm text-green-medium">
@@ -97,13 +94,11 @@
 								>
 								Dados cadastrais
 							</h2>
-							<a
-								href="/"
-								class="btn !px-3 w-[130px] text-grey-blueish bg-grey-background uppercase flex lg:items-right lg:mt-0 self-center"
-							>
-								<CircleUserRound class="lucide-button" />
-								Fazer&nbsp;login
-							</a>
+							<Button url="/" type="light" title="Fazer&nbsp;login" size="xs" minimalPx={true}>
+								{#snippet icon()}
+									<CircleUserRound class="lucide-button !px-0 !mx-0" />
+								{/snippet}
+							</Button>
 						</div>
 
 						<form class="space-y-4">
@@ -150,12 +145,16 @@
 							/>
 
 							<!-- Botão de continuar -->
-							<button
+							<!-- <button
 								type="submit"
 								class="w-full text-sm px-4 py-2 bg-sun text-white font-medium rounded-lg border-grey-light focus:ring-2 focus:ring-sun focus:outline-none"
 							>
 								CONTINUAR →
-							</button>
+							</button> -->
+							<div class="py-1">
+								<Button type="sun" url="#" title="CONTINUAR →" size="md" rounded="lg" font="md"
+								></Button>
+							</div>
 						</form>
 					</div>
 
@@ -253,16 +252,18 @@
 									🎉&nbsp;&nbsp;Ofertas imperdíveis
 								</div>
 								<div class="flex items-center">
-									<button
-										class="bg-white p-2 py-[2px] rounded-lg mr-2 border border-dashed border-grey-lighter"
-									>
-										←
-									</button>
-									<button
-										class="bg-white py-[2px] p-2 rounded-lg border border-grey-lighter border-dashed"
-									>
-										→
-									</button>
+									<PrevNextButton
+										moveBackward={true}
+										action={() => {
+											alert("Let's move backard");
+										}}
+									/>
+									<PrevNextButton
+										moveForward={true}
+										action={() => {
+											alert("Let's move forward");
+										}}
+									/>
 								</div>
 							</div>
 							<div
@@ -293,11 +294,19 @@
 												Não perca a oportunidade, adquira agora esta promoção exclusiva.
 											</p>
 
-											<button
-												class="bg-white mt-4 block w-full border border-dashed border-grey-light text-grey-dark py-1 px-3 rounded-lg"
-											>
-												Adicionar ao carrinho
-											</button>
+											<div class="mt-4">
+												<Button
+													title="Adicionar ao carrinho"
+													rounded="lg"
+													type="light"
+													size="sm"
+													url="/"
+												>
+													{#snippet icon()}
+														<!-- <Headset class="lucide-button" /> -->
+													{/snippet}
+												</Button>
+											</div>
 										</div>
 										<div class="hidden md:block">
 											<div class="flex items-center md:mx-auto md:justify-center">
@@ -322,23 +331,44 @@
 												Não perca a oportunidade, adquira agora esta promoção exclusiva.
 											</p>
 
-											<button
-												class="bg-white mt-4 block w-full border border-dashed border-grey-light text-grey-dark py-1 px-3 rounded-lg"
-											>
-												Adicionar ao carrinho
-											</button>
+											<div class="mt-4">
+												<Button
+													title="Adicionar ao carrinho"
+													rounded="lg"
+													type="light"
+													size="sm"
+													url="/"
+												>
+													{#snippet icon()}
+														<!-- <Headset class="lucide-button" /> -->
+													{/snippet}
+												</Button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 
 							<!-- Botão de continuar -->
-							<button
+							<!-- <button
 								type="submit"
 								class="w-full mt-2 text-sm px-4 py-3 bg-sun text-white font-medium rounded-lg border-grey-light focus:ring-2 focus:ring-sun focus:outline-none"
 							>
 								FINALIZAR COMPRA
-							</button>
+							</button> -->
+							<div class="py-3">
+								<Button
+									type="sun"
+									url="#"
+									action={() => {
+										alert('Submit');
+									}}
+									title="FINALIZAR COMPRA"
+									size="xl"
+									rounded="lg"
+									font="md"
+								></Button>
+							</div>
 						</form>
 
 						<!-- Promo -->
@@ -362,9 +392,9 @@
 									Com cashbacks entre 5 e 10% em toda compra, 3 vinhos top todo mês + fretes grátis!
 									Além de experiências com outros Passport e compras coletivas!
 								</p>
-								<button class="bg-sun text-white font-medium py-1 px-4 rounded-full mt-4">
-									Adicionar ao carrinho
-								</button>
+								<div class="mx-10 py-2">
+									<Button title="Adicionar ao carrinho" type="sun" url="/cart" tracking="normal" />
+								</div>
 								<p class="text-xs text-gray-500 mt-2">
 									<a href="/" class="text-blue-500 underline">Saiba mais</a>
 								</p>
@@ -394,9 +424,9 @@
 							Com cashbacks entre 5 e 10% em toda compra, 3 vinhos top todo mês + fretes grátis! Além
 							de experiências com outros Passport e compras coletivas!!
 						</p>
-						<button class="bg-sun text-white font-medium py-1 px-4 rounded-full mt-4">
-							Adicionar ao carrinho
-						</button>
+						<div class="mx-11 py-2">
+							<Button title="Adicionar ao carrinho" type="sun" url="/cart" tracking="normal" />
+						</div>
 						<p class="text-xs text-gray-500 mt-2">
 							<a href="/" class="text-blue-500 underline">Saiba mais</a>
 						</p>

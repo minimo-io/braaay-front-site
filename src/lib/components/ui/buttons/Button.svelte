@@ -5,14 +5,23 @@
 		title: string;
 		icon?: Snippet;
 		type: 'light' | 'sun' | 'blue' | 'grey';
-		size?: 'sm' | 'sm-short' | 'md' | 'xl';
+
+		size?: 'xs' | 'sm' | 'sm-short' | 'md' | 'xl';
+
 		url: string;
 		chevron?: boolean;
 		borderDark?: boolean;
 		tracking?: 'normal' | 'expanded';
 		font?: 'sm' | 'md' | 'xl';
 		bold?: boolean;
-		width130px?: boolean;
+
+		action?: () => void;
+
+		rounded?: 'full' | 'lg';
+
+		minimalPx?: boolean;
+
+		width?: 'full' | 'fit' | '130px';
 	}
 	let {
 		title,
@@ -25,19 +34,24 @@
 		tracking = 'expanded',
 		font = 'sm',
 		bold = false,
-		width130px = false
+		action = undefined,
+		rounded = 'full',
+		minimalPx = false,
+		width = 'full'
 	}: Props = $props();
 </script>
 
 <a
+	role="button"
 	href={url}
 	class={[
 		'btn uppercase flex items-center justify-center shine-effect',
 
+		size == 'xs' && 'py-1 !px-3 lg:mt-0 self-center',
 		size == 'sm-short' && '!px-3',
 		size == 'sm' && 'mt-1',
 		size == 'md' && 'mt-3 lg:mt-0 lg:py-3',
-		size == 'xl' && 'pr-3 pl-3 h-[45px]',
+		size == 'xl' && '!px-3 h-[45px]',
 
 		type == 'light' && 'text-grey-blueish',
 		type == 'sun' && 'bg-sun text-white !border-0',
@@ -53,8 +67,22 @@
 
 		bold && 'font-bold',
 
-		width130px && `!w-[130px]`
+		icon && '!pr-5',
+
+		rounded == 'lg' && '!rounded-lg',
+
+		minimalPx && '!px-[.5rem] !pr-[.9rem]',
+
+		width == 'full' && '',
+		width == '130px' && '!w-[130px]',
+		width == 'fit' && '!w-fit'
 	]}
+	onclick={(event) => {
+		if (typeof action == 'function') {
+			action();
+			event.preventDefault();
+		}
+	}}
 >
 	{#if icon}
 		{@render icon()}

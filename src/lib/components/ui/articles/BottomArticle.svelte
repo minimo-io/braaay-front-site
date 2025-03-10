@@ -17,7 +17,7 @@
 
 <article class="relative bg-white py-10 mt-14">
 	<SectionDivider color="green" />
-	<div id="article" class="max-w-screen-lg mx-auto relative">
+	<div id="know-more" class="max-w-screen-lg mx-auto relative">
 		<!-- General title header -->
 		<ArticleHeader fullWidth={false} />
 

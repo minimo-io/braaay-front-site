@@ -20,8 +20,8 @@
 	<div class="flex items-center mb-4">
 		<a
 			href="/cart"
+			class="px-8 py-2 text-white rounded-lg uppercase font-roboto text-[13px] tracking-[2.5px] text-center w-full md:w-auto"
 			style="background-color: var(--bry-current-color)"
-			class="px-8 py-2 text-white rounded-lg uppercase font-roboto text-[13px] tracking-[2.5px]"
 		>
 			ADICIONAR À SACOLA
 		</a>

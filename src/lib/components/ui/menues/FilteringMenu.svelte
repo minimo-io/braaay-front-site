@@ -16,14 +16,14 @@
 <div class="pb-8 border-b border-b-grey-lighter">
 	<div class="bry-filtering-inline relative">
 		<!-- All Filters Button -->
-		<button class="!bg-sun !text-white !border-sun">
+		<button class="!bg-sun !text-white !border-sun shine-effect">
 			<SlidersHorizontal class="lucide-button w-5 h-5 mr-2" />
 			Todos os filtros
 		</button>
 
 		<!-- Menu button -->
 		<div class="relative group">
-			<button>
+			<button class="shine-effect">
 				<Grape class="lucide-button w-5 h-5 mr-2" />
 				Variedade
 				<ChevronDown class="lucide-button w-5 h-5 mr-2" />
@@ -81,7 +81,7 @@
 
 		<!-- Menu button -->
 		<div class="relative group">
-			<button>
+			<button class="shine-effect">
 				<Globe class="lucide-button w-5 h-5 mr-2" />
 				País
 				<ChevronDown class="lucide-button w-5 h-5 mr-2" />
@@ -201,7 +201,7 @@
 
 		<!-- Menu button -->
 		<div class="relative group">
-			<button>
+			<button class="shine-effect">
 				<DollarSign class="lucide-button w-5 h-5 mr-2" />
 				Preço
 				<ChevronDown class="lucide-button w-5 h-5 mr-2" />
@@ -230,7 +230,7 @@
 
 		<!-- Menu button -->
 		<div class="relative group">
-			<button>
+			<button class="shine-effect">
 				<Smile class="lucide-button w-5 h-5 mr-2" />
 				Paladar Típico
 				<ChevronDown class="lucide-button w-5 h-5 mr-2" />
@@ -307,7 +307,7 @@
 
 		<!-- Menu button -->
 		<div class="relative group">
-			<button>
+			<button class="shine-effect">
 				<Truck class="lucide-button w-5 h-5 mr-2" />
 				Envío
 				<ChevronDown class="lucide-button w-5 h-5 mr-2" />
@@ -358,7 +358,7 @@
 
 		<!-- Menu button -->
 		<div class="relative group">
-			<button>
+			<button class="shine-effect">
 				<Ruler class="lucide-button w-5 h-5 mr-2" />
 				Tamanho
 				<ChevronDown class="lucide-button w-5 h-5 mr-2" />

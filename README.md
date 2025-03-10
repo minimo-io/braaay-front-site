@@ -17,11 +17,6 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
-- Componentizar botones
-  - Falta button del producto y mini botones de la categoría (crear otro)
-  - Por algun motivo en el header, el botón de CONTA no tiene shine effect
-  - Botones en el checkout
-  - My account
 - Adicionar boton en /blog -- abajo de dica do chef
 - Create a loader
 - Some articles share elements that are duplicated, (componentize!)
@@ -46,11 +41,22 @@ npm run dev -- --open
   - Show price with PIX discount (or lowest possible price)
 - SCREEN: Cashback
 - LOGIN
+
   - Must be a dynamic popup
-- MARKETING POPUP: like primal.
+
+- MARKETING POPUP: like primalwines.
+- BUTTONS:
+
+  - Should accept url, click or submit. There is already an action param
+
+- CASHBACK:
+  - Debo completar desafíos para ganar puntos de cashback
+    - Desafíos:
+      - Link de "Convide amigos": Invitar a tres amigos desde mi link de afiliados, ganha 50% de cashback dos amigos
 
 ### Bugs
 
+- Por algun motivo en el header, el botón de CONTA no tiene shine effect
 - In the checkout process the footer `components/ui/footers/CheckoutFooter.svelte` is not visible on mobile and this it is not visible the phone number, etc. Check our reference sites (happends on smaller screens -- laptop)
   Probablemente también causa en el checkout (mismo footer).
 
@@ -66,6 +72,9 @@ npm run dev -- --open
 	}
 ```
 
+- BUTTONS:
+  - Buttons should be able to receive the --page-color (check layout)
+  - The add to cart button in products, shine-effect does not work because we are hardcoding the page color.
 - Para el BottomArticle, si es twoColumn=true poder pasar un snippet.
 - Pagination for blog
 - Aviso para Pedidos Express: Pedidos hasta el medio día (envío express) se envía en el mismo día, ou se for final de semana, no próximo dia util da Braaay.

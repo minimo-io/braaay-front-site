@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { smoothScroll } from '$lib/utils/smoothScroll';
+	import MoreInfoButton from '../buttons/MoreInfoButton.svelte';
 </script>
 
 <div class="bg-white border-b border-b-grey-lighter">
@@ -25,13 +26,7 @@
 					class="flex flex-col gap-1 md:flex-row text-grey-medium-dark font-roboto text-[14px] antialiased"
 				>
 					<span>36 produtos</span>
-					<a
-						use:smoothScroll
-						href="#article"
-						class="font-roboto text-grey-medium-dark font-[11px] text-xs border border-grey-light py-[3px] px-[7px] antialiased ml-2 rounded-md"
-					>
-						CONHEÇA MAIS
-					</a>
+					<MoreInfoButton title="CONHEÇA MAIS" />
 				</div>
 			</div>
 			<div class="block">
