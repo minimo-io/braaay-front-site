@@ -17,14 +17,14 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
+- Starting working in the structure for fetching data from the GraphQL >Currently<
 - Add component for schema.
 - Filtering menu in search should receive a payload will selecteed filters, and pre-select a country for example.
 - On modal we need hover with white opacity in the BG, like https://v3.tailwindcss.com/docs/installation (open menu)
   Also when clicked in category > All filters
 - Add accesibility with tab button to <main> like in Minimo.
-- Create button component
+
 - When articles have final routes, they must have the Blog Secondary Menu.
-- Create the svelte this repo as a standalone project to use it with Vercel or Netlify.
 - Mobile menu, needs to improve (no current place for cashback or account buttons)
 
 - SCREEN: Cashback
@@ -35,7 +35,7 @@ npm run dev -- --open
 - MARKETING POPUP: like primalwines.
 - BUTTONS:
 
-  - Should accept url, click or submit. There is already an action param
+  - Should accept url, click or submit behavious. There is already an action param. But still currently you must send the url (mandatory). Not good.
 
 - CASHBACK:
 
@@ -64,6 +64,9 @@ npm run dev -- --open
 
 ### v2
 
+- SEARCH:
+  - On focus search results
+  - Autocompletion
 - ARTICLE: - Header debe ser igual que el blog -> Ver que sea una propiedad global configurable (Pensar si así o mejor no, en términos de conversión).
 - En algunos lugares tenemos esto, utilizarlo para cambiar el color:
 
