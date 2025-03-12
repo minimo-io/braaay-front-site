@@ -1,3 +1,4 @@
+<!-- src/routes/+layout.svelte -->
 <script lang="ts">
 	import '@fontsource/prata';
 	import '@fontsource-variable/open-sans';
@@ -5,11 +6,12 @@
 	import Footer from '$components/layout/Footer.svelte';
 	import Header from '$components/layout/Header.svelte';
 
+	import { modalState } from '$stores/modalState.state.svelte';
+	import Modal from '$components/ui/Modal.svelte';
+
 	import '../app.css';
 	import 'animate.css';
 	let { children } = $props();
-
-	let showModal = $state(false);
 </script>
 
 <Header />
@@ -17,6 +19,9 @@
 {@render children()}
 
 <Footer />
+
+<Modal bind:showModal={modalState.current} header={modalState.header} content={modalState.content}
+></Modal>
 
 <style global>
 	:root {
