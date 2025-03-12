@@ -1,15 +1,32 @@
-<script>
+<script lang="ts">
 	import ArticleCard from '$components/ui/articles/components/ArticleCard.svelte';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 	import BlogHeader from '$components/ui/headers/BlogHeader.svelte';
 	import TitleSection from '$components/ui/TitleSection.svelte';
 	import { ChefHat } from 'lucide-svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
+
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
 </script>
 
 <main class="w-full mx-auto">
 	<BlogHeader />
 </main>
+
+{#if data.posts && data.posts.length > 0}
+	<ul>
+		{#each data.posts as post (post.id)}
+			<li>
+				<h2>{post.title}</h2>
+				<p>{new Date(post.date).toLocaleDateString()}</p>
+			</li>
+		{/each}
+	</ul>
+{:else}
+	<p>No posts available.</p>
+{/if}
 
 <!-- Section with white background and divider -->
 <section class="relative bg-white py-3 mt-10">

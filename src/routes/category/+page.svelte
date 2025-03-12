@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import FilteringMenu from '$components/ui/menues/FilteringMenu.svelte';
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 	import SortingMenu from '$components/ui/menues/SortingMenu.svelte';
