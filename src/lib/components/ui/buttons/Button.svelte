@@ -20,6 +20,7 @@
 		rounded?: 'full' | 'lg';
 
 		minimalPx?: boolean;
+		customPx?: string;
 
 		width?: 'full' | 'fit' | '130px';
 	}
@@ -37,7 +38,8 @@
 		action = undefined,
 		rounded = 'full',
 		minimalPx = false,
-		width = 'full'
+		width = 'full',
+		customPx = ''
 	}: Props = $props();
 </script>
 
@@ -75,7 +77,9 @@
 
 		width == 'full' && '',
 		width == '130px' && '!w-[130px]',
-		width == 'fit' && '!w-fit'
+		width == 'fit' && '!w-fit',
+
+		customPx
 	]}
 	onclick={(event) => {
 		if (typeof action == 'function') {

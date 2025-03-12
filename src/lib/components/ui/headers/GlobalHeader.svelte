@@ -57,7 +57,14 @@
 
 		<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
 			<!-- My account -->
-			<Button chevron={true} title="Conta" url="/account" type="blue" size="xl">
+			<Button
+				chevron={true}
+				customPx="!pr-[12px] !pl-3"
+				title="Conta"
+				url="/account"
+				type="blue"
+				size="xl"
+			>
 				{#snippet icon()}
 					<CircleUser class="lucide-button h-[10px]" />
 				{/snippet}
