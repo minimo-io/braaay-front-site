@@ -6,8 +6,12 @@
 	import Footer from '$components/layout/Footer.svelte';
 	import Header from '$components/layout/Header.svelte';
 
+	// Modal
 	import { modalState } from '$stores/modalState.state.svelte';
 	import Modal from '$components/ui/Modal.svelte';
+
+	// Toasts
+	import { Toasts } from 'svoast';
 
 	import '../app.css';
 	import 'animate.css';
@@ -22,6 +26,8 @@
 
 <Modal bind:showModal={modalState.current} header={modalState.header} content={modalState.content}
 ></Modal>
+
+<Toasts />
 
 <style global>
 	:root {

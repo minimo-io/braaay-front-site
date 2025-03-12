@@ -31,6 +31,7 @@
 		"prettier-plugin-svelte": "^3.3.3",
 		"svelte": "^5.20.4",
 		"svelte-check": "^4.0.0",
+		"svoast": "^3.0.3",
 		"tailwindcss": "^3.4.17",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.20.0",
@@ -40,10 +41,10 @@
 		"@fontsource-variable/open-sans": "^5.1.1",
 		"@fontsource/prata": "^5.1.1",
 		"@glidejs/glide": "^3.7.1",
+		"@types/glidejs__glide": "^3.6.6",
 		"animate.css": "^4.1.1",
 		"lucide-svelte": "^0.475.0",
 		"pino": "^9.6.0",
-		"pino-pretty": "^13.0.0",
-		"@types/glidejs__glide": "^3.6.6"
+		"pino-pretty": "^13.0.0"
 	}
 }
