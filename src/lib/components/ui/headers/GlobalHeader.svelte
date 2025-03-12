@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { onMount } from 'svelte';
 
 	import {
 		// Newspaper,
 		Search,
 		Coins,
-		ChevronDown,
 		CircleUser
 	} from 'lucide-svelte';
 
@@ -18,12 +18,30 @@
 	let SecondaryMenuComponent = $state(
 		page.url.pathname.startsWith('/blog') ? SecondaryMenuBlog : SecondaryMenuGeneral
 	);
+	let searchInput: HTMLInputElement | null = null;
+
+	let isMac = $state<boolean | null>(null);
+
+	function handleKeydown(event: KeyboardEvent): void {
+		if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+			event.preventDefault();
+			if (searchInput) {
+				searchInput.focus();
+			}
+		}
+	}
 
 	// Subscribe to page store changes
 	$effect(() => {
 		SecondaryMenuComponent = page.url.pathname.startsWith('/blog')
 			? SecondaryMenuBlog
 			: SecondaryMenuGeneral;
+	});
+
+	onMount(() => {
+		isMac = /Mac/i.test(navigator.userAgent);
+		window.addEventListener('keydown', handleKeydown);
+		return () => window.removeEventListener('keydown', handleKeydown);
 	});
 </script>
 
@@ -60,15 +78,23 @@
 						minlength="3"
 						class="rounded-3xl focus:ring-1 ring-sun w-full text-sm h-[45px] placeholder:tracking-wide placeholder:text-grey-medium border border-grey-lighter px-5 py-2.5 font-roboto placeholder:font-light shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]"
 						placeholder="Pesquisar…"
-						value=""
+						bind:this={searchInput}
 						name="s"
 						title="Procurar:"
 					/>
 					<!-- KBD -->
-					<kbd class="bry-search-kbd">
-						<abbr title="Command" class="no-underline">⌘</abbr>
-						K
-					</kbd>
+					{#if isMac !== null}
+						{#if isMac}
+							<kbd class="bry-search-kbd">
+								<abbr title="Command" class="no-underline">⌘</abbr>
+								K
+							</kbd>
+						{:else}
+							<kbd class="bry-search-kbd">
+								Ctrl<span class="px-1">+</span>K
+							</kbd>
+						{/if}
+					{/if}
 				</div>
 			</form>
 		</div>

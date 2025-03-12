@@ -25,39 +25,22 @@
 				/>
 			</a>
 		</div>
-
-		<!-- Desktop & Mobile menu -->
-		<div class="hidden lg:flex flex-1 lg:gap-x-12 invisible">
-			<!-- Search form -->
-			<form action="https://braaay.com/" method="get" class="w-full">
-				<div class="relative px-5 border-r border-r-1 border-r-grey-lighter h-[45px]">
-					<input
-						id="search"
-						type="search"
-						minlength="3"
-						class="rounded-3xl focus:ring-1 ring-sun w-full text-sm h-[45px] placeholder:tracking-wide placeholder:text-grey-medium border border-grey-lighter px-5 py-2.5 font-roboto placeholder:font-light shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]"
-						placeholder="Pesquisar…"
-						value=""
-						name="s"
-						title="Procurar:"
-					/>
-					<!-- KBD -->
-					<kbd class="bry-search-kbd"><abbr title="Command" class="no-underline">⌘</abbr> K</kbd>
-				</div>
-			</form>
+		<div class="flex justify-end">
+			<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
+				<Button title="Atendimento" type="light" size="sm" url="/">
+					{#snippet icon()}
+						<Headset class="lucide-button" />
+					{/snippet}
+				</Button>
+			</div>
+			<div>
+				<img
+					src="/images/safe-env.png"
+					alt="ambiente-seguro"
+					height="35"
+					class="h-[30px] md:h-[35px] ml-8"
+				/>
+			</div>
 		</div>
-		<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
-			<Button title="Atendimento" type="light" size="sm" url="/">
-				{#snippet icon()}
-					<Headset class="lucide-button" />
-				{/snippet}
-			</Button>
-		</div>
-		<img
-			src="/images/safe-env.png"
-			alt="ambiente-seguro"
-			height="35"
-			class="h-[30px] md:h-[35px] ml-8"
-		/>
 	</nav>
 </header>

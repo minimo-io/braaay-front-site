@@ -17,10 +17,6 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
-- COMPONENT LIBRARY:
-  - Precisamos toasts, ejemplo para notificaciones.
-- Continue creating sub-components for product.
-- PRODUCTS: There are (not-yet-designed types of products), kits, presentes & experiences.
 - Add component for schema.
 - Filtering menu in search should receive a payload will selecteed filters, and pre-select a country for example.
 - On modal we need hover with white opacity in the BG, like https://v3.tailwindcss.com/docs/installation (open menu)
@@ -30,9 +26,7 @@ npm run dev -- --open
 - When articles have final routes, they must have the Blog Secondary Menu.
 - Create the svelte this repo as a standalone project to use it with Vercel or Netlify.
 - Mobile menu, needs to improve (no current place for cashback or account buttons)
-- PRODUCT PAGE:
-  - We need than when you hover down, and loose sight of "Buy button" a fixed div appears below.
-  - Show price with PIX discount (or lowest possible price)
+
 - SCREEN: Cashback
 - LOGIN
 
@@ -51,8 +45,16 @@ npm run dev -- --open
 
 - Create a loader
 
+- CHECKOUT: The first choosing of the Shipping is weid. Use the same boxed components as below.
+
 - MODAL:
+
   - Be able to pass an specific action to the action button in the modal.
+
+- PRODUCT PAGE:
+  - We need than when you hover down, and loose sight of "Buy button" a fixed div appears below.
+  - Show price with PIX discount (or lowest possible price)
+- OTHER PRODUCTS PAGES: There are (not-yet-designed types of products), kits, presentes & experiences.
 
 ### Bugs
 

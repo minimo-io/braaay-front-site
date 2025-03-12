@@ -7,7 +7,7 @@
 	import { toast } from 'svoast';
 
 	async function launchToast() {
-		toast.error('Super good looking toast ;)');
+		toast.warning('Super good looking toast ;)', { closable: true });
 	}
 </script>
 

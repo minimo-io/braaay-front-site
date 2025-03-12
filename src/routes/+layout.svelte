@@ -27,7 +27,7 @@
 <Modal bind:showModal={modalState.current} header={modalState.header} content={modalState.content}
 ></Modal>
 
-<Toasts />
+<Toasts position="bottom-right" />
 
 <style global>
 	:root {
