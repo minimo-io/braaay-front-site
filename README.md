@@ -17,12 +17,7 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
-- Be able to pass an specific action to the action button in the modal.
-  - Be able to close the modal from within the internal component.
-- Adicionar boton en /blog -- abajo de dica do chef
-- ARTICLE: - Header debe ser igual que el blog -> Ver que sea una propiedad global configurable.
 - COMPONENT LIBRARY:
-  - Add a lightweight component library (for popups > Login, Frete, etc)
   - Precisamos toasts, ejemplo para notificaciones.
 - Continue creating sub-components for product.
 - PRODUCTS: There are (not-yet-designed types of products), kits, presentes & experiences.
@@ -56,6 +51,9 @@ npm run dev -- --open
 
 - Create a loader
 
+- MODAL:
+  - Be able to pass an specific action to the action button in the modal.
+
 ### Bugs
 
 - Por algun motivo en el header, el botón de CONTA no tiene shine effect
@@ -64,6 +62,7 @@ npm run dev -- --open
 
 ### v2
 
+- ARTICLE: - Header debe ser igual que el blog -> Ver que sea una propiedad global configurable (Pensar si así o mejor no, en términos de conversión).
 - En algunos lugares tenemos esto, utilizarlo para cambiar el color:
 
 ```

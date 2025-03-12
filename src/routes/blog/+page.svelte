@@ -4,6 +4,7 @@
 	import BlogHeader from '$components/ui/headers/BlogHeader.svelte';
 	import TitleSection from '$components/ui/TitleSection.svelte';
 	import { ChefHat } from 'lucide-svelte';
+	import Button from '$components/ui/buttons/Button.svelte';
 </script>
 
 <main class="w-full mx-auto">
@@ -18,12 +19,15 @@
 		<div class="max-w-full">
 			<div class="mb-5">
 				<TitleSection
-					buttonText="Harmonizações"
 					title="ÚLTIMOS ARTIGOS"
 					description="Fique por dentro das tendências, dicas de harmonização, entrevistas, curiosidades e accesórios sobre vinhos!"
 				>
-					{#snippet icon()}
-						<ChefHat class="lucide-button" />
+					{#snippet button()}
+						<Button title="Ver todas" size="md" type="sun" url="/">
+							{#snippet icon()}
+								<ChefHat class="lucide-button" />
+							{/snippet}
+						</Button>
 					{/snippet}
 				</TitleSection>
 			</div>

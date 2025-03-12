@@ -1,3 +1,7 @@
+<script lang="ts">
+	import Button from '$components/ui/buttons/Button.svelte';
+</script>
+
 <div
 	class="max-w-screen-xl mx-auto flex flex-col md:flex-row rounded-md overflow-hidden pt-10 pb-5 md:pb-0 px-[30px] md:px-10"
 >
@@ -35,11 +39,16 @@
 		</h2>
 
 		<!-- Description -->
+
 		<p class="text-grey-blueish text-[15px] md:text-[15px] font-roboto mb-4">
 			Se você é um amante de vinho vai adorar essa iguaria: Geleia de Vinho. Descubra, nesse artigo
 			da Braaay, como preparar uma deliciosa receita de Geleia de Vinho! Como preparar a Geleia de
 			vinho? E como harmonizar-la com os melhores vinhos uruguayios e brasileiros!
 		</p>
+
+		<div class="mb-3 max-w-none md:max-w-[150px]">
+			<Button title="Ler artigo" size="sm" type="light" url="/article" bold={true}></Button>
+		</div>
 
 		<!-- Tags -->
 		<div class="text-sm text-grey-medium-dark flex items-center space-x-2">
