@@ -13,11 +13,17 @@ const config = {
 		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter(),
+		// Prevent CSS inlining by setting the threshold to 0
+		inlineStyleThreshold: 0,
 		alias: {
 			$components: path.resolve('src/lib/components'),
 			$stores: path.resolve('src/lib/stores')
 			// $types: path.resolve('src/lib/types.ts')
 		}
+	},
+	compilerOptions: {
+		// Extract CSS into separate files
+		css: 'external'
 	}
 };
 

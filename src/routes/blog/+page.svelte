@@ -19,6 +19,14 @@
 	let firstPost: Post | undefined = postsCopy.shift();
 </script>
 
+<svelte:head>
+	<title>Blog da Braaay: Dicas, Novidades e Harmonizações com vinhos</title>
+	<meta
+		name="description"
+		content="Acesse nosso blog e descubra dicas, curiosidades e novidades sobre vinhos uruguaios e brasileiros. Inspire-se e aproveite ofertas exclusivas!"
+	/>
+</svelte:head>
+
 {#if firstPost}
 	<main class="w-full mx-auto">
 		<BlogHeader post={firstPost} />

@@ -43,7 +43,7 @@
 
 		<!-- Title -->
 		<h2 class="text-lg md:text-xl mb-4 font-prata mt-5 uppercase">
-			<a href="/article">{post.title}</a>
+			<a href={post.uri}>{post.title}</a>
 		</h2>
 
 		<!-- Description -->
