@@ -1,5 +1,11 @@
 <script lang="ts">
 	import Button from '$components/ui/buttons/Button.svelte';
+	import type { Post } from '$lib/types';
+	interface Props {
+		post: Post;
+	}
+
+	let { post }: Props = $props();
 </script>
 
 <div
@@ -8,7 +14,7 @@
 	<!-- Image Section -->
 	<div class="lg:w-1/2 max-h-[300px] self-center">
 		<img
-			src="/images/Geleia-de-Vinho.jpg"
+			src={post.featuredImage.mediaItemUrl}
 			alt="Receita de Geleia de Vinho"
 			class="w-full h-[300px] object-cover rounded-2xl"
 		/>
@@ -20,34 +26,34 @@
 		<div class="text-sm flex items-center space-x-2 mb-2">
 			<span class="font-medium flex align-middle justify-center">
 				<img
-					src="/images/erika-96x96.jpeg"
-					alt="erika"
+					src={post.author.avatar.url}
+					alt={post.author.name}
 					class="self-center rounded-full w-9 h-9 mr-2"
 				/>
-				<span class="self-center text-sm md:text-lg">Erika Bezerra</span>
+				<span class="self-center text-sm md:text-lg">{post.author.name}</span>
 			</span>
 			<span>•</span>
 			<div class="text-grey-medium">
-				12 de agosto 2024
-				<span class="hidden md:inline">(atualizado)</span>
+				{new Date(post.date).toLocaleDateString()}
+				{#if post.date !== post.modified}
+					<span class="hidden md:inline">(atualizado)</span>
+				{/if}
 			</div>
 		</div>
 
 		<!-- Title -->
-		<h2 class="text-lg md:text-xl mb-4 font-prata mt-5">
-			<a href="/article">RECEITA DE GELEIA DE VINHO</a>
+		<h2 class="text-lg md:text-xl mb-4 font-prata mt-5 uppercase">
+			<a href="/article">{post.title}</a>
 		</h2>
 
 		<!-- Description -->
 
 		<p class="text-grey-blueish text-[15px] md:text-[15px] font-roboto mb-4">
-			Se você é um amante de vinho vai adorar essa iguaria: Geleia de Vinho. Descubra, nesse artigo
-			da Braaay, como preparar uma deliciosa receita de Geleia de Vinho! Como preparar a Geleia de
-			vinho? E como harmonizar-la com os melhores vinhos uruguayios e brasileiros!
+			{post.plainExcerpt}
 		</p>
 
 		<div class="mb-3 max-w-none md:max-w-[150px]">
-			<Button title="Ler artigo" size="sm" type="light" url="/article" bold={true}></Button>
+			<Button title="Ler artigo" size="sm" type="light" url={post.uri} bold={true}></Button>
 		</div>
 
 		<!-- Tags -->

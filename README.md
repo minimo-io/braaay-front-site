@@ -17,7 +17,12 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
-- Starting working in the structure for fetching data from the GraphQL >Currently<
+- GraphQL:
+
+  - Abastract the stripHtml
+  - Be able to concatenate GQL queries, so i can add the total number of posts in the latests
+  - Starting working in the structure for fetching data from the GraphQL >Currently<
+
 - Add component for schema.
 - Filtering menu in search should receive a payload will selecteed filters, and pre-select a country for example.
 - On modal we need hover with white opacity in the BG, like https://v3.tailwindcss.com/docs/installation (open menu)
@@ -55,6 +60,8 @@ npm run dev -- --open
   - We need than when you hover down, and loose sight of "Buy button" a fixed div appears below.
   - Show price with PIX discount (or lowest possible price)
 - OTHER PRODUCTS PAGES: There are (not-yet-designed types of products), kits, presentes & experiences.
+
+- Enable GraphQL debug mode.
 
 ### Bugs
 

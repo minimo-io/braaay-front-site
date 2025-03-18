@@ -1,35 +1,24 @@
-// src/routes/+page.server.ts
+// src/routes/blog/+page.server.ts
 import type { PageServerLoad } from './$types';
-import { client } from '$lib/graphql/client';
-import { LATEST_PRODUCTS_QUERY } from '$lib/graphql/queries';
+import { gqlClient } from '$lib/graphql/client';
 
-// Define an interface for a Post.
-interface Post {
-	id: string;
-	title: string;
-	date: string;
-}
+import { LATEST_PRODUCTS_QUERY } from '$lib/graphql/queries/index';
 
-// Define an interface for the query result.
-interface PostsQueryResult {
-	posts: {
-		edges: {
-			node: Post;
-		}[];
-	};
-}
+import type { Post, PostsQueryResult, GraphQLPost } from '$lib/types';
+
+import { mapRelayResult } from '$lib/graphql/mappers/mapper';
+import { mapPost } from '$lib/graphql/mappers/post.mapper';
 
 export const load: PageServerLoad = async () => {
-	const result = await client
-		.query<PostsQueryResult>(LATEST_PRODUCTS_QUERY, { first: 10 })
+	const result = await gqlClient
+		.query<PostsQueryResult>(LATEST_PRODUCTS_QUERY, { first: 100 })
 		.toPromise();
 
 	if (result.error || !result.data) {
 		console.error(result.error);
 		throw new Error('Failed to fetch posts');
 	}
-
-	const posts: Post[] = result.data.posts.edges.map((edge) => edge.node);
+	const posts: Post[] = mapRelayResult<GraphQLPost, Post, 'posts'>(result.data, 'posts', mapPost);
 
 	return { posts };
 };

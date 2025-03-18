@@ -1,3 +1,4 @@
+<!-- src/routes/blog/+page.svelte -->
 <script lang="ts">
 	import ArticleCard from '$components/ui/articles/components/ArticleCard.svelte';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
@@ -7,25 +8,21 @@
 	import Button from '$components/ui/buttons/Button.svelte';
 
 	import type { PageData } from './$types';
+	import type { Post } from '$lib/types';
 
 	let { data }: { data: PageData } = $props();
+
+	// let firstPost: Post | undefined = $state();
+
+	// Instead of mutating data.posts, create a local copy
+	let postsCopy: Post[] = data.posts ? [...data.posts] : [];
+	let firstPost: Post | undefined = postsCopy.shift();
 </script>
 
-<main class="w-full mx-auto">
-	<BlogHeader />
-</main>
-
-{#if data.posts && data.posts.length > 0}
-	<ul>
-		{#each data.posts as post (post.id)}
-			<li>
-				<h2>{post.title}</h2>
-				<p>{new Date(post.date).toLocaleDateString()}</p>
-			</li>
-		{/each}
-	</ul>
-{:else}
-	<p>No posts available.</p>
+{#if firstPost}
+	<main class="w-full mx-auto">
+		<BlogHeader post={firstPost} />
+	</main>
 {/if}
 
 <!-- Section with white background and divider -->
@@ -51,49 +48,21 @@
 
 			<!-- Grid Container -->
 			<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-				<!-- Article -->
-				<ArticleCard
-					url="/article"
-					image="/images/blog-2.png"
-					title="RECEITA DE frango assado"
-					date="12 de agosto 2024"
-					author={{ name: 'Erika Bezerra', image: '/images/erika-96x96.jpeg' }}
-					readingTime="Leitura em 6 min"
-					category={{ url: '/article', title: 'Dica do Chef' }}
-				/>
-
-				<!-- Article -->
-				<ArticleCard
-					url="/article"
-					image="/images/blog-3.png"
-					title="RECEITA DE galeia do vinho"
-					date="12 de agosto 2024"
-					author={{ name: 'Erika Bezerra', image: '/images/erika-96x96.jpeg' }}
-					readingTime="Leitura em 6 min"
-					category={{ url: '/article', title: 'Dica do Chef' }}
-				/>
-
-				<!-- Article -->
-				<ArticleCard
-					url="/article"
-					image="/images/blog-4.png"
-					title="RECEITA DE frango assado com batatas a brasileira"
-					date="12 de agosto 2024"
-					author={{ name: 'Erika Bezerra', image: '/images/erika-96x96.jpeg' }}
-					readingTime="Leitura em 6 min"
-					category={{ url: '/article', title: 'Dica do Chef' }}
-				/>
-
-				<!-- Article -->
-				<ArticleCard
-					url="/article"
-					image="/images/blog-5.png"
-					title="Baita pizza que só pode ser comida por professionais"
-					date="12 de agosto 2024"
-					author={{ name: 'Erika Bezerra', image: '/images/erika-96x96.jpeg' }}
-					readingTime="Leitura em 6 min"
-					category={{ url: '/article', title: 'Dica do Chef' }}
-				/>
+				{#if postsCopy && postsCopy.length > 0}
+					{#each postsCopy as post (post.id)}
+						<ArticleCard
+							url={post.uri}
+							image={post.featuredImage.mediaItemUrl}
+							title={post.title}
+							date={new Date(post.date).toLocaleDateString()}
+							author={{ name: post.author.name, image: post.author.avatar.url }}
+							readingTime="Leitura em 6 min"
+							category={{ url: '/article', title: 'Dica do Chef' }}
+						/>
+					{/each}
+				{:else}
+					<p>No posts available.</p>
+				{/if}
 			</div>
 		</div>
 	</div>
