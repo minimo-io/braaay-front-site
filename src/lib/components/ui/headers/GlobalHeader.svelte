@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { onMount } from 'svelte';
+	// import { onMount } from 'svelte';
 
 	import {
 		// Newspaper,
 		Search,
-		Coins,
 		CircleUser
 	} from 'lucide-svelte';
 

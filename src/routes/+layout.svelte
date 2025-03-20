@@ -54,7 +54,7 @@
 		left: 0;
 		height: 4px;
 		width: 0%;
-		background: linear-gradient(90deg, #bd8836, #4c89c8);
+		background: linear-gradient(90deg, #bd8836, #212639);
 		z-index: 9999;
 		transition: width 0.3s ease;
 	}

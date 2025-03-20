@@ -1,14 +1,42 @@
-<script>
+<script lang="ts">
+	import { page } from '$app/state';
 	import { EllipsisVertical, Newspaper, Undo2 } from 'lucide-svelte';
+	import { isBlogPost } from '$lib/utils/index';
+
+	interface BackLink {
+		text: string;
+		href: string;
+	}
+
+	// Verifica o pathname atual
+	// We need to subscribe to page.url.pathname changes
+	// Single state object for related values
+	let isPost = $state(isBlogPost(page.url.pathname));
+
+	let backParams = $state<BackLink>({
+		text: 'Voltar á loja',
+		href: '/'
+	});
+
+	// Single effect to update both properties together
+	$effect(() => {
+		// First update isPost based on current pathname
+		isPost = isBlogPost(page.url.pathname);
+
+		// Then update the voltar object based on isPost
+		backParams = isPost
+			? { text: 'Voltar ao blog', href: '/blog' }
+			: { text: 'Voltar á loja', href: '/' };
+	});
 </script>
 
 <div class="bry-secondary-menu">
 	<nav class="container max-w-screen-lg py-2 mx-[30px] lg:mx-auto">
 		<ul class="flex space-x-4">
 			<li class="relative group transition-all duration-300 flex">
-				<a href="/" class="!pr-2 !lg:pr-3 !pl-0 !text-sm">
+				<a href={backParams.href} class="!pr-2 !lg:pr-3 !pl-0 !text-sm">
 					<Undo2 class="lucide-menu badge-percent text-blue !h-4 self-center" />
-					Voltar á loja
+					{backParams.text}
 				</a>
 			</li>
 

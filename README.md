@@ -17,6 +17,7 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
+- If we are in a blog post, we should not see get "Voltar a loja" (as in /blog), we should see voltar ao blog...
 - GraphQL:
 
   - Tenemos que agregar a la respuesta de GraphQL para posts -> Custom Fields, el primer párrafo y su título para la intro. Ahora esto está escondido de la interface, <ArticleIntro>. Esto tiene que venir sólo para el get-post.gql. Y se va a utilizar en muchos otros lugares.
