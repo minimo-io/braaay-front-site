@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
-	import { goto } from '$app/navigation';
 	import { locales, localizeHref } from '$lib/paraglide/runtime';
 	import { page } from '$app/state';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
@@ -8,6 +7,8 @@
 	function changeLocale(newLocale: string) {
 		window.location.href = localizeHref(page.url.pathname, { locale: newLocale });
 	}
+
+	let props = $props();
 </script>
 
 <footer class="relative bg-grey-background py-0 mt-0">
@@ -140,7 +141,7 @@
 				{#each locales as locale, i}
 					<button
 						type="button"
-						on:click={() => changeLocale(locale)}
+						onclick={() => changeLocale(locale)}
 						class="text-black text-xs cursor-pointer bg-transparent border-none p-0"
 					>
 						<img
