@@ -15,8 +15,19 @@
 
 	import '../app.css';
 	import 'animate.css';
+
+	// Loader
+	import { navigating } from '$app/state';
+	// import { navigating } from '$app/stores';
+	// import { derived } from 'svelte/store';
+	// const isNavigating = derived(navigating, ($navigating) => $navigating !== null);
+
 	let { children } = $props();
 </script>
+
+{#if navigating.to}
+	<div class="loader active"></div>
+{/if}
 
 <Header />
 
@@ -34,5 +45,33 @@
 		--bry-current-color: #211a2e;
 		--bry-current-gradient-start: #847f87;
 		--bry-current-gradient-end: #77747d;
+	}
+
+	/* Loader styles: a fixed top progress bar */
+	.loader {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 4px;
+		width: 0%;
+		background: linear-gradient(90deg, #bd8836, #4c89c8);
+		z-index: 9999;
+		transition: width 0.3s ease;
+	}
+	/* When active, the width can animate (you can customize this) */
+	.loader.active {
+		width: 100%;
+		animation: loaderAnimation 2s infinite;
+	}
+	@keyframes loaderAnimation {
+		0% {
+			width: 0%;
+		}
+		50% {
+			width: 80%;
+		}
+		100% {
+			width: 100%;
+		}
 	}
 </style>

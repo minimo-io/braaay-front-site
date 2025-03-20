@@ -72,6 +72,10 @@ npm run dev -- --open
   - Show price with PIX discount (or lowest possible price)
 - OTHER PRODUCTS PAGES: There are (not-yet-designed types of products), kits, presentes & experiences.
 
+- LOADER:
+
+  - Not its a basic setup, it would be better with a wine animation, over a overlayed screen in white (with blur)
+
 - Enable GraphQL debug mode.
 
 ### Bugs
