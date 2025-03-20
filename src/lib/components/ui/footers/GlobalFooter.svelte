@@ -1,7 +1,13 @@
 <script lang="ts">
+	import { m } from '$lib/paraglide/messages';
+	import { goto } from '$app/navigation';
 	import { locales, localizeHref } from '$lib/paraglide/runtime';
 	import { page } from '$app/state';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
+
+	function changeLocale(newLocale: string) {
+		window.location.href = localizeHref(page.url.pathname, { locale: newLocale });
+	}
 </script>
 
 <footer class="relative bg-grey-background py-0 mt-0">
@@ -98,7 +104,7 @@
 				<div class="md:block text-center">
 					<h3>BRAAAY</h3>
 					<ul>
-						<li><a href="/">SOBRE NÓS</a></li>
+						<li><a href="/">{m.sobreNos()}</a></li>
 						<li><a href="/">AFILIADOS</a></li>
 						<li><a href="/blog">BLOG</a></li>
 						<li><a href="/">SHOWROOM</a></li>
@@ -132,14 +138,18 @@
 			<!-- Locales -->
 			<div class="text-center my-2">
 				{#each locales as locale, i}
-					<a class="text-black text-xs" href={localizeHref(page.url.pathname, { locale })}>
+					<button
+						type="button"
+						on:click={() => changeLocale(locale)}
+						class="text-black text-xs cursor-pointer bg-transparent border-none p-0"
+					>
 						<img
 							src={locale === 'pt' ? '/images/flags/brazil.png' : '/images/flags/uruguay.png'}
 							alt="flag-{locale}"
 							class="inline w-[13px] h-[13px] mb-[3px] mr-[1px]"
 						/>
-						<span>{locale == 'pt' ? 'Brasil' : 'Uruguay'}</span>
-					</a>
+						<span>{locale === 'pt' ? 'Brasil' : 'Uruguay'}</span>
+					</button>
 					{#if i < locales.length - 1}
 						<span class="mx-2">/</span>
 					{/if}
