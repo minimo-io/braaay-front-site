@@ -4,7 +4,7 @@
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 	import BlogHeader from '$components/ui/headers/BlogHeader.svelte';
 	import TitleSection from '$components/ui/TitleSection.svelte';
-	import { ChefHat } from 'lucide-svelte';
+	import { Send } from 'lucide-svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 
 	import type { PageData } from './$types';
@@ -45,9 +45,14 @@
 					description="Fique por dentro das tendências, dicas de harmonização, entrevistas, curiosidades e accesórios sobre vinhos!"
 				>
 					{#snippet button()}
-						<Button title="Ver todos" size="md" type="sun" url="/">
+						<Button
+							title="Assine y Ganhe 15% OFF"
+							size="md"
+							type="sun"
+							url="http://eepurl.com/iW9KH6"
+						>
 							{#snippet icon()}
-								<ChefHat class="lucide-button" />
+								<Send class="lucide-button" />
 							{/snippet}
 						</Button>
 					{/snippet}

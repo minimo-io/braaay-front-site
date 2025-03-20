@@ -1,5 +1,5 @@
 <script lang="ts">
-	// import ArticleIntro from '$components/ui/articles/components/ArticleIntro.svelte';
+	import ArticleIntro from '$components/ui/articles/components/ArticleIntro.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import ArticleHeader from '$components/ui/articles/components/ArticleHeader.svelte';
 	import ArticleContent from '$components/ui/articles/components/ArticleContent.svelte';
@@ -19,7 +19,7 @@
 
 			<!-- Article content -->
 			<div class="md:px-32 px-[30px] max-w-screen-lg mx-auto">
-				<!-- <ArticleIntro title="{  }" /> -->
+				<ArticleIntro title={article.header?.title} content={article.header?.content} />
 
 				<Divider color="blue" />
 				<img

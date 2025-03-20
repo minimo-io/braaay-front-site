@@ -25,6 +25,10 @@ export const POST_QUERY = gql`
 					altText
 				}
 			}
+			header {
+				firstSubtitle
+				firstParagraph
+			}
 			categories {
 				nodes {
 					name

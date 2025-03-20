@@ -17,11 +17,10 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
-- If we are in a blog post, we should not see get "Voltar a loja" (as in /blog), we should see voltar ao blog...
 - GraphQL:
 
-  - Tenemos que agregar a la respuesta de GraphQL para posts -> Custom Fields, el primer párrafo y su título para la intro. Ahora esto está escondido de la interface, <ArticleIntro>. Esto tiene que venir sólo para el get-post.gql. Y se va a utilizar en muchos otros lugares.
-    - Ya que vamos a editar el ouput de graphql, creo que todo lo relacionado a WPBakery debería desaparecer desde el origen, con una función PHP.
+  - Adicionar y obtener las categorías
+  - Ya que vamos a editar el ouput de graphql, creo que todo lo relacionado a WPBakery debería desaparecer desde el origen, con una función PHP (o convertirse en HTML via una mutation del graphql).
     - Tambien, el author tiene que venir con un campo ˝profession".
   - En algunos artículos como /blog/vinhos-brasileiros-premiados-que-vao-te-surpreender los <ul> no se renderizan bien.
   - Be able to concatenate GQL queries, so i can add the total number of posts in the latests
@@ -29,7 +28,7 @@ npm run dev -- --open
   - We need to be able to see a log of our WP GraphQL queries so to know if we are hitting a log.
     - This might need to better configure Breeze cache.
 
-- Add component for schema.
+- Add component for seo schema.
 - Filtering menu in search should receive a payload will selecteed filters, and pre-select a country for example.
 - On modal we need hover with white opacity in the BG, like https://v3.tailwindcss.com/docs/installation (open menu)
   Also when clicked in category > All filters

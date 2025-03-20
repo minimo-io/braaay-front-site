@@ -18,6 +18,10 @@ export function mapPost(node: GraphQLPost): Post {
 		featuredImage: {
 			mediaItemUrl: node.featuredImage.node.mediaItemUrl,
 			altText: node.featuredImage.node.altText
+		},
+		header: {
+			title: node.header?.firstSubtitle,
+			content: node.header?.firstParagraph
 		}
 	};
 }

@@ -16,6 +16,10 @@ export interface Post {
 		mediaItemUrl: string;
 		altText: string;
 	};
+	header?: {
+		title?: string;
+		content?: string;
+	};
 }
 
 // And the raw GraphQL node structure for posts:
@@ -39,6 +43,10 @@ export interface GraphQLPost {
 			mediaItemUrl: string;
 			altText: string;
 		};
+	};
+	header?: {
+		firstSubtitle?: string;
+		firstParagraph?: string;
 	};
 }
 // For /blog posts query
