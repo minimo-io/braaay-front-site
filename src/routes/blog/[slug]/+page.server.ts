@@ -1,3 +1,4 @@
+// src/routes/blog/[slug]/+page.server.ts
 import type { PageServerLoad } from './$types';
 import { gqlClient } from '$lib/graphql/client';
 import { POST_QUERY, SLUGS_QUERY } from '$lib/graphql/queries/index';
@@ -5,14 +6,6 @@ import { mapPost } from '$lib/graphql/mappers/post.mapper';
 import type { Post, SinglePostsQueryResult } from '$lib/types';
 
 import type { EntryGenerator } from './$types';
-
-// // This function can be async, to get a list of all posts to be prerender, at compile time.
-// export const entries: EntryGenerator = () => {
-// 	return [
-// 		{ slug: 'dicas-de-vinho-para-presente' }
-// 		// { slug: 'vinhos-brasileiros-premiados-que-vao-te-surpreender' }
-// 	];
-// };
 
 export const prerender = true;
 

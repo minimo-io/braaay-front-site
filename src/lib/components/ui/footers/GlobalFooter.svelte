@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+	import { locales, localizeHref } from '$lib/paraglide/runtime';
+	import { page } from '$app/state';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 </script>
 
@@ -127,6 +129,22 @@
 				|
 				<a href="/" class="text-black font-medium">*Frete Grátis: Confira as regras</a>
 			</p>
+			<!-- Locales -->
+			<div class="text-center my-2">
+				{#each locales as locale, i}
+					<a class="text-black text-xs" href={localizeHref(page.url.pathname, { locale })}>
+						<img
+							src={locale === 'pt' ? '/images/flags/brazil.png' : '/images/flags/uruguay.png'}
+							alt="flag-{locale}"
+							class="inline w-[13px] h-[13px] mb-[3px] mr-[1px]"
+						/>
+						<span>{locale == 'pt' ? 'Brasil' : 'Uruguay'}</span>
+					</a>
+					{#if i < locales.length - 1}
+						<span class="mx-2">/</span>
+					{/if}
+				{/each}
+			</div>
 		</div>
 	</div>
 </footer>
