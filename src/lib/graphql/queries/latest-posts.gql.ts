@@ -14,6 +14,7 @@ export const LATEST_PRODUCTS_QUERY = gql`
 					featuredImage {
 						node {
 							mediaItemUrl
+							altText
 						}
 					}
 					author {

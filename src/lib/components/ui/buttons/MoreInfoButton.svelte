@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { smoothScroll } from '$lib/utils/smoothScroll';
+	import { smoothScroll } from '$lib/utils/index';
 	interface Props {
 		title: string;
 		action?: () => void;

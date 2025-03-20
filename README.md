@@ -19,9 +19,14 @@ npm run dev -- --open
 
 - GraphQL:
 
-  - Abastract the stripHtml
+  - Tenemos que agregar a la respuesta de GraphQL para posts -> Custom Fields, el primer párrafo y su título para la intro. Ahora esto está escondido de la interface, <ArticleIntro>. Esto tiene que venir sólo para el get-post.gql. Y se va a utilizar en muchos otros lugares.
+    - Ya que vamos a editar el ouput de graphql, creo que todo lo relacionado a WPBakery debería desaparecer desde el origen, con una función PHP.
+    - Tambien, el author tiene que venir con un campo ˝profession".
+  - En algunos artículos como /blog/vinhos-brasileiros-premiados-que-vao-te-surpreender los <ul> no se renderizan bien.
   - Be able to concatenate GQL queries, so i can add the total number of posts in the latests
   - Starting working in the structure for fetching data from the GraphQL >Currently<
+  - We need to be able to see a log of our WP GraphQL queries so to know if we are hitting a log.
+    - This might need to better configure Breeze cache.
 
 - Add component for schema.
 - Filtering menu in search should receive a payload will selecteed filters, and pre-select a country for example.
@@ -31,6 +36,12 @@ npm run dev -- --open
 
 - When articles have final routes, they must have the Blog Secondary Menu.
 - Mobile menu, needs to improve (no current place for cashback or account buttons)
+
+- _i18n_: We need to stablish a library for this from the start, the /blog part of the site might be a good start.
+
+  - https://jldec.me/blog/getting-started-i18n-with-paraglide-and-fink
+  - https://inlang.com/m/gerre34r/library-inlang-paraglideJs/sveltekit
+  - https://www.npmjs.com/package/@inlang/paraglide-js
 
 - SCREEN: Cashback
 - LOGIN
@@ -71,6 +82,8 @@ npm run dev -- --open
 
 ### v2
 
+- Posts, pre-rendering, we are getting a list of all posts for pre-rendering. This will increase build times.
+  We must adjust this, in the future, when we have a lot of posts.
 - SEARCH:
   - On focus search results
   - Autocompletion

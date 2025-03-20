@@ -1,10 +1,14 @@
 <script lang="ts">
 	import ArticleAuthor from './ArticleAuthor.svelte';
+	import type { ArticleCreator, Post } from '$lib/types/index';
 	interface Props {
 		fullWidth: boolean;
 		useCurrentColor?: boolean; // -- use a gradient for header bg color or not
+		article: Post;
 	}
-	let { fullWidth, useCurrentColor = false }: Props = $props();
+	let { fullWidth, useCurrentColor = false, article }: Props = $props();
+
+	let author: ArticleCreator = article.author;
 </script>
 
 {#if fullWidth}
@@ -14,7 +18,7 @@
 			class="absolute inset-0 opacity-70 z-0"
 			style="
     background-size: cover;
-    background-image: url(/images/Geleia-de-Vinho.jpg),
+    background-image: url({article.featuredImage.mediaItemUrl}),
       linear-gradient(to bottom, var(--bry-current-color), var(--bry-current-color));
     background-blend-mode: multiply;
   "
@@ -25,10 +29,10 @@
             </h3> -->
 		<!-- Header title -->
 		<h2 class="bry-header-title max-w-screen-lg !pt-0">
-			Vinhos brasileiros premiados que vão te surpreender
+			{article.title}
 		</h2>
 		<!-- Header author -->
-		<ArticleAuthor />
+		<ArticleAuthor {author} />
 	</div>
 {:else}
 	<!-- Mostly for products and categories -->
@@ -52,7 +56,7 @@
 		</h3>
 
 		<h2 class="bry-header-title">A terra da uva Tannat</h2>
-		<ArticleAuthor />
+		<!-- <ArticleAuthor /> -->
 	</div>
 
 	<!-- <div class="bry-header h-[200px] max-h-[200px] bg-[#d1d1d0] relative md:rounded-2xl mb-36">

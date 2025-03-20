@@ -45,7 +45,7 @@
 					description="Fique por dentro das tendências, dicas de harmonização, entrevistas, curiosidades e accesórios sobre vinhos!"
 				>
 					{#snippet button()}
-						<Button title="Ver todas" size="md" type="sun" url="/">
+						<Button title="Ver todos" size="md" type="sun" url="/">
 							{#snippet icon()}
 								<ChefHat class="lucide-button" />
 							{/snippet}

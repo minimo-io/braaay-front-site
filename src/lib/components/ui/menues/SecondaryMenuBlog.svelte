@@ -13,7 +13,7 @@
 			</li>
 
 			<li class="relative group transition-all duration-300 flex">
-				<a href="./blog" class="bg-blue !py-1 rounded-full text-white self-center">
+				<a href="/blog" class="bg-blue !py-1 rounded-full text-white self-center">
 					<Newspaper class="lucide-menu badge-percent text-white" />
 					<span class="text-white">Blog</span>
 				</a>

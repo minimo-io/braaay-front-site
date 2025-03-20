@@ -1,9 +1,5 @@
 import type { Post, GraphQLPost } from '$lib/types';
-
-// Helper to strip HTML tags from a string.
-function stripHtml(html: string): string {
-	return html.replace(/<[^>]+>/g, '');
-}
+import { stripHtml } from '$lib/utils/index';
 
 export function mapPost(node: GraphQLPost): Post {
 	return {
@@ -12,12 +8,16 @@ export function mapPost(node: GraphQLPost): Post {
 		date: node.date,
 		modified: node.modified,
 		excerpt: node.excerpt,
+		content: node.content || undefined,
 		plainExcerpt: stripHtml(node.excerpt),
 		uri: node.uri,
 		author: {
 			name: node.author.node.name,
 			avatar: { url: node.author.node.avatar.url }
 		},
-		featuredImage: { mediaItemUrl: node.featuredImage.node.mediaItemUrl }
+		featuredImage: {
+			mediaItemUrl: node.featuredImage.node.mediaItemUrl,
+			altText: node.featuredImage.node.altText
+		}
 	};
 }

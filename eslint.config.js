@@ -30,5 +30,12 @@ export default ts.config(
 				parser: ts.parser
 			}
 		}
+	},
+
+	// Add a top-level config to disable no-explicit-any globally.
+	{
+		rules: {
+			'@typescript-eslint/no-explicit-any': 'off'
+		}
 	}
 );
