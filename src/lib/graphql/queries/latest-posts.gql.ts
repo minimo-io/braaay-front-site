@@ -1,3 +1,4 @@
+// src/lib/graphql/queries/latest-posts.gql.ts
 import { gql } from '@urql/core';
 
 export const LATEST_PRODUCTS_QUERY = gql`

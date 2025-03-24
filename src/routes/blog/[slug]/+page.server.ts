@@ -1,6 +1,6 @@
 // src/routes/blog/[slug]/+page.server.ts
 import type { PageServerLoad } from './$types';
-import { gqlClient } from '$lib/graphql/client';
+import { getGqlClient } from '$lib/graphql/client';
 import { POST_QUERY, SLUGS_QUERY } from '$lib/graphql/queries/index';
 import { mapPost } from '$lib/graphql/mappers/post.mapper';
 import type { Post, SinglePostsQueryResult } from '$lib/types';
@@ -10,7 +10,8 @@ import type { EntryGenerator } from './$types';
 export const prerender = true;
 
 export const entries: EntryGenerator = async () => {
-	const result = await gqlClient.query(SLUGS_QUERY, {}).toPromise();
+	const client = getGqlClient();
+	const result = await client.query(SLUGS_QUERY, {}).toPromise();
 	if (result.error || !result.data) {
 		console.error(result.error);
 		throw new Error('Failed to fetch post slugs');
@@ -26,7 +27,8 @@ export const entries: EntryGenerator = async () => {
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
-	const result = await gqlClient.query<SinglePostsQueryResult>(POST_QUERY, { slug }).toPromise();
+	const client = getGqlClient();
+	const result = await client.query<SinglePostsQueryResult>(POST_QUERY, { slug }).toPromise();
 	if (result.error || !result.data) {
 		console.error(result.error);
 		throw new Error('Failed to fetch the post');

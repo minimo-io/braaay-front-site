@@ -7,7 +7,7 @@
 		let glide = new Glide('#glide-carousel', {
 			type: 'carousel',
 			perView: 1,
-			autoplay: 3000,
+			autoplay: 5000,
 			hoverpause: true,
 			gap: 0
 		});
@@ -22,15 +22,30 @@
 		<ul class="glide__slides">
 			<li class="glide__slide w-full">
 				<a href="./" class="not-hover-effect">
-					<!-- <img
-						src="/images/carousel/braaay-carousel-desktop-1.webp"
-						alt="placeholder 2"
-						class="carousel-image w-full"
-						data-desktop="braaay-carousel-desktop-1.webp"
-						data-mobile="braaay-carousel-mobile-1.png"
-						width="800"
-						height="600"
-					/> -->
+					<picture>
+						<!-- Mobile image: for screens up to 767px -->
+						<source
+							srcset="/images/carousel/frete-gratis-2025-mobile.png"
+							media="(max-width: 767px)"
+						/>
+						<!-- Desktop image: for screens 768px and above -->
+						<source
+							srcset="/images/carousel/frete-gratis-2025-desktop.png"
+							media="(min-width: 768px)"
+						/>
+						<!-- Fallback image -->
+						<img
+							src="/images/carousel/frete-gratis-2025-desktop.png"
+							alt="placeholder 2"
+							class="carousel-image w-full"
+							width="800"
+							height="600"
+						/>
+					</picture>
+				</a>
+			</li>
+			<li class="glide__slide w-full">
+				<a href="./" class="not-hover-effect">
 					<picture>
 						<!-- Mobile image: for screens up to 767px -->
 						<source
@@ -55,15 +70,6 @@
 			</li>
 			<li class="glide__slide w-full">
 				<a href="/" class="not-hover-effect">
-					<!-- <img
-						src="/images/carousel/braaay-carousel-desktop-2.webp"
-						alt="placeholder 3"
-						class="carousel-image w-full"
-						data-desktop="braaay-carousel-desktop-2.webp"
-						data-mobile="braaay-carousel-mobile-2.png"
-						width="800"
-						height="600"
-					/> -->
 					<picture>
 						<!-- Mobile image: for screens up to 767px -->
 						<source
@@ -96,6 +102,7 @@
 	>
 		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=0"></button>
 		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=1"></button>
+		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=2"></button>
 		<!-- <button class="glide__bullet" aria-label="bullet" data-glide-dir="=2"></button> -->
 		<!-- Add more bullets based on the number of slides -->
 	</div>

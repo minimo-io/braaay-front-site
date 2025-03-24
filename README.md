@@ -19,6 +19,8 @@ npm run dev -- --open
 
 - GraphQL:
 
+  - Existe un error en el blog/uy con la url final en el link. También aprovechar a hacer un mejor try...catch y en el caso de un artículo no existir o no poder ser obtenido, hacer un redirect a una página 404.
+  - Agregar la lista de entries, también para artículos del blog de UY.
   - Adicionar y obtener las categorías
   - Ya que vamos a editar el ouput de graphql, creo que todo lo relacionado a WPBakery debería desaparecer desde el origen, con una función PHP (o convertirse en HTML via una mutation del graphql).
     - Tambien, el author tiene que venir con un campo ˝profession".

@@ -22,12 +22,12 @@
 
 	<div class="my-5">
 		<TitleSection
-			title="Encontros & Jantares"
+			title="Vinhos & Encontros"
 			subTitle="Showroom"
-			description="Venha descobrir o inesperado em nosso showroom e prepare-se para eventos inesquecíveis."
+			description="Seu próximo vinho, espumante ou evento privado com curadoría da nossa sommelier. Somos especialistas no melhor de 🇺🇾 Uruguai, do 🇧🇷 Brasil e do Mundo. Visite nosso showroom; venha descobrir o inesperado!"
 		>
 			{#snippet button()}
-				<Button title="Consulte as experiência" size="md" type="sun" url="/experiencias">
+				<Button title="Consulte as experiências" size="md" type="sun" url="/experiencias">
 					{#snippet icon()}
 						<Calendar class="lucide-button" />
 					{/snippet}
