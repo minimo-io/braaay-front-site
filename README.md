@@ -19,7 +19,7 @@ npm run dev -- --open
 
 - GraphQL:
 
-  - Existe un error en el blog/uy con la url final en el link. También aprovechar a hacer un mejor try...catch y en el caso de un artículo no existir o no poder ser obtenido, hacer un redirect a una página 404.
+  - También aprovechar a hacer un mejor try...catch y en el caso de un artículo no existir o no poder ser obtenido, hacer un redirect a una página 404.
   - Agregar la lista de entries, también para artículos del blog de UY.
   - Adicionar y obtener las categorías
   - Ya que vamos a editar el ouput de graphql, creo que todo lo relacionado a WPBakery debería desaparecer desde el origen, con una función PHP (o convertirse en HTML via una mutation del graphql).
@@ -80,6 +80,9 @@ npm run dev -- --open
 
 - Enable GraphQL debug mode.
 
+- ERROR
+  - No tiene traducciones, `+error.svelte`
+
 ### Bugs
 
 - Por algun motivo en el header, el botón de CONTA no tiene shine effect
@@ -88,8 +91,11 @@ npm run dev -- --open
 
 ### v2
 
-- Posts, pre-rendering, we are getting a list of all posts for pre-rendering. This will increase build times.
-  We must adjust this, in the future, when we have a lot of posts.
+- SSG Pre-rendering DISABLED BECAUSE OF CONFLICTS WITH PARAGLIDE (urls were not recognized by sveltekit / for /uy)
+  For the moment we stick to SSR.
+  - No consigo que el entries funcione para otras urls además de las definidas en routes.
+    Ejemplo: /blog/ARTICULO funciona ok
+    /uy/blog/ no funciona
 - SEARCH:
   - On focus search results
   - Autocompletion

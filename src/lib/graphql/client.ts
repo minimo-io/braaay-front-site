@@ -7,9 +7,12 @@ import { getLocale } from '$lib/paraglide/runtime';
 /**
  * Creates a new GraphQL client using the current locale.
  */
-export function getGqlClient() {
-	// On the server, getLocale() returns the correct locale ("uy" for /uy URLs)
-	const locale = getLocale();
+/**
+ * Returns a new GraphQL client instance.
+ * Accepts an optional localeOverride parameter to force a specific locale.
+ */
+export function getGqlClient(localeOverride?: string) {
+	const locale = localeOverride || getLocale();
 	const endpoint = locale === 'uy' ? PUBLIC_GRAPHQL_SERVER_UY : PUBLIC_GRAPHQL_SERVER_PT;
 	console.log('Creating gqlClient with locale:', locale, 'endpoint:', endpoint);
 	return createClient({

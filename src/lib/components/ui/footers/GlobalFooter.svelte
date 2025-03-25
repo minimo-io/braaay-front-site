@@ -107,7 +107,7 @@
 					<ul>
 						<li><a href="/">{m.sobreNos()}</a></li>
 						<li><a href="/">AFILIADOS</a></li>
-						<li><a href="/blog">BLOG</a></li>
+						<li><a href={localizeHref('/blog')}>BLOG</a></li>
 						<li><a href="/">SHOWROOM</a></li>
 					</ul>
 				</div>

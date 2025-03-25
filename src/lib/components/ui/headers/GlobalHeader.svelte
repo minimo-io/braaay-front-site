@@ -13,16 +13,20 @@
 	import Button from '$components/ui/buttons/Button.svelte';
 	import { CashbackButton } from '$components/ui/buttons/index';
 	import SearchBar from '../search/SearchBar.svelte';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	// Using runes for reactive state
 	let SecondaryMenuComponent = $state(
-		page.url.pathname.startsWith('/blog') ? SecondaryMenuBlog : SecondaryMenuGeneral
+		page.url.pathname.startsWith('/blog') || page.url.pathname.startsWith('/uy/blog')
+			? SecondaryMenuBlog
+			: SecondaryMenuGeneral
 	);
 	// Subscribe to page store changes
 	$effect(() => {
-		SecondaryMenuComponent = page.url.pathname.startsWith('/blog')
-			? SecondaryMenuBlog
-			: SecondaryMenuGeneral;
+		SecondaryMenuComponent =
+			page.url.pathname.startsWith('/blog') || page.url.pathname.startsWith('/uy/blog')
+				? SecondaryMenuBlog
+				: SecondaryMenuGeneral;
 	});
 </script>
 
@@ -33,7 +37,7 @@
 	>
 		<!-- logo -->
 		<div class="flex lg:flex-none pr-8">
-			<a href="/" class="">
+			<a href={localizeHref('/')} class="">
 				<span class="sr-only">Braaay</span>
 				<img
 					class="h-[38px] w-auto hidden lg:block"

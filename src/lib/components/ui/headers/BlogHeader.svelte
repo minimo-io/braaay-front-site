@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { localizeHref } from '$lib/paraglide/runtime';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import type { Post } from '$lib/types';
 	interface Props {
@@ -43,7 +44,7 @@
 
 		<!-- Title -->
 		<h2 class="text-lg md:text-xl mb-4 font-prata mt-5 uppercase">
-			<a href={post.uri}>{post.title}</a>
+			<a href={localizeHref(post.uri)}>{post.title}</a>
 		</h2>
 
 		<!-- Description -->
@@ -53,7 +54,8 @@
 		</p>
 
 		<div class="mb-3 max-w-none md:max-w-[150px]">
-			<Button title="Ler artigo" size="sm" type="light" url={post.uri} bold={true}></Button>
+			<Button title="Ler artigo" size="sm" type="light" url={localizeHref(post.uri)} bold={true}
+			></Button>
 		</div>
 
 		<!-- Tags -->

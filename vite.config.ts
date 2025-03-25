@@ -7,7 +7,40 @@ export default defineConfig({
 		paraglideVitePlugin({
 			project: './project.inlang',
 			outdir: './src/lib/paraglide',
-			strategy: ['url', 'cookie', 'baseLocale']
+
+			strategy: ['url', 'cookie', 'baseLocale'],
+			urlPatterns: [
+				{
+					pattern: '/blog',
+					localized: [
+						['pt', '/blog'],
+						['uy', '/uy/blog']
+					]
+				},
+				{
+					pattern: '/blog',
+					localized: [
+						['pt', '/blog'],
+						['uy', '/uy/blog']
+					]
+				},
+				{
+					pattern: '/blog/:id',
+					localized: [
+						['pt', '/blog/:id(.*)?'],
+						['uy', '/uy/blog/:id(.*)?']
+					]
+				},
+				// Wildcard pattern for untranslated routes
+				// This allows you to incrementally translate routes as needed
+				{
+					pattern: '/',
+					localized: [
+						['pt', '/'],
+						['uy', '/uy']
+					]
+				}
+			]
 		}),
 		sveltekit()
 	],

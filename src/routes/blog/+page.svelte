@@ -9,6 +9,7 @@
 
 	import type { PageData } from './$types';
 	import type { Post } from '$lib/types';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 
 	let { data }: { data: PageData } = $props();
 
@@ -64,7 +65,7 @@
 				{#if postsCopy && postsCopy.length > 0}
 					{#each postsCopy as post (post.id)}
 						<ArticleCard
-							url={post.uri}
+							url={localizeHref(post.uri)}
 							image={post.featuredImage.mediaItemUrl}
 							title={post.title}
 							date={new Date(post.date).toLocaleDateString()}
