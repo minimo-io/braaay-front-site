@@ -2,7 +2,7 @@
 import type { PageServerLoad } from './$types';
 import { getGqlClient } from '$lib/graphql/client';
 
-import { LATEST_PRODUCTS_QUERY } from '$lib/graphql/queries/index';
+import { LATEST_POSTS_QUERY } from '$lib/graphql/queries/index';
 
 import type { Post, PostsQueryResult, GraphQLPost } from '$lib/types';
 
@@ -13,7 +13,7 @@ export const load: PageServerLoad = async () => {
 	const gqlClient = getGqlClient();
 
 	const result = await gqlClient
-		.query<PostsQueryResult>(LATEST_PRODUCTS_QUERY, { first: 1500 })
+		.query<PostsQueryResult>(LATEST_POSTS_QUERY, { first: 1500 })
 		.toPromise();
 
 	if (result.error || !result.data) {

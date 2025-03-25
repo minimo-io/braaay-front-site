@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	<h5 class="wine-title">{props.wine.title}</h5>
-	<p class="wine-price">R$ {props.wine.price}</p>
+	<p class="wine-price">{props.wine.price}</p>
 
 	<!-- <a href={props.wine.url} class="wine-button">VER DETALHES</a> -->
 	<div class="mt-2">

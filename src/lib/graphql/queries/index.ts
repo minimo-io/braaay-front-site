@@ -1,3 +1,4 @@
-export * from './latest-posts.gql';
-export * from './get-post.gql';
-export * from './slugs-query.gql';
+export * from './latest-posts.query';
+export * from './latest-products.query';
+export * from './get-post.query';
+export * from './slugs-query.query';

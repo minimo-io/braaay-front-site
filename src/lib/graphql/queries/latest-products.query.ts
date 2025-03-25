@@ -1,16 +1,25 @@
 import { gql } from '@urql/core';
 
-// No price....
-export const LATEST_PRODUCFTS = gql`
-	query LatestProducts($first: Int!) {
-		products(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+export const LATEST_PRODUCTS_QUERY = gql`
+	query LatestProducts($first: Int!, $categoryId: Int!) {
+		products(
+			first: $first
+			where: { categoryId: $categoryId, orderby: { field: DATE, order: DESC } }
+		) {
 			nodes {
 				... on SimpleProduct {
-					id
+					slug
 					name
+					price
 					outrosDadosDeProduto {
 						bgGradientStart
 						bgGradientEnd
+						pageMainColor
+						bgContentImage {
+							node {
+								mediaItemUrl
+							}
+						}
 					}
 					sku
 					status

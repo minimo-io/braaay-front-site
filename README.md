@@ -19,6 +19,8 @@ npm run dev -- --open
 
 - GraphQL:
 
+  - No funciona la categoría vinhos after build.
+  - Simplificar obtención de lista de blog posts, (esquema de interfaces), como en productos.
   - También aprovechar a hacer un mejor try...catch y en el caso de un artículo no existir o no poder ser obtenido, hacer un redirect a una página 404.
   - Agregar la lista de entries, también para artículos del blog de UY.
   - Adicionar y obtener las categorías
@@ -85,12 +87,15 @@ npm run dev -- --open
 
 ### Bugs
 
+- The selective top bar is not working well in preview... should change on articles (works ok if refresh the page, not the reactivity)
 - Por algun motivo en el header, el botón de CONTA no tiene shine effect
 - In the checkout process the footer `components/ui/footers/CheckoutFooter.svelte` is not visible on mobile and this it is not visible the phone number, etc. Check our reference sites (happends on smaller screens -- laptop)
   Probablemente también causa en el checkout (mismo footer).
 
 ### v2
 
+- MULTI-LANG:
+  - If we are in an article and try to switch lang, and in that other lang the article does not exists we get an error.
 - SSG Pre-rendering DISABLED BECAUSE OF CONFLICTS WITH PARAGLIDE (urls were not recognized by sveltekit / for /uy)
   For the moment we stick to SSR.
   - No consigo que el entries funcione para otras urls además de las definidas en routes.

@@ -31,6 +31,13 @@ export default defineConfig({
 						['uy', '/uy/blog/:id(.*)?']
 					]
 				},
+				{
+					pattern: '/produto/:id',
+					localized: [
+						['pt', '/produto/:id(.*)?'],
+						['uy', '/uy/producto/:id(.*)?']
+					]
+				},
 				// Wildcard pattern for untranslated routes
 				// This allows you to incrementally translate routes as needed
 				{

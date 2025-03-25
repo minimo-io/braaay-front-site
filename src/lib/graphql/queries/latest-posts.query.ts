@@ -1,7 +1,6 @@
-// src/lib/graphql/queries/latest-posts.gql.ts
 import { gql } from '@urql/core';
 
-export const LATEST_PRODUCTS_QUERY = gql`
+export const LATEST_POSTS_QUERY = gql`
 	query LatestPosts($first: Int!) {
 		posts(first: $first, where: { status: PUBLISH, orderby: { field: DATE, order: DESC } }) {
 			edges {

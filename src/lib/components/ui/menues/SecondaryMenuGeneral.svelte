@@ -7,7 +7,7 @@
 	<nav class="container max-w-screen-lg py-2 mx-[30px] lg:mx-auto">
 		<ul class="flex space-x-4">
 			<li class="md:!ml-0 relative group transition-all duration-300">
-				<a href="/category" class="!pr-2 !lg:pr-3 md:!pl-0">
+				<a href="/vinhos" class="!pr-2 !lg:pr-3 md:!pl-0">
 					<Wine class="lucide-menu" />
 					Vinhos
 				</a>
