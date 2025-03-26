@@ -7,8 +7,6 @@
 	function changeLocale(newLocale: string) {
 		window.location.href = localizeHref(page.url.pathname, { locale: newLocale });
 	}
-
-	let props = $props();
 </script>
 
 <footer class="relative bg-grey-background py-0 mt-0">
@@ -138,23 +136,25 @@
 			</p>
 			<!-- Locales -->
 			<div class="text-center my-2">
-				{#each locales as locale, i}
-					<button
-						type="button"
-						onclick={() => changeLocale(locale)}
-						class="text-black text-xs cursor-pointer bg-transparent border-none p-0"
-					>
-						<img
-							src={locale === 'pt' ? '/images/flags/brazil.png' : '/images/flags/uruguay.png'}
-							alt="flag-{locale}"
-							class="inline w-[13px] h-[13px] mb-[3px] mr-[1px]"
-						/>
-						<span>{locale === 'pt' ? 'Brasil' : 'Uruguay'}</span>
-					</button>
-					{#if i < locales.length - 1}
-						<span class="mx-2">/</span>
-					{/if}
-				{/each}
+				{#if locales}
+					{#each locales as locale, i}
+						<button
+							type="button"
+							onclick={() => changeLocale(locale)}
+							class="text-black text-xs cursor-pointer bg-transparent border-none p-0"
+						>
+							<img
+								src={locale === 'pt' ? '/images/flags/brazil.png' : '/images/flags/uruguay.png'}
+								alt="flag-{locale}"
+								class="inline w-[13px] h-[13px] mb-[3px] mr-[1px]"
+							/>
+							<span>{locale === 'pt' ? 'Brasil' : 'Uruguay'}</span>
+						</button>
+						{#if i < locales.length - 1}
+							<span class="mx-2">/</span>
+						{/if}
+					{/each}
+				{/if}
 			</div>
 		</div>
 	</div>
