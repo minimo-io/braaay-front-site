@@ -100,6 +100,8 @@ npm run dev -- --open
 
 ### v2
 
+- Crear un script para traer las categorías y paises, con su cantidad de artículos. Eso puede generarse antes de cada build.
+
 - También aprovechar a hacer un mejor try...catch y en el caso de un artículo no existir o no poder ser obtenido, hacer un redirect a una página 404.
 - MULTI-LANG:
   - If we are in an article and try to switch lang, and in that other lang the article does not exists we get an error.

@@ -27,7 +27,7 @@
 			description="Seu próximo vinho, espumante ou evento privado com curadoría da nossa sommelier. Somos especialistas no melhor de 🇺🇾 Uruguai, do 🇧🇷 Brasil e do Mundo. Visite nosso showroom; venha descobrir o inesperado!"
 		>
 			{#snippet button()}
-				<Button title="Consulte as experiências" size="md" type="sun" url="/experiencias">
+				<Button title="Reserve o espaço / Consulte" size="md" type="sun" url="/experiencias">
 					{#snippet icon()}
 						<Calendar class="lucide-button" />
 					{/snippet}

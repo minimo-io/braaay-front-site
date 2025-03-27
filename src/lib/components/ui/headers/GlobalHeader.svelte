@@ -5,7 +5,8 @@
 	import {
 		// Newspaper,
 		Search,
-		CircleUser
+		CircleUser,
+		Heart
 	} from '@lucide/svelte';
 
 	import SecondaryMenuGeneral from '$components/ui/menues/SecondaryMenuGeneral.svelte';
@@ -63,13 +64,27 @@
 			<Button
 				chevron={true}
 				customPx="!pr-[12px] !pl-3"
-				title="Conta"
+				title="Entrar"
 				url="/account"
 				type="blue"
 				size="xl"
 			>
 				{#snippet icon()}
 					<CircleUser class="lucide-button h-[10px]" />
+				{/snippet}
+			</Button>
+
+			<!-- My account -->
+			<Button
+				chevron={false}
+				customPx="!pl-3 ml-[12px]"
+				title="Meus vinhos"
+				url="/account"
+				type="light"
+				size="xl"
+			>
+				{#snippet icon()}
+					<Heart class="lucide-button h-[10px]" fill="red" color="red" />
 				{/snippet}
 			</Button>
 
@@ -111,3 +126,6 @@
 	<!-- Secondary menu -->
 	<SecondaryMenuComponent />
 </header>
+<div class="border-b border-grey-background">
+	<a href="/vinhos/"><img src="/images/primeira-compra-1.png" alt="primeira-compra" /></a>
+</div>
