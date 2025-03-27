@@ -3,7 +3,7 @@
 
 	import Button from '$components/ui/buttons/Button.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
-	import { Gift, Minus, Plus, Sparkle, Truck } from 'lucide-svelte';
+	import { Gift, Minus, Plus, Sparkle, Truck } from '@lucide/svelte';
 	import { openModal } from '$stores/modalState.state.svelte';
 	import CupomForm from '$components/ui/forms/cupomForm.svelte';
 </script>

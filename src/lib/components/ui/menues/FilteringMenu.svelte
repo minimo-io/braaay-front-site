@@ -9,7 +9,7 @@
 		Smile,
 		Truck,
 		Ruler
-	} from 'lucide-svelte';
+	} from '@lucide/svelte';
 </script>
 
 <!-- Filtering menu -->

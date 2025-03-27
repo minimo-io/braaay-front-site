@@ -6,7 +6,7 @@
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 	import WineBox from '$components/ui/products/WineBox.svelte';
 
-	import { Calendar, ChefHat } from 'lucide-svelte';
+	import { Calendar, ChefHat } from '@lucide/svelte';
 </script>
 
 <svelte:head>
@@ -105,9 +105,9 @@
 					}}
 					wine={{
 						title: 'Don Pascual Cabernet Franc',
-						price: 150.0,
+						price: '150.0',
 						url: '/product',
-						score: 4.5
+						score: '4.5'
 					}}
 				/>
 
@@ -118,9 +118,9 @@
 					}}
 					wine={{
 						title: 'Pizzato Merlot de Merlots 2022',
-						price: 150.0,
+						price: '150.0',
 						url: '/product',
-						score: 4.5
+						score: '4.5'
 					}}
 				/>
 
@@ -131,9 +131,9 @@
 					}}
 					wine={{
 						title: 'Artesana Cabernet Franc/Merlot Reserva',
-						price: 100.0,
+						price: '100.0',
 						url: '/product',
-						score: 4.5
+						score: '4.5'
 					}}
 				/>
 
@@ -144,9 +144,9 @@
 					}}
 					wine={{
 						title: 'Pizzato Chardonnay de Chardonnays',
-						price: 119.0,
+						price: '119.0',
 						url: '/product',
-						score: 4.5
+						score: '4.5'
 					}}
 				/>
 
@@ -157,9 +157,9 @@
 					}}
 					wine={{
 						title: 'Mayos Jovem Branco da Basso',
-						price: 43.0,
+						price: '43.0',
 						url: '/product',
-						score: 4.5
+						score: '4.5'
 					}}
 				/>
 
@@ -171,9 +171,9 @@
 					}}
 					wine={{
 						title: 'Artesana Cabernet Franc/Merlot Reserva',
-						price: 100.0,
+						price: '100.0',
 						url: '/product',
-						score: 4.5
+						score: '4.5'
 					}}
 					discount={'50%'}
 				/>

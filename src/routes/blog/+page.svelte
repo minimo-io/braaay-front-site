@@ -4,7 +4,7 @@
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 	import BlogHeader from '$components/ui/headers/BlogHeader.svelte';
 	import TitleSection from '$components/ui/TitleSection.svelte';
-	import { Send } from 'lucide-svelte';
+	import { Send } from '@lucide/svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 
 	import type { PageData } from './$types';

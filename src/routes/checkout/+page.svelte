@@ -1,6 +1,6 @@
 <script>
 	import Divider from '$components/ui/dividers/Divider.svelte';
-	import { Check, CircleChevronDown, CircleUserRound, ShoppingBag, Sparkle } from 'lucide-svelte';
+	import { Check, CircleChevronDown, CircleUserRound, ShoppingBag, Sparkle } from '@lucide/svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import PrevNextButton from '$components/ui/buttons/PrevNextButton.svelte';
 </script>

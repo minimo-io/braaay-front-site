@@ -20,6 +20,7 @@ npm run dev -- --open
 - GraphQL:
 
   - Productos para Uruguai
+    - Crear categorias por idioma
   - Crear una forma mas general de obtener el valor con e descuento mas barato (se usa en ProductAccordion) un calculo my básico.
   - Adicionar a product en WP, y empezar a adicionarlo a todos los productos
     // header {

@@ -1,7 +1,5 @@
 <!-- Card -->
 <script lang="ts">
-	import { Proportions } from 'lucide-svelte';
-
 	interface Props {
 		author: {
 			name: string;

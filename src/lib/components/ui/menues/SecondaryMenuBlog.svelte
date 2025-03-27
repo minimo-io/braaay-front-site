@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { EllipsisVertical, Newspaper, Undo2 } from 'lucide-svelte';
+	import { EllipsisVertical, Newspaper, Undo2 } from '@lucide/svelte';
 	import { isBlogPost } from '$lib/utils/index';
 	import { localizeHref } from '$lib/paraglide/runtime';
 

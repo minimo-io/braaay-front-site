@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Coins } from 'lucide-svelte';
+	import { Coins } from '@lucide/svelte';
 	interface Props {
 		title: string;
 		value: number;

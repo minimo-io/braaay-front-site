@@ -2,7 +2,7 @@
 	import Button from '$components/ui/buttons/Button.svelte';
 	import MoreInfoButton from '$components/ui/buttons/MoreInfoButton.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
-	import { User } from 'lucide-svelte';
+	import { User } from '@lucide/svelte';
 </script>
 
 <main class="w-full mx-auto">

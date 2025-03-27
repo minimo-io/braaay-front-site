@@ -1,5 +1,5 @@
 <script>
-	import { Headset } from 'lucide-svelte';
+	import { Headset } from '@lucide/svelte';
 	import { Button } from '$components/ui/buttons/index';
 </script>
 

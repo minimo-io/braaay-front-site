@@ -8,7 +8,7 @@
 		Grape,
 		MapPinHouse,
 		Truck
-	} from 'lucide-svelte';
+	} from '@lucide/svelte';
 	import { slide } from 'svelte/transition';
 
 	// Active tab can be 'frete', 'caracteristicas', 'vinicola', or 'pagamento'

@@ -6,7 +6,7 @@
 		// Newspaper,
 		Search,
 		CircleUser
-	} from 'lucide-svelte';
+	} from '@lucide/svelte';
 
 	import SecondaryMenuGeneral from '$components/ui/menues/SecondaryMenuGeneral.svelte';
 	import SecondaryMenuBlog from '$components/ui/menues/SecondaryMenuBlog.svelte';

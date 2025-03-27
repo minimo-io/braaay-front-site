@@ -44,7 +44,7 @@ export default defineConfig({
 					pattern: '/',
 					localized: [
 						['pt', '/'],
-						['uy', '/uy']
+						['uy', '/uy/']
 					]
 				}
 			]

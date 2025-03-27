@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ArrowDownUp, LayoutGrid } from 'lucide-svelte';
+	import { ArrowDownUp, LayoutGrid } from '@lucide/svelte';
 </script>
 
 <div class="bry-sorting">
