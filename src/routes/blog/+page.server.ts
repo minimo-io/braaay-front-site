@@ -4,10 +4,7 @@ import { getGqlClient } from '$lib/graphql/client';
 
 import { LATEST_POSTS_QUERY } from '$lib/graphql/queries/index';
 
-import type { Post, PostsQueryResult, GraphQLPost } from '$lib/types';
-
-import { mapRelayResult } from '$lib/graphql/mappers/mapper';
-import { mapPost } from '$lib/graphql/mappers/post.mapper';
+import { type Post, type PostsQueryResult, type GraphQLPostFromList, mapPost } from '$lib/types';
 
 export const load: PageServerLoad = async () => {
 	const gqlClient = getGqlClient();
@@ -20,7 +17,8 @@ export const load: PageServerLoad = async () => {
 		console.error(result.error);
 		throw new Error('Failed to fetch posts');
 	}
-	const posts: Post[] = mapRelayResult<GraphQLPost, Post, 'posts'>(result.data, 'posts', mapPost);
+	// const posts: Post[] = mapRelayResult<GraphQLPost, Post, 'posts'>(result.data, 'posts', mapPost);
+	const posts: Post[] = result.data.posts.edges.map((post: GraphQLPostFromList) => mapPost(post));
 
 	return { posts };
 };

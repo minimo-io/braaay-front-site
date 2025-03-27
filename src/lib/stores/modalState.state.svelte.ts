@@ -21,7 +21,5 @@ export function openModal({ header, content }: { header?: string | null; content
 }
 
 export function closeModal() {
-	console.log(modalState.current);
 	modalState.current = false;
-	console.log(modalState.current);
 }

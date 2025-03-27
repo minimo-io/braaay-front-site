@@ -16,7 +16,7 @@
 					<div class="flex">
 						<img
 							class="w-7 h-7 self-center mr-2"
-							src="./images/flags/uruguay.png"
+							src="/images/flags/uruguay.png"
 							alt="uruguay-flag"
 						/>
 						<span class="self-center align-bottom pt-1">Uruguai</span>
@@ -31,7 +31,7 @@
 			</div>
 			<div class="block">
 				<img
-					src="./images/uruguai.webp"
+					src="/images/uruguai.webp"
 					alt="Uruguai"
 					class="md:min-h-40 md:max-h-40 max-h-40 h-40 md:full-width-r object-cover"
 				/>

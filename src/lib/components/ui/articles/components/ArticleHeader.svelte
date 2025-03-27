@@ -9,6 +9,11 @@
 	let { fullWidth, useCurrentColor = false, article }: Props = $props();
 
 	let author: ArticleCreator = article.author;
+
+	let articleFinalImage = $state('/images/uruguai.webp');
+	if (article.featuredImage.mediaItemUrl) {
+		articleFinalImage = article.featuredImage.mediaItemUrl;
+	}
 </script>
 
 {#if fullWidth}
@@ -18,7 +23,7 @@
 			class="absolute inset-0 opacity-70 z-0"
 			style="
     background-size: cover;
-    background-image: url({article.featuredImage.mediaItemUrl}),
+    background-image: url({articleFinalImage}),
       linear-gradient(to bottom, var(--bry-current-color), var(--bry-current-color));
     background-blend-mode: multiply;
   "
@@ -43,7 +48,7 @@
 			class="absolute inset-0 opacity-70 z-0 md:rounded-2xl"
 			style="
                     background-size: cover;
-                    background-image: url(/images/uruguai.webp){useCurrentColor ? ',' : ';'}
+                    background-image: url({articleFinalImage}){useCurrentColor ? ',' : ';'}
 					{useCurrentColor
 				? 'linear-gradient(to bottom, var(--bry-current-color), var(--bry-current-color));'
 				: ''}
@@ -52,30 +57,10 @@
 		></div>
 
 		<h3 class="bry-header-deck">
-			<a href="/" style="border-color: var(--bry-current-color)">Uruguay</a>
+			<a href="/pais/uruguai/" style="border-color: var(--bry-current-color)">Uruguai</a>
 		</h3>
 
-		<h2 class="bry-header-title">A terra da uva Tannat</h2>
-		<!-- <ArticleAuthor /> -->
+		<h2 class="bry-header-title">{article.title}</h2>
+		<ArticleAuthor author={article.author} />
 	</div>
-
-	<!-- <div class="bry-header h-[200px] max-h-[200px] bg-[#d1d1d0] relative md:rounded-2xl mb-36">
-			<div
-				class="absolute inset-0 opacity-70 z-0 md:rounded-2xl"
-				style="
-                            background-size: cover;
-                            background-image: url(./images/vinicola-don-pascual-uruguai.webp),
-                                linear-gradient(to bottom, var(--bry-current-color), var(--bry-current-color));
-                            background-blend-mode: multiply;
-                        "
-			></div>
-
-			<h3 class="bry-header-deck">
-				<a href="/" style="border-color: var(--bry-current-color)">Don Pascual</a>
-			</h3>
-
-			<h2 class="bry-header-title">Don Pascual Tannat Merlot</h2>
-
-			<ArticleAuthor />
-		</div> -->
 {/if}

@@ -1,22 +1,43 @@
 <script lang="ts">
 	import ProductAccordion from '$components/ui/products/ProductAccordion.svelte';
+	import { stripHtml, correctPrice } from '$lib/utils/index';
+	import type { Product } from '$lib/types';
+
+	interface Props {
+		product: Product;
+	}
+
+	let { product }: Props = $props();
+
+	let stockStatus = $state('');
+	if (product.stockStatus == 'OUT_OF_STOCK') {
+		stockStatus = '<span style="color:red;">Fora de estoque</span>';
+	} else if (product.stockStatus == 'IN_STOCK') {
+		stockStatus = '<span>Em estoque</span>';
+	}
 </script>
 
 <div class="md:w-[50%] pt-8 pb-0 pl-8 pr-8 md:pr-0">
-	<h1 class="bry-product-title pt-4">Familia Deicas Massimo Tannat</h1>
+	<h1 class="bry-product-title pt-4">{product.title}</h1>
 	<p class="mb-4 font-roboto text-[15px] tracking-[0.5px] text-grey-blueish font-normal">
-		O vinho Familia Deicas Massimo Tannat é a mais sofisticada e refinada expressão da casta em
-		Uruguai. Esse vinho destaca-se por sua intensidade, complexidade e elegância. Amadurecido em
-		barricas de carvalho e ânforas de barro. Com um potencial de guarda de 10 a 15 anos.
+		{@html stripHtml(product.shortDescription)}
 	</p>
 
 	<div class="mb-4">
-		<span class="line-through text-gray-500 mr-2 text-grey-darkest font-roboto">R$1.199,00</span>
-		<span class="text-2xl font-bold text-grey-darkest font-roboto">R$1.000,00</span>
+		{#if product.regularPrice != product.price}
+			<span class="line-through text-gray-500 mr-2 text-grey-darkest font-roboto"
+				>{product.regularPrice}</span
+			>
+		{/if}
+		<span class="text-2xl font-bold text-grey-darkest font-roboto">{product.price}</span>
+		<h4 class="!text-[13px] font-bold mb-2">
+			<span class="text-green-dark">R$ {correctPrice(product.floatPrice * 0.95)}</span> NO PIX (5% OFF)
+		</h4>
 	</div>
 
-	<p class="text-grey-medium-dark font-roboto text-[15px] mb-4">Em estoque</p>
-
+	{#if stockStatus}
+		<p class="text-grey-medium-dark font-roboto text-[15px] mb-4">{@html stockStatus}</p>
+	{/if}
 	<div class="flex items-center mb-4">
 		<a
 			href="/cart"
@@ -28,5 +49,5 @@
 	</div>
 
 	<!-- Product accordion -->
-	<ProductAccordion />
+	<ProductAccordion {product} />
 </div>

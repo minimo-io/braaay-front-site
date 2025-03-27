@@ -8,7 +8,6 @@
 
 	const { data } = $props();
 	let products: Product[] = $state(data.products);
-	// console.log('DATA', props.data.products);
 </script>
 
 <svelte:head>
@@ -33,7 +32,7 @@
 					wine={{
 						title: product.title,
 						price: product.price,
-						url: `/produto/${product.slug}`,
+						url: `/produto/${product.slug}/`,
 						score: product.averageRating
 					}}
 				/>

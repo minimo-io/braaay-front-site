@@ -2,12 +2,14 @@
 import type { PageServerLoad } from './$types';
 import { getGqlClient } from '$lib/graphql/client';
 import { LATEST_PRODUCTS_QUERY } from '$lib/graphql/queries/index';
-import { mapProduct, type GraphQLProduct, type Product } from '$lib/types/index';
-import { error } from '@sveltejs/kit';
+import {
+	mapProduct,
+	type GraphQLProduct,
+	type Product,
+	type ProductsQueryResult
+} from '$lib/types/index';
 
-export interface ProductQueryResult {
-	products: { nodes: GraphQLProduct[] };
-}
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { categorySlug } = params;
@@ -16,12 +18,12 @@ export const load: PageServerLoad = async ({ params }) => {
 	const client = getGqlClient();
 
 	const result = await client
-		.query<ProductQueryResult>(LATEST_PRODUCTS_QUERY, { first: 10, categoryId: 26 })
+		.query<ProductsQueryResult>(LATEST_PRODUCTS_QUERY, { first: 10, categoryId: 26 })
 		.toPromise();
 
 	if (result.error || !result.data) {
-		throw new Error(`Failed to fetch the products: ${result.error}`);
-		throw error(404, 'No products founded.');
+		console.error(`Failed to fetch the products: ${result.error}`);
+		throw error(404, `Failed to fetch the products: ${result.error}`);
 	}
 
 	const products: Product[] = result.data.products.nodes.map((product: GraphQLProduct) =>

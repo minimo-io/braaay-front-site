@@ -1,5 +1,10 @@
 import type { ArticleCreator } from './article-creator.types';
-import type { RelayData } from './relay-data.types';
+import { stripHtml } from '$lib/utils/index';
+
+// For list of posts
+export interface PostsQueryResult {
+	posts: { edges: GraphQLPostFromList[] };
+}
 
 // Define an interface for a Post.
 export interface Post {
@@ -22,9 +27,7 @@ export interface Post {
 	};
 }
 
-// And the raw GraphQL node structure for posts:
-// Too over complicated
-export interface GraphQLPost {
+export interface BasePost {
 	id: string;
 	title: string;
 	date: string;
@@ -49,11 +52,47 @@ export interface GraphQLPost {
 		firstParagraph?: string;
 	};
 }
-// For /blog posts query
-export interface PostsQueryResult {
-	posts: RelayData<GraphQLPost>;
+
+// And the raw GraphQL node structure for posts:
+// Too over complicated
+export interface GraphQLPostFromList {
+	node: BasePost;
 }
-// For single posts
-export interface SinglePostsQueryResult {
-	post: GraphQLPost;
+
+export interface GraphQLPostSingle {
+	post: BasePost;
+}
+
+export function mapPost(post: GraphQLPostFromList | GraphQLPostSingle): Post {
+	let postBase: BasePost;
+	if ('node' in post) {
+		// Handle GraphQLPostFromList
+		postBase = post.node;
+	} else {
+		// Handle GraphQLPostSingle
+		postBase = post.post;
+	}
+
+	return {
+		id: postBase.id,
+		title: postBase.title,
+		date: postBase.date,
+		modified: postBase.modified,
+		excerpt: postBase.excerpt,
+		content: postBase.content || undefined,
+		plainExcerpt: stripHtml(postBase.excerpt),
+		uri: postBase.uri,
+		author: {
+			name: postBase.author.node.name,
+			avatar: { url: postBase.author.node.avatar.url }
+		},
+		featuredImage: {
+			mediaItemUrl: postBase.featuredImage.node.mediaItemUrl,
+			altText: postBase.featuredImage.node.altText
+		},
+		header: {
+			title: postBase.header?.firstSubtitle,
+			content: postBase.header?.firstParagraph
+		}
+	};
 }

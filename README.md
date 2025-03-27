@@ -19,10 +19,12 @@ npm run dev -- --open
 
 - GraphQL:
 
-  - No funciona la categoría vinhos after build.
-  - Simplificar obtención de lista de blog posts, (esquema de interfaces), como en productos.
-  - También aprovechar a hacer un mejor try...catch y en el caso de un artículo no existir o no poder ser obtenido, hacer un redirect a una página 404.
-  - Agregar la lista de entries, también para artículos del blog de UY.
+  - Crear una forma mas general de obtener el valor con e descuento mas barato (se usa en ProductAccordion) un calculo my básico.
+  - Adicionar a product en WP, y empezar a adicionarlo a todos los productos
+    // header {
+    // firstSubtitle
+    // firstParagraph
+    // }
   - Adicionar y obtener las categorías
   - Ya que vamos a editar el ouput de graphql, creo que todo lo relacionado a WPBakery debería desaparecer desde el origen, con una función PHP (o convertirse en HTML via una mutation del graphql).
     - Tambien, el author tiene que venir con un campo ˝profession".
@@ -87,6 +89,8 @@ npm run dev -- --open
 
 ### Bugs
 
+- A veces da error, la categoría vinhos
+  - Si voy al blog en portugues, cambio a español y después voy la categoría vinhos da error
 - The selective top bar is not working well in preview... should change on articles (works ok if refresh the page, not the reactivity)
 - Por algun motivo en el header, el botón de CONTA no tiene shine effect
 - In the checkout process the footer `components/ui/footers/CheckoutFooter.svelte` is not visible on mobile and this it is not visible the phone number, etc. Check our reference sites (happends on smaller screens -- laptop)
@@ -94,6 +98,7 @@ npm run dev -- --open
 
 ### v2
 
+- También aprovechar a hacer un mejor try...catch y en el caso de un artículo no existir o no poder ser obtenido, hacer un redirect a una página 404.
 - MULTI-LANG:
   - If we are in an article and try to switch lang, and in that other lang the article does not exists we get an error.
 - SSG Pre-rendering DISABLED BECAUSE OF CONFLICTS WITH PARAGLIDE (urls were not recognized by sveltekit / for /uy)

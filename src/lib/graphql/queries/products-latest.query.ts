@@ -11,6 +11,8 @@ export const LATEST_PRODUCTS_QUERY = gql`
 					slug
 					name
 					price
+					regularPrice
+					stockStatus
 					outrosDadosDeProduto {
 						bgGradientStart
 						bgGradientEnd

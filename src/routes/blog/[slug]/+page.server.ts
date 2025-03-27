@@ -3,8 +3,7 @@ import type { PageServerLoad } from './$types';
 import { getGqlClient } from '$lib/graphql/client';
 import { POST_QUERY } from '$lib/graphql/queries/index';
 // import { SLUGS_QUERY } from '$lib/graphql/queries/index';
-import { mapPost } from '$lib/graphql/mappers/post.mapper';
-import type { Post, SinglePostsQueryResult } from '$lib/types';
+import { type Post, type GraphQLPostSingle, mapPost } from '$lib/types';
 // import type { EntryGenerator } from './$types';
 import { error } from '@sveltejs/kit';
 // import { building } from '$app/environment';
@@ -29,7 +28,6 @@ import {} from '$lib/paraglide/server';
 // 		}));
 // 		allEntries = allEntries.concat(entriesForLocale);
 // 	}
-// 	console.log('ALL_ENTRIES', allEntries);
 // 	return allEntries;
 // };
 
@@ -38,11 +36,9 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	const locale = getLocale();
 
-	// console.log('URL_TO_QUERY', `${locale} - ${url}`);
-
 	const client = getGqlClient(locale);
-	const result = await client.query<SinglePostsQueryResult>(POST_QUERY, { slug }).toPromise();
-	// console.log('RESULT_BLOG', result);
+	const result = await client.query<GraphQLPostSingle>(POST_QUERY, { slug }).toPromise();
+
 	if (result.error || !result.data || !result.data.post) {
 		// throw new Error('Failed to fetch the post');
 		throw error(404, 'Post not found');
@@ -50,10 +46,10 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	// Map the raw GraphQL data to your Post interface.
 	try {
-		const post: Post = mapPost(result.data.post);
+		const post: Post = mapPost(result.data);
 		return { post };
 	} catch (errorMsg) {
-		console.log('ERROR', errorMsg);
-		throw error(404, 'Post not found');
+		console.error('ERROR', errorMsg);
+		// throw error(404, 'Post not found');
 	}
 };

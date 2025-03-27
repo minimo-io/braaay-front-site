@@ -1,19 +1,51 @@
-<script>
+<script lang="ts">
+	import type { PageData } from './$types';
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 	import ProductDetails from '$components/ui/products/ProductDetails.svelte';
 	import ProductImage from '$components/ui/products/ProductImage.svelte';
+	import type { ArticleCreator, ImageGeneral, Post } from '$lib/types';
+
+	let { data }: { data: PageData } = $props();
+
+	const placeholderImage: ImageGeneral = {
+		url: '/images/placeholder-image.png',
+		altText: 'placeholder-wine'
+	};
+	const product = $state(data.product);
+
+	const article: Post = {
+		id: '',
+		title: product!.title,
+		date: '',
+		modified: '',
+		excerpt: '',
+		content: product!.content,
+		plainExcerpt: '',
+		uri: '',
+		author: product!.author as ArticleCreator,
+		featuredImage: {
+			mediaItemUrl: product?.pageCustomColors.bgImage || '',
+			altText: ''
+		}
+	};
 </script>
 
 <main class="max-w-screen-lg mx-auto">
 	<!-- Main Product section -->
 	<section class="flex flex-col md:flex-row mx-auto">
 		<!-- Left side - Image -->
-		<ProductImage />
+		{#if product && product.image}
+			<ProductImage image={product?.image!} colors={product?.pageCustomColors!} />
+		{:else}
+			<ProductImage image={placeholderImage} />
+		{/if}
 
 		<!-- Right side - Product details -->
-		<ProductDetails />
+		{#if product}
+			<ProductDetails {product} />
+		{/if}
 	</section>
 </main>
 
 <!-- Product Article -->
-<BottomArticle twoColumns={true} />
+<BottomArticle {article} twoColumns={true} />

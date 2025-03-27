@@ -15,11 +15,13 @@
 
 <div class="wine wine-transparent">
 	<div class="mb-3 flex-grow">
-		<img
-			src={props.image.src}
-			alt={JSON.stringify(props.image.alt ? props.image.alt : props.wine.title)}
-			class="mx-auto"
-		/>
+		<a href={props.wine.url}>
+			<img
+				src={props.image.src}
+				alt={JSON.stringify(props.image.alt ? props.image.alt : props.wine.title)}
+				class="mx-auto"
+			/>
+		</a>
 	</div>
 	<div class="absolute top-4 left-4">
 		<div class="wine-stars">

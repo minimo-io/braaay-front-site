@@ -4,10 +4,17 @@ import type { PageCustomColors } from './page-custom-header.types';
 import type { ImageGeneral } from './image.types';
 // import type { RelayData } from './relay-data.types';
 
+export interface ProductsQueryResult {
+	products: { nodes: GraphQLProduct[] };
+}
+
 export interface Product {
 	slug: string;
 	title: string;
+	floatPrice: number;
 	price: string;
+	regularPrice: string;
+	stockStatus: string;
 	sku: string;
 	status: string;
 	pageCustomColors: PageCustomColors;
@@ -23,12 +30,18 @@ export interface Product {
 	shortDescription: string;
 }
 
+export interface GraphQLSingleProduct {
+	product: GraphQLProduct;
+}
+
 export interface GraphQLProduct {
 	slug: string;
 	title: string;
 	sku: string;
 	status: string;
 	price: string;
+	regularPrice: string;
+	stockStatus: string;
 
 	outrosDadosDeProduto: {
 		bgGradientStart?: string;
@@ -67,17 +80,27 @@ export interface GraphQLProduct {
 }
 
 export function mapProduct(node: GraphQLProduct): Product {
+	let averageRating = '0.0';
+	if (node.averageRating && node.averageRating !== 0) {
+		averageRating = node.averageRating.toFixed(1);
+	}
+
 	return {
 		slug: node.slug,
+		floatPrice: parseFloat(node.price.replaceAll('R$', '').replaceAll(' ', '')),
 		price: node.price,
+		regularPrice: node.regularPrice,
+		stockStatus: node.stockStatus,
 		title: node.title,
 		sku: node.sku,
 		status: node.status,
+		content: node.content,
+		shortDescription: node.shortDescription,
 		pageCustomColors: {
-			gradientStart: node.outrosDadosDeProduto.bgGradientStart || undefined,
-			gradientEnd: node.outrosDadosDeProduto.bgGradientEnd || undefined,
-			color: node.outrosDadosDeProduto.pageMainColor || undefined,
-			bgImage: node.outrosDadosDeProduto.bgContentImage?.node?.mediaItemUrl || undefined
+			gradientStart: node.outrosDadosDeProduto?.bgGradientStart || undefined,
+			gradientEnd: node.outrosDadosDeProduto?.bgGradientEnd || undefined,
+			color: node.outrosDadosDeProduto?.pageMainColor || undefined,
+			bgImage: node.outrosDadosDeProduto?.bgContentImage?.node?.mediaItemUrl || undefined
 		},
 		uri: node.uri,
 		date: node.date,
@@ -86,13 +109,12 @@ export function mapProduct(node: GraphQLProduct): Product {
 			name: node.author.node.name,
 			avatar: node.author.node.avatar
 		},
-		averageRating: node.averageRating === 0 ? '0.0' : node.averageRating.toFixed(1),
+		averageRating: averageRating,
 		excerpt: node.excerpt,
 		image: {
 			url: node.featuredImage?.node.mediaItemUrl,
 			altText: node.featuredImage?.node.altText
 		},
-		reviewCount: node.reviewCount,
-		shortDescription: node.shortDescription
+		reviewCount: node.reviewCount
 	};
 }

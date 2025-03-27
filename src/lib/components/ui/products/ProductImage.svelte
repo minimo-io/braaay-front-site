@@ -1,3 +1,13 @@
+<script lang="ts">
+	import type { PageCustomColors, ImageGeneral } from '$lib/types';
+
+	interface Props {
+		colors?: PageCustomColors;
+		image: ImageGeneral;
+	}
+	let { colors, image }: Props = $props();
+</script>
+
 <div
 	class="p-8 flex items-center"
 	style="
@@ -8,11 +18,5 @@
                 );
             "
 >
-	<img
-		src="./images/wines/vinho-don-pascual-tannat-merlot.webp"
-		alt="Don Pascual"
-		class="mx-auto max-w-[70%]"
-		width="680"
-		height="578"
-	/>
+	<img src={image.url} alt={image.altText} class="mx-auto max-w-[70%]" width="680" height="578" />
 </div>

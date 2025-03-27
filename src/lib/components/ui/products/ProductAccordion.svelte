@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { Product } from '$lib/types';
+	import { correctPrice } from '$lib/utils';
 	import {
 		CircleChevronDown,
 		CircleChevronUp,
@@ -10,12 +12,19 @@
 	import { slide } from 'svelte/transition';
 
 	// Active tab can be 'frete', 'caracteristicas', 'vinicola', or 'pagamento'
-	let activeAccordion: 'frete' | 'caracteristicas' | 'vinicola' | 'pagamento' | null = 'pagamento';
+	let activeAccordion: 'frete' | 'caracteristicas' | 'vinicola' | 'pagamento' | null =
+		$state('pagamento');
 
 	function toggleAccordion(tab: 'frete' | 'caracteristicas' | 'vinicola' | 'pagamento') {
 		// If the clicked tab is already active, close it; otherwise, open it and close others.
 		activeAccordion = activeAccordion === tab ? null : tab;
 	}
+
+	interface Props {
+		product: Product;
+	}
+
+	let { product }: Props = $props();
 </script>
 
 <div class="bry-product-accordion">
@@ -23,7 +32,7 @@
 	<div>
 		<button
 			type="button"
-			on:click={() => toggleAccordion('frete')}
+			onclick={() => toggleAccordion('frete')}
 			class="flex items-center w-full justify-between py-2 cursor-pointer transition-colors duration-200 ease-in-out"
 		>
 			<div class="flex items-center">
@@ -55,7 +64,7 @@
 	<div>
 		<button
 			type="button"
-			on:click={() => toggleAccordion('caracteristicas')}
+			onclick={() => toggleAccordion('caracteristicas')}
 			class="flex items-center w-full justify-between py-2 cursor-pointer transition-colors duration-200 ease-in-out"
 		>
 			<div class="flex items-center">
@@ -133,7 +142,7 @@
 	<div>
 		<button
 			type="button"
-			on:click={() => toggleAccordion('vinicola')}
+			onclick={() => toggleAccordion('vinicola')}
 			class="flex items-center w-full justify-between py-2 cursor-pointer transition-colors duration-200 ease-in-out"
 		>
 			<div class="flex items-center">
@@ -184,7 +193,7 @@
 	<div>
 		<button
 			type="button"
-			on:click={() => toggleAccordion('pagamento')}
+			onclick={() => toggleAccordion('pagamento')}
 			class="flex items-center w-full justify-between py-2 cursor-pointer transition-colors duration-200 ease-in-out"
 		>
 			<div class="flex items-center">
@@ -207,29 +216,30 @@
 			<div transition:slide>
 				<div class="p-4">
 					<div class="text-left">
+						<div class="mb-3">
+							<h4 class="!text-[13px] font-bold mb-2">
+								PIX: <span>R${correctPrice(product.floatPrice * 0.95)}</span> (5% OFF)
+							</h4>
+							<!-- <p class=" !text-[12px] font-bold"></p> -->
+						</div>
+						<div class="mt-3">
+							<h4 class="!text-[13px] font-bold mb-2">BOLETO: {product.price}</h4>
+						</div>
 						<h3 class="text-[13px] font-bold mb-3">CARTÃO DE CRÉDITO</h3>
 						<ul class="space-y-1">
 							<li class="font-light text-[12px] normal-case">
-								1x R$ <strong>1000,00</strong> sem juros
+								1x R$ <strong>{correctPrice(product.floatPrice / 1)}</strong> sem juros
 							</li>
 							<li class="font-light text-[12px] normal-case">
-								2x R$ <strong>500,00</strong> sem juros
+								2x R$ <strong>{correctPrice(product.floatPrice / 2)}</strong> sem juros
 							</li>
 							<li class="font-light text-[12px] normal-case">
-								3x R$ <strong>333,33</strong> sem juros
+								3x R$ <strong>{correctPrice(product.floatPrice / 3)}</strong> sem juros
 							</li>
 							<li class="font-light text-[12px] normal-case">
-								4x R$ <strong>250,00</strong> sem juros
+								4x R$ <strong>{correctPrice(product.floatPrice / 4)}</strong> sem juros
 							</li>
 						</ul>
-						<div class="mt-3">
-							<h4 class="!text-[13px] font-bold mb-2">PIX</h4>
-							<p class="font-light !text-[12px]">R$ 1000,00 (5% OFF)</p>
-						</div>
-						<div class="mt-3">
-							<h4 class="!text-[13px] font-bold mb-2">BOLETO</h4>
-							<p class="font-light !text-[12px]">R$ 1000,00</p>
-						</div>
 					</div>
 				</div>
 			</div>
