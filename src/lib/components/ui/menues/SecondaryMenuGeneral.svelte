@@ -32,25 +32,139 @@
 					<!-- Sub-items if exists -->
 					{#if category.subcategories}
 						<div class="absolute left-0 w-full h-4 bg-transparent"></div>
+
 						<div
-							class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-1 rounded-xl md:w-[300px] w-48 origin-top overflow-y-auto hidden group-hover:block"
+							class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-1 rounded-xl md:w-[400px] w-48 origin-top overflow-y-auto hidden group-hover:block p-1"
 							style="max-height: calc(55vh - 170px)"
 						>
-							<div class="text-xs px-0 flex flex-col">
-								{#each category.subcategories as subcat}
+							<div class="flex">
+								<div class="text-xs px-0 flex-1 flex flex-col">
+									{#each category.subcategories as subcat, i}
+										{@const realCurrent = i + 1}
+										<a
+											href={subcat.url}
+											class={[
+												'shine-effect px-4 py-3 text-left text-sm font-roboto text-grey-dark flex justify-between align-middle',
+												realCurrent != category.subcategories.length &&
+													'border-b border-grey-lighter'
+											]}
+										>
+											<div class="text-left self-center flex align-middle justify-center">
+												<span class="self-center mx-2 text-base">{subcat.name}</span>
+											</div>
+											<div class="text-grey-medium flex justify-end align-middle">
+												<!-- <span class="self-center mr-3 text-xs">251</span> -->
+												<ChevronRight class="w-4 aspect-1 text-grey-dark " />
+											</div>
+										</a>
+									{/each}
+								</div>
+
+								<!-- Second part (Countries for BR) -->
+								<div class="flex flex-1 text-xs px-3 flex-col">
 									<a
-										href={subcat.url}
-										class="shine-effect px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle"
+										href="/"
+										class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
 									>
 										<div class="text-left self-center flex align-middle justify-center">
-											<span class="self-center mx-2 text-sm">{subcat.name}</span>
+											<img
+												class="w-4 h-4 self-center mr-2"
+												src="/images/flags/uruguay.png"
+												alt="uruguay-flag"
+											/>
+											<span class="self-center">Uruguai</span>
 										</div>
-										<div class="text-grey-medium flex justify-end align-middle">
+										<div class="text-grey-medium flex flex-row align-middle self-center">
 											<!-- <span class="self-center mr-3 text-xs">251</span> -->
-											<ChevronRight class="w-4 aspect-1 text-grey-dark " />
+											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
 										</div>
 									</a>
-								{/each}
+									<a
+										href="/"
+										class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
+									>
+										<div class="text-left self-center flex align-middle justify-center">
+											<img
+												class="w-4 h-4 self-center mr-2"
+												src="/images/flags/brazil.png"
+												alt="uruguay-flag"
+											/>
+											<span class="self-center">Brasil</span>
+										</div>
+										<div class="text-grey-medium flex flex-row align-middle self-center">
+											<!-- <span class="self-center mr-3 text-xs">142</span> -->
+											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+										</div>
+									</a>
+									<a
+										href="/"
+										class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
+									>
+										<div class="text-left self-center flex align-middle justify-center">
+											<img
+												class="w-4 h-4 self-center mr-2"
+												src="/images/flags/chile.png"
+												alt="uruguay-flag"
+											/>
+											<span class="self-center">Chile</span>
+										</div>
+										<div class="text-grey-medium flex flex-row align-middle self-center">
+											<!-- <span class="self-center mr-3 text-xs">89</span> -->
+											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+										</div>
+									</a>
+									<a
+										href="/"
+										class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
+									>
+										<div class="text-left self-center flex align-middle justify-center">
+											<img
+												class="w-4 h-4 self-center mr-2"
+												src="/images/flags/argentina.png"
+												alt="uruguay-flag"
+											/>
+											<span class="self-center">Argentina</span>
+										</div>
+										<div class="text-grey-medium flex flex-row align-middle self-center">
+											<!-- <span class="self-center mr-3 text-xs">142</span> -->
+											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+										</div>
+									</a>
+									<a
+										href="/"
+										class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
+									>
+										<div class="text-left self-center flex align-middle justify-center">
+											<img
+												class="w-4 h-4 self-center mr-2"
+												src="/images/flags/portugal.png"
+												alt="portugal-flag"
+											/>
+											<span class="self-center">Portugal</span>
+										</div>
+										<div class="text-grey-medium flex flex-row align-middle self-center">
+											<!-- <span class="self-center mr-3 text-xs">142</span> -->
+											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+										</div>
+									</a>
+									<a
+										href="/"
+										class="px-4 py-3 text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
+									>
+										<div class="text-left self-center flex align-middle justify-center">
+											<img
+												class="w-4 h-4 self-center mr-2"
+												src="/images/flags/italy.png"
+												alt="italy-flag"
+											/>
+											<span class="self-center">Italia</span>
+										</div>
+										<div class="text-grey-medium flex flex-row align-middle self-center">
+											<!-- <span class="self-center mr-3 text-xs">142</span> -->
+											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+										</div>
+									</a>
+								</div>
 							</div>
 						</div>
 					{/if}
