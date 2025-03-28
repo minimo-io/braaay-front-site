@@ -19,15 +19,11 @@ npm run dev -- --open
 
 - GraphQL:
 
-  - Productos para Uruguai
-    - Crear categorias por idioma
-  - Crear una forma mas general de obtener el valor con e descuento mas barato (se usa en ProductAccordion) un calculo my básico.
-  - Adicionar a product en WP, y empezar a adicionarlo a todos los productos
-    // header {
-    // firstSubtitle
-    // firstParagraph
-    // }
-  - Adicionar y obtener las categorías
+  - Preever flagImage para Category (crear y probar, lo vamos a usar solo para pais)
+    - También agregar un campo count de productos.
+  - Artículo de categorías
+  - Traer otras informaciones de la categoria de product (catalog)
+  - Tener otro "data" para el resto de los productos de la homepage.
   - Ya que vamos a editar el ouput de graphql, creo que todo lo relacionado a WPBakery debería desaparecer desde el origen, con una función PHP (o convertirse en HTML via una mutation del graphql).
     - Tambien, el author tiene que venir con un campo ˝profession".
   - En algunos artículos como /blog/vinhos-brasileiros-premiados-que-vao-te-surpreender los <ul> no se renderizan bien.
@@ -35,6 +31,8 @@ npm run dev -- --open
   - Starting working in the structure for fetching data from the GraphQL >Currently<
   - We need to be able to see a log of our WP GraphQL queries so to know if we are hitting a log.
     - This might need to better configure Breeze cache.
+
+- Imagem principal de carrousel mobile no puede ser tan grande. Ver ejemplos de los cuatro sitio referencia.
 
 - Add component for seo schema.
 - Filtering menu in search should receive a payload will selecteed filters, and pre-select a country for example.
@@ -76,6 +74,7 @@ npm run dev -- --open
   - Be able to pass an specific action to the action button in the modal.
 
 - PRODUCT PAGE:
+  - Add breadcrumbs
   - We need than when you hover down, and loose sight of "Buy button" a fixed div appears below.
   - Show price with PIX discount (or lowest possible price)
 - OTHER PRODUCTS PAGES: There are (not-yet-designed types of products), kits, presentes & experiences.
@@ -87,10 +86,21 @@ npm run dev -- --open
 - Enable GraphQL debug mode.
 
 - ERROR
+
   - No tiene traducciones, `+error.svelte`
+
+- EXTRAS
+  - En product page cuando no existe artículo tenemos que mostrar algo en esa sección.
+
+### Lanzamiento
+
+- Cada producto debe tener su primer párrafo y título (sin quedar duplicados en el contenido).
+  Corregir en este sentido o artigo: vinho-familia-deicas-massimo-tannat
 
 ### Bugs
 
+- Url inexistentes no están yendo a 404, sino a catagory: http://localhost:4000/asdasd/
+- Evitar doble query desde el layout.server
 - A veces da error, la categoría vinhos
   - Si voy al blog en portugues, cambio a español y después voy la categoría vinhos da error
 - The selective top bar is not working well in preview... should change on articles (works ok if refresh the page, not the reactivity)
@@ -99,6 +109,11 @@ npm run dev -- --open
   Probablemente también causa en el checkout (mismo footer).
 
 ### v2
+
+- Al cliquear en el banner grande de primera compra, tenemos que ofrecer aplicar el descuento al carrito automáticamente (como hace wine.com)
+- Crear una forma mas general de obtener el valor con e descuento mas barato (se usa en ProductAccordion) un calculo my básico.
+
+- The loader could add an overlay transition, apart from the top loader.
 
 - Crear un script para traer las categorías y paises, con su cantidad de artículos. Eso puede generarse antes de cada build.
 
@@ -138,7 +153,8 @@ npm run dev -- --open
 - Take this reference for project structure: [https://github.com/huggingface/chat-ui](https://github.com/huggingface/chat-ui)
 - Wine store references:
   - https://primalwine.com/ - BRAND VIBES
-  - https://www.vineria9.com.br/ - BR LOCAL E-COMMERCE
-  - https://www.vinoverace.com.br/ - BR SMALL STORE
   - https://www.wine.com/ - ECOMMERCE, FILTERS, SALES, DYAMIC ELEMENTS
+  - https://www.netshoes.com.br/
+  - https://www.vinoverace.com.br/ - BR SMALL STORE
   - https://bacan.uy/ - UY
+  - https://www.vineria9.com.br/ - BR LOCAL E-COMMERCE

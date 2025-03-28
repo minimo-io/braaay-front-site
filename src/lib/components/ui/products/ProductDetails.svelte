@@ -2,6 +2,7 @@
 	import ProductAccordion from '$components/ui/products/ProductAccordion.svelte';
 	import { stripHtml, correctPrice } from '$lib/utils/index';
 	import type { Product } from '$lib/types';
+	import { m } from '$lib/paraglide/messages';
 
 	interface Props {
 		product: Product;
@@ -11,9 +12,9 @@
 
 	let stockStatus = $state('');
 	if (product.stockStatus == 'OUT_OF_STOCK') {
-		stockStatus = '<span style="color:red;">Fora de estoque</span>';
+		stockStatus = `<span style="color:red;">${m.outOfStock()}</span>`;
 	} else if (product.stockStatus == 'IN_STOCK') {
-		stockStatus = '<span>Em estoque</span>';
+		stockStatus = `<span>${m.inStock()}</span>`;
 	}
 </script>
 
@@ -31,7 +32,10 @@
 		{/if}
 		<span class="text-2xl font-bold text-grey-darkest font-roboto">{product.price}</span>
 		<h4 class="!text-[13px] font-bold mb-2">
-			<span class="text-green-dark">R$ {correctPrice(product.floatPrice * 0.95)}</span> NO PIX (5% OFF)
+			<span class="text-green-dark"
+				>{m.currencySymbol()} {correctPrice(product.floatPrice * 0.95)}</span
+			>
+			{m.cashDiscountText()}
 		</h4>
 	</div>
 

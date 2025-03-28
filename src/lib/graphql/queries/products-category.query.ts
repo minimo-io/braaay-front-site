@@ -1,10 +1,28 @@
 import { gql } from '@urql/core';
 
-export const LATEST_PRODUCTS_QUERY = gql`
-	query LatestProducts($first: Int!, $categoryId: Int!) {
+export const CATEGORY_PRODUCTS = gql`
+	query LatestProducts($first: Int!, $categorySlug: String!, $categoryId: ID!) {
+		productCategory(id: $categoryId, idType: SLUG) {
+			name
+			categoryHeader {
+				customCatalogTitle
+				customCatalogImage {
+					node {
+						mediaItemUrl
+						altText
+					}
+				}
+			}
+			description
+			image {
+				mediaItemUrl
+				altText
+			}
+		}
+
 		products(
 			first: $first
-			where: { categoryId: $categoryId, orderby: { field: DATE, order: DESC } }
+			where: { category: $categorySlug, orderby: { field: DATE, order: DESC } }
 		) {
 			nodes {
 				... on SimpleProduct {
@@ -45,7 +63,6 @@ export const LATEST_PRODUCTS_QUERY = gql`
 							mediaItemUrl
 						}
 					}
-
 					reviewCount
 					content
 					shortDescription

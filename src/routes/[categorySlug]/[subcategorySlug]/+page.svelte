@@ -1,4 +1,4 @@
-<!-- src/routes/[categorySlug]/+page.svelte -->
+<!-- src/routes/[categorySlug]/[subcategorySlug]/+page.svelte -->
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import FilteringMenu from '$components/ui/menues/FilteringMenu.svelte';
@@ -6,11 +6,10 @@
 	import SortingMenu from '$components/ui/menues/SortingMenu.svelte';
 	import CategoryHeader from '$components/ui/headers/CategoryHeader.svelte';
 	import WineBox from '$components/ui/products/WineBox.svelte';
-	import type { Category, Product } from '$lib/types';
-	import { localizeHref } from '$lib/paraglide/runtime.js';
+	import type { Product, Category } from '$lib/types';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime.js';
 
 	const { data } = $props();
-
 	let products: Product[] = $derived(data.products);
 	let category: Category = $derived(data.category);
 </script>
@@ -29,7 +28,7 @@
 
 	<div class="max-w-screen-lg mx-[1.5rem] md:mx-auto mt-1 mb-[2rem]">
 		<div class="bry-product-list">
-			{#each products as product}
+			{#each products as product (product.slug)}
 				<span in:fade out:fade>
 					<WineBox
 						image={{

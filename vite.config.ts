@@ -11,19 +11,21 @@ export default defineConfig({
 			strategy: ['url', 'cookie', 'baseLocale'],
 			urlPatterns: [
 				{
-					pattern: '/blog',
+					pattern: '/',
 					localized: [
-						['pt', '/blog'],
-						['uy', '/uy/blog']
+						['pt', '/'],
+						['uy', '/uy/']
 					]
 				},
+
 				{
 					pattern: '/blog',
 					localized: [
-						['pt', '/blog'],
-						['uy', '/uy/blog']
+						['pt', '/blog/'],
+						['uy', '/uy/blog/']
 					]
 				},
+
 				{
 					pattern: '/blog/:id',
 					localized: [
@@ -31,6 +33,7 @@ export default defineConfig({
 						['uy', '/uy/blog/:id(.*)?']
 					]
 				},
+
 				{
 					pattern: '/produto/:id',
 					localized: [
@@ -38,13 +41,13 @@ export default defineConfig({
 						['uy', '/uy/producto/:id(.*)?']
 					]
 				},
-				// Wildcard pattern for untranslated routes
-				// This allows you to incrementally translate routes as needed
+
+				// Category & Subcategory route – intended to match exactly one segment (e.g. "/cervezas/")
 				{
-					pattern: '/',
+					pattern: '/:path/',
 					localized: [
-						['pt', '/'],
-						['uy', '/uy/']
+						['pt', '/:path/'],
+						['uy', '/uy/:path/']
 					]
 				}
 			]

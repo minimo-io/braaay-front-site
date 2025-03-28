@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { smoothScroll } from '$lib/utils/index';
 	import MoreInfoButton from '../buttons/MoreInfoButton.svelte';
+	import type { Category } from '$lib/types';
+
+	interface Props {
+		category: Category;
+	}
+	let { category }: Props = $props();
+
+	let categoryImage = $derived(category.header.image?.url || '/images/placeholder-category.png');
+	let categoryAltText = $derived(category.header.image?.altText || 'category-image');
+	let categoryTitle = $derived(category.header.title || category.name);
 </script>
 
 <div class="bg-white border-b border-b-grey-lighter">
@@ -14,12 +24,14 @@
 					class="font-prata uppercase text-[25px] my-1 font-light text-grey-dark tracking-wider antialiased"
 				>
 					<div class="flex">
-						<img
-							class="w-7 h-7 self-center mr-2"
-							src="/images/flags/uruguay.png"
-							alt="uruguay-flag"
-						/>
-						<span class="self-center align-bottom pt-1">Uruguai</span>
+						{#if category.flagImage}
+							<img
+								class="w-7 h-7 self-center mr-2"
+								src="/images/flags/uruguay.png"
+								alt="uruguay-flag"
+							/>
+						{/if}
+						<span class="self-center align-bottom pt-1">{categoryTitle}</span>
 					</div>
 				</h1>
 				<div
@@ -31,8 +43,8 @@
 			</div>
 			<div class="block">
 				<img
-					src="/images/uruguai.webp"
-					alt="Uruguai"
+					src={categoryImage}
+					alt={categoryAltText}
 					class="md:min-h-40 md:max-h-40 max-h-40 h-40 md:full-width-r object-cover"
 				/>
 			</div>

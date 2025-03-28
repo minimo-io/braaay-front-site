@@ -27,7 +27,7 @@
 
 		<!-- Article content -->
 		<div class="md:px-32 px-[30px]">
-			<ArticleIntro />
+			<ArticleIntro title={article.header?.title} content={article.header?.content} />
 
 			<Divider color="blue" />
 

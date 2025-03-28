@@ -8,12 +8,16 @@ import {
 	Sparkles,
 	Shield,
 	Cloud,
-	Beer
+	Beer,
+	Droplets,
+	Gem,
+	Factory,
+	Store
 } from '@lucide/svelte';
-import type { Category } from '$lib/types';
+import type { MenuCategory } from '$lib/types';
 
 export function getSiteCategories(site: 'pt' | 'uy' = 'pt') {
-	const categories: { [key: string]: Category[] } = {
+	const categories: { [key: string]: MenuCategory[] } = {
 		pt: [
 			{
 				id: 8,
@@ -27,7 +31,7 @@ export function getSiteCategories(site: 'pt' | 'uy' = 'pt') {
 					{ id: 12, name: 'Rosés', url: '/vinhos/roses/', icon: Wine },
 					{ id: 5, name: 'Frisantes', url: '/vinhos/frisantes/', icon: Cloud },
 					{ id: 2, name: 'Fortificados', url: '/vinhos/fortificados/', icon: Shield }
-				] as Category[]
+				] as MenuCategory[]
 			},
 			{ id: 101, name: 'Presentes', url: '/presentes/', icon: Gift },
 			{ id: 102, name: 'Kits', url: '/kits/', icon: PackageOpen },
@@ -46,6 +50,42 @@ export function getSiteCategories(site: 'pt' | 'uy' = 'pt') {
 				name: 'Cervezas',
 				url: '/uy/cervezas/',
 				icon: Beer
+			},
+			{
+				id: 8,
+				name: 'Vinos',
+				url: '/uy/vinos/',
+				icon: Wine
+			},
+			{
+				id: 0,
+				name: 'Packs',
+				url: '/uy/packs/',
+				icon: PackageOpen
+			},
+			{
+				id: 0,
+				name: 'Choperas',
+				url: '/uy/choperas/',
+				icon: Droplets
+			},
+			{
+				id: 0,
+				name: 'Cristalería',
+				url: '/uy/cristaleria/',
+				icon: Gem
+			},
+			{
+				id: 0,
+				name: 'Cervecerías',
+				url: '/uy/cervecerias/',
+				icon: Factory
+			},
+			{
+				id: 0,
+				name: 'Bares',
+				url: '/uy/bares/',
+				icon: Store
 			}
 		]
 	};

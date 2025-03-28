@@ -51,6 +51,11 @@ export const PRODUCT_QUERY = gql`
 						}
 					}
 				}
+
+				header {
+					firstSubtitle
+					firstParagraph
+				}
 			}
 		}
 	}

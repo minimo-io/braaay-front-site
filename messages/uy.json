@@ -1,4 +1,11 @@
 {
+	"currencySymbol": "$",
+
+	"outOfStock": "Fuera de stock",
+	"inStock": "Con stock",
+
+	"cashDiscountText": "EN EFECTIVO (5% OFF)",
+
 	"sobreNos": "SOBRE NOSOTROS",
 	"afiliados": "AFILIADOS",
 	"blog": "BLOG",

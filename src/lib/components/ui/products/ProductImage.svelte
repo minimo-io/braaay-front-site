@@ -10,6 +10,8 @@
 
 <div
 	class="p-8 flex items-center"
+	style:--bry-current-gradient-start={colors?.gradientStart}
+	style:--bry-current-gradient-end={colors?.gradientEnd}
 	style="
                 background: linear-gradient(
                     to bottom,

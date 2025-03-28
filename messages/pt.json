@@ -1,4 +1,11 @@
 {
+	"currencySymbol": "R$",
+
+	"outOfStock": "Fora de estoque",
+	"inStock": "Em estoque",
+
+	"cashDiscountText": "NO PIX (5% OFF)",
+
 	"sobreNos": "SOBRE NÓS",
 	"afiliados": "AFILIADOS",
 	"blog": "BLOG",

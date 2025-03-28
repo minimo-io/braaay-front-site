@@ -11,16 +11,16 @@
 	>
 		<!-- logo -->
 		<div class="flex lg:flex-none pr-8">
-			<a href="./" class="">
+			<a href="/" class="">
 				<span class="sr-only">Braaay</span>
 				<img
 					class="h-[38px] w-auto hidden lg:block"
-					src="./images/logo-braaay-desktop.svg"
+					src="/images/logo-braaay-desktop.svg"
 					alt="braaay-logo-desktop"
 				/>
 				<img
 					class="h-[21px] w-auto lg:hidden"
-					src="./images/logo-braaay-mobile.svg"
+					src="/images/logo-braaay-mobile.svg"
 					alt="braaay-logo-mobile"
 				/>
 			</a>

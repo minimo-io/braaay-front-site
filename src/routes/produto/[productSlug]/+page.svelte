@@ -22,6 +22,10 @@
 		content: product!.content,
 		plainExcerpt: '',
 		uri: '',
+		header: {
+			title: product!.header?.title,
+			content: product!.header?.content
+		},
 		author: product!.author as ArticleCreator,
 		featuredImage: {
 			mediaItemUrl: product?.pageCustomColors.bgImage || '',
@@ -48,4 +52,6 @@
 </main>
 
 <!-- Product Article -->
-<BottomArticle {article} twoColumns={true} />
+{#if article.content}
+	<BottomArticle {article} twoColumns={true} />
+{/if}

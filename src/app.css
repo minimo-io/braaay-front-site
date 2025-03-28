@@ -6,9 +6,9 @@
 	/* Defaults */
 	--bry-sun: #bd8836;
 	/* For the main button. Used with gradient for products. */
-	--bry-current-color: #303133;
-	--bry-current-gradient-start: #d1d1d0;
-	--bry-current-gradient-end: #b5b5b3;
+	--bry-current-color: #211a2e;
+	--bry-current-gradient-start: #d2d2d1;
+	--bry-current-gradient-end: #b7b6b4;
 }
 *,
 *::after,
@@ -16,6 +16,14 @@
 	transition: opacity 0.2s linear;
 	/* outline: 2px solid lime; */
 }
+html {
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	display: block;
+}
+/* #braaay {
+	overflow: hidden;
+} */
 @layer base {
 	.shine-effect {
 		--shine-deg: 45deg;
@@ -173,25 +181,25 @@
 	.bry-product-list {
 		@apply container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4;
 	}
-	.bry-product-list > .wine {
+	.bry-product-list .wine {
 		@apply bg-[#EFEFEF] rounded-md shadow-sm p-4 text-center relative h-full flex flex-col;
 	}
-	.bry-product-list > .wine-transparent {
+	.bry-product-list .wine-transparent {
 		@apply bg-white border border-grey-lighter;
 	}
-	.bry-product-list > .wine .wine-button {
+	.bry-product-list .wine .wine-button {
 		@apply bg-white block mt-4 px-4 py-2 rounded-full border border-grey-light text-xs;
 	}
-	.bry-product-list > .wine .wine-title {
+	.bry-product-list .wine .wine-title {
 		@apply text-sm lg:text-base font-prata leading-tight two-lines;
 	}
-	.bry-product-list > .wine .wine-price {
+	.bry-product-list .wine .wine-price {
 		@apply text-base lg:text-xl font-bold mt-2 border-b-2 w-fit border-sun mx-auto;
 	}
-	.bry-product-list > .wine .wine-stars {
+	.bry-product-list .wine .wine-stars {
 		@apply text-base text-grey-medium-dark;
 	}
-	.bry-product-list > .wine .wine-stars > span {
+	.bry-product-list .wine .wine-stars > span {
 		@apply text-yellow-dark;
 	}
 

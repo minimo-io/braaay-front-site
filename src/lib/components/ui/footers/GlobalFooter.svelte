@@ -5,7 +5,7 @@
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 
 	function changeLocale(newLocale: string) {
-		window.location.href = localizeHref(page.url.pathname, { locale: newLocale });
+		window.location.href = localizeHref('/', { locale: newLocale });
 	}
 </script>
 

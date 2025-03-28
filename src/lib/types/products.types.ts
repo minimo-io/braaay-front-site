@@ -2,9 +2,11 @@
 import type { ArticleCreator } from './article-creator.types';
 import type { PageCustomColors } from './page-custom-header.types';
 import type { ImageGeneral } from './image.types';
+import type { GraphQLCategory } from './categories.types';
 // import type { RelayData } from './relay-data.types';
 
 export interface ProductsQueryResult {
+	productCategory: GraphQLCategory;
 	products: { nodes: GraphQLProduct[] };
 }
 
@@ -28,6 +30,10 @@ export interface Product {
 	reviewCount: number;
 	content?: string;
 	shortDescription: string;
+	header?: {
+		title?: string;
+		content?: string;
+	};
 }
 
 export interface GraphQLSingleProduct {
@@ -77,6 +83,10 @@ export interface GraphQLProduct {
 	reviewCount: number;
 	content?: string;
 	shortDescription: string;
+	header?: {
+		firstSubtitle?: string;
+		firstParagraph?: string;
+	};
 }
 
 export function mapProduct(node: GraphQLProduct): Product {
@@ -87,7 +97,7 @@ export function mapProduct(node: GraphQLProduct): Product {
 
 	return {
 		slug: node.slug,
-		floatPrice: parseFloat(node.price.replaceAll('R$', '').replaceAll(' ', '')),
+		floatPrice: parseFloat(node.price.replaceAll('R$', '').replaceAll('$', '').replaceAll(' ', '')),
 		price: node.price,
 		regularPrice: node.regularPrice,
 		stockStatus: node.stockStatus,
@@ -115,6 +125,10 @@ export function mapProduct(node: GraphQLProduct): Product {
 			url: node.featuredImage?.node.mediaItemUrl,
 			altText: node.featuredImage?.node.altText
 		},
-		reviewCount: node.reviewCount
+		reviewCount: node.reviewCount,
+		header: {
+			title: node.header?.firstSubtitle,
+			content: node.header?.firstParagraph
+		}
 	};
 }

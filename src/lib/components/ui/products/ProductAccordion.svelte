@@ -10,6 +10,7 @@
 		Truck
 	} from '@lucide/svelte';
 	import { slide } from 'svelte/transition';
+	import { m } from '$lib/paraglide/messages';
 
 	// Active tab can be 'frete', 'caracteristicas', 'vinicola', or 'pagamento'
 	let activeAccordion: 'frete' | 'caracteristicas' | 'vinicola' | 'pagamento' | null =
@@ -217,27 +218,31 @@
 				<div class="p-4">
 					<div class="text-left">
 						<div class="mb-3">
-							<h4 class="!text-[13px] font-bold mb-2">
-								PIX: <span>R${correctPrice(product.floatPrice * 0.95)}</span> (5% OFF)
+							<h4 class="!text-[13px] mb-2">
+								<span class="font-bold">PIX:</span>
+								<span>{m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)}</span> (5% OFF)
 							</h4>
 							<!-- <p class=" !text-[12px] font-bold"></p> -->
 						</div>
 						<div class="mt-3">
-							<h4 class="!text-[13px] font-bold mb-2">BOLETO: {product.price}</h4>
+							<h4 class="!text-[13px] mb-2">
+								<span class="font-bold">BOLETO:</span>
+								{product.price}
+							</h4>
 						</div>
 						<h3 class="text-[13px] font-bold mb-3">CARTÃO DE CRÉDITO</h3>
 						<ul class="space-y-1">
 							<li class="font-light text-[12px] normal-case">
-								1x R$ <strong>{correctPrice(product.floatPrice / 1)}</strong> sem juros
+								1x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 1)}</strong> sem juros
 							</li>
 							<li class="font-light text-[12px] normal-case">
-								2x R$ <strong>{correctPrice(product.floatPrice / 2)}</strong> sem juros
+								2x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 2)}</strong> sem juros
 							</li>
 							<li class="font-light text-[12px] normal-case">
-								3x R$ <strong>{correctPrice(product.floatPrice / 3)}</strong> sem juros
+								3x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 3)}</strong> sem juros
 							</li>
 							<li class="font-light text-[12px] normal-case">
-								4x R$ <strong>{correctPrice(product.floatPrice / 4)}</strong> sem juros
+								4x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 4)}</strong> sem juros
 							</li>
 						</ul>
 					</div>

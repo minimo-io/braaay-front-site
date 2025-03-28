@@ -43,8 +43,8 @@
 <style global>
 	:root {
 		--bry-current-color: #211a2e;
-		--bry-current-gradient-start: #847f87;
-		--bry-current-gradient-end: #77747d;
+		--bry-current-gradient-start: #d2d2d1;
+		--bry-current-gradient-end: #b7b6b4;
 	}
 
 	/* Loader styles: a fixed top progress bar */
