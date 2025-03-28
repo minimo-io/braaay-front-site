@@ -3,14 +3,20 @@
 	import '@fontsource/prata';
 	import '@fontsource-variable/open-sans';
 
+	// In case we want SSG
+	// import { page } from '$app/state';
+	// import { localizeHref, locales } from '$lib/paraglide/runtime';
+
 	import Footer from '$components/layout/Footer.svelte';
 	import Header from '$components/layout/Header.svelte';
 
 	// Modal
+	// import { urqlClient } from '$stores/urqlClient.state.svelte';
 	import { modalState } from '$stores/modalState.state.svelte';
 	import Modal from '$components/ui/Modal.svelte';
 
 	// Toasts
+
 	import { Toasts } from 'svoast';
 
 	import '../app.css';
@@ -39,6 +45,12 @@
 ></Modal>
 
 <Toasts position="bottom-right" />
+
+<!-- <div style="display:none">
+	{#each locales as locale}
+		<a href={localizeHref(page.url.pathname, { locale })}>{locale}</a>
+	{/each}
+</div> -->
 
 <style global>
 	:root {

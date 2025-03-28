@@ -1,14 +1,13 @@
 // src/routes/blog/[slug]/+page.server.ts
 import type { PageServerLoad } from './$types';
-import { getGqlClient } from '$lib/graphql/client';
 import { POST_QUERY } from '$lib/graphql/queries/index';
 // import { SLUGS_QUERY } from '$lib/graphql/queries/index';
 import { type Post, type GraphQLPostSingle, mapPost } from '$lib/types';
 // import type { EntryGenerator } from './$types';
 import { error } from '@sveltejs/kit';
 // import { building } from '$app/environment';
-import { getLocale } from '$lib/paraglide/runtime';
-import {} from '$lib/paraglide/server';
+
+import { urqlClient } from '$stores/urqlClient.state.svelte';
 
 // export const prerender = true;
 
@@ -34,10 +33,10 @@ import {} from '$lib/paraglide/server';
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
 
-	const locale = getLocale();
+	// const locale = getLocale();
+	// const client = getGqlClient(locale);
 
-	const client = getGqlClient(locale);
-	const result = await client.query<GraphQLPostSingle>(POST_QUERY, { slug }).toPromise();
+	const result = await urqlClient.client.query<GraphQLPostSingle>(POST_QUERY, { slug }).toPromise();
 
 	if (result.error || !result.data || !result.data.post) {
 		// throw new Error('Failed to fetch the post');

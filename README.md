@@ -19,6 +19,9 @@ npm run dev -- --open
 
 - GraphQL:
 
+  - Establish a timeout for urql cache
+
+  - Category on mobile se rompió sin enviar la imagen del pais
   - Preever flagImage para Category (crear y probar, lo vamos a usar solo para pais)
     - También agregar un campo count de productos.
   - Artículo de categorías
@@ -100,7 +103,7 @@ npm run dev -- --open
 ### Bugs
 
 - Url inexistentes no están yendo a 404, sino a catagory: http://localhost:4000/asdasd/
-- Evitar doble query desde el layout.server
+
 - A veces da error, la categoría vinhos
   - Si voy al blog en portugues, cambio a español y después voy la categoría vinhos da error
 - The selective top bar is not working well in preview... should change on articles (works ok if refresh the page, not the reactivity)

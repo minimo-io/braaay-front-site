@@ -1,6 +1,6 @@
 // src/routes/blog/[slug]/+page.server.ts
 import type { PageServerLoad } from './$types';
-import { getGqlClient } from '$lib/graphql/client';
+import { urqlClient } from '$stores/urqlClient.state.svelte';
 import { PRODUCT_QUERY } from '$lib/graphql/queries/index';
 // import { SLUGS_QUERY } from '$lib/graphql/queries/index';
 import { type Product, type GraphQLSingleProduct, mapProduct } from '$lib/types';
@@ -15,8 +15,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	// const locale = getLocale();
 
-	const client = getGqlClient();
-	const result = await client
+	const result = await urqlClient.client
 		.query<GraphQLSingleProduct>(PRODUCT_QUERY, { slug: productSlug })
 		.toPromise();
 

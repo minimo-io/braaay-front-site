@@ -1,15 +1,17 @@
 // src/routes/blog/+page.server.ts
 import type { PageServerLoad } from './$types';
-import { getGqlClient } from '$lib/graphql/client';
+import { urqlClient } from '$stores/urqlClient.state.svelte';
 
 import { LATEST_POSTS_QUERY } from '$lib/graphql/queries/index';
 
 import { type Post, type PostsQueryResult, type GraphQLPostFromList, mapPost } from '$lib/types';
 
 export const load: PageServerLoad = async () => {
-	const gqlClient = getGqlClient();
+	// console.log('ANOTHER_URQL', urqlClient);
 
-	const result = await gqlClient
+	// const gqlClient = getGqlClient();
+
+	const result = await urqlClient.client
 		.query<PostsQueryResult>(LATEST_POSTS_QUERY, { first: 1500 })
 		.toPromise();
 

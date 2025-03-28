@@ -1,6 +1,6 @@
 // src/routes/[categorySlug]/+page.server.ts
 import type { LayoutServerLoad } from './$types';
-import { getGqlClient } from '$lib/graphql/client';
+import { urqlClient } from '$stores/urqlClient.state.svelte';
 import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/index';
 import {
 	mapProduct,
@@ -17,13 +17,11 @@ export const load: LayoutServerLoad = async ({ params }) => {
 	const { subcategorySlug } = params;
 	let { categorySlug } = params;
 
-	const client = getGqlClient();
-
 	if (subcategorySlug && subcategorySlug !== '') {
 		categorySlug = subcategorySlug;
 	}
 
-	const result = await client
+	const result = await urqlClient.client
 		.query<ProductsQueryResult>(CATEGORY_PRODUCTS, {
 			first: 10,
 			categorySlug: categorySlug,

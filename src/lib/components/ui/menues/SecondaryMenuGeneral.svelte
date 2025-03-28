@@ -6,7 +6,7 @@
 	let currentCategories = getSiteCategories(getLocale());
 </script>
 
-<div class="bry-secondary-menu">
+<div class="bry-secondary-menu" data-sveltekit-preload-data="false">
 	<nav class="container max-w-screen-lg py-2 mx-[30px] lg:mx-auto">
 		<ul class="flex space-x-4">
 			{#each currentCategories.slice(0, 4) as category, i}
