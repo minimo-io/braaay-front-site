@@ -25,7 +25,7 @@
 						{category.name}
 
 						{#if category.subcategories}
-							<ChevronDown class="ml-1 h-4 top-[2px] relative" />
+							<ChevronDown class="ml-1 h-4 top-[2px] relative hidden md:flex" />
 						{/if}
 					</a>
 
@@ -61,110 +61,112 @@
 								</div>
 
 								<!-- Second part (Countries for BR) -->
-								<div class="flex flex-1 text-xs px-3 flex-col">
-									<a
-										href="/"
-										class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
-									>
-										<div class="text-left self-center flex align-middle justify-center">
-											<img
-												class="w-4 h-4 self-center mr-2"
-												src="/images/flags/uruguay.png"
-												alt="uruguay-flag"
-											/>
-											<span class="self-center">Uruguai</span>
-										</div>
-										<div class="text-grey-medium flex flex-row align-middle self-center">
-											<!-- <span class="self-center mr-3 text-xs">251</span> -->
-											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
-										</div>
-									</a>
-									<a
-										href="/"
-										class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
-									>
-										<div class="text-left self-center flex align-middle justify-center">
-											<img
-												class="w-4 h-4 self-center mr-2"
-												src="/images/flags/brazil.png"
-												alt="uruguay-flag"
-											/>
-											<span class="self-center">Brasil</span>
-										</div>
-										<div class="text-grey-medium flex flex-row align-middle self-center">
-											<!-- <span class="self-center mr-3 text-xs">142</span> -->
-											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
-										</div>
-									</a>
-									<a
-										href="/"
-										class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
-									>
-										<div class="text-left self-center flex align-middle justify-center">
-											<img
-												class="w-4 h-4 self-center mr-2"
-												src="/images/flags/chile.png"
-												alt="uruguay-flag"
-											/>
-											<span class="self-center">Chile</span>
-										</div>
-										<div class="text-grey-medium flex flex-row align-middle self-center">
-											<!-- <span class="self-center mr-3 text-xs">89</span> -->
-											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
-										</div>
-									</a>
-									<a
-										href="/"
-										class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
-									>
-										<div class="text-left self-center flex align-middle justify-center">
-											<img
-												class="w-4 h-4 self-center mr-2"
-												src="/images/flags/argentina.png"
-												alt="uruguay-flag"
-											/>
-											<span class="self-center">Argentina</span>
-										</div>
-										<div class="text-grey-medium flex flex-row align-middle self-center">
-											<!-- <span class="self-center mr-3 text-xs">142</span> -->
-											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
-										</div>
-									</a>
-									<a
-										href="/"
-										class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
-									>
-										<div class="text-left self-center flex align-middle justify-center">
-											<img
-												class="w-4 h-4 self-center mr-2"
-												src="/images/flags/portugal.png"
-												alt="portugal-flag"
-											/>
-											<span class="self-center">Portugal</span>
-										</div>
-										<div class="text-grey-medium flex flex-row align-middle self-center">
-											<!-- <span class="self-center mr-3 text-xs">142</span> -->
-											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
-										</div>
-									</a>
-									<a
-										href="/"
-										class="px-4 py-3 text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
-									>
-										<div class="text-left self-center flex align-middle justify-center">
-											<img
-												class="w-4 h-4 self-center mr-2"
-												src="/images/flags/italy.png"
-												alt="italy-flag"
-											/>
-											<span class="self-center">Italia</span>
-										</div>
-										<div class="text-grey-medium flex flex-row align-middle self-center">
-											<!-- <span class="self-center mr-3 text-xs">142</span> -->
-											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
-										</div>
-									</a>
-								</div>
+								{#if getLocale() == 'pt'}
+									<div class="flex flex-1 text-xs px-3 flex-col">
+										<a
+											href="/pais/uruguai/"
+											class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
+										>
+											<div class="text-left self-center flex align-middle justify-center">
+												<img
+													class="w-4 h-4 self-center mr-2"
+													src="/images/flags/uruguay.png"
+													alt="uruguay-flag"
+												/>
+												<span class="self-center">Uruguai</span>
+											</div>
+											<div class="text-grey-medium flex flex-row align-middle self-center">
+												<!-- <span class="self-center mr-3 text-xs">251</span> -->
+												<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+											</div>
+										</a>
+										<a
+											href="/pais/brasil"
+											class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
+										>
+											<div class="text-left self-center flex align-middle justify-center">
+												<img
+													class="w-4 h-4 self-center mr-2"
+													src="/images/flags/brazil.png"
+													alt="uruguay-flag"
+												/>
+												<span class="self-center">Brasil</span>
+											</div>
+											<div class="text-grey-medium flex flex-row align-middle self-center">
+												<!-- <span class="self-center mr-3 text-xs">142</span> -->
+												<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+											</div>
+										</a>
+										<a
+											href="/pais/chile/"
+											class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
+										>
+											<div class="text-left self-center flex align-middle justify-center">
+												<img
+													class="w-4 h-4 self-center mr-2"
+													src="/images/flags/chile.png"
+													alt="uruguay-flag"
+												/>
+												<span class="self-center">Chile</span>
+											</div>
+											<div class="text-grey-medium flex flex-row align-middle self-center">
+												<!-- <span class="self-center mr-3 text-xs">89</span> -->
+												<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+											</div>
+										</a>
+										<a
+											href="/pais/argentina/"
+											class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
+										>
+											<div class="text-left self-center flex align-middle justify-center">
+												<img
+													class="w-4 h-4 self-center mr-2"
+													src="/images/flags/argentina.png"
+													alt="uruguay-flag"
+												/>
+												<span class="self-center">Argentina</span>
+											</div>
+											<div class="text-grey-medium flex flex-row align-middle self-center">
+												<!-- <span class="self-center mr-3 text-xs">142</span> -->
+												<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+											</div>
+										</a>
+										<a
+											href="/pais/portugal/"
+											class="px-4 py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
+										>
+											<div class="text-left self-center flex align-middle justify-center">
+												<img
+													class="w-4 h-4 self-center mr-2"
+													src="/images/flags/portugal.png"
+													alt="portugal-flag"
+												/>
+												<span class="self-center">Portugal</span>
+											</div>
+											<div class="text-grey-medium flex flex-row align-middle self-center">
+												<!-- <span class="self-center mr-3 text-xs">142</span> -->
+												<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+											</div>
+										</a>
+										<a
+											href="/pais/italia/"
+											class="px-4 py-3 text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect"
+										>
+											<div class="text-left self-center flex align-middle justify-center">
+												<img
+													class="w-4 h-4 self-center mr-2"
+													src="/images/flags/italy.png"
+													alt="italy-flag"
+												/>
+												<span class="self-center">Italia</span>
+											</div>
+											<div class="text-grey-medium flex flex-row align-middle self-center">
+												<!-- <span class="self-center mr-3 text-xs">142</span> -->
+												<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+											</div>
+										</a>
+									</div>
+								{/if}
 							</div>
 						</div>
 					{/if}

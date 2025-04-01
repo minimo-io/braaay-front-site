@@ -9,9 +9,15 @@
 				<img
 					src="/images/primeira-compra-mobile.png"
 					alt="primeira-compra-mobile"
-					class="absolute left-1/2 -translate-x-1/2 min-h-[65px] max-h-[65px] min-w-fit"
+					class="absolute left-1/2 -translate-x-1/2 min-h-[] max-h-[65px] min-w-fit"
 				/>
 			</figure>
 		</div>
 	</a>
 </div>
+
+<style lang="postcss">
+	.bry-banner {
+		@apply border-b border-grey-light;
+	}
+</style>

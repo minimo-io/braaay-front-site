@@ -7,10 +7,6 @@ import { LATEST_POSTS_QUERY } from '$lib/graphql/queries/index';
 import { type Post, type PostsQueryResult, type GraphQLPostFromList, mapPost } from '$lib/types';
 
 export const load: PageServerLoad = async () => {
-	// console.log('ANOTHER_URQL', urqlClient);
-
-	// const gqlClient = getGqlClient();
-
 	const result = await getUrqlClient()
 		.client.query<PostsQueryResult>(LATEST_POSTS_QUERY, { first: 1500 })
 		.toPromise();

@@ -24,21 +24,24 @@
 					class="font-prata uppercase text-[25px] my-1 font-light text-grey-dark tracking-wider antialiased"
 				>
 					<div class="flex">
-						{#if category.flagImage}
+						{#if category.header.icon && category.header.icon.url}
 							<img
-								class="w-7 h-7 self-center mr-2"
-								src="/images/flags/uruguay.png"
-								alt="uruguay-flag"
+								class="w-5 h-5 md:w-6 md:h-6 self-center mr-2"
+								src={category.header.icon.url}
+								alt={category.header.icon.altText || 'country-image'}
 							/>
 						{/if}
-						<span class="self-center align-bottom pt-1">{categoryTitle}</span>
+						<span
+							class="self-center font-roboto font-extrabold align-bottom pt-1 text-left text-[18px] md:text-[22px] truncate"
+							>{categoryTitle}</span
+						>
 					</div>
 				</h1>
 				<div
 					class="flex flex-col gap-1 md:flex-row text-grey-medium-dark font-roboto text-[14px] antialiased"
 				>
 					<span>36 produtos</span>
-					<MoreInfoButton title="CONHEÇA MAIS" />
+					<MoreInfoButton title="CONHEÇA&nbsp;MAIS" />
 				</div>
 			</div>
 			<div class="block">

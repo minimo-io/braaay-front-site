@@ -17,13 +17,18 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
-- Continua error en Imagen mobile de promo
 - GraphQL:
 
-  - Category on mobile se rompió sin enviar la imagen del pais
-  - Preever flagImage para Category (crear y probar, lo vamos a usar solo para pais)
-    - También agregar un campo count de productos.
+  - ABSTRAER EL GRAPQL in Product ...
+  - También agregar un campo count de productos.
+
   - Artículo de categorías
+  - CREAR UM MEGA-COMPONENTE, PARA TODAS LAS RUTAS QUE EN REALIDAD TIENE CATALOGO DE CATEGORIA y MISMO HEADER
+    - Category
+    - Subcategory
+    - Country
+    - Vinicola
+    - Uva
   - Traer otras informaciones de la categoria de product (catalog)
   - Tener otro "data" para el resto de los productos de la homepage.
   - Ya que vamos a editar el ouput de graphql, creo que todo lo relacionado a WPBakery debería desaparecer desde el origen, con una función PHP (o convertirse en HTML via una mutation del graphql).
@@ -111,6 +116,8 @@ npm run dev -- --open
   Probablemente también causa en el checkout (mismo footer).
 
 ### v2
+
+- Sub-menu (ahora de pais) tiene que estar configurado en algun lugar
 
 - Establish URQL SSR cache invalidations, (via shared reactive state/store).
 

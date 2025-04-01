@@ -399,9 +399,12 @@ html {
 
 .bry-secondary-menu {
 	overflow-x: auto; /* Enable horizontal scrolling */
+	@apply overflow-hidden md:overflow-visible;
+	/* overflow-y: hidden; */
 	-webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 	scroll-behavior: smooth; /* Smooth scroll behavior */
 	@apply border-t border-t-grey-lighter border-b border-b-grey-lighter;
+
 	/* @apply shadow-sm; */
 }
 .bry-secondary-menu a {

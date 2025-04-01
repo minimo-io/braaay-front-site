@@ -17,8 +17,8 @@ export interface Category {
 	header: {
 		title: string;
 		image?: ImageGeneral;
+		icon?: ImageGeneral;
 	};
-	flagImage?: ImageGeneral;
 }
 
 export interface GraphQLCategory {
@@ -26,6 +26,12 @@ export interface GraphQLCategory {
 	categoryHeader: {
 		customCatalogTitle: string;
 		customCatalogImage: {
+			node: {
+				mediaItemUrl: string;
+				altText: string;
+			};
+		};
+		customCatalogIcon: {
 			node: {
 				mediaItemUrl: string;
 				altText: string;
@@ -42,6 +48,10 @@ export function mapCategory(category: GraphQLCategory): Category {
 			image: {
 				url: category.categoryHeader?.customCatalogImage?.node?.mediaItemUrl,
 				altText: category.categoryHeader?.customCatalogImage?.node?.altText
+			},
+			icon: {
+				url: category.categoryHeader?.customCatalogIcon?.node?.mediaItemUrl,
+				altText: category.categoryHeader?.customCatalogIcon?.node?.altText
 			}
 		}
 	};

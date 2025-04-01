@@ -1,31 +1,27 @@
 // src/routes/[categorySlug]/+page.server.ts
-import type { LayoutServerLoad } from './$types';
+import type { PageServerLoad } from './$types';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
-import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/index';
+import { COUNTRY_PRODUCTS } from '$lib/graphql/queries/index';
 import {
 	mapProduct,
-	mapCategory,
+	// mapCountry,
 	type Category,
 	type GraphQLProduct,
 	type Product,
-	type ProductsForCategoryQueryResult
+	type ProductsForCountryQueryResult,
+	mapCategory
 } from '$lib/types/index';
 
 import { error } from '@sveltejs/kit';
 
-export const load: LayoutServerLoad = async ({ params }) => {
-	const { subcategorySlug } = params;
-	let { categorySlug } = params;
-
-	if (subcategorySlug && subcategorySlug !== '') {
-		categorySlug = subcategorySlug;
-	}
+export const load: PageServerLoad = async ({ params }) => {
+	const { countrySlug } = params;
 
 	const result = await getUrqlClient()
-		.client.query<ProductsForCategoryQueryResult>(CATEGORY_PRODUCTS, {
+		.client.query<ProductsForCountryQueryResult>(COUNTRY_PRODUCTS, {
 			first: 10,
-			categorySlug: categorySlug,
-			categoryId: categorySlug
+			countrySlug: countrySlug,
+			taxonomyTerms: [countrySlug]
 		})
 		.toPromise();
 
@@ -35,7 +31,8 @@ export const load: LayoutServerLoad = async ({ params }) => {
 	}
 
 	try {
-		const productCategory: Category = mapCategory(result.data.productCategory);
+		const category: Category = mapCategory(result.data.allPaPais.nodes[0]);
+
 		// Get products para of the query
 		const products: Product[] = result.data.products.nodes.map((product: GraphQLProduct) =>
 			mapProduct(product)
@@ -43,7 +40,7 @@ export const load: LayoutServerLoad = async ({ params }) => {
 
 		return {
 			products: products,
-			category: productCategory
+			category: category
 		};
 	} catch (err) {
 		throw error(404, `Failed to fetch the category: ${err}`);

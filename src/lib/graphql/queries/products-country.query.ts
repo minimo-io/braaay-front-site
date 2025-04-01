@@ -1,21 +1,23 @@
+// Country list products query
+
 import { gql } from '@urql/core';
 import { CATEGORY_HEADER_FRAGMENT } from './fragments/cagegoryHeader.query.fragment';
 
-export const CATEGORY_PRODUCTS = gql`
-	query LatestProducts($first: Int!, $categorySlug: String!, $categoryId: ID!) {
-		productCategory(id: $categoryId, idType: SLUG) {
-			name
-			${CATEGORY_HEADER_FRAGMENT}
-			description
-			image {
-				mediaItemUrl
-				altText
+export const COUNTRY_PRODUCTS = gql`
+	query LatestProducts($first: Int!, $countrySlug: String!) {
+		allPaPais(where: { slug: [$countrySlug] }) {
+			nodes {
+				name
+				${CATEGORY_HEADER_FRAGMENT}
 			}
 		}
 
 		products(
 			first: $first
-			where: { category: $categorySlug, orderby: { field: DATE, order: DESC } }
+			where: {
+				taxonomyFilter: { filters: { taxonomy: PA_PAIS, terms: [$countrySlug] } }
+				orderby: { field: DATE, order: DESC }
+			}
 		) {
 			nodes {
 				... on SimpleProduct {

@@ -5,8 +5,15 @@ import type { ImageGeneral } from './image.types';
 import type { GraphQLCategory } from './categories.types';
 // import type { RelayData } from './relay-data.types';
 
-export interface ProductsQueryResult {
+export interface ProductsForCategoryQueryResult {
 	productCategory: GraphQLCategory;
+	products: { nodes: GraphQLProduct[] };
+}
+
+export interface ProductsForCountryQueryResult {
+	allPaPais: {
+		nodes: GraphQLCategory[];
+	};
 	products: { nodes: GraphQLProduct[] };
 }
 

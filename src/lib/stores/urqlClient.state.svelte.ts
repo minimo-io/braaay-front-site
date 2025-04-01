@@ -30,6 +30,7 @@ export const urqlClientPt = $state({
 		url: PUBLIC_GRAPHQL_SERVER_PT,
 		exchanges: [cacheExchange, fetchExchange, loggerExchange],
 		requestPolicy: 'cache-first',
+		// requestPolicy: 'network-only',
 		fetchOptions: () => {
 			return {};
 		}
