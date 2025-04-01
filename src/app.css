@@ -399,7 +399,7 @@ html {
 
 .bry-secondary-menu {
 	overflow-x: auto; /* Enable horizontal scrolling */
-	@apply overflow-hidden md:overflow-visible;
+	@apply overflow-y-hidden md:overflow-y-visible;
 	/* overflow-y: hidden; */
 	-webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 	scroll-behavior: smooth; /* Smooth scroll behavior */
