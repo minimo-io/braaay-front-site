@@ -14,6 +14,8 @@ export interface MenuCategory {
 
 export interface Category {
 	name: string;
+	description: string;
+	count: number;
 	header: {
 		title: string;
 		image?: ImageGeneral;
@@ -23,6 +25,9 @@ export interface Category {
 
 export interface GraphQLCategory {
 	name: string;
+	description: string;
+	count: number;
+
 	categoryHeader: {
 		customCatalogTitle: string;
 		customCatalogImage: {
@@ -43,6 +48,9 @@ export interface GraphQLCategory {
 export function mapCategory(category: GraphQLCategory): Category {
 	return {
 		name: category.name,
+		description: category.description,
+		count: category.count || 0,
+
 		header: {
 			title: category.categoryHeader?.customCatalogTitle || '',
 			image: {

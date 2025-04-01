@@ -19,16 +19,17 @@ npm run dev -- --open
 
 - GraphQL:
 
-  - ABSTRAER EL GRAPQL in Product ...
-  - También agregar un campo count de productos.
-
-  - Artículo de categorías
   - CREAR UM MEGA-COMPONENTE, PARA TODAS LAS RUTAS QUE EN REALIDAD TIENE CATALOGO DE CATEGORIA y MISMO HEADER
+
     - Category
     - Subcategory
     - Country
     - Vinicola
     - Uva
+    - Tag
+
+  - Artículo de categorías
+
   - Traer otras informaciones de la categoria de product (catalog)
   - Tener otro "data" para el resto de los productos de la homepage.
   - Ya que vamos a editar el ouput de graphql, creo que todo lo relacionado a WPBakery debería desaparecer desde el origen, con una función PHP (o convertirse en HTML via una mutation del graphql).
@@ -95,6 +96,10 @@ npm run dev -- --open
 - ERROR
 
   - No tiene traducciones, `+error.svelte`
+
+- HOME
+
+  - Agregar la lista de paises
 
 - EXTRAS
   - En product page cuando no existe artículo tenemos que mostrar algo en esa sección.

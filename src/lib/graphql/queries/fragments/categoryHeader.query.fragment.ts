@@ -1,4 +1,7 @@
 export const CATEGORY_HEADER_FRAGMENT = `
+		name
+		description
+		count
 		categoryHeader {
 			customCatalogTitle
 			customCatalogImage {

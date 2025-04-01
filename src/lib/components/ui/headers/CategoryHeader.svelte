@@ -40,7 +40,7 @@
 				<div
 					class="flex flex-col gap-1 md:flex-row text-grey-medium-dark font-roboto text-[14px] antialiased"
 				>
-					<span>36 produtos</span>
+					<span>{category.count} produtos</span>
 					<MoreInfoButton title="CONHEÇA&nbsp;MAIS" />
 				</div>
 			</div>

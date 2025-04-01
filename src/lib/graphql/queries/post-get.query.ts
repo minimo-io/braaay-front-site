@@ -1,30 +1,18 @@
+// src/lib/graphql/queries/post-get.query.ts
 import { gql } from '@urql/core';
+import { POST_QUERY_FRAGMENT } from './fragments/posts.query.fragment';
 
 export const POST_QUERY = gql`
 	query GetPost($slug: ID!) {
 		post(id: $slug, idType: SLUG) {
-			id
+			
+			${POST_QUERY_FRAGMENT}
+
 			slug
 			status
 			date
-			modified
-			title
 			content
-			excerpt
-			author {
-				node {
-					name
-					avatar {
-						url
-					}
-				}
-			}
-			featuredImage {
-				node {
-					mediaItemUrl
-					altText
-				}
-			}
+
 			header {
 				firstSubtitle
 				firstParagraph
