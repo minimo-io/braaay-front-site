@@ -15,6 +15,7 @@
 	import { CashbackButton } from '$components/ui/buttons/index';
 	import SearchBar from '../search/SearchBar.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
+	import GlobalBanner from './GlobalBanner.svelte';
 
 	// Using runes for reactive state
 	let SecondaryMenuComponent = $state(
@@ -126,20 +127,6 @@
 	<!-- Secondary menu -->
 	<SecondaryMenuComponent />
 </header>
-<div class="border-b border-grey-light">
-	<a href="/vinhos/">
-		<img src="/images/primeira-compra-1.png" alt="primeira-compra" class="hidden lg:inline" />
 
-		<div class="relative overflow-hidden lg:hidden">
-			<figure
-				class=" flex items-center justify-center w-full h-[65px] max-h-[65px] overflow-hidden"
-			>
-				<img
-					src="/images/primeira-compra-mobile.png"
-					alt="primeira-compra-mobile"
-					class="absolute left-1/2 -translate-x-1/2 max-h-[65px] min-w-fit"
-				/>
-			</figure>
-		</div>
-	</a>
-</div>
+<!-- Global Banner -->
+<GlobalBanner></GlobalBanner>

@@ -89,7 +89,7 @@
 
 						<div class="flex flex-col md:flex-row justify-between align-middle">
 							<div class="flex w-full md:w-[50%] md:pr-10">
-								<img src="./images/wines/Deica-2-1.webp" alt="Product" class="w-16 mr-4" />
+								<img src="/images/wines/Deica-2-1.webp" alt="Product" class="w-16 mr-4" />
 								<div class="self-center">
 									<p class="font-medium font-roboto leading-5">
 										Preludio Barrel Select Familia Deicas
