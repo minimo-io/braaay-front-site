@@ -1,6 +1,6 @@
 // src/routes/blog/+page.server.ts
 import type { PageServerLoad } from './$types';
-import { urqlClient } from '$stores/urqlClient.state.svelte';
+import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 
 import { LATEST_POSTS_QUERY } from '$lib/graphql/queries/index';
 
@@ -11,8 +11,8 @@ export const load: PageServerLoad = async () => {
 
 	// const gqlClient = getGqlClient();
 
-	const result = await urqlClient.client
-		.query<PostsQueryResult>(LATEST_POSTS_QUERY, { first: 1500 })
+	const result = await getUrqlClient()
+		.client.query<PostsQueryResult>(LATEST_POSTS_QUERY, { first: 1500 })
 		.toPromise();
 
 	if (result.error || !result.data) {

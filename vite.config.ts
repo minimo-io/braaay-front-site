@@ -4,6 +4,8 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [
+		sveltekit(),
+
 		paraglideVitePlugin({
 			project: './project.inlang',
 			outdir: './src/lib/paraglide',
@@ -51,8 +53,7 @@ export default defineConfig({
 					]
 				}
 			]
-		}),
-		sveltekit()
+		})
 	],
 	build: {
 		cssCodeSplit: true

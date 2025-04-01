@@ -7,7 +7,7 @@ import { type Post, type GraphQLPostSingle, mapPost } from '$lib/types';
 import { error } from '@sveltejs/kit';
 // import { building } from '$app/environment';
 
-import { urqlClient } from '$stores/urqlClient.state.svelte';
+import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 
 // export const prerender = true;
 
@@ -36,7 +36,9 @@ export const load: PageServerLoad = async ({ params }) => {
 	// const locale = getLocale();
 	// const client = getGqlClient(locale);
 
-	const result = await urqlClient.client.query<GraphQLPostSingle>(POST_QUERY, { slug }).toPromise();
+	const result = await getUrqlClient()
+		.client.query<GraphQLPostSingle>(POST_QUERY, { slug })
+		.toPromise();
 
 	if (result.error || !result.data || !result.data.post) {
 		// throw new Error('Failed to fetch the post');

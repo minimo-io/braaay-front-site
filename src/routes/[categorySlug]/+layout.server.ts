@@ -1,6 +1,6 @@
 // src/routes/[categorySlug]/+page.server.ts
 import type { LayoutServerLoad } from './$types';
-import { urqlClient } from '$stores/urqlClient.state.svelte';
+import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/index';
 import {
 	mapProduct,
@@ -21,8 +21,8 @@ export const load: LayoutServerLoad = async ({ params }) => {
 		categorySlug = subcategorySlug;
 	}
 
-	const result = await urqlClient.client
-		.query<ProductsQueryResult>(CATEGORY_PRODUCTS, {
+	const result = await getUrqlClient()
+		.client.query<ProductsQueryResult>(CATEGORY_PRODUCTS, {
 			first: 10,
 			categorySlug: categorySlug,
 			categoryId: categorySlug
@@ -36,15 +36,19 @@ export const load: LayoutServerLoad = async ({ params }) => {
 
 	// console.log('GQL_CAT', result.data.productCategory);
 	// Get productCategory part of the query
-	const productCategory: Category = mapCategory(result.data.productCategory);
 
-	// Get products para of the query
-	const products: Product[] = result.data.products.nodes.map((product: GraphQLProduct) =>
-		mapProduct(product)
-	);
+	try {
+		const productCategory: Category = mapCategory(result.data.productCategory);
+		// Get products para of the query
+		const products: Product[] = result.data.products.nodes.map((product: GraphQLProduct) =>
+			mapProduct(product)
+		);
 
-	return {
-		products: products,
-		category: productCategory
-	};
+		return {
+			products: products,
+			category: productCategory
+		};
+	} catch (err) {
+		throw error(404, `Failed to fetch the category: ${err}`);
+	}
 };

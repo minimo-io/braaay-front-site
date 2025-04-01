@@ -17,9 +17,8 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
+- Continua error en Imagen mobile de promo
 - GraphQL:
-
-  - Establish a timeout for urql cache
 
   - Category on mobile se rompió sin enviar la imagen del pais
   - Preever flagImage para Category (crear y probar, lo vamos a usar solo para pais)
@@ -113,6 +112,8 @@ npm run dev -- --open
 
 ### v2
 
+- Establish URQL SSR cache invalidations, (via shared reactive state/store).
+
 - Al cliquear en el banner grande de primera compra, tenemos que ofrecer aplicar el descuento al carrito automáticamente (como hace wine.com)
 - Crear una forma mas general de obtener el valor con e descuento mas barato (se usa en ProductAccordion) un calculo my básico.
 
@@ -161,3 +162,4 @@ npm run dev -- --open
   - https://www.vinoverace.com.br/ - BR SMALL STORE
   - https://bacan.uy/ - UY
   - https://www.vineria9.com.br/ - BR LOCAL E-COMMERCE
+  - https://www.divvino.com.br/ - CLUBE
