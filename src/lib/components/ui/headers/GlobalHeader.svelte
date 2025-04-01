@@ -129,4 +129,4 @@
 </header>
 
 <!-- Global Banner -->
-<GlobalBanner></GlobalBanner>
+<GlobalBanner />
