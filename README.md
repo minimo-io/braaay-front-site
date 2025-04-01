@@ -19,16 +19,17 @@ npm run dev -- --open
 
 - GraphQL:
 
-  - CREAR UM MEGA-COMPONENTE, PARA TODAS LAS RUTAS QUE EN REALIDAD TIENE CATALOGO DE CATEGORIA y MISMO HEADER
+  - Artículo de categorías
+    - Colores del artículo no queda bien
+  - Taxonomias
 
-    - Category
-    - Subcategory
-    - Country
+    - Category - OK
+    - Subcategory - OK
+    - Country - OK
     - Vinicola
+    - Harmonizacoes
     - Uva
     - Tag
-
-  - Artículo de categorías
 
   - Traer otras informaciones de la categoria de product (catalog)
   - Tener otro "data" para el resto de los productos de la homepage.

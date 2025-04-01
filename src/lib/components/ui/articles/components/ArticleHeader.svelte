@@ -5,6 +5,7 @@
 		fullWidth: boolean;
 		useCurrentColor?: boolean; // -- use a gradient for header bg color or not
 		article: Post;
+		showAuthor?: boolean;
 	}
 	let { fullWidth, useCurrentColor = false, article }: Props = $props();
 
@@ -61,6 +62,7 @@
 		</h3>
 
 		<h2 class="bry-header-title">{article.title}</h2>
+
 		<ArticleAuthor author={article.author} />
 	</div>
 {/if}

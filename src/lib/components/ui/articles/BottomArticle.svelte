@@ -13,10 +13,11 @@
 	interface Props {
 		twoColumns: boolean;
 		article: Post;
+		showAuthor?: boolean;
 	}
 
 	let { twoColumns, article }: Props = $props();
-	const content = $state(article.content || '');
+	const content = $derived(article.content || '');
 </script>
 
 <article class="relative bg-white py-10 mt-14">

@@ -1,18 +1,33 @@
 <!-- src/routes/[countrySlug]/+page.svelte -->
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-	import FilteringMenu from '$components/ui/menues/FilteringMenu.svelte';
-	// import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
-	import SortingMenu from '$components/ui/menues/SortingMenu.svelte';
-	import CategoryHeader from '$components/ui/headers/CategoryHeader.svelte';
-	import WineBox from '$components/ui/products/WineBox.svelte';
-	import type { Category, Product } from '$lib/types';
-	import { localizeHref } from '$lib/paraglide/runtime.js';
+	import type { Category, Product, Post, ArticleCreator } from '$lib/types';
+	import GlobalCategory from '$components/layout/GlobalCategory.svelte';
+	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 
 	const { data } = $props();
 
 	let products: Product[] = $derived(data.products);
 	let category: Category = $derived(data.category);
+
+	let article: Post = $derived({
+		id: '0',
+		title: category.header.title,
+		date: '',
+		modified: '',
+		excerpt: '',
+		content: category.description,
+		plainExcerpt: '',
+		uri: '',
+		header: {
+			title: category.header.firstTitle,
+			content: category.header.firstParagraph
+		},
+		author: products![0].author as ArticleCreator,
+		featuredImage: {
+			mediaItemUrl: category.header.image?.url || '',
+			altText: category.header.image?.altText || ''
+		}
+	});
 </script>
 
 <svelte:head>
@@ -20,33 +35,9 @@
 	<meta name="description" content="" />
 </svelte:head>
 
-<main>
-	<CategoryHeader {category} />
-
-	<FilteringMenu />
-
-	<SortingMenu />
-
-	<div class="max-w-screen-lg mx-[1.5rem] md:mx-auto mt-1 mb-[2rem]">
-		<div class="bry-product-list">
-			{#each products as product}
-				<span in:fade out:fade>
-					<WineBox
-						image={{
-							src: product.image.url
-						}}
-						wine={{
-							title: product.title,
-							price: product.price,
-							url: localizeHref(`/produto/${product.slug}/`),
-							score: product.averageRating
-						}}
-					/>
-				</span>
-			{/each}
-		</div>
-	</div>
-</main>
+<GlobalCategory {products} {category} />
 
 <!-- Category article -->
-<!-- <BottomArticle twoColumns={false} /> -->
+{#if category.description}
+	<BottomArticle {article} twoColumns={false} />
+{/if}

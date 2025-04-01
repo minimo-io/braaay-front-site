@@ -20,6 +20,8 @@ export interface Category {
 		title: string;
 		image?: ImageGeneral;
 		icon?: ImageGeneral;
+		firstParagraph?: string;
+		firstTitle?: string;
 	};
 }
 
@@ -27,7 +29,10 @@ export interface GraphQLCategory {
 	name: string;
 	description: string;
 	count: number;
-
+	header: {
+		firstParagraph: string;
+		firstSubtitle: string;
+	};
 	categoryHeader: {
 		customCatalogTitle: string;
 		customCatalogImage: {
@@ -60,7 +65,9 @@ export function mapCategory(category: GraphQLCategory): Category {
 			icon: {
 				url: category.categoryHeader?.customCatalogIcon?.node?.mediaItemUrl,
 				altText: category.categoryHeader?.customCatalogIcon?.node?.altText
-			}
+			},
+			firstParagraph: category.header.firstParagraph,
+			firstTitle: category.header.firstSubtitle
 		}
 	};
 }
