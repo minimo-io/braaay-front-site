@@ -110,7 +110,7 @@
 				url="/account"
 				type="blue"
 				size="sm"
-			></Button>
+			/>
 			<!-- Bag -->
 			<a
 				href={localizeHref('/cart')}
