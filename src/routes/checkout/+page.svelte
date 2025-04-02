@@ -3,6 +3,7 @@
 	import { Check, CircleChevronDown, CircleUserRound, ShoppingBag, Sparkle } from '@lucide/svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import PrevNextButton from '$components/ui/buttons/PrevNextButton.svelte';
+	import { localizeHref } from '$lib/paraglide/runtime';
 </script>
 
 <main>
@@ -393,7 +394,12 @@
 									Além de experiências com outros Passport e compras coletivas!
 								</p>
 								<div class="mx-10 py-2">
-									<Button title="Adicionar ao carrinho" type="sun" url="/cart" tracking="normal" />
+									<Button
+										title="Adicionar ao carrinho"
+										type="sun"
+										url={localizeHref('/cart')}
+										tracking="normal"
+									/>
 								</div>
 								<p class="text-xs text-gray-500 mt-2">
 									<a href="/" class="text-blue-500 underline">Saiba mais</a>
@@ -425,7 +431,12 @@
 							de experiências com outros Passport e compras coletivas!!
 						</p>
 						<div class="mx-11 py-2">
-							<Button title="Adicionar ao carrinho" type="sun" url="/cart" tracking="normal" />
+							<Button
+								title="Adicionar ao carrinho"
+								type="sun"
+								url={localizeHref('/cart')}
+								tracking="normal"
+							/>
 						</div>
 						<p class="text-xs text-gray-500 mt-2">
 							<a href="/" class="text-blue-500 underline">Saiba mais</a>
@@ -500,7 +511,9 @@
 							</div>
 						</div>
 						<div class="py-2 mt-4 px-5 border border-grey-lighter rounded-full bg-grey-background">
-							<a href="/cart" class="mt-0 block text-sm font-roboto hover:underline text-center"
+							<a
+								href={localizeHref('/cart')}
+								class="mt-0 block text-sm font-roboto hover:underline text-center"
 								>Voltar ao carrinho</a
 							>
 						</div>

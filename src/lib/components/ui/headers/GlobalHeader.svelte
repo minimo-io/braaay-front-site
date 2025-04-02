@@ -94,7 +94,7 @@
 		</div>
 
 		<!-- Bag -->
-		<a href="/cart" class="bry-cart relative h-[45px] uppercase flex items-center">
+		<a href={localizeHref('/cart')} class="bry-cart relative h-[45px] uppercase flex items-center">
 			<i class="bry-bag"></i>
 			<span
 				class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"

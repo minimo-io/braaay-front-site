@@ -13,21 +13,22 @@
 </script>
 
 <!-- Filtering menu -->
-<div class="pb-8 border-b border-b-grey-lighter">
+<div class="pb-0 md:pb-8 border-b border-b-grey-lighter">
 	<div class="bry-filtering-inline relative">
 		<!-- All Filters Button -->
-		<button class="!bg-sun !text-white !border-sun shine-effect">
+		<button class="!bg-sun !text-white !border-sun shine-effect filtering-button-primary">
 			<SlidersHorizontal class="lucide-button w-5 h-5 mr-2" />
 			Todos os filtros
 		</button>
 
 		<!-- Menu button -->
-		<div class="relative group">
+		<div class="relative group filtering-button">
 			<button class="shine-effect">
 				<Grape class="lucide-button w-5 h-5 mr-2" />
 				Variedade
 				<ChevronDown class="lucide-button w-5 h-5 mr-2" />
 			</button>
+
 			<!-- Invisible bridge to prevent accidental mouseout -->
 			<div class="absolute left-0 w-full h-4 bg-transparent"></div>
 			<div
@@ -80,7 +81,7 @@
 		</div>
 
 		<!-- Menu button -->
-		<div class="relative group">
+		<div class="relative group filtering-button">
 			<button class="shine-effect">
 				<Globe class="lucide-button w-5 h-5 mr-2" />
 				País
@@ -200,7 +201,7 @@
 		</div>
 
 		<!-- Menu button -->
-		<div class="relative group">
+		<div class="relative group filtering-button">
 			<button class="shine-effect">
 				<DollarSign class="lucide-button w-5 h-5 mr-2" />
 				Preço
@@ -229,7 +230,7 @@
 		</div>
 
 		<!-- Menu button -->
-		<div class="relative group">
+		<div class="relative group filtering-button">
 			<button class="shine-effect">
 				<Smile class="lucide-button w-5 h-5 mr-2" />
 				Paladar Típico
@@ -306,7 +307,7 @@
 		</div>
 
 		<!-- Menu button -->
-		<div class="relative group">
+		<div class="relative group filtering-button">
 			<button class="shine-effect">
 				<Truck class="lucide-button w-5 h-5 mr-2" />
 				Envío
@@ -357,7 +358,7 @@
 		</div>
 
 		<!-- Menu button -->
-		<div class="relative group">
+		<div class="relative group filtering-button">
 			<button class="shine-effect">
 				<Ruler class="lucide-button w-5 h-5 mr-2" />
 				Tamanho

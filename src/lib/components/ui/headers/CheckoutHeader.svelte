@@ -1,6 +1,7 @@
 <script>
 	import { Headset } from '@lucide/svelte';
 	import { Button } from '$components/ui/buttons/index';
+	import { localizeHref } from '$lib/paraglide/runtime';
 </script>
 
 <header class="bg-white border-b border-b-grey-lighter">
@@ -11,7 +12,7 @@
 	>
 		<!-- logo -->
 		<div class="flex lg:flex-none pr-8">
-			<a href="/" class="">
+			<a href={localizeHref('/')}>
 				<span class="sr-only">Braaay</span>
 				<img
 					class="h-[38px] w-auto hidden lg:block"

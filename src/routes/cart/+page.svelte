@@ -6,6 +6,7 @@
 	import { Gift, Minus, Plus, Sparkle, Truck } from '@lucide/svelte';
 	import { openModal } from '$stores/modalState.state.svelte';
 	import CupomForm from '$components/ui/forms/cupomForm.svelte';
+	import { localizeHref } from '$lib/paraglide/runtime';
 </script>
 
 <main>
@@ -169,7 +170,7 @@
 								<Button
 									title="Adicionar ao carrinho"
 									type="sun"
-									url="/cart"
+									url={localizeHref('/cart')}
 									tracking="normal"
 									bold={false}
 								/>
@@ -219,15 +220,16 @@
 						<p class="font-roboto self-center">R$ 59,90</p>
 					</div>
 					<div class="my-4 border-t border-t-grey-lighter"></div>
-					<div class="flex justify-between">
+					<div class="flex justify-between items-center">
 						<p class="font-light text-[15px] self-center">Cupom de desconto</p>
 						<Button
 							title="ADICIONAR"
 							width="130px"
-							url="/cart"
+							url={localizeHref('/cart')}
 							size="sm-short"
 							type="grey"
 							borderDark={true}
+							customPx="max-h-min"
 							action={() => {
 								openModal({
 									header: 'Adicionar cupom',
@@ -241,16 +243,17 @@
 						</Button>
 					</div>
 					<div class="my-4 border-t border-t-grey-lighter"></div>
-					<div class="flex justify-between">
+					<div class="flex justify-between items-center">
 						<p class="font-light text-[15px] self-center">Frete</p>
 
 						<Button
 							title="CALCULAR"
-							url="/cart"
+							url={localizeHref('/cart')}
 							size="sm-short"
 							width="130px"
 							type="grey"
 							borderDark={true}
+							customPx="max-h-min"
 							action={() => {
 								alert('Popup. Calcular frete');
 							}}

@@ -5,7 +5,7 @@
 </script>
 
 <!-- Top header -->
-{#if page.url.pathname.startsWith('/cart') || page.url.pathname.startsWith('/checkout') || page.url.pathname.startsWith('/thank-you')}
+{#if page.url.pathname.startsWith('/carrinho') || page.url.pathname.startsWith('/uy/carrito') || page.url.pathname.startsWith('/checkout') || page.url.pathname.startsWith('/thank-you')}
 	<CheckoutHeader />
 {:else}
 	<GlobalHeader />

@@ -123,8 +123,9 @@ npm run dev -- --open
 
 ### v2
 
+- en WineBox no estamos usando el valor discount
 - Sub-menu (ahora de pais) tiene que estar configurado en algun lugar
-
+- Boton para volver a subir
 - Establish URQL SSR cache invalidations, (via shared reactive state/store).
 
 - Al cliquear en el banner grande de primera compra, tenemos que ofrecer aplicar el descuento al carrito automáticamente (como hace wine.com)

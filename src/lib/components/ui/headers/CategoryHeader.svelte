@@ -18,7 +18,7 @@
 	<div class="max-w-screen-lg border-sky bg-gray-100 md:mx-auto">
 		<div class="flex flex-col md:flex-row items-center md:min-h-40 relative">
 			<div
-				class="flex justify-between items-center text-right md:text-left md:items-start md:justify-normal flex-row md:flex-col w-full md:w-[55%] py-4 md:py-[20px] mx-[30px] px-[30px] md:pl-0"
+				class="flex justify-between items-center text-right md:text-left md:items-start md:justify-normal flex-row md:flex-col w-full md:w-[55%] py-4 md:py-[20px] mx-[30px] px-[30px] md:pl-0 md:ml-[5px]"
 			>
 				<h1
 					class="font-prata uppercase text-[25px] my-1 font-light text-grey-dark tracking-wider antialiased"

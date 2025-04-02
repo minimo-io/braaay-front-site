@@ -91,7 +91,9 @@
 	{#if icon}
 		{@render icon()}
 	{/if}
+
 	{title}
+
 	{#if chevron}
 		<ChevronDown class="lucide-button !mx-0 !px-0" />
 	{/if}

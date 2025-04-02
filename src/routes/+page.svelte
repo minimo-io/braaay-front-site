@@ -106,7 +106,7 @@
 					wine={{
 						title: 'Don Pascual Cabernet Franc',
 						price: '150.0',
-						url: '/product',
+						url: '/produto/vinho-familia-deicas-massimo-tannat/',
 						score: '4.5'
 					}}
 				/>
@@ -119,7 +119,7 @@
 					wine={{
 						title: 'Pizzato Merlot de Merlots 2022',
 						price: '150.0',
-						url: '/product',
+						url: '/produto/vinho-familia-deicas-massimo-tannat/',
 						score: '4.5'
 					}}
 				/>
@@ -132,7 +132,7 @@
 					wine={{
 						title: 'Artesana Cabernet Franc/Merlot Reserva',
 						price: '100.0',
-						url: '/product',
+						url: '/produto/vinho-familia-deicas-massimo-tannat/',
 						score: '4.5'
 					}}
 				/>
@@ -145,7 +145,7 @@
 					wine={{
 						title: 'Pizzato Chardonnay de Chardonnays',
 						price: '119.0',
-						url: '/product',
+						url: '/produto/vinho-familia-deicas-massimo-tannat/',
 						score: '4.5'
 					}}
 				/>
@@ -158,7 +158,7 @@
 					wine={{
 						title: 'Mayos Jovem Branco da Basso',
 						price: '43.0',
-						url: '/product',
+						url: '/produto/vinho-familia-deicas-massimo-tannat/',
 						score: '4.5'
 					}}
 				/>
@@ -172,7 +172,7 @@
 					wine={{
 						title: 'Artesana Cabernet Franc/Merlot Reserva',
 						price: '100.0',
-						url: '/product',
+						url: '/produto/vinho-familia-deicas-massimo-tannat/',
 						score: '4.5'
 					}}
 					discount={'50%'}

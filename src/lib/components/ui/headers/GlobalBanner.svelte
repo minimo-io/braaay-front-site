@@ -21,7 +21,8 @@
 </script>
 
 <!-- {#if (showBanner && path == '/') || path == '/uy/' || path.startsWith('/blog') || path.startsWith('/uy/blog') || path.startsWith('/produto') || path.startsWith('/uy/producto')} -->
-{#if showBanner}
+{#if showBanner && (path == '/' || path == '/uy/')}
+	<!-- {#if } -->
 	<div class="bry-banner" transition:slide={{ duration: 300 }}>
 		<a href="/vinhos/">
 			<img src="/images/primeira-compra-1.png" alt="primeira-compra" class="hidden lg:inline" />
@@ -39,6 +40,7 @@
 			</div>
 		</a>
 	</div>
+	<!-- {/if} -->
 {/if}
 
 <style lang="postcss">

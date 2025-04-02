@@ -338,12 +338,22 @@ html {
 	}
 
 	/* Filtering */
+
+	.bry-filtering-inline .filtering-button-primary {
+		@apply w-full md:w-auto text-center justify-center;
+	}
+	.bry-filtering-inline .filtering-button {
+		@apply hidden md:flex;
+	}
 	.bry-filtering-inline,
 	.bry-sorting {
 		@apply max-w-screen-lg mx-[30px] md:mx-auto flex flex-wrap items-center gap-2 pt-8 pb-0 text-center justify-center md:justify-evenly;
 	}
+	.bry-filtering-inline {
+		@apply pt-0 md:pt-8 mx-[0] md:mx-auto;
+	}
 	.bry-sorting {
-		@apply justify-center md:justify-end pt-5 pb-3 gap-1;
+		@apply justify-end md:justify-end pt-5 pb-3 gap-1;
 	}
 
 	.bry-filtering-inline > button,
@@ -351,8 +361,11 @@ html {
 	.bry-sorting > button {
 		@apply flex items-center px-4 py-2 rounded-full border border-grey-lighter text-grey-dark shadow-sm font-roboto text-sm bg-white;
 	}
+	.bry-filtering-inline > button {
+		@apply rounded-none md:rounded-full;
+	}
 	.bry-sorting > button {
-		@apply rounded-full px-3 py-[0.3rem] bg-grey-lighter text-grey-dark  md:mr-1 border-0;
+		@apply rounded-full px-3 py-[0.3rem] bg-grey-lighter text-grey-dark  md:mr-1 border-0 text-xs md:text-sm;
 	}
 
 	.bry-dashed-line {

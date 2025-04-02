@@ -34,7 +34,7 @@
 						<div class="absolute left-0 w-full h-4 bg-transparent"></div>
 
 						<div
-							class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-1 rounded-xl md:w-[500px] w-48 origin-top overflow-y-auto hidden group-hover:block p-1"
+							class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-1 rounded-xl md:w-[500px] w-48 origin-top overflow-y-auto hidden md:group-hover:block p-1"
 							style="max-height: calc(55vh - 170px)"
 						>
 							<div class="flex">

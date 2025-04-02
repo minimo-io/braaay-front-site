@@ -4,7 +4,7 @@
 
 <div class="bry-sorting">
 	<!-- Sorting Button -->
-	<span class="text-xs mr-1 text-grey-blueish uppercase">Ordenação:</span>
+	<!-- <span class="text-xs mr-1 text-grey-blueish uppercase">Ordenação:</span> -->
 	<button>
 		<ArrowDownUp class="lucide-button w-5 h-5" />
 		Mais relevante

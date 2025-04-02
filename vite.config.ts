@@ -29,6 +29,14 @@ export default defineConfig({
 				},
 
 				{
+					pattern: '/cart',
+					localized: [
+						['pt', '/carrinho/'],
+						['uy', '/uy/carrito/']
+					]
+				},
+
+				{
 					pattern: '/blog/:id',
 					localized: [
 						['pt', '/blog/:id(.*)?'],
