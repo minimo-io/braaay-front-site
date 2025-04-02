@@ -6,7 +6,10 @@
 		// Newspaper,
 		Search,
 		CircleUser,
-		Heart
+		Heart,
+		Menu,
+		EllipsisVertical,
+		AlignJustify
 	} from '@lucide/svelte';
 
 	import SecondaryMenuGeneral from '$components/ui/menues/SecondaryMenuGeneral.svelte';
@@ -38,20 +41,25 @@
 		aria-label="Global"
 	>
 		<!-- logo -->
-		<div class="flex lg:flex-none pr-8">
-			<a href={localizeHref('/')} class="">
-				<span class="sr-only">Braaay</span>
-				<img
-					class="h-[38px] w-auto hidden lg:block"
-					src="/images/logo-braaay-desktop.svg"
-					alt="braaay-logo-desktop"
-				/>
-				<img
-					class="h-[21px] w-auto lg:hidden"
-					src="/images/logo-braaay-mobile.svg"
-					alt="braaay-logo-mobile"
-				/>
-			</a>
+		<div class="flex">
+			<button class="flex md:hidden justify-start mr-6">
+				<AlignJustify class="h-[22px] !mr-0 text-grey-medium-dark" />
+			</button>
+			<div class="flex lg:flex-none pr-0 emd:pr-8 justify-start">
+				<a href={localizeHref('/')} class="">
+					<span class="sr-only">Braaay</span>
+					<img
+						class="h-[38px] w-auto hidden lg:block"
+						src="/images/logo-braaay-desktop.svg"
+						alt="braaay-logo-desktop"
+					/>
+					<img
+						class="h-[21px] w-auto lg:hidden"
+						src="/images/logo-braaay-mobile.svg"
+						alt="braaay-logo-mobile"
+					/>
+				</a>
+			</div>
 		</div>
 
 		<!-- Search-->
@@ -75,7 +83,8 @@
 				{/snippet}
 			</Button>
 
-			<!-- My account -->
+			<!-- Favorites -->
+
 			<Button
 				chevron={false}
 				customPx="!pl-3 ml-[12px]"
@@ -93,15 +102,28 @@
 			<CashbackButton title="Cashback" currency="R$" value={123.42} />
 		</div>
 
-		<!-- Bag -->
-		<a href={localizeHref('/cart')} class="bry-cart relative h-[45px] uppercase flex items-center">
-			<i class="bry-bag"></i>
-			<span
-				class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
+		<div class="flex md:hidden justify-end items-center">
+			<Button
+				chevron={false}
+				customPx="!pr-4 !pl-4 !my-0 max-h-[30px]"
+				title="Entrar"
+				url="/account"
+				type="blue"
+				size="sm"
+			></Button>
+			<!-- Bag -->
+			<a
+				href={localizeHref('/cart')}
+				class="bry-cart relative h-[45px] uppercase flex items-center"
 			>
-				0
-			</span>
-		</a>
+				<i class="bry-bag"></i>
+				<span
+					class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
+				>
+					0
+				</span>
+			</a>
+		</div>
 	</nav>
 
 	<!-- Mobile search -->

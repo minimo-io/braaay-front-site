@@ -2,7 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import { ChevronDown } from '@lucide/svelte';
 	interface Props {
-		title: string;
+		title?: string;
 		icon?: Snippet;
 		type: 'light' | 'sun' | 'blue' | 'grey';
 
@@ -92,7 +92,9 @@
 		{@render icon()}
 	{/if}
 
-	{title}
+	{#if title}
+		{title}
+	{/if}
 
 	{#if chevron}
 		<ChevronDown class="lucide-button !mx-0 !px-0" />
