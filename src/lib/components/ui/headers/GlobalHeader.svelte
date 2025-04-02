@@ -42,25 +42,26 @@
 	>
 		<!-- logo -->
 		<div class="flex">
-			<button class="flex md:hidden justify-start mr-4">
+			<button class="flex md:hidden justify-start mr-6">
 				<AlignJustify class="h-[22px] !mr-0 text-blue" />
 			</button>
+			<div class="flex lg:flex-none pr-0 md:pr-8 justify-start">
+				<a href={localizeHref('/')} class="">
+					<span class="sr-only">Braaay</span>
+					<img
+						class="h-[38px] w-auto hidden lg:block"
+						src="/images/logo-braaay-desktop.svg"
+						alt="braaay-logo-desktop"
+					/>
+					<img
+						class="h-[21px] w-auto lg:hidden"
+						src="/images/logo-braaay-mobile.svg"
+						alt="braaay-logo-mobile"
+					/>
+				</a>
+			</div>
 		</div>
-		<div class="flex lg:flex-none pr-0 md:pr-8 justify-start">
-			<a href={localizeHref('/')} class="">
-				<span class="sr-only">Braaay</span>
-				<img
-					class="h-[38px] w-auto hidden lg:block"
-					src="/images/logo-braaay-desktop.svg"
-					alt="braaay-logo-desktop"
-				/>
-				<img
-					class="h-[21px] w-auto lg:hidden"
-					src="/images/logo-braaay-mobile.svg"
-					alt="braaay-logo-mobile"
-				/>
-			</a>
-		</div>
+
 		<!-- Search-->
 		<div class="hidden lg:flex flex-1 lg:gap-x-12">
 			<!-- Search form -->
