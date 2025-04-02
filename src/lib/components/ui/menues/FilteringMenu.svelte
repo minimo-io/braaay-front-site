@@ -18,7 +18,7 @@
 		<!-- All Filters Button -->
 		<button class="!bg-sun !text-white !border-sun shine-effect filtering-button-primary">
 			<SlidersHorizontal class="lucide-button w-5 h-5 mr-2" />
-			Todos os filtros
+			FILTRAR
 		</button>
 
 		<!-- Menu button -->
