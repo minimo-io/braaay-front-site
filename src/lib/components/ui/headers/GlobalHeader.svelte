@@ -42,10 +42,10 @@
 	>
 		<!-- logo -->
 		<div class="flex">
-			<button class="flex md:hidden justify-start mr-6">
+			<button class="flex md:hidden justify-start mr-4">
 				<AlignJustify class="h-[22px] !mr-0 text-grey-medium-dark" />
 			</button>
-			<div class="flex lg:flex-none pr-0 emd:pr-8 justify-start">
+			<div class="flex lg:flex-none pr-0 md:pr-8 justify-start">
 				<a href={localizeHref('/')} class="">
 					<span class="sr-only">Braaay</span>
 					<img
@@ -105,7 +105,7 @@
 		<div class="flex md:hidden justify-end items-center">
 			<Button
 				chevron={false}
-				customPx="!pr-4 !pl-4 !my-0 max-h-[30px]"
+				customPx="!pr-3 !pl-3 !my-0 max-h-[30px]"
 				title="Entrar"
 				url="/account"
 				type="blue"
