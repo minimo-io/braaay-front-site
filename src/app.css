@@ -365,7 +365,7 @@ html {
 		@apply rounded-none md:rounded-full;
 	}
 	.bry-sorting > button {
-		@apply rounded-full px-3 py-[0.3rem] bg-grey-lighter text-grey-dark  md:mr-1 border-0 text-xs md:text-sm;
+		@apply rounded-lg px-3 py-[0.3rem] bg-grey-lighter text-grey-dark  md:mr-1 border-0 text-xs;
 	}
 
 	.bry-dashed-line {

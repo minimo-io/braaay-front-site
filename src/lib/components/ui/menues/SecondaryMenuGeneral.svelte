@@ -73,7 +73,7 @@
 													src="/images/flags/uruguay.png"
 													alt="uruguay-flag"
 												/>
-												<span class="self-center">Uruguai</span>
+												<span class="self-center font-semibold">Uruguai</span>
 											</div>
 											<div class="text-grey-medium flex flex-row align-middle self-center">
 												<!-- <span class="self-center mr-3 text-xs">251</span> -->
@@ -90,7 +90,7 @@
 													src="/images/flags/brazil.png"
 													alt="uruguay-flag"
 												/>
-												<span class="self-center">Brasil</span>
+												<span class="self-center font-semibold">Brasil</span>
 											</div>
 											<div class="text-grey-medium flex flex-row align-middle self-center">
 												<!-- <span class="self-center mr-3 text-xs">142</span> -->

@@ -16,9 +16,13 @@
 <div class="pb-0 md:pb-8 border-b border-b-grey-lighter">
 	<div class="bry-filtering-inline relative">
 		<!-- All Filters Button -->
-		<button class="!bg-sun !text-white !border-sun shine-effect filtering-button-primary">
-			<SlidersHorizontal class="lucide-button w-5 h-5 mr-2" />
-			FILTRAR
+		<button
+			class="!bg-sun !shadow-none active:shadow-none !text-white !border-none shine-effect filtering-button-primary"
+		>
+			<div class="flex items-center relative -left-2 md:left-0">
+				<SlidersHorizontal class="lucide-button w-5 h-5 mr-2" />
+				Todos os filtros
+			</div>
 		</button>
 
 		<!-- Menu button -->
