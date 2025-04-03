@@ -19,20 +19,18 @@ npm run dev -- --open
 
 - GraphQL:
 
-  - Artículo de categorías
-    - Colores del artículo no queda bien
+  - Agregar vinicola uruguay y chequear el multi-idioma
   - Taxonomias
 
     - Category - OK
     - Subcategory - OK
     - Country - OK
-    - Vinicola
+    - Vinicola - OK
     - Harmonizacoes
     - Uva
     - Tag
 
-  - Traer otras informaciones de la categoria de product (catalog)
-  - Tener otro "data" para el resto de los productos de la homepage.
+  - Tener otro "data" para el resto de los productos de la homepage, vinicolas, etc
   - Ya que vamos a editar el ouput de graphql, creo que todo lo relacionado a WPBakery debería desaparecer desde el origen, con una función PHP (o convertirse en HTML via una mutation del graphql).
     - Tambien, el author tiene que venir con un campo ˝profession".
   - En algunos artículos como /blog/vinhos-brasileiros-premiados-que-vao-te-surpreender los <ul> no se renderizan bien.
@@ -103,6 +101,8 @@ npm run dev -- --open
   - Agregar la lista de paises
 
 - EXTRAS
+  - BUG: En mobile y desktop tenemos lista de productos par e impar, por lo que sobra o falta un elemento.s
+  - Incorporar a la paginación el ordem de los productos
   - En product page cuando no existe artículo tenemos que mostrar algo en esa sección.
   - Breadcrumbs en la pagina de producto
   - Caja de producto tiene que tener un botón para dejar un comentário
@@ -125,7 +125,9 @@ npm run dev -- --open
 
 ### v2
 
+- En homepage, separar parceiros por pais.
 - Paginación: al cargar mas cuando vuelvo para atrás del catálogo, y vuelvo, tengo que volver a hacer click en el botón cargar mos (sin embargo la llamada sea cachea correctamente) -> Estado del botón?
+- Crear páginas de categorias base. Ejemplo: /produtores-de-vinho/
 - en WineBox no estamos usando el valor discount
 - Sub-menu (ahora de pais) tiene que estar configurado en algun lugar
 - Boton para volver a subir

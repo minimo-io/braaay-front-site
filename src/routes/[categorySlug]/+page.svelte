@@ -89,6 +89,4 @@
 <GlobalCategory {products} {category} />
 <LoadMoreButton {isLoading} {pagination} {handleLoadMore} />
 
-{#if category.description}
-	<BottomArticle {article} twoColumns={false} />
-{/if}
+<BottomArticle {article} twoColumns={false} />

@@ -20,28 +20,31 @@
 	const content = $derived(article.content || '');
 </script>
 
-<article class="relative bg-white py-10 mt-14">
-	<SectionDivider color="green" />
-	<div id="know-more" class="max-w-screen-lg mx-auto relative">
-		<!-- General title header -->
-		<ArticleHeader fullWidth={false} {article} />
+<!-- <article class="relative bg-white py-10 mt-14"> -->
+{#if content}
+	<article class="relative bg-white pb-10 md:mt-14">
+		<SectionDivider color="green" />
+		<div id="know-more" class="max-w-screen-lg mx-auto relative">
+			<!-- General title header -->
+			<ArticleHeader fullWidth={false} {article} />
 
-		<!-- Article content -->
-		<div class="md:px-32 px-[30px]">
-			<ArticleIntro title={article.header?.title} content={article.header?.content} />
+			<!-- Article content -->
+			<div class="md:px-32 px-[30px]">
+				<ArticleIntro title={article.header?.title} content={article.header?.content} />
 
-			<Divider color="blue" />
+				<Divider color="blue" />
 
-			<div class="bry-article-content">
-				<ArticleContent {content} />
-				{#if twoColumns}
-					<div class="w-full md:w-1/3 pl-0 md:pl-6">
-						<div class="md:sticky md:top-1">
-							<ArticleRightBannerBox />
+				<div class="bry-article-content">
+					<ArticleContent {content} />
+					{#if twoColumns}
+						<div class="w-full md:w-1/3 pl-0 md:pl-6">
+							<div class="md:sticky md:top-1">
+								<ArticleRightBannerBox />
+							</div>
 						</div>
-					</div>
-				{/if}
+					{/if}
+				</div>
 			</div>
 		</div>
-	</div>
-</article>
+	</article>
+{/if}

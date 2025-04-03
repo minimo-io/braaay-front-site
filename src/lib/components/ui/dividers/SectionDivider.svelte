@@ -7,7 +7,7 @@
 	let { color = 'green' }: Props = $props();
 </script>
 
-<div class="absolute inset-x-0 -top-3 flex justify-center">
+<div class="absolute inset-x-0 -top-3 flex justify-center z-10">
 	<img
 		src="/images/divider-{color}.svg"
 		width="23px"

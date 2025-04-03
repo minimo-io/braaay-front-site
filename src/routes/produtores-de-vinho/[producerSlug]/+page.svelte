@@ -6,7 +6,7 @@
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 	import { loadMoreProducts } from '$lib/utils/loadMoreProducts.util.js';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte.js';
-	import { COUNTRY_PRODUCTS } from '$lib/graphql/queries/products-country.query.js';
+	import { WINE_PRODUCER_PRODUCTS } from '$lib/graphql/queries/index';
 	import LoadMoreButton from '$components/ui/buttons/LoadMoreButton.svelte';
 
 	const { data } = $props();
@@ -48,14 +48,14 @@
 		toggleLoader();
 		try {
 			// Determine current category slug
-			const { countrySlug } = page.params;
+			const { producerSlug } = page.params;
 			// Use the abstracted function.
 			const result = await loadMoreProducts({
 				products,
 				pagination,
-				query: COUNTRY_PRODUCTS,
+				query: WINE_PRODUCER_PRODUCTS,
 				params: {
-					countrySlug: countrySlug
+					producerSlug: producerSlug
 				}
 			});
 

@@ -54,7 +54,7 @@
 		</a>
 	</div>
 	<div>
-		<a href="/">
+		<a href="/produtores-de-vinho/pizzato/">
 			<img
 				src="/images/partners/pizzato-logo.webp"
 				alt="Casa Eva Logo"

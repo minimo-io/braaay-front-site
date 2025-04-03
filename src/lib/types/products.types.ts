@@ -18,6 +18,12 @@ export interface ProductsForCountryQueryResult {
 	};
 	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
 }
+export interface ProductsForWineProducerQueryResult {
+	allPaProdutoresDeVinho: {
+		nodes: GraphQLCategory[];
+	};
+	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
+}
 
 export interface Product {
 	slug: string;

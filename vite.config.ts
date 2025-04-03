@@ -28,11 +28,30 @@ export default defineConfig({
 					]
 				},
 
+				// Club
+				{
+					pattern: '/club',
+					localized: [
+						['pt', '/clube/'],
+						['uy', '/uy/club/']
+					]
+				},
+
+				// Carrinho
 				{
 					pattern: '/cart',
 					localized: [
 						['pt', '/carrinho/'],
 						['uy', '/uy/carrito/']
+					]
+				},
+
+				// Produtores de vinho
+				{
+					pattern: '/produtores-de-vinho/:id',
+					localized: [
+						['pt', '/produtores-de-vinho/:id'],
+						['uy', '/uy/productores-de-vino/:id']
 					]
 				},
 

@@ -19,7 +19,7 @@
 			<img
 				src={props.image.src}
 				alt={JSON.stringify(props.image.alt ? props.image.alt : props.wine.title)}
-				class="mx-auto"
+				class="mx-auto rounded-lg"
 			/>
 		</a>
 	</div>
