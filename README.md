@@ -17,9 +17,6 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
-- Abstraer Button element de paginas de categoria (cat, subcat, country)
-- Button element tiene que poder estar disabled (for pagination)
-
 - GraphQL:
 
   - Artículo de categorías
@@ -108,6 +105,7 @@ npm run dev -- --open
 - EXTRAS
   - En product page cuando no existe artículo tenemos que mostrar algo en esa sección.
   - Breadcrumbs en la pagina de producto
+  - Caja de producto tiene que tener un botón para dejar un comentário
 
 ### Lanzamiento
 
@@ -127,6 +125,7 @@ npm run dev -- --open
 
 ### v2
 
+- Paginación: al cargar mas cuando vuelvo para atrás del catálogo, y vuelvo, tengo que volver a hacer click en el botón cargar mos (sin embargo la llamada sea cachea correctamente) -> Estado del botón?
 - en WineBox no estamos usando el valor discount
 - Sub-menu (ahora de pais) tiene que estar configurado en algun lugar
 - Boton para volver a subir

@@ -1,20 +1,13 @@
 <!-- src/routes/[countrySlug]/+page.svelte -->
 <script lang="ts">
 	import { page } from '$app/state';
-	import type {
-		Category,
-		Product,
-		Post,
-		ArticleCreator,
-		Pagination,
-		ProductsForCategoryQueryResult
-	} from '$lib/types';
+	import type { Category, Product, Post, ArticleCreator, Pagination } from '$lib/types';
 	import GlobalCategory from '$components/layout/GlobalCategory.svelte';
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
-	import Button from '$components/ui/buttons/Button.svelte';
 	import { loadMoreProducts } from '$lib/utils/loadMoreProducts.util.js';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte.js';
 	import { COUNTRY_PRODUCTS } from '$lib/graphql/queries/products-country.query.js';
+	import LoadMoreButton from '$components/ui/buttons/LoadMoreButton.svelte';
 
 	const { data } = $props();
 
@@ -84,21 +77,7 @@
 </svelte:head>
 
 <GlobalCategory {products} {category} />
-<div class="max-w-screen-lg mx-auto my-10">
-	{#if pagination.hasNextPage}
-		<Button
-			action={() => {
-				// toggleLoader();
-				handleLoadMore();
-			}}
-			bold
-			type="blue"
-			size="xl"
-			url=""
-			title={isLoading ? 'Loading...' : 'More results'}
-		/>
-	{/if}
-</div>
+<LoadMoreButton {isLoading} {pagination} {handleLoadMore} />
 
 <!-- Category article -->
 {#if category.description}

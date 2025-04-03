@@ -11,7 +11,7 @@
 	} from '$lib/types';
 	import GlobalCategory from '$components/layout/GlobalCategory.svelte';
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
-	import Button from '$components/ui/buttons/Button.svelte';
+	import LoadMoreButton from '$components/ui/buttons/LoadMoreButton.svelte';
 	import { loadMoreProducts } from '$lib/utils/loadMoreProducts.util.js';
 	import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/products-category.query.js';
 
@@ -87,21 +87,7 @@
 </svelte:head>
 
 <GlobalCategory {products} {category} />
-<div class="max-w-screen-lg mx-auto my-10">
-	{#if pagination.hasNextPage}
-		<Button
-			action={() => {
-				// toggleLoader();
-				handleLoadMore();
-			}}
-			bold
-			type="blue"
-			size="xl"
-			url=""
-			title={isLoading ? 'Loading...' : 'More results'}
-		/>
-	{/if}
-</div>
+<LoadMoreButton {isLoading} {pagination} {handleLoadMore} />
 
 {#if category.description}
 	<BottomArticle {article} twoColumns={false} />

@@ -102,28 +102,15 @@
 			<CashbackButton title="Cashback" currency="R$" value={123.42} />
 		</div>
 
-		<div class="flex md:hidden justify-end items-center">
-			<!-- <Button
-				chevron={false}
-				customPx="!pr-3 !pl-3 !my-0 max-h-[30px]"
-				title="Entrar"
-				url="/account"
-				type="blue"
-				size="sm"
-			/> -->
-			<!-- Bag -->
-			<a
-				href={localizeHref('/cart')}
-				class="bry-cart relative h-[45px] uppercase flex items-center"
+		<!-- Bag -->
+		<a href={localizeHref('/cart')} class="bry-cart relative h-[45px] uppercase flex items-center">
+			<i class="bry-bag"></i>
+			<span
+				class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
 			>
-				<i class="bry-bag"></i>
-				<span
-					class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
-				>
-					0
-				</span>
-			</a>
-		</div>
+				0
+			</span>
+		</a>
 	</nav>
 
 	<!-- Mobile search -->
