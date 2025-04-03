@@ -25,7 +25,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	}
 
 	try {
-		const product: Product = mapProduct(result.data.product);
+		const product: Product = mapProduct({ node: result.data.product });
 		return { product };
 	} catch (errorMsg) {
 		console.error('ERROR', errorMsg);

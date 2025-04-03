@@ -1,14 +1,15 @@
-// src/routes/[categorySlug]/+page.server.ts
+// src/routes/[countrySlug]/+page.server.ts
 import type { PageServerLoad } from './$types';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 import { COUNTRY_PRODUCTS } from '$lib/graphql/queries/index';
+import { CATALOGS_INITIAL_QUERY_LIMIT } from '$lib';
 import {
 	mapProduct,
 	// mapCountry,
 	type Category,
-	type GraphQLProduct,
 	type Product,
 	type ProductsForCountryQueryResult,
+	type GraphQLProductNode,
 	mapCategory
 } from '$lib/types/index';
 
@@ -19,7 +20,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	const result = await getUrqlClient()
 		.client.query<ProductsForCountryQueryResult>(COUNTRY_PRODUCTS, {
-			first: 10,
+			first: CATALOGS_INITIAL_QUERY_LIMIT,
 			countrySlug: countrySlug,
 			taxonomyTerms: [countrySlug]
 		})
@@ -34,7 +35,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		const category: Category = mapCategory(result.data.allPaPais.nodes[0]);
 
 		// Get products para of the query
-		const products: Product[] = result.data.products.nodes.map((product: GraphQLProduct) =>
+		const products: Product[] = result.data.products.edges.map((product: GraphQLProductNode) =>
 			mapProduct(product)
 		);
 

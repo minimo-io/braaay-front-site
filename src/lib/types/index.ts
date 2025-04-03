@@ -5,6 +5,7 @@ export * from './article-creator.types';
 export * from './page-custom-header.types';
 export * from './image.types';
 export * from './categories.types';
+export * from './pagination.types';
 // export * from './country.types';
 
 export interface Wine {

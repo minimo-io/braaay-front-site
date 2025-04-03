@@ -17,6 +17,8 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
+- Button element tiene que poder estar disabled (for pagination)
+
 - GraphQL:
 
   - Artículo de categorías
@@ -104,6 +106,7 @@ npm run dev -- --open
 
 - EXTRAS
   - En product page cuando no existe artículo tenemos que mostrar algo en esa sección.
+  - Breadcrumbs en la pagina de producto
 
 ### Lanzamiento
 

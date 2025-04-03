@@ -1,20 +1,22 @@
 // src/lib/types/products.types.ts
-import type { ArticleCreator } from './article-creator.types';
-import type { PageCustomColors } from './page-custom-header.types';
-import type { ImageGeneral } from './image.types';
-import type { GraphQLCategory } from './categories.types';
-// import type { RelayData } from './relay-data.types';
+import type {
+	GraphQLPagination,
+	ArticleCreator,
+	PageCustomColors,
+	ImageGeneral,
+	GraphQLCategory
+} from './index';
 
 export interface ProductsForCategoryQueryResult {
 	productCategory: GraphQLCategory;
-	products: { nodes: GraphQLProduct[] };
+	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
 }
 
 export interface ProductsForCountryQueryResult {
 	allPaPais: {
 		nodes: GraphQLCategory[];
 	};
-	products: { nodes: GraphQLProduct[] };
+	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
 }
 
 export interface Product {
@@ -45,6 +47,10 @@ export interface Product {
 
 export interface GraphQLSingleProduct {
 	product: GraphQLProduct;
+}
+
+export interface GraphQLProductNode {
+	node: GraphQLProduct;
 }
 
 export interface GraphQLProduct {
@@ -96,46 +102,48 @@ export interface GraphQLProduct {
 	};
 }
 
-export function mapProduct(node: GraphQLProduct): Product {
+export function mapProduct(data: GraphQLProductNode): Product {
 	let averageRating = '0.0';
-	if (node.averageRating && node.averageRating !== 0) {
-		averageRating = node.averageRating.toFixed(1);
+	if (data.node.averageRating && data.node.averageRating !== 0) {
+		averageRating = data.node.averageRating.toFixed(1);
 	}
 
 	return {
-		slug: node.slug,
-		floatPrice: parseFloat(node.price.replaceAll('R$', '').replaceAll('$', '').replaceAll(' ', '')),
-		price: node.price,
-		regularPrice: node.regularPrice,
-		stockStatus: node.stockStatus,
-		title: node.title,
-		sku: node.sku,
-		status: node.status,
-		content: node.content,
-		shortDescription: node.shortDescription,
+		slug: data.node.slug,
+		floatPrice: parseFloat(
+			data.node.price.replaceAll('R$', '').replaceAll('$', '').replaceAll(' ', '')
+		),
+		price: data.node.price,
+		regularPrice: data.node.regularPrice,
+		stockStatus: data.node.stockStatus,
+		title: data.node.title,
+		sku: data.node.sku,
+		status: data.node.status,
+		content: data.node.content,
+		shortDescription: data.node.shortDescription,
 		pageCustomColors: {
-			gradientStart: node.outrosDadosDeProduto?.bgGradientStart || undefined,
-			gradientEnd: node.outrosDadosDeProduto?.bgGradientEnd || undefined,
-			color: node.outrosDadosDeProduto?.pageMainColor || undefined,
-			bgImage: node.outrosDadosDeProduto?.bgContentImage?.node?.mediaItemUrl || undefined
+			gradientStart: data.node.outrosDadosDeProduto?.bgGradientStart || undefined,
+			gradientEnd: data.node.outrosDadosDeProduto?.bgGradientEnd || undefined,
+			color: data.node.outrosDadosDeProduto?.pageMainColor || undefined,
+			bgImage: data.node.outrosDadosDeProduto?.bgContentImage?.node?.mediaItemUrl || undefined
 		},
-		uri: node.uri,
-		date: node.date,
-		modified: node.modified,
+		uri: data.node.uri,
+		date: data.node.date,
+		modified: data.node.modified,
 		author: {
-			name: node.author.node.name,
-			avatar: node.author.node.avatar
+			name: data.node.author.node.name,
+			avatar: data.node.author.node.avatar
 		},
 		averageRating: averageRating,
-		excerpt: node.excerpt,
+		excerpt: data.node.excerpt,
 		image: {
-			url: node.featuredImage?.node.mediaItemUrl,
-			altText: node.featuredImage?.node.altText
+			url: data.node.featuredImage?.node.mediaItemUrl,
+			altText: data.node.featuredImage?.node.altText
 		},
-		reviewCount: node.reviewCount,
+		reviewCount: data.node.reviewCount,
 		header: {
-			title: node.header?.firstSubtitle,
-			content: node.header?.firstParagraph
+			title: data.node.header?.firstSubtitle,
+			content: data.node.header?.firstParagraph
 		}
 	};
 }

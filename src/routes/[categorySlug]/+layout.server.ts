@@ -5,12 +5,14 @@ import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/index';
 import {
 	mapProduct,
 	mapCategory,
+	mapPagination,
 	type Category,
-	type GraphQLProduct,
+	type GraphQLProductNode,
 	type Product,
-	type ProductsForCategoryQueryResult
+	type ProductsForCategoryQueryResult,
+	type Pagination
 } from '$lib/types/index';
-
+import { CATALOGS_INITIAL_QUERY_LIMIT } from '$lib/index';
 import { error } from '@sveltejs/kit';
 
 export const load: LayoutServerLoad = async ({ params }) => {
@@ -23,7 +25,7 @@ export const load: LayoutServerLoad = async ({ params }) => {
 
 	const result = await getUrqlClient()
 		.client.query<ProductsForCategoryQueryResult>(CATEGORY_PRODUCTS, {
-			first: 10,
+			first: CATALOGS_INITIAL_QUERY_LIMIT,
 			categorySlug: categorySlug,
 			categoryId: categorySlug
 		})
@@ -36,16 +38,25 @@ export const load: LayoutServerLoad = async ({ params }) => {
 
 	try {
 		const productCategory: Category = mapCategory(result.data.productCategory);
+		const pagination: Pagination = mapPagination(result.data.products.pageInfo);
+
 		// Get products para of the query
-		const products: Product[] = result.data.products.nodes.map((product: GraphQLProduct) =>
+		const products: Product[] = result.data.products.edges.map((product: GraphQLProductNode) =>
 			mapProduct(product)
 		);
 
 		return {
 			products: products,
-			category: productCategory
+			category: productCategory,
+			pagination
 		};
 	} catch (err) {
 		throw error(404, `Failed to fetch the category: ${err}`);
 	}
 };
+
+// export const actions = {
+// 	loadMore: async (event) => {
+// 		// TODO log the user in
+// 	}
+// } satisfies Actions;

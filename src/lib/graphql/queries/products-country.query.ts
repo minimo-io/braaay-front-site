@@ -1,7 +1,11 @@
 // Country list products query
 
 import { gql } from '@urql/core';
-import { CATEGORY_HEADER_FRAGMENT, PRODUCT_LIST_FRAGMENT } from './fragments/index';
+import {
+	CATEGORY_HEADER_FRAGMENT,
+	PRODUCT_LIST_FRAGMENT,
+	PAGINATION_INFO_FRAGMENT
+} from './fragments/index';
 
 export const COUNTRY_PRODUCTS = gql`
 	query LatestProducts($first: Int!, $countrySlug: String!) {
@@ -18,10 +22,13 @@ export const COUNTRY_PRODUCTS = gql`
 				orderby: { field: DATE, order: DESC }
 			}
 		) {
-			nodes {
-				... on SimpleProduct {
-					${PRODUCT_LIST_FRAGMENT}
-				}
+			${PAGINATION_INFO_FRAGMENT}
+			edges {
+				node{
+					... on SimpleProduct {
+						${PRODUCT_LIST_FRAGMENT}
+					}
+				}				
 			}
 		}
 	}

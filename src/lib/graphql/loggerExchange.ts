@@ -11,6 +11,7 @@ export const loggerExchange: Exchange =
 			tap((operation: Operation) => {
 				// if (dev) {
 				console.log('[GraphQL Request]', operation.variables);
+				// console.log('[GraphQL Request]', operation.query.loc);
 				// }
 			}),
 			forward,

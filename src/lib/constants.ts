@@ -1,0 +1,1 @@
+export const CATALOGS_INITIAL_QUERY_LIMIT = 15;

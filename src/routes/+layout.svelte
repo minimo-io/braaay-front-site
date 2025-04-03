@@ -24,14 +24,23 @@
 
 	// Loader
 	import { navigating } from '$app/state';
+	import { loaderActivated } from '$stores/loaderStore.state.svelte';
 	// import { navigating } from '$app/stores';
 	// import { derived } from 'svelte/store';
 	// const isNavigating = derived(navigating, ($navigating) => $navigating !== null);
 
 	let { children } = $props();
+
+	let showLoader = $derived.by(() => {
+		// $navigation and $loaderStore are auto-subscribed values.
+		return navigating.to || loaderActivated.active;
+	});
 </script>
 
-{#if navigating.to}
+<!-- {#if navigating.to}
+	<div class="loader active"></div>
+{/if} -->
+{#if showLoader}
 	<div class="loader active"></div>
 {/if}
 
