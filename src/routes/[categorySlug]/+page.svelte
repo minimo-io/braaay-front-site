@@ -7,26 +7,25 @@
 		type Product,
 		type Post,
 		type ArticleCreator,
-		type Pagination,
-		type ProductsForCategoryQueryResult,
-		type GraphQLProductNode,
-		mapProduct,
-		mapPagination
+		type Pagination
 	} from '$lib/types';
 	import GlobalCategory from '$components/layout/GlobalCategory.svelte';
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
-	import { getUrqlClient } from '$stores/urqlClient.state.svelte.js';
-	import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/products-category.query.js';
-	import { CATALOGS_INITIAL_QUERY_LIMIT } from '$lib';
+	import { loadMoreProducts } from '$lib/utils/loadMoreProducts.util.js';
 
 	const { data } = $props();
 
 	let products: Product[] = $state(data.products);
-	let category: Category = $derived(data.category);
-	// let pagination: Pagination = $derived(data.pagination);
+	let category: Category = $state(data.category);
 	let pagination: Pagination = $state(data.pagination);
 	let isLoading = $state(false);
+
+	$effect(() => {
+		products = data.products;
+		category = data.category;
+		pagination = data.pagination;
+	});
 
 	let article: Post = $derived({
 		id: '0',
@@ -48,43 +47,28 @@
 		}
 	});
 
-	// Function to load more products
-	async function loadMoreProducts() {
-		if (!pagination.hasNextPage || isLoading) return;
-
-		const { categorySlug, subcategorySlug } = page.params;
-		const currentCategorySlug =
-			subcategorySlug && subcategorySlug !== '' ? subcategorySlug : categorySlug;
-
+	async function handleLoadMore() {
+		if (isLoading) return;
 		isLoading = true;
-
+		toggleLoader();
 		try {
-			const result = await getUrqlClient()
-				.client.query<ProductsForCategoryQueryResult>(CATEGORY_PRODUCTS, {
-					first: CATALOGS_INITIAL_QUERY_LIMIT,
-					after: pagination.endCursor,
-					categorySlug: currentCategorySlug,
-					categoryId: currentCategorySlug
-				})
-				.toPromise();
+			// Determine current category slug
+			const { categorySlug, subcategorySlug } = page.params;
+			const currentCategorySlug =
+				subcategorySlug && subcategorySlug !== '' ? subcategorySlug : categorySlug;
 
-			if (result.error || !result.data) {
-				console.error(`Failed to fetch more products: ${result.error}`);
-				return;
-			}
+			// Use the abstracted function.
+			const result = await loadMoreProducts({
+				products,
+				pagination,
+				categorySlug: currentCategorySlug
+			});
 
-			// Get new products
-			const newProducts: Product[] = result.data.products.edges.map((product: GraphQLProductNode) =>
-				mapProduct(product)
-			);
-
-			// Update pagination info
-			pagination = mapPagination(result.data.products.pageInfo);
-
-			// Append new products to the existing array
-			products = [...products, ...newProducts];
+			products = result.products;
+			pagination = result.pagination;
 		} catch (err) {
-			console.error(`Failed to fetch more products: ${err}`);
+			// Handle the error as needed
+			console.error(err);
 		} finally {
 			isLoading = false;
 			toggleLoader();
@@ -102,8 +86,8 @@
 	{#if pagination.hasNextPage}
 		<Button
 			action={() => {
-				toggleLoader();
-				loadMoreProducts();
+				// toggleLoader();
+				handleLoadMore();
 			}}
 			bold
 			type="blue"

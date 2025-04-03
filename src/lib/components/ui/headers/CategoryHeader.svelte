@@ -1,5 +1,6 @@
+<!-- src/lib/components/ui/headers/CategoryHeader.svelte -->
 <script lang="ts">
-	import { smoothScroll } from '$lib/utils/index';
+	import { fade } from 'svelte/transition';
 	import MoreInfoButton from '../buttons/MoreInfoButton.svelte';
 	import type { Category } from '$lib/types';
 
@@ -46,6 +47,7 @@
 			</div>
 			<div class="block">
 				<img
+					in:fade={{ duration: 500 }}
 					src={categoryImage}
 					alt={categoryAltText}
 					class="md:min-h-40 md:max-h-40 max-h-40 h-40 md:full-width-r object-cover"
