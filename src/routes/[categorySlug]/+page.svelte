@@ -13,6 +13,7 @@
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import { loadMoreProducts } from '$lib/utils/loadMoreProducts.util.js';
+	import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/products-category.query.js';
 
 	const { data } = $props();
 
@@ -61,7 +62,11 @@
 			const result = await loadMoreProducts({
 				products,
 				pagination,
-				categorySlug: currentCategorySlug
+				query: CATEGORY_PRODUCTS,
+				params: {
+					categorySlug: categorySlug,
+					categoryId: categorySlug
+				}
 			});
 
 			products = result.products;

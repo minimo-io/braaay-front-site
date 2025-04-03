@@ -8,7 +8,7 @@ import {
 } from './fragments/index';
 
 export const COUNTRY_PRODUCTS = gql`
-	query LatestProducts($first: Int!, $countrySlug: String!) {
+	query LatestProducts($first: Int!, $countrySlug: String!, $after: String) {
 		allPaPais(where: { slug: [$countrySlug] }) {
 			nodes {
 				${CATEGORY_HEADER_FRAGMENT}
@@ -17,6 +17,7 @@ export const COUNTRY_PRODUCTS = gql`
 
 		products(
 			first: $first
+			after: $after			
 			where: {
 				taxonomyFilter: { filters: { taxonomy: PA_PAIS, terms: [$countrySlug] } }
 				orderby: { field: DATE, order: DESC }

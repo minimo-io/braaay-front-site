@@ -1,13 +1,33 @@
 <!-- src/routes/[countrySlug]/+page.svelte -->
 <script lang="ts">
-	import type { Category, Product, Post, ArticleCreator } from '$lib/types';
+	import { page } from '$app/state';
+	import type {
+		Category,
+		Product,
+		Post,
+		ArticleCreator,
+		Pagination,
+		ProductsForCategoryQueryResult
+	} from '$lib/types';
 	import GlobalCategory from '$components/layout/GlobalCategory.svelte';
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
+	import Button from '$components/ui/buttons/Button.svelte';
+	import { loadMoreProducts } from '$lib/utils/loadMoreProducts.util.js';
+	import { toggleLoader } from '$stores/loaderStore.state.svelte.js';
+	import { COUNTRY_PRODUCTS } from '$lib/graphql/queries/products-country.query.js';
 
 	const { data } = $props();
 
-	let products: Product[] = $derived(data.products);
-	let category: Category = $derived(data.category);
+	let products: Product[] = $state(data.products);
+	let category: Category = $state(data.category);
+	let pagination: Pagination = $state(data.pagination);
+	let isLoading = $state(false);
+
+	$effect(() => {
+		products = data.products;
+		category = data.category;
+		pagination = data.pagination;
+	});
 
 	let article: Post = $derived({
 		id: '0',
@@ -28,14 +48,57 @@
 			altText: category.header.image?.altText || ''
 		}
 	});
+
+	async function handleLoadMore() {
+		if (isLoading) return;
+		isLoading = true;
+		toggleLoader();
+		try {
+			// Determine current category slug
+			const { countrySlug } = page.params;
+			// Use the abstracted function.
+			const result = await loadMoreProducts({
+				products,
+				pagination,
+				query: COUNTRY_PRODUCTS,
+				params: {
+					countrySlug: countrySlug
+				}
+			});
+
+			products = result.products;
+			pagination = result.pagination;
+		} catch (err) {
+			// Handle the error as needed
+			console.error(err);
+		} finally {
+			isLoading = false;
+			toggleLoader();
+		}
+	}
 </script>
 
 <svelte:head>
-	<title>Vinhos do Uruguai - Braaay</title>
+	<title>{category.name} - Braaay</title>
 	<meta name="description" content="" />
 </svelte:head>
 
 <GlobalCategory {products} {category} />
+<div class="max-w-screen-lg mx-auto my-10">
+	{#if pagination.hasNextPage}
+		<Button
+			action={() => {
+				// toggleLoader();
+				handleLoadMore();
+			}}
+			bold
+			type="blue"
+			size="xl"
+			url=""
+			title={isLoading ? 'Loading...' : 'More results'}
+		/>
+	{/if}
+</div>
 
 <!-- Category article -->
 {#if category.description}

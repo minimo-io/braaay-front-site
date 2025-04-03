@@ -17,6 +17,7 @@ npm run dev -- --open
 
 ## To Do: Speed & UI/UX
 
+- Abstraer Button element de paginas de categoria (cat, subcat, country)
 - Button element tiene que poder estar disabled (for pagination)
 
 - GraphQL:

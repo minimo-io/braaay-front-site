@@ -3,14 +3,16 @@ import type { PageServerLoad } from './$types';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 import { COUNTRY_PRODUCTS } from '$lib/graphql/queries/index';
 import { CATALOGS_INITIAL_QUERY_LIMIT } from '$lib';
+
 import {
 	mapProduct,
-	// mapCountry,
+	mapPagination,
+	mapCategory,
 	type Category,
 	type Product,
 	type ProductsForCountryQueryResult,
 	type GraphQLProductNode,
-	mapCategory
+	type Pagination
 } from '$lib/types/index';
 
 import { error } from '@sveltejs/kit';
@@ -33,6 +35,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	try {
 		const category: Category = mapCategory(result.data.allPaPais.nodes[0]);
+		const pagination: Pagination = mapPagination(result.data.products.pageInfo);
 
 		// Get products para of the query
 		const products: Product[] = result.data.products.edges.map((product: GraphQLProductNode) =>
@@ -41,7 +44,8 @@ export const load: PageServerLoad = async ({ params }) => {
 
 		return {
 			products: products,
-			category: category
+			category: category,
+			pagination
 		};
 	} catch (err) {
 		throw error(404, `Failed to fetch the category: ${err}`);

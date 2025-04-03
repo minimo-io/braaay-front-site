@@ -1,6 +1,5 @@
 // src/lib/api/loadMoreProducts.ts
 import { getUrqlClient } from '$stores/urqlClient.state.svelte.js';
-import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/products-category.query.js';
 import { CATALOGS_INITIAL_QUERY_LIMIT } from '$lib';
 import type {
 	Product,
@@ -9,38 +8,33 @@ import type {
 	GraphQLProductNode
 } from '$lib/types';
 import { mapProduct, mapPagination } from '$lib/types';
+import type { AnyVariables, TypedDocumentNode } from '@urql/core';
 
-/**
- * Loads additional products for a given category.
- *
- * @param products - The current array of products.
- * @param pagination - The current pagination state.
- * @param categorySlug - The slug identifying the current category.
- * @returns A promise resolving to an object containing the updated products array and new pagination state.
- */
 export async function loadMoreProducts({
 	products,
 	pagination,
-	categorySlug
+	query,
+	params
 }: {
 	products: Product[];
 	pagination: Pagination;
-	categorySlug: string;
+	query: TypedDocumentNode<any, AnyVariables>;
+	params: object;
 }): Promise<{ products: Product[]; pagination: Pagination }> {
 	// Return early if there's no next page.
 	if (!pagination.hasNextPage) return { products, pagination };
 
-	// Get the client.
-	const client = getUrqlClient().client;
+	console.log('QUERY', query);
 
 	try {
 		// Query for additional products.
-		const result = await client
-			.query<ProductsForCategoryQueryResult>(CATEGORY_PRODUCTS, {
+		const result = await getUrqlClient()
+			.client.query<ProductsForCategoryQueryResult>(query, {
 				first: CATALOGS_INITIAL_QUERY_LIMIT,
 				after: pagination.endCursor,
-				categorySlug,
-				categoryId: categorySlug
+				...params
+				// categorySlug: slug,
+				// categoryId: slug
 			})
 			.toPromise();
 

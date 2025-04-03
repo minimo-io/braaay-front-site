@@ -6,6 +6,8 @@
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import { loadMoreProducts } from '$lib/utils/loadMoreProducts.util.js';
+	import { COUNTRY_PRODUCTS } from '$lib/graphql/queries/products-country.query.js';
+	import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/products-category.query.js';
 
 	// Destructure props at the top level
 	let { data } = $props();
@@ -56,7 +58,11 @@
 			const result = await loadMoreProducts({
 				products,
 				pagination,
-				categorySlug: currentCategorySlug
+				query: CATEGORY_PRODUCTS,
+				params: {
+					categorySlug: currentCategorySlug,
+					categoryId: currentCategorySlug
+				}
 			});
 
 			products = result.products;
