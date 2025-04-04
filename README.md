@@ -19,7 +19,8 @@ npm run dev -- --open
 
 - GraphQL:
 
-  - Agregar vinicola uruguay y chequear el multi-idioma
+  - La paginación de cervezas, no elimina el boton
+  - Vinícola para /uy
   - Taxonomias
 
     - Category - OK
@@ -161,6 +162,8 @@ npm run dev -- --open
 		--bry-current-gradient-end: #77747d;
 	}
 ```
+
+- Aunque sea dos minisites diferentes, si tenemos un vino que existe en los dos sitios, sería interesante mostrar eso en un link (con tradicción y headers alternate)
 
 - BUTTONS:
   - Buttons should be able to receive the --page-color (check layout)

@@ -114,11 +114,14 @@ export function mapProduct(data: GraphQLProductNode): Product {
 		averageRating = data.node.averageRating.toFixed(1);
 	}
 
+	let floatPrice = data.node.price;
+	if (floatPrice) {
+		floatPrice = floatPrice.replaceAll('R$', '').replaceAll('$', '').replaceAll(' ', '');
+	}
+
 	return {
 		slug: data.node.slug,
-		floatPrice: parseFloat(
-			data.node.price.replaceAll('R$', '').replaceAll('$', '').replaceAll(' ', '')
-		),
+		floatPrice: parseFloat(floatPrice),
 		price: data.node.price,
 		regularPrice: data.node.regularPrice,
 		stockStatus: data.node.stockStatus,

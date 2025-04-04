@@ -37,7 +37,7 @@
 		<span class="text-2xl font-bold text-grey-darkest font-roboto">{product.price}</span>
 		<h4 class="!text-[13px] font-bold mb-2">
 			<span class="text-green-dark"
-				>{m.currencySymbol()} {correctPrice(product.floatPrice * 0.95)}</span
+				>{m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)}</span
 			>
 			{m.cashDiscountText()}
 		</h4>
