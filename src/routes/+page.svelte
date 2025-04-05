@@ -91,7 +91,7 @@
 			sugestões para presentes empresariais."
 		>
 			{#snippet button()}
-				<Button title="Ver todos" size="md" type="sun" url="/category"></Button>
+				<Button title="Ver todos" size="md" type="sun" url="/category" />
 			{/snippet}
 		</TitleSection>
 

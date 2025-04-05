@@ -137,7 +137,7 @@
 							rounded="lg"
 							font="md"
 							width="fit"
-						></Button>
+						/>
 					</form>
 				</div>
 
@@ -167,7 +167,7 @@
 							rounded="lg"
 							font="md"
 							width="fit"
-						></Button>
+						/>
 					</form>
 				</div>
 
@@ -206,7 +206,7 @@
 							rounded="lg"
 							font="md"
 							width="fit"
-						></Button>
+						/>
 					</form>
 				</div>
 			</div>

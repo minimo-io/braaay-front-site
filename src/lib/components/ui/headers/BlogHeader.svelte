@@ -54,8 +54,7 @@
 		</p>
 
 		<div class="mb-3 max-w-none md:max-w-[150px]">
-			<Button title="Ler artigo" size="sm" type="light" url={localizeHref(post.uri)} bold={true}
-			></Button>
+			<Button title="Ler artigo" size="sm" type="light" url={localizeHref(post.uri)} bold={true} />
 		</div>
 
 		<!-- Tags -->

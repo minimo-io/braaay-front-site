@@ -34,8 +34,13 @@
 
 	<!-- <a href={props.wine.url} class="wine-button">VER DETALHES</a> -->
 	<div class="mt-2">
-		<Button title="DETALHES" type="light" url={props.wine.url} borderDark={true} tracking="normal"
-		></Button>
+		<Button
+			title="DETALHES"
+			type="light"
+			url={props.wine.url}
+			borderDark={true}
+			tracking="normal"
+		/>
 	</div>
 	{#if props.discount}
 		<div class="absolute top-4 right-4 bg-black text-white px-2 py-1 text-xs rounded-lg">

@@ -50,8 +50,11 @@
 
 <Footer />
 
-<Modal bind:showModal={modalState.current} header={modalState.header} content={modalState.content}
-></Modal>
+<Modal
+	bind:showModal={modalState.current}
+	header={modalState.header}
+	content={modalState.content}
+/>
 
 <Toasts position="bottom-right" />
 
