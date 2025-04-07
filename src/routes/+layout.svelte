@@ -12,7 +12,7 @@
 	import Footer from '$components/layout/Footer.svelte';
 	import Header from '$components/layout/Header.svelte';
 
-	import Drawer from '$components/ui/Drawer.svelte';
+	import Drawer from '$components/ui/drawer/Drawer.svelte';
 	import { closeDrawer } from '$lib/stores/drawerState.state.svelte';
 
 	// Modal

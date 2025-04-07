@@ -1,3 +1,4 @@
+// src/lib/data/categories.ts
 import {
 	Gift,
 	PackageOpen,

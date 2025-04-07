@@ -3,6 +3,7 @@ export const drawerState = $state({ active: false, currentSubmenu: null });
 
 export function toggleDrawer() {
 	drawerState.active = !drawerState.active;
+	drawerState.currentSubmenu = null;
 }
 
 export function closeDrawer() {
