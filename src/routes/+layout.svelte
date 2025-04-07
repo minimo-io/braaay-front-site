@@ -3,6 +3,8 @@
 	import '@fontsource/prata';
 	import '@fontsource-variable/open-sans';
 
+	import { afterNavigate } from '$app/navigation';
+
 	// In case we want SSG
 	// import { page } from '$app/state';
 	// import { localizeHref, locales } from '$lib/paraglide/runtime';
@@ -11,6 +13,7 @@
 	import Header from '$components/layout/Header.svelte';
 
 	import Drawer from '$components/ui/Drawer.svelte';
+	import { closeDrawer } from '$lib/stores/drawerState.state.svelte';
 
 	// Modal
 	// import { urqlClient } from '$stores/urqlClient.state.svelte';
@@ -34,8 +37,19 @@
 	let { children } = $props();
 
 	let showLoader = $derived.by(() => {
-		// $navigation and $loaderStore are auto-subscribed values.
 		return navigating.to || loaderActivated.active;
+	});
+
+	afterNavigate(() => {
+		// Close drawer if active
+		closeDrawer();
+		// reset horizontal scroll on menu if exsits
+		const secondaryMenus = document.querySelectorAll('.bry-secondary-menu');
+		secondaryMenus.forEach((menu) => {
+			if (menu instanceof HTMLElement) {
+				menu.scrollLeft = 0;
+			}
+		});
 	});
 </script>
 

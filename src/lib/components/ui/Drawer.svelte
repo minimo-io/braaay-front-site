@@ -1,4 +1,4 @@
-<!-- src/lib/Drawer.svelte -->
+<!-- src/lib/components/ui/Drawer.svelte -->
 <script lang="ts">
 	import { drawerState } from '$stores/drawerState.state.svelte';
 	import { ChevronRight, ChevronDown } from '@lucide/svelte';
@@ -13,7 +13,7 @@
 </script>
 
 <div
-	class="fixed border-0 inset-y-0 left-0 z-10 transform transition-transform duration-200 ease-in-out Xmd:hidden"
+	class="fixed border-0 inset-y-0 left-0 z-10 transform transition-transform duration-200 ease-in-out"
 	class:translate-y-0={drawerState.active}
 	class:-translate-y-full={!drawerState.active}
 	class:mt-[115px]={drawerState.active}

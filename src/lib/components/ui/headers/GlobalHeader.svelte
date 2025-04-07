@@ -37,6 +37,12 @@
 
 	// Effect to control page scrolling
 	$effect(() => {
+		if (drawerState.active) {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth' // Use 'auto' instead of 'smooth' for instant scrolling
+			});
+		}
 		document.body.style.overflow = drawerState.active ? 'hidden' : '';
 	});
 </script>
