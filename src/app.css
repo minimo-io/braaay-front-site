@@ -314,6 +314,12 @@ html {
 	.bry-article-content img {
 		@apply rounded-xl my-2 relative;
 	}
+	.bry-article-content ul {
+		@apply list-disc list-inside;
+	}
+	.bry-article-content ul > li {
+		@apply my-3;
+	}
 
 	/* Bry hr bulleted line */
 	/* .bry-bullet-blue */

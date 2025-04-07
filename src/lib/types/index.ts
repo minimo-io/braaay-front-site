@@ -1,3 +1,5 @@
+import type { ImageGeneral } from './image.types';
+
 export * from './posts.types';
 export * from './products.types';
 export * from './relay-data.types';
@@ -15,4 +17,9 @@ export interface Wine {
 	score: string;
 }
 
-// export type { Wine };
+// For country box
+export interface Country {
+	flag: ImageGeneral;
+	url: string;
+	isBold: boolean;
+}

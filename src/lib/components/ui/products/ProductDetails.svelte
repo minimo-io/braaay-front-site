@@ -41,7 +41,11 @@
 			>
 			{m.cashDiscountText()}
 		</h4>
-		<MoreInfoButton title={clubMoreInfoText} customStyles="!mx-0" url="/clube/" />
+		<MoreInfoButton
+			title={clubMoreInfoText}
+			customStyles="!mx-0 !bg-green-dark !text-white border-none"
+			url="/clube/"
+		/>
 	</div>
 
 	{#if stockStatus}

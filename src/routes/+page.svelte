@@ -1,12 +1,61 @@
 <script lang="ts">
 	import Carrousel from '$components/ui/Carrousel.svelte';
+	import CountryBox from '$components/ui/CountryBox.svelte';
 	import PartnersList from '$components/ui/PartnersList.svelte';
 	import TitleSection from '$components/ui/TitleSection.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 	import WineBox from '$components/ui/products/WineBox.svelte';
+	import type { Country, ImageGeneral } from '$lib/types';
 
 	import { Calendar, ChefHat } from '@lucide/svelte';
+
+	let countries: Country[] = [
+		{
+			url: '/pais/uruguai/',
+			isBold: true,
+			flag: {
+				url: '/images/flags/uruguay.png',
+				altText: 'Uruguai'
+			} as ImageGeneral
+		} as Country,
+		{
+			url: '/pais/brasil/',
+			isBold: true,
+			flag: {
+				url: '/images/flags/brazil.png',
+				altText: 'Brasil'
+			} as ImageGeneral
+		} as Country,
+		{
+			url: '/pais/chile/',
+			flag: {
+				url: '/images/flags/chile.png',
+				altText: 'Chile'
+			} as ImageGeneral
+		} as Country,
+		{
+			url: '/pais/argentina/',
+			flag: {
+				url: '/images/flags/argentina.png',
+				altText: 'Argentina'
+			} as ImageGeneral
+		} as Country,
+		{
+			url: '/pais/portugal/',
+			flag: {
+				url: '/images/flags/portugal.png',
+				altText: 'Portugal'
+			} as ImageGeneral
+		} as Country,
+		{
+			url: '/pais/italia/',
+			flag: {
+				url: '/images/flags/italy.png',
+				altText: 'Italia'
+			} as ImageGeneral
+		} as Country
+	];
 </script>
 
 <svelte:head>
@@ -180,6 +229,21 @@
 			</div>
 		</section>
 
+		<!-- Header section: Paises -->
+		<TitleSection
+			title="Vinhos por País"
+			subTitle="E-Commerce"
+			description="Somos especialistas no melhores vinhos de Uruguai e do Brasil mas a BRAAAY vai além, desde o melhor em vinhos Italianos, até Chilenos, Argentinos e Portugueses."
+		/>
+
+		<section class="bg-white max-w-screen-lg-2x py-5 md:py-0 mx-[20px] lg:mx-auto">
+			<div class="flex !flex-row justify-evenly gap-8 overflow-x-auto whitespace-nowrap">
+				{#each countries as country}
+					<CountryBox {country} />
+				{/each}
+			</div>
+		</section>
+
 		<!-- Header section: Harmonizacoes -->
 		<TitleSection
 			title="Harmonizações"
@@ -201,38 +265,46 @@
 			<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
 				<!-- Image 1 with play button overlay -->
 				<div class="relative">
-					<img
-						src="/images/harmonizacoes/carnes-vermelhas-2.webp"
-						alt="1 description"
-						class="rounded-lg w-full h-auto"
-					/>
+					<a title="Carnes vermelhas" href="/harmonizacoes/carnes-vermelhas/">
+						<img
+							src="/images/harmonizacoes/carnes-vermelhas-2.webp"
+							alt="1 description"
+							class="rounded-lg w-full h-auto"
+						/>
+					</a>
 				</div>
 
 				<!-- Image 2 -->
 				<div>
-					<img
-						src="/images/harmonizacoes/harmonizacoes-vegetariano.png"
-						alt="2 description"
-						class="rounded-lg w-full h-auto"
-					/>
+					<a title="Vegetariano" href="/harmonizacoes/vegetariano/">
+						<img
+							src="/images/harmonizacoes/harmonizacoes-vegetariano.png"
+							alt="2 description"
+							class="rounded-lg w-full h-auto"
+						/>
+					</a>
 				</div>
 
 				<!-- Image 3 -->
 				<div>
-					<img
-						src="/images/harmonizacoes/culinaria-japonesa-2.webp"
-						alt="3 description"
-						class="rounded-lg w-full h-auto"
-					/>
+					<a title="Culinaria japonesa" href="/harmonizacoes/culinaria-japonesa/">
+						<img
+							src="/images/harmonizacoes/culinaria-japonesa-2.webp"
+							alt="3 description"
+							class="rounded-lg w-full h-auto"
+						/>
+					</a>
 				</div>
 
 				<!-- Image 4 -->
 				<div>
-					<img
-						src="/images/harmonizacoes/harmonizacao-carnes-brancas.webp"
-						alt="4 description"
-						class="rounded-lg w-full h-auto"
-					/>
+					<a title="Culinaria japonesa" href="/harmonizacoes/carnes-brancas/">
+						<img
+							src="/images/harmonizacoes/harmonizacao-carnes-brancas.webp"
+							alt="4 description"
+							class="rounded-lg w-full h-auto"
+						/>
+					</a>
 				</div>
 			</div>
 		</div>

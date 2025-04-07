@@ -104,7 +104,11 @@
 					<h3>BRAAAY</h3>
 					<ul>
 						<li><a href="/">{m.sobreNos()}</a></li>
-						<li><a href="/">AFILIADOS</a></li>
+						<li>
+							<a href="/blog/tannat-day-150-anos-dos-melhores-tannat-do-mundo-14-de-abril/"
+								>TANNAT DAY</a
+							>
+						</li>
 						<li><a href={localizeHref('/blog')}>BLOG</a></li>
 						<li><a href="/">SHOWROOM</a></li>
 					</ul>

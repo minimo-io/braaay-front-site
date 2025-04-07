@@ -24,6 +24,20 @@ export interface ProductsForWineProducerQueryResult {
 	};
 	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
 }
+export interface ProductsForPairingQueryResult {
+	allPaHarmonizacoes: {
+		nodes: GraphQLCategory[];
+	};
+	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
+}
+export interface ProductsForUvaQueryResult {
+	uva: GraphQLCategory;
+	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
+}
+export interface ProductsForTagQueryResult {
+	productTag: GraphQLCategory;
+	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
+}
 
 export interface Product {
 	slug: string;

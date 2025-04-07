@@ -55,6 +55,34 @@ export default defineConfig({
 					]
 				},
 
+				// Harmonizacoes
+				{
+					pattern: '/harmonizacoes/:id',
+					localized: [
+						['pt', '/harmonizacoes/:id'],
+						['uy', '/uy/maridajes/:id']
+					]
+				},
+
+				// Uva
+				{
+					pattern: '/uva/:id',
+					localized: [
+						['pt', '/uva/:id'],
+						['uy', '/uy/uva/:id']
+					]
+				},
+
+				// Tag
+				{
+					pattern: '/tag/:id',
+					localized: [
+						['pt', '/tag/:id'],
+						['uy', '/uy/tag/:id']
+					]
+				},
+
+				// Blog
 				{
 					pattern: '/blog/:id',
 					localized: [
