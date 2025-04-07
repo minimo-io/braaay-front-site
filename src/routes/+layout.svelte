@@ -10,13 +10,15 @@
 	import Footer from '$components/layout/Footer.svelte';
 	import Header from '$components/layout/Header.svelte';
 
+	import Drawer from '$components/ui/Drawer.svelte';
+
 	// Modal
 	// import { urqlClient } from '$stores/urqlClient.state.svelte';
 	import { modalState } from '$stores/modalState.state.svelte';
 	import Modal from '$components/ui/Modal.svelte';
 
 	// Toasts
-
+	// @ts-ignore
 	import { Toasts } from 'svoast';
 
 	import '../app.css';
@@ -55,6 +57,8 @@
 	header={modalState.header}
 	content={modalState.content}
 />
+
+<Drawer />
 
 <Toasts position="bottom-right" />
 

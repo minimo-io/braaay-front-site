@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	// import { onMount } from 'svelte';
-
+	import { drawerState, toggleDrawer } from '$stores/drawerState.state.svelte';
 	import {
-		// Newspaper,
+		X,
 		Search,
 		CircleUser,
 		Heart,
@@ -19,6 +19,7 @@
 	import SearchBar from '../search/SearchBar.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import GlobalBanner from './GlobalBanner.svelte';
+	import { draw } from 'svelte/transition';
 
 	// Using runes for reactive state
 	let SecondaryMenuComponent = $state(
@@ -33,6 +34,11 @@
 				? SecondaryMenuBlog
 				: SecondaryMenuGeneral;
 	});
+
+	// Effect to control page scrolling
+	$effect(() => {
+		document.body.style.overflow = drawerState.active ? 'hidden' : '';
+	});
 </script>
 
 <header class="bg-white">
@@ -42,8 +48,20 @@
 	>
 		<!-- logo -->
 		<div class="flex">
-			<button class="flex md:hidden justify-start mr-6">
-				<AlignJustify class="h-[22px] !mr-0 text-blue" />
+			<button
+				class="flex md:hidden justify-start mr-6"
+				onclick={() => {
+					toggleDrawer();
+					// drawerOpen.set(true);
+				}}
+			>
+				{#if drawerState.active}
+					<!-- When active, display the cross icon -->
+					<X class="h-[22px] !mr-0 text-blue" />
+				{:else}
+					<!-- When inactive, display the hamburger icon -->
+					<AlignJustify class="h-[22px] !mr-0 text-blue" />
+				{/if}
 			</button>
 			<div class="flex lg:flex-none pr-0 md:pr-8 justify-start">
 				<a href={localizeHref('/')} class="">

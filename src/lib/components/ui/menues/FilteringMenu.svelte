@@ -10,6 +10,7 @@
 		Truck,
 		Ruler
 	} from '@lucide/svelte';
+	import { toggleDrawer } from '$stores/drawerState.state.svelte';
 </script>
 
 <!-- Filtering menu -->
@@ -18,6 +19,9 @@
 		<!-- All Filters Button -->
 		<button
 			class="!bg-sun !shadow-none active:shadow-none !text-white !border-none shine-effect filtering-button-primary"
+			onclick={() => {
+				toggleDrawer();
+			}}
 		>
 			<div class="flex items-center relative -left-2 md:left-0">
 				<SlidersHorizontal class="lucide-button w-5 h-5 mr-2" />
