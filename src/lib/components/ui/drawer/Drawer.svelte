@@ -4,15 +4,12 @@
 	import { quintOut } from 'svelte/easing';
 
 	import { drawerState, goBackToMainMenu } from '$stores/drawerState.state.svelte';
-	import { ArrowLeft, ChevronRight } from '@lucide/svelte';
+	import { ArrowLeft } from '@lucide/svelte';
 
-	import { getSiteCategories } from '$lib/data/categories.data';
-	import { getLocale } from '$lib/paraglide/runtime';
 	import DrawerCountries from './DrawerCountries.svelte';
 	import DrawerMain from './DrawerMain.svelte';
 	import DrawerUvas from './DrawerUvas.svelte';
 	import DrawerCategories from './DrawerCategories.svelte';
-	let currentCategories = getSiteCategories(getLocale());
 </script>
 
 <div
