@@ -1,0 +1,215 @@
+{
+  "pt": [
+    {
+      "name": "Tannat",
+      "url": "/uva/tannat/",
+      "count": 28
+    },
+    {
+      "name": "Uva Chardonnay",
+      "url": "/uva/chardonnay/",
+      "count": 24
+    },
+    {
+      "name": "Cabernet Sauvignon",
+      "url": "/uva/cabernet-sauvignon/",
+      "count": 23
+    },
+    {
+      "name": "Merlot",
+      "url": "/uva/merlot/",
+      "count": 20
+    },
+    {
+      "name": "Pinot Noir",
+      "url": "/uva/pinot-noir/",
+      "count": 17
+    },
+    {
+      "name": "Malbec",
+      "url": "/uva/malbec/",
+      "count": 10
+    },
+    {
+      "name": "Carmènére",
+      "url": "/uva/carmenere/",
+      "count": 9
+    },
+    {
+      "name": "Moscato Bianco",
+      "url": "/uva/moscato-bianco/",
+      "count": 6
+    },
+    {
+      "name": "Cabernet Franc",
+      "url": "/uva/cabernet-franc/",
+      "count": 5
+    },
+    {
+      "name": "Alvarinho",
+      "url": "/uva/alvarinho/",
+      "count": 4
+    },
+    {
+      "name": "Moscato Hamburgo",
+      "url": "/uva/moscato-hamburgo/",
+      "count": 4
+    },
+    {
+      "name": "Syrah",
+      "url": "/uva/syrah/",
+      "count": 3
+    },
+    {
+      "name": "Marselan",
+      "url": "/uva/marselan/",
+      "count": 3
+    },
+    {
+      "name": "Viognier",
+      "url": "/uva/viognier/",
+      "count": 3
+    },
+    {
+      "name": "Zinfandel",
+      "url": "/uva/zinfandel/",
+      "count": 3
+    },
+    {
+      "name": "Moscato Giallo",
+      "url": "/uva/moscato-giallo/",
+      "count": 3
+    },
+    {
+      "name": "Barbera",
+      "url": "/uva/barbera/",
+      "count": 2
+    },
+    {
+      "name": "Tempranillo",
+      "url": "/uva/tempranillo/",
+      "count": 2
+    },
+    {
+      "name": "Touriga Nacional",
+      "url": "/uva/touriga-nacional/",
+      "count": 2
+    },
+    {
+      "name": "Pinot Grigio",
+      "url": "/uva/pinot-grigio/",
+      "count": 2
+    },
+    {
+      "name": "Nero D’Avola",
+      "url": "/uva/nero-davola/",
+      "count": 2
+    },
+    {
+      "name": "Malvasia",
+      "url": "/uva/malvasia/",
+      "count": 2
+    },
+    {
+      "name": "Riesling",
+      "url": "/uva/riesling/",
+      "count": 2
+    },
+    {
+      "name": "Sauvignon Blanc",
+      "url": "/uva/sauvignon-blanc/",
+      "count": 2
+    },
+    {
+      "name": "Moscatel de Setúbal",
+      "url": "/uva/moscatel-de-setubal/",
+      "count": 1
+    },
+    {
+      "name": "Moscato Rosado",
+      "url": "/uva/moscato-rosado/",
+      "count": 1
+    },
+    {
+      "name": "Petit Manseng",
+      "url": "/uva/petit-manseng/",
+      "count": 1
+    },
+    {
+      "name": "Moscato",
+      "url": "/uva/moscato/",
+      "count": 1
+    },
+    {
+      "name": "Petit Verdot",
+      "url": "/uva/petit-verdot/",
+      "count": 1
+    },
+    {
+      "name": "Alicante Bouschet",
+      "url": "/uva/alicante-bouschet/",
+      "count": 1
+    },
+    {
+      "name": "Chenin",
+      "url": "/uva/chenin/",
+      "count": 1
+    },
+    {
+      "name": "Nebbiolo",
+      "url": "/uva/nebbiolo/",
+      "count": 1
+    },
+    {
+      "name": "Marufo",
+      "url": "/uva/marufo/",
+      "count": 1
+    },
+    {
+      "name": "Rufete",
+      "url": "/uva/rufete/",
+      "count": 1
+    },
+    {
+      "name": "Tinta Roriz",
+      "url": "/uva/tinta-roriz/",
+      "count": 1
+    },
+    {
+      "name": "Jaen",
+      "url": "/uva/jaen/",
+      "count": 1
+    },
+    {
+      "name": "Primitivo",
+      "url": "/uva/primitivo/",
+      "count": 1
+    },
+    {
+      "name": "Prosecco",
+      "url": "/uva/prosecco/",
+      "count": 1
+    },
+    {
+      "name": "Trebiano",
+      "url": "/uva/trebiano/",
+      "count": 1
+    },
+    {
+      "name": "Ancellotta",
+      "url": "/uva/ancellotta/",
+      "count": 1
+    },
+    {
+      "name": "Gamay",
+      "url": "/uva/gamay/",
+      "count": 1
+    },
+    {
+      "name": "Alentejo",
+      "url": "/uva/alentejo/",
+      "count": 1
+    }
+  ],
+  "uy": []
+}

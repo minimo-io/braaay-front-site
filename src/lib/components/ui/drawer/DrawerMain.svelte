@@ -1,14 +1,5 @@
 <script lang="ts">
-	import {
-		ChevronRight,
-		Wine,
-		Gift,
-		PackageOpen,
-		Globe,
-		Grape,
-		CircleUser,
-		Headset
-	} from '@lucide/svelte';
+	import { ChevronRight, CircleUser, Headset } from '@lucide/svelte';
 	import { openSubmenu } from '$stores/drawerState.state.svelte';
 	import { drawerData } from '$lib/data/drawer.data';
 	import { getLocale } from '$lib/paraglide/runtime';
