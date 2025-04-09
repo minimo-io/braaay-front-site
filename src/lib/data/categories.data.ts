@@ -6,9 +6,6 @@ import {
 	Leaf,
 	Award,
 	Wine,
-	Sparkles,
-	Shield,
-	Cloud,
 	Beer,
 	Droplets,
 	Gem,
@@ -16,6 +13,7 @@ import {
 	Store
 } from '@lucide/svelte';
 import type { MenuCategory } from '$lib/types';
+import WineSubcategories from '$data/jsons/wine-subcategories.json';
 
 export function getSiteCategories(site: 'pt' | 'uy' = 'pt') {
 	const categories: { [key: string]: MenuCategory[] } = {
@@ -25,17 +23,11 @@ export function getSiteCategories(site: 'pt' | 'uy' = 'pt') {
 				name: 'Vinhos',
 				url: '/vinhos/',
 				icon: Wine,
-				subcategories: [
-					{ id: 85, name: 'Tintos', url: '/vinhos/tintos/', icon: Wine },
-					{ id: 22, name: 'Espumantes', url: '/vinhos/espumantes/', icon: Sparkles },
-					{ id: 20, name: 'Brancos', url: '/vinhos/brancos/', icon: Wine },
-					{ id: 12, name: 'Rosés', url: '/vinhos/roses/', icon: Wine },
-					{ id: 5, name: 'Frisantes', url: '/vinhos/frisantes/', icon: Cloud },
-					{ id: 2, name: 'Fortificados', url: '/vinhos/fortificados/', icon: Shield }
-				] as MenuCategory[]
+				subcategories: WineSubcategories['pt'] as MenuCategory[]
 			},
-			{ id: 101, name: 'Presentes', url: '/presentes/', icon: Gift },
-			{ id: 102, name: 'Kits', url: '/kits/', icon: PackageOpen },
+			{ id: 101, name: 'Presentes & Kits', url: '/kits/', icon: Gift },
+			{ id: 101, name: 'Cervejas', url: '/cervejas/', icon: Beer },
+			// { id: 102, name: 'Kits', url: '/kits/', icon: PackageOpen },
 			{
 				id: 103,
 				name: 'Experiências',

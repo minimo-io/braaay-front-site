@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { localizeHref, getLocale } from '$lib/paraglide/runtime';
 	import { ChevronDown, ChevronRight } from '@lucide/svelte';
-	import { getSiteCategories } from '$lib/data/categories';
+	import { getSiteCategories } from '$lib/data/categories.data';
 
 	let currentCategories = getSiteCategories(getLocale());
 </script>
 
 <div class="bry-secondary-menu" data-sveltekit-preload-data="false">
 	<nav class="container max-w-screen-lg py-2 mx-[30px] lg:mx-auto">
-		<ul class="flex space-x-4">
+		<ul class="flex space-x-2 md:-left-2 relative">
 			{#each currentCategories.slice(0, 4) as category, i}
 				<li class={['relative group transition-all duration-300', i == 0 && 'md:!ml-0']}>
 					<a

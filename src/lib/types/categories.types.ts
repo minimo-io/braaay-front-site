@@ -10,6 +10,7 @@ export interface MenuCategory {
 	subcategories?: MenuCategory[]; // Optional subcategories
 	external?: boolean; // Optional external link flag
 	color?: 'green' | 'red';
+	count?: number;
 }
 
 export interface Category {

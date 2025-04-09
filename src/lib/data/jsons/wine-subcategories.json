@@ -1,0 +1,11 @@
+{
+	"pt": [
+		{ "id": 85, "name": "Tintos", "url": "/vinhos/tintos/", "count": 210 },
+		{ "id": 22, "name": "Espumantes", "url": "/vinhos/espumantes/", "count": 141 },
+		{ "id": 20, "name": "Brancos", "url": "/vinhos/brancos/", "count": 89 },
+		{ "id": 12, "name": "Rosés", "url": "/vinhos/roses/", "count": 45 },
+		{ "id": 5, "name": "Frisantes", "url": "/vinhos/frisantes/", "count": 12 },
+		{ "id": 2, "name": "Fortificados", "url": "/vinhos/fortificados/", "count": 3 }
+	],
+	"uy": []
+}

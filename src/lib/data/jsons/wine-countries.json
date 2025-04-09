@@ -1,0 +1,41 @@
+{
+	"pt": [
+		{
+			"name": "Uruguai",
+			"url": "/pais/uruguai/",
+			"flag": "/images/flags/uruguay.png",
+			"count": 321
+		},
+		{
+			"name": "Brasil",
+			"url": "/pais/brasil/",
+			"flag": "/images/flags/brasil.png",
+			"count": 21
+		},
+		{
+			"name": "Chile",
+			"url": "/pais/chile/",
+			"flag": "/images/flags/chile.png",
+			"count": 10
+		},
+		{
+			"name": "Argentina",
+			"url": "/pais/argentina/",
+			"flag": "/images/flags/argentina.png",
+			"count": 15
+		},
+		{
+			"name": "Portugal",
+			"url": "/pais/portugal/",
+			"flag": "/images/flags/portugal.png",
+			"count": 6
+		},
+		{
+			"name": "Italia",
+			"url": "/pais/italia/",
+			"flag": "/images/flags/italy.png",
+			"count": 4
+		}
+	],
+	"uy": []
+}

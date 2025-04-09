@@ -20,7 +20,7 @@
 		<button
 			class="!bg-sun !shadow-none active:shadow-none !text-white !border-none shine-effect filtering-button-primary"
 			onclick={() => {
-				toggleDrawer();
+				// toggleFilterDrawer();
 			}}
 		>
 			<div class="flex items-center relative -left-2 md:left-0">

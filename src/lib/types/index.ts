@@ -19,7 +19,13 @@ export interface Wine {
 
 // For country box
 export interface Country {
+	name: string;
 	flag: ImageGeneral;
 	url: string;
 	isBold: boolean;
+	count?: number;
+}
+export interface AllCountries {
+	pt: Country[];
+	uy: Country[];
 }

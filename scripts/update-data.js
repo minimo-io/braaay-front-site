@@ -1,2 +1,2 @@
-var message = 'Updating categories...';
+var message = 'Updating static data...';
 console.log(message);

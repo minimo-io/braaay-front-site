@@ -19,6 +19,6 @@
 			/>
 		</div>
 
-		<div class={['mt-2', country.isBold && 'font-bold']}>{country.flag.altText}</div>
+		<div class={['mt-2', country.isBold && 'font-bold']}>{country.name}</div>
 	</div>
 </a>

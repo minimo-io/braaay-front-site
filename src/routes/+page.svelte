@@ -6,9 +6,12 @@
 	import Button from '$components/ui/buttons/Button.svelte';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 	import WineBox from '$components/ui/products/WineBox.svelte';
-	import { countries } from '$lib/data/countries';
+	import { allCountries } from '$lib/data/countries.data';
+	import { getLocale } from '$lib/paraglide/runtime';
 
 	import { Calendar, ChefHat } from '@lucide/svelte';
+
+	let pageCountries = $state(allCountries[getLocale()]);
 </script>
 
 <svelte:head>
@@ -191,7 +194,7 @@
 
 		<section class="bg-white max-w-screen-lg-2x py-5 md:py-0 mx-[20px] lg:mx-auto">
 			<div class="flex !flex-row justify-evenly gap-8 overflow-x-auto whitespace-nowrap">
-				{#each countries as country}
+				{#each pageCountries as country}
 					<CountryBox {country} />
 				{/each}
 			</div>
