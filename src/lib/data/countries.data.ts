@@ -6,7 +6,7 @@ const wineCountriesData = rawWineCountriesData as WineCountriesData;
 
 // Function to check if a country should be bold based on flag
 function shouldBeBold(flagPath: string): boolean {
-	return flagPath.includes('brazil.png') || flagPath.includes('uruguay.png');
+	return flagPath.includes('brasil-flag.png') || flagPath.includes('uruguai-flag.png');
 }
 
 // Function to transform the data

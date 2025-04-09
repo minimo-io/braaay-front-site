@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"prebuild": "tsc -p scripts/tsconfig.scripts.json && node scripts/update-grapes.js",
+		"prebuild": "tsc -p scripts/tsconfig.scripts.json && node scripts/update-grapes.js && node scripts/update-subcategories.js && node scripts/update-countries.js",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",

@@ -9,7 +9,7 @@ import { cacheExchange, fetchExchange } from '@urql/core';
 // Load environment variables
 // dotenv.config();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const outputPath = path.join(__dirname, '../src/lib/data/jsons/wine-grapes.json');
+const outputPath = path.join(__dirname, '../src/lib/data/jsons/wine-subcategories.json');
 // GraphQL endpoint URLs from environment variables
 const PT_GRAPHQL_URL = 'https://braaay.com/graphql'; // process.env.PUBLIC_GRAPHQL_SERVER_PT;
 const UY_GRAPHQL_URL = 'https://braaay.com/uy/graphql'; // process.env.PUBLIC_GRAPHQL_SERVER_UY;
@@ -27,23 +27,24 @@ const uyClient = createClient({
     fetchOptions: () => ({})
 });
 // GraphQL query to fetch grape varieties
-const GRAPE_VARIETIES_QUERY = `
-  query {
-   	uvas(first:10000, where:{orderby: COUNT, hideEmpty:true}){
-      nodes {
-        name
-        uri
-        count
-      }
-    }
-  }
+const GRAPE_VARIETIES_QUERY_PT = `
+	query{
+		productCategories(first:10000, where:{orderby: COUNT, hideEmpty:true, parent:26 }){
+			nodes{
+				databaseId
+				count
+				name
+				uri
+			}
+		}
+	}
 `;
-// Transform the data into the required format
 function transformData(data) {
-    if (!data || !data.uvas || !data.uvas.nodes) {
+    if (!data || !data.productCategories || !data.productCategories.nodes) {
         return [];
     }
-    return data.uvas.nodes.map((node) => ({
+    return data.productCategories.nodes.map((node) => ({
+        id: node.databaseId,
         name: node.name,
         url: node.uri,
         count: node.count || 0
@@ -51,9 +52,9 @@ function transformData(data) {
 }
 // Fetch data from Portuguese endpoint
 async function fetchPtData() {
-    console.log('Fetching grape varieties from Portuguese endpoint...');
+    console.log('Fetching sub-categories from Portuguese endpoint...');
     try {
-        const result = await ptClient.query(GRAPE_VARIETIES_QUERY, {}).toPromise();
+        const result = await ptClient.query(GRAPE_VARIETIES_QUERY_PT, {}).toPromise();
         if (result.error) {
             console.error('Error fetching PT data:', result.error);
             return [];
@@ -67,7 +68,7 @@ async function fetchPtData() {
 }
 // For Uruguay, since there's no "uvas" taxonomy yet, just return an empty array
 async function fetchUyData() {
-    console.log('No uvas taxonomy in Uruguayan endpoint yet, returning empty array');
+    console.log('No sub-categories in Uruguayan endpoint yet, returning empty array');
     // Reference the client to prevent unused variable warnings
     // but don't make an actual query yet
     if (!uyClient) {
@@ -106,10 +107,10 @@ async function fetchAllData() {
         }
         // Write the data to a JSON file
         fs.writeFileSync(outputPath, JSON.stringify(combinedData, null, 2), 'utf8');
-        console.log(`Grape varieties data saved to ${outputPath}`);
+        console.log(`Sub-categories data saved to ${outputPath}`);
     }
     catch (error) {
-        console.error('Failed to fetch grape varieties:', error);
+        console.error('Failed to fetch sub-categories:', error);
         process.exit(1);
     }
 }

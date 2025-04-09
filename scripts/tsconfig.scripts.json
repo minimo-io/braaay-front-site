@@ -12,6 +12,6 @@
 		"skipLibCheck": true
 	},
 	// "include": ["./**/*.ts"]
-	"include": ["update-grapes.ts"],
+	"include": ["update-grapes.ts", "update-subcategories.ts", "update-countries.ts"],
 	"exclude": []
 }
