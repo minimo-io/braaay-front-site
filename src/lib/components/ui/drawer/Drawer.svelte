@@ -25,10 +25,11 @@
 		{#if drawerState.currentSubmenu}
 			<div class="flex text-xs px-0 flex-col">
 				<div class="flex items-center px-[30px] border-b border-grey-lighter">
-					<button on:click={goBackToMainMenu} class="flex items-center text-blue mr-3">
+					<button onclick={goBackToMainMenu} class="flex items-center text-blue mr-3">
 						<ArrowLeft class="w-4 h-4" />
+
+						<h2 class="my-5 uppercase font-extrabold text-base">{drawerState.currentName}</h2>
 					</button>
-					<h2 class="my-5 uppercase font-extrabold text-base">{drawerState.currentName}</h2>
 				</div>
 			</div>
 		{/if}
