@@ -23,7 +23,11 @@
 		{#if drawer.subMenu}
 			<button
 				onclick={() => openSubmenu(drawer.id, drawer.name)}
-				class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
+				class={[
+					'py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full',
+					drawer?.color == 'green' && '!text-bra',
+					drawer?.color == 'red' && '!text-[red]'
+				]}
 			>
 				<div class="text-left self-center flex align-middle justify-center">
 					<!-- <Wine class="w-4 h-4 self-center mr-2" /> -->
@@ -39,7 +43,11 @@
 		{:else}
 			<a
 				href={drawer.url}
-				class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px]"
+				class={[
+					'py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px]',
+					drawer?.color == 'green' && '!text-bra',
+					drawer?.color == 'red' && '!text-[red]'
+				]}
 			>
 				<div class="text-left self-center flex align-middle justify-center">
 					<drawer.icon class="w-4 h-4 self-center mr-2" />
