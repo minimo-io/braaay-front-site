@@ -5,3 +5,4 @@ export { default as CashbackButton } from './CashbackButton.svelte';
 export { default as PrevNextButton } from './PrevNextButton.svelte';
 export { default as MoreInfoButton } from './MoreInfoButton.svelte';
 export { default as LoadMoreButton } from './LoadMoreButton.svelte';
+export { default as WhatsappButton } from './WhatsappButton.svelte';

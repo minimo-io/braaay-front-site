@@ -10,6 +10,7 @@
 	import DrawerMain from './DrawerMain.svelte';
 	import DrawerUvas from './DrawerUvas.svelte';
 	import DrawerCategories from './DrawerCategories.svelte';
+	import DrawerLogin from './DrawerLogin.svelte';
 </script>
 
 <div
@@ -55,7 +56,7 @@
 			</div>
 		{:else if drawerState.currentSubmenu === 'account'}
 			<div in:fly={{ x: 300, duration: 300, easing: quintOut }} class="overflow-y-auto">
-				<div class="text-center py-5">EM BREVE</div>
+				<DrawerLogin />
 			</div>
 		{/if}
 	</div>

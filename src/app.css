@@ -121,6 +121,11 @@ html {
 			}
 		}
 	}
+
+	.form-btn {
+		@apply uppercase flex items-center justify-center disabled:opacity-50 disabled:bg-grey-medium mt-3 lg:mt-0 lg:py-3 bg-sun text-white !border-0 text-[15px] !rounded-lg shine-effect;
+	}
+
 	.bry-search-kbd {
 		@apply px-2 py-1 bg-grey-background rounded-xl text-grey-medium border border-grey-lighter font-roboto text-xs absolute top-1/2 transform -translate-y-1/2 right-8;
 	}
