@@ -53,23 +53,23 @@
 		});
 	});
 
-	let overlayActive = $state(true);
+	let overlayActive = $state(false);
 
-	// let timer: ReturnType<typeof setTimeout> | null = null;
-	// $effect(() => {
-	// 	if (navigating.to) {
-	// 		// Start loader
-	// 		overlayActive = false;
-	// 		if (timer) clearTimeout(timer);
-	// 		timer = setTimeout(() => {
-	// 			overlayActive = true;
-	// 		}, 3000);
-	// 	} else {
-	// 		// Navigation ended
-	// 		if (timer) clearTimeout(timer);
-	// 		overlayActive = false;
-	// 	}
-	// });
+	let timer: ReturnType<typeof setTimeout> | null = null;
+	$effect(() => {
+		if (navigating.to) {
+			// Start loader
+			overlayActive = false;
+			if (timer) clearTimeout(timer);
+			timer = setTimeout(() => {
+				overlayActive = true;
+			}, 3000);
+		} else {
+			// Navigation ended
+			if (timer) clearTimeout(timer);
+			overlayActive = false;
+		}
+	});
 </script>
 
 {#if showLoader}
@@ -82,8 +82,8 @@
 				strokeWidth={2}
 				style=""
 			/>
-			<div class="loader-overlay"></div>
 		{/if}
+		<div class="loader-overlay"></div>
 	</div>
 {/if}
 
