@@ -9,27 +9,6 @@ import { error } from '@sveltejs/kit';
 
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 
-// export const prerender = true;
-
-// export const entries: EntryGenerator = async () => {
-// 	const locales = ['pt', 'uy'];
-// 	let allEntries: { slug: string; locale: string }[] = [];
-
-// 	for (const locale of locales) {
-// 		const client = getGqlClient(locale);
-// 		const result = await client.query(SLUGS_QUERY, {}).toPromise();
-// 		if (result.error || !result.data) {
-// 			console.error(`Error fetching posts for locale ${locale}:`, result.error);
-// 			throw new Error(`Failed to fetch post slugs for locale ${locale}`);
-// 		}
-// 		const entriesForLocale = result.data.posts.edges.map((edge: any) => ({
-// 			slug: edge.node.slug
-// 		}));
-// 		allEntries = allEntries.concat(entriesForLocale);
-// 	}
-// 	return allEntries;
-// };
-
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
 
