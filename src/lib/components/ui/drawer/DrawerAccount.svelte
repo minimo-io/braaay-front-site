@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import Button from '../buttons/Button.svelte';
 
 	import WhatsappButton from '$components/ui/buttons/WhatsappButton.svelte';
 	import { slide } from 'svelte/transition';
 	import { login } from '$lib/graphql/auth';
 	import { redirectHref } from '$lib/utils';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	let showReset = $state(false);
 
@@ -15,6 +17,11 @@
 	let returnUrl = $derived(page.url.href);
 	let error = $state('');
 
+	interface Props {
+		showBottomBorder?: boolean;
+	}
+	let { showBottomBorder = true }: Props = $props();
+
 	// Derived state with runes
 
 	function toggleForms(e) {
@@ -23,7 +30,7 @@
 	}
 
 	// Handle the login form submission
-	async function handleSubmit(event) {
+	async function handleLogin(event) {
 		event.preventDefault();
 		processing = true;
 		toggleLoader();
@@ -31,7 +38,12 @@
 			let loginResult = await login(email, password);
 			if (loginResult && loginResult.success) {
 				error = '';
-				redirectHref(returnUrl);
+				redirectHref(localizeHref('/vinhos'));
+				// if (returnUrl.includes('/login')) {
+				// 	redirectHref(localizeHref('/vinhos'));
+				// } else {
+				// 	redirectHref(returnUrl);
+				// }
 			} else {
 				error = loginResult.message;
 				processing = false;
@@ -73,7 +85,7 @@
 		<form
 			id="frm-login"
 			method="POST"
-			onsubmit={handleSubmit}
+			onsubmit={handleLogin}
 			class="px-[30px] mt-5"
 			in:slide={{ duration: 200 }}
 		>
@@ -85,6 +97,7 @@
 					type="email"
 					bind:value={email}
 					disabled={processing}
+					required
 					class="w-full px-3 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none mt-2 text-sm"
 					placeholder="contato@braaay.com"
 				/>
@@ -97,6 +110,7 @@
 					type="password"
 					bind:value={password}
 					disabled={processing}
+					required
 					class="w-full px-3 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none mt-2 text-sm"
 					placeholder="123456789!"
 				/>
@@ -108,12 +122,25 @@
 				>
 			</div>
 			{#if error}
-				<div class="text-center text-red-medium text-sm pt-4">{error}</div>
+				<div class="text-left text-red-medium text-sm pt-4">{error}</div>
 			{/if}
 		</form>
 	</div>
 {/if}
-<div class="px-[35px] flex flex-col text-xs mt-7 border-b border-grey-lighter pb-6">
+<div
+	class="px-[35px] border-b border-grey-lighter w-full md:flex-1 md:justify-center flex-row text-center md:h-full self-center py-10 text-sm md:hidden"
+>
+	<div class="text-center flex flex-col p-0 md:p-10 font-bold">
+		<span class="mb-2 block">Não tem uma conta?</span>
+		<Button shineEffect={false} title="Cadastre-se" type="sun" />
+	</div>
+</div>
+<div
+	class={[
+		'px-[35px] flex flex-col text-xs mt-7  border-grey-lighter pb-6 border-b-0',
+		showBottomBorder && '!border-b'
+	]}
+>
 	<strong class="uppercase">Precisar de ajuda?</strong>
 	<span class="text-grey-medium-dark my-2"
 		>Entre em contato com nossa equipe através do botão abaixo e nós o ajudaremos.</span

@@ -1,8 +1,21 @@
-<script>
+<script lang="ts">
+	import { page } from '$app/state';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import MoreInfoButton from '$components/ui/buttons/MoreInfoButton.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import { User } from '@lucide/svelte';
+	import { toggleLoader } from '$stores/loaderStore.state.svelte';
+	import { logout } from '$lib/graphql/auth';
+	import { redirectHref } from '$lib/utils';
+
+	let returnUrl = $derived('/login');
+
+	async function handleLogout() {
+		// event.preventDefault();
+		toggleLoader();
+		let logoutResult = logout();
+		redirectHref(returnUrl);
+	}
 </script>
 
 <main class="w-full mx-auto">
@@ -81,7 +94,7 @@
 							<div class="border-t border-grey-lighter my-5"></div>
 						</li>
 						<li class="border-b md:border-b-none border-grey-lighter pb-5">
-							<Button title="Sair da conta" url="/logout" type="light" />
+							<Button title="Sair da conta" action={() => handleLogout()} type="light" />
 						</li>
 					</ul>
 				</div>

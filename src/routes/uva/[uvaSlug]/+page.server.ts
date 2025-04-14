@@ -1,3 +1,4 @@
+// src/routes/uva/[uvaSlug]/+page.server.ts
 import type { PageServerLoad } from './$types';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 import { UVA_PRODUCTS } from '$lib/graphql/queries/index';
@@ -16,15 +17,19 @@ import {
 
 import { error } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
 	const { uvaSlug } = params;
 
 	const result = await getUrqlClient()
-		.client.query<ProductsForUvaQueryResult>(UVA_PRODUCTS, {
-			first: CATALOGS_INITIAL_QUERY_LIMIT,
-			uvaId: uvaSlug,
-			uvaSlug: uvaSlug
-		})
+		.client.query<ProductsForUvaQueryResult>(
+			UVA_PRODUCTS,
+			{
+				first: CATALOGS_INITIAL_QUERY_LIMIT,
+				uvaId: uvaSlug,
+				uvaSlug: uvaSlug
+			},
+			{ context: { authToken: locals.authToken } }
+		)
 		.toPromise();
 
 	if (result.error || !result.data) {

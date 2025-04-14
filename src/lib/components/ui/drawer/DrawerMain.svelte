@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { ChevronRight, CircleUser, Headset, Truck, Heart } from '@lucide/svelte';
+	import { ChevronRight, CircleUser, Headset, Truck, Heart, Sparkle } from '@lucide/svelte';
 	import { openSubmenu } from '$stores/drawerState.state.svelte';
 	import { drawerData } from '$lib/data/drawer.data';
 	import { getLocale } from '$lib/paraglide/runtime';
-	import MoreInfoButton from '$components/ui/buttons/MoreInfoButton.svelte';
 	import WhatsappButton from '../buttons/WhatsappButton.svelte';
 	import { isAuthenticated } from '$lib/graphql/auth';
 
@@ -61,7 +60,7 @@
 		>
 			<div class="text-left self-center flex align-middle justify-center">
 				<CircleUser class="w-4 h-4 self-center mr-2" />
-				<span class="self-center font-semibold">Acessar</span>
+				<span class="self-center font-semibold">Acessar / Cadastro</span>
 			</div>
 			<div class="text-grey-medium flex flex-row align-middle self-center">
 				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
@@ -107,13 +106,22 @@
 				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
 			</div>
 		</button>
+		<a
+			href="/clube/"
+			class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px]"
+		>
+			<div class="text-left self-center flex align-middle justify-center">
+				<Sparkle class="w-4 h-4 self-center mr-2 text-sun" />
+				<span class="self-center font-semibold">Clube de benefícios — Conheça!</span>
+			</div>
+			<div class="text-grey-medium flex flex-row align-middle self-center">
+				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+			</div>
+		</a>
 	{/if}
 
 	<!-- Item with submenu -->
-	<a
-		href="https://wa.me/5511947530340"
-		target="_blank"
-		rel="nofollow noopener"
+	<div
 		class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px]"
 	>
 		<div class="text-left self-center flex align-middle justify-center">
@@ -124,5 +132,5 @@
 		<div class="text-grey-medium flex flex-row align-middle self-center">
 			<WhatsappButton />
 		</div>
-	</a>
+	</div>
 </div>

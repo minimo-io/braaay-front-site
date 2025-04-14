@@ -15,7 +15,7 @@ import {
 import { CATALOGS_INITIAL_QUERY_LIMIT } from '$lib/index';
 import { error } from '@sveltejs/kit';
 
-export const load: LayoutServerLoad = async ({ params }) => {
+export const load: LayoutServerLoad = async ({ params, locals }) => {
 	const { subcategorySlug } = params;
 	let { categorySlug } = params;
 
@@ -24,11 +24,16 @@ export const load: LayoutServerLoad = async ({ params }) => {
 	}
 
 	const result = await getUrqlClient()
-		.client.query<ProductsForCategoryQueryResult>(CATEGORY_PRODUCTS, {
-			first: CATALOGS_INITIAL_QUERY_LIMIT,
-			categorySlug: categorySlug,
-			categoryId: categorySlug
-		})
+		.client.query<ProductsForCategoryQueryResult>(
+			CATEGORY_PRODUCTS,
+			{
+				first: CATALOGS_INITIAL_QUERY_LIMIT,
+				categorySlug: categorySlug,
+				categoryId: categorySlug
+			},
+			{ context: { authToken: locals.authToken } }
+		)
+
 		.toPromise();
 
 	if (result.error || !result.data) {

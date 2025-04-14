@@ -10,13 +10,17 @@ import { error } from '@sveltejs/kit';
 // import { getLocale } from '$lib/paraglide/runtime';
 import {} from '$lib/paraglide/server';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
 	const { productSlug } = params;
 
 	// const locale = getLocale();
 
 	const result = await getUrqlClient()
-		.client.query<GraphQLSingleProduct>(PRODUCT_QUERY, { slug: productSlug })
+		.client.query<GraphQLSingleProduct>(
+			PRODUCT_QUERY,
+			{ slug: productSlug },
+			{ context: { authToken: locals.authToken } }
+		)
 		.toPromise();
 
 	if (result.error || !result.data) {

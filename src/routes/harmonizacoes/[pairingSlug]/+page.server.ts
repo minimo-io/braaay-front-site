@@ -17,14 +17,18 @@ import {
 
 import { error } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
 	const { pairingSlug } = params;
 
 	const result = await getUrqlClient()
-		.client.query<ProductsForPairingQueryResult>(PAIRING_PRODUCTS, {
-			first: CATALOGS_INITIAL_QUERY_LIMIT,
-			pairingSlug: pairingSlug
-		})
+		.client.query<ProductsForPairingQueryResult>(
+			PAIRING_PRODUCTS,
+			{
+				first: CATALOGS_INITIAL_QUERY_LIMIT,
+				pairingSlug: pairingSlug
+			},
+			{ context: { authToken: locals.authToken } }
+		)
 		.toPromise();
 
 	if (result.error || !result.data) {

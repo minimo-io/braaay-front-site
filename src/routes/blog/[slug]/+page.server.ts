@@ -9,14 +9,18 @@ import { error } from '@sveltejs/kit';
 
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
 	const { slug } = params;
 
 	// const locale = getLocale();
 	// const client = getGqlClient(locale);
 
 	const result = await getUrqlClient()
-		.client.query<GraphQLPostSingle>(POST_QUERY, { slug })
+		.client.query<GraphQLPostSingle>(
+			POST_QUERY,
+			{ slug },
+			{ context: { authToken: locals.authToken } }
+		)
 		.toPromise();
 
 	if (result.error || !result.data || !result.data.post) {

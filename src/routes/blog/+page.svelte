@@ -47,7 +47,7 @@
 				>
 					{#snippet button()}
 						<Button
-							title="Assine y Ganhe 15% OFF"
+							title="Assine y Ganhe 10% OFF"
 							size="md"
 							type="sun"
 							url="http://eepurl.com/iW9KH6"

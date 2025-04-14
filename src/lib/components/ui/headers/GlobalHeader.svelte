@@ -2,15 +2,7 @@
 	import { page } from '$app/state';
 	// import { onMount } from 'svelte';
 	import { drawerState, toggleDrawer } from '$stores/drawerState.state.svelte';
-	import {
-		X,
-		Search,
-		CircleUser,
-		Heart,
-		Menu,
-		EllipsisVertical,
-		AlignJustify
-	} from '@lucide/svelte';
+	import { X, Search, CircleUser, Heart, AlignJustify } from '@lucide/svelte';
 
 	import SecondaryMenuGeneral from '$components/ui/menues/SecondaryMenuGeneral.svelte';
 	import SecondaryMenuBlog from '$components/ui/menues/SecondaryMenuBlog.svelte';
@@ -20,6 +12,7 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import GlobalBanner from './GlobalBanner.svelte';
 	import { draw } from 'svelte/transition';
+	import { isAuthenticated } from '$lib/graphql/auth';
 
 	// Using runes for reactive state
 	let SecondaryMenuComponent = $state(
@@ -93,19 +86,35 @@
 		</div>
 
 		<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
-			<!-- My account -->
-			<Button
-				chevron={true}
-				customPx="!pr-[12px] !pl-3"
-				title="Entrar"
-				url="/account"
-				type="blue"
-				size="xl"
-			>
-				{#snippet icon()}
-					<CircleUser class="lucide-button h-[10px]" />
-				{/snippet}
-			</Button>
+			{#if !isAuthenticated()}
+				<!--Entrar -->
+				<Button
+					chevron={false}
+					customPx="!pr-[12px] !pl-3 !pr-7"
+					title="Entrar"
+					url="/login"
+					type="blue"
+					size="xl"
+				>
+					{#snippet icon()}
+						<CircleUser class="lucide-button h-[10px]" />
+					{/snippet}
+				</Button>
+			{:else}
+				<!-- My account -->
+				<Button
+					chevron={true}
+					customPx="!pr-[12px] !pl-3"
+					title="Conta"
+					url="/account"
+					type="blue"
+					size="xl"
+				>
+					{#snippet icon()}
+						<CircleUser class="lucide-button h-[10px]" />
+					{/snippet}
+				</Button>
+			{/if}
 
 			<!-- Favorites -->
 
@@ -113,7 +122,7 @@
 				chevron={false}
 				customPx="!pl-3 ml-[12px]"
 				title="Minha lista"
-				url="/account"
+				url="/login"
 				type="light"
 				size="xl"
 			>

@@ -17,15 +17,19 @@ import {
 
 import { error } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
 	const { countrySlug } = params;
 
 	const result = await getUrqlClient()
-		.client.query<ProductsForCountryQueryResult>(COUNTRY_PRODUCTS, {
-			first: CATALOGS_INITIAL_QUERY_LIMIT,
-			countrySlug: countrySlug,
-			taxonomyTerms: [countrySlug]
-		})
+		.client.query<ProductsForCountryQueryResult>(
+			COUNTRY_PRODUCTS,
+			{
+				first: CATALOGS_INITIAL_QUERY_LIMIT,
+				countrySlug: countrySlug,
+				taxonomyTerms: [countrySlug]
+			},
+			{ context: { authToken: locals.authToken } }
+		)
 		.toPromise();
 
 	if (result.error || !result.data) {

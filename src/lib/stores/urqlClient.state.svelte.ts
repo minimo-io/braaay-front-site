@@ -28,6 +28,13 @@ const getAuthToken = () => {
 // Create the auth exchange instance
 const authExchange = createAuthExchange(getAuthToken);
 
+// fetchOptions: () => {
+// 	const token = getAuthState().token;
+// 	return {
+// 	  headers: token ? { Authorization: `Bearer ${token}` } : {}
+// 	};
+//   },
+
 export const urqlClientUy = $state({
 	client: createClient({
 		url: PUBLIC_GRAPHQL_SERVER_UY,
