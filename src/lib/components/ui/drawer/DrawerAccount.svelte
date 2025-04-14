@@ -8,6 +8,7 @@
 	import { redirectHref } from '$lib/utils';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
+	import { onMount } from 'svelte';
 
 	let showReset = $state(false);
 
@@ -22,8 +23,11 @@
 	}
 	let { showBottomBorder = true }: Props = $props();
 
-	// Derived state with runes
+	onMount(() => {
+		document.getElementById('username')?.focus();
+	});
 
+	// Derived state with runes
 	function toggleForms(e) {
 		e.preventDefault();
 		showReset = !showReset;
@@ -66,6 +70,7 @@
 	>
 		<fieldset>
 			<label for="username" class="text-sm font-bold">REDEFINIR SENHA</label>
+
 			<input
 				id="username"
 				type="email"
@@ -116,7 +121,9 @@
 				/>
 			</fieldset>
 			<div class="flex justify-start gap-3 mt-3">
-				<button type="submit" class="btn form-btn !text-xs mt-0">Entrar</button>
+				<button type="submit" class="btn form-btn !text-xs mt-0" disabled={processing}
+					>Entrar</button
+				>
 				<button class="text-xs font-bold self-center pr-5 underline" onclick={toggleForms}
 					>Esqueceu sua senha?</button
 				>
