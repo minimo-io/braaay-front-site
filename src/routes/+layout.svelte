@@ -171,8 +171,10 @@
 		position: fixed;
 		top: 0;
 		left: 0;
+		bottom: 0;
 		width: 100%;
-		height: 100%;
+		/* height: 100%; */
+		height: 100dvh;
 		background-color: rgba(33, 38, 128, 0.2); /* semi-transparent gray */
 		z-index: 9998;
 		animation: fadeIn 0.3s ease-in-out;

@@ -34,8 +34,8 @@
 						{/if}
 						<span
 							class={[
-								'self-center font-roboto font-extrabold align-bottom pt-1 text-left text-[18px] md:text-[22px] truncate',
-								categoryTitle.split(' ').length > 1 && 'md:max-w-max max-w-[90%]'
+								'self-center font-roboto font-extrabold align-bottom pt-1 text-left text-[18px] md:text-[22px] text-wrap',
+								categoryTitle.split(' ').length > 1 && 'md:max-w-max max-w-[87%] leading-tight'
 							]}>{categoryTitle}</span
 						>
 					</div>
