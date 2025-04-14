@@ -28,6 +28,8 @@
 				: SecondaryMenuGeneral;
 	});
 
+	let isLogin = $derived(page.url.href.includes('/login'));
+
 	// Effect to control page scrolling
 	$effect(() => {
 		if (drawerState.active) {
@@ -167,7 +169,11 @@
 	</div>
 
 	<!-- Secondary menu -->
-	<SecondaryMenuComponent />
+	{#if isLogin}
+		<div class="border-t border-grey-lighter"></div>
+	{:else}
+		<SecondaryMenuComponent />
+	{/if}
 </header>
 
 <!-- Global Banner -->
