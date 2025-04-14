@@ -33,7 +33,7 @@
 							/>
 						{/if}
 						<span
-							class="self-center font-roboto font-extrabold align-bottom pt-1 text-left text-[18px] md:text-[22px] truncate max-w-[95%] md:max-w-max"
+							class="self-center font-roboto font-extrabold align-bottom pt-1 text-left text-[18px] md:text-[22px] truncate md:max-w-max max-w-[95%]"
 							>{categoryTitle}</span
 						>
 					</div>
