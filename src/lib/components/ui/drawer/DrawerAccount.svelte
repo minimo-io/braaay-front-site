@@ -8,7 +8,7 @@
 	import { redirectHref } from '$lib/utils';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
-	import { onMount } from 'svelte';
+	// import { onMount } from 'svelte';
 
 	let showReset = $state(false);
 
@@ -23,9 +23,9 @@
 	}
 	let { showBottomBorder = true }: Props = $props();
 
-	onMount(() => {
-		document.getElementById('username')?.focus();
-	});
+	// onMount(() => {
+	// 	document.getElementById('username')?.focus();
+	// });
 
 	// Derived state with runes
 	function toggleForms(e) {
