@@ -30,3 +30,9 @@ export interface AllCountries {
 	pt: Country[];
 	uy: Country[];
 }
+
+export interface LoginResult {
+	success: boolean;
+	user: any;
+	message: string;
+}

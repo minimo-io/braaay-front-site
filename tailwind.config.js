@@ -42,6 +42,11 @@ export default {
 				medium: '#43aa9b',
 				dark: '#36b376'
 			},
+			red: {
+				light: '#ffd4e0',
+				medium: '#cd2553',
+				dark: '#9c0730'
+			},
 
 			yellow: {
 				dark: '#F3A633',

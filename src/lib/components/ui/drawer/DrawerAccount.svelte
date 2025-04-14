@@ -13,6 +13,7 @@
 	let password = $state('');
 	let processing = $state(false);
 	let returnUrl = $derived(page.url.href);
+	let error = $state('');
 
 	// Derived state with runes
 
@@ -28,50 +29,19 @@
 		toggleLoader();
 		try {
 			let loginResult = await login(email, password);
-			redirectHref(returnUrl);
-			processing = false;
+			if (loginResult && loginResult.success) {
+				error = '';
+				redirectHref(returnUrl);
+			} else {
+				error = loginResult.message;
+				processing = false;
+				toggleLoader();
+			}
 		} catch (error) {
 			processing = false;
-			alert(`Error ${error}`);
+
 			toggleLoader();
 		}
-
-		// errors = {};
-
-		// try {
-		// 	const response = await fetch('/api/auth/login', {
-		// 		method: 'POST',
-		// 		body: formData
-		// 	});
-
-		// 	if (!response.ok) {
-		// 		const data = await response.json();
-
-		// 		if (response.status === 400) {
-		// 			errors.form = data.message;
-		// 		} else if (response.status === 401) {
-		// 			errors.credentials = data.message;
-		// 		} else {
-		// 			errors.server = data.message || 'An error occurred';
-		// 		}
-
-		// 		processing = false;
-		// 		return;
-		// 	}
-
-		// 	// Handle successful login
-		// 	const data = await response.json();
-		// 	success = true;
-
-		// 	// Navigate to the return URL
-		// 	setTimeout(() => {
-		// 		goto(data.returnUrl || $derived.returnUrl);
-		// 	}, 500);
-		// } catch (error) {
-		// 	console.error('Login error:', error);
-		// 	errors.server = 'Connection error';
-		// 	processing = false;
-		// }
 	}
 </script>
 
@@ -137,6 +107,9 @@
 					>Esqueceu sua senha?</button
 				>
 			</div>
+			{#if error}
+				<div class="text-center text-red-medium text-sm pt-4">{error}</div>
+			{/if}
 		</form>
 	</div>
 {/if}
