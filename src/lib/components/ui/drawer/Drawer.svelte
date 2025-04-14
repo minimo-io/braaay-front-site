@@ -10,7 +10,8 @@
 	import DrawerMain from './DrawerMain.svelte';
 	import DrawerUvas from './DrawerUvas.svelte';
 	import DrawerCategories from './DrawerCategories.svelte';
-	import DrawerLogin from './DrawerLogin.svelte';
+	import DrawerAccount from './DrawerAccount.svelte';
+	import DrawerAccountLoggedIn from './DrawerAccountLoggedIn.svelte';
 </script>
 
 <div
@@ -56,7 +57,11 @@
 			</div>
 		{:else if drawerState.currentSubmenu === 'account'}
 			<div in:fly={{ x: 300, duration: 300, easing: quintOut }} class="overflow-y-auto">
-				<DrawerLogin />
+				<DrawerAccount />
+			</div>
+		{:else if drawerState.currentSubmenu === 'account_loggedin'}
+			<div in:fly={{ x: 300, duration: 300, easing: quintOut }} class="overflow-y-auto">
+				<DrawerAccountLoggedIn />
 			</div>
 		{/if}
 	</div>

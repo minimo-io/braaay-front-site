@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { ChevronRight, CircleUser, Headset } from '@lucide/svelte';
+	import { ChevronRight, CircleUser, Headset, Truck, Heart } from '@lucide/svelte';
 	import { openSubmenu } from '$stores/drawerState.state.svelte';
 	import { drawerData } from '$lib/data/drawer.data';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import MoreInfoButton from '$components/ui/buttons/MoreInfoButton.svelte';
 	import WhatsappButton from '../buttons/WhatsappButton.svelte';
+	import { isAuthenticated } from '$lib/graphql/auth';
 
 	let drawerDataForLang = $state(drawerData[getLocale()]);
 </script>
@@ -52,19 +53,62 @@
 
 	<!-- Fixed Extra Menu -->
 	<h2 class="px-[30px] my-5 uppercase font-extrabold text-base">Conta</h2>
-	<!-- Item with submenu -->
-	<button
-		onclick={() => openSubmenu('account', 'Acessar')}
-		class="py-3 border-b border-t border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
-	>
-		<div class="text-left self-center flex align-middle justify-center">
-			<CircleUser class="w-4 h-4 self-center mr-2" />
-			<span class="self-center font-semibold">Acessar</span>
-		</div>
-		<div class="text-grey-medium flex flex-row align-middle self-center">
-			<ChevronRight class="w-4 aspect-1 text-grey-dark" />
-		</div>
-	</button>
+	{#if !isAuthenticated()}
+		<!-- Item with submenu -->
+		<button
+			onclick={() => openSubmenu('account', 'Acessar')}
+			class="py-3 border-b border-t border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
+		>
+			<div class="text-left self-center flex align-middle justify-center">
+				<CircleUser class="w-4 h-4 self-center mr-2" />
+				<span class="self-center font-semibold">Acessar</span>
+			</div>
+			<div class="text-grey-medium flex flex-row align-middle self-center">
+				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+			</div>
+		</button>
+	{:else}
+		<!-- Item with submenu -->
+		<button
+			onclick={() => alert('Em breve')}
+			class="py-3 border-b border-t border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
+		>
+			<div class="text-left self-center flex align-middle justify-center">
+				<Heart class="w-4 h-4 self-center mr-2" fill="red" color="red" />
+				<span class="self-center font-semibold">Minha lista</span>
+			</div>
+			<div class="text-grey-medium flex flex-row align-middle self-center">
+				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+			</div>
+		</button>
+		<!-- Item with submenu -->
+		<a
+			href="/account/"
+			class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
+		>
+			<div class="text-left self-center flex align-middle justify-center">
+				<Truck class="w-4 h-4 self-center mr-2" />
+				<span class="self-center font-semibold">Meus pedidos</span>
+			</div>
+			<div class="text-grey-medium flex flex-row align-middle self-center">
+				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+			</div>
+		</a>
+		<!-- Item with submenu -->
+		<button
+			onclick={() => openSubmenu('account_loggedin', 'Minha conta')}
+			class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
+		>
+			<div class="text-left self-center flex align-middle justify-center">
+				<CircleUser class="w-4 h-4 self-center mr-2" />
+				<span class="self-center font-semibold">Minha Conta</span>
+			</div>
+			<div class="text-grey-medium flex flex-row align-middle self-center">
+				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+			</div>
+		</button>
+	{/if}
+
 	<!-- Item with submenu -->
 	<a
 		href="https://wa.me/5511947530340"

@@ -1,12 +1,77 @@
 <script lang="ts">
+	import { page } from '$app/state';
+
 	import WhatsappButton from '$components/ui/buttons/WhatsappButton.svelte';
 	import { slide } from 'svelte/transition';
+	import { login } from '$lib/graphql/auth';
+	import { redirectHref } from '$lib/utils';
+	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 
 	let showReset = $state(false);
+
+	let email = $state('');
+	let password = $state('');
+	let processing = $state(false);
+	let returnUrl = $derived(page.url.href);
+
+	// Derived state with runes
 
 	function toggleForms(e) {
 		e.preventDefault();
 		showReset = !showReset;
+	}
+
+	// Handle the login form submission
+	async function handleSubmit(event) {
+		event.preventDefault();
+		processing = true;
+		toggleLoader();
+		try {
+			let loginResult = await login(email, password);
+			redirectHref(returnUrl);
+			processing = false;
+		} catch (error) {
+			processing = false;
+			alert(`Error ${error}`);
+			toggleLoader();
+		}
+
+		// errors = {};
+
+		// try {
+		// 	const response = await fetch('/api/auth/login', {
+		// 		method: 'POST',
+		// 		body: formData
+		// 	});
+
+		// 	if (!response.ok) {
+		// 		const data = await response.json();
+
+		// 		if (response.status === 400) {
+		// 			errors.form = data.message;
+		// 		} else if (response.status === 401) {
+		// 			errors.credentials = data.message;
+		// 		} else {
+		// 			errors.server = data.message || 'An error occurred';
+		// 		}
+
+		// 		processing = false;
+		// 		return;
+		// 	}
+
+		// 	// Handle successful login
+		// 	const data = await response.json();
+		// 	success = true;
+
+		// 	// Navigate to the return URL
+		// 	setTimeout(() => {
+		// 		goto(data.returnUrl || $derived.returnUrl);
+		// 	}, 500);
+		// } catch (error) {
+		// 	console.error('Login error:', error);
+		// 	errors.server = 'Connection error';
+		// 	processing = false;
+		// }
 	}
 </script>
 
@@ -35,12 +100,21 @@
 	</form>
 {:else}
 	<div class="border-b pb-8 border-grey-lighter">
-		<form id="frm-login" action="" class="px-[30px] mt-5" in:slide={{ duration: 200 }}>
+		<form
+			id="frm-login"
+			method="POST"
+			onsubmit={handleSubmit}
+			class="px-[30px] mt-5"
+			in:slide={{ duration: 200 }}
+		>
 			<fieldset>
 				<label for="username" class="text-sm font-bold">Email</label>
 				<input
 					id="username"
+					name="username"
 					type="email"
+					bind:value={email}
+					disabled={processing}
 					class="w-full px-3 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none mt-2 text-sm"
 					placeholder="contato@braaay.com"
 				/>
@@ -49,7 +123,10 @@
 				<label for="password" class="text-sm font-bold">Senha</label>
 				<input
 					id="password"
+					name="password"
 					type="password"
+					bind:value={password}
+					disabled={processing}
 					class="w-full px-3 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none mt-2 text-sm"
 					placeholder="123456789!"
 				/>

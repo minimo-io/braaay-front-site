@@ -30,7 +30,7 @@
 	// Loader
 	import { navigating } from '$app/state';
 	import { loaderActivated } from '$stores/loaderStore.state.svelte';
-	import { Loader, LoaderCircle } from '@lucide/svelte';
+	import { LoaderCircle } from '@lucide/svelte';
 	// import { navigating } from '$app/stores';
 	// import { derived } from 'svelte/store';
 	// const isNavigating = derived(navigating, ($navigating) => $navigating !== null);
