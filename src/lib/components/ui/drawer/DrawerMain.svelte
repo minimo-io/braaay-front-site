@@ -60,7 +60,7 @@
 		>
 			<div class="text-left self-center flex align-middle justify-center">
 				<CircleUser class="w-4 h-4 self-center mr-2" />
-				<span class="self-center font-semibold">Acessar / Cadastro</span>
+				<span class="self-center font-semibold">Acesso / Cadastro</span>
 			</div>
 			<div class="text-grey-medium flex flex-row align-middle self-center">
 				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
@@ -106,19 +106,19 @@
 				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
 			</div>
 		</button>
-		<a
-			href="/clube/"
-			class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px]"
-		>
-			<div class="text-left self-center flex align-middle justify-center">
-				<Sparkle class="w-4 h-4 self-center mr-2 text-sun" />
-				<span class="self-center font-semibold">Clube de benefícios — Conheça!</span>
-			</div>
-			<div class="text-grey-medium flex flex-row align-middle self-center">
-				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
-			</div>
-		</a>
 	{/if}
+	<a
+		href="/clube/"
+		class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px]"
+	>
+		<div class="text-left self-center flex align-middle justify-center">
+			<Sparkle class="w-4 h-4 self-center mr-2 text-sun" />
+			<span class="self-center font-semibold">Clube de benefícios — Conheça!</span>
+		</div>
+		<div class="text-grey-medium flex flex-row align-middle self-center">
+			<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+		</div>
+	</a>
 
 	<!-- Item with submenu -->
 	<div

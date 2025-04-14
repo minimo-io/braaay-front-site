@@ -153,8 +153,7 @@
 								CONTINUAR →
 							</button> -->
 							<div class="py-1">
-								<Button type="sun" url="#" title="CONTINUAR →" size="md" rounded="lg" font="md"
-								></Button>
+								<Button type="sun" url="#" title="CONTINUAR →" size="md" rounded="lg" font="md" />
 							</div>
 						</form>
 					</div>
@@ -368,7 +367,7 @@
 									size="xl"
 									rounded="lg"
 									font="md"
-								></Button>
+								/>
 							</div>
 						</form>
 
