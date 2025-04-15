@@ -58,7 +58,7 @@
 
 	let timer: ReturnType<typeof setTimeout> | null = null;
 	$effect(() => {
-		if (navigating.to) {
+		if (showLoader) {
 			// Start loader
 			overlayActive = false;
 			if (timer) clearTimeout(timer);

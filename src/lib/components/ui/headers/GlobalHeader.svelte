@@ -92,7 +92,7 @@
 				<!--Entrar -->
 				<Button
 					chevron={false}
-					customPx="!pr-[12px] !pl-3 !pr-7"
+					customPx="!pr-[12px] !pl-3 !pr-[20px]"
 					title="Entrar"
 					url="/login"
 					type="blue"
