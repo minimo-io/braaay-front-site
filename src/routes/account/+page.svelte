@@ -31,10 +31,14 @@
 						class="font-prata uppercase text-[25px] my-1 font-light text-grey-dark tracking-wider antialiased"
 					>
 						<div class="flex">
-							<span class="self-center align-top pb-2 pr-2">
+							<span class="self-center align-middle pt-2 pb-2 pr-2">
 								<User />
 							</span>
-							<span class="self-center align-top text-lg md:text-2xl"> MINHA CONTA </span>
+							<span
+								class="self-center font-roboto font-extrabold align-bottom pt-1 text-left text-[18px] md:text-[22px] text-wrap"
+							>
+								MINHA CONTA
+							</span>
 						</div>
 					</h1>
 					<div
