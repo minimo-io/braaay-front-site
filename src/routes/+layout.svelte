@@ -181,6 +181,7 @@
 		background-color: rgba(33, 38, 128, 0.2); /* semi-transparent gray */
 		z-index: 9998;
 		animation: fadeIn 0.3s ease-in-out;
+		pointer-events: all;
 	}
 
 	@keyframes fadeIn {
