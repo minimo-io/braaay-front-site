@@ -36,8 +36,8 @@
                 );
             "
 >
-	<div class="absolute top-4 md:top-[30px] left-[35px]">
-		<div class="wine-stars text-[15px] md:text-base">
+	<div class="absolute top-[42px] md:top-[58px] left-[35px]">
+		<div class="wine-stars text-[15px] md:text-[15px]">
 			<span>★</span>
 			4.5
 		</div>
@@ -45,7 +45,7 @@
 	<!-- Tag -->
 	{#if 1 == 1}
 		<div
-			class="absolute top-11 md:top-14 md:right-auto left-[35px] bg-red-dark text-white px-2 py-1 text-[11px] md:text-xs rounded-lg"
+			class="absolute top-[15px] md:top-[30px] left-[30px] md:right-auto bg-red-dark text-white px-2 py-1 text-[11px] md:text-xs rounded-lg"
 		>
 			EM OFERTA
 		</div>
