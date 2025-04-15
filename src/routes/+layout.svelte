@@ -64,7 +64,7 @@
 			if (timer) clearTimeout(timer);
 			timer = setTimeout(() => {
 				overlayActive = true;
-			}, 3000);
+			}, 10);
 			document.body.classList.toggle('no-scroll', true);
 		} else {
 			// Navigation ended

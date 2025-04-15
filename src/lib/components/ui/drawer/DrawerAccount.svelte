@@ -38,11 +38,13 @@
 		event.preventDefault();
 		processing = true;
 		toggleLoader();
+		document.body.classList.toggle('no-scroll');
 		try {
 			let loginResult = await login(email, password);
 			if (loginResult && loginResult.success) {
 				error = '';
 				redirectHref(localizeHref('/vinhos'));
+
 				// if (returnUrl.includes('/login')) {
 				// 	redirectHref(localizeHref('/vinhos'));
 				// } else {
@@ -52,11 +54,13 @@
 				error = loginResult.message;
 				processing = false;
 				toggleLoader();
+				document.body.classList.toggle('no-scroll');
 			}
 		} catch (error) {
 			processing = false;
 
 			toggleLoader();
+			document.body.classList.toggle('no-scroll');
 		}
 	}
 </script>
