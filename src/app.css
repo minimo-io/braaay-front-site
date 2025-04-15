@@ -206,10 +206,10 @@ html {
 	.bry-product-list .wine .wine-price {
 		@apply text-base lg:text-xl font-bold mt-2 border-b-2 w-fit border-sun mx-auto;
 	}
-	.bry-product-list .wine .wine-stars {
+	.wine-stars {
 		@apply text-base text-grey-medium-dark;
 	}
-	.bry-product-list .wine .wine-stars > span {
+	.wine-stars > span {
 		@apply text-yellow-dark;
 	}
 
@@ -414,7 +414,7 @@ html {
 		-webkit-font-smoothing: antialiased;
 		font-smoothing: antialiased;
 		-webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
-		@apply mb-4 border-0 font-prata font-medium leading-[30px] text-[26px];
+		@apply mb-4 border-0 font-prata font-medium leading-[30px] text-[22px] md:text-[26px];
 	}
 	.lucide-icon {
 		@apply mr-1;

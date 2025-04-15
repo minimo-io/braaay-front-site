@@ -19,7 +19,7 @@
 		stockStatus = `<span>${m.inStock()}</span>`;
 	}
 	const clubCashbackValue = 10;
-	const clubMoreInfoText = `<strong>${m.currencySymbol()}${correctPrice(clubCashbackValue)}</strong> em cashback no Clube`;
+	const clubMoreInfoText = `Ganhe <strong>${m.currencySymbol()}${correctPrice(clubCashbackValue)}</strong> em cashback no Clube`;
 </script>
 
 <div class="md:w-[50%] pt-8 pb-0 pl-8 pr-8 md:pr-0">
@@ -41,11 +41,7 @@
 			>
 			{m.cashDiscountText()}
 		</h4>
-		<MoreInfoButton
-			title={clubMoreInfoText}
-			customStyles="!mx-0 !bg-green-dark !text-white border-none"
-			url="/clube/"
-		/>
+		<MoreInfoButton title={clubMoreInfoText} customStyles="!mx-0 " url="/clube/" />
 	</div>
 
 	{#if stockStatus}
