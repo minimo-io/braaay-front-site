@@ -46,6 +46,7 @@
 		closeDrawer();
 		// reset horizontal scroll on menu if exsits
 		const secondaryMenus = document.querySelectorAll('.bry-secondary-menu');
+
 		secondaryMenus.forEach((menu) => {
 			if (menu instanceof HTMLElement) {
 				menu.scrollLeft = 0;
@@ -64,8 +65,10 @@
 			timer = setTimeout(() => {
 				overlayActive = true;
 			}, 3000);
+			document.body.classList.toggle('no-scroll', true);
 		} else {
 			// Navigation ended
+			document.body.classList.toggle('no-scroll', false);
 			if (timer) clearTimeout(timer);
 			overlayActive = false;
 		}
