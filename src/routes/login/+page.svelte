@@ -47,7 +47,7 @@
 					<img
 						src="/images/my-account.png"
 						alt="minha-conta"
-						class="md:min-h-40 md:max-h-40 max-h-40 h-40 md:full-width-r object-cover"
+						class="md:min-h-40 md:max-h-40 max-h-32 h-32 md:full-width-r object-cover"
 					/>
 				</div>
 			</div>

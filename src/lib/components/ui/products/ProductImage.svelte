@@ -21,7 +21,7 @@
             "
 >
 	<div class="absolute top-4 right-[35px] md:left-[20px]">
-		<div class="wine-stars">
+		<div class="wine-stars md:text-base">
 			<span>★</span>
 			4.5
 		</div>
@@ -29,7 +29,7 @@
 	<!-- Tag -->
 	{#if 1 == 1}
 		<div
-			class="absolute top-11 right-[20px] md:right-auto md:left-[20px] bg-red-dark text-white px-2 py-1 text-xs rounded-lg"
+			class="absolute top-11 right-[20px] md:right-auto md:left-[20px] bg-red-dark text-white px-2 py-1 text-[11px] md:text-xs rounded-lg"
 		>
 			EM OFERTA
 		</div>
