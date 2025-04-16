@@ -3,7 +3,7 @@
 	import type { ArticleCreator, Post } from '$lib/types/index';
 	interface Props {
 		fullWidth: boolean;
-		useCurrentColor?: boolean; // -- use a gradient for header bg color or not
+		useCurrentColor?: boolean;
 		article: Post;
 		showAuthor?: boolean;
 	}
@@ -11,10 +11,7 @@
 
 	let author: ArticleCreator = article.author;
 
-	let articleFinalImage = $state('/images/uruguai.webp');
-	if (article.featuredImage.mediaItemUrl) {
-		articleFinalImage = article.featuredImage.mediaItemUrl;
-	}
+	let articleFinalImage = $derived(article.featuredImage.mediaItemUrl || '/images/uruguai.webp');
 </script>
 
 {#if fullWidth}
@@ -55,13 +52,15 @@
 				: ''}
                     background-blend-mode: multiply;
                 "
-		></div>
+		>
+			<div class="glass border w-full h-full absolute top-0 left-0 md:rounded-2xl"></div>
+		</div>
 
 		<h3 class="bry-header-deck">
-			<a href="/pais/uruguai/" style="border-color: var(--bry-current-color)">Uruguai</a>
+			<!-- <a href="/pais/uruguai/" style="border-color: var(--bry-current-color)">Uruguai</a> -->
 		</h3>
 
-		<h2 class="bry-header-title">{article.title}</h2>
+		<h2 class="bry-header-title text-blue font-semibold font-roboto">{article.title}</h2>
 
 		<ArticleAuthor author={article.author} />
 	</div>

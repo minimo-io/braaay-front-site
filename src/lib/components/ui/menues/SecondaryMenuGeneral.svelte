@@ -118,7 +118,7 @@
 			<li
 				class="!ml-0 md:!ml-5 relative group transition-all duration-300 animate__animated animate__swing order-first md:order-none"
 			>
-				<a href={localizeHref('/blog')} class="!py-0 !pr-5 !pl-0 h-full">
+				<a href={localizeHref('/blog/')} class="!py-0 !pr-5 !pl-0 h-full">
 					<!-- <BadgePercent class="lucide-menu badge-percent" color="white" fill="#000" /> -->
 					<img
 						src="/images/badge-offer.png"

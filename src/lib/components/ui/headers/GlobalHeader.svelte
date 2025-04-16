@@ -11,7 +11,6 @@
 	import SearchBar from '../search/SearchBar.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import GlobalBanner from './GlobalBanner.svelte';
-	import { draw } from 'svelte/transition';
 	import { isAuthenticated } from '$lib/graphql/auth';
 
 	// Using runes for reactive state
@@ -108,7 +107,7 @@
 					chevron={true}
 					customPx="!pr-[12px] !pl-3"
 					title="Conta"
-					url="/account"
+					url={localizeHref('/account/')}
 					type="blue"
 					size="xl"
 				>

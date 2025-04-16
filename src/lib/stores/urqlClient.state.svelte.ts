@@ -35,122 +35,67 @@ const authExchange = createAuthExchange(getAuthToken);
 // 	};
 //   },
 
-export const urqlClientUy = $state({
+export const urqlClientUyLoggedOut = $state({
 	client: createClient({
 		url: PUBLIC_GRAPHQL_SERVER_UY,
 		exchanges: [cacheExchange, authExchange, fetchExchange, loggerExchange],
-		requestPolicy: getAuthState().token ? 'network-only' : 'cache-first',
+		requestPolicy: 'cache-first',
+		fetchOptions: () => {
+			return {};
+		}
+	})
+});
+export const urqlClientUyLoggedIn = $state({
+	client: createClient({
+		url: PUBLIC_GRAPHQL_SERVER_UY,
+		exchanges: [cacheExchange, authExchange, fetchExchange, loggerExchange],
+		requestPolicy: 'network-only',
 		fetchOptions: () => {
 			return {};
 		}
 	})
 });
 
-export const urqlClientPt = $state({
+export const urqlClientPtLoggedOut = $state({
 	client: createClient({
 		url: PUBLIC_GRAPHQL_SERVER_PT,
 		exchanges: [cacheExchange, authExchange, fetchExchange, loggerExchange],
-		requestPolicy: getAuthState().token ? 'network-only' : 'cache-first',
-
+		requestPolicy: 'cache-first',
+		fetchOptions: () => {
+			return {};
+		}
+	})
+});
+export const urqlClientPtLoggedIn = $state({
+	client: createClient({
+		url: PUBLIC_GRAPHQL_SERVER_PT,
+		exchanges: [cacheExchange, authExchange, fetchExchange, loggerExchange],
+		requestPolicy: 'network-only',
 		fetchOptions: () => {
 			return {};
 		}
 	})
 });
 
-export function getUrqlClient() {
+/**
+ * We use different clients for logged-in (network only) vs logged-out (cache-first) users.
+ * @param authToken is for when we check session from the server Locals
+ */
+export function getUrqlClient(authToken?: string) {
 	const locale = getLocale();
+	const token = getAuthState().token;
+
 	if (locale == 'uy') {
-		return urqlClientUy;
-	} else if (locale == 'pt') {
-		return urqlClientPt;
+		if (token || authToken) {
+			return urqlClientUyLoggedIn;
+		} else {
+			return urqlClientUyLoggedOut;
+		}
 	} else {
-		return urqlClientPt;
+		if (token || authToken) {
+			return urqlClientPtLoggedIn;
+		} else {
+			return urqlClientPtLoggedOut;
+		}
 	}
 }
-
-// Create auth exchange that uses our existing auth state
-// const createAuthExchange = () => {
-// 	return ({ forward }) =>
-// 		(ops$) => {
-// 			return {
-// 				subscribe: (observer) => {
-// 					return ops$.subscribe({
-// 						next: (operation) => {
-// 							// Get current auth token from our existing auth state
-// 							const { token } = getAuthState();
-
-// 							// Add auth header if token exists
-// 							if (token) {
-// 								const fetchOptions =
-// 									typeof operation.context.fetchOptions === 'function'
-// 										? operation.context.fetchOptions()
-// 										: operation.context.fetchOptions || {};
-
-// 								operation.context.fetchOptions = {
-// 									...fetchOptions,
-// 									headers: {
-// 										...fetchOptions.headers,
-// 										Authorization: `Bearer ${token}`
-// 									}
-// 								};
-// 							}
-
-// 							forward(operation).subscribe(observer);
-// 						},
-// 						error: (err) => observer.error(err),
-// 						complete: () => observer.complete()
-// 					});
-// 				}
-// 			};
-// 		};
-// };
-
-// import { createClient, cacheExchange, fetchExchange } from '@urql/core';
-// // import {  ssrExchange } from '@urql/core';
-// import { loggerExchange } from '$lib/graphql/loggerExchange';
-// import { PUBLIC_GRAPHQL_SERVER_PT, PUBLIC_GRAPHQL_SERVER_UY } from '$env/static/public';
-// import { getLocale } from '$lib/paraglide/runtime';
-// // import { browser } from '$app/environment';
-
-// // const isClient = browser;
-
-// // The `ssrExchange` must be initialized with `isClient` and `initialState`
-// // const ssr = ssrExchange({
-// // 	isClient: isClient,
-// // 	initialState: undefined
-// // });
-
-// export const urqlClientUy = $state({
-// 	client: createClient({
-// 		url: PUBLIC_GRAPHQL_SERVER_UY,
-// 		exchanges: [cacheExchange, fetchExchange, loggerExchange],
-// 		requestPolicy: 'cache-first',
-// 		fetchOptions: () => {
-// 			return {};
-// 		}
-// 	})
-// });
-
-// export const urqlClientPt = $state({
-// 	client: createClient({
-// 		url: PUBLIC_GRAPHQL_SERVER_PT,
-// 		exchanges: [cacheExchange, fetchExchange, loggerExchange],
-// 		requestPolicy: 'cache-first',
-// 		// requestPolicy: 'network-only',
-// 		fetchOptions: () => {
-// 			return {};
-// 		}
-// 	})
-// });
-
-// export function getUrqlClient() {
-// 	const locale = getLocale();
-// 	if (locale == 'uy') {
-// 		return urqlClientUy;
-// 	} else if (locale == 'pt') {
-// 		return urqlClientPt;
-// 	} else {
-// 		return urqlClientPt;
-// 	}
-// }

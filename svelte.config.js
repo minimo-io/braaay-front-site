@@ -33,6 +33,7 @@ const config = {
 			$components: path.resolve('src/lib/components'),
 			$stores: path.resolve('src/lib/stores'),
 			$data: path.resolve('src/lib/data')
+
 			// $types: path.resolve('src/lib/types.ts')
 		}
 	},

@@ -23,7 +23,7 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 		categorySlug = subcategorySlug;
 	}
 
-	const result = await getUrqlClient()
+	const result = await getUrqlClient(locals.authToken)
 		.client.query<ProductsForCategoryQueryResult>(
 			CATEGORY_PRODUCTS,
 			{

@@ -20,7 +20,7 @@ import { error } from '@sveltejs/kit';
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const { uvaSlug } = params;
 
-	const result = await getUrqlClient()
+	const result = await getUrqlClient(locals.authToken)
 		.client.query<ProductsForUvaQueryResult>(
 			UVA_PRODUCTS,
 			{

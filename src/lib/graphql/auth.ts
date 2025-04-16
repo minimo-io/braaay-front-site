@@ -5,6 +5,9 @@ import { setAuthToken, clearAuth, getAuthState } from '$lib/stores/auth.state.sv
 import { gql } from '@urql/core';
 import he from 'he';
 
+export const protectedRoutes = ['/account', '/cart', '/club', '/checkout'];
+export const authRoutes = ['/login', '/signup'];
+
 // Login mutation
 const LOGIN_MUTATION = gql`
 	mutation Login($username: String!, $password: String!) {
@@ -18,6 +21,17 @@ const LOGIN_MUTATION = gql`
 		}
 	}
 `;
+
+// Helper function to check if a path requires authentication
+export function requiresAuth(path: string): boolean {
+	// Add your protected routes here
+	return protectedRoutes.some((route) => path.startsWith(route));
+}
+
+// Helper function to check if a path is for authentication (and should redirect if already logged in)
+export function isAuthRoute(path: string): boolean {
+	return authRoutes.some((route) => path.startsWith(route));
+}
 
 // Function to login
 export async function login(username: string, password: string): Promise<LoginResult> {
@@ -53,13 +67,6 @@ export function logout() {
 }
 
 // Check if user is authenticated
-// export function isAuthenticated() {
-// 	let authenticated = false;
-// 	authState.subscribe((state) => {
-// 		authenticated = !!state.token;
-// 	})();
-// 	return authenticated;
-// }
 export function isAuthenticated() {
 	return !!getAuthState().token;
 }

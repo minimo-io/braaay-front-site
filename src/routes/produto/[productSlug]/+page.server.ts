@@ -15,7 +15,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 
 	// const locale = getLocale();
 
-	const result = await getUrqlClient()
+	const result = await getUrqlClient(locals.authToken)
 		.client.query<GraphQLSingleProduct>(
 			PRODUCT_QUERY,
 			{ slug: productSlug },

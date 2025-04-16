@@ -20,7 +20,7 @@ import { error } from '@sveltejs/kit';
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const { producerSlug } = params;
 
-	const result = await getUrqlClient()
+	const result = await getUrqlClient(locals.authToken)
 		.client.query<ProductsForWineProducerQueryResult>(
 			WINE_PRODUCER_PRODUCTS,
 			{

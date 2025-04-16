@@ -105,7 +105,7 @@
 								>TANNAT DAY</a
 							>
 						</li>
-						<li><a href={localizeHref('/blog')}>BLOG</a></li>
+						<li><a href={localizeHref('/blog/')}>BLOG</a></li>
 						<li><a href="/">SHOWROOM</a></li>
 					</ul>
 				</div>

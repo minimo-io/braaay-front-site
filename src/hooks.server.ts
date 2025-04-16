@@ -1,8 +1,12 @@
 // src/hooks.server.ts
-
+//
 import type { Handle } from '@sveltejs/kit';
 import { paraglideMiddleware } from '$lib/paraglide/server';
 import { sequence } from '@sveltejs/kit/hooks';
+import { redirect } from '@sveltejs/kit';
+import { deLocalizeUrl } from '$lib/paraglide/runtime';
+import { requiresAuth, isAuthRoute } from '$lib/graphql/auth';
+import { getLocale, localizeHref } from './paraglide/runtime';
 
 // Auth middleware
 const authHandle: Handle = async ({ event, resolve }) => {
@@ -21,6 +25,19 @@ const authHandle: Handle = async ({ event, resolve }) => {
 		} catch (e) {
 			console.error(`Failed to parse user data: ${e}`);
 		}
+	}
+
+	// Check if the route requires authentication and redirect if needed
+	const pathDelocalized = deLocalizeUrl(event.url.href);
+
+	// Redirect logged-in users away from auth pages
+	if (isAuthRoute(pathDelocalized.pathname) && event.locals.authToken) {
+		throw redirect(303, localizeHref('/account/', { locale: getLocale() }));
+	}
+
+	if (requiresAuth(pathDelocalized.pathname) && !event.locals.authToken) {
+		// Redirect to login page with return URL as a query parameter
+		throw redirect(303, `/login?returnUrl=${encodeURIComponent(pathDelocalized.pathname)}`);
 	}
 
 	return resolve(event);

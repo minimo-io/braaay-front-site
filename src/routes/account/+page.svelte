@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/state';
+	// import { page } from '$app/state';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import MoreInfoButton from '$components/ui/buttons/MoreInfoButton.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
@@ -7,6 +7,7 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { logout } from '$lib/graphql/auth';
 	import { redirectHref } from '$lib/utils';
+	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
 
 	let returnUrl = $derived('/login');
 
@@ -231,8 +232,4 @@
 	</div>
 </main>
 
-<div
-	class="bg-white border-t border-b border-grey-lighter w-full text-center py-10 text-grey-blueish"
->
-	Obrigado por ser genial 😀
-</div>
+<FunMessageSection />

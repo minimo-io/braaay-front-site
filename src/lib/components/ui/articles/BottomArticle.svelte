@@ -4,11 +4,12 @@
 
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
-	import ArticleAuthor from './components/ArticleAuthor.svelte';
+	// import ArticleAuthor from './components/ArticleAuthor.svelte';
 	import ArticleContent from './components/ArticleContent.svelte';
 	import ArticleHeader from './components/ArticleHeader.svelte';
 	import ArticleIntro from './components/ArticleIntro.svelte';
 	import ArticleRightBannerBox from './components/ArticleRightBannerBox.svelte';
+	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
 
 	interface Props {
 		twoColumns: boolean;
@@ -47,4 +48,6 @@
 			</div>
 		</div>
 	</article>
+{:else}
+	<FunMessageSection />
 {/if}

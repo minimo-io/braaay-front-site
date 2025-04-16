@@ -26,7 +26,7 @@
 
 		// Then update the voltar object based on isPost
 		backParams = isPost
-			? { text: 'Voltar ao blog', href: localizeHref('/blog') }
+			? { text: 'Voltar ao blog', href: localizeHref('/blog/') }
 			: { text: 'Voltar á loja', href: localizeHref('/') };
 	});
 </script>
@@ -42,7 +42,7 @@
 			</li>
 
 			<li class="relative group transition-all duration-300 flex">
-				<a href={localizeHref('/blog')} class="bg-blue !py-1 rounded-full text-white self-center">
+				<a href={localizeHref('/blog/')} class="bg-blue !py-1 rounded-full text-white self-center">
 					<Newspaper class="lucide-menu badge-percent text-white" />
 					<span class="text-white">Blog</span>
 				</a>
@@ -66,10 +66,10 @@
 				<a href="/em-breve/"> Harmonizações </a>
 			</li>
 			<li class="relative group transition-all duration-300">
-				<a href={localizeHref('/blog')}> Uvas </a>
+				<a href={localizeHref('/blog/')}> Uvas </a>
 			</li>
 			<li class="relative group transition-all duration-300 flex justify-center">
-				<a href={localizeHref('/blog')} class="!pl-0 self-center !pr-5">
+				<a href={localizeHref('/blog/')} class="!pl-0 self-center !pr-5">
 					<EllipsisVertical class="lucide-menu badge-percent text-blue !h-4" />
 					Mais
 				</a>

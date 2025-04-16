@@ -24,8 +24,6 @@ export async function loadMoreProducts({
 	// Return early if there's no next page.
 	if (!pagination.hasNextPage) return { products, pagination };
 
-	console.log('QUERY', query);
-
 	try {
 		// Query for additional products.
 		const result = await getUrqlClient()

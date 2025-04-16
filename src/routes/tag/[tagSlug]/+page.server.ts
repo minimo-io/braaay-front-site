@@ -19,7 +19,7 @@ import { error } from '@sveltejs/kit';
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const { tagSlug } = params;
 
-	const result = await getUrqlClient()
+	const result = await getUrqlClient(locals.authToken)
 		.client.query<ProductsForTagQueryResult>(
 			TAG_PRODUCTS,
 			{

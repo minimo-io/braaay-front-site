@@ -21,7 +21,7 @@ export default defineConfig({
 				},
 
 				{
-					pattern: '/blog',
+					pattern: '/blog/',
 					localized: [
 						['pt', '/blog/'],
 						['uy', '/uy/blog/']
@@ -30,16 +30,25 @@ export default defineConfig({
 
 				// Club
 				{
-					pattern: '/club',
+					pattern: '/club/',
 					localized: [
 						['pt', '/clube/'],
 						['uy', '/uy/club/']
 					]
 				},
 
+				// Account
+				{
+					pattern: '/account/',
+					localized: [
+						['pt', '/conta/'],
+						['uy', '/uy/cuenta/']
+					]
+				},
+
 				// Carrinho
 				{
-					pattern: '/cart',
+					pattern: '/cart/',
 					localized: [
 						['pt', '/carrinho/'],
 						['uy', '/uy/carrito/']

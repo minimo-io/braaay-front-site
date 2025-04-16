@@ -20,7 +20,7 @@ import { error } from '@sveltejs/kit';
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const { countrySlug } = params;
 
-	const result = await getUrqlClient()
+	const result = await getUrqlClient(locals.authToken)
 		.client.query<ProductsForCountryQueryResult>(
 			COUNTRY_PRODUCTS,
 			{
