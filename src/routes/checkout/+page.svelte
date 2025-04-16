@@ -445,10 +445,6 @@
 
 				<!-- Extra cart elements -->
 				<div class="mt-5">
-					<!-- <h2 class="text-[19px] font-prata ml-2 mb-4">
-                        Resumo da compra
-                    </h2> -->
-
 					<div class="hidden md:block bg-white py-4 px-5 border border-grey-lighter rounded-lg">
 						<div class="flex justify-between mt-2">
 							<p class="font-light text-[15px] self-center">Sub-total (3 item)</p>
@@ -459,43 +455,7 @@
 							<p class="font-light text-[15px] self-center">Entrega</p>
 							<p class="font-roboto self-center">A calcular</p>
 						</div>
-						<!-- <div class="flex justify-between">
-                            <p
-                                class="font-light text-[15px] self-center"
-                            >
-                                Cupom de desconto
-                            </p>
-                            <a
-                                href="/"
-                                class="btn !px-3 w-[130px] text-grey-blueish bg-grey-background uppercase flex lg:items-right mt-3 lg:mt-0 self-center"
-                            >
-                                <i
-                                    data-lucide="gift"
-                                    class="lucide-button"
-                                ></i>
-                                ADICIONAR
-                            </a>
-                        </div> -->
-						<!-- <div
-                            class="my-4 border-t border-t-grey-lighter"
-                        ></div> -->
-						<!-- <div class="flex justify-between">
-                            <p
-                                class="font-light text-[15px] self-center"
-                            >
-                                Frete
-                            </p>
-                            <a
-                                href="/"
-                                class="btn !px-3 w-[130px] text-grey-blueish bg-grey-background uppercase flex lg:items-right mt-3 lg:mt-0 self-center"
-                            >
-                                <i
-                                    data-lucide="truck"
-                                    class="lucide-button"
-                                ></i>
-                                CALCULAR
-                            </a>
-                        </div> -->
+
 						<Divider color="blue" extraClasses="my-4 !border-b-grey-lighter" />
 						<div class="flex justify-between pt-1 mb-2">
 							<p class="font-roboto font-bold">Valor total</p>

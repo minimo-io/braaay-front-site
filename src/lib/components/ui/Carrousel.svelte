@@ -100,8 +100,8 @@
 		class="glide__bullets absolute bottom-4 left-1/2 transform -translate-x-1/2"
 		data-glide-el="controls[nav]"
 	>
-		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=0"></button>
-		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=1"></button>
-		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=2"></button>
+		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=0">&nbsp;</button>
+		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=1">&nbsp;</button>
+		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=2">&nbsp;</button>
 	</div>
 </div>
