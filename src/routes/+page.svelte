@@ -274,7 +274,7 @@
 			experiências."
 		>
 			{#snippet button()}
-				<Button title="Ver todos" size="md" type="sun" url="/"></Button>
+				<Button title="Ver todos" size="md" type="sun" url="/" />
 			{/snippet}
 		</TitleSection>
 

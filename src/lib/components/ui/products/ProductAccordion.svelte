@@ -222,7 +222,6 @@
 								<span class="font-bold">PIX:</span>
 								<span>{m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)}</span> (5% OFF)
 							</h4>
-							<!-- <p class=" !text-[12px] font-bold"></p> -->
 						</div>
 						<div class="mt-3">
 							<h4 class="!text-[13px] mb-2">

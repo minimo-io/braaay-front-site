@@ -56,11 +56,11 @@
 	>
 		<div class="flex gap-0 items-center">
 			<div class="pr-2 flex border-r border-grey-medium">
-				<button onclick={shareContent}><Share2 class="h-[20px]" /></button>
+				<button onclick={shareContent}><Share2 class="h-[20px]" /> </button>
 			</div>
 
 			<div class="pl-2 flex">
-				<button onclick={() => alert('Soon')}><Heart class="h-[20px]" /></button>
+				<button onclick={() => alert('Soon')}><Heart class="h-[20px]" /> </button>
 			</div>
 		</div>
 	</div>
