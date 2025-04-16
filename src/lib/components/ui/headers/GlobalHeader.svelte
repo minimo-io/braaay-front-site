@@ -12,6 +12,7 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import GlobalBanner from './GlobalBanner.svelte';
 	import { isAuthenticated } from '$lib/graphql/auth';
+	import { cart } from '$stores/cart.store.svelte';
 
 	// Using runes for reactive state
 	let SecondaryMenuComponent = $state(
@@ -28,6 +29,12 @@
 	});
 
 	let isLogin = $derived(page.url.href.includes('/login'));
+
+	// Cart amount
+	let totalCartAmount = $state(0);
+	cart.subscribe((cart) => {
+		totalCartAmount = cart.items.reduce((count, item) => count + item.quantity, 0);
+	});
 
 	// Effect to control page scrolling
 	$effect(() => {
@@ -142,7 +149,7 @@
 			<span
 				class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
 			>
-				0
+				{totalCartAmount}
 			</span>
 		</a>
 	</nav>

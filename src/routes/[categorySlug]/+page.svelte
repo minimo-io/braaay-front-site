@@ -30,7 +30,7 @@
 
 	let article: Post = $derived({
 		id: '0',
-		title: category.header.title,
+		title: category.header.title || category.name,
 		date: '',
 		modified: '',
 		excerpt: '',

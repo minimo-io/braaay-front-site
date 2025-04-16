@@ -130,7 +130,11 @@ export function mapProduct(data: GraphQLProductNode): Product {
 
 	let floatPrice = data.node.price;
 	if (floatPrice) {
-		floatPrice = floatPrice.replaceAll('R$', '').replaceAll('$', '').replaceAll(' ', '');
+		floatPrice = floatPrice
+			.replaceAll('R$', '')
+			.replaceAll('$', '')
+			.replaceAll(' ', '')
+			.replaceAll(',', '.');
 	}
 
 	return {

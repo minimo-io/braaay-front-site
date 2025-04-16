@@ -26,6 +26,8 @@
 		width?: 'full' | 'fit' | '130px';
 
 		shineEffect?: boolean;
+
+		newTab?: boolean;
 	}
 	let {
 		title,
@@ -44,7 +46,8 @@
 		minimalPx = false,
 		width = 'full',
 		customPx = '',
-		shineEffect = true
+		shineEffect = true,
+		newTab = false
 	}: Props = $props();
 </script>
 
@@ -52,6 +55,7 @@
 	<a
 		role="button"
 		href={url}
+		target={newTab ? '_blank' : null}
 		class={[
 			'btn uppercase flex items-center justify-center disabled:opacity-50 disabled:bg-grey-medium',
 

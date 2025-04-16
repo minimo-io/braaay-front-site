@@ -60,7 +60,7 @@
 			<!-- <a href="/pais/uruguai/" style="border-color: var(--bry-current-color)">Uruguai</a> -->
 		</h3>
 
-		<h2 class="bry-header-title text-blue font-semibold font-roboto">{article.title}</h2>
+		<h2 class="bry-header-title text-blue text-2xl md:text-3xl">{article.title}</h2>
 
 		<ArticleAuthor author={article.author} />
 	</div>

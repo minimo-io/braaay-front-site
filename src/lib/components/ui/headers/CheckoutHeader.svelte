@@ -28,7 +28,13 @@
 		</div>
 		<div class="flex justify-end">
 			<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
-				<Button title="Atendimento" type="light" size="sm" url="/">
+				<Button
+					title="Atendimento"
+					type="light"
+					size="sm"
+					url="https://wa.me/5511947530340"
+					newTab={true}
+				>
 					{#snippet icon()}
 						<Headset class="lucide-button" />
 					{/snippet}

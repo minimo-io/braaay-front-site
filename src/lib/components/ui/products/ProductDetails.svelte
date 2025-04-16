@@ -4,7 +4,8 @@
 	import { stripHtml, correctPrice } from '$lib/utils/index';
 	import type { Product } from '$lib/types';
 	import { m } from '$lib/paraglide/messages';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { type CartItem } from '$lib/types/cart.types';
+	import { addToCart } from '$stores/cart.store.svelte';
 
 	interface Props {
 		product: Product;
@@ -20,6 +21,22 @@
 	}
 	const clubCashbackValue = 10;
 	const clubMoreInfoText = `Ganhe <strong>${m.currencySymbol()}${correctPrice(clubCashbackValue)}</strong> em cashback no Clube`;
+
+	const item: CartItem = {
+		id: product.sku,
+		sku: product.sku,
+		uri: product.uri,
+		name: product.title,
+		priceString: product.price,
+		price: product.floatPrice,
+		quantity: 1,
+		image: product.image
+	};
+
+	// Optionally, you can provide a wrapper function in case you want to extend the behavior.
+	const handleAddToCart = () => {
+		addToCart(item);
+	};
 </script>
 
 <div class="md:w-[50%] pt-8 pb-0 pl-8 pr-8 md:pr-0">
@@ -48,13 +65,13 @@
 		<p class="text-grey-medium-dark font-roboto text-[15px] mb-4">{@html stockStatus}</p>
 	{/if}
 	<div class="flex items-center mb-4">
-		<a
-			href={localizeHref('/cart/')}
+		<button
+			onclick={() => handleAddToCart()}
 			class="px-8 py-2 text-white rounded-lg uppercase font-roboto text-[13px] tracking-[2.5px] text-center w-full md:w-auto"
 			style="background-color: var(--bry-current-color)"
 		>
 			ADICIONAR À SACOLA
-		</a>
+		</button>
 	</div>
 
 	<!-- Product accordion -->
