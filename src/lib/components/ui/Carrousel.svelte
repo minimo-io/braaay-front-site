@@ -103,7 +103,5 @@
 		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=0"></button>
 		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=1"></button>
 		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=2"></button>
-		<!-- <button class="glide__bullet" aria-label="bullet" data-glide-dir="=2"></button> -->
-		<!-- Add more bullets based on the number of slides -->
 	</div>
 </div>
