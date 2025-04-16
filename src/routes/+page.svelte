@@ -52,7 +52,7 @@
 					class="rounded-lg w-full h-auto"
 				/>
 				<a href="/" class="play-button not-hover-effect" aria-label="play-button" role="button">
-					<span></span>
+					<span>&nbsp;</span>
 				</a>
 			</div>
 
