@@ -4,9 +4,8 @@ import type { Handle } from '@sveltejs/kit';
 import { paraglideMiddleware } from '$lib/paraglide/server';
 import { sequence } from '@sveltejs/kit/hooks';
 import { redirect } from '@sveltejs/kit';
-import { deLocalizeUrl } from '$lib/paraglide/runtime';
 import { requiresAuth, isAuthRoute } from '$lib/graphql/auth';
-import { getLocale, localizeHref } from './paraglide/runtime';
+import { getLocale, localizeHref, deLocalizeUrl } from '$lib/paraglide/runtime';
 
 // Auth middleware
 const authHandle: Handle = async ({ event, resolve }) => {
