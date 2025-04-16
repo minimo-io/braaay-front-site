@@ -170,7 +170,7 @@
 								<Button
 									title="Adicionar ao carrinho"
 									type="sun"
-									url={localizeHref('/cart')}
+									url={localizeHref('/cart/')}
 									tracking="normal"
 									bold={false}
 								/>
@@ -225,7 +225,7 @@
 						<Button
 							title="ADICIONAR"
 							width="130px"
-							url={localizeHref('/cart')}
+							url={localizeHref('/cart/')}
 							size="sm-short"
 							type="grey"
 							borderDark={true}
@@ -248,7 +248,7 @@
 
 						<Button
 							title="CALCULAR"
-							url={localizeHref('/cart')}
+							url={localizeHref('/cart/')}
 							size="sm-short"
 							width="130px"
 							type="grey"

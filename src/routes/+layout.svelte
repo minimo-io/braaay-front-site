@@ -3,7 +3,7 @@
 	import '@fontsource/prata';
 	import '@fontsource-variable/open-sans';
 
-	import { afterNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
 
 	// In case we want SSG
 	// import { page } from '$app/state';
@@ -31,9 +31,8 @@
 	import { navigating } from '$app/state';
 	import { loaderActivated } from '$stores/loaderStore.state.svelte';
 	import { LoaderCircle } from '@lucide/svelte';
-	// import { navigating } from '$app/stores';
-	// import { derived } from 'svelte/store';
-	// const isNavigating = derived(navigating, ($navigating) => $navigating !== null);
+	import { isAuthenticated, requiresAuth } from '$lib/graphql/auth';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	let { children } = $props();
 
@@ -52,6 +51,22 @@
 				menu.scrollLeft = 0;
 			}
 		});
+	});
+
+	beforeNavigate((navigation) => {
+		if (navigation.to && navigation.to.route) {
+			const isAuthTo = requiresAuth(`${navigation.to.route.id}`);
+			const isUserAuth = isAuthenticated();
+			if (isAuthTo && isUserAuth == false) {
+				const returnUrl = new URL(window.location.href);
+
+				goto(`/login/?returnUrl=${returnUrl.pathname}`);
+			}
+
+			if (navigation.to.route.id == '/login' && isUserAuth) {
+				goto(localizeHref(`/account/`));
+			}
+		}
 	});
 
 	let overlayActive = $state(false);

@@ -396,7 +396,7 @@
 									<Button
 										title="Adicionar ao carrinho"
 										type="sun"
-										url={localizeHref('/cart')}
+										url={localizeHref('/cart/')}
 										tracking="normal"
 									/>
 								</div>
@@ -433,7 +433,7 @@
 							<Button
 								title="Adicionar ao carrinho"
 								type="sun"
-								url={localizeHref('/cart')}
+								url={localizeHref('/cart/')}
 								tracking="normal"
 							/>
 						</div>
@@ -511,7 +511,7 @@
 						</div>
 						<div class="py-2 mt-4 px-5 border border-grey-lighter rounded-full bg-grey-background">
 							<a
-								href={localizeHref('/cart')}
+								href={localizeHref('/cart/')}
 								class="mt-0 block text-sm font-roboto hover:underline text-center"
 								>Voltar ao carrinho</a
 							>

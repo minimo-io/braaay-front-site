@@ -2,10 +2,12 @@
 import { getUrqlClient } from '$lib/stores/urqlClient.state.svelte';
 import type { LoginResult } from '$lib/types';
 import { setAuthToken, clearAuth, getAuthState } from '$lib/stores/auth.state.svelte';
+import type { RequestEvent } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import { gql } from '@urql/core';
 import he from 'he';
 
-export const protectedRoutes = ['/account', '/cart', '/club', '/checkout'];
+export const protectedRoutes = ['/account', '/checkout', '/thank-you'];
 export const authRoutes = ['/login', '/signup'];
 
 // Login mutation
@@ -31,6 +33,27 @@ export function requiresAuth(path: string): boolean {
 // Helper function to check if a path is for authentication (and should redirect if already logged in)
 export function isAuthRoute(path: string): boolean {
 	return authRoutes.some((route) => path.startsWith(route));
+}
+// to protect api routes if needed
+// Example
+// src/routes/api/protected-data/+server.ts
+// import { json } from '@sveltejs/kit';
+// import { ensureAuth } from '$lib/server/auth';
+
+// export async function GET(event) {
+//   const user = ensureAuth(event);
+
+//   // Your protected route logic here
+//   return json({
+//     message: 'This is protected data',
+//     user: user
+//   });
+// }
+export function ensureAuth(event: RequestEvent) {
+	if (!event.locals.authToken) {
+		throw error(401, 'Unauthorized');
+	}
+	return event.locals.user;
 }
 
 // Function to login
