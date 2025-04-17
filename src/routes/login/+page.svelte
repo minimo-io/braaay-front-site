@@ -1,16 +1,8 @@
 <script lang="ts">
-	// import { page } from '$app/state';
 	import Button from '$components/ui/buttons/Button.svelte';
-	// import MoreInfoButton from '$components/ui/buttons/MoreInfoButton.svelte';
-	// import Divider from '$components/ui/dividers/Divider.svelte';
 	import { User } from '@lucide/svelte';
-	// import { toggleLoader } from '$stores/loaderStore.state.svelte';
-	// import { logout } from '$lib/graphql/auth';
-	// import { redirectHref } from '$lib/utils';
 	import DrawerAccount from '$components/ui/drawer/DrawerAccount.svelte';
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
-
-	// let returnUrl = $derived(page.url.href);
 </script>
 
 <main class="w-full mx-auto">

@@ -24,6 +24,22 @@ const LOGIN_MUTATION = gql`
 	}
 `;
 
+// mutation Login {
+// 	login(input: { username: "nicolas@viivpay.com", password: "nicolasviivpay1234" }) {
+// 		authToken
+//   refreshToken
+//   sessionToken
+//   customer{
+// 	jwtAuthExpiration
+//   }
+// 		user {
+// 			id
+// 			name
+// 			email
+// 		}
+// 	}
+// }
+
 // Helper function to check if a path requires authentication
 export function requiresAuth(path: string): boolean {
 	// Add your protected routes here

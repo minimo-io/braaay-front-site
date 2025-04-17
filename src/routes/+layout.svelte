@@ -21,7 +21,6 @@
 	import Modal from '$components/ui/Modal.svelte';
 
 	// Toasts
-	// @ts-ignore
 	import { Toasts } from 'svoast';
 
 	import '../app.css';
@@ -119,7 +118,7 @@
 
 <Drawer />
 
-<Toasts position="bottom-right" />
+<Toasts position="bottom-center" />
 
 <!-- <div style="display:none">
 	{#each locales as locale}
@@ -193,7 +192,7 @@
 		width: 100%;
 		/* height: 100%; */
 		height: 100dvh;
-		background-color: rgba(33, 38, 128, 0.2); /* semi-transparent gray */
+		background-color: rgba(33, 38, 128, 0.2);
 		z-index: 9998;
 		animation: fadeIn 0.3s ease-in-out;
 		pointer-events: all;

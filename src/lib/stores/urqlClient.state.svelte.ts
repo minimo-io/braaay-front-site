@@ -81,18 +81,18 @@ export const urqlClientPtLoggedIn = $state({
  * We use different clients for logged-in (network only) vs logged-out (cache-first) users.
  * @param authToken is for when we check session from the server Locals
  */
-export function getUrqlClient(authToken?: string) {
+export function getUrqlClient(authToken?: string, forceNetworkOnly?: boolean) {
 	const locale = getLocale();
 	const token = getAuthState().token;
 
 	if (locale == 'uy') {
-		if (token || authToken) {
+		if (token || authToken || forceNetworkOnly) {
 			return urqlClientUyLoggedIn;
 		} else {
 			return urqlClientUyLoggedOut;
 		}
 	} else {
-		if (token || authToken) {
+		if (token || authToken || forceNetworkOnly) {
 			return urqlClientPtLoggedIn;
 		} else {
 			return urqlClientPtLoggedOut;

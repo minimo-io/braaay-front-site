@@ -28,6 +28,8 @@
 		shineEffect?: boolean;
 
 		newTab?: boolean;
+
+		isSubmit?: boolean;
 	}
 	let {
 		title,
@@ -47,7 +49,8 @@
 		width = 'full',
 		customPx = '',
 		shineEffect = true,
-		newTab = false
+		newTab = false,
+		isSubmit = false
 	}: Props = $props();
 </script>
 
@@ -115,6 +118,7 @@
 {:else}
 	<button
 		{disabled}
+		type={isSubmit ? 'submit' : 'button'}
 		class={[
 			'btn uppercase flex items-center justify-center disabled:opacity-50 disabled:bg-grey-medium',
 

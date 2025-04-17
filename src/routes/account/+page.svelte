@@ -8,8 +8,17 @@
 	import { logout } from '$lib/graphql/auth';
 	import { redirectHref } from '$lib/utils';
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
+	import { authState } from '$stores/auth.state.svelte';
 
 	let returnUrl = $derived('/login');
+	let userName = $state('');
+	let userEmail = $state('');
+	authState.subscribe((auth) => {
+		if (auth.user && auth.user.name && auth.user.email) {
+			userName = auth.user.name;
+			userEmail = auth.user.email;
+		}
+	});
 
 	async function handleLogout() {
 		// event.preventDefault();
@@ -33,25 +42,29 @@
 					>
 						<div class="flex">
 							<span class="self-center align-middle pt-2 pb-2 pr-2">
-								<User />
+								<!-- <User /> -->
+								👋
 							</span>
 							<span
 								class="self-center font-roboto font-extrabold align-bottom pt-1 text-left text-[18px] md:text-[22px] text-wrap"
 							>
-								MINHA CONTA
+								Olá, {userName}!
 							</span>
 						</div>
 					</h1>
 					<div
 						class="flex flex-col gap-1 md:flex-row text-grey-medium-dark font-roboto text-[14px] antialiased"
 					>
-						<span>3641 pontos</span>
-						<MoreInfoButton
-							title="SAIBA MAIS"
-							action={() => {
-								alert('Popup!');
-							}}
-						/>
+						<div>
+							<MoreInfoButton
+								title="Meu cashback"
+								action={() => {
+									alert('Popup!');
+								}}
+							/>
+						</div>
+
+						<span class="md:ml-2 mt-1 md:mt-0">{userEmail}</span>
 					</div>
 				</div>
 				<div class="block">
@@ -68,7 +81,7 @@
 	<div class="flex flex-col md:flex-row max-w-screen-lg mx-auto">
 		<!-- Left Sidebar -->
 		<div class="border-r border-grey-lighter p-8 w-full md:w-1/4">
-			<h1 class="text-lg font-bold mb-6">Olá, Erika</h1>
+			<h1 class="text-lg font-bold mb-6">MENU</h1>
 			<nav class="space-y-4">
 				<div>
 					<ul class="space-y-3 text-base">
