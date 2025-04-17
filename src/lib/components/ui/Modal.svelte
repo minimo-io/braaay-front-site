@@ -31,12 +31,14 @@
 		{#if content}
 			<div class="my-3">{@render content()}</div>
 		{/if}
-		<button
-			onclick={closeDialog}
-			class="justify-center place-self-center text-center text-xs text-grey-medium-dark mt-2 mb-0"
-		>
-			Cancelar
-		</button>
+		<div class="text-center flex justify-center">
+			<button
+				onclick={closeDialog}
+				class="justify-center text-center text-xs text-grey-medium-dark mt-2 md:mt-0 mb-0"
+			>
+				Cancelar
+			</button>
+		</div>
 	</div>
 
 	<!-- <div class="absolute -top-1 -right-1">

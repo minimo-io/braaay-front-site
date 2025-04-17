@@ -23,7 +23,7 @@
 	async function handleLogout() {
 		// event.preventDefault();
 		toggleLoader();
-		let logoutResult = logout();
+		let logoutResult = await logout();
 		redirectHref(returnUrl);
 	}
 </script>
@@ -46,10 +46,16 @@
 								👋
 							</span>
 							<span
-								class="self-center font-roboto font-extrabold align-bottom pt-1 text-left text-[18px] md:text-[22px] text-wrap"
+								class={[
+									'self-center font-roboto font-extrabold align-bottom pt-0 text-left text-[18px] md:text-[22px] text-wrap',
+									'md:max-w-max max-w-[87%] leading-tight pr-2 md:pr-0'
+								]}>Olá, {userName}</span
+							>
+							<!-- <span
+								class="self-center font-roboto font-extrabold align-bottom pt-1 text-left text-[18px] md:text-[22px] text-wrap truncate"
 							>
 								Olá, {userName}!
-							</span>
+							</span> -->
 						</div>
 					</h1>
 					<div

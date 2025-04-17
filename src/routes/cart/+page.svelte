@@ -9,7 +9,7 @@
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import { Gift, Sparkle, Truck } from '@lucide/svelte';
 	import { openModal } from '$stores/modalState.state.svelte';
-	import CupomForm from '$components/ui/forms/cupomForm.svelte';
+	import CouponForm from '$components/ui/forms/couponForm.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import CartItemElement from '$components/ui/cart/CartItemElement.svelte';
 	import { correctPrice } from '$lib/utils';
@@ -154,7 +154,7 @@
 							action={() => {
 								openModal({
 									header: 'Adicionar cupom',
-									content: CupomForm as Component
+									content: CouponForm as Component
 								});
 							}}
 						>

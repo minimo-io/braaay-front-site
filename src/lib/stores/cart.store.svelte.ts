@@ -58,6 +58,13 @@ export const adjustQuantity = (itemId: string, delta: number, specific?: number)
 	});
 };
 
+// Clear the whole cart
+export const emptyCart = () => {
+	cart.update(() => {
+		return { items: [] };
+	});
+};
+
 // Total amount in the cart
 // export function getCartTotalAmount(): number {
 // 	const currentCart: Cart = get(cart);

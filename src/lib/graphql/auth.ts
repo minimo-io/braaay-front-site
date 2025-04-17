@@ -4,41 +4,12 @@ import type { LoginResult } from '$lib/types';
 import { setAuthToken, clearAuth, getAuthState } from '$lib/stores/auth.state.svelte';
 import type { RequestEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
-import { gql } from '@urql/core';
 import he from 'he';
+import { EMPTY_CART_MUTATION, LOGIN_MUTATION } from './mutations';
+import { emptyCart } from '$stores/cart.store.svelte';
 
 export const protectedRoutes = ['/account', '/checkout', '/thank-you'];
 export const authRoutes = ['/login', '/signup'];
-
-// Login mutation
-const LOGIN_MUTATION = gql`
-	mutation Login($username: String!, $password: String!) {
-		login(input: { username: $username, password: $password }) {
-			authToken
-			user {
-				id
-				name
-				email
-			}
-		}
-	}
-`;
-
-// mutation Login {
-// 	login(input: { username: "nicolas@viivpay.com", password: "nicolasviivpay1234" }) {
-// 		authToken
-//   refreshToken
-//   sessionToken
-//   customer{
-// 	jwtAuthExpiration
-//   }
-// 		user {
-// 			id
-// 			name
-// 			email
-// 		}
-// 	}
-// }
 
 // Helper function to check if a path requires authentication
 export function requiresAuth(path: string): boolean {
@@ -101,7 +72,13 @@ export async function login(username: string, password: string): Promise<LoginRe
 }
 
 // Function to logout
-export function logout() {
+export async function logout() {
+	try {
+		await getUrqlClient().client.mutation(EMPTY_CART_MUTATION, {}).toPromise();
+		emptyCart();
+	} catch (err) {
+		console.warn('Failed to log out via GraphQL:', err);
+	}
 	clearAuth();
 }
 

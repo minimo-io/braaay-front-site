@@ -23,7 +23,6 @@
 		toggleLoader();
 		let logoutResult = logout();
 		redirectHref(returnUrl);
-		console.log(logoutResult);
 	}
 </script>
 

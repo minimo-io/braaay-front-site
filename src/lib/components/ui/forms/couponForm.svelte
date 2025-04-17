@@ -31,22 +31,23 @@
 		document.body.classList.toggle('no-scroll');
 		try {
 			if (couponCodeSanitized.length > 3) {
-				console.log('CODE', couponCodeSanitized);
+				// console.log('CODE', couponCodeSanitized);
 				const result = await getUrqlClient('', true)
-					.client.query(COUPON_QUERY, {
-						slug: couponCodeSanitized
+					.client.mutation(COUPON_QUERY, {
+						couponCode: couponCodeSanitized
 					})
 					.toPromise();
 
+				// console.log(result);
 				processing = false;
-				if (result.data.coupon) {
+				if (result.error && result.error.message) {
+					error = `Error: ${result.error.message.replaceAll('[GraphQL]', '').trim()}`;
+				} else if (result.data.applyCoupon) {
 					launchToast(`Cupom "${couponCodeSanitized}"" aplicado!`, 'success');
 
 					couponCode = '';
 					closeModal();
-					// Apply coupon
-				} else {
-					error = 'Código de cupom nao encontrado.';
+					// Apply coupon code
 				}
 			} else {
 				error = 'O código do cupom deve ter pelo menos 4 letras ou números';
@@ -54,10 +55,12 @@
 				// closeModal();
 			}
 
+			document.body.classList.toggle('no-scroll');
 			toggleLoader();
 		} catch (error) {
 			// processing = false;
-			launchToast(`Error procesando o cupom ${error}`, 'error');
+
+			launchToast(`Error procesando o cupom: ${error}`, 'error');
 			toggleLoader();
 			document.body.classList.toggle('no-scroll');
 			processing = false;
