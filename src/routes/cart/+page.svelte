@@ -74,7 +74,7 @@
 								<Sparkle class="pl-1" />
 							</h2>
 							<p class="text-lg font-semibold mt-2 leading-[23px] w-5/6 mx-auto">
-								Ganhe 10% em cashback, fretes grátis + 3 vinhos todo mês!
+								Ganhe 10% em cashback, fretes grátis e mais!
 							</p>
 							<p class="text-xs text-grey-dark mt-3 leading-2 w-5/6 block mx-auto">
 								Junte-se ao APP do Clube e
@@ -225,7 +225,7 @@
 							<Sparkle class="pl-1" />
 						</h2>
 						<p class="text-lg font-semibold mt-2 leading-[23px]">
-							Ganhe 10% em cashback, fretes grátis + 3 vinhos todo mês!
+							Ganhe 10% em cashback, fretes grátis e mais!
 						</p>
 						<p class="text-xs text-grey-dark mt-3 leading-2">
 							Junte-se ao APP do Clube e

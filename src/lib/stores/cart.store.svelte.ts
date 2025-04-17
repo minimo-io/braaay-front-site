@@ -38,20 +38,26 @@ export const removeFromCart = (itemId: string) => {
 	});
 };
 // Increase item amount
-export const adjustQuantity = (itemId: string, delta: number) => {
+export const adjustQuantity = (itemId: string, delta: number, specific?: number) => {
 	cart.update((currentCart: Cart) => {
 		const existingIndex = currentCart.items.findIndex((i) => i.id === itemId);
 
 		if (existingIndex !== -1) {
-			const newQuantity = currentCart.items[existingIndex].quantity + delta;
+			let newQuantity = 0;
+			if (specific) {
+				newQuantity = specific;
+			} else {
+				newQuantity = currentCart.items[existingIndex].quantity + delta;
+				// Prevent negative quantities
+			}
 
-			// Prevent negative quantities
 			currentCart.items[existingIndex].quantity = Math.max(1, newQuantity);
 		}
 
 		return currentCart;
 	});
 };
+
 // Total amount in the cart
 // export function getCartTotalAmount(): number {
 // 	const currentCart: Cart = get(cart);

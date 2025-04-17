@@ -13,6 +13,70 @@
 	let { cartItem }: Props = $props();
 
 	let currentPrice = $derived(cartItem.price * cartItem.quantity);
+	// handle manual quantity
+	const handleQuantityChange = (cartItemId, e) => {
+		// Get the input value and parse it as an integer
+		const value = e.target.value;
+		const parsedValue = parseInt(value);
+
+		// Handle cases where the input is empty or not a valid number
+		if (isNaN(parsedValue) || parsedValue <= 0) {
+			// For empty input or invalid numbers, don't update the cart yet
+			// This allows users to clear the field while typing
+			if (value === '') {
+				// Let the field remain empty while user is typing
+				return;
+			} else {
+				// For other invalid inputs like negative numbers, non-numbers, etc.
+				// Set to 1 and update the cart
+				e.target.value = 1;
+				adjustQuantity(cartItemId, 0, 1);
+			}
+		} else {
+			// For valid numbers > 0, update normally
+			adjustQuantity(cartItemId, 0, parsedValue);
+		}
+	};
+
+	// Handle when user leaves the input field
+	const handleBlur = (cartItemId, e) => {
+		const value = e.target.value;
+		const parsedValue = parseInt(value);
+
+		// If the field is empty or has an invalid value when user leaves the field,
+		// set it to 1
+		if (value === '' || isNaN(parsedValue) || parsedValue <= 0) {
+			e.target.value = 1;
+			adjustQuantity(cartItemId, 0, 1);
+		}
+	};
+	// Prevent non-numeric key presses (optional extra layer of protection)
+	const handleKeyPress = (e) => {
+		// Allow only numbers, backspace, delete, tab, arrows, home, end
+		const allowedKeys = [
+			'0',
+			'1',
+			'2',
+			'3',
+			'4',
+			'5',
+			'6',
+			'7',
+			'8',
+			'9',
+			'Backspace',
+			'Delete',
+			'Tab',
+			'ArrowLeft',
+			'ArrowRight',
+			'Home',
+			'End'
+		];
+
+		if (!allowedKeys.includes(e.key)) {
+			e.preventDefault();
+		}
+	};
 </script>
 
 <div class="flex flex-col md:flex-row justify-between align-middle">
@@ -46,8 +110,11 @@
 
 		<!-- Quantity Input -->
 		<input
-			disabled
 			type="tel"
+			onchange={(e) => handleQuantityChange(cartItem.id, e)}
+			oninput={(e) => handleQuantityChange(cartItem.id, e)}
+			onblur={(e) => handleBlur(cartItem.id, e)}
+			onkeydown={(e) => handleKeyPress(e)}
 			value={cartItem.quantity}
 			class="w-20 border p-4 border-grey-lighter rounded-full h-7 text-center text-lg font-semibold bg-transparent focus:outline-none"
 			min="1"

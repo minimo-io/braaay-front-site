@@ -4,6 +4,7 @@
 	import ProductDetails from '$components/ui/products/ProductDetails.svelte';
 	import ProductImage from '$components/ui/products/ProductImage.svelte';
 	import type { ArticleCreator, ImageGeneral, Post } from '$lib/types';
+	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -54,4 +55,6 @@
 <!-- Product Article -->
 {#if article.content}
 	<BottomArticle {article} twoColumns={true} />
+{:else}
+	<FunMessageSection />
 {/if}
