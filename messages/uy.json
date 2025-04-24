@@ -9,5 +9,9 @@
 	"sobreNos": "SOBRE NOSOTROS",
 	"afiliados": "AFILIADOS",
 	"blog": "BLOG",
-	"showroom": "SHOWROOM"
+	"showroom": "SHOWROOM",
+
+	"addToCart": "Añadir al carrito",
+	"addingToCart": "Añadiendo...",
+	"addingToCartOk": "Item añadido con éxito"
 }

@@ -17,12 +17,15 @@
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
-<dialog
-	bind:this={dialog}
-	onclose={() => (showModal = false)}
+<!-- 
+	IF WE WANT TO CLOSE IT ON OVERLAY
 	onclick={(e) => {
 		if (e.target === dialog) closeDialog();
 	}}
+ -->
+<dialog
+	bind:this={dialog}
+	onclose={() => (showModal = false)}
 	class="w-dvw md:w-[30em] md:min-w-[450px] rounded-xl border-none border-grey-light md:shadow-2xl"
 >
 	<div class="p-7 pb-6">
@@ -40,10 +43,6 @@
 			</button>
 		</div>
 	</div>
-
-	<!-- <div class="absolute -top-1 -right-1">
-		<button onclick={closeDialog}><CircleX /></button>
-	</div> -->
 </dialog>
 
 <style>
@@ -58,28 +57,8 @@
 		animation: zoomIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	@keyframes zoomIn {
-		from {
-			transform: scale(0.9);
-			opacity: 0;
-		}
-		to {
-			transform: scale(1);
-			opacity: 1;
-		}
-	}
-
 	dialog[open]::backdrop {
 		animation: fadeIn 0.2s ease-out;
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
 	}
 
 	button {

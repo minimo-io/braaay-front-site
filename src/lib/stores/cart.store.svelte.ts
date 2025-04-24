@@ -2,12 +2,14 @@
 import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
 import type { CartItem, Cart } from '$lib/types/cart.types';
+import { AppConfig } from '$config';
 
 const initialCart: Cart = browser
 	? JSON.parse(window.localStorage.getItem('cart') || 'null') || { items: [] }
 	: { items: [] };
 
 export const cart = writable<Cart>(initialCart);
+export const miniCart = $state({ active: false, duration: AppConfig.miniCartDuration });
 
 // Subscribe only on the client
 if (browser) {
@@ -17,7 +19,7 @@ if (browser) {
 }
 
 // Add items from the cart
-export const addToCart = (item: CartItem) => {
+export const addToCart = (item: CartItem, callback?: (updatedCart: Cart) => void) => {
 	cart.update((currentCart: Cart) => {
 		const existingIndex = currentCart.items.findIndex((i) => i.id === item.id);
 		if (existingIndex !== -1) {
@@ -26,8 +28,25 @@ export const addToCart = (item: CartItem) => {
 			// When adding a new item, ensure its initial quantity is 1.
 			currentCart.items.push({ ...item, quantity: 1 });
 		}
+
+		// If a callback is provided, call it with the updated cart
+		if (callback) {
+			callback(currentCart);
+		}
+
 		return currentCart;
 	});
+};
+
+export const activateMiniCart = () => {
+	miniCart.active = true;
+	console.log('Starting to showing mini cart.');
+	if (browser) {
+		setTimeout(() => {
+			miniCart.active = false;
+			console.log('Finished showing mini cart.');
+		}, miniCart.duration);
+	}
 };
 
 // Remove cart items

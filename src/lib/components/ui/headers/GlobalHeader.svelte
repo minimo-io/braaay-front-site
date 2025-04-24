@@ -48,7 +48,7 @@
 	});
 </script>
 
-<header class="bg-white">
+<header class="bg-white relative">
 	<nav
 		class="mx-[30px] lg:mx-auto flex max-w-screen-lg items-center justify-between h-[63px] lg:h-[90px]"
 		aria-label="Global"

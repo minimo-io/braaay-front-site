@@ -5,7 +5,10 @@
 	import type { Product } from '$lib/types';
 	import { m } from '$lib/paraglide/messages';
 	import { type CartItem } from '$lib/types/cart.types';
-	import { addToCart } from '$stores/cart.store.svelte';
+	import { activateMiniCart, addToCart } from '$stores/cart.store.svelte';
+	import { browser } from '$app/environment';
+	import { toast } from 'svoast';
+	import CartToast from '$components/ui/cart/CartToast.svelte';
 
 	interface Props {
 		product: Product;
@@ -33,9 +36,20 @@
 		image: product.image
 	};
 
+	let processing = $state(false);
+
 	// Optionally, you can provide a wrapper function in case you want to extend the behavior.
-	const handleAddToCart = () => {
-		addToCart(item);
+	const handleAddToCart = async () => {
+		processing = true;
+		addToCart(item, () => {
+			if (browser) {
+				// toast.success(m.addingToCartOk(), {
+				// 	closable: true
+				// });
+			}
+		});
+		activateMiniCart();
+		processing = false;
 	};
 </script>
 
@@ -70,7 +84,11 @@
 			class="px-8 py-2 text-white rounded-lg uppercase font-roboto text-[13px] tracking-[2.5px] text-center w-full md:w-auto"
 			style="background-color: var(--bry-current-color)"
 		>
-			ADICIONAR À SACOLA
+			{#if processing}
+				{m.addingToCart()}
+			{:else}
+				{m.addToCart()}
+			{/if}
 		</button>
 	</div>
 

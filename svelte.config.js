@@ -32,7 +32,8 @@ const config = {
 		alias: {
 			$components: path.resolve('src/lib/components'),
 			$stores: path.resolve('src/lib/stores'),
-			$data: path.resolve('src/lib/data')
+			$data: path.resolve('src/lib/data'),
+			$config: path.resolve('src/lib/config')
 			// $types: path.resolve('src/lib/types.ts')
 		}
 	},

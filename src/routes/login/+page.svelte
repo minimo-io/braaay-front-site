@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Button from '$components/ui/buttons/Button.svelte';
-	import { User } from '@lucide/svelte';
+	import { CheckCheck, User } from '@lucide/svelte';
 	import DrawerAccount from '$components/ui/drawer/DrawerAccount.svelte';
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
+	import SignupBenefits from '$components/ui/SignupBenefits.svelte';
 </script>
 
 <main class="w-full mx-auto">
@@ -59,10 +60,12 @@
 		<div
 			class="hidden md:inline px-[35px] w-full md:flex-1 md:justify-center flex-row text-center h-full self-center py-10 text-sm"
 		>
-			<div class="text-center flex flex-col p-0 md:p-10 font-bold">
+			<div class="text-center flex flex-col p-0 md:px-9 font-bold">
 				<!-- <Info class="h-5 self-center" /> -->
 				<span class="mb-2 block">Não tem uma conta?</span>
 				<Button rounded="lg" shineEffect={false} title="Cadastre-se" type="sun" />
+
+				<SignupBenefits />
 			</div>
 		</div>
 	</div>

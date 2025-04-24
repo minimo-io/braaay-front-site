@@ -3,11 +3,11 @@
 	import '@fontsource/prata';
 	import '@fontsource-variable/open-sans';
 
-	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
+	import '../app.css';
+	import 'animate.css';
+	import { LoaderCircle } from '@lucide/svelte';
 
-	// In case we want SSG
-	// import { page } from '$app/state';
-	// import { localizeHref, locales } from '$lib/paraglide/runtime';
+	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
 
 	import Footer from '$components/layout/Footer.svelte';
 	import Header from '$components/layout/Header.svelte';
@@ -15,29 +15,29 @@
 	import Drawer from '$components/ui/drawer/Drawer.svelte';
 	import { closeDrawer } from '$lib/stores/drawerState.state.svelte';
 
+	import { isAuthenticated, requiresAuth } from '$lib/graphql/auth';
+	import { localizeHref } from '$lib/paraglide/runtime';
+
 	// Modal
-	// import { urqlClient } from '$stores/urqlClient.state.svelte';
 	import { modalState } from '$stores/modalState.state.svelte';
 	import Modal from '$components/ui/Modal.svelte';
 
 	// Toasts
 	import { Toasts } from 'svoast';
 
-	import '../app.css';
-	import 'animate.css';
-
 	// Loader
 	import { navigating } from '$app/state';
 	import { loaderActivated } from '$stores/loaderStore.state.svelte';
-	import { LoaderCircle } from '@lucide/svelte';
-	import { isAuthenticated, requiresAuth } from '$lib/graphql/auth';
-	import { localizeHref } from '$lib/paraglide/runtime';
 
 	let { children } = $props();
 
 	let showLoader = $derived.by(() => {
 		return navigating.to || loaderActivated.active;
 	});
+
+	// Mini cart
+	import { miniCart } from '$stores/cart.store.svelte';
+	import CartToast from '$components/ui/cart/CartToast.svelte';
 
 	afterNavigate(() => {
 		// Close drawer if active
@@ -116,7 +116,11 @@
 	content={modalState.content}
 />
 
+<!-- Used as a mobile menu -->
 <Drawer />
+
+<!-- Used when adding an item to the cart -->
+<CartToast bind:showCartToast={miniCart.active} />
 
 <Toasts position="bottom-center" />
 

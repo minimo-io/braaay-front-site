@@ -9,6 +9,7 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { Eye, EyeOff } from '@lucide/svelte';
+	import SignupBenefits from '../SignupBenefits.svelte';
 	// import { onMount } from 'svelte';
 
 	let showReset = $state(false);
@@ -160,13 +161,17 @@
 	</div>
 {/if}
 <div
-	class="px-[35px] border-b border-grey-lighter w-full md:flex-1 md:justify-center flex-row text-center md:h-full self-center py-10 text-sm md:hidden"
+	class="px-[35px] border-b border-grey-lighter w-full md:flex-1 md:justify-center flex-row text-center md:h-full self-center py-10 pb-7 text-sm md:hidden"
 >
 	<div class="text-center flex flex-col p-0 md:p-10 font-bold">
 		<span class="mb-2 block">Não tem uma conta?</span>
 		<Button shineEffect={false} title="Cadastre-se" type="sun" />
 	</div>
+	<div class="px-5">
+		<SignupBenefits />
+	</div>
 </div>
+
 <div
 	class={[
 		'px-[35px] flex flex-col text-xs mt-7  border-grey-lighter pb-6 border-b-0',

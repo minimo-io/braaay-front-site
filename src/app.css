@@ -25,6 +25,25 @@ html {
 	overflow: hidden;
 } */
 @layer base {
+	@keyframes zoomIn {
+		from {
+			transform: scale(0.9);
+			opacity: 0;
+		}
+		to {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
 	.glass {
 		background: rgba(255, 255, 255, 0.1); /* Light transparent layer */
 		backdrop-filter: blur(2px); /* Frosted glass effect */
