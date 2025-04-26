@@ -4,7 +4,8 @@
 	import { closeModal } from '$stores/modalState.state.svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
-	import { COUPON_QUERY } from '$lib/graphql/queries';
+	import { addCoupon, hasCoupon, removeCoupon } from '$lib/stores/cart.store.svelte';
+	import { COUPON_APPLY } from '$lib/graphql/mutations';
 	import { toast } from 'svoast';
 
 	let couponCode = $state('');
@@ -33,7 +34,7 @@
 			if (couponCodeSanitized.length > 3) {
 				// console.log('CODE', couponCodeSanitized);
 				const result = await getUrqlClient('', true)
-					.client.mutation(COUPON_QUERY, {
+					.client.mutation(COUPON_APPLY, {
 						couponCode: couponCodeSanitized
 					})
 					.toPromise();
@@ -42,12 +43,25 @@
 				processing = false;
 				if (result.error && result.error.message) {
 					error = `Error: ${result.error.message.replaceAll('[GraphQL]', '').trim()}`;
-				} else if (result.data.applyCoupon) {
+				} else if (result.data.applyCoupon && result.data.applyCoupon.applied.code) {
+					// Coupon was appllied OK!
+					const couponCodeFromDb = result.data.applyCoupon.applied.code;
+					if (couponCodeFromDb) {
+						if (hasCoupon(couponCodeFromDb)) {
+							removeCoupon(couponCodeFromDb);
+						}
+						addCoupon(couponCodeFromDb);
+					}
+
 					launchToast(`Cupom "${couponCodeSanitized}"" aplicado!`, 'success');
 
 					couponCode = '';
 					closeModal();
+
 					// Apply coupon code
+				} else {
+					error = 'Error inesperado com o código do cupom';
+					processing = false;
 				}
 			} else {
 				error = 'O código do cupom deve ter pelo menos 4 letras ou números';

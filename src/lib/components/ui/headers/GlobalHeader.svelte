@@ -140,7 +140,7 @@
 			</Button>
 
 			<!-- Cashback -->
-			<CashbackButton title="Cashback" currency="R$" value={123.42} />
+			<CashbackButton title="Cashback" currency="R$" value={0.0} />
 		</div>
 
 		<!-- Bag -->

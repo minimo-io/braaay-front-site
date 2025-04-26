@@ -40,6 +40,7 @@ export interface ProductsForTagQueryResult {
 }
 
 export interface Product {
+	id: number;
 	slug: string;
 	title: string;
 	floatPrice: number;
@@ -74,6 +75,7 @@ export interface GraphQLProductNode {
 }
 
 export interface GraphQLProduct {
+	databaseId: number;
 	slug: string;
 	title: string;
 	sku: string;
@@ -138,6 +140,7 @@ export function mapProduct(data: GraphQLProductNode): Product {
 	}
 
 	return {
+		id: data.node.databaseId,
 		slug: data.node.slug,
 		floatPrice: parseFloat(floatPrice),
 		price: data.node.price,

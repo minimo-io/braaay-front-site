@@ -1,14 +1,16 @@
 // src/lib/stores/cart.store.svelte.ts
 import { browser } from '$app/environment';
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
 import type { CartItem, Cart } from '$lib/types/cart.types';
 import { AppConfig } from '$config';
 
+// Main cart
 const initialCart: Cart = browser
-	? JSON.parse(window.localStorage.getItem('cart') || 'null') || { items: [] }
-	: { items: [] };
+	? JSON.parse(window.localStorage.getItem('cart') || 'null') || { items: [], coupons: [] }
+	: { items: [], coupons: [] };
 
 export const cart = writable<Cart>(initialCart);
+// Mini cart toaster
 export const miniCart = $state({ active: false, duration: AppConfig.miniCartDuration });
 
 // Subscribe only on the client
@@ -40,24 +42,23 @@ export const addToCart = (item: CartItem, callback?: (updatedCart: Cart) => void
 
 export const activateMiniCart = () => {
 	miniCart.active = true;
-	console.log('Starting to showing mini cart.');
+
 	if (browser) {
 		setTimeout(() => {
 			miniCart.active = false;
-			console.log('Finished showing mini cart.');
 		}, miniCart.duration);
 	}
 };
 
 // Remove cart items
-export const removeFromCart = (itemId: string) => {
+export const removeFromCart = (itemId: number) => {
 	cart.update((currentCart: Cart) => {
 		currentCart.items = currentCart.items.filter((i) => i.id !== itemId);
 		return currentCart;
 	});
 };
 // Increase item amount
-export const adjustQuantity = (itemId: string, delta: number, specific?: number) => {
+export const adjustQuantity = (itemId: number, delta: number, specific?: number) => {
 	cart.update((currentCart: Cart) => {
 		const existingIndex = currentCart.items.findIndex((i) => i.id === itemId);
 
@@ -80,12 +81,106 @@ export const adjustQuantity = (itemId: string, delta: number, specific?: number)
 // Clear the whole cart
 export const emptyCart = () => {
 	cart.update(() => {
-		return { items: [] };
+		return { items: [], coupons: [] };
 	});
 };
 
-// Total amount in the cart
-// export function getCartTotalAmount(): number {
-// 	const currentCart: Cart = get(cart);
-// 	return currentCart.items.reduce((total, item) => total + item.price * item.quantity, 0);
+// ---- Coupon related methods ----
+
+// Add a coupon to the cart
+export const addCoupon = (couponCode: string) => {
+	cart.update((currentCart: Cart) => {
+		// Check if the coupon already exists to avoid duplicates
+		if (!currentCart.coupons.includes(couponCode)) {
+			currentCart.coupons.push(couponCode);
+		}
+		return currentCart;
+	});
+};
+
+// Remove a specific coupon from the cart
+export const removeCoupon = (couponCode: string) => {
+	cart.update((currentCart: Cart) => {
+		currentCart.coupons = currentCart.coupons.filter((code) => code !== couponCode);
+		return currentCart;
+	});
+};
+
+// export async function logout() {
+// 	try {
+// 		await getUrqlClient().client.mutation(EMPTY_CART_MUTATION, {}).toPromise();
+// 		emptyCart();
+// 	} catch (err) {
+// 		console.warn('Failed to log out via GraphQL:', err);
+// 	}
+// 	clearAuth();
 // }
+
+// Clear all coupons from the cart
+export const clearAllCoupons = () => {
+	cart.update((currentCart: Cart) => {
+		currentCart.coupons = [];
+		return currentCart;
+	});
+};
+
+// Check if a specific coupon exists in the cart
+export const hasCoupon = (couponCode: string): boolean => {
+	const currentCart = get(cart);
+	return currentCart.coupons.includes(couponCode);
+};
+
+// Get the count of applied coupons
+export const getCouponCount = (): number => {
+	// cart.update((currentCart: Cart): =>{
+
+	// 	return currentCart.coupons.length;
+	// });
+
+	const currentCart = get(cart);
+	return currentCart.coupons.length;
+};
+
+// Get all applied coupons
+export const getAppliedCoupons = (): string[] => {
+	const currentCart = get(cart);
+	return [...currentCart.coupons];
+};
+
+// Calculate the total price of items in cart before any discounts
+export const getCartSubtotal = (): number => {
+	const currentCart = get(cart);
+	return currentCart.items.reduce((total, item) => total + item.price * item.quantity, 0);
+};
+
+// Get coupon details from config
+export const getCouponDetails = (couponCode: string) => {
+	return AppConfig.coupons[couponCode] || null;
+};
+
+// Calculate the discount value based on applied coupons
+export const calculateDiscount = (couponCode: string): number => {
+	const subtotal = getCartSubtotal();
+	let totalDiscount = 0;
+
+	const couponDetails = getCouponDetails(couponCode);
+
+	if (couponDetails) {
+		// Skip if coupon doesn't exist in config
+		// if (!couponDetails) continue;
+
+		let discountAmount = 0;
+
+		// Calculate discount based on type
+		if (couponDetails.discountType === 'PERCENT') {
+			discountAmount = subtotal * (couponDetails.amount / 100);
+		} else if (couponDetails.discountType === 'FIXED_CART') {
+			discountAmount = Math.min(subtotal, couponDetails.amount);
+		}
+
+		// Add to total and record details
+		totalDiscount += discountAmount;
+	}
+
+	return totalDiscount;
+};

@@ -13,5 +13,9 @@
 
 	"addToCart": "ADICIONAR À SACOLA",
 	"addingToCart": "Adicionando...",
-	"addingToCartOk": "Item adicionado com sucesso"
+	"addingToCartOk": "Adicionado com sucesso",
+
+	"continue": "Continuar",
+
+	"addYourZipCode": "Digite seu CEP"
 }

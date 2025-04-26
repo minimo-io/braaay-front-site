@@ -137,7 +137,8 @@
 					class="font-semibold text-center md:text-right text-lg md:text-base"
 					transition:slide={{ duration: 150, axis: 'y' }}
 				>
-					{m.currencySymbol()}{correctPrice(currentPrice)}
+					{m.currencySymbol()}
+					{correctPrice(currentPrice)}
 				</p>
 			{/key}
 		</div>

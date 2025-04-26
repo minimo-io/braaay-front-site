@@ -61,8 +61,8 @@ export const urqlClientPtLoggedOut = $state({
 		url: PUBLIC_GRAPHQL_SERVER_PT,
 		exchanges: [cacheExchange, authExchange, fetchExchange, loggerExchange],
 		requestPolicy: 'cache-first',
-		fetchOptions: () => {
-			return {};
+		fetchOptions: {
+			credentials: 'include'
 		}
 	})
 });

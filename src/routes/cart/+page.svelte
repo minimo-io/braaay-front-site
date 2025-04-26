@@ -4,7 +4,7 @@
 	import { quintOut } from 'svelte/easing';
 	import { m } from '$lib/paraglide/messages';
 
-	import { cart } from '$stores/cart.store.svelte';
+	import { cart, calculateDiscount, clearAllCoupons } from '$stores/cart.store.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import { Gift, Sparkle, Truck } from '@lucide/svelte';
@@ -13,13 +13,25 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import CartItemElement from '$components/ui/cart/CartItemElement.svelte';
 	import { correctPrice } from '$lib/utils';
+	import { MoreInfoButton } from '$components/ui/buttons';
+	import { COUPON_CLEAR_ALL } from '$lib/graphql/mutations';
+	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
+	import { toggleLoader } from '$stores/loaderStore.state.svelte';
+	import ShippingForm from '$components/ui/forms/shippingForm.svelte';
 
 	// Cart amount
 	let totalCartAmount = $state(0);
 	let totalAmount = $state(0);
+	let discounts = $state(0);
+	let couponsCount = $state(0);
 	cart.subscribe((cart) => {
 		totalCartAmount = cart.items.reduce((count, item) => count + item.quantity, 0);
 		totalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
+		couponsCount = cart.coupons.length;
+		for (const couponCode of cart.coupons) {
+			discounts = calculateDiscount(couponCode);
+			break; // just one coupon allowed
+		}
 	});
 </script>
 
@@ -142,26 +154,53 @@
 					</div>
 					<div class="my-4 border-t border-t-grey-lighter"></div>
 					<div class="flex justify-between items-center">
-						<p class="font-light text-[15px] self-center">Cupom de desconto</p>
-						<Button
-							title="ADICIONAR"
-							width="130px"
-							url={localizeHref('/cart/')}
-							size="sm-short"
-							type="grey"
-							borderDark={true}
-							customPx="max-h-min"
-							action={() => {
-								openModal({
-									header: 'Adicionar cupom',
-									content: CouponForm as Component
-								});
-							}}
-						>
-							{#snippet icon()}
-								<Gift class="lucide-button" />
-							{/snippet}
-						</Button>
+						<div class="!font-light font-roboto text-[15px] self-center flex flex-col">
+							Cupom de desconto
+							{#if couponsCount >= 1}
+								<MoreInfoButton
+									title="Remover"
+									action={async () => {
+										// Clear remote coupons session
+										toggleLoader();
+										try {
+											await getUrqlClient().client.mutation(COUPON_CLEAR_ALL, {}).toPromise();
+											// emptyCart();
+										} catch (err) {
+											console.error('Failed to clear coupons from remote server', err);
+										}
+										clearAllCoupons();
+										toggleLoader();
+									}}
+									customStyles="w-fit !ml-0 mt-2"
+								/>
+							{/if}
+						</div>
+
+						{#if couponsCount < 1}
+							<Button
+								title="ADICIONAR"
+								width="130px"
+								url={localizeHref('/cart/')}
+								size="sm-short"
+								type="grey"
+								borderDark={true}
+								customPx="max-h-min"
+								action={() => {
+									openModal({
+										header: 'Adicionar cupom',
+										content: CouponForm as Component
+									});
+								}}
+							>
+								{#snippet icon()}
+									<Gift class="lucide-button" />
+								{/snippet}
+							</Button>
+						{:else}
+							<span class="font-roboto text-red-dark"
+								>- {m.currencySymbol()} {correctPrice(discounts)}</span
+							>
+						{/if}
 					</div>
 					<div class="my-4 border-t border-t-grey-lighter"></div>
 					<div class="flex justify-between items-center">
@@ -176,7 +215,10 @@
 							borderDark={true}
 							customPx="max-h-min"
 							action={() => {
-								alert('Popup. Calcular frete');
+								openModal({
+									header: 'Calcular frete',
+									content: ShippingForm as Component
+								});
 							}}
 						>
 							{#snippet icon()}
@@ -202,15 +244,17 @@
 						</div>
 					</div>
 					<div class="my-4 mb-1">
-						<Button
-							type="sun"
-							url="/checkout"
-							title="FINALIZAR COMPRA"
-							size="xl"
-							tracking="normal"
-							font="xl"
-							bold={false}
-						/>
+						{#if $cart.items.length > 0}
+							<Button
+								type="sun"
+								url="/checkout"
+								title={m.continue()}
+								size="xl"
+								tracking="normal"
+								font="xl"
+								bold={false}
+							/>
+						{/if}
 					</div>
 				</div>
 
@@ -245,7 +289,7 @@
 
 				<!-- Extra cart elements -->
 				<div class="mt-5">
-					<h2 class="text-[19px] font-prata ml-2 mb-4">Entrega grátis</h2>
+					<!-- <h2 class="text-[19px] font-prata ml-2 mb-4">Entrega grátis</h2>
 					<div class="bg-white py-3 px-5 border border-grey-lighter rounded-lg">
 						<p class="text-xs mt-2 text-center">
 							Faltam <strong>R$ 35,18</strong> para você conseguir frete grátis!
@@ -261,13 +305,14 @@
 								80%
 							</span>
 						</div>
-					</div>
+					</div> -->
 					<Button
 						title="Continuar comprando"
 						size="sm"
 						type="light"
 						url={localizeHref('/')}
 						tracking="normal"
+						customPx="font-bold"
 					/>
 				</div>
 

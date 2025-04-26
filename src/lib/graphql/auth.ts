@@ -8,7 +8,7 @@ import he from 'he';
 import { EMPTY_CART_MUTATION, LOGIN_MUTATION } from './mutations';
 import { emptyCart } from '$stores/cart.store.svelte';
 
-export const protectedRoutes = ['/account', '/checkout', '/thank-you'];
+export const protectedRoutes = ['/account', '/thank-you'];
 export const authRoutes = ['/login', '/signup'];
 
 // Helper function to check if a path requires authentication

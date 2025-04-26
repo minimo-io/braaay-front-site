@@ -13,5 +13,9 @@
 
 	"addToCart": "Añadir al carrito",
 	"addingToCart": "Añadiendo...",
-	"addingToCartOk": "Item añadido con éxito"
+	"addingToCartOk": "Añadido con éxito",
+
+	"continue": "Continuar",
+
+	"addYourZipCode": "Digite su CP"
 }

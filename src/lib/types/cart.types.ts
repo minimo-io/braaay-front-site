@@ -1,6 +1,7 @@
 import type { ImageGeneral } from './image.types';
+
 export interface CartItem {
-	id: string;
+	id: number;
 	name: string;
 	priceString: string;
 	price: number;
@@ -12,4 +13,5 @@ export interface CartItem {
 
 export interface Cart {
 	items: CartItem[];
+	coupons: string[]; // Array of coupon codes
 }

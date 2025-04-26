@@ -7,8 +7,6 @@
 	import { type CartItem } from '$lib/types/cart.types';
 	import { activateMiniCart, addToCart } from '$stores/cart.store.svelte';
 	import { browser } from '$app/environment';
-	import { toast } from 'svoast';
-	import CartToast from '$components/ui/cart/CartToast.svelte';
 
 	interface Props {
 		product: Product;
@@ -26,7 +24,7 @@
 	const clubMoreInfoText = `Ganhe <strong>${m.currencySymbol()}${correctPrice(clubCashbackValue)}</strong> em cashback no Clube`;
 
 	const item: CartItem = {
-		id: product.sku,
+		id: product.id,
 		sku: product.sku,
 		uri: product.uri,
 		name: product.title,

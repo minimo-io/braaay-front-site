@@ -1,5 +1,7 @@
 // src/app.d.ts
 // See https://svelte.dev/docs/kit/types#app.d.ts
+import type { Cart } from '$lib/types/cart.types';
+
 declare global {
 	namespace App {
 		interface Locals {
@@ -10,7 +12,8 @@ declare global {
 				email: string;
 				// Add other user properties as needed
 			};
-			// Keep any existing properties that may already be defined here
+			// The “live” cart on every request to send to the server
+			cart?: Cart;
 		}
 		// Other existing interface declarations...
 	}
