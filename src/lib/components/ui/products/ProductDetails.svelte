@@ -7,6 +7,7 @@
 	import { type CartItem } from '$lib/types/cart.types';
 	import { activateMiniCart, addToCart } from '$stores/cart.store.svelte';
 	import { browser } from '$app/environment';
+	import { setShippingDetails, shippingDetails } from '$stores/shippingDetails.state.svelte';
 
 	interface Props {
 		product: Product;
@@ -39,6 +40,8 @@
 	// Optionally, you can provide a wrapper function in case you want to extend the behavior.
 	const handleAddToCart = async () => {
 		processing = true;
+		// empty previous shippings if any
+		setShippingDetails([]);
 		addToCart(item, () => {
 			if (browser) {
 				// toast.success(m.addingToCartOk(), {
