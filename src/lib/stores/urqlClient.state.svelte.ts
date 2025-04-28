@@ -62,7 +62,7 @@ export const urqlClientPtLoggedOut = $state({
 		exchanges: [cacheExchange, authExchange, fetchExchange, loggerExchange],
 		requestPolicy: 'cache-first',
 		fetchOptions: {
-			credentials: 'include'
+			// credentials: 'include'
 		}
 	})
 });

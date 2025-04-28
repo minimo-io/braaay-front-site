@@ -4,12 +4,12 @@
 	import { closeModal } from '$stores/modalState.state.svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
-	import { addCoupon, hasCoupon, removeCoupon } from '$lib/stores/cart.store.svelte';
+	import { launchToast } from '$lib/utils';
 	import { gql } from '@urql/core';
-	import { toast } from 'svoast';
 	import { m } from '$lib/paraglide/messages';
 	import { Search } from '@lucide/svelte';
-	import { PUBLIC_GRAPHQL_SERVER_PT } from '$env/static/public';
+	import type { ShippingRate } from '$lib/types/cart.types';
+	import { setShippingDetails } from '$stores/shippingDetails.state.svelte';
 
 	let zipCode = $state('01222-001');
 	let error = $state('');
@@ -17,18 +17,6 @@
 	let processing = $state(false);
 
 	let isValidCep = $derived(/^\d{5}-\d{3}$/.test(zipCode));
-
-	async function launchToast(text: string, type: 'success' | 'warning' | 'error') {
-		if (text) {
-			if (type == 'success') {
-				toast.success(text, { closable: true });
-			} else if (type == 'error') {
-				toast.error(text, { closable: true });
-			} else if (type == 'warning') {
-				toast.warning(text, { closable: true });
-			}
-		}
-	}
 
 	function maskCep(value: string): string {
 		const digits = value.replace(/\D/g, '').slice(0, 8); // Only digits, max 8
@@ -83,22 +71,6 @@
 		}
 	`;
 
-	const QUERY_CART = gql`
-		query {
-			cart {
-				contents {
-					nodes {
-						product {
-							node {
-								title
-							}
-						}
-					}
-				}
-			}
-		}
-	`;
-
 	async function handleSubmit() {
 		processing = true;
 		error = '';
@@ -106,9 +78,11 @@
 		document.body.classList.toggle('no-scroll');
 
 		try {
+			setShippingDetails([]);
 			let client = getUrqlClient('', true).client;
 
-			// Step 1: First update customer shipping details
+			// Step 1: First update customer shipping details ----------------------
+			launchToast(`Obtendo parceiros...`, 'info', 2000);
 			const updateResult = await client
 				.mutation(UPDATE_GUEST_SHIPPING_ADDRESS, {
 					input: {
@@ -127,13 +101,15 @@
 
 			// Get the initial session token
 			const sessionToken = updateResult.data.updateCustomer.customer.sessionToken;
-			console.log('Initial session token:', sessionToken);
+			// console.log('Initial session token:', sessionToken);
 
 			// Create headers with this session
 			const sessionHeaders = {
 				'Content-Type': 'application/json',
 				'woocommerce-session': `Session ${sessionToken}`
 			};
+
+			// ----------------------------------------------------------------------
 
 			// Step 2: Add product to cart with this session, but CAPTURE any new session that's created
 			let currentSessionToken = sessionToken;
@@ -170,7 +146,7 @@
 				'Content-Type': 'application/json',
 				'woocommerce-session': `Session ${currentSessionToken}`
 			};
-
+			launchToast(`Simulando envío...`, 'info', 2000);
 			// Step 3: Re-update the shipping address using the LATEST session token
 			const reUpdateResult = await client
 				.mutation(
@@ -190,7 +166,7 @@
 
 			// Capture the final session token to use for shipping estimates
 			const finalSessionToken = reUpdateResult.data.updateCustomer.customer.sessionToken;
-			console.log('Final session token:', finalSessionToken);
+			// console.log('Final session token:', finalSessionToken);
 
 			const finalSessionHeaders = {
 				'Content-Type': 'application/json',
@@ -207,9 +183,23 @@
 				throw new Error('Failed to get shipping estimates');
 			}
 
-			console.log('Full shipping response:', estimatesResult.data);
+			// return shipping data
+			const shippingData = estimatesResult.data.cart.availableShippingMethods[0].rates;
+			// final shipping details
+			let finalShippingDetails: ShippingRate[] = [];
 
-			console.log('RESULTS', estimatesResult.data.cart.availableShippingMethods[0].rates);
+			for (const result of shippingData) {
+				finalShippingDetails.push({
+					id: result.id,
+					label: result.label,
+					cost: result.cost
+				});
+			}
+			// console.log('SHIPPING-RATES', finalShippingDetails);
+			setShippingDetails(finalShippingDetails);
+			launchToast(`Custos de envio obtidos com suceso`, 'success');
+			// shippingDetails = finalShippingDetails;
+			// Call the context function if it exists
 
 			closeModal();
 			toggleLoader();

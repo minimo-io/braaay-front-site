@@ -1,7 +1,8 @@
 <script>
-	import { Headset } from '@lucide/svelte';
+	import { CircleUserIcon, CircleUser, Headset } from '@lucide/svelte';
 	import { Button } from '$components/ui/buttons/index';
 	import { localizeHref } from '$lib/paraglide/runtime';
+	import { isAuthenticated } from '$lib/graphql/auth';
 </script>
 
 <header class="bg-white border-b border-b-grey-lighter">
@@ -28,10 +29,40 @@
 		</div>
 		<div class="flex justify-end">
 			<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
+				{#if isAuthenticated()}
+					<!-- Account / SignUp -->
+					<Button
+						chevron={true}
+						customPx="!pr-[12px] !pl-3 mr-3"
+						title="Conta"
+						url={localizeHref('/account/')}
+						type="blue"
+						size="xl"
+					>
+						{#snippet icon()}
+							<CircleUser class="lucide-button h-[10px]" />
+						{/snippet}
+					</Button>
+				{:else}
+					<!--Enter -->
+					<Button
+						chevron={false}
+						customPx="!pr-[12px] !pl-3 !pr-[20px] mr-3"
+						title="Entrar"
+						url="/login"
+						type="blue"
+						size="xl"
+					>
+						{#snippet icon()}
+							<CircleUser class="lucide-button h-[10px]" />
+						{/snippet}
+					</Button>
+				{/if}
+				<!-- Atendimento -->
 				<Button
 					title="Atendimento"
 					type="light"
-					size="sm"
+					size="md"
 					url="https://wa.me/5511947530340"
 					newTab={true}
 				>

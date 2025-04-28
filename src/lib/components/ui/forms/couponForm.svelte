@@ -6,24 +6,12 @@
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { addCoupon, hasCoupon, removeCoupon } from '$lib/stores/cart.store.svelte';
 	import { COUPON_APPLY } from '$lib/graphql/mutations';
-	import { toast } from 'svoast';
+	import { launchToast } from '$lib/utils';
 
 	let couponCode = $state('');
 	let error = $state('');
 	let couponCodeSanitized = $derived(couponCode.trim());
 	let processing = $state(false);
-
-	async function launchToast(text: string, type: 'success' | 'warning' | 'error') {
-		if (text) {
-			if (type == 'success') {
-				toast.success(text, { closable: true });
-			} else if (type == 'error') {
-				toast.error(text, { closable: true });
-			} else if (type == 'warning') {
-				toast.warning(text, { closable: true });
-			}
-		}
-	}
 
 	async function handleCouponSubmit() {
 		processing = true;

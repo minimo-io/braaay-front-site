@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { Component } from 'svelte';
+	import { type Component } from 'svelte';
+	import { slide } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
 	import { m } from '$lib/paraglide/messages';
@@ -7,7 +8,7 @@
 	import { cart, calculateDiscount, clearAllCoupons } from '$stores/cart.store.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
-	import { Gift, Sparkle, Truck } from '@lucide/svelte';
+	import { CircleX, Gift, Sparkle, Truck, X } from '@lucide/svelte';
 	import { openModal } from '$stores/modalState.state.svelte';
 	import CouponForm from '$components/ui/forms/couponForm.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
@@ -18,12 +19,15 @@
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import ShippingForm from '$components/ui/forms/shippingForm.svelte';
+	import { shippingDetails } from '$stores/shippingDetails.state.svelte';
 
 	// Cart amount
+	let hasItems = $state(false);
 	let totalCartAmount = $state(0);
 	let totalAmount = $state(0);
 	let discounts = $state(0);
 	let couponsCount = $state(0);
+
 	cart.subscribe((cart) => {
 		totalCartAmount = cart.items.reduce((count, item) => count + item.quantity, 0);
 		totalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
@@ -32,6 +36,7 @@
 			discounts = calculateDiscount(couponCode);
 			break; // just one coupon allowed
 		}
+		hasItems = cart.items.length > 0;
 	});
 </script>
 
@@ -208,12 +213,12 @@
 
 						<Button
 							title="CALCULAR"
-							url={localizeHref('/cart/')}
+							disabled={!hasItems}
 							size="sm-short"
 							width="130px"
 							type="grey"
 							borderDark={true}
-							customPx="max-h-min"
+							customPx="max-h-min disabled:opacity-20"
 							action={() => {
 								openModal({
 									header: 'Calcular frete',
@@ -226,6 +231,31 @@
 							{/snippet}
 						</Button>
 					</div>
+
+					{#if shippingDetails.details && shippingDetails.details.length > 0}
+						<div in:slide={{ duration: 200 }} out:slide={{ duration: 200 }}>
+							<div class="my-4 border-t border-t-grey-lighter"></div>
+							<div class="flex flex-col">
+								<div class="flex justify-between items-center">
+									<span
+										class="font-bold text-[10px] mb-2 bg-blue w-fit py-1 px-2 rounded text-white uppercase"
+										>Estimativas de envio</span
+									>
+
+									<button onclick={() => (shippingDetails.details = [])}
+										><X class="h-3 m-0 p-0 ml-2 mb-2 text-grey-medium" /></button
+									>
+								</div>
+
+								{#each shippingDetails.details as rate}
+									<div class="flex text-sm justify-between text-grey-dark items-center">
+										<div class="text-[11px] truncate">{rate.label}</div>
+										<div class="text-xs">{m.currencySymbol()} {rate.cost}</div>
+									</div>
+								{/each}
+							</div>
+						</div>
+					{/if}
 
 					<Divider color="blue" extraClasses="my-4 !border-b-grey-lighter" />
 					<div class="flex justify-between pt-1 mb-2">

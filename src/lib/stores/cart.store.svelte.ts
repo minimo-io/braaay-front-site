@@ -6,7 +6,10 @@ import { AppConfig } from '$config';
 
 // Main cart
 const initialCart: Cart = browser
-	? JSON.parse(window.localStorage.getItem('cart') || 'null') || { items: [], coupons: [] }
+	? JSON.parse(window.localStorage.getItem('cart') || 'null') || {
+			items: [],
+			coupons: []
+		}
 	: { items: [], coupons: [] };
 
 export const cart = writable<Cart>(initialCart);
@@ -81,7 +84,7 @@ export const adjustQuantity = (itemId: number, delta: number, specific?: number)
 // Clear the whole cart
 export const emptyCart = () => {
 	cart.update(() => {
-		return { items: [], coupons: [] };
+		return { items: [], coupons: [], shipping: [] };
 	});
 };
 

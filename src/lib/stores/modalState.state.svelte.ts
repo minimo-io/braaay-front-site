@@ -17,6 +17,7 @@ export let modalState = $state({
 export function openModal({ header, content }: { header?: string | null; content: Component }) {
 	modalState.header = header || null;
 	modalState.content = content;
+
 	modalState.current = true;
 }
 
