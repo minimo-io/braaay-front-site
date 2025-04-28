@@ -9,7 +9,7 @@ export * from './image.types';
 export * from './categories.types';
 export * from './pagination.types';
 export * from './drawer.types';
-// export * from './country.types';
+export * from './customer.types';
 
 export interface Wine {
 	title: string;

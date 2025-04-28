@@ -9,6 +9,7 @@
 	import { redirectHref } from '$lib/utils';
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
 	import { authState } from '$stores/auth.state.svelte';
+	import { m } from '$lib/paraglide/messages';
 
 	let returnUrl = $derived('/login');
 	let userName = $state('');
@@ -70,7 +71,7 @@
 							/>
 						</div>
 
-						<span class="md:ml-2 mt-1 md:mt-0">{userEmail}</span>
+						<!-- <span class="md:ml-2 mt-1 md:mt-0">{userEmail}</span> -->
 					</div>
 				</div>
 				<div class="block">
@@ -118,7 +119,7 @@
 							<div class="border-t border-grey-lighter my-5"></div>
 						</li>
 						<li class="border-b md:border-b-none border-grey-lighter pb-5">
-							<Button title="Sair da conta" action={() => handleLogout()} type="light" />
+							<Button title={m.accountExit()} action={() => handleLogout()} type="blue" />
 						</li>
 					</ul>
 				</div>

@@ -15,3 +15,6 @@ export * from './slugs-query.query';
 
 // query all coupons for the pre-fetch query script
 export * from './coupon-get-all.query';
+
+// customer
+export * from './customer.query';

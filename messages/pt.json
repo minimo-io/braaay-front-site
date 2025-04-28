@@ -1,4 +1,6 @@
 {
+	"loading": "Carregando...",
+
 	"currencySymbol": "R$",
 
 	"outOfStock": "Fora de estoque",
@@ -11,11 +13,17 @@
 	"blog": "BLOG",
 	"showroom": "SHOWROOM",
 
+	"emptyCart": "Seu carrinho está vazio!",
 	"addToCart": "ADICIONAR À SACOLA",
 	"addingToCart": "Adicionando...",
 	"addingToCartOk": "Adicionado com sucesso",
 
 	"continue": "Continuar",
 
-	"addYourZipCode": "Digite seu CEP"
+	"addYourZipCode": "Digite seu CEP",
+
+	"exit": "Sair",
+	"accountExit": "Sair da conta",
+
+	"login": "Entrar"
 }

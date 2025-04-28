@@ -14,6 +14,7 @@ export interface CartItem {
 export interface Cart {
 	items: CartItem[];
 	coupons: string[]; // Array of coupon codes
+	zip: string;
 }
 
 export interface ShippingRate {

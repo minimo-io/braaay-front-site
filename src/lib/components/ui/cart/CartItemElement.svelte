@@ -6,6 +6,7 @@
 	import type { CartItem } from '$lib/types/cart.types';
 	import { removeFromCart, adjustQuantity } from '$stores/cart.store.svelte';
 	import { correctPrice } from '$lib/utils';
+	import { shippingDetails, setShippingDetails } from '$stores/shippingDetails.state.svelte';
 
 	interface Props {
 		cartItem: CartItem;
@@ -16,6 +17,9 @@
 	// handle manual quantity
 	const handleQuantityChange = (cartItemId, e) => {
 		// Get the input value and parse it as an integer
+		if (shippingDetails.details) {
+			setShippingDetails([]);
+		}
 		const value = e.target.value;
 		const parsedValue = parseInt(value);
 

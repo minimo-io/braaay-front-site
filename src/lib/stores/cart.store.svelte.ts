@@ -3,14 +3,16 @@ import { browser } from '$app/environment';
 import { writable, get } from 'svelte/store';
 import type { CartItem, Cart } from '$lib/types/cart.types';
 import { AppConfig } from '$config';
+import { shippingDetails, setShippingDetails } from './shippingDetails.state.svelte';
 
 // Main cart
 const initialCart: Cart = browser
 	? JSON.parse(window.localStorage.getItem('cart') || 'null') || {
 			items: [],
-			coupons: []
+			coupons: [],
+			zip: ''
 		}
-	: { items: [], coupons: [] };
+	: { items: [], coupons: [], zip: '' };
 
 export const cart = writable<Cart>(initialCart);
 // Mini cart toaster
@@ -56,6 +58,7 @@ export const activateMiniCart = () => {
 // Remove cart items
 export const removeFromCart = (itemId: number) => {
 	cart.update((currentCart: Cart) => {
+		shippingDetails.details = [];
 		currentCart.items = currentCart.items.filter((i) => i.id !== itemId);
 		return currentCart;
 	});
@@ -63,6 +66,10 @@ export const removeFromCart = (itemId: number) => {
 // Increase item amount
 export const adjustQuantity = (itemId: number, delta: number, specific?: number) => {
 	cart.update((currentCart: Cart) => {
+		if (shippingDetails.details) {
+			setShippingDetails([]);
+		}
+
 		const existingIndex = currentCart.items.findIndex((i) => i.id === itemId);
 
 		if (existingIndex !== -1) {
@@ -84,12 +91,20 @@ export const adjustQuantity = (itemId: number, delta: number, specific?: number)
 // Clear the whole cart
 export const emptyCart = () => {
 	cart.update(() => {
-		return { items: [], coupons: [], shipping: [] };
+		shippingDetails.details = [];
+		return { items: [], coupons: [], zip: '' };
+	});
+};
+
+// Set zip code for app wide use
+export const updateZip = (zipCode: string) => {
+	cart.update((currentCart: Cart) => {
+		currentCart.zip = zipCode;
+		return currentCart;
 	});
 };
 
 // ---- Coupon related methods ----
-
 // Add a coupon to the cart
 export const addCoupon = (couponCode: string) => {
 	cart.update((currentCart: Cart) => {

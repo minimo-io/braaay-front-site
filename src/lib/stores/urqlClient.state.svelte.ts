@@ -38,8 +38,9 @@ const authExchange = createAuthExchange(getAuthToken);
 export const urqlClientUyLoggedOut = $state({
 	client: createClient({
 		url: PUBLIC_GRAPHQL_SERVER_UY,
-		exchanges: [cacheExchange, authExchange, fetchExchange, loggerExchange],
+		exchanges: [cacheExchange, fetchExchange, loggerExchange],
 		requestPolicy: 'cache-first',
+		// requestPolicy: 'network-only',
 		fetchOptions: () => {
 			return {};
 		}
@@ -59,8 +60,9 @@ export const urqlClientUyLoggedIn = $state({
 export const urqlClientPtLoggedOut = $state({
 	client: createClient({
 		url: PUBLIC_GRAPHQL_SERVER_PT,
-		exchanges: [cacheExchange, authExchange, fetchExchange, loggerExchange],
+		exchanges: [cacheExchange, fetchExchange, loggerExchange],
 		requestPolicy: 'cache-first',
+		// requestPolicy: 'network-only',
 		fetchOptions: {
 			// credentials: 'include'
 		}
@@ -81,21 +83,23 @@ export const urqlClientPtLoggedIn = $state({
  * We use different clients for logged-in (network only) vs logged-out (cache-first) users.
  * @param authToken is for when we check session from the server Locals
  */
-export function getUrqlClient(authToken?: string, forceNetworkOnly?: boolean) {
+export function getUrqlClient(authToken?: string, forceLoggedOut?: boolean) {
 	const locale = getLocale();
 	const token = getAuthState().token;
 
 	if (locale == 'uy') {
-		if (token || authToken || forceNetworkOnly) {
-			return urqlClientUyLoggedIn;
-		} else {
+		if (forceLoggedOut || !(token || authToken)) {
+			// console.log('Logged out UY');
 			return urqlClientUyLoggedOut;
 		}
+		// console.log('Logged in UY');
+		return urqlClientUyLoggedIn;
 	} else {
-		if (token || authToken || forceNetworkOnly) {
-			return urqlClientPtLoggedIn;
-		} else {
+		if (forceLoggedOut || !(token || authToken)) {
+			// console.log('Logged out PT');
 			return urqlClientPtLoggedOut;
 		}
+		// console.log('Logged in PT');
+		return urqlClientPtLoggedIn;
 	}
 }

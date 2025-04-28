@@ -15,6 +15,7 @@
 	import { redirectHref } from '$lib/utils';
 	import { logout } from '$lib/graphql/auth';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
+	import { m } from '$lib/paraglide/messages';
 
 	let returnUrl = $derived(page.url.href);
 
@@ -87,7 +88,7 @@
 	>
 		<div class="text-left self-center flex align-middle justify-center">
 			<LogOut class="w-4 h-4 self-center mr-2" />
-			<span class="self-center font-semibold">Sair</span>
+			<span class="self-center font-semibold">{m.exit()}</span>
 		</div>
 		<div class="text-grey-medium flex flex-row align-middle self-center">
 			<ChevronRight class="w-4 aspect-1 text-grey-dark" />

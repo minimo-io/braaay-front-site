@@ -54,6 +54,7 @@
 
 	beforeNavigate((navigation) => {
 		if (navigation.to && navigation.to.route) {
+			miniCart.active = false;
 			const isAuthTo = requiresAuth(`${navigation.to.route.id}`);
 			const isUserAuth = isAuthenticated();
 			if (isAuthTo && isUserAuth == false) {

@@ -1,5 +1,7 @@
 <!-- src/lib/components/ui/forms/shippingForm.svelte -->
 <script lang="ts">
+	import { cacheExchange, fetchExchange } from '@urql/core';
+	import { loggerExchange } from '$lib/graphql/loggerExchange';
 	import Button from '../buttons/Button.svelte';
 	import { closeModal } from '$stores/modalState.state.svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
@@ -10,6 +12,7 @@
 	import { Search } from '@lucide/svelte';
 	import type { ShippingRate } from '$lib/types/cart.types';
 	import { setShippingDetails } from '$stores/shippingDetails.state.svelte';
+	import { updateZip } from '$stores/cart.store.svelte';
 
 	let zipCode = $state('01222-001');
 	let error = $state('');
@@ -79,6 +82,7 @@
 
 		try {
 			setShippingDetails([]);
+			updateZip(zipCodeSanitized);
 			let client = getUrqlClient('', true).client;
 
 			// Step 1: First update customer shipping details ----------------------
@@ -87,7 +91,7 @@
 				.mutation(UPDATE_GUEST_SHIPPING_ADDRESS, {
 					input: {
 						shipping: {
-							postcode: zipCode,
+							postcode: zipCodeSanitized,
 							country: 'BR',
 							overwrite: true
 						}
@@ -127,7 +131,7 @@
 								const newSession = response.headers.get('woocommerce-session');
 								if (newSession) {
 									currentSessionToken = newSession.replace('Session ', '');
-									console.log('New session from add to cart:', currentSessionToken);
+									// console.log('New session from add to cart:', currentSessionToken);
 								}
 								addToCartResponse = response;
 								return response;
@@ -160,7 +164,9 @@
 							}
 						}
 					},
-					{ fetchOptions: { headers: updatedSessionHeaders } }
+					{
+						fetchOptions: { headers: updatedSessionHeaders }
+					}
 				)
 				.toPromise();
 

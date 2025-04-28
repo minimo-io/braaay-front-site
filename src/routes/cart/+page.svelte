@@ -57,7 +57,7 @@
 						</a>
 					</div>
 
-					<h2 class="text-[19px] font-prata ml-0">Meu carrinho</h2>
+					<h2 class="text-[19px] ml-0 font-roboto font-extrabold">Meu carrinho</h2>
 				</div>
 				<div class="flex flex-col">
 					<div class="border border-grey-lighter bg-white rounded-lg p-5 order-1">
@@ -73,7 +73,7 @@
 								</div>
 							{/each}
 						{:else}
-							<p class="text-center">Your cart is empty!</p>
+							<p class="text-center font-bold">{m.emptyCart()}</p>
 						{/if}
 					</div>
 
@@ -148,7 +148,7 @@
 			</div>
 
 			<div class="mt-8">
-				<h2 class="text-[19px] font-prata ml-2 mb-4">Resumo da compra</h2>
+				<h2 class="text-[19px] ml-2 mb-4 font-roboto">Resumo da compra</h2>
 
 				<div class="bg-white py-4 px-5 border border-grey-lighter rounded-lg">
 					<div class="flex justify-between mt-2">
@@ -342,7 +342,6 @@
 						type="light"
 						url={localizeHref('/')}
 						tracking="normal"
-						customPx="font-bold"
 					/>
 				</div>
 
