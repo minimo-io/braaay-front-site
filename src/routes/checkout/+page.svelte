@@ -11,13 +11,15 @@
 	import { goto } from '$app/navigation';
 	import CheckoutSummary from '$components/ui/checkout/CheckoutSummary.svelte';
 	import CheckoutChooseDelivery from '$components/ui/checkout/CheckoutChooseDelivery.svelte';
-	import StepOneLoggedIn from '$components/ui/checkout/StepOneLoggedIn.svelte';
-	import StepOneLoggedOut from '$components/ui/checkout/StepOneLoggedOut.svelte';
+	import StepOneDone from '$components/ui/checkout/StepOneDone.svelte';
+	import StepOnePending from '$components/ui/checkout/StepOnePending.svelte';
 	import Step2Waiting from '$components/ui/checkout/Step2Waiting.svelte';
 	import Step3Waiting from '$components/ui/checkout/Step3Waiting.svelte';
 	import Step4Active from '$components/ui/checkout/Step4Active.svelte';
 	import PromoClub from '$components/ui/checkout/PromoClub.svelte';
 	import CheckoutCartSummary from '$components/ui/checkout/CheckoutCartSummary.svelte';
+	import StepTwoDone from '$components/ui/checkout/StepTwoDone.svelte';
+	import StepTwoPending from '$components/ui/checkout/StepTwoPending.svelte';
 
 	// let userName = $state('');
 	// let userEmail = $state('');
@@ -39,15 +41,21 @@
 	onMount(async () => {
 		toggleLoader();
 		try {
+			// Check for step 1
+			if (isAuthenticated()) {
+				steps.step1 = true;
+			}
+
 			const customerResult = await getUrqlClient().client.query(CUSTOMER_QUERY, {});
 			if (customerResult && customerResult.error) {
-				launchToast('Houve um error tentando obter os dados do cliente', 'error');
+				launchToast('Houve um error tentando obter os dados do cliente 2', 'error');
+				goto(localizeHref('/cart/'));
 			}
 
 			customer = mapCustomerToUser(customerResult.data);
 		} catch (err) {
 			console.error(err);
-			launchToast('Houve um error tentando obter os dados do cliente', 'error');
+			launchToast('Houve um error tentando obter os dados do cliente 1 (try)', 'error');
 			goto(localizeHref('/cart/'));
 		}
 
@@ -75,16 +83,21 @@
 						<Divider color="blue" extraClasses="!border-b-grey-lighter my-7" />
 					</div>
 
-					{#if isAuthenticated()}
-						<!-- Step 1: LoggedIn -->
-						<StepOneLoggedIn {customer} />
+					<!-- Step 1 -->
+					{#if steps.step1 == true}
+						<StepOneDone {customer} />
 					{:else}
-						<!-- Step 1: LoggedOut -->
-						<StepOneLoggedOut {customer} />
+						<StepOnePending {customer} />
 					{/if}
 
 					<!-- Step 2 -->
-					<Step2Waiting />
+					{#if steps.step1 && steps.step2}
+						<StepTwoDone />
+					{:else if steps.step1 && !steps.step2}
+						<StepTwoPending {customer} />
+					{:else}
+						<Step2Waiting />
+					{/if}
 
 					<!-- Step 3 -->
 					<Step3Waiting />

@@ -20,7 +20,7 @@
 
 	// Email
 	let emailValue = $state(customer?.email || '');
-	let emailInputElement: HTMLInputElement;
+
 	// No longer using emailMask
 
 	// Date Mask
@@ -37,10 +37,6 @@
 
 		if (cpfValue) cpfMask.unmaskedValue = cpfValue;
 		cpfMask.on('accept', () => (cpfValue = cpfMask.unmaskedValue));
-
-		// Email input without mask - using simple binding instead
-		// The regex mask for email is too restrictive for typing
-		let emailValue = $state(customer?.email || '');
 
 		// Date Mask
 		birthDateMask = IMask(birthDateInputElement, {
