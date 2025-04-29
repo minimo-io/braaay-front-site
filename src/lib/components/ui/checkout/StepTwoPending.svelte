@@ -83,9 +83,6 @@
 			class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
 		/>
 
-		<!-- For debugging - show current value -->
-		<div>Current value: {zipValue}</div>
-
 		<div class="py-1">
 			<Button type="sun" url="#" title="CONTINUAR →" size="md" rounded="lg" font="md" />
 		</div>

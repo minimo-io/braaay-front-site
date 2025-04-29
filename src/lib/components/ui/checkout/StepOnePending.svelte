@@ -163,7 +163,7 @@
 			placeholder={datePlaceholder}
 			class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
 		/>
-		{emailValue} - {birthDateValue} - {cpfValue}
+		<!-- {emailValue} - {birthDateValue} - {cpfValue} -->
 		<div class="py-1">
 			<Button type="sun" url="#" title="CONTINUAR →" size="md" rounded="lg" font="md" />
 		</div>

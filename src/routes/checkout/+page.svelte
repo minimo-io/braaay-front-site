@@ -115,7 +115,7 @@
 				<!-- Extra cart elements -->
 				<CheckoutCartSummary />
 
-				<div class="hidden md:block md:my-36"></div>
+				<div class="hidden md:block md:my-36">&nbsp;</div>
 			</div>
 		</div>
 	</div>
