@@ -31,15 +31,22 @@ export interface Order {
 // GraphQL response for customer data
 export interface CustomerGraphQLResponse {
 	customer: {
-		id: string;
 		databaseId: number;
 		email: string;
+		cpf: string;
+		telephone: string;
+		birthDate: string;
+
 		firstName: string;
 		lastName: string;
+
 		sessionToken: string;
+
 		billing: CustomerAddress;
 		shipping: CustomerAddress;
+
 		isVatExempt: boolean;
+
 		hasCalculatedShipping: boolean;
 		calculatedShipping: boolean;
 		// metaData: MetaData[];
@@ -50,16 +57,24 @@ export interface CustomerGraphQLResponse {
 }
 
 export interface Customer {
-	id: number;
+	databaseId: number;
 	email: string;
+	cpf: string;
+	telephone: string;
+	birthDate: string;
+
 	firstName: string;
 	lastName: string;
+
 	sessionToken: string;
+
 	addresses: {
 		billing: CustomerAddress;
 		shipping: CustomerAddress;
 	};
+
 	vatExempt: boolean;
+
 	orderHistory: Order[];
 	// metadata: Record<string, string>;
 }

@@ -6,10 +6,9 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { CUSTOMER_QUERY, mapCustomerToUser } from '$lib/graphql/queries';
-	import type { Customer, CustomerGraphQLResponse } from '$lib/types';
+	import type { Customer } from '$lib/types';
 	import { launchToast } from '$lib/utils';
 	import { goto } from '$app/navigation';
-	import { m } from '$lib/paraglide/messages';
 	import CheckoutSummary from '$components/ui/checkout/CheckoutSummary.svelte';
 	import CheckoutChooseDelivery from '$components/ui/checkout/CheckoutChooseDelivery.svelte';
 	import StepOneLoggedIn from '$components/ui/checkout/StepOneLoggedIn.svelte';
@@ -81,7 +80,7 @@
 						<StepOneLoggedIn {customer} />
 					{:else}
 						<!-- Step 1: LoggedOut -->
-						<StepOneLoggedOut />
+						<StepOneLoggedOut {customer} />
 					{/if}
 
 					<!-- Step 2 -->

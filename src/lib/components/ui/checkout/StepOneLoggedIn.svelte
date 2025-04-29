@@ -4,6 +4,7 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages';
 	import type { Customer } from '$lib/types';
+	import { formatCpf } from '$lib/utils';
 
 	interface Props {
 		customer: Customer | undefined;
@@ -33,7 +34,13 @@
 				{customer?.email}
 				<br />
 				<span>{customer?.firstName} {customer?.lastName}</span>
-				<span>(#{customer?.id})</span><span></span>
+				<span>(#{customer?.databaseId})</span>
+				- <span class="font-bold">CPF:</span>
+				{#if customer.cpf}
+					<span> {formatCpf(customer?.cpf)}</span>
+				{:else}
+					<span class="italic">(Sem CPF).</span>
+				{/if}
 			</div>
 		{:else}
 			{m.loading()}

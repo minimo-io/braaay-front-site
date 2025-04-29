@@ -6,6 +6,7 @@ export * from './removeWPBakery.util';
 export * from './correctPrice.util';
 export * from './loadMoreProducts.util';
 export * from './launchToast.util';
+export * from './cpfs.util';
 
 export function isBlogPost(path: string) {
 	return /^\/(uy\/)?blog\/[^/]+$/.test(path);

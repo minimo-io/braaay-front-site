@@ -1,15 +1,34 @@
 import { gql } from '@urql/core';
 import type { Customer, CustomerGraphQLResponse } from '$lib/types';
 
+// Other ways to query a customer
+// {
+// 	customer(id: "VXNlcjo1") {
+// 	  cpf
+// 	}
+//   }
+
+// logged in
+//   {
+// 	customer {
+// 	  cpf
+// 	}
+//   }
+
 export const CUSTOMER_QUERY = gql`
 	query GetCustomerData {
 		customer {
-			id
 			databaseId
 			email
+			cpf
+			telephone
+			birthDate
+
 			firstName
 			lastName
+
 			sessionToken
+
 			billing {
 				firstName
 				lastName
@@ -23,6 +42,7 @@ export const CUSTOMER_QUERY = gql`
 				email
 				phone
 			}
+
 			shipping {
 				firstName
 				lastName
@@ -34,9 +54,11 @@ export const CUSTOMER_QUERY = gql`
 				country
 				state
 			}
+
 			isVatExempt
 			hasCalculatedShipping
 			calculatedShipping
+
 			orders {
 				nodes {
 					id
@@ -65,8 +87,12 @@ export function mapCustomerToUser(response: CustomerGraphQLResponse): Customer {
 	// });
 
 	return {
-		id: customer.databaseId,
+		databaseId: customer.databaseId,
 		email: customer.email,
+		cpf: customer.cpf,
+		telephone: customer.telephone,
+		birthDate: customer.birthDate,
+
 		firstName: customer.firstName,
 		lastName: customer.lastName,
 		sessionToken: customer.sessionToken,

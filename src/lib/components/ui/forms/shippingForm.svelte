@@ -1,7 +1,5 @@
 <!-- src/lib/components/ui/forms/shippingForm.svelte -->
 <script lang="ts">
-	import { cacheExchange, fetchExchange } from '@urql/core';
-	import { loggerExchange } from '$lib/graphql/loggerExchange';
 	import Button from '../buttons/Button.svelte';
 	import { closeModal } from '$stores/modalState.state.svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
