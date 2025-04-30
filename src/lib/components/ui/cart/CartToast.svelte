@@ -9,16 +9,6 @@
 	// let dialog = $state(); // HTMLDialogElement
 
 	let { showCartToast = $bindable() } = $props();
-
-	// $effect(() => {
-	// 	if (showCartToast) {
-	// 		dialog.showModal();
-	// 		// console.log('Showing toast from the toast...');
-	// 	} else {
-	// 		dialog.close();
-	// 		// console.log('NOT Showing toast from the toast...');
-	// 	}
-	// });
 </script>
 
 {#if showCartToast}

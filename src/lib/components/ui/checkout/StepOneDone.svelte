@@ -10,9 +10,6 @@
 		customer: Customer | undefined;
 	}
 	let { customer }: Props = $props();
-
-	console.log('Customer from component');
-	console.log(customer);
 </script>
 
 <div class="mx-auto p-6 border border-green-dark bg-green-light rounded-lg shadow-sm">

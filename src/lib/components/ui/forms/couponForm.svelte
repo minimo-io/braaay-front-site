@@ -20,14 +20,12 @@
 		document.body.classList.toggle('no-scroll');
 		try {
 			if (couponCodeSanitized.length > 3) {
-				// console.log('CODE', couponCodeSanitized);
 				const result = await getUrqlClient('', true)
 					.client.mutation(COUPON_APPLY, {
 						couponCode: couponCodeSanitized
 					})
 					.toPromise();
 
-				// console.log(result);
 				processing = false;
 				if (result.error && result.error.message) {
 					error = `Error: ${result.error.message.replaceAll('[GraphQL]', '').trim()}`;

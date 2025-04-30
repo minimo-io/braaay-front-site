@@ -10,6 +10,7 @@ export * from './categories.types';
 export * from './pagination.types';
 export * from './drawer.types';
 export * from './customer.types';
+export * from './zip-codes.types';
 
 export interface Wine {
 	title: string;

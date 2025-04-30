@@ -1,4 +1,5 @@
 export const AppConfig = {
+	debug: false,
 	miniCartDuration: 8000, // from wine.com
 	// list all coupons, this will be fetched from a pre-fetched json
 	coupons: {
