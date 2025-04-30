@@ -13,9 +13,9 @@
 	import CheckoutChooseDelivery from '$components/ui/checkout/CheckoutChooseDelivery.svelte';
 	import StepOneDone from '$components/ui/checkout/StepOneDone.svelte';
 	import StepOnePending from '$components/ui/checkout/StepOnePending.svelte';
-	import Step2Waiting from '$components/ui/checkout/Step2Waiting.svelte';
-	import Step3Waiting from '$components/ui/checkout/Step3Waiting.svelte';
-	import Step4Active from '$components/ui/checkout/Step4Active.svelte';
+	import StepTwoWaiting from '$components/ui/checkout/StepTwoWaiting.svelte';
+	import StepThreeWaiting from '$components/ui/checkout/StepThreeWaiting.svelte';
+	import StepFourActive from '$components/ui/checkout/StepFourActive.svelte';
 	import PromoClub from '$components/ui/checkout/PromoClub.svelte';
 	import CheckoutCartSummary from '$components/ui/checkout/CheckoutCartSummary.svelte';
 	import StepTwoDone from '$components/ui/checkout/StepTwoDone.svelte';
@@ -30,12 +30,14 @@
 	// 	}
 	// });
 	interface Steps {
-		step1: boolean;
-		step2: boolean;
-		step3: boolean;
-		step4: boolean;
+		step1: boolean | object;
+		step2: boolean | object;
+		step3: boolean | object;
+		step4: boolean | object;
 	}
 	let steps: Steps = $state({ step1: false, step2: false, step3: false, step4: false });
+	let editStep1 = $state(false);
+
 	let customer: Customer | undefined = $state();
 
 	onMount(async () => {
@@ -45,7 +47,7 @@
 			if (isAuthenticated()) {
 				steps.step1 = true;
 			}
-
+			// Query customer in database
 			const customerResult = await getUrqlClient().client.query(CUSTOMER_QUERY, {});
 			if (customerResult && customerResult.error) {
 				launchToast('Houve um error tentando obter os dados do cliente 2', 'error');
@@ -54,13 +56,23 @@
 
 			customer = mapCustomerToUser(customerResult.data);
 		} catch (err) {
-			console.error(err);
+			console.error(`Error: ${err}`);
 			launchToast('Houve um error tentando obter os dados do cliente 1 (try)', 'error');
 			goto(localizeHref('/cart/'));
 		}
 
 		toggleLoader();
 	});
+
+	function onUpdateStepOne(customerData: Customer) {
+		editStep1 = false;
+		customer = customerData;
+		console.log(customer);
+		steps.step1 = customer;
+	}
+	function onActionStepOneDone() {
+		editStep1 = true;
+	}
 </script>
 
 <main>
@@ -84,10 +96,11 @@
 					</div>
 
 					<!-- Step 1 -->
-					{#if steps.step1 == true}
-						<StepOneDone {customer} />
+
+					{#if steps.step1 && !editStep1}
+						<StepOneDone {customer} onActionClick={onActionStepOneDone} />
 					{:else}
-						<StepOnePending {customer} />
+						<StepOnePending {customer} onUpdate={onUpdateStepOne} />
 					{/if}
 
 					<!-- Step 2 -->
@@ -96,14 +109,14 @@
 					{:else if steps.step1 && !steps.step2}
 						<StepTwoPending {customer} />
 					{:else}
-						<Step2Waiting />
+						<StepTwoWaiting />
 					{/if}
 
 					<!-- Step 3 -->
-					<Step3Waiting />
+					<StepThreeWaiting />
 
 					<!-- Form step 4 -->
-					<Step4Active />
+					<StepFourActive />
 				</div>
 			</div>
 

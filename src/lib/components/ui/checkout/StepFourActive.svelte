@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '../buttons/Button.svelte';
+	import { Lock } from '@lucide/svelte';
 	import PrevNextButton from '../buttons/PrevNextButton.svelte';
 	import { Sparkle } from '@lucide/svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
@@ -79,7 +80,11 @@
 				size="xl"
 				rounded="lg"
 				font="md"
-			/>
+			>
+				{#snippet icon()}
+					<Lock class="h-4" />
+				{/snippet}
+			</Button>
 		</div>
 	</form>
 

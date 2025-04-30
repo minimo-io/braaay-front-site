@@ -13,13 +13,13 @@
 	let { customer }: Props = $props();
 
 	// Form state with $state for reactivity
-	let zipValue = $state(customer?.addresses.shipping.postcode || '');
-	let street = $state(customer?.addresses.shipping.address1 || '');
+	let zipValue = $state(customer?.addresses?.shipping?.postcode || '');
+	let street = $state(customer?.addresses?.shipping?.address1 || '');
 	let number = $state('');
-	let complement = $state(customer?.addresses.shipping.address2 || '');
+	let complement = $state(customer?.addresses?.shipping?.address2 || '');
 	let neighborhood = $state('');
-	let city = $state(customer?.addresses.shipping.city || '');
-	let stateCode = $state(customer?.addresses.shipping.state || '');
+	let city = $state(customer?.addresses?.shipping?.city || '');
+	let stateCode = $state(customer?.addresses?.shipping?.state || '');
 
 	// Status flags
 	let isLoading = $state(false);
@@ -28,7 +28,7 @@
 
 	// Update form fields whenever customer changes
 	$effect(() => {
-		if (customer?.addresses.shipping) {
+		if (customer?.addresses?.shipping) {
 			// Update all our form fields from customer data
 			zipValue = customer.addresses.shipping.postcode || '';
 			// street = customer.addresses.shipping.address1 || '';

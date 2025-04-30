@@ -57,7 +57,7 @@ export interface CustomerGraphQLResponse {
 }
 
 export interface Customer {
-	databaseId: number;
+	databaseId: number | undefined;
 	email: string;
 	cpf: string;
 	telephone: string;
@@ -66,15 +66,15 @@ export interface Customer {
 	firstName: string;
 	lastName: string;
 
-	sessionToken: string;
+	// sessionToken: string;
 
-	addresses: {
-		billing: CustomerAddress;
-		shipping: CustomerAddress;
+	addresses?: {
+		// billing: CustomerAddress;
+		shipping?: CustomerAddress;
 	};
 
-	vatExempt: boolean;
+	// vatExempt: boolean;
 
-	orderHistory: Order[];
+	// orderHistory: Order[];
 	// metadata: Record<string, string>;
 }

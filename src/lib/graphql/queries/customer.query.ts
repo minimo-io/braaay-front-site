@@ -88,20 +88,23 @@ export function mapCustomerToUser(response: CustomerGraphQLResponse): Customer {
 
 	return {
 		databaseId: customer.databaseId,
+
 		email: customer.email,
-		cpf: customer.cpf,
 		telephone: customer.telephone,
-		birthDate: customer.birthDate,
 
 		firstName: customer.firstName,
 		lastName: customer.lastName,
-		sessionToken: customer.sessionToken,
+
+		cpf: customer.cpf,
+		birthDate: customer.birthDate,
+
+		// sessionToken: customer.sessionToken,
+
 		addresses: {
-			billing: customer.billing,
+			// billing: customer.billing,
 			shipping: customer.shipping
-		},
-		vatExempt: customer.isVatExempt,
-		orderHistory: customer.orders.nodes
-		// metadata
+		}
+		// vatExempt: customer.isVatExempt,
+		// orderHistory: customer.orders.nodes
 	};
 }

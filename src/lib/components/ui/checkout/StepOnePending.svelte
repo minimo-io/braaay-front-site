@@ -1,16 +1,19 @@
 <script lang="ts">
 	import Button from '../buttons/Button.svelte';
+	import { Lock } from '@lucide/svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages';
 	import { CircleUserRound } from '@lucide/svelte';
 	import IMask from 'imask';
 	import type { Customer } from '$lib/types';
 	import { onMount, onDestroy } from 'svelte';
+	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 
 	interface Props {
 		customer: Customer | undefined;
+		onUpdate: (customerData: Customer) => void;
 	}
-	let { customer }: Props = $props();
+	let { customer, onUpdate }: Props = $props();
 
 	// CPF Mask
 	let cpfMask: any;
@@ -22,6 +25,8 @@
 	let emailValue = $state(customer?.email || '');
 
 	// No longer using emailMask
+	let firstName = $state(customer?.firstName || '');
+	let lastName = $state(customer?.lastName || '');
 
 	// Date Mask
 	let birthDateValue = $state(customer?.birthDate || '');
@@ -29,7 +34,28 @@
 	let birthDateMask: any;
 	const datePlaceholder = 'DD/MM/AAAA';
 
+	// phone imask
+	let phoneMask: any;
+	let phoneInputElement: HTMLInputElement;
+	let phoneValue = $state(customer?.telephone || '');
+	// const phonePlaceholderLandline = '(00) 0000-0000';
+	const phonePlaceholderMobile = '(00) 0 0000-0000';
+
 	onMount(() => {
+		// Phone Mask
+		phoneMask = IMask(phoneInputElement, {
+			mask: [
+				// { mask: phonePlaceholderLandline }, // Landline (8 digits)
+				phonePlaceholderMobile // Mobile (9 digits)
+			]
+			// dispatch: (appended, dynamicMasked) => {
+			// 	const number = dynamicMasked.unmaskedValue.replace(/\D/g, '');
+			// 	return number.length > 10 ? dynamicMasked.compiledMasks[1] : dynamicMasked.compiledMasks[0];
+			// }
+		});
+		if (phoneValue) phoneMask.unmaskedValue = phoneValue;
+		phoneMask.on('accept', () => (phoneValue = phoneMask.unmaskedValue));
+
 		// CPF Mask
 		cpfMask = IMask(cpfInputElement, {
 			mask: cpfPlaceholder
@@ -111,11 +137,19 @@
 			>
 			Dados cadastrais
 		</h2>
-		<Button url={localizeHref('/login/')} type="light" title={m.login()} size="xs" minimalPx={true}>
-			{#snippet icon()}
-				<CircleUserRound class="lucide-button !px-0 !mx-0" />
-			{/snippet}
-		</Button>
+		<div class="md:hidden">
+			<Button
+				url={localizeHref('/login/')}
+				type="light"
+				title={m.login()}
+				size="xs"
+				minimalPx={true}
+			>
+				{#snippet icon()}
+					<CircleUserRound class="lucide-button !px-0 !mx-0" />
+				{/snippet}
+			</Button>
+		</div>
 	</div>
 
 	<form class="space-y-4">
@@ -129,7 +163,8 @@
 
 		<!-- Celular / WhatsApp -->
 		<input
-			type="text"
+			bind:this={phoneInputElement}
+			type="tel"
 			placeholder="Celular / WhatsApp"
 			class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
 		/>
@@ -137,35 +172,64 @@
 		<!-- Nome e Sobrenome -->
 		<div class="flex space-x-4">
 			<input
+				bind:value={firstName}
 				type="text"
 				placeholder="Nome"
 				class="w-1/2 px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			/>
 			<input
 				type="text"
+				bind:value={lastName}
 				placeholder="Sobrenome"
 				class="w-1/2 px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			/>
 		</div>
 
-		<!-- CPF -->
-		<input
-			bind:this={cpfInputElement}
-			type="text"
-			placeholder={cpfPlaceholder}
-			class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-		/>
+		<div class="flex space-x-4">
+			<!-- CPF -->
+			<input
+				bind:this={cpfInputElement}
+				type="text"
+				placeholder="CPF"
+				class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+			/>
 
-		<!-- Data de nascimento -->
-		<input
-			bind:this={birthDateInputElement}
-			type="text"
-			placeholder={datePlaceholder}
-			class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-		/>
-		<!-- {emailValue} - {birthDateValue} - {cpfValue} -->
+			<!-- Data de nascimento -->
+			<input
+				bind:this={birthDateInputElement}
+				type="text"
+				placeholder={datePlaceholder}
+				class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+			/>
+		</div>
+		<!-- Next -->
 		<div class="py-1">
-			<Button type="sun" url="#" title="CONTINUAR →" size="md" rounded="lg" font="md" />
+			<Button
+				action={() => {
+					toggleLoader();
+					setTimeout(() => {}, 1000);
+					onUpdate({
+						databaseId: undefined,
+						email: emailValue,
+						cpf: cpfValue,
+						telephone: phoneValue,
+						birthDate: birthDateValue,
+						firstName: firstName,
+						lastName: lastName
+					});
+					toggleLoader();
+				}}
+				type="sun"
+				url="#"
+				title="CONTINUAR →"
+				size="md"
+				rounded="lg"
+				font="md"
+			>
+				{#snippet icon()}
+					<Lock class="h-4" />
+				{/snippet}
+			</Button>
 		</div>
 	</form>
 </div>

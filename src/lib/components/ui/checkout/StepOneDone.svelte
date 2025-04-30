@@ -5,11 +5,13 @@
 	import { m } from '$lib/paraglide/messages';
 	import type { Customer } from '$lib/types';
 	import { formatCpf } from '$lib/utils';
+	import { isAuthenticated } from '$lib/graphql/auth';
 
 	interface Props {
 		customer: Customer | undefined;
+		onActionClick: () => void;
 	}
-	let { customer }: Props = $props();
+	let { customer, onActionClick }: Props = $props();
 </script>
 
 <div class="mx-auto p-6 border border-green-dark bg-green-light rounded-lg shadow-sm">
@@ -22,7 +24,17 @@
 			>
 			Conta
 		</h2>
-		<Button title="Alterar" type="light" url={localizeHref('/account/')} size="xs" />
+		{#if isAuthenticated()}
+			<Button title="Alterar" type="light" url={localizeHref('/account/')} size="xs" />
+		{:else}
+			<Button
+				title="Alterar"
+				type="light"
+				customPx="max-w-[100px]"
+				action={() => onActionClick()}
+				size="xs"
+			/>
+		{/if}
 	</div>
 
 	<form class="space-y-4 text-sm text-green-medium">
@@ -31,7 +43,8 @@
 				{customer?.email}
 				<br />
 				<span>{customer?.firstName} {customer?.lastName}</span>
-				<span>(#{customer?.databaseId})</span>
+
+				- <span>({customer?.databaseId ? `#${customer.databaseId}` : 'Convidado'})</span>
 				- <span class="font-bold">CPF:</span>
 				{#if customer.cpf}
 					<span> {formatCpf(customer?.cpf)}</span>
