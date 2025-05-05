@@ -8,6 +8,7 @@
 	import type { Customer } from '$lib/types';
 	import { onMount, onDestroy } from 'svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
+	import { launchToast, isValidEmail, alphaOnly } from '$lib/utils';
 
 	interface Props {
 		customer: Customer | undefined;
@@ -126,6 +127,62 @@
 		cpfMask?.destroy();
 		birthDateMask?.destroy();
 	});
+
+	// Validations ---------------------------------------------
+	type CheckoutValidationResult =
+		| { valid: true }
+		| { valid: false; errors: { [field: string]: string } };
+
+	function validateCheckoutStepOne(values: {
+		email: string;
+		cpf: string;
+		telephone: string;
+		birthDate: string;
+		firstName: string;
+		lastName: string;
+	}): CheckoutValidationResult {
+		const errors: { [key: string]: string } = {};
+
+		// Email
+		if (values.email.trim() === '') {
+			errors.email = m.checkoutStep1NoEmail();
+		} else if (!isValidEmail(values.email)) {
+			errors.email = m.checkoutStep1EnterValidEmail();
+		}
+
+		// CPF (Brazilian ID) – simple placeholder example
+		if (values.cpf.trim() === '') {
+			errors.cpf = m.checkoutStep1NoId();
+		} else if (!/^[0-9]{11}$/.test(values.cpf)) {
+			errors.cpf = m.checkoutStep1CPF11Digits();
+		}
+
+		// Telephone
+		if (values.telephone.trim() === '') {
+			errors.telephone = m.checkoutStep1NoTel();
+		} else if (!/^[0-9\s()+-]+$/.test(values.telephone)) {
+			errors.telephone = m.checkoutStep1TelInvalid();
+		}
+
+		// Birth date
+		if (values.birthDate.trim() === '') {
+			errors.birthDate = m.checkoutStep1NoBirthDate();
+		} else if (isNaN(Date.parse(values.birthDate))) {
+			errors.birthDate = m.checkoutStep1BirthDateInvalid();
+		}
+
+		// First name
+		if (values.firstName.trim() === '') {
+			errors.firstName = m.checkoutStep1NoFirstname();
+		}
+
+		// Last name
+		if (values.lastName.trim() === '') {
+			errors.lastName = m.checkoutStep1NoLastname();
+		}
+
+		return Object.keys(errors).length > 0 ? { valid: false, errors } : { valid: true };
+	}
 </script>
 
 <div class="mx-auto p-6 bg-white border border-grey-lighter rounded-lg shadow-sm">
@@ -172,13 +229,17 @@
 		<!-- Nome e Sobrenome -->
 		<div class="flex space-x-4">
 			<input
+				use:alphaOnly
 				bind:value={firstName}
+				maxlength="50"
 				type="text"
 				placeholder="Nome"
 				class="w-1/2 px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			/>
 			<input
 				type="text"
+				use:alphaOnly
+				maxlength="50"
 				bind:value={lastName}
 				placeholder="Sobrenome"
 				class="w-1/2 px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
@@ -189,7 +250,7 @@
 			<!-- CPF -->
 			<input
 				bind:this={cpfInputElement}
-				type="text"
+				type="tel"
 				placeholder="CPF"
 				class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			/>
@@ -207,16 +268,26 @@
 			<Button
 				action={() => {
 					toggleLoader();
-					setTimeout(() => {}, 1000);
-					onUpdate({
-						databaseId: undefined,
+					// setTimeout(() => {}, 1000);
+
+					const frmValues = {
 						email: emailValue,
 						cpf: cpfValue,
 						telephone: phoneValue,
 						birthDate: birthDateValue,
-						firstName: firstName,
-						lastName: lastName
-					});
+						firstName,
+						lastName
+					};
+
+					const validation = validateCheckoutStepOne(frmValues);
+
+					if (validation.valid) {
+						onUpdate({ ...frmValues, databaseId: undefined });
+					} else {
+						// launchToast('Hey! Wrong! Mehh!', 'error');
+						Object.values(validation.errors).forEach((msg) => launchToast(msg, 'error'));
+					}
+
 					toggleLoader();
 				}}
 				type="sun"

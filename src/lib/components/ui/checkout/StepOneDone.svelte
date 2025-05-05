@@ -20,8 +20,8 @@
 			<span
 				class="inline-flex items-center justify-center w-5 h-5 bg-green-medium text-grey-background rounded-full mr-2 text-xs"
 			>
-				<Check class="h-3 ml-1" /></span
-			>
+				<Check class="h-3 ml-1" />
+			</span>
 			Conta
 		</h2>
 		{#if isAuthenticated()}

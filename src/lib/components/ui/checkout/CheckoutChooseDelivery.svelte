@@ -1,11 +1,27 @@
-<form class="mx-2 md:mx-auto">
-	<!-- Ship to home or work -->
+<script lang="ts">
+	import { DeliveryUIType } from '$lib/types';
+	interface Props {
+		onUpdate: (deliveryType: DeliveryUIType) => void;
+		initialValue?: DeliveryUIType | null; // Allow null/undefined initial value
+	}
+	let { onUpdate, initialValue = null }: Props = $props();
+	let deliveryType = $state<DeliveryUIType | null>(initialValue);
+
+	function handleChange(type: DeliveryUIType) {
+		deliveryType = type;
+		onUpdate(type); // Call onUpdate with the new value
+	}
+</script>
+
+<div class="mx-2 md:mx-auto">
 	<label class="flex items-center space-x-3 cursor-pointer">
 		<input
 			type="radio"
-			name="recipient"
+			value={DeliveryUIType.DELIVERY}
+			checked={deliveryType === DeliveryUIType.DELIVERY}
+			onchange={() => handleChange(DeliveryUIType.DELIVERY)}
+			name="delivery"
 			class="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
-			checked
 		/>
 		<span class="text-sm">Enviar para casa ou trabalho</span>
 	</label>
@@ -14,7 +30,10 @@
 	<label class="flex items-start space-x-3 mt-3 cursor-pointer">
 		<input
 			type="radio"
-			name="recipient"
+			value={DeliveryUIType.PICKUP}
+			checked={deliveryType === DeliveryUIType.PICKUP}
+			onchange={() => handleChange(DeliveryUIType.PICKUP)}
+			name="delivery"
 			class="w-5 h-5 text-sun border-grey-medium focus:ring-sun"
 		/>
 		<span class="flex flex-col">
@@ -22,4 +41,4 @@
 			<span class="text-xs text-grey-medium"> Seg a Sex, das 09:00 às 18:30, exceto feriados </span>
 		</span>
 	</label>
-</form>
+</div>

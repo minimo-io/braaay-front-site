@@ -25,5 +25,16 @@
 	"exit": "Salir",
 	"accountExit": "Salir de la cuenta",
 
-	"login": "Entrar"
+	"login": "Entrar",
+
+	"checkoutStep1NoEmail": "Email obligatorio.",
+	"checkoutStep1EnterValidEmail": "Introduce una dirección de correo electrónico válida.",
+	"checkoutStep1NoId": "Cédula es un dato obligatório.",
+	"checkoutStep1CPF11Digits": "El CPF debe tener 11 dígitos.",
+	"checkoutStep1NoTel": "Un teléfono es obligatorio.",
+	"checkoutStep1TelInvalid": "El teléfono contiene caracteres no válidos.",
+	"checkoutStep1NoBirthDate": "La fecha de nacimiento es obrigatoria.",
+	"checkoutStep1BirthDateInvalid": "Fecha de nacimiento inválida.",
+	"checkoutStep1NoFirstname": "El nombre es obligatorio.",
+	"checkoutStep1NoLastname": "El apellido es obligatorio."
 }

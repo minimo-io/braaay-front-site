@@ -7,6 +7,7 @@
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { CUSTOMER_QUERY, mapCustomerToUser } from '$lib/graphql/queries';
 	import type { Customer } from '$lib/types';
+	import { DeliveryUIType } from '$lib/types';
 	import { launchToast } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import CheckoutSummary from '$components/ui/checkout/CheckoutSummary.svelte';
@@ -20,15 +21,8 @@
 	import CheckoutCartSummary from '$components/ui/checkout/CheckoutCartSummary.svelte';
 	import StepTwoDone from '$components/ui/checkout/StepTwoDone.svelte';
 	import StepTwoPending from '$components/ui/checkout/StepTwoPending.svelte';
+	import StepTwoPickup from '$components/ui/checkout/StepTwoPickup.svelte';
 
-	// let userName = $state('');
-	// let userEmail = $state('');
-	// authState.subscribe((auth) => {
-	// 	if (auth.user && auth.user.name && auth.user.email) {
-	// 		userName = auth.user.name;
-	// 		userEmail = auth.user.email;
-	// 	}
-	// });
 	interface Steps {
 		step1: boolean | object;
 		step2: boolean | object;
@@ -37,6 +31,9 @@
 	}
 	let steps: Steps = $state({ step1: false, step2: false, step3: false, step4: false });
 	let editStep1 = $state(false);
+
+	// Initialize as null to have no default selection
+	let deliveryType = $state<DeliveryUIType | null>(null);
 
 	let customer: Customer | undefined = $state();
 
@@ -70,8 +67,23 @@
 		console.log(customer);
 		steps.step1 = customer;
 	}
+
 	function onActionStepOneDone() {
 		editStep1 = true;
+	}
+
+	function handleDeliveryUpdate(delivery: DeliveryUIType) {
+		deliveryType = delivery;
+		console.log(`Delivery type updated: ${delivery}`);
+
+		// You might want to do additional logic here
+		// like enabling step2 when a selection is made
+		if (deliveryType) {
+			// Only progress to step2 if user is logged in (step1 complete)
+			if (steps.step1) {
+				steps.step2 = true;
+			}
+		}
 	}
 </script>
 
@@ -89,14 +101,13 @@
 
 				<div class="space-y-4 px-3 md:mb-24">
 					<!-- Delivery or Pickup -->
-					<CheckoutChooseDelivery />
+					<CheckoutChooseDelivery initialValue={deliveryType} onUpdate={handleDeliveryUpdate} />
 
 					<div>
 						<Divider color="blue" extraClasses="!border-b-grey-lighter my-7" />
 					</div>
 
 					<!-- Step 1 -->
-
 					{#if steps.step1 && !editStep1}
 						<StepOneDone {customer} onActionClick={onActionStepOneDone} />
 					{:else}
@@ -106,8 +117,10 @@
 					<!-- Step 2 -->
 					{#if steps.step1 && steps.step2}
 						<StepTwoDone />
-					{:else if steps.step1 && !steps.step2}
+					{:else if steps.step1 && deliveryType}
 						<StepTwoPending {customer} />
+					{:else if deliveryType == 'PICKUP'}
+						<StepTwoPickup />
 					{:else}
 						<StepTwoWaiting />
 					{/if}

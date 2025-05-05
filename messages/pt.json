@@ -25,5 +25,16 @@
 	"exit": "Sair",
 	"accountExit": "Sair da conta",
 
-	"login": "Entrar"
+	"login": "Entrar",
+
+	"checkoutStep1NoEmail": "E-mail é obrigatório.",
+	"checkoutStep1EnterValidEmail": "Insira um endereço de e-mail válido.",
+	"checkoutStep1NoId": "CPF é necessário.",
+	"checkoutStep1CPF11Digits": "O CPF deve ter 11 dígitos.",
+	"checkoutStep1NoTel": "Telefone é necessário.",
+	"checkoutStep1TelInvalid": "O telefone contém caracteres inválidos.",
+	"checkoutStep1NoBirthDate": "Data de nascimento é obrigatória.",
+	"checkoutStep1BirthDateInvalid": "Data de nascimento inválida.",
+	"checkoutStep1NoFirstname": "O primeiro nome é obrigatório.",
+	"checkoutStep1NoLastname": "O sobrenome é obrigatório."
 }

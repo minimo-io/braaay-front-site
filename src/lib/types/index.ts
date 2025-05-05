@@ -37,3 +37,8 @@ export interface LoginResult {
 	user: any;
 	message: string;
 }
+
+export enum DeliveryUIType {
+	DELIVERY = 'DELIVERY',
+	PICKUP = 'PICKUP'
+}
