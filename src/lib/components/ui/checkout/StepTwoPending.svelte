@@ -6,11 +6,15 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { getAddressFromCep } from '$lib/services/zipService';
 	import { AppConfig } from '$config';
+	import type { CustomerAddress } from '$lib/types';
+	import { getLocale } from '$lib/paraglide/runtime';
+	import { numbersOnly } from '$lib/utils';
 
 	interface Props {
 		customer: Customer | undefined;
+		onActionClick: (shippingData: CustomerAddress) => void;
 	}
-	let { customer }: Props = $props();
+	let { customer, onActionClick }: Props = $props();
 
 	// Form state with $state for reactivity
 	let zipValue = $state(customer?.addresses?.shipping?.postcode || '');
@@ -151,7 +155,7 @@
 				class="inline-flex items-center justify-center w-5 h-5 bg-sun text-grey-background rounded-full mr-2 text-xs"
 				>2</span
 			>
-			Local de entrega
+			Endereço de entrega
 		</h2>
 	</div>
 
@@ -203,6 +207,7 @@
 				<input
 					id="street"
 					bind:value={street}
+					maxlength="100"
 					type="text"
 					placeholder="Exemplo: Avenida Paulista"
 					class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
@@ -216,18 +221,23 @@
 					<input
 						id="number"
 						bind:value={number}
+						use:numbersOnly
 						type="text"
+						inputmode="numeric"
+						pattern="[0-9]*"
+						maxlength="5"
 						placeholder="123"
 						class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
 					/>
 				</div>
 				<div>
-					<label for="complement" class="block text-sm font-medium text-grey-darker mb-1"
-						>Complemento</label
-					>
+					<label for="complement" class="block text-sm font-medium text-grey-darker mb-1">
+						Complemento
+					</label>
 					<input
 						id="complement"
 						bind:value={complement}
+						maxlength="20"
 						type="text"
 						placeholder="Apto, Bloco, etc."
 						class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
@@ -277,7 +287,26 @@
 		{/if}
 
 		<div class="py-1">
-			<Button type="sun" url="#" title="CONTINUAR →" size="md" rounded="lg" font="md">
+			<Button
+				action={() =>
+					onActionClick({
+						firstName: customer?.firstName || '',
+						lastName: customer?.lastName || '',
+						company: '',
+						address1: `${street} ${number}${complement ? ' / ' + complement : ''}`,
+						address2: `${neighborhood}`,
+						city: city,
+						postcode: zipValue,
+						country: getLocale() == 'pt' ? 'BR' : 'UY',
+						state: stateCode
+					})}
+				type="sun"
+				url="#"
+				title="CONTINUAR →"
+				size="md"
+				rounded="lg"
+				font="md"
+			>
 				{#snippet icon()}
 					<Lock class="h-4" />
 				{/snippet}

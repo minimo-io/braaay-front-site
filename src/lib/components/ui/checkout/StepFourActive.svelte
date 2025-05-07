@@ -5,6 +5,13 @@
 	import { Sparkle } from '@lucide/svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import CheckoutProductOffers from './CheckoutProductOffers.svelte';
+
+	import { DeliveryUIType } from '$lib/types';
+	interface Props {
+		deliveryType: DeliveryUIType | null;
+	}
+
+	let { deliveryType }: Props = $props();
 </script>
 
 <div class="mx-auto p-6 bg-white border border-grey-lighter rounded-lg shadow-sm">
@@ -12,7 +19,7 @@
 		<h2 class="text-lg font-medium flex items-center">
 			<span
 				class="inline-flex items-center justify-center w-5 h-5 bg-sun text-grey-background rounded-full mr-2 text-xs"
-				>4</span
+				>{deliveryType == 'DELIVERY' ? 4 : 3}</span
 			>
 			Pagamento
 		</h2>

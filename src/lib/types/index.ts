@@ -11,6 +11,7 @@ export * from './pagination.types';
 export * from './drawer.types';
 export * from './customer.types';
 export * from './zip-codes.types';
+export * from './cart.types';
 
 export interface Wine {
 	title: string;

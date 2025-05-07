@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Check } from '@lucide/svelte';
 	import Button from '../buttons/Button.svelte';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages';
 	import type { Customer } from '$lib/types';
-	import { formatCpf } from '$lib/utils';
+	import { formatCpf, formatPhone } from '$lib/utils';
 	import { isAuthenticated } from '$lib/graphql/auth';
 
 	interface Props {
@@ -16,7 +16,7 @@
 
 <div class="mx-auto p-6 border border-green-dark bg-green-light rounded-lg shadow-sm">
 	<div class="flex justify-between items-center mb-4">
-		<h2 class="text-base font-medium flex items-center text-green-medium">
+		<h2 class="text-base font-bold flex items-center text-green-medium">
 			<span
 				class="inline-flex items-center justify-center w-5 h-5 bg-green-medium text-grey-background rounded-full mr-2 text-xs"
 			>
@@ -40,7 +40,7 @@
 	<form class="space-y-4 text-sm text-green-medium">
 		{#if customer?.email}
 			<div>
-				{customer?.email}
+				{customer?.email} / {formatPhone(getLocale(), customer.telephone)}
 				<br />
 				<span>{customer?.firstName} {customer?.lastName}</span>
 

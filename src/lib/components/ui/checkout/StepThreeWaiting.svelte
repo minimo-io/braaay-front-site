@@ -7,9 +7,9 @@
 				class="inline-flex items-center justify-center w-5 h-5 bg-sun text-grey-background rounded-full mr-2 text-xs"
 				>3</span
 			>
-			Pagamento
+			Opções de envio
 		</h2>
 	</div>
 
-	<form class="space-y-4">Aguardando seleção de frete.</form>
+	<div class="space-y-4">Aguardando endereço de entrega.</div>
 </div>

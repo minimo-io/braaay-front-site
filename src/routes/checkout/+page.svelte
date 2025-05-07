@@ -6,7 +6,7 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { CUSTOMER_QUERY, mapCustomerToUser } from '$lib/graphql/queries';
-	import type { Customer } from '$lib/types';
+	import type { Customer, CustomerAddress } from '$lib/types';
 	import { DeliveryUIType } from '$lib/types';
 	import { launchToast } from '$lib/utils';
 	import { goto } from '$app/navigation';
@@ -22,6 +22,8 @@
 	import StepTwoDone from '$components/ui/checkout/StepTwoDone.svelte';
 	import StepTwoPending from '$components/ui/checkout/StepTwoPending.svelte';
 	import StepTwoPickup from '$components/ui/checkout/StepTwoPickup.svelte';
+	import StepThreePending from '$components/ui/checkout/StepThreePending.svelte';
+	import StepFourWaiting from '$components/ui/checkout/StepFourWaiting.svelte';
 
 	interface Steps {
 		step1: boolean | object;
@@ -31,9 +33,12 @@
 	}
 	let steps: Steps = $state({ step1: false, step2: false, step3: false, step4: false });
 	let editStep1 = $state(false);
+	let editStep2 = $state(false);
 
 	// Initialize as null to have no default selection
-	let deliveryType = $state<DeliveryUIType | null>(null);
+	let deliveryType = $state<DeliveryUIType | null>(DeliveryUIType.DELIVERY);
+	let shippingAddress = $state<CustomerAddress | null>(null);
+	let guestSessionToken = $state('');
 
 	let customer: Customer | undefined = $state();
 
@@ -64,7 +69,7 @@
 	function onUpdateStepOne(customerData: Customer) {
 		editStep1 = false;
 		customer = customerData;
-		console.log(customer);
+
 		steps.step1 = customer;
 	}
 
@@ -72,17 +77,33 @@
 		editStep1 = true;
 	}
 
-	function handleDeliveryUpdate(delivery: DeliveryUIType) {
+	function handleDeliveryTypeUpdate(delivery: DeliveryUIType) {
 		deliveryType = delivery;
-		console.log(`Delivery type updated: ${delivery}`);
 
 		// You might want to do additional logic here
 		// like enabling step2 when a selection is made
-		if (deliveryType) {
+		if (deliveryType == 'PICKUP') {
 			// Only progress to step2 if user is logged in (step1 complete)
+			// if (steps.step1) {
+			editStep2 = false;
+			steps.step2 = true;
+			steps.step3 = true;
+			// }
+		} else if (deliveryType == 'DELIVERY') {
 			if (steps.step1) {
-				steps.step2 = true;
+				editStep2 = false;
+				steps.step2 = false;
+				steps.step3 = false;
 			}
+		}
+	}
+
+	// Update the delivery data, also save in localStorage (in the future)
+	function onUpdateShippingData(shippingData: CustomerAddress) {
+		shippingAddress = shippingData;
+		editStep2 = false;
+		if (steps.step1) {
+			steps.step2 = true;
 		}
 	}
 </script>
@@ -101,35 +122,70 @@
 
 				<div class="space-y-4 px-3 md:mb-24">
 					<!-- Delivery or Pickup -->
-					<CheckoutChooseDelivery initialValue={deliveryType} onUpdate={handleDeliveryUpdate} />
+					<CheckoutChooseDelivery initialValue={deliveryType} onUpdate={handleDeliveryTypeUpdate} />
 
 					<div>
 						<Divider color="blue" extraClasses="!border-b-grey-lighter my-7" />
 					</div>
 
-					<!-- Step 1 -->
+					<!-- Step 1: Client info -->
 					{#if steps.step1 && !editStep1}
 						<StepOneDone {customer} onActionClick={onActionStepOneDone} />
 					{:else}
 						<StepOnePending {customer} onUpdate={onUpdateStepOne} />
 					{/if}
 
-					<!-- Step 2 -->
-					{#if steps.step1 && steps.step2}
-						<StepTwoDone />
-					{:else if steps.step1 && deliveryType}
-						<StepTwoPending {customer} />
-					{:else if deliveryType == 'PICKUP'}
+					<!-- Step 2: Shipping address -->
+					{#if deliveryType == 'PICKUP'}
+						<!-- Pickup -->
 						<StepTwoPickup />
+					{:else if steps.step1}
+						<!-- Step 2 Done -->
+						{#if steps.step2 && shippingAddress && !editStep2}
+							<StepTwoDone
+								{shippingAddress}
+								onActionClick={() => {
+									editStep2 = true;
+									steps.step2 = false;
+								}}
+							/>
+						{/if}
+						<!-- Step 2 Pending -->
+						{#if !steps.step2 || editStep2}
+							<StepTwoPending {customer} onActionClick={onUpdateShippingData} />
+						{/if}
 					{:else}
 						<StepTwoWaiting />
 					{/if}
 
-					<!-- Step 3 -->
-					<StepThreeWaiting />
-
+					<!-- Step 3: Delivery options -->
+					{#if deliveryType == 'DELIVERY'}
+						{#if steps.step1 && steps.step2 && !steps.step3}
+							<StepThreePending
+								{customer}
+								{shippingAddress}
+								onUpdate={() => {
+									alert('updated');
+								}}
+							/>
+						{:else if steps.step1 && steps.step2 && steps.step3}
+							STEP 3 DONE.
+						{:else}
+							<StepThreeWaiting />
+						{/if}
+					{/if}
 					<!-- Form step 4 -->
-					<StepFourActive />
+					<!-- DEBUG -->
+					<!-- Edit Step 1: {editStep1} - Edit Step 2: {editStep2}
+					<br />
+					Step 1: {steps.step1} - Step 2: {steps.step2} - Step 3: {steps.step3}
+					<br />
+					deliveryType: {deliveryType} -->
+					{#if steps.step1 && steps.step2 && steps.step3}
+						<StepFourActive {deliveryType} />
+					{:else}
+						<StepFourWaiting {deliveryType} />
+					{/if}
 				</div>
 			</div>
 

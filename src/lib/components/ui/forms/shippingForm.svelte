@@ -11,6 +11,8 @@
 	import type { ShippingRate } from '$lib/types/cart.types';
 	import { setShippingDetails } from '$stores/shippingDetails.state.svelte';
 	import { updateZip } from '$stores/cart.store.svelte';
+	import { UPDATE_GUEST_SHIPPING_ADDRESS } from '$lib/graphql/mutations/shipping-update.mutation';
+	import { GET_SHIPPING_ESTIMATES } from '$lib/graphql/mutations/shipping-estimates.mutation';
 
 	let zipCode = $state('01222-001');
 	let error = $state('');
@@ -26,33 +28,6 @@
 	}
 
 	// 1) Define your mutations & queries
-	const UPDATE_GUEST_SHIPPING_ADDRESS = gql`
-		mutation UpdateGuestShippingAddress($input: UpdateCustomerInput!) {
-			updateCustomer(input: $input) {
-				customer {
-					sessionToken
-					shipping {
-						postcode
-						country
-					}
-				}
-			}
-		}
-	`;
-	const GET_CART_SHIPPING_ESTIMATES = gql`
-		query GetCartShippingEstimates {
-			cart {
-				availableShippingMethods {
-					rates {
-						id
-						label
-						cost
-					}
-				}
-				shippingTotal
-			}
-		}
-	`;
 
 	const ADD_TO_CART = gql`
 		mutation {
@@ -85,36 +60,37 @@
 
 			// Step 1: First update customer shipping details ----------------------
 			launchToast(`Obtendo parceiros...`, 'info', 2000);
-			const updateResult = await client
-				.mutation(UPDATE_GUEST_SHIPPING_ADDRESS, {
-					input: {
-						shipping: {
-							postcode: zipCodeSanitized,
-							country: 'BR',
-							overwrite: true
-						}
-					}
-				})
-				.toPromise();
+			// const updateResult = await client
+			// 	.mutation(UPDATE_GUEST_SHIPPING_ADDRESS, {
+			// 		input: {
+			// 			shipping: {
+			// 				postcode: zipCodeSanitized,
+			// 				country: 'BR',
+			// 				overwrite: true
+			// 			}
+			// 		}
+			// 	})
+			// 	.toPromise();
 
-			if (updateResult.error) {
-				throw new Error(`Shipping update failed: ${updateResult.error.message}`);
-			}
+			// if (updateResult.error) {
+			// 	throw new Error(`Shipping update failed: ${updateResult.error.message}`);
+			// }
 
-			// Get the initial session token
-			const sessionToken = updateResult.data.updateCustomer.customer.sessionToken;
-			// console.log('Initial session token:', sessionToken);
+			// // Get the initial session token
+			// const sessionToken = updateResult.data.updateCustomer.customer.sessionToken;
+			// // console.log('Initial session token:', sessionToken);
 
-			// Create headers with this session
-			const sessionHeaders = {
-				'Content-Type': 'application/json',
-				'woocommerce-session': `Session ${sessionToken}`
-			};
+			// // Create headers with this session
+			// const sessionHeaders = {
+			// 	'Content-Type': 'application/json',
+			// 	'woocommerce-session': `Session ${sessionToken}`
+			// };
 
 			// ----------------------------------------------------------------------
 
 			// Step 2: Add product to cart with this session, but CAPTURE any new session that's created
-			let currentSessionToken = sessionToken;
+			// let currentSessionToken = sessionToken;
+			let currentSessionToken = '';
 			let addToCartResponse;
 
 			const addToCartResult = await client
@@ -122,7 +98,7 @@
 					ADD_TO_CART,
 					{ productId: 131701, quantity: 1 },
 					{
-						fetchOptions: { headers: sessionHeaders },
+						// fetchOptions: { headers: sessionHeaders },
 						fetch: (input, init) => {
 							return fetch(input, init).then((response) => {
 								// Capture any new session token if provided
@@ -179,7 +155,7 @@
 
 			// Step 4: Now finally get shipping estimates with the final session
 			const estimatesResult = await client
-				.query(GET_CART_SHIPPING_ESTIMATES, {}, { fetchOptions: { headers: finalSessionHeaders } })
+				.query(GET_SHIPPING_ESTIMATES, {}, { fetchOptions: { headers: finalSessionHeaders } })
 				.toPromise();
 
 			if (estimatesResult.error) {

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Check } from '@lucide/svelte';
+	import { Check, MapPin } from '@lucide/svelte';
+	import MoreInfoButton from '../buttons/MoreInfoButton.svelte';
 </script>
 
 <div class="mx-auto p-6 border border-green-dark bg-green-light rounded-lg shadow-sm">
@@ -16,14 +17,15 @@
 
 	<div class="flex flex-col gap-1 text-sm text-green-medium">
 		<div>R. Cristiano Viana, 62 - cj 35 - Cerqueira César, São Paulo - SP, 05411-000</div>
-		<div>
+		<div class="mt-1 right-[6px] relative">
 			<a
 				href="https://maps.app.goo.gl/C62e1n2KGZmtuMW39"
 				rel="nofollow noreferrer"
 				target="_blank"
-				class="font-bold"
+				class="font-bold flex items-center"
 			>
-				Ver no mapa
+				<MapPin class="h-4" />
+				<span>Ver no mapa</span>
 			</a>
 		</div>
 	</div>

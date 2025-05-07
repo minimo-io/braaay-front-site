@@ -231,7 +231,7 @@
 			<input
 				use:alphaOnly
 				bind:value={firstName}
-				maxlength="50"
+				maxlength="20"
 				type="text"
 				placeholder="Nome"
 				class="w-1/2 px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
@@ -239,7 +239,7 @@
 			<input
 				type="text"
 				use:alphaOnly
-				maxlength="50"
+				maxlength="20"
 				bind:value={lastName}
 				placeholder="Sobrenome"
 				class="w-1/2 px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
