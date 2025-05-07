@@ -22,8 +22,11 @@
 
 	let finalShippingDetails: ShippingRate[] = $state([]);
 
+	let loading = $state(false);
+
 	onMount(async () => {
 		toggleLoader();
+		loading = true;
 		console.log('Get shipping options for...');
 		console.log(shippingAddress);
 
@@ -118,10 +121,12 @@
 			}
 
 			console.log('ALL_SHIPPINGS', finalShippingDetails);
+
 			// -------------------------------------------------
 		} catch (err) {
 			console.log(`Error from query: ${err}`);
 		}
+		loading = false;
 		toggleLoader();
 	});
 </script>
@@ -135,22 +140,28 @@
 			> -->
 			Opções de envio
 		</h2>
-		<div class="flex flex-col">
-			{#each finalShippingDetails as shipping}
-				<div class="flex flex-row justify-between text-xs">
-					<div class="flex justify-start">
-						<input type="radio" />
-						<span class="ml-2">
-							{shipping.label}
-						</span>
-					</div>
+		{#if loading}
+			<div class="text-xs">{m.loading()}</div>
+		{:else}
+			<div class="flex flex-col">
+				{#each finalShippingDetails as shipping, i}
+					<div class="flex flex-row justify-between text-xs items-center my-1">
+						<div class="flex justify-start items-center">
+							<label for="radio-{i}">
+								<input name="shippingOption" id="radio-{i}" type="radio" />
+								<span class="ml-2">
+									{shipping.label}
+								</span>
+							</label>
+						</div>
 
-					<div class="font-bold">
-						{shipping.cost}
+						<div class="font-bold">
+							{shipping.cost}
+						</div>
 					</div>
-				</div>
-			{/each}
-		</div>
+				{/each}
+			</div>
+		{/if}
 	</div>
 
 	<form class="space-y-4">
