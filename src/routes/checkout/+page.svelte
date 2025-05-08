@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { AppConfig } from '$config';
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { isAuthenticated } from '$lib/graphql/auth';
@@ -6,23 +7,30 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { CUSTOMER_QUERY, mapCustomerToUser } from '$lib/graphql/queries';
-	import type { Customer, CustomerAddress } from '$lib/types';
+	import type { Customer, CustomerAddress, ShippingOption } from '$lib/types';
 	import { DeliveryUIType } from '$lib/types';
-	import { launchToast } from '$lib/utils';
+	import { launchToast, truncate } from '$lib/utils';
 	import { goto } from '$app/navigation';
+
 	import CheckoutSummary from '$components/ui/checkout/CheckoutSummary.svelte';
 	import CheckoutChooseDelivery from '$components/ui/checkout/CheckoutChooseDelivery.svelte';
-	import StepOneDone from '$components/ui/checkout/StepOneDone.svelte';
-	import StepOnePending from '$components/ui/checkout/StepOnePending.svelte';
-	import StepTwoWaiting from '$components/ui/checkout/StepTwoWaiting.svelte';
-	import StepThreeWaiting from '$components/ui/checkout/StepThreeWaiting.svelte';
-	import StepFourActive from '$components/ui/checkout/StepFourActive.svelte';
 	import PromoClub from '$components/ui/checkout/PromoClub.svelte';
 	import CheckoutCartSummary from '$components/ui/checkout/CheckoutCartSummary.svelte';
-	import StepTwoDone from '$components/ui/checkout/StepTwoDone.svelte';
+
+	// Step 1
+	import StepOneDone from '$components/ui/checkout/StepOneDone.svelte';
+	import StepOnePending from '$components/ui/checkout/StepOnePending.svelte';
+	// Step 2
+	import StepTwoWaiting from '$components/ui/checkout/StepTwoWaiting.svelte';
 	import StepTwoPending from '$components/ui/checkout/StepTwoPending.svelte';
+	import StepTwoDone from '$components/ui/checkout/StepTwoDone.svelte';
 	import StepTwoPickup from '$components/ui/checkout/StepTwoPickup.svelte';
+	// Step 3
+	import StepThreeDone from '$components/ui/checkout/StepThreeDone.svelte';
+	import StepThreeWaiting from '$components/ui/checkout/StepThreeWaiting.svelte';
 	import StepThreePending from '$components/ui/checkout/StepThreePending.svelte';
+	// Step 4
+	import StepFourPending from '$components/ui/checkout/StepFourPending.svelte';
 	import StepFourWaiting from '$components/ui/checkout/StepFourWaiting.svelte';
 
 	interface Steps {
@@ -34,11 +42,13 @@
 	let steps: Steps = $state({ step1: false, step2: false, step3: false, step4: false });
 	let editStep1 = $state(false);
 	let editStep2 = $state(false);
+	let editStep3 = $state(false);
 
 	// Initialize as null to have no default selection
 	let deliveryType = $state<DeliveryUIType | null>(DeliveryUIType.DELIVERY);
 	let shippingAddress = $state<CustomerAddress | null>(null);
-	let guestSessionToken = $state('');
+	let shippingOption: ShippingOption | undefined = $state();
+	let userSessionToken = $state('');
 
 	let customer: Customer | undefined = $state();
 
@@ -160,29 +170,34 @@
 
 					<!-- Step 3: Delivery options -->
 					{#if deliveryType == 'DELIVERY'}
-						{#if steps.step1 && steps.step2 && !steps.step3}
+						{#if editStep3 || (steps.step1 && steps.step2 && !steps.step3)}
 							<StepThreePending
 								{customer}
 								{shippingAddress}
-								onUpdate={() => {
-									alert('updated');
+								onUpdate={(shippingFetched: ShippingOption | undefined, sessionToken: string) => {
+									userSessionToken = sessionToken;
+									shippingOption = shippingFetched;
+									steps.step3 = true;
+									editStep3 = false;
 								}}
 							/>
-						{:else if steps.step1 && steps.step2 && steps.step3}
-							STEP 3 DONE.
+						{:else if steps.step1 && steps.step2 && steps.step3 && !editStep3}
+							<StepThreeDone
+								shippingAddress={shippingOption}
+								onUpdate={() => {
+									editStep3 = true;
+									steps.step3 = false;
+									shippingOption = undefined;
+								}}
+							/>
 						{:else}
 							<StepThreeWaiting />
 						{/if}
 					{/if}
+
 					<!-- Form step 4 -->
-					<!-- DEBUG -->
-					<!-- Edit Step 1: {editStep1} - Edit Step 2: {editStep2}
-					<br />
-					Step 1: {steps.step1} - Step 2: {steps.step2} - Step 3: {steps.step3}
-					<br />
-					deliveryType: {deliveryType} -->
 					{#if steps.step1 && steps.step2 && steps.step3}
-						<StepFourActive {deliveryType} />
+						<StepFourPending {deliveryType} sessionToken={userSessionToken} />
 					{:else}
 						<StepFourWaiting {deliveryType} />
 					{/if}
@@ -202,3 +217,29 @@
 		</div>
 	</div>
 </main>
+
+{#if AppConfig.debug}
+	<!-- DEBUG -->
+	<div class="fixed bottom-0 left-0 border z-50 py-5 px-8 bg-white text-xs">
+		<h2 class="font-bold mb-3 text-[15px]">DEBUG</h2>
+		<div class="pb-2 border-b border-grey-light">
+			<strong>Edit (1):</strong>
+			{editStep1} - <strong>Edit (2):</strong>
+			{editStep2} - <strong>Edit (3):</strong>
+			{editStep3}
+		</div>
+		<div class="py-2 border-b border-grey-light">
+			<strong>Step (1):</strong>
+			{steps.step1} - <strong>Step (2):</strong>
+			{steps.step2} - <strong>Step (3):</strong>
+			{steps.step3} - <strong>Step (4):</strong>
+			{steps.step4}
+		</div>
+		<div class="py-2">
+			<strong>DeliveryType:</strong>
+			{deliveryType} - <strong>DeliveryOption:</strong>
+			{shippingOption || 'undefined'}
+		</div>
+		<div><strong>Session:</strong> {truncate(userSessionToken, 50) || 'undefined'}</div>
+	</div>
+{/if}

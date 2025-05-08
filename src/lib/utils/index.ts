@@ -10,6 +10,19 @@ export * from './cpfs.util';
 export * from './emails.util';
 export * from './phones.util';
 
+/**
+ * Truncate a string to a maximum length and add ellipsis if needed.
+ */
+export function truncate(str, maxLength, ellipsis = '...') {
+	if (typeof str !== 'string') throw new TypeError('First argument must be a string');
+	if (typeof maxLength !== 'number' || maxLength < 0)
+		throw new TypeError('Second argument must be a non-negative number');
+	if (str.length <= maxLength) {
+		return str;
+	}
+	return str.slice(0, maxLength) + ellipsis;
+}
+
 export function isBlogPost(path: string) {
 	return /^\/(uy\/)?blog\/[^/]+$/.test(path);
 }

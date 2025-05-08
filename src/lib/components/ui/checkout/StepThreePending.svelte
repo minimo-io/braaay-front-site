@@ -2,12 +2,10 @@
 	import { onMount, onDestroy } from 'svelte';
 	import Button from '../buttons/Button.svelte';
 	import { Lock } from '@lucide/svelte';
-	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages';
-	import { CircleUserRound } from '@lucide/svelte';
 	import { UPDATE_GUEST_SHIPPING_ADDRESS } from '$lib/graphql/mutations/shipping-update.mutation';
 	import { GET_SHIPPING_ESTIMATES } from '$lib/graphql/mutations/shipping-estimates.mutation';
-	import type { Customer, CustomerAddress, ShippingRate } from '$lib/types';
+	import type { Customer, CustomerAddress, ShippingOption, ShippingRate } from '$lib/types';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { launchToast } from '$lib/utils';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
@@ -16,19 +14,22 @@
 	interface Props {
 		customer: Customer | undefined;
 		shippingAddress: CustomerAddress | null;
-		onUpdate: (customerData: Customer) => void;
+		onUpdate: (shippingOption: ShippingOption | undefined, sessionToken: string) => void;
 	}
 	let { customer, shippingAddress, onUpdate }: Props = $props();
 
 	let finalShippingDetails: ShippingRate[] = $state([]);
-
+	let finalShippingValueSelected = $state<ShippingOption>();
 	let loading = $state(false);
+	let error = $state('');
+	let currentSessionToken = $state('');
 
 	onMount(async () => {
 		toggleLoader();
 		loading = true;
-		console.log('Get shipping options for...');
-		console.log(shippingAddress);
+		error = '';
+		// console.log('Get shipping options for...');
+		// console.log(shippingAddress);
 
 		try {
 			// Check ------------------------------------------
@@ -51,7 +52,7 @@
 
 			// Get the initial session token
 			const sessionToken = updateResult.data.updateCustomer.customer.sessionToken;
-			console.log('Session token', sessionToken);
+			// console.log('Session token', sessionToken);
 
 			// Step 2: Add product to cart with this session, but CAPTURE any new session that's created
 			const sessionHeaders = {
@@ -59,8 +60,27 @@
 				'woocommerce-session': `Session ${sessionToken}`
 			};
 
-			let currentSessionToken = sessionToken;
+			currentSessionToken = sessionToken;
 			let addToCartResponse;
+
+			// 			mutation{
+			//   addCartItems(input:{items:{
+			//     productId:1,
+			//     quantity: 1,
+
+			//   }}){
+			//     cart{
+			//       availableShippingMethods{
+			//         rates{
+			//           id
+			//           methodId
+			//           label
+			//           cost
+			//         }
+			//       }
+			//     }
+			//   }
+			// }
 
 			const addToCartResult = await getUrqlClient()
 				.client.mutation(
@@ -120,7 +140,9 @@
 				});
 			}
 
-			console.log('ALL_SHIPPINGS', finalShippingDetails);
+			// console.log('ALL_SHIPPINGS', finalShippingDetails);
+
+			console.log('currentSessionToken', currentSessionToken);
 
 			// -------------------------------------------------
 		} catch (err) {
@@ -134,10 +156,10 @@
 <div class="mx-auto p-6 bg-white border border-grey-lighter rounded-lg shadow-sm">
 	<div class="mb-4">
 		<h2 class="text-lg font-medium text-left mb-4">
-			<!-- <span
+			<span
 				class="inline-flex items-center justify-center w-5 h-5 bg-sun text-grey-background rounded-full mr-2 text-xs"
-				>1</span
-			> -->
+				>3</span
+			>
 			Opções de envio
 		</h2>
 		{#if loading}
@@ -145,51 +167,57 @@
 		{:else}
 			<div class="flex flex-col">
 				{#each finalShippingDetails as shipping, i}
-					<div class="flex flex-row justify-between text-xs items-center my-1">
-						<div class="flex justify-start items-center">
-							<label for="radio-{i}">
-								<input name="shippingOption" id="radio-{i}" type="radio" />
-								<span class="ml-2">
-									{shipping.label}
-								</span>
+					{#if !shipping.id.startsWith('local_pickup')}
+						<div class="flex flex-row justify-between text-xs items-center my-1">
+							<label
+								class="text-[13px] md:text-[15px] flex cursor-pointer justify-between w-full"
+								for="radio-{i}"
+							>
+								<div class="flex justify-start items-center">
+									<input
+										bind:group={finalShippingValueSelected}
+										onclick={() => (error = '')}
+										name="shippingOption"
+										id="radio-{i}"
+										type="radio"
+										value={{ id: shipping.id, label: shipping.label, cost: shipping.cost }}
+									/>
+									<span class="ml-2 capitalize">
+										{shipping.label.replace('Entrega ', '')}
+									</span>
+								</div>
+
+								<div class="font-bold">
+									{m.currencySymbol()}
+									{shipping.cost}
+								</div>
 							</label>
 						</div>
-
-						<div class="font-bold">
-							{shipping.cost}
-						</div>
-					</div>
+					{/if}
 				{/each}
 			</div>
 		{/if}
 	</div>
 
 	<form class="space-y-4">
+		<!-- Error -->
+		{#if error}
+			<div class="text-red-medium text-xs">
+				{error}
+			</div>
+		{/if}
 		<!-- Next -->
 		<div class="py-1">
 			<Button
 				action={() => {
-					toggleLoader();
+					// toggleLoader();
+					if (finalShippingValueSelected) {
+						onUpdate(finalShippingValueSelected, currentSessionToken);
+					} else {
+						error = 'Seleccione al menos una opción de envío.';
+					}
 
-					// const frmValues = {
-					// 	email: emailValue,
-					// 	cpf: cpfValue,
-					// 	telephone: phoneValue,
-					// 	birthDate: birthDateValue,
-					// 	firstName,
-					// 	lastName
-					// };
-
-					// const validation = validateCheckoutStepOne(frmValues);
-
-					// if (validation.valid) {
-					// 	onUpdate({ ...frmValues, databaseId: undefined });
-					// } else {
-					// 	// launchToast('Hey! Wrong! Mehh!', 'error');
-					// 	Object.values(validation.errors).forEach((msg) => launchToast(msg, 'error'));
-					// }
-
-					toggleLoader();
+					// toggleLoader();
 				}}
 				type="sun"
 				url="#"

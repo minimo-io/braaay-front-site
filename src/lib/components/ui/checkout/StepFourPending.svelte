@@ -1,17 +1,43 @@
 <script lang="ts">
+	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
+
 	import Button from '../buttons/Button.svelte';
 	import { Lock } from '@lucide/svelte';
-	import PrevNextButton from '../buttons/PrevNextButton.svelte';
+	import { toggleLoader } from '$stores/loaderStore.state.svelte';
+	import { launchToast } from '$lib/utils';
 	import { Sparkle } from '@lucide/svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import CheckoutProductOffers from './CheckoutProductOffers.svelte';
 
 	import { DeliveryUIType } from '$lib/types';
+	import { onMount } from 'svelte';
 	interface Props {
 		deliveryType: DeliveryUIType | null;
+		sessionToken: string;
 	}
 
-	let { deliveryType }: Props = $props();
+	let { deliveryType, sessionToken }: Props = $props();
+
+	let loading = $state(false);
+	let error = $state('');
+
+	onMount(async () => {
+		toggleLoader();
+		loading = true;
+		error = '';
+		try {
+			launchToast(`Obtendo parceiros...`, 'info', 2000);
+
+			// const updateResult = await getUrqlClient()
+			// 	.client.mutation(UPDATE_GUEST_SHIPPING_ADDRESS, {
+			// 		input: {}
+			// 	})
+			// 	.toPromise();
+		} catch (err) {
+			console.error(`${err}`);
+			// alert(sessionToken);
+		}
+	});
 </script>
 
 <div class="mx-auto p-6 bg-white border border-grey-lighter rounded-lg shadow-sm">

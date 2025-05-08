@@ -2,6 +2,8 @@
 	import type { CustomerAddress } from '$lib/types';
 	import { Check } from '@lucide/svelte';
 	import Button from '../buttons/Button.svelte';
+	import IMask from 'imask';
+	import { getLocale } from '$lib/paraglide/runtime';
 
 	interface Props {
 		shippingAddress: CustomerAddress;
@@ -9,6 +11,21 @@
 	}
 
 	let { shippingAddress, onActionClick }: Props = $props();
+	// Format
+	let formattedZip = {
+		mask: '00000-000'
+	};
+	if (getLocale() == 'pt') {
+		formattedZip = {
+			mask: '00000-000'
+		};
+	} else if (getLocale() == 'uy') {
+		formattedZip = {
+			mask: '00000'
+		};
+	}
+
+	const maskedValue = IMask.pipe(shippingAddress.postcode, formattedZip);
 </script>
 
 <div class="mx-auto p-6 border border-green-dark bg-green-light rounded-lg shadow-sm">
@@ -34,7 +51,7 @@
 	<div class="flex flex-col gap-1 text-sm text-green-medium">
 		<div>
 			{shippingAddress.address1} - {shippingAddress.address2} - {shippingAddress.city}, - {shippingAddress.state},
-			{shippingAddress.postcode}
+			{maskedValue}
 		</div>
 	</div>
 </div>

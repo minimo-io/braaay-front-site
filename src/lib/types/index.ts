@@ -10,8 +10,8 @@ export * from './categories.types';
 export * from './pagination.types';
 export * from './drawer.types';
 export * from './customer.types';
-export * from './zip-codes.types';
 export * from './cart.types';
+export * from './shipping.types';
 
 export interface Wine {
 	title: string;
@@ -37,9 +37,4 @@ export interface LoginResult {
 	success: boolean;
 	user: any;
 	message: string;
-}
-
-export enum DeliveryUIType {
-	DELIVERY = 'DELIVERY',
-	PICKUP = 'PICKUP'
 }

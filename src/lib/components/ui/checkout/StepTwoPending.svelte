@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from '../buttons/Button.svelte';
-	import { Lock } from '@lucide/svelte';
+	import { Lock, Search } from '@lucide/svelte';
 	import IMask from 'imask';
 	import type { Customer } from '$lib/types';
 	import { onMount, onDestroy } from 'svelte';
@@ -8,7 +8,9 @@
 	import { AppConfig } from '$config';
 	import type { CustomerAddress } from '$lib/types';
 	import { getLocale } from '$lib/paraglide/runtime';
-	import { numbersOnly } from '$lib/utils';
+	import { launchToast, numbersOnly } from '$lib/utils';
+	import { toggleLoader } from '$stores/loaderStore.state.svelte';
+	import ZipQueryButton from '../buttons/ZipQueryButton.svelte';
 
 	interface Props {
 		customer: Customer | undefined;
@@ -146,6 +148,104 @@
 			isLoading = false;
 		}
 	}
+
+	/**
+	 * Validates the checkout step two form (shipping address)
+	 * @param {CustomerAddress} address - The shipping address data to validate
+	 * @returns {Object} - Validation result with valid flag and any error messages
+	 */
+	/**
+	 * Validates the checkout step two form (shipping address)
+	 * @param {CustomerAddress} address - The shipping address data to validate
+	 * @returns {Object} - Validation result with valid flag and any error messages
+	 */
+	function validateCheckoutStepTwo(address: CustomerAddress) {
+		// Initialize validation result
+		const result = {
+			valid: true,
+			errors: {} as Record<string, string>
+		};
+
+		// Extract street number from address1 if not provided separately
+		// The address1 format is expected to be: "Street name 123 / Complement"
+		const addressParts = address.address1.split(' ');
+
+		// Required fields validation
+		const requiredFields = [
+			{ field: 'address1', message: 'Endereço é obrigatório' },
+			{ field: 'city', message: 'Cidade é obrigatória' },
+			{ field: 'postcode', message: 'CEP é obrigatório' },
+			{ field: 'state', message: 'Estado é obrigatório' }
+		];
+
+		// Check each required field
+		for (const { field, message } of requiredFields) {
+			if (
+				!address[field as keyof CustomerAddress] ||
+				String(address[field as keyof CustomerAddress]).trim() === ''
+			) {
+				result.valid = false;
+				result.errors[field] = message;
+			}
+		}
+
+		// Validate number in address1
+		if (!number.trim()) {
+			result.valid = false;
+			result.errors.address1 = 'Número é obrigatório';
+		}
+
+		if (!complement.trim()) {
+			result.valid = false;
+			result.errors.address1 = 'Complemento é obligatório';
+		}
+
+		// CEP/Postcode validation - should be 8 digits for Brazil
+		if (address.country === 'BR' && address.postcode.trim()) {
+			// Remove any non-digit characters for validation
+			const cleanPostcode = address.postcode.replace(/\D/g, '');
+			if (cleanPostcode.length !== 8) {
+				result.valid = false;
+				result.errors.postcode = 'CEP deve conter 8 dígitos';
+			}
+		}
+
+		// State validation - should be 2 letters for Brazil
+		if (address.country === 'BR' && address.state) {
+			const stateRegex = /^[A-Z]{2}$/i;
+			if (!stateRegex.test(address.state)) {
+				result.valid = false;
+				result.errors.state = 'Estado deve conter 2 letras';
+			}
+		}
+
+		// Address line validation - check for reasonable length
+		if (address.address1 && address.address1.length < 5) {
+			result.valid = false;
+			result.errors.address1 = 'Endereço muito curto';
+		}
+
+		// City validation - check for reasonable length and no digits
+		if (address.city) {
+			if (address.city.length < 2) {
+				result.valid = false;
+				result.errors.city = 'Nome da cidade muito curto';
+			}
+			// Optional: Check for digits in city name
+			if (/\d/.test(address.city)) {
+				result.valid = false;
+				result.errors.city = 'Nome da cidade não deve conter números';
+			}
+		}
+
+		// Neighborhood validation (address2)
+		if (!address.address2 || address.address2.trim() === '') {
+			result.valid = false;
+			result.errors.address2 = 'Bairro é obrigatório';
+		}
+
+		return result;
+	}
 </script>
 
 <div class="mx-auto p-6 bg-white border border-grey-lighter rounded-lg shadow-sm">
@@ -182,6 +282,10 @@
 					</div>
 				{/if}
 			</div>
+			<div class="mt-3 mr-2">
+				<ZipQueryButton />
+			</div>
+
 			{#if errorMessage}
 				<p id="cep-error" class="mt-2 ml-1 text-xs text-red-500 text-red-dark font-bold">
 					{errorMessage}
@@ -190,12 +294,12 @@
 		</div>
 
 		<!-- Debug values - can be removed in production -->
-		{#if AppConfig.debug}
+		<!-- {#if AppConfig.debug}
 			<div class="p-2 bg-gray-100 text-xs">
 				<strong>Debug:</strong> CEP: {zipValue} | Street: {street} | City: {city} | State: {stateCode}
 				| Neighborhood: {neighborhood} | Visible: {addressFieldsVisible ? 'Yes' : 'No'}
 			</div>
-		{/if}
+		{/if} -->
 
 		<!-- Address Fields -->
 		{#if addressFieldsVisible}
@@ -287,30 +391,42 @@
 		{/if}
 
 		<div class="py-1">
-			<Button
-				action={() =>
-					onActionClick({
-						firstName: customer?.firstName || '',
-						lastName: customer?.lastName || '',
-						company: '',
-						address1: `${street} ${number}${complement ? ' / ' + complement : ''}`,
-						address2: `${neighborhood}`,
-						city: city,
-						postcode: zipValue,
-						country: getLocale() == 'pt' ? 'BR' : 'UY',
-						state: stateCode
-					})}
-				type="sun"
-				url="#"
-				title="CONTINUAR →"
-				size="md"
-				rounded="lg"
-				font="md"
-			>
-				{#snippet icon()}
-					<Lock class="h-4" />
-				{/snippet}
-			</Button>
+			{#if zipValue && addressFieldsVisible}
+				<Button
+					action={() => {
+						toggleLoader();
+						const frmValues = {
+							firstName: customer?.firstName || '',
+							lastName: customer?.lastName || '',
+							company: '',
+							address1: `${street} ${number}${complement ? ' / ' + complement : ''}`,
+							address2: `${neighborhood}`,
+							city: city,
+							postcode: zipValue,
+							country: getLocale() == 'pt' ? 'BR' : 'UY',
+							state: stateCode
+						};
+
+						const validation = validateCheckoutStepTwo(frmValues);
+						if (validation.valid) {
+							onActionClick(frmValues);
+						} else {
+							Object.values(validation.errors).forEach((msg) => launchToast(msg, 'error'));
+						}
+						toggleLoader();
+					}}
+					type="sun"
+					url="#"
+					title="CONTINUAR →"
+					size="md"
+					rounded="lg"
+					font="md"
+				>
+					{#snippet icon()}
+						<Lock class="h-4" />
+					{/snippet}
+				</Button>
+			{/if}
 		</div>
 	</form>
 </div>

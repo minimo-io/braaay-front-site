@@ -13,6 +13,7 @@
 	import { updateZip } from '$stores/cart.store.svelte';
 	import { UPDATE_GUEST_SHIPPING_ADDRESS } from '$lib/graphql/mutations/shipping-update.mutation';
 	import { GET_SHIPPING_ESTIMATES } from '$lib/graphql/mutations/shipping-estimates.mutation';
+	import ZipQueryButton from '../buttons/ZipQueryButton.svelte';
 
 	let zipCode = $state('01222-001');
 	let error = $state('');
@@ -215,14 +216,7 @@
 	/>
 
 	<div class="my-3 text-right mr-1">
-		<a
-			href="https://buscacepinter.correios.com.br/app/endereco/index.php"
-			target="_blank"
-			rel="nofollow noreferrer"
-			class="text-xs flex items-center justify-end font-bold text-green-medium"
-		>
-			<Search class="h-3 mr-0 pr-0 relative -right-1" />Não sei meu CEP
-		</a>
+		<ZipQueryButton />
 	</div>
 	<div>
 		<!-- <button type="submit" onclick={() => handleCouponSubmit()}>Aplicar cupom</button> -->
