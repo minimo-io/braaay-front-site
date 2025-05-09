@@ -11,6 +11,7 @@
 
 	import { DeliveryUIType } from '$lib/types';
 	import { onMount } from 'svelte';
+	import { CHECKOUT_PAYMENT_METHODS_MUTATION } from '$lib/graphql/mutations';
 	interface Props {
 		deliveryType: DeliveryUIType | null;
 		sessionToken: string;
@@ -28,11 +29,17 @@
 		try {
 			launchToast(`Obtendo parceiros...`, 'info', 2000);
 
-			// const updateResult = await getUrqlClient()
-			// 	.client.mutation(UPDATE_GUEST_SHIPPING_ADDRESS, {
-			// 		input: {}
-			// 	})
-			// 	.toPromise();
+			const updateResult = await getUrqlClient()
+				.client.mutation(CHECKOUT_PAYMENT_METHODS_MUTATION, {
+					// input: {
+					countryCode: 'BR',
+					postCode: '01222-001'
+					// }
+				})
+				.toPromise();
+			//Result
+			console.log('RESULT');
+			console.log(updateResult);
 		} catch (err) {
 			console.error(`${err}`);
 			// alert(sessionToken);

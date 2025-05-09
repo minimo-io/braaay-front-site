@@ -3,3 +3,4 @@ export * from './cart-empty.mutation';
 export * from './cart-add.mutation';
 export * from './coupon-apply.mutation';
 export * from './coupon-clear-all.mutation';
+export * from './checkout-payment-methods.mutation';
