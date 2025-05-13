@@ -41,14 +41,14 @@
       "count": 6
     },
     {
-      "name": "Cabernet Franc",
-      "url": "/uva/cabernet-franc/",
+      "name": "Alvarinho",
+      "url": "/uva/alvarinho/",
       "count": 5
     },
     {
-      "name": "Alvarinho",
-      "url": "/uva/alvarinho/",
-      "count": 4
+      "name": "Cabernet Franc",
+      "url": "/uva/cabernet-franc/",
+      "count": 5
     },
     {
       "name": "Moscato Hamburgo",
@@ -79,6 +79,11 @@
       "name": "Moscato Giallo",
       "url": "/uva/moscato-giallo/",
       "count": 3
+    },
+    {
+      "name": "Montepulciano",
+      "url": "/uva/montepulciano/",
+      "count": 2
     },
     {
       "name": "Barbera",

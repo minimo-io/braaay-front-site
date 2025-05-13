@@ -31,11 +31,14 @@
 	cart.subscribe((cart) => {
 		totalCartAmount = cart.items.reduce((count, item) => count + item.quantity, 0);
 		totalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
-		couponsCount = cart.coupons.length;
-		for (const couponCode of cart.coupons) {
-			discounts = calculateDiscount(couponCode);
-			break; // just one coupon allowed
+		if (cart.coupons) {
+			couponsCount = cart.coupons.length;
+			for (const couponCode of cart.coupons) {
+				discounts = calculateDiscount(couponCode);
+				break; // just one coupon allowed
+			}
 		}
+
 		hasItems = cart.items.length > 0;
 	});
 	let totalCartAmountWithDiscounts = $derived(totalAmount - discounts);

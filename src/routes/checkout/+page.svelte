@@ -89,9 +89,11 @@
 	cart.subscribe((cart) => {
 		cartItemsCount = cart.items.reduce((count, item) => count + item.quantity, 0);
 		cartSubTotalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
-		for (const couponCode of cart.coupons) {
-			cartDiscounts = calculateDiscount(couponCode);
-			break; // just one coupon allowed
+		if (cart.coupons) {
+			for (const couponCode of cart.coupons) {
+				cartDiscounts = calculateDiscount(couponCode);
+				break; // just one coupon allowed
+			}
 		}
 	});
 
