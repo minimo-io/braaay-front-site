@@ -38,6 +38,7 @@
 		}
 		hasItems = cart.items.length > 0;
 	});
+	let totalCartAmountWithDiscounts = $derived(totalAmount - discounts);
 </script>
 
 <main>
@@ -185,7 +186,6 @@
 							<Button
 								title="ADICIONAR"
 								width="130px"
-								url={localizeHref('/cart/')}
 								size="sm-short"
 								type="grey"
 								borderDark={true}
@@ -207,30 +207,33 @@
 							>
 						{/if}
 					</div>
-					<div class="my-4 border-t border-t-grey-lighter"></div>
-					<div class="flex justify-between items-center">
-						<p class="font-light text-[15px] self-center">Frete</p>
 
-						<Button
-							title="CALCULAR"
-							disabled={!hasItems}
-							size="sm-short"
-							width="130px"
-							type="grey"
-							borderDark={true}
-							customPx="max-h-min disabled:opacity-20"
-							action={() => {
-								openModal({
-									header: 'Calcular frete',
-									content: ShippingForm as Component
-								});
-							}}
-						>
-							{#snippet icon()}
-								<Truck class="lucide-button" />
-							{/snippet}
-						</Button>
-					</div>
+					{#if !shippingDetails.details || shippingDetails.details.length == 0}
+						<div class="my-4 border-t border-t-grey-lighter"></div>
+						<div class="flex justify-between items-center">
+							<p class="font-light text-[15px] self-center">Frete</p>
+
+							<Button
+								title="CALCULAR"
+								disabled={!hasItems}
+								size="sm-short"
+								width="130px"
+								type="grey"
+								borderDark={true}
+								customPx="max-h-min disabled:opacity-20"
+								action={() => {
+									openModal({
+										header: 'Calcular frete',
+										content: ShippingForm as Component
+									});
+								}}
+							>
+								{#snippet icon()}
+									<Truck class="lucide-button" />
+								{/snippet}
+							</Button>
+						</div>
+					{/if}
 
 					{#if shippingDetails.details && shippingDetails.details.length > 0}
 						<div in:slide={{ duration: 200 }} out:slide={{ duration: 200 }}>
@@ -262,12 +265,13 @@
 						<p class="font-roboto font-bold">Valor total</p>
 						<div class="flex flex-col font-roboto text-right">
 							<span class="font-bold text-[17px]"
-								>{m.currencySymbol()} {correctPrice(totalAmount)} no Pix</span
+								>{m.currencySymbol()}
+								{correctPrice(totalCartAmountWithDiscounts)} no Pix <br />+ Envio</span
 							>
 
 							<span class="text-sm text-[#28BA48] font-bold leading-4 pt-2">
 								ou 4x de {m.currencySymbol()}
-								{correctPrice(totalAmount / 4)} sem juros
+								{correctPrice(totalCartAmountWithDiscounts / 4)} sem juros
 								<br />
 								<a href={localizeHref('/club/')}><u>+ 5% em CASHBACK</u></a>
 							</span>

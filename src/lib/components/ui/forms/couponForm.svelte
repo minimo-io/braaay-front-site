@@ -20,7 +20,7 @@
 		document.body.classList.toggle('no-scroll');
 		try {
 			if (couponCodeSanitized.length > 3) {
-				const result = await getUrqlClient('', true)
+				const result = await getUrqlClient('', false)
 					.client.mutation(COUPON_APPLY, {
 						couponCode: couponCodeSanitized
 					})

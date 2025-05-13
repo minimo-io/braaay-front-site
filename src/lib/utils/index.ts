@@ -3,7 +3,7 @@ import { localizeHref } from '$lib/paraglide/runtime';
 export * from './smoothScroll.util';
 export * from './stripHtml.util';
 export * from './removeWPBakery.util';
-export * from './correctPrice.util';
+export * from './prices.util';
 export * from './loadMoreProducts.util';
 export * from './launchToast.util';
 export * from './cpfs.util';

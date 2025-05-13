@@ -12,7 +12,7 @@
 	import { launchToast, truncate } from '$lib/utils';
 	import { goto } from '$app/navigation';
 
-	import CheckoutSummary from '$components/ui/checkout/CheckoutSummary.svelte';
+	import CheckoutMobileSummary from '$components/ui/checkout/CheckoutMobileSummary.svelte';
 	import CheckoutChooseDelivery from '$components/ui/checkout/CheckoutChooseDelivery.svelte';
 	import PromoClub from '$components/ui/checkout/PromoClub.svelte';
 	import CheckoutCartSummary from '$components/ui/checkout/CheckoutCartSummary.svelte';
@@ -33,6 +33,8 @@
 	import StepFourPending from '$components/ui/checkout/StepFourPending.svelte';
 	import StepFourWaiting from '$components/ui/checkout/StepFourWaiting.svelte';
 
+	import { calculateDiscount, cart } from '$stores/cart.store.svelte';
+
 	interface Steps {
 		step1: boolean | object;
 		step2: boolean | object;
@@ -49,6 +51,13 @@
 	let shippingAddress = $state<CustomerAddress | null>(null);
 	let shippingOption: ShippingOption | undefined = $state();
 	let userSessionToken = $state('');
+
+	// Cart stuff
+	let cartItemsCount = $state(0);
+	let cartSubTotalAmount = $state(0);
+	// let cartTotalAmount = $state(0);
+	let cartDiscounts = $state(0);
+	// let couponsCount = $state(0);
 
 	let customer: Customer | undefined = $state();
 
@@ -75,6 +84,21 @@
 
 		toggleLoader();
 	});
+
+	// Cart Stuff ------------------------------------------------------------------------------------------------------
+	cart.subscribe((cart) => {
+		cartItemsCount = cart.items.reduce((count, item) => count + item.quantity, 0);
+		cartSubTotalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
+		for (const couponCode of cart.coupons) {
+			cartDiscounts = calculateDiscount(couponCode);
+			break; // just one coupon allowed
+		}
+	});
+
+	let cartTotalAmount = $derived(
+		cartSubTotalAmount + parseFloat(shippingOption ? shippingOption.cost : '0') - cartDiscounts
+	);
+	//  End-of Cart Stuff ----------------------------------------------------------------------------------------------
 
 	function onUpdateStepOne(customerData: Customer) {
 		editStep1 = false;
@@ -128,7 +152,7 @@
 				</div>
 
 				<!-- On mobile -->
-				<CheckoutSummary />
+				<CheckoutMobileSummary cartTotal={cartTotalAmount} />
 
 				<div class="space-y-4 px-3 md:mb-24">
 					<!-- Delivery or Pickup -->
@@ -214,7 +238,13 @@
 				<PromoClub />
 
 				<!-- Extra cart elements -->
-				<CheckoutCartSummary />
+				<CheckoutCartSummary
+					items={cartItemsCount}
+					cartTotal={cartTotalAmount}
+					cartSubTotal={cartSubTotalAmount}
+					shippingAddress={shippingOption}
+					{deliveryType}
+				/>
 
 				<div class="hidden md:block md:my-36">&nbsp;</div>
 			</div>

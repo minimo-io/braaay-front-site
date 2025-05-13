@@ -5,18 +5,22 @@
 	import { Lock } from '@lucide/svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
-	import { launchToast } from '$lib/utils';
+	import { correctPrice, launchToast } from '$lib/utils';
 	import { Sparkle } from '@lucide/svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import CheckoutProductOffers from './CheckoutProductOffers.svelte';
+	import { calculateDiscountPercentage } from '$lib/utils';
 
 	import { DeliveryUIType, type CustomerAddress } from '$lib/types';
 	import { onMount } from 'svelte';
 	import { CHECKOUT_PAYMENT_METHODS_MUTATION } from '$lib/graphql/mutations';
+
+	import { cart } from '$stores/cart.store.svelte';
+
 	interface Props {
 		deliveryType: DeliveryUIType | null;
 		sessionToken: string;
-		address: CustomerAddress;
+		address: CustomerAddress | null;
 	}
 
 	let { deliveryType, sessionToken, address }: Props = $props();
@@ -24,9 +28,18 @@
 	let loading = $state(false);
 	let error = $state('');
 
-	let countryCode = $state(address.country);
-	let postCode = $state(address.postcode);
+	let countryCode = $state(address!.country);
+	let postCode = $state(address!.postcode);
 	let paymentMethods = $state<[] | undefined>();
+
+	// Cart amount
+	let hasItems = $state(false);
+	let totalAmount = $state(0);
+
+	cart.subscribe((cart) => {
+		totalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
+		hasItems = cart.items.length > 0;
+	});
 
 	onMount(async () => {
 		// console.log('Session', sessionToken);
@@ -40,7 +53,7 @@
 		};
 
 		try {
-			launchToast(`Obtendo parceiros...`, 'info', 2000);
+			launchToast(`Obtendo formas de pagamento...`, 'info', 2000);
 
 			const updateResult = await getUrqlClient()
 				.client.mutation(
@@ -58,7 +71,7 @@
 				.toPromise();
 			//Result
 			if (updateResult.error && !updateResult.data) {
-				launchToast(`Error obteniendo métodos de pago`, 'error', 2000);
+				launchToast(`Error obteniendo métodos de pagamento`, 'error', 2000);
 			}
 
 			paymentMethods =
@@ -78,7 +91,7 @@
 			// console.log(updateResult);
 		} catch (err) {
 			console.error(`${err}`);
-			launchToast(`Error obteniendo métodos de pago ${err}`, 'error', 2000);
+			launchToast(`Error obteniendo métodos de pagamento ${err}`, 'error', 2000);
 			// alert(sessionToken);
 		}
 		toggleLoader();
@@ -99,45 +112,34 @@
 	<form class="">
 		{#if paymentMethods}
 			{#each paymentMethods as method, i (i)}
+				{@const discountPercentage = calculateDiscountPercentage(
+					totalAmount,
+					totalAmount + method.cost
+				)}
 				<div
 					class="bg-grey-background border-grey-light border px-3 py-2 rounded-lg font-roboto mb-2"
 				>
 					<label class="flex justify-between text-sm cursor-pointer">
 						<div class="self-center flex">
-							<input type="radio" tabindex="0" name="radio1" />
+							<input type="radio" tabindex="0" name="radio1" value={method.id} />
 							<span class="ml-2 text-grey-blueish">{method.title}</span>
 						</div>
-						<div class="font-bold font-roboto">{m.currencySymbol()}&nbsp;{method.cost}</div>
+						<div class="font-bold font-roboto">
+							{#if discountPercentage > 0}
+								<span class="text-green-medium font-medium">
+									{discountPercentage}% OFF
+								</span>
+								/
+							{/if}
+
+							{m.currencySymbol()}&nbsp;{correctPrice(totalAmount + method.cost)}
+						</div>
 					</label>
 				</div>
 			{/each}
 		{:else}
 			<div>Sem métodos de pagamento.</div>
 		{/if}
-
-		<!-- <div
-			class="bg-grey-background border-grey-light mt-0 border px-3 py-2 rounded-lg font-roboto mb-2"
-		>
-			<label class="flex justify-between text-sm cursor-pointer" for="radio1">
-				<div class="self-center flex">
-					<input type="radio" id="radio1" name="radio1" tabindex="0" />
-					<span class="ml-2 text-grey-blueish">Boleto bancário</span>
-				</div>
-				<div class="font-bold font-roboto">R$&nbsp;60,04</div>
-			</label>
-		</div>
-
-		<div
-			class="bg-grey-background border-grey-light mt-0 border px-3 py-2 rounded-lg font-roboto mb-2"
-		>
-			<label class="flex justify-between text-sm cursor-pointer">
-				<div class="self-center flex">
-					<input type="radio" name="radio1" tabindex="0" />
-					<span class="ml-2 text-grey-blueish">Cartão de crédito</span>
-				</div>
-				<div class="font-bold font-roboto">R$&nbsp;60,04</div>
-			</label>
-		</div> -->
 
 		<!-- Promocoes -->
 		<div class="flex items-center text-sm my-5 px-3">
@@ -149,12 +151,6 @@
 		<CheckoutProductOffers />
 
 		<!-- Botão de continuar -->
-		<!-- <button
-            type="submit"
-            class="w-full mt-2 text-sm px-4 py-3 bg-sun text-white font-medium rounded-lg border-grey-light focus:ring-2 focus:ring-sun focus:outline-none"
-        >
-            FINALIZAR COMPRA
-        </button> -->
 		<div class="py-3">
 			<Button
 				type="sun"

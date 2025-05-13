@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PrevNextButton from '../buttons/PrevNextButton.svelte';
 	import Button from '../buttons/Button.svelte';
+	// Import the data (later via prev)
 </script>
 
 <div class="flex items-center justify-between mb-2 pl-2">
@@ -20,6 +21,7 @@
 		/>
 	</div>
 </div>
+
 <div class="bg-yellow-light border-grey-light border rounded-lg border-dashed p-5 mb-2">
 	<div class="flex justify-center align-middle">
 		<div class="flex flex-col md:flex-row">

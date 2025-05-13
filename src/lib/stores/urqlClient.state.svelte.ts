@@ -96,10 +96,10 @@ export function getUrqlClient(authToken?: string, forceLoggedOut?: boolean) {
 		return urqlClientUyLoggedIn;
 	} else {
 		if (forceLoggedOut || !(token || authToken)) {
-			// console.log('Logged out PT');
+			console.log('Forced Loogged out PT');
 			return urqlClientPtLoggedOut;
 		}
-		// console.log('Logged in PT');
+		console.log('Logged in PT');
 		return urqlClientPtLoggedIn;
 	}
 }
