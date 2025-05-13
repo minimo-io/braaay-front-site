@@ -3,47 +3,85 @@
 
 	import Button from '../buttons/Button.svelte';
 	import { Lock } from '@lucide/svelte';
+	import { m } from '$lib/paraglide/messages';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { launchToast } from '$lib/utils';
 	import { Sparkle } from '@lucide/svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import CheckoutProductOffers from './CheckoutProductOffers.svelte';
 
-	import { DeliveryUIType } from '$lib/types';
+	import { DeliveryUIType, type CustomerAddress } from '$lib/types';
 	import { onMount } from 'svelte';
 	import { CHECKOUT_PAYMENT_METHODS_MUTATION } from '$lib/graphql/mutations';
 	interface Props {
 		deliveryType: DeliveryUIType | null;
 		sessionToken: string;
+		address: CustomerAddress;
 	}
 
-	let { deliveryType, sessionToken }: Props = $props();
+	let { deliveryType, sessionToken, address }: Props = $props();
 
 	let loading = $state(false);
 	let error = $state('');
 
+	let countryCode = $state(address.country);
+	let postCode = $state(address.postcode);
+	let paymentMethods = $state<[] | undefined>();
+
 	onMount(async () => {
+		// console.log('Session', sessionToken);
 		toggleLoader();
 		loading = true;
 		error = '';
+
+		const sessionHeaders = {
+			'Content-Type': 'application/json',
+			'woocommerce-session': `Session ${sessionToken}`
+		};
+
 		try {
 			launchToast(`Obtendo parceiros...`, 'info', 2000);
 
 			const updateResult = await getUrqlClient()
-				.client.mutation(CHECKOUT_PAYMENT_METHODS_MUTATION, {
-					// input: {
-					countryCode: 'BR',
-					postCode: '01222-001'
-					// }
-				})
+				.client.mutation(
+					CHECKOUT_PAYMENT_METHODS_MUTATION,
+					{
+						// input: {
+						countryCode: countryCode,
+						postCode: postCode
+						// }
+					},
+					{
+						fetchOptions: { headers: sessionHeaders }
+					}
+				)
 				.toPromise();
 			//Result
-			console.log('RESULT');
-			console.log(updateResult);
+			if (updateResult.error && !updateResult.data) {
+				launchToast(`Error obteniendo métodos de pago`, 'error', 2000);
+			}
+
+			paymentMethods =
+				updateResult.data.getAvailablePaymentMethods.shippingPaymentMethods.paymentMethods ||
+				undefined;
+
+			// Payment methods
+			// if (paymentMethods) {
+
+			// 	for (const method of paymentMethods) {
+			// 		console.log(`Method ${method.id}`);
+			// 	}
+
+			// }
+
+			// console.log('RESULT');
+			// console.log(updateResult);
 		} catch (err) {
 			console.error(`${err}`);
+			launchToast(`Error obteniendo métodos de pago ${err}`, 'error', 2000);
 			// alert(sessionToken);
 		}
+		toggleLoader();
 	});
 </script>
 
@@ -59,17 +97,25 @@
 	</div>
 
 	<form class="">
-		<div class="bg-grey-background border-grey-light border px-3 py-2 rounded-lg font-roboto mb-2">
-			<label class="flex justify-between text-sm cursor-pointer">
-				<div class="self-center flex">
-					<input type="radio" tabindex="0" name="radio1" />
-					<span class="ml-2 text-grey-blueish">PIX</span>
+		{#if paymentMethods}
+			{#each paymentMethods as method, i (i)}
+				<div
+					class="bg-grey-background border-grey-light border px-3 py-2 rounded-lg font-roboto mb-2"
+				>
+					<label class="flex justify-between text-sm cursor-pointer">
+						<div class="self-center flex">
+							<input type="radio" tabindex="0" name="radio1" />
+							<span class="ml-2 text-grey-blueish">{method.title}</span>
+						</div>
+						<div class="font-bold font-roboto">{m.currencySymbol()}&nbsp;{method.cost}</div>
+					</label>
 				</div>
-				<div class="font-bold font-roboto">R$&nbsp;60,04</div>
-			</label>
-		</div>
+			{/each}
+		{:else}
+			<div>Sem métodos de pagamento.</div>
+		{/if}
 
-		<div
+		<!-- <div
 			class="bg-grey-background border-grey-light mt-0 border px-3 py-2 rounded-lg font-roboto mb-2"
 		>
 			<label class="flex justify-between text-sm cursor-pointer" for="radio1">
@@ -91,7 +137,7 @@
 				</div>
 				<div class="font-bold font-roboto">R$&nbsp;60,04</div>
 			</label>
-		</div>
+		</div> -->
 
 		<!-- Promocoes -->
 		<div class="flex items-center text-sm my-5 px-3">

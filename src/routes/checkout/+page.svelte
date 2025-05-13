@@ -197,7 +197,11 @@
 
 					<!-- Form step 4 -->
 					{#if steps.step1 && steps.step2 && steps.step3}
-						<StepFourPending {deliveryType} sessionToken={userSessionToken} />
+						<StepFourPending
+							{deliveryType}
+							sessionToken={userSessionToken}
+							address={shippingAddress}
+						/>
 					{:else}
 						<StepFourWaiting {deliveryType} />
 					{/if}
