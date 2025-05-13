@@ -105,10 +105,18 @@
 		customer = customerData;
 
 		steps.step1 = customer;
+		if (deliveryType == 'PICKUP') {
+			steps.step2 = true;
+			steps.step3 = true;
+		}
 	}
 
 	function onActionStepOneDone() {
 		editStep1 = true;
+		steps.step1 = false;
+		steps.step2 = false;
+		steps.step3 = false;
+		shippingOption = undefined;
 	}
 
 	function handleDeliveryTypeUpdate(delivery: DeliveryUIType) {
@@ -128,6 +136,11 @@
 				editStep2 = false;
 				steps.step2 = false;
 				steps.step3 = false;
+			} else {
+				editStep2 = false;
+				steps.step1 = false;
+				steps.step2 = false;
+				steps.step3 = false;
 			}
 		}
 	}
@@ -136,6 +149,8 @@
 	function onUpdateShippingData(shippingData: CustomerAddress) {
 		shippingAddress = shippingData;
 		editStep2 = false;
+		steps.step3 = false;
+		shippingOption = undefined;
 		if (steps.step1) {
 			steps.step2 = true;
 		}
