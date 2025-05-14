@@ -19,18 +19,18 @@
 	// CPF Mask
 	let cpfMask: any;
 	let cpfInputElement: HTMLInputElement;
-	let cpfValue = $state(customer?.cpf || '');
+	let cpfValue = $state(customer?.cpf || '06515267797');
 	const cpfPlaceholder = '000.000.000-00';
 
 	// Email
-	let emailValue = $state(customer?.email || '');
+	let emailValue = $state(customer?.email || 'test@test.com');
 
 	// No longer using emailMask
-	let firstName = $state(customer?.firstName || '');
-	let lastName = $state(customer?.lastName || '');
+	let firstName = $state(customer?.firstName || 'Pepe');
+	let lastName = $state(customer?.lastName || 'Gonzales');
 
 	// Date Mask
-	let birthDateValue = $state(customer?.birthDate || '');
+	let birthDateValue = $state(customer?.birthDate || '02/01/1988');
 	let birthDateInputElement: HTMLInputElement;
 	let birthDateMask: any;
 	const datePlaceholder = 'DD/MM/AAAA';
@@ -38,7 +38,7 @@
 	// phone imask
 	let phoneMask: any;
 	let phoneInputElement: HTMLInputElement;
-	let phoneValue = $state(customer?.telephone || '');
+	let phoneValue = $state(customer?.telephone || '11966090456');
 	// const phonePlaceholderLandline = '(00) 0000-0000';
 	const phonePlaceholderMobile = '(00) 0 0000-0000';
 
@@ -258,7 +258,7 @@
 			<!-- Data de nascimento -->
 			<input
 				bind:this={birthDateInputElement}
-				type="text"
+				type="tel"
 				placeholder={datePlaceholder}
 				class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			/>

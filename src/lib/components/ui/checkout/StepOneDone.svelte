@@ -40,7 +40,7 @@
 	<form class="space-y-4 text-sm text-green-medium">
 		{#if customer?.email}
 			<div>
-				{customer?.email} / {formatPhone(getLocale(), customer.telephone)}
+				{customer?.email} / {formatPhone(getLocale(), customer.telephone) || '(Sem telefone)'}
 				<br />
 				<span>{customer?.firstName} {customer?.lastName}</span>
 

@@ -152,7 +152,7 @@
 			</div>
 
 			<div class="mt-8">
-				<h2 class="text-[19px] ml-2 mb-4 font-roboto">Resumo da compra</h2>
+				<h2 class="text-[19px] ml-2 mb-4 font-roboto">{m.cartSummaryTitle()}</h2>
 
 				<div class="bg-white py-4 px-5 border border-grey-lighter rounded-lg">
 					<div class="flex justify-between mt-2">
@@ -162,9 +162,10 @@
 						<p class="font-roboto self-center">{m.currencySymbol()} {correctPrice(totalAmount)}</p>
 					</div>
 					<div class="my-4 border-t border-t-grey-lighter"></div>
+					<!-- Coupons -->
 					<div class="flex justify-between items-center">
 						<div class="!font-light font-roboto text-[15px] self-center flex flex-col">
-							Cupom de desconto
+							{m.discountCouponTitle()}
 							{#if couponsCount >= 1}
 								<MoreInfoButton
 									title="Remover"

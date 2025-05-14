@@ -13,11 +13,14 @@
 	"blog": "BLOG",
 	"showroom": "SHOWROOM",
 
+	"cartSummaryTitle": "Resumo da compra",
 	"emptyCart": "Seu carrinho está vazio!",
 	"addToCart": "ADICIONAR À SACOLA",
 	"addingToCart": "Adicionando...",
 	"addingToCartOk": "Adicionado com sucesso",
 	"cartSummary": "Resumo do carrinho",
+
+	"discountCouponTitle": "Cupom de desconto",
 
 	"continue": "Continuar",
 

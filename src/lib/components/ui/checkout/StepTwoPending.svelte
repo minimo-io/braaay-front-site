@@ -18,6 +18,8 @@
 	}
 	let { customer, onActionClick }: Props = $props();
 
+	// let realCustomer: Customer | undefined = $state();
+
 	// Form state with $state for reactivity
 	let zipValue = $state(customer?.addresses?.shipping?.postcode || '');
 	let street = $state(customer?.addresses?.shipping?.address1 || '');
@@ -34,7 +36,7 @@
 
 	// Update form fields whenever customer changes
 	$effect(() => {
-		if (customer?.addresses?.shipping) {
+		if (customer?.addresses?.shipping?.postcode) {
 			// Update all our form fields from customer data
 			zipValue = customer.addresses.shipping.postcode || '';
 			// street = customer.addresses.shipping.address1 || '';
@@ -64,7 +66,7 @@
 		zipMask = IMask(zipInputElement, {
 			mask: zipPlaceholder
 		});
-
+		console.log('CUSTOMER', customer);
 		// Set initial value if available
 		if (zipValue) {
 			zipMask.unmaskedValue = zipValue;
@@ -269,7 +271,7 @@
 					bind:this={zipInputElement}
 					oninput={handleZipChange}
 					onblur={handleZipBlur}
-					type="text"
+					type="tel"
 					placeholder={zipPlaceholder}
 					class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
 					aria-describedby={errorMessage ? 'cep-error' : undefined}
@@ -302,6 +304,7 @@
 		{/if} -->
 
 		<!-- Address Fields -->
+
 		{#if addressFieldsVisible}
 			<!-- Street -->
 			<div>
@@ -326,7 +329,7 @@
 						id="number"
 						bind:value={number}
 						use:numbersOnly
-						type="text"
+						type="tel"
 						inputmode="numeric"
 						pattern="[0-9]*"
 						maxlength="5"
@@ -416,7 +419,6 @@
 						toggleLoader();
 					}}
 					type="sun"
-					url="#"
 					title="CONTINUAR →"
 					size="md"
 					rounded="lg"

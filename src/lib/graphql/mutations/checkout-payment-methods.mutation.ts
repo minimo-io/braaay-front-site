@@ -54,3 +54,13 @@ export const CHECKOUT_PAYMENT_METHODS_MUTATION = gql`
 //       }
 //     }
 //   }
+
+// query{
+//   paymentGateways{
+//     nodes{
+//       id
+//       title
+//       description
+//     }
+//   }
+// }

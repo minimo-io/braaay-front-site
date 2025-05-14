@@ -28,9 +28,18 @@
 	let loading = $state(false);
 	let error = $state('');
 
-	let countryCode = $state(address!.country);
-	let postCode = $state(address!.postcode);
+	if (!address) {
+		console.log(`NO ADDRESS, DELIVERY TYPE ${deliveryType}`);
+	} else {
+		// alert(address);
+	}
+
+	let countryCode = $state(address ? address.country : 'BR');
+	let postCode = $state(address ? address.postcode : '05411-000');
 	let paymentMethods = $state<[] | undefined>();
+	let guessSessionToken = $state(
+		'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2JyYWFheS5jb20iLCJpYXQiOjE3NDcyMzYxNDcsIm5iZiI6MTc0NzIzNjE0NywiZXhwIjoxNzQ3NDA4OTQ3LCJkYXRhIjp7ImN1c3RvbWVyX2lkIjoidF9lODMzNWUxZDVlY2ZiN2ViOTVhNjczMzBjZDE2YmIifX0.BKVFElrsiw0SzM4Bc11sJW5Oe3f7iJsfQnWkmtiItpw'
+	);
 
 	// Cart amount
 	let hasItems = $state(false);
@@ -49,7 +58,7 @@
 
 		const sessionHeaders = {
 			'Content-Type': 'application/json',
-			'woocommerce-session': `Session ${sessionToken}`
+			'woocommerce-session': `Session ${sessionToken || guessSessionToken}`
 		};
 
 		try {
@@ -138,7 +147,7 @@
 				</div>
 			{/each}
 		{:else}
-			<div>Sem métodos de pagamento.</div>
+			<div class="text-xs">Carregando método de pagamento...</div>
 		{/if}
 
 		<!-- Promocoes -->
@@ -156,7 +165,7 @@
 				type="sun"
 				url="#"
 				action={() => {
-					alert('Submit');
+					// alert('Submit');
 				}}
 				title="FINALIZAR COMPRA"
 				size="xl"

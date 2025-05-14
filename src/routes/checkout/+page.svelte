@@ -57,7 +57,7 @@
 	let cartSubTotalAmount = $state(0);
 	// let cartTotalAmount = $state(0);
 	let cartDiscounts = $state(0);
-	// let couponsCount = $state(0);
+	let couponsCount = $state(0);
 
 	let customer: Customer | undefined = $state();
 
@@ -74,7 +74,6 @@
 				launchToast('Houve um error tentando obter os dados do cliente 2', 'error');
 				goto(localizeHref('/cart/'));
 			}
-
 			customer = mapCustomerToUser(customerResult.data);
 		} catch (err) {
 			console.error(`Error: ${err}`);
@@ -90,6 +89,7 @@
 		cartItemsCount = cart.items.reduce((count, item) => count + item.quantity, 0);
 		cartSubTotalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
 		if (cart.coupons) {
+			couponsCount = cart.coupons.length;
 			for (const couponCode of cart.coupons) {
 				cartDiscounts = calculateDiscount(couponCode);
 				break; // just one coupon allowed
@@ -107,6 +107,7 @@
 		customer = customerData;
 
 		steps.step1 = customer;
+
 		if (deliveryType == 'PICKUP') {
 			steps.step2 = true;
 			steps.step3 = true;
@@ -261,6 +262,8 @@
 					cartSubTotal={cartSubTotalAmount}
 					shippingAddress={shippingOption}
 					{deliveryType}
+					{couponsCount}
+					{cartDiscounts}
 				/>
 
 				<div class="hidden md:block md:my-36">&nbsp;</div>

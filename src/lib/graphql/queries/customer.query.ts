@@ -86,6 +86,12 @@ export function mapCustomerToUser(response: CustomerGraphQLResponse): Customer {
 	// 	metadata[item.key] = item.value;
 	// });
 
+	// If there is no data in woocommerce shipping entry, then use the billing entry.
+	let activeCustomerShipping = customer.shipping;
+	if (!customer.shipping.firstName && customer.billing.firstName) {
+		activeCustomerShipping = customer.billing;
+	}
+
 	return {
 		databaseId: customer.databaseId,
 
@@ -102,7 +108,7 @@ export function mapCustomerToUser(response: CustomerGraphQLResponse): Customer {
 
 		addresses: {
 			// billing: customer.billing,
-			shipping: customer.shipping
+			shipping: activeCustomerShipping
 		}
 		// vatExempt: customer.isVatExempt,
 		// orderHistory: customer.orders.nodes
