@@ -4,12 +4,14 @@
 	import { m } from '$lib/paraglide/messages';
 	import { correctPrice } from '$lib/utils';
 	import { onMount } from 'svelte';
+	import type { PaymentMethod } from '$lib/types';
 
 	interface Props {
 		cartTotal: number;
+		paymentMethodSelected: PaymentMethod | undefined;
 	}
 
-	let { cartTotal }: Props = $props();
+	let { cartTotal, paymentMethodSelected }: Props = $props();
 
 	// State to track if the component should be fixed
 	let isFixed = $state(false);

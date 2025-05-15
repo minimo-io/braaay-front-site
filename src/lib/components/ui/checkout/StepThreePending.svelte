@@ -5,11 +5,18 @@
 	import { m } from '$lib/paraglide/messages';
 	import { UPDATE_GUEST_SHIPPING_ADDRESS } from '$lib/graphql/mutations/shipping-update.mutation';
 	import { GET_SHIPPING_ESTIMATES } from '$lib/graphql/mutations/shipping-estimates.mutation';
-	import type { Customer, CustomerAddress, ShippingOption, ShippingRate } from '$lib/types';
+	import type {
+		CartItem,
+		Customer,
+		CustomerAddress,
+		ShippingOption,
+		ShippingRate
+	} from '$lib/types';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { launchToast } from '$lib/utils';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
-	import { CART_ADD_MUTATION } from '$lib/graphql/mutations';
+	import { CART_ADD_ITEMS_MUTATION, CART_ADD_MUTATION } from '$lib/graphql/mutations';
+	import { cart } from '$stores/cart.store.svelte';
 
 	interface Props {
 		customer: Customer | undefined;
@@ -63,29 +70,46 @@
 			currentSessionToken = sessionToken;
 			let addToCartResponse;
 
-			// 			mutation{
-			//   addCartItems(input:{items:{
-			//     productId:1,
-			//     quantity: 1,
+			// let cartItems: CartItem[] = [];
+			let cartItemsForGraphQL: { productId: number; quantity: number }[] = [];
+			cart.subscribe((cart) => {
+				cart.items.forEach((item) => {
+					cartItemsForGraphQL.push({
+						productId: item.id,
+						quantity: item.quantity
+					});
+				});
+			});
+			// get all cart items
 
-			//   }}){
-			//     cart{
-			//       availableShippingMethods{
-			//         rates{
-			//           id
-			//           methodId
-			//           label
-			//           cost
-			//         }
-			//       }
-			//     }
-			//   }
-			// }
+			// const addToCartResult = await getUrqlClient()
+			// 	.client.mutation(
+			// 		CART_ADD_MUTATION,
+			// 		{ productId: 131701, quantity: 1 },
+			// 		{
+			// 			fetchOptions: { headers: sessionHeaders },
+			// 			fetch: (input, init) => {
+			// 				return fetch(input, init).then((response) => {
+			// 					// Capture any new session token if provided
+			// 					const newSession = response.headers.get('woocommerce-session');
+			// 					if (newSession) {
+			// 						currentSessionToken = newSession.replace('Session ', '');
+			// 						// console.log('New session from add to cart:', currentSessionToken);
+			// 					}
+			// 					addToCartResponse = response;
+			// 					return response;
+			// 				});
+			// 			}
+			// 		}
+			// 	)
+			// 	.toPromise();
 
 			const addToCartResult = await getUrqlClient()
 				.client.mutation(
-					CART_ADD_MUTATION,
-					{ productId: 131701, quantity: 1 },
+					CART_ADD_ITEMS_MUTATION,
+					{
+						items: cartItemsForGraphQL
+					},
 					{
 						fetchOptions: { headers: sessionHeaders },
 						fetch: (input, init) => {

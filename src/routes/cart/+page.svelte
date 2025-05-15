@@ -188,7 +188,7 @@
 
 						{#if couponsCount < 1}
 							<Button
-								title="ADICIONAR"
+								title={m.add()}
 								width="130px"
 								size="sm-short"
 								type="grey"

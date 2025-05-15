@@ -12,6 +12,7 @@ export * from './drawer.types';
 export * from './customer.types';
 export * from './cart.types';
 export * from './shipping.types';
+export * from './payments.types';
 
 export interface Wine {
 	title: string;

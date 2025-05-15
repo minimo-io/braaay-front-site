@@ -4,7 +4,7 @@
 	import { clearAllCoupons } from '$stores/cart.store.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { correctPrice } from '$lib/utils';
-	import type { ShippingOption, DeliveryUIType } from '$lib/types';
+	import type { ShippingOption, DeliveryUIType, PaymentMethod } from '$lib/types';
 	import MoreInfoButton from '../buttons/MoreInfoButton.svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
@@ -14,6 +14,7 @@
 	import CouponForm from '../forms/couponForm.svelte';
 	import type { Component } from 'svelte';
 	import { Gift } from '@lucide/svelte';
+	import { subtractPercentage, calculateDiscountPercentage } from '$lib/utils';
 
 	interface Props {
 		items: number;
@@ -23,6 +24,7 @@
 		deliveryType: DeliveryUIType | null;
 		couponsCount: number;
 		cartDiscounts: number;
+		paymentMethodSelected: PaymentMethod | undefined;
 	}
 
 	let {
@@ -32,8 +34,11 @@
 		shippingAddress,
 		deliveryType,
 		couponsCount,
-		cartDiscounts
+		cartDiscounts,
+		paymentMethodSelected
 	}: Props = $props();
+
+	let cartTotalMinus5 = $derived(subtractPercentage(cartTotal, 5));
 </script>
 
 <div class="mt-5">
@@ -74,7 +79,7 @@
 
 			{#if couponsCount < 1}
 				<Button
-					title="ADICIONAR"
+					title={m.add()}
 					width="130px"
 					size="sm-short"
 					type="grey"
@@ -100,7 +105,8 @@
 
 		<!-- Divider  -->
 		<div class="my-4 border-t border-t-grey-lighter"></div>
-		<!-- Shipping -->
+
+		<!-- Shipping costs -->
 		<div class="flex justify-between mt-2">
 			<p class="font-light text-[15px] self-center">Envío</p>
 			{#if deliveryType == 'PICKUP'}
@@ -118,20 +124,53 @@
 			{/if}
 		</div>
 
+		<!-- Payment method discount -->
+		{#if paymentMethodSelected?.cost}
+			<!-- Divider  -->
+			<div class="my-4 border-t border-t-grey-lighter"></div>
+
+			<div class="flex justify-between mt-2">
+				<p class="font-light text-[15px] self-center">
+					Desconto {paymentMethodSelected.title}
+				</p>
+				<p class="font-roboto self-center text-red-dark">
+					{m.currencySymbol()}
+					{correctPrice(paymentMethodSelected.cost)}
+				</p>
+			</div>
+		{:else if paymentMethodSelected == undefined}
+			<div class="my-4 border-t border-t-grey-lighter"></div>
+
+			<div class="flex justify-between mt-2">
+				<p class="font-light text-[15px] self-center">Desconto PIX</p>
+				<p class="font-roboto self-center text-red-dark">
+					{m.currencySymbol()}
+					<!-- {correctPrice(paymentMethodSelected.cost)} -->
+					-{correctPrice(calculateDiscountPercentage(cartTotal, cartTotalMinus5))}
+				</p>
+			</div>
+		{/if}
+
 		<Divider color="blue" extraClasses="my-4 !border-b-grey-lighter" />
 
 		<div class="flex justify-between pt-1 mb-2">
 			<p class="font-roboto font-bold">Valor total</p>
-			<div class="flex flex-col font-roboto text-right">
-				<span class="font-bold text-[17px]"
-					>{m.currencySymbol()} {correctPrice(cartTotal)} no Pix</span
-				>
+			<div class="flex flex-col font-roboto text-right font-bold">
+				{#if paymentMethodSelected}
+					{m.currencySymbol()}
+					{correctPrice(cartTotal + paymentMethodSelected.cost)}
+				{:else}
+					<span class="font-bold text-[17px]">
+						{m.currencySymbol()}
+						{correctPrice(cartTotalMinus5)} no Pix
+					</span>
 
-				<span class="text-sm text-[#28BA48] font-bold leading-4">
-					ou 4x de {m.currencySymbol()} 5,99 sem juros
-					<br />
-					<a href="/"><u>+ 5% em CASHBACK</u></a>
-				</span>
+					<span class="text-sm text-[#28BA48] font-bold leading-4">
+						ou 4x de {m.currencySymbol()} 5,99 sem juros
+						<br />
+						<a href="/"><u>+ 5% em CASHBACK</u></a>
+					</span>
+				{/if}
 			</div>
 		</div>
 		<div class="py-2 mt-4 px-5 border border-grey-lighter rounded-full bg-blue text-white">

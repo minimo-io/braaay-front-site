@@ -11,7 +11,7 @@
 	import CheckoutProductOffers from './CheckoutProductOffers.svelte';
 	import { calculateDiscountPercentage } from '$lib/utils';
 
-	import { DeliveryUIType, type CustomerAddress } from '$lib/types';
+	import { DeliveryUIType, type CustomerAddress, type PaymentMethod } from '$lib/types';
 	import { onMount } from 'svelte';
 	import { CHECKOUT_PAYMENT_METHODS_MUTATION } from '$lib/graphql/mutations';
 
@@ -21,9 +21,10 @@
 		deliveryType: DeliveryUIType | null;
 		sessionToken: string;
 		address: CustomerAddress | null;
+		onUpdatePayment: (method) => void;
 	}
 
-	let { deliveryType, sessionToken, address }: Props = $props();
+	let { deliveryType, sessionToken, address, onUpdatePayment }: Props = $props();
 
 	let loading = $state(false);
 	let error = $state('');
@@ -36,7 +37,7 @@
 
 	let countryCode = $state(address ? address.country : 'BR');
 	let postCode = $state(address ? address.postcode : '05411-000');
-	let paymentMethods = $state<[] | undefined>();
+	let paymentMethods = $state<PaymentMethod[] | undefined>();
 	let guessSessionToken = $state(
 		'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2JyYWFheS5jb20iLCJpYXQiOjE3NDcyMzYxNDcsIm5iZiI6MTc0NzIzNjE0NywiZXhwIjoxNzQ3NDA4OTQ3LCJkYXRhIjp7ImN1c3RvbWVyX2lkIjoidF9lODMzNWUxZDVlY2ZiN2ViOTVhNjczMzBjZDE2YmIifX0.BKVFElrsiw0SzM4Bc11sJW5Oe3f7iJsfQnWkmtiItpw'
 	);
@@ -83,21 +84,26 @@
 				launchToast(`Error obteniendo métodos de pagamento`, 'error', 2000);
 			}
 
-			paymentMethods =
+			// paymentMethods = [];
+
+			let paymentMethodsRaw =
 				updateResult.data.getAvailablePaymentMethods.shippingPaymentMethods.paymentMethods ||
 				undefined;
 
-			// Payment methods
-			// if (paymentMethods) {
+			paymentMethods = [];
+			for (const pm of paymentMethodsRaw) {
+				let methodObject: PaymentMethod = {
+					id: pm.id,
+					title: pm.title,
+					description: pm.description,
+					cost: pm.cost,
+					feeDetails: pm.feeDetails
+				};
 
-			// 	for (const method of paymentMethods) {
-			// 		console.log(`Method ${method.id}`);
-			// 	}
-
-			// }
-
-			// console.log('RESULT');
-			// console.log(updateResult);
+				// Add payment method
+				paymentMethods?.push(methodObject);
+			}
+			// console.log('Payment methods', paymentMethods);
 		} catch (err) {
 			console.error(`${err}`);
 			launchToast(`Error obteniendo métodos de pagamento ${err}`, 'error', 2000);
@@ -130,7 +136,15 @@
 				>
 					<label class="flex justify-between text-sm cursor-pointer">
 						<div class="self-center flex">
-							<input type="radio" tabindex="0" name="radio1" value={method.id} />
+							<input
+								type="radio"
+								tabindex="0"
+								name="radio1"
+								value={method.id}
+								onclick={() => {
+									onUpdatePayment(method);
+								}}
+							/>
 							<span class="ml-2 text-grey-blueish">{method.title}</span>
 						</div>
 						<div class="font-bold font-roboto">
@@ -147,7 +161,7 @@
 				</div>
 			{/each}
 		{:else}
-			<div class="text-xs">Carregando método de pagamento...</div>
+			<div class="text-xs">Carregando métodos de pagamento...</div>
 		{/if}
 
 		<!-- Promocoes -->

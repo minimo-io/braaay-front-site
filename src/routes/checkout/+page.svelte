@@ -7,7 +7,7 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { CUSTOMER_QUERY, mapCustomerToUser } from '$lib/graphql/queries';
-	import type { Customer, CustomerAddress, ShippingOption } from '$lib/types';
+	import type { Customer, CustomerAddress, PaymentMethod, ShippingOption } from '$lib/types';
 	import { DeliveryUIType } from '$lib/types';
 	import { launchToast, truncate } from '$lib/utils';
 	import { goto } from '$app/navigation';
@@ -51,6 +51,7 @@
 	let shippingAddress = $state<CustomerAddress | null>(null);
 	let shippingOption: ShippingOption | undefined = $state();
 	let userSessionToken = $state('');
+	let paymentMethodSelected = $state<PaymentMethod>();
 
 	// Cart stuff
 	let cartItemsCount = $state(0);
@@ -119,6 +120,7 @@
 		steps.step1 = false;
 		steps.step2 = false;
 		steps.step3 = false;
+		paymentMethodSelected = undefined;
 		shippingOption = undefined;
 	}
 
@@ -153,6 +155,7 @@
 		shippingAddress = shippingData;
 		editStep2 = false;
 		steps.step3 = false;
+
 		shippingOption = undefined;
 		if (steps.step1) {
 			steps.step2 = true;
@@ -170,7 +173,7 @@
 				</div>
 
 				<!-- On mobile -->
-				<CheckoutMobileSummary cartTotal={cartTotalAmount} />
+				<CheckoutMobileSummary cartTotal={cartTotalAmount} {paymentMethodSelected} />
 
 				<div class="space-y-4 px-3 md:mb-24">
 					<!-- Delivery or Pickup -->
@@ -197,6 +200,7 @@
 							<StepTwoDone
 								{shippingAddress}
 								onActionClick={() => {
+									paymentMethodSelected = undefined;
 									editStep2 = true;
 									steps.step2 = false;
 								}}
@@ -227,6 +231,7 @@
 							<StepThreeDone
 								shippingAddress={shippingOption}
 								onUpdate={() => {
+									paymentMethodSelected = undefined;
 									editStep3 = true;
 									steps.step3 = false;
 									shippingOption = undefined;
@@ -243,6 +248,9 @@
 							{deliveryType}
 							sessionToken={userSessionToken}
 							address={shippingAddress}
+							onUpdatePayment={(method: PaymentMethod) => {
+								paymentMethodSelected = method;
+							}}
 						/>
 					{:else}
 						<StepFourWaiting {deliveryType} />
@@ -264,6 +272,7 @@
 					{deliveryType}
 					{couponsCount}
 					{cartDiscounts}
+					{paymentMethodSelected}
 				/>
 
 				<div class="hidden md:block md:my-36">&nbsp;</div>
