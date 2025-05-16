@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Check, MapPin } from '@lucide/svelte';
 	import MoreInfoButton from '../buttons/MoreInfoButton.svelte';
+	import { AppConfig } from '$config';
+	import { m } from '$lib/paraglide/messages';
 </script>
 
 <div class="mx-auto p-6 border border-green-dark bg-green-light rounded-lg shadow-sm">
@@ -11,7 +13,7 @@
 			>
 				<Check class="h-3 ml-1" />
 			</span>
-			<span class="font-bold">Entrega:&nbsp;</span> Retirada no showroom
+			<span class="font-bold">Entrega:&nbsp;</span> Retirada no Showroom
 		</h2>
 	</div>
 
@@ -19,13 +21,13 @@
 		<div>R. Cristiano Viana, 62 - cj 35 - Cerqueira César, São Paulo - SP, 05411-000</div>
 		<div class="mt-1 right-[6px] relative">
 			<a
-				href="https://maps.app.goo.gl/C62e1n2KGZmtuMW39"
+				href={AppConfig.mapLink}
 				rel="nofollow noreferrer"
 				target="_blank"
 				class="font-bold flex items-center"
 			>
 				<MapPin class="h-4" />
-				<span>Ver no mapa</span>
+				<span>{m.viewOnMap()}</span>
 			</a>
 		</div>
 	</div>

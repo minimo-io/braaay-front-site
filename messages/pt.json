@@ -32,6 +32,8 @@
 
 	"login": "Entrar",
 
+	"viewOnMap": "Ver no mapa",
+
 	"checkoutStep1NoEmail": "E-mail é obrigatório.",
 	"checkoutStep1EnterValidEmail": "Insira um endereço de e-mail válido.",
 	"checkoutStep1NoId": "CPF é necessário.",

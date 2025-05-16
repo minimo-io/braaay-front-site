@@ -32,6 +32,8 @@
 
 	"login": "Entrar",
 
+	"viewOnMap": "Ver en el mapa",
+
 	"checkoutStep1NoEmail": "Email obligatorio.",
 	"checkoutStep1EnterValidEmail": "Introduce una dirección de correo electrónico válida.",
 	"checkoutStep1NoId": "Cédula es un dato obligatório.",

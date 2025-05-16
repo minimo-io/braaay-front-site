@@ -1,6 +1,7 @@
 export const AppConfig = {
 	debug: true,
 	miniCartDuration: 8000, // from wine.com
+	mapLink: 'https://maps.app.goo.gl/C62e1n2KGZmtuMW39',
 	// list all coupons, this will be fetched from a pre-fetched json
 	coupons: {
 		primeira10: {

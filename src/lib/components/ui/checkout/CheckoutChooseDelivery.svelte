@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { AppConfig } from '$config';
+	import { m } from '$lib/paraglide/messages';
 	import { DeliveryUIType } from '$lib/types';
+	import { MapPin } from '@lucide/svelte';
 	interface Props {
 		onUpdate: (deliveryType: DeliveryUIType) => void;
 		initialValue?: DeliveryUIType | null; // Allow null/undefined initial value
@@ -37,7 +40,13 @@
 			class="w-5 h-5 text-sun border-grey-medium focus:ring-sun"
 		/>
 		<span class="flex flex-col">
-			<span class="text-sm">Retirada no Showroom</span>
+			<div class="flex text-sm">
+				Retirada no Showroom -
+				<div class="flex items-center">
+					<MapPin class="h-3 !mx-0 !px-0" />
+					<a rel="nofollow noreferrer" target="_blank" href={AppConfig.mapLink}>{m.viewOnMap()}</a>
+				</div>
+			</div>
 			<span class="text-xs text-grey-medium"> Seg a Sex, das 09:00 às 18:30, exceto feriados </span>
 		</span>
 	</label>
