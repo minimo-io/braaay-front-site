@@ -5,15 +5,22 @@
 	import { Lock } from '@lucide/svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
-	import { correctPrice, launchToast } from '$lib/utils';
+	import { correctPrice, launchToast, calculateDiscountPercentage } from '$lib/utils';
 	import { Sparkle } from '@lucide/svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import CheckoutProductOffers from './CheckoutProductOffers.svelte';
-	import { calculateDiscountPercentage } from '$lib/utils';
 
-	import { DeliveryUIType, type CustomerAddress, type PaymentMethod } from '$lib/types';
+	import {
+		DeliveryUIType,
+		type CustomerAddress,
+		type PaymentMethod,
+		type ShippingOption
+	} from '$lib/types';
 	import { onMount } from 'svelte';
-	import { CHECKOUT_PAYMENT_METHODS_MUTATION } from '$lib/graphql/mutations';
+	import {
+		CART_ADD_ITEMS_MUTATION,
+		CHECKOUT_PAYMENT_METHODS_MUTATION
+	} from '$lib/graphql/mutations';
 
 	import { cart } from '$stores/cart.store.svelte';
 
@@ -21,10 +28,13 @@
 		deliveryType: DeliveryUIType | null;
 		sessionToken: string;
 		address: CustomerAddress | null;
+		shippingOption: ShippingOption | undefined;
+		cartTotal: number;
 		onUpdatePayment: (method) => void;
 	}
 
-	let { deliveryType, sessionToken, address, onUpdatePayment }: Props = $props();
+	let { deliveryType, sessionToken, address, onUpdatePayment, shippingOption, cartTotal }: Props =
+		$props();
 
 	let loading = $state(false);
 	let error = $state('');
@@ -38,18 +48,6 @@
 	let countryCode = $state(address ? address.country : 'BR');
 	let postCode = $state(address ? address.postcode : '05411-000');
 	let paymentMethods = $state<PaymentMethod[] | undefined>();
-	let guessSessionToken = $state(
-		'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2JyYWFheS5jb20iLCJpYXQiOjE3NDcyMzYxNDcsIm5iZiI6MTc0NzIzNjE0NywiZXhwIjoxNzQ3NDA4OTQ3LCJkYXRhIjp7ImN1c3RvbWVyX2lkIjoidF9lODMzNWUxZDVlY2ZiN2ViOTVhNjczMzBjZDE2YmIifX0.BKVFElrsiw0SzM4Bc11sJW5Oe3f7iJsfQnWkmtiItpw'
-	);
-
-	// Cart amount
-	let hasItems = $state(false);
-	let totalAmount = $state(0);
-
-	cart.subscribe((cart) => {
-		totalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
-		hasItems = cart.items.length > 0;
-	});
 
 	onMount(async () => {
 		// console.log('Session', sessionToken);
@@ -57,9 +55,55 @@
 		loading = true;
 		error = '';
 
+		// If no user session then it's a guest, then we have to create the cart and session ---------------------------
+		let currentSessionToken;
+		if (!sessionToken) {
+			console.log('No session/guest, then creating one...');
+			let cartItemsForGraphQL: { productId: number; quantity: number }[] = [];
+			cart.subscribe((cart) => {
+				cart.items.forEach((item) => {
+					cartItemsForGraphQL.push({
+						productId: item.id,
+						quantity: item.quantity
+					});
+				});
+			});
+
+			const addToCartResult = await getUrqlClient()
+				.client.mutation(
+					CART_ADD_ITEMS_MUTATION,
+					{
+						items: cartItemsForGraphQL
+					},
+					{
+						// fetchOptions: { headers: sessionHeaders },
+						fetch: (input, init) => {
+							return fetch(input, init).then((response) => {
+								// Capture any new session token if provided
+								const newSession = response.headers.get('woocommerce-session');
+								if (newSession) {
+									currentSessionToken = newSession.replace('Session ', '');
+									// console.log('New session from add to cart:', currentSessionToken);
+								}
+								// addToCartResponse = response;
+								return response;
+							});
+						}
+					}
+				)
+				.toPromise();
+
+			if (addToCartResult.error) {
+				throw new Error(`Failed to add product: ${addToCartResult.error.message}`);
+			}
+			console.log('New session...', currentSessionToken);
+		}
+
+		// -------------------------------------------------------------------------------------------------------------
+
 		const sessionHeaders = {
 			'Content-Type': 'application/json',
-			'woocommerce-session': `Session ${sessionToken || guessSessionToken}`
+			'woocommerce-session': `Session ${sessionToken || currentSessionToken}`
 		};
 
 		try {
@@ -71,7 +115,8 @@
 					{
 						// input: {
 						countryCode: countryCode,
-						postCode: postCode
+						postCode: postCode,
+						shippingMethodId: shippingOption ? shippingOption.id : '0'
 						// }
 					},
 					{
@@ -90,6 +135,8 @@
 				updateResult.data.getAvailablePaymentMethods.shippingPaymentMethods.paymentMethods ||
 				undefined;
 
+			// console.log('RAW', paymentMethodsRaw);
+
 			paymentMethods = [];
 			for (const pm of paymentMethodsRaw) {
 				let methodObject: PaymentMethod = {
@@ -103,7 +150,7 @@
 				// Add payment method
 				paymentMethods?.push(methodObject);
 			}
-			// console.log('Payment methods', paymentMethods);
+			console.log('Payment methods', paymentMethods);
 		} catch (err) {
 			console.error(`${err}`);
 			launchToast(`Error obteniendo métodos de pagamento ${err}`, 'error', 2000);
@@ -128,8 +175,8 @@
 		{#if paymentMethods}
 			{#each paymentMethods as method, i (i)}
 				{@const discountPercentage = calculateDiscountPercentage(
-					totalAmount,
-					totalAmount + method.cost
+					cartTotal,
+					cartTotal + method.cost
 				)}
 				<div
 					class="bg-grey-background border-grey-light border px-3 py-2 rounded-lg font-roboto mb-2"
@@ -154,8 +201,9 @@
 								</span>
 								/
 							{/if}
-
-							{m.currencySymbol()}&nbsp;{correctPrice(totalAmount + method.cost)}
+							<!-- CartTotal: {cartTotal} - Method Discount: {method.cost} - {method.feeDetails} - Shipping:{shippingOption?.cost}
+							- -->
+							{m.currencySymbol()}&nbsp;{correctPrice(cartTotal + method.cost)}
 						</div>
 					</label>
 				</div>

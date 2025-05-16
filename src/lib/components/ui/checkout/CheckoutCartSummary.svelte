@@ -39,6 +39,7 @@
 	}: Props = $props();
 
 	let cartTotalMinus5 = $derived(subtractPercentage(cartTotal, 5));
+	// let cartSubTotalMinus5 = $derived(subtractPercentage(cartSubTotal, 5));
 </script>
 
 <div class="mt-5">
@@ -136,6 +137,7 @@
 				<p class="font-roboto self-center text-red-dark">
 					{m.currencySymbol()}
 					{correctPrice(paymentMethodSelected.cost)}
+					<!-- {paymentMethodSelected.feeDetails[0].label} -->
 				</p>
 			</div>
 		{:else if paymentMethodSelected == undefined}
@@ -145,8 +147,7 @@
 				<p class="font-light text-[15px] self-center">Desconto PIX</p>
 				<p class="font-roboto self-center text-red-dark">
 					{m.currencySymbol()}
-					<!-- {correctPrice(paymentMethodSelected.cost)} -->
-					-{correctPrice(calculateDiscountPercentage(cartTotal, cartTotalMinus5))}
+					-{correctPrice(cartTotal - cartTotalMinus5)}
 				</p>
 			</div>
 		{/if}
@@ -160,6 +161,8 @@
 					{m.currencySymbol()}
 					{correctPrice(cartTotal + paymentMethodSelected.cost)}
 				{:else}
+					<!-- <br />
+					{cartTotal} - {cartTotalMinus5} -->
 					<span class="font-bold text-[17px]">
 						{m.currencySymbol()}
 						{correctPrice(cartTotalMinus5)} no Pix

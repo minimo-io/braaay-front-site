@@ -51,6 +51,7 @@
 	let shippingAddress = $state<CustomerAddress | null>(null);
 	let shippingOption: ShippingOption | undefined = $state();
 	let userSessionToken = $state('');
+
 	let paymentMethodSelected = $state<PaymentMethod>();
 
 	// Cart stuff
@@ -59,6 +60,7 @@
 	// let cartTotalAmount = $state(0);
 	let cartDiscounts = $state(0);
 	let couponsCount = $state(0);
+	let isGuestUser = $state(isAuthenticated() ? false : true);
 
 	let customer: Customer | undefined = $state();
 
@@ -99,8 +101,11 @@
 	});
 
 	let cartTotalAmount = $derived(
-		cartSubTotalAmount + parseFloat(shippingOption ? shippingOption.cost : '0') - cartDiscounts
+		cartSubTotalAmount +
+			parseFloat(shippingOption && deliveryType != 'PICKUP' ? shippingOption.cost : '0') -
+			cartDiscounts
 	);
+
 	//  End-of Cart Stuff ----------------------------------------------------------------------------------------------
 
 	function onUpdateStepOne(customerData: Customer) {
@@ -126,15 +131,18 @@
 
 	function handleDeliveryTypeUpdate(delivery: DeliveryUIType) {
 		deliveryType = delivery;
+		paymentMethodSelected = undefined;
 
 		// You might want to do additional logic here
 		// like enabling step2 when a selection is made
 		if (deliveryType == 'PICKUP') {
 			// Only progress to step2 if user is logged in (step1 complete)
 			// if (steps.step1) {
+			if (isGuestUser) userSessionToken = '';
 			editStep2 = false;
 			steps.step2 = true;
 			steps.step3 = true;
+			shippingOption = undefined;
 			// }
 		} else if (deliveryType == 'DELIVERY') {
 			if (steps.step1) {
@@ -244,14 +252,18 @@
 
 					<!-- Form step 4 -->
 					{#if steps.step1 && steps.step2 && steps.step3}
-						<StepFourPending
-							{deliveryType}
-							sessionToken={userSessionToken}
-							address={shippingAddress}
-							onUpdatePayment={(method: PaymentMethod) => {
-								paymentMethodSelected = method;
-							}}
-						/>
+						{#key deliveryType}
+							<StepFourPending
+								{deliveryType}
+								sessionToken={userSessionToken}
+								address={shippingAddress}
+								cartTotal={cartTotalAmount}
+								{shippingOption}
+								onUpdatePayment={(method: PaymentMethod) => {
+									paymentMethodSelected = method;
+								}}
+							/>
+						{/key}
 					{:else}
 						<StepFourWaiting {deliveryType} />
 					{/if}

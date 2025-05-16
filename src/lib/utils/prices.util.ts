@@ -20,5 +20,5 @@ export function calculateDiscountPercentage(originalPrice, discountedPrice) {
 export function subtractPercentage(amount: number, percentage: number): number {
 	if (amount <= 0 || percentage <= 0) return amount; // Return original amount for invalid inputs
 	const subtraction = amount * (percentage / 100);
-	return parseFloat((amount - subtraction).toFixed(2));
+	return parseFloat((amount - subtraction).toFixed(3));
 }

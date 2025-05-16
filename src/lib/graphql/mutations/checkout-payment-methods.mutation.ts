@@ -2,14 +2,21 @@
 import { gql } from '@urql/core';
 
 export const CHECKOUT_PAYMENT_METHODS_MUTATION = gql`
-	mutation GetPaymentMethods($countryCode: String!, $postCode: String!) {
+	mutation GetPaymentMethods(
+		$countryCode: String!
+		$postCode: String!
+		$shippingMethodId: String!
+	) {
 		getAvailablePaymentMethods(
-			input: { shippingAddress: { country: $countryCode, postcode: $postCode } }
+			input: {
+				shippingAddress: { country: $countryCode, postcode: $postCode }
+				shippingMethodId: $shippingMethodId
+			}
 		) {
 			shippingPaymentMethods {
 				cartSubtotal
-				cartTotal
-				discounts {
+				discountInfo {
+					code
 					label
 					amount
 				}

@@ -80,30 +80,8 @@
 					});
 				});
 			});
+
 			// get all cart items
-
-			// const addToCartResult = await getUrqlClient()
-			// 	.client.mutation(
-			// 		CART_ADD_MUTATION,
-			// 		{ productId: 131701, quantity: 1 },
-			// 		{
-			// 			fetchOptions: { headers: sessionHeaders },
-			// 			fetch: (input, init) => {
-			// 				return fetch(input, init).then((response) => {
-			// 					// Capture any new session token if provided
-			// 					const newSession = response.headers.get('woocommerce-session');
-			// 					if (newSession) {
-			// 						currentSessionToken = newSession.replace('Session ', '');
-			// 						// console.log('New session from add to cart:', currentSessionToken);
-			// 					}
-			// 					addToCartResponse = response;
-			// 					return response;
-			// 				});
-			// 			}
-			// 		}
-			// 	)
-			// 	.toPromise();
-
 			const addToCartResult = await getUrqlClient()
 				.client.mutation(
 					CART_ADD_ITEMS_MUTATION,
