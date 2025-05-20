@@ -1,4 +1,8 @@
-<a href="https://wa.me/5511947530340" target="_blank" rel="nofollow noopener">
+<script>
+	import { AppConfig } from '$config';
+</script>
+
+<a href={AppConfig.whatsappLink} target="_blank" rel="nofollow noopener">
 	<div
 		class="font-roboto text-grey-medium-dark font-[11px] text-xs border border-grey-lighter py-[3px] px-[7px] antialiased rounded-md shine-effect flex items-center scale-105"
 	>

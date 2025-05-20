@@ -10,6 +10,7 @@
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
 	import { authState } from '$stores/auth.state.svelte';
 	import { m } from '$lib/paraglide/messages';
+	import { AppConfig } from '$config';
 
 	let returnUrl = $derived('/login');
 	let userName = $state('');
@@ -110,7 +111,7 @@
 							<div class="border-t border-grey-lighter my-5"></div>
 						</li>
 						<li>
-							<a href="https://wa.me/5511947530340" class="text-grey-blueish"
+							<a href={AppConfig.whatsappLink} class="text-grey-blueish"
 								>Atendimento ao Cliente
 								<span class="block text-sm font-sans font-bold">+55 11 94753-0340</span>
 							</a>

@@ -23,12 +23,14 @@
 			/>
 		</a>
 	</div>
-	<div class="absolute top-4 left-4">
-		<div class="wine-stars">
-			<span>★</span>
-			{props.wine.score}
+	{#if props.wine.score != '0.0'}
+		<div class="absolute top-4 left-4">
+			<div class="wine-stars">
+				<span>★</span>
+				{props.wine.score}
+			</div>
 		</div>
-	</div>
+	{/if}
 	<h5 class="wine-title">{props.wine.title}</h5>
 	<p class="wine-price">{props.wine.price}</p>
 

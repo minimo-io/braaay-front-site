@@ -3,6 +3,7 @@
 	import { locales, localizeHref } from '$lib/paraglide/runtime';
 	import { redirectLocale } from '$lib/utils';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
+	import { AppConfig } from '$config';
 </script>
 
 <footer class="relative bg-grey-background py-0 mt-0">
@@ -78,7 +79,7 @@
 					<ul>
 						<li>
 							<a
-								href="https://wa.me/5511947530340"
+								href={AppConfig.whatsappLink}
 								rel="nofollow noreferrer"
 								target="_blank"
 								class="!text-black font-bold"
@@ -113,7 +114,7 @@
 				<div class="hidden md:block text-center">
 					<h3>REDES SOCIAIS</h3>
 					<ul>
-						<li><a href="/">INSTAGRAM</a></li>
+						<li><a href="https://www.instagram.com/braaay_com">INSTAGRAM</a></li>
 						<li><a href="/">YOUTUBE</a></li>
 						<li><a href="/">TIKTOK</a></li>
 						<li><a href="/">FACEBOOK</a></li>

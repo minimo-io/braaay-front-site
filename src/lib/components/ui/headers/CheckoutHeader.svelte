@@ -3,6 +3,7 @@
 	import { Button } from '$components/ui/buttons/index';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { isAuthenticated } from '$lib/graphql/auth';
+	import { AppConfig } from '$config';
 </script>
 
 <header class="bg-white border-b border-b-grey-lighter">
@@ -63,7 +64,7 @@
 					title="Atendimento"
 					type="light"
 					size="md"
-					url="https://wa.me/5511947530340"
+					url={AppConfig.whatsappLink}
 					newTab={true}
 				>
 					{#snippet icon()}

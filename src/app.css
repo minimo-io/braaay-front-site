@@ -274,7 +274,7 @@ html {
 		/* @apply space-y-2; */
 	}
 	.bry-footer-grid h3 {
-		@apply text-center md:text-left;
+		@apply text-center md:text-left !font-roboto !font-extrabold;
 	}
 	.bry-footer-grid > div > ul > li {
 		@apply leading-5 mb-0 text-center md:text-left;

@@ -28,6 +28,15 @@ export default defineConfig({
 					]
 				},
 
+				// Search with query parameter
+				{
+					pattern: '/search/',
+					localized: [
+						['pt', '/pesquisa/'],
+						['uy', '/uy/busqueda/']
+					]
+				},
+
 				// Club
 				{
 					pattern: '/club/',

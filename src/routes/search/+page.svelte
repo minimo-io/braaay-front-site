@@ -1,96 +1,164 @@
-<script>
+<script lang="ts">
+	import { fade } from 'svelte/transition';
+	import { type Product, type GraphQLProductNode, mapProduct, mapPagination } from '$lib/types';
+	import { localizeHref } from '$lib/paraglide/runtime';
+	import { page } from '$app/state';
+	import { goto } from '$app/navigation';
+	import { onDestroy } from 'svelte';
+
 	import FilteringMenu from '$components/ui/menues/FilteringMenu.svelte';
 	import SortingMenu from '$components/ui/menues/SortingMenu.svelte';
 	import WineBox from '$components/ui/products/WineBox.svelte';
+	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
+	import SearchHeader from '$components/ui/headers/SearchHeader.svelte';
+
+	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
+	import { SEARCH_QUERY } from '$lib/graphql/queries/search.query';
+	import type { Category, Pagination } from '$lib/types';
+	import { m } from '$lib/paraglide/messages';
+
+	// Get the search term from URL query parameter using runes
+	const searchTermTyped = $derived(page.url.searchParams.get('s') || '');
+	let loadingSearch = $state(false);
+	const after = $derived('');
+	let error = $state('');
+
+	let products: Product[] = $state([]);
+	let productsCount: number = $derived(products.length);
+
+	let categoryHeader: Category = $state({
+		name: '',
+		description: 'asdas',
+		count: 0,
+		header: {
+			title: 'Searching...'
+			// image?: ImageGeneral;
+			// icon?: ImageGeneral;
+			// firstParagraph?: string;
+			// firstTitle?: string;
+		}
+	});
+
+	// Redirect to homepage if no search term
+	$effect(() => {
+		if (!searchTermTyped) {
+			goto('/');
+		} else {
+			loadingSearch = true;
+			// console.log('Trigger search...');
+			// toggleLoader();
+			try {
+				const searchResult = getUrqlClient()
+					.client.query(
+						SEARCH_QUERY,
+						{
+							searchTerm: searchTermTyped,
+							first: 1000,
+							after: after
+						},
+						{
+							// fetchOptions: { headers: sessionHeaders }
+						}
+					)
+					.toPromise()
+					.then((res) => {
+						loadingSearch = false;
+						console.log('RES_FROM_THEN');
+						// On error
+						if (res.error && res.error != undefined) {
+							error = `Error: ${res.error}`;
+						}
+
+						// Results
+						const resProducts: Product[] = res.data.products.edges.map(
+							(product: GraphQLProductNode) => mapProduct(product)
+						);
+						const resPagination: Pagination = mapPagination(res.data.products.pageInfo);
+
+						// console.log('Products');
+						products = resProducts;
+
+						// console.log('Pagination');
+						// console.log(pagination);
+					});
+			} catch (err) {
+				console.log(`Error: ${err}`);
+			}
+			// toggleLoader();
+		}
+	});
+
+	onDestroy(() => {
+		console.log('Component is being destroyed via onDestroy hook.');
+		// Any other cleanup logic not directly tied to an effect
+	});
+
+	// onMount(async () => {
+	// 	if (searchTermTyped) {
+	// 		console.log(`Searching for mounted: ${searchTermTyped}`);
+
+	// 		toggleLoader();
+	// 		try {
+	// 			const searchResult = await getUrqlClient()
+	// 				.client.query(
+	// 					SEARCH_QUERY,
+	// 					{
+	// 						searchTerm: searchTermTyped,
+	// 						first: 10,
+	// 						after: after
+	// 					},
+	// 					{
+	// 						// fetchOptions: { headers: sessionHeaders }
+	// 					}
+	// 				)
+	// 				.toPromise();
+
+	// 			console.log(searchResult);
+	// 		} catch (err) {
+	// 			console.log(`Error: ${err}`);
+	// 		}
+	// 		justMonted = false;
+	// 		toggleLoader();
+	// 	}
+	// });
 </script>
 
-<main class="w-full mx-auto">
-	<FilteringMenu />
+<SearchHeader
+	title={loadingSearch ? `${m.searching()}` : `Resultados: "${searchTermTyped}"`}
+	count={productsCount}
+	showCount={!loadingSearch}
+/>
 
-	<SortingMenu />
+<main id={searchTermTyped} class="w-full mx-auto">
+	{#if searchTermTyped && loadingSearch == false}
+		<!-- Filtering & Sorting -->
+		<FilteringMenu />
+		<SortingMenu />
 
-	<!-- Product list -->
-	<div class="max-w-screen-lg mx-[1.5rem] md:mx-auto mt-1 mb-[2rem]">
-		<div class="bry-product-list">
-			<!-- Wine Box 0 -->
-			<WineBox
-				image={{
-					src: '/images/wines/vinho-don-pascual-tannat-merlot.webp'
-				}}
-				wine={{
-					title: 'Don Pascual Cabernet Franc',
-					price: 150.0,
-					url: '/product',
-					score: 4.5
-				}}
-			/>
-
-			<!-- Wine Box 1 -->
-			<WineBox
-				image={{
-					src: '/images/wines/Deica-2-1.webp'
-				}}
-				wine={{
-					title: 'Pizzato Merlot de Merlots 2022',
-					price: 150.0,
-					url: '/product',
-					score: 4.5
-				}}
-			/>
-
-			<!-- Wine Box 2 -->
-			<WineBox
-				image={{
-					src: '/images/wines/PIZZATO-concentus.webp'
-				}}
-				wine={{
-					title: 'Artesana Cabernet Franc/Merlot Reserva',
-					price: 100.0,
-					url: '/product',
-					score: 4.5
-				}}
-			/>
-
-			<!-- Wine Box 3 -->
-			<WineBox
-				image={{
-					src: '/images/wines/Pizzato-Legno-Chardonnay.webp'
-				}}
-				wine={{
-					title: 'Pizzato Chardonnay de Chardonnays',
-					price: 119.0,
-					url: '/product',
-					score: 4.5
-				}}
-			/>
-
-			<!-- Wine Box 4 -->
-			<WineBox
-				image={{
-					src: '/images/wines/vinho-don-pascual-cabernet-merlot.webp'
-				}}
-				wine={{
-					title: 'Mayos Jovem Branco da Basso',
-					price: 43.0,
-					url: '/product',
-					score: 4.5
-				}}
-			/>
-
-			<!-- Wine Box 6 (with discount) -->
-			<WineBox
-				image={{
-					src: '/images/wines/vinho-mayos-jovem-branco.webp',
-					alt: 'Artesana Cabernet Franc/Merlot Reserva'
-				}}
-				wine={{
-					title: 'Artesana Cabernet Franc/Merlot Reserva',
-					price: 100.0,
-					url: '/product',
-					score: 4.5
-				}}
-				discount={'50%'}
-			/>
+		<!-- Product list -->
+		<div class="max-w-screen-lg mx-[1.5rem] md:mx-auto mt-1 mb-[2rem]">
+			<div class="bry-product-list">
+				{#if error}
+					<div class="text-red">{error}</div>
+				{:else}
+					{#each products as product}
+						<span in:fade out:fade>
+							<WineBox
+								image={{
+									src: product.image.url
+								}}
+								wine={{
+									title: product.title,
+									price: product.price,
+									url: localizeHref(`/produto/${product.slug}/`),
+									score: product.averageRating
+								}}
+							/>
+						</span>
+					{/each}
+				{/if}
+			</div>
 		</div>
-	</div>
+	{/if}
 </main>
+<FunMessageSection />
