@@ -45,5 +45,8 @@
 	"checkoutStep1NoBirthDate": "La fecha de nacimiento es obrigatoria.",
 	"checkoutStep1BirthDateInvalid": "Fecha de nacimiento inválida.",
 	"checkoutStep1NoFirstname": "El nombre es obligatorio.",
-	"checkoutStep1NoLastname": "El apellido es obligatorio."
+	"checkoutStep1NoLastname": "El apellido es obligatorio.",
+
+	"checkoutLoadingPayments": "Cargando métodos de pago...",
+	"checkoutNewsletterOptIn": "Quiero recibir noticias y promociones"
 }

@@ -285,7 +285,7 @@
 						{#if $cart.items.length > 0}
 							<Button
 								type="sun"
-								url="/checkout"
+								url={localizeHref('/checkout/')}
 								title={m.continue()}
 								size="xl"
 								tracking="normal"

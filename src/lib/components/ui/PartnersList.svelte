@@ -2,8 +2,6 @@
 	import { getLocale } from '$lib/paraglide/runtime';
 	import { mappedPartners } from '$data/partners.data';
 
-	console.log(mappedPartners);
-
 	const getMappedPartnersForPT = mappedPartners[getLocale()];
 	// let pageCountries = $state(allCountries[getLocale()]);
 </script>

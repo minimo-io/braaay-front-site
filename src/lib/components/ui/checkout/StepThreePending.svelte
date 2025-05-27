@@ -80,7 +80,7 @@
 					});
 				});
 			});
-
+			// console.log(cartItemsForGraphQL);
 			// get all cart items
 			const addToCartResult = await getUrqlClient()
 				.client.mutation(

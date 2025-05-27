@@ -262,6 +262,15 @@
 								onUpdatePayment={(method: PaymentMethod) => {
 									paymentMethodSelected = method;
 								}}
+								onCheckoutDone={(newsletter: boolean) => {
+									if (!paymentMethodSelected) {
+										launchToast('Selecione um método de pagamento', 'error', 2500);
+									} else {
+										goto(localizeHref(`/checkout/pagamento/1214`));
+										// alert(paymentMethodSelected);
+										// alert(newsletter);
+									}
+								}}
 							/>
 						{/key}
 					{:else}

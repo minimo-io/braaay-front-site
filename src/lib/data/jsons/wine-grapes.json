@@ -8,7 +8,7 @@
     {
       "name": "Uva Chardonnay",
       "url": "/uva/chardonnay/",
-      "count": 24
+      "count": 25
     },
     {
       "name": "Cabernet Sauvignon",
@@ -81,6 +81,11 @@
       "count": 3
     },
     {
+      "name": "Riesling",
+      "url": "/uva/riesling/",
+      "count": 3
+    },
+    {
       "name": "Montepulciano",
       "url": "/uva/montepulciano/",
       "count": 2
@@ -113,11 +118,6 @@
     {
       "name": "Malvasia",
       "url": "/uva/malvasia/",
-      "count": 2
-    },
-    {
-      "name": "Riesling",
-      "url": "/uva/riesling/",
       "count": 2
     },
     {

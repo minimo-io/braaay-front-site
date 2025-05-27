@@ -64,3 +64,4 @@ const paraglideHandle: Handle = ({ event, resolve }) =>
 
 // Combine the middleware functions using sequence
 export const handle = sequence(authHandle, paraglideHandle);
+// export const handle = sequence(paraglideHandle);

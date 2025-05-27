@@ -31,10 +31,18 @@
 		shippingOption: ShippingOption | undefined;
 		cartTotal: number;
 		onUpdatePayment: (method) => void;
+		onCheckoutDone: (newsletter: boolean) => void;
 	}
 
-	let { deliveryType, sessionToken, address, onUpdatePayment, shippingOption, cartTotal }: Props =
-		$props();
+	let {
+		deliveryType,
+		sessionToken,
+		address,
+		onUpdatePayment,
+		shippingOption,
+		cartTotal,
+		onCheckoutDone
+	}: Props = $props();
 
 	let loading = $state(false);
 	let error = $state('');
@@ -48,6 +56,7 @@
 	let countryCode = $state(address ? address.country : 'BR');
 	let postCode = $state(address ? address.postcode : '05411-000');
 	let paymentMethods = $state<PaymentMethod[] | undefined>();
+	let newsletter = $state(false);
 
 	onMount(async () => {
 		// console.log('Session', sessionToken);
@@ -68,7 +77,8 @@
 					});
 				});
 			});
-
+			// console.log('CART ITEMS:');
+			// console.log(cartItemsForGraphQL);
 			const addToCartResult = await getUrqlClient()
 				.client.mutation(
 					CART_ADD_ITEMS_MUTATION,
@@ -209,13 +219,19 @@
 				</div>
 			{/each}
 		{:else}
-			<div class="text-xs">Carregando métodos de pagamento...</div>
+			<div class="text-xs">{m.checkoutLoadingPayments()}</div>
 		{/if}
 
 		<!-- Promocoes -->
 		<div class="flex items-center text-sm my-5 px-3">
-			<input type="checkbox" name="radio-promos" class="mr-2" checked />
-			<label for="radio-promos">Quero receber novidades e promoções</label>
+			<input
+				type="checkbox"
+				id="radio-promos"
+				name="radio-promos"
+				class="mr-2 cursor-pointer"
+				bind:checked={newsletter}
+			/>
+			<label class="cursor-pointer" for="radio-promos">{m.checkoutNewsletterOptIn()}</label>
 		</div>
 
 		<!-- Offers controls -->
@@ -227,7 +243,7 @@
 				type="sun"
 				url="#"
 				action={() => {
-					// alert('Submit');
+					onCheckoutDone(newsletter);
 				}}
 				title="FINALIZAR COMPRA"
 				size="xl"
@@ -261,12 +277,7 @@
 				com outros Passport e compras coletivas!
 			</p>
 			<div class="mx-10 py-2">
-				<Button
-					title="Adicionar ao carrinho"
-					type="sun"
-					url={localizeHref('/cart/')}
-					tracking="normal"
-				/>
+				<Button title={m.addToCart()} type="sun" url={localizeHref('/cart/')} tracking="normal" />
 			</div>
 			<p class="text-xs text-gray-500 mt-2">
 				<a href={localizeHref('/club/')} class="text-blue-500 underline">Saiba mais</a>

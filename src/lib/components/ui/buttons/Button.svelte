@@ -1,3 +1,4 @@
+<!-- src/lib/components/ui/buttons/Button.svelte -->
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { ChevronDown } from '@lucide/svelte';
@@ -16,7 +17,8 @@
 		font?: 'sm' | 'md' | 'xl';
 		bold?: boolean;
 
-		action?: () => void;
+		// action?: () => void;
+		action?: (...args: any[]) => void;
 
 		rounded?: 'full' | 'lg';
 
@@ -98,7 +100,7 @@
 		]}
 		onclick={(event) => {
 			if (typeof action == 'function') {
-				action();
+				action(event);
 				event.preventDefault();
 			}
 		}}
@@ -158,7 +160,7 @@
 		]}
 		onclick={(event) => {
 			if (typeof action == 'function') {
-				action();
+				action(event);
 				event.preventDefault();
 			}
 		}}

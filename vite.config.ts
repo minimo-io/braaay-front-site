@@ -64,21 +64,54 @@ export default defineConfig({
 					]
 				},
 
+				// Checkout : Payment
+				{
+					pattern: '/checkout/pagamento/:id/',
+					localized: [
+						['pt', '/checkout/pagamento/:id/'],
+						['uy', '/uy/checkout/pago/:id/']
+					]
+				},
+				// Checkout : Confirmation
+				{
+					pattern: '/checkout/confirmation/:id/',
+					localized: [
+						['pt', '/checkout/confirmacao/:id/'],
+						['uy', '/uy/checkout/confirmacion/:id/']
+					]
+				},
+				// Checkout : Error
+				{
+					pattern: '/checkout/error/:id/',
+					localized: [
+						['pt', '/checkout/error/:id/'],
+						['uy', '/uy/checkout/error/:id/']
+					]
+				},
+				// Checkout
+				{
+					pattern: '/checkout/',
+					localized: [
+						['pt', '/checkout/'],
+						['uy', '/uy/checkout/']
+					]
+				},
+
 				// Produtores de vinho
 				{
-					pattern: '/produtores-de-vinho/:id',
+					pattern: '/produtores-de-vinho/:id/',
 					localized: [
-						['pt', '/produtores-de-vinho/:id'],
-						['uy', '/uy/productores-de-vino/:id']
+						['pt', '/produtores-de-vinho/:id/'],
+						['uy', '/uy/productores-de-vino/:id/']
 					]
 				},
 
 				// Harmonizacoes
 				{
-					pattern: '/harmonizacoes/:id',
+					pattern: '/harmonizacoes/:id/',
 					localized: [
-						['pt', '/harmonizacoes/:id'],
-						['uy', '/uy/maridajes/:id']
+						['pt', '/harmonizacoes/:id/'],
+						['uy', '/uy/maridajes/:id/']
 					]
 				},
 
@@ -86,8 +119,8 @@ export default defineConfig({
 				{
 					pattern: '/uva/:id',
 					localized: [
-						['pt', '/uva/:id'],
-						['uy', '/uy/uva/:id']
+						['pt', '/uva/:id/'],
+						['uy', '/uy/uva/:id/']
 					]
 				},
 
@@ -95,8 +128,8 @@ export default defineConfig({
 				{
 					pattern: '/tag/:id',
 					localized: [
-						['pt', '/tag/:id'],
-						['uy', '/uy/tag/:id']
+						['pt', '/tag/:id/'],
+						['uy', '/uy/tag/:id/']
 					]
 				},
 
