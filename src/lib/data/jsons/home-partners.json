@@ -1,0 +1,91 @@
+{
+	"pt": [
+		{
+			"name": "Viña Edén",
+			"logo": "/images/partners/vina-eden-logo.webp",
+			"url": "/produtores-de-vinho/vina-eden/",
+			"count": 0
+		},
+		{
+			"name": "Garzón",
+			"logo": "/images/partners/garzon-logo-2.webp",
+			"url": "/produtores-de-vinho/bodega-garzon/",
+			"count": 0
+		},
+		{
+			"name": "Artesana",
+			"logo": "/images/partners/artesana-logo-3.webp",
+			"url": "/produtores-de-vinho/bodega-artesana/",
+			"count": 0
+		},
+		{
+			"name": "Casa Perini",
+			"logo": "/images/partners/casa-perini-logo.png",
+			"url": "/produtores-de-vinho/casa-perini/",
+			"count": 0
+		},
+		{
+			"name": "Casa Eva",
+			"logo": "/images/partners/casa-eva-logo-2.webp",
+			"url": "/produtores-de-vinho/vinicola-casa-eva/",
+			"count": 0
+		},
+		{
+			"name": "Familia Capoani",
+			"logo": "/images/partners/capoani-logo-3.webp",
+			"url": "/produtores-de-vinho/familia-capoani/C",
+			"count": 0
+		},
+		{
+			"name": "Cerro del Toro",
+			"logo": "/images/partners/cerro-del-toro-logo-2.webp",
+			"url": "/produtores-de-vinho/bodega-cerro-del-toro/",
+			"count": 0
+		},
+		{
+			"name": "Don Pascual",
+			"logo": "/images/partners/don-pascual-logo-2.webp",
+			"url": "/produtores-de-vinho/don-pascual/",
+			"count": 0
+		},
+		{
+			"name": "Familia Deicas",
+			"logo": "/images/partners/familia-deicas-uruguai.webp",
+			"url": "/produtores-de-vinho/familia-deicas/",
+			"count": 0
+		},
+		{
+			"name": "Pizzato",
+			"logo": "/images/partners/pizzato-logo.webp",
+			"url": "/produtores-de-vinho/pizzato/",
+			"count": 0
+		},
+		{
+			"name": "Vinícola Manus",
+			"logo": "/images/partners/vinicola-manus-logo.webp",
+			"url": "/produtores-de-vinho/manus/",
+			"count": 0
+		},
+
+		{
+			"name": "Giaretta",
+			"logo": "/images/partners/giaretta-logo-2.webp",
+			"url": "/produtores-de-vinho/vinicula-giaretta/",
+			"count": 0
+		},
+		{
+			"name": "Vinhedos de Monte Agudo",
+			"logo": "/images/partners/vinhedos-monte-agudo-logo.webp",
+			"url": "/produtores-de-vinho/vinhedos-do-monte-agudo/",
+			"count": 0
+		},
+
+		{
+			"name": "Casal Da Coheleira",
+			"logo": "/images/partners/casa-da-coheleira-logo-3.webp",
+			"url": "/produtores-de-vinho/casal-da-coelheira/",
+			"count": 0
+		}
+	],
+	"uy": []
+}

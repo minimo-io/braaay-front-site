@@ -13,6 +13,7 @@ export * from './customer.types';
 export * from './cart.types';
 export * from './shipping.types';
 export * from './payments.types';
+export * from './partners.types';
 
 export interface Wine {
 	title: string;

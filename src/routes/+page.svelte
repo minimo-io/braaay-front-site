@@ -1,4 +1,5 @@
 <script lang="ts">
+	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
 	import Carrousel from '$components/ui/Carrousel.svelte';
 	import CountryBox from '$components/ui/CountryBox.svelte';
 	import PartnersList from '$components/ui/PartnersList.svelte';
@@ -250,6 +251,7 @@
 		<PartnersList />
 	</section>
 </main>
+<FunMessageSection />
 
 <style>
 </style>
