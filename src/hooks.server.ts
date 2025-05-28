@@ -53,15 +53,15 @@ const paraglideHandle: Handle = ({ event, resolve }) =>
 			mappedLocale = 'pt-BR';
 		}
 		event.request = localizedRequest;
-		return resolve(event, {
+		const eventh = resolve(event, {
 			transformPageChunk: ({ html }) => {
 				return html.replace('%lang%', mappedLocale);
 			}
 		});
+		// console.log('EVENT');
+		// console.log(eventh);
+		return eventh;
 	});
-
-// export const handle: Handle = paraglideHandle;
 
 // Combine the middleware functions using sequence
 export const handle = sequence(authHandle, paraglideHandle);
-// export const handle = sequence(paraglideHandle);

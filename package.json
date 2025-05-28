@@ -53,6 +53,7 @@
 		"he": "^1.2.0",
 		"imask": "^7.6.1",
 		"js-cookie": "^3.0.5",
+		"mercadopago": "^2.7.0",
 		"pino": "^9.6.0",
 		"pino-pretty": "^13.0.0"
 	}
