@@ -24,7 +24,7 @@
 			checked={deliveryType === DeliveryUIType.DELIVERY}
 			onchange={() => handleChange(DeliveryUIType.DELIVERY)}
 			name="delivery"
-			class="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+			class="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500 cursor-pointer"
 		/>
 		<span class="text-sm">Enviar para casa ou trabalho</span>
 	</label>
@@ -37,7 +37,7 @@
 			checked={deliveryType === DeliveryUIType.PICKUP}
 			onchange={() => handleChange(DeliveryUIType.PICKUP)}
 			name="delivery"
-			class="w-5 h-5 text-sun border-grey-medium focus:ring-sun"
+			class="w-5 h-5 text-sun border-grey-medium focus:ring-sun cursor-pointer"
 		/>
 		<span class="flex flex-col">
 			<div class="flex text-sm">

@@ -1,5 +1,5 @@
 export const AppConfig = {
-	debug: false,
+	debug: true,
 	// the notification duration when adding a product to the cart
 	miniCartDuration: 8000,
 	mapLink: 'https://maps.app.goo.gl/C62e1n2KGZmtuMW39',

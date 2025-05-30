@@ -14,6 +14,7 @@
 		DeliveryUIType,
 		type CustomerAddress,
 		type PaymentMethod,
+		type ProductGraphQL,
 		type ShippingOption
 	} from '$lib/types';
 	import { onMount } from 'svelte';
@@ -68,7 +69,7 @@
 		let currentSessionToken;
 		if (!sessionToken) {
 			console.log('No session/guest, then creating one...');
-			let cartItemsForGraphQL: { productId: number; quantity: number }[] = [];
+			let cartItemsForGraphQL: ProductGraphQL[] = [];
 			cart.subscribe((cart) => {
 				cart.items.forEach((item) => {
 					cartItemsForGraphQL.push({

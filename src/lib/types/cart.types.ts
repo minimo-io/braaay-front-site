@@ -22,3 +22,9 @@ export interface ShippingRate {
 	label: string;
 	cost: string;
 }
+
+// Use to add items to carts & adding products in the checkout
+export interface ProductGraphQL {
+	productId: number;
+	quantity: number;
+}

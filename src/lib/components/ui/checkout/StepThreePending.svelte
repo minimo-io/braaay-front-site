@@ -15,7 +15,7 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { launchToast } from '$lib/utils';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
-	import { CART_ADD_ITEMS_MUTATION, CART_ADD_MUTATION } from '$lib/graphql/mutations';
+	import { CART_ADD_ITEMS_MUTATION } from '$lib/graphql/mutations';
 	import { cart } from '$stores/cart.store.svelte';
 
 	interface Props {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 
-	const orderId = page.params.orderId;
+	const routeId = page.route.id;
 </script>
 
-ERROR: {orderId}
+ERROR: {routeId}

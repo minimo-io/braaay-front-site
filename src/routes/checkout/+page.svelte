@@ -7,7 +7,13 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { CUSTOMER_QUERY, mapCustomerToUser } from '$lib/graphql/queries';
-	import type { Customer, CustomerAddress, PaymentMethod, ShippingOption } from '$lib/types';
+	import type {
+		Customer,
+		CustomerAddress,
+		PaymentMethod,
+		ProductGraphQL,
+		ShippingOption
+	} from '$lib/types';
 	import { DeliveryUIType } from '$lib/types';
 	import { launchToast, truncate } from '$lib/utils';
 	import { goto } from '$app/navigation';
@@ -34,6 +40,7 @@
 	import StepFourWaiting from '$components/ui/checkout/StepFourWaiting.svelte';
 
 	import { calculateDiscount, cart } from '$stores/cart.store.svelte';
+	import { CHECKOUT_CREATE_ORDER_MUTATION } from '$lib/graphql/mutations';
 
 	interface Steps {
 		step1: boolean | object;
@@ -169,6 +176,103 @@
 			steps.step2 = true;
 		}
 	}
+
+	// Create order ----------------------------------------------------------------------------------------------------
+	async function checkoutCreateOrder() {
+		let currentSessionToken;
+
+		// Prepare products array & cupons
+		let cartItemsForGraphQL: ProductGraphQL[] = [];
+		let couponsForGraphQL: string[] = [];
+		cart.subscribe((cart) => {
+			cart.items.forEach((item) => {
+				cartItemsForGraphQL.push({
+					productId: item.id,
+					quantity: item.quantity
+				});
+			});
+
+			cart.coupons.forEach((item) => {
+				couponsForGraphQL.push(item);
+			});
+		});
+
+		// Prepare billing address
+		let billingForGraphQL = {};
+		if (deliveryType != 'PICKUP') {
+			console.log('Billing address client');
+
+			billingForGraphQL = {
+				...shippingAddress,
+				email: customer?.email,
+				phone: customer?.telephone
+			};
+		} else {
+			console.log('Billing address showroom');
+			billingForGraphQL = {
+				firstName: customer?.firstName,
+				lastName: customer?.lastName,
+				company: '',
+				address1: 'R. Cristiano Viana, 62 - cj 35',
+				address2: 'Cerqueira César',
+				city: 'São Paulo',
+				postcode: '05411-000',
+				country: 'BR',
+				state: 'São Paulo',
+				email: customer?.email,
+				phone: customer?.telephone
+			};
+		}
+
+		// const createOrderResult = await getUrqlClient(undefined, true)
+		const createOrderResult = await getUrqlClient()
+			.client.mutation(
+				CHECKOUT_CREATE_ORDER_MUTATION,
+				{
+					cpf: customer?.cpf,
+					lineItems: cartItemsForGraphQL,
+					couponCodes: couponsForGraphQL,
+					paymentMethod: paymentMethodSelected?.id,
+					customerBilling: billingForGraphQL,
+					shippingLines: [
+						{
+							methodId: shippingOption?.id,
+							methodTitle: shippingOption?.label,
+							total: shippingOption?.cost
+						}
+					]
+				},
+				{
+					// fetchOptions: { headers: sessionHeaders },
+					fetch: (input, init) => {
+						return fetch(input, init).then((response) => {
+							// Capture any new session token if provided
+							const newSession = response.headers.get('woocommerce-session');
+							if (newSession) {
+								currentSessionToken = newSession.replace('Session ', '');
+								// console.log('New session from add to cart:', currentSessionToken);
+							}
+							// addToCartResponse = response;
+							return response;
+						});
+					}
+				}
+			)
+			.toPromise();
+
+		console.log('RESULT_CREATE_ORDER:');
+		console.log(createOrderResult);
+		// Check for errors
+		if (createOrderResult.error) {
+			console.error(`Error: ${createOrderResult.error.message}`);
+			goto(localizeHref(`/checkout/error?code=${createOrderResult.error.name}`));
+			return;
+		}
+
+		// Get the order id
+
+		return createOrderResult.data.createOrder.orderId;
+	}
 </script>
 
 <main>
@@ -262,13 +366,18 @@
 								onUpdatePayment={(method: PaymentMethod) => {
 									paymentMethodSelected = method;
 								}}
-								onCheckoutDone={(newsletter: boolean) => {
+								onCheckoutDone={async (newsletter: boolean) => {
 									if (!paymentMethodSelected) {
 										launchToast('Selecione um método de pagamento', 'error', 2500);
 									} else {
-										goto(localizeHref(`/checkout/pagamento/1214`));
-										// alert(paymentMethodSelected);
-										// alert(newsletter);
+										let orderId = await checkoutCreateOrder();
+										if (orderId) {
+											// console.log(`ORDER ID FINAL STAGE: ${orderId}`);
+											goto(localizeHref(`/checkout/pagamento/${orderId}`));
+										} else {
+											goto(localizeHref('/checkout/error?code=no-order-id'));
+											return;
+										}
 									}
 								}}
 							/>
