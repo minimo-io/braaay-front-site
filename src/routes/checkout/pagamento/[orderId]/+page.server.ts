@@ -3,25 +3,67 @@ import { redirect, error } from '@sveltejs/kit';
 import { localizeHref } from '$lib/paraglide/runtime';
 import { MercadoPagoConfig, Order } from 'mercadopago';
 import { MP_ACCESS_TOKEN } from '$env/static/private';
+import { getUrqlClient } from '$stores/urqlClient.state.svelte';
+import { ORDER_QUERY } from '$lib/graphql/queries';
+import { generateBasicAuthorization } from '$lib/utils';
 
-// const MOCK_WOO_PAYMENT_METHOD_ID = 'woo_mercadopago_custom_gateway'; // Hardcoded for this example
+const queryOrderFromSession = async (orderId, session: string) => {
+	const wooOrder = await getUrqlClient().client.query(
+		ORDER_QUERY,
+		{
+			orderId: parseInt(orderId)
+			// billingEmail: 'test@test.com'
+		},
+		{
+			fetchOptions: {
+				headers: {
+					authorization: `Basic ${generateBasicAuthorization('nicolas@minimo.io', 'Kk0R V7Vs EvJs v4VJ n0NU ZJWl')}`
+				}
+			}
+		}
+	);
+	// console.log('WOO_ORDER');
+	// console.log(wooOrder);
+	console.log('session (not used)', session);
+	return wooOrder;
+};
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, url }) => {
 	const orderId = params.orderId;
+	const session = url.searchParams.get('sess') || '';
 
-	// To get from fetched order (from orderId) ------------------------------------------------------------------------
+	console.log('ORDER_KEY', params.orderId);
+
+	console.log(`Query order session for payment: ${session}`);
+
+	// Query WooCommerce order get from fetched order (from orderId) ------------------------------------------------------------------------
+
+	const order = await queryOrderFromSession(orderId, session);
+	if (order.data.getOrder) {
+		const orderData = order.data.getOrder;
+		console.log('ORDER_DATA_OKK');
+		console.log(orderData);
+		throw redirect(302, localizeHref(`/checkout/error/?code=order-data-showed`));
+	} else {
+		console.error(`CHECKOUT ORDER QUERY FAILED_1: ${order.error!.message}`);
+		throw redirect(302, localizeHref('/error/?code=checkout-order-query-failed-inside'));
+	}
+	// console.log('ORDER');
+	// console.log(order);
+
 	const orderPaymentId = 'mercadopago';
-	const orderFounded = true;
+	const orderFounded = false;
 	const orderAmount = '120.0';
+
 	// -----------------------------------------------------------------------------------------------------------------
 
 	if (!orderFounded) {
 		console.error(`Order ${orderId} not found.`);
-		throw redirect(302, localizeHref(`/checkout/error/2313?message=order-not-found`)); // Redirect to a generic error page
+		throw redirect(302, localizeHref(`/checkout/error/?code=order-not-processed`)); // Redirect to a generic error page
 	}
 
 	if (orderPaymentId == 'mercadopago') {
-		console.log(`Get data from Mercado Pago:${orderId}`);
+		console.log(`Create order at Mercado Pago:${orderId}`);
 
 		try {
 			// Initialize the Mercado Pago client

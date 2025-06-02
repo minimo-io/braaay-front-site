@@ -7,6 +7,10 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { CUSTOMER_QUERY, mapCustomerToUser } from '$lib/graphql/queries';
+	import {
+		CHECKOUT_CREATE_ORDER_MUTATION,
+		CHECKOUT_UPDATE_CUSTOMER_EMAIL
+	} from '$lib/graphql/mutations';
 	import type {
 		Customer,
 		CustomerAddress,
@@ -40,7 +44,7 @@
 	import StepFourWaiting from '$components/ui/checkout/StepFourWaiting.svelte';
 
 	import { calculateDiscount, cart } from '$stores/cart.store.svelte';
-	import { CHECKOUT_CREATE_ORDER_MUTATION } from '$lib/graphql/mutations';
+	import { m } from '$lib/paraglide/messages';
 
 	interface Steps {
 		step1: boolean | object;
@@ -208,7 +212,9 @@
 				phone: customer?.telephone
 			};
 		} else {
+			// For pickup defaults
 			console.log('Billing address showroom');
+			// Address is the showroom address
 			billingForGraphQL = {
 				firstName: customer?.firstName,
 				lastName: customer?.lastName,
@@ -221,6 +227,12 @@
 				state: 'São Paulo',
 				email: customer?.email,
 				phone: customer?.telephone
+			};
+			// Shipping is pickup
+			shippingOption = {
+				id: 'local_pickup',
+				label: m.checkoutStorePickup(),
+				cost: '0'
 			};
 		}
 
@@ -269,10 +281,49 @@
 			return;
 		}
 
-		// Get the order id
-
-		return createOrderResult.data.createOrder.orderId;
+		return {
+			// orderId: createOrderResult.data.createOrder.orderId,
+			orderId: createOrderResult.data.createOrder.orderId,
+			orderKey: createOrderResult.data.createOrder.orderKey,
+			session: currentSessionToken
+		};
 	}
+
+	// async function updateCustomerEmail(session: string) {
+	// 	let newSessionAfter = '';
+	// 	const updateCustomerEmailResult = await getUrqlClient()
+	// 		.client.mutation(
+	// 			CHECKOUT_UPDATE_CUSTOMER_EMAIL,
+	// 			{
+	// 				email: customer?.email
+	// 			},
+	// 			{
+	// 				fetchOptions: {
+	// 					headers: {
+	// 						'Content-Type': 'application/json',
+	// 						'woocommerce-session': `Session ${session}`
+	// 					}
+	// 				},
+	// 				fetch: (input, init) => {
+	// 					return fetch(input, init).then((response) => {
+	// 						// Capture any new session token if provided
+	// 						const newSession = response.headers.get('woocommerce-session');
+	// 						if (newSession) {
+	// 							newSessionAfter = newSession.replace('Session ', '');
+	// 							// console.log('New session from add to cart:', currentSessionToken);
+	// 						}
+	// 						// addToCartResponse = response;
+	// 						return response;
+	// 					});
+	// 				}
+	// 			}
+	// 		)
+	// 		.toPromise();
+	// 	console.log('CUSTOMER EMAIL', customer?.email);
+	// 	console.log('UPDATE CUSTOMER EMAIL');
+	// 	console.log(updateCustomerEmailResult);
+	// 	return newSessionAfter;
+	// }
 </script>
 
 <main>
@@ -370,12 +421,26 @@
 									if (!paymentMethodSelected) {
 										launchToast('Selecione um método de pagamento', 'error', 2500);
 									} else {
-										let orderId = await checkoutCreateOrder();
-										if (orderId) {
+										toggleLoader();
+										let orderCreateResult = await checkoutCreateOrder();
+										if (orderCreateResult && orderCreateResult.orderId) {
 											// console.log(`ORDER ID FINAL STAGE: ${orderId}`);
-											goto(localizeHref(`/checkout/pagamento/${orderId}`));
+
+											// update customer
+											// const updateCustomerSession = await updateCustomerEmail(
+											// 	orderCreateResult.session
+											// );
+
+											console.log('ORDER SESSION', orderCreateResult.session);
+											// console.log('UPDATE CUSTOMER SESSION', updateCustomerSession);
+											// Redirect to payment
+											goto(
+												localizeHref(
+													`/checkout/pagamento/${orderCreateResult.orderId}/?sess=${orderCreateResult.session}`
+												)
+											);
 										} else {
-											goto(localizeHref('/checkout/error?code=no-order-id'));
+											goto(localizeHref('/checkout/error/?code=no-order-id'));
 											return;
 										}
 									}

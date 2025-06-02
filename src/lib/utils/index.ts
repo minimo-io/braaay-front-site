@@ -59,3 +59,9 @@ export function numbersOnly(node: HTMLInputElement) {
 		}
 	};
 }
+
+export function generateBasicAuthorization(username, appPassword) {
+	const credentials = `${username}:${appPassword}`;
+	const encodedCredentials = btoa(credentials); // btoa is a built-in browser function for Base64 encoding
+	return encodedCredentials;
+}

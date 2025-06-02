@@ -48,5 +48,7 @@
 	"checkoutStep1NoLastname": "El apellido es obligatorio.",
 
 	"checkoutLoadingPayments": "Cargando métodos de pago...",
-	"checkoutNewsletterOptIn": "Quiero recibir noticias y promociones"
+	"checkoutNewsletterOptIn": "Quiero recibir noticias y promociones",
+	"checkoutAreYouSureToLeave": "¿Estás seguro de que quieres volver? Tu pago aún se está procesando.",
+	"checkoutStorePickup": "Retiro en el showroom"
 }

@@ -1,11 +1,92 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { beforeNavigate, pushState, goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { m } from '$lib/paraglide/messages';
+	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 
 	const orderId = page.params.orderId;
 	const data = $derived(page.data);
+
+	// Determines if the navigation alert should be shown.
+	// It's initially true and becomes false if payment is approved or user confirms leaving.
+	let showNavigationAlert = $state(true);
+
+	// Auto-disable alerts if payment status changes to approved
+	$effect(() => {
+		if (data?.payment?.payment_status === 'approved') {
+			showNavigationAlert = false;
+		}
+	});
+
+	/**
+	 * Handles the user's attempt to navigate away (back, reload, close, or internal SvelteKit navigation).
+	 * @returns {boolean} true if navigation should proceed, false if it should be cancelled.
+	 */
+	const handleNavigationAttempt = () => {
+		if (!showNavigationAlert || data?.payment?.payment_status === 'approved') {
+			return true; // Allow navigation if alerts are disabled or payment is approved
+		}
+
+		const confirmed = confirm(m.checkoutAreYouSureToLeave());
+		if (confirmed) {
+			// User confirmed leaving, disable further alerts for this session
+			showNavigationAlert = false;
+			return true; // Allow navigation
+		} else {
+			return false; // Cancel navigation
+		}
+	};
+
+	onMount(() => {
+		// This ensures the current state is added to history, so `popstate` can detect a "back" action.
+		// It helps when the user lands directly on this page and then tries to go back.
+		pushState('', {});
+		toggleLoader();
+
+		// Handle browser refresh/close
+		const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+			if (!handleNavigationAttempt()) {
+				event.preventDefault();
+				event.returnValue = ''; // Required for some browsers
+			}
+		};
+
+		// Handle browser back button (popstate)
+		const handlePopState = () => {
+			// When popstate fires, it means the browser is already trying to go back.
+			// If the user *doesn't* confirm, we want to push the current state again
+			// to effectively "undo" the back navigation and prevent changing the URL.
+			if (!handleNavigationAttempt()) {
+				// If the user cancelled, push the current state to prevent the back navigation
+				pushState('', {});
+			} else {
+				// If the user confirmed, navigate to checkout as requested
+				goto('/checkout');
+			}
+		};
+
+		window.addEventListener('beforeunload', handleBeforeUnload);
+		window.addEventListener('popstate', handlePopState);
+
+		return () => {
+			window.removeEventListener('beforeunload', handleBeforeUnload);
+			window.removeEventListener('popstate', handlePopState);
+		};
+	});
+
+	// Handle SvelteKit internal navigation (e.g., clicking a link)
+	beforeNavigate(({ cancel, to }) => {
+		// Only intervene if navigating to a different pathname (i.e., truly leaving this page)
+		if (to?.url?.pathname !== page.url.pathname) {
+			if (!handleNavigationAttempt()) {
+				cancel(); // Prevent SvelteKit navigation
+			}
+		}
+	});
 </script>
 
-PAGO: {orderId}
+--- PAGO: {orderId}
 
 {#if data.success}
 	<div class="payment-success">
@@ -61,7 +142,6 @@ PAGO: {orderId}
 					<p><strong>Mensaje:</strong> {error.message}</p>
 					<p><strong>Código:</strong> {error.code}</p>
 
-					<!-- Context-sensitive help for specific errors -->
 					{#if error.code === 'invalid_email_for_sandbox'}
 						<div class="error-help">
 							<h4>💡 Solución:</h4>
@@ -85,6 +165,7 @@ PAGO: {orderId}
 {/if}
 
 <style>
+	/* Your existing styles here */
 	.payment-container {
 		max-width: 600px;
 		margin: 0 auto;

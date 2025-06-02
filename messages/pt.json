@@ -48,5 +48,8 @@
 	"checkoutStep1NoLastname": "O sobrenome é obrigatório.",
 
 	"checkoutLoadingPayments": "Carregando métodos de pagamento...",
-	"checkoutNewsletterOptIn": "Quero receber novidades e promoções"
+	"checkoutNewsletterOptIn": "Quero receber novidades e promoções",
+
+	"checkoutAreYouSureToLeave": "Tem certeza de que quer voltar? Seu pagamento ainda está sendo processado.",
+	"checkoutStorePickup": "Retirada no showroom"
 }

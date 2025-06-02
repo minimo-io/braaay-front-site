@@ -24,6 +24,7 @@ export const CHECKOUT_CREATE_ORDER_MUTATION = gql`
 		) {
 			orderId
 			order {
+				orderKey
 				status
 				billing {
 					firstName
