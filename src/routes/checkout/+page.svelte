@@ -19,7 +19,7 @@
 		ShippingOption
 	} from '$lib/types';
 	import { DeliveryUIType } from '$lib/types';
-	import { launchToast, truncate } from '$lib/utils';
+	import { generateBasicAuthorization, launchToast, truncate } from '$lib/utils';
 	import { goto } from '$app/navigation';
 
 	import CheckoutMobileSummary from '$components/ui/checkout/CheckoutMobileSummary.svelte';
@@ -45,6 +45,8 @@
 
 	import { calculateDiscount, cart } from '$stores/cart.store.svelte';
 	import { m } from '$lib/paraglide/messages';
+
+	import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
 
 	interface Steps {
 		step1: boolean | object;
@@ -237,39 +239,48 @@
 		}
 
 		// const createOrderResult = await getUrqlClient(undefined, true)
-		const createOrderResult = await getUrqlClient()
-			.client.mutation(
-				CHECKOUT_CREATE_ORDER_MUTATION,
+		const orderDataForMutation = {
+			cpf: customer?.cpf,
+			lineItems: cartItemsForGraphQL,
+			couponCodes: couponsForGraphQL,
+			paymentMethod: paymentMethodSelected?.id,
+			customerBilling: billingForGraphQL,
+			shippingLines: [
 				{
-					cpf: customer?.cpf,
-					lineItems: cartItemsForGraphQL,
-					couponCodes: couponsForGraphQL,
-					paymentMethod: paymentMethodSelected?.id,
-					customerBilling: billingForGraphQL,
-					shippingLines: [
-						{
-							methodId: shippingOption?.id,
-							methodTitle: shippingOption?.label,
-							total: shippingOption?.cost
-						}
-					]
-				},
-				{
-					// fetchOptions: { headers: sessionHeaders },
-					fetch: (input, init) => {
-						return fetch(input, init).then((response) => {
-							// Capture any new session token if provided
-							const newSession = response.headers.get('woocommerce-session');
-							if (newSession) {
-								currentSessionToken = newSession.replace('Session ', '');
-								// console.log('New session from add to cart:', currentSessionToken);
-							}
-							// addToCartResponse = response;
-							return response;
-						});
-					}
+					methodId: shippingOption?.id,
+					methodTitle: shippingOption?.label,
+					total: shippingOption?.cost
 				}
-			)
+			]
+		};
+		console.log('ORDER_DATA_FOR_MUTATION');
+		console.log(orderDataForMutation);
+		const createOrderResult = await getUrqlClient()
+			.client.mutation(CHECKOUT_CREATE_ORDER_MUTATION, orderDataForMutation, {
+				fetchOptions: {
+					headers: {
+						authorization: `Basic ${generateBasicAuthorization(PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY)}`
+
+						// 'User-Agent': 'WordPress/6.x; https://braaay.com',
+						// 'X-Requested-With': 'XMLHttpRequest',
+						// Accept: 'application/json',
+						// 'Content-Type': 'application/json',
+						// Referer: 'https://braaay.com' // Your WordPress site URL
+					}
+				},
+				fetch: (input, init) => {
+					return fetch(input, init).then((response) => {
+						// Capture any new session token if provided
+						const newSession = response.headers.get('woocommerce-session');
+						if (newSession) {
+							currentSessionToken = newSession.replace('Session ', '');
+							// console.log('New session from add to cart:', currentSessionToken);
+						}
+						// addToCartResponse = response;
+						return response;
+					});
+				}
+			})
 			.toPromise();
 
 		console.log('RESULT_CREATE_ORDER:');
@@ -277,6 +288,8 @@
 		// Check for errors
 		if (createOrderResult.error) {
 			console.error(`Error: ${createOrderResult.error.message}`);
+			console.error('Error details');
+			console.error(createOrderResult.error);
 			goto(localizeHref(`/checkout/error?code=${createOrderResult.error.name}`));
 			return;
 		}

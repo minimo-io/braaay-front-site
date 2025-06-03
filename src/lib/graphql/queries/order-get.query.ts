@@ -34,6 +34,10 @@ export const ORDER_QUERY = gql`
 			billingCountry
 			billingPhone
 			billingCompany
+
+			paymentMethod
+			paymentMethodTitle
+			needsPayment
 		}
 	}
 `;

@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { beforeNavigate, pushState, goto } from '$app/navigation';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import { m } from '$lib/paraglide/messages';
-	import { toggleLoader } from '$stores/loaderStore.state.svelte';
+	import { toggleLoader, loaderActivated } from '$stores/loaderStore.state.svelte';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	const orderId = page.params.orderId;
 	const data = $derived(page.data);
@@ -39,10 +40,25 @@
 	};
 
 	onMount(() => {
-		// This ensures the current state is added to history, so `popstate` can detect a "back" action.
-		// It helps when the user lands directly on this page and then tries to go back.
-		pushState('', {});
-		toggleLoader();
+		// Handle the pushState call asynchronously but don't make onMount async
+		(async () => {
+			// Wait for the next tick to ensure the router is initialized
+			await tick();
+
+			// Small additional delay to ensure router is fully ready
+			setTimeout(() => {
+				try {
+					// This ensures the current state is added to history, so `popstate` can detect a "back" action.
+					// It helps when the user lands directly on this page and then tries to go back.
+					pushState('', {});
+				} catch (error) {
+					console.warn('Failed to push state, router may not be ready:', error);
+				}
+			}, 0);
+		})();
+
+		// toggleLoader();
+		loaderActivated.active = false;
 
 		// Handle browser refresh/close
 		const handleBeforeUnload = (event: BeforeUnloadEvent) => {
@@ -59,10 +75,14 @@
 			// to effectively "undo" the back navigation and prevent changing the URL.
 			if (!handleNavigationAttempt()) {
 				// If the user cancelled, push the current state to prevent the back navigation
-				pushState('', {});
+				try {
+					pushState('', {});
+				} catch (error) {
+					console.warn('Failed to push state in popstate handler:', error);
+				}
 			} else {
 				// If the user confirmed, navigate to checkout as requested
-				goto('/checkout');
+				goto(localizeHref('/checkout/'));
 			}
 		};
 
