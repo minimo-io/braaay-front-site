@@ -16,5 +16,8 @@ export const AppConfig = {
 			description: '10% de desconto na sua primeira compra no site, sem mínimo.',
 			usageLimitPerUser: 1
 		}
+	},
+	payments: {
+		timeout: 30
 	}
 };

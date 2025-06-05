@@ -2,6 +2,9 @@
 	"loading": "Carregando...",
 	"search": "Pesquisar...",
 	"searching": "Pesquisando...",
+	"copy": "Copiar",
+	"copiedToClipboard": "Copiado para a área de transferência",
+	"copiedError": "Erro ao copiar:",
 
 	"currencySymbol": "R$",
 
