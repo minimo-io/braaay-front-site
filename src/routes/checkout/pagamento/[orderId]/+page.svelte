@@ -392,7 +392,7 @@
 							<p><strong>Mensaje:</strong> {error.message}</p>
 							<p><strong>Código:</strong> {error.code}</p>
 
-							{#if error.code === 'invalid_email_for_sandbox'}
+							<!-- {#if error.code === 'invalid_email_for_sandbox'}
 								<div class="error-help">
 									<h4>💡 Solución:</h4>
 									<p>
@@ -402,7 +402,7 @@
 									</p>
 									<p>Ejemplo: <code>nicolas@testuser.com</code></p>
 								</div>
-							{/if}
+							{/if} -->
 						</div>
 					{/each}
 				{/if}
@@ -418,20 +418,6 @@
 
 <style>
 	/* Your existing styles here */
-	.payment-container {
-		max-width: 600px;
-		margin: 0 auto;
-		padding: 20px;
-		font-family: Arial, sans-serif;
-	}
-
-	.payment-success {
-		background: #d4edda;
-		border: 1px solid #c3e6cb;
-		border-radius: 8px;
-		padding: 20px;
-		margin: 20px 0;
-	}
 
 	.payment-error {
 		background: #f8d7da;
@@ -440,72 +426,6 @@
 		padding: 20px;
 		margin: 20px 0;
 	}
-
-	.payment-info {
-		margin: 15px 0;
-	}
-
-	.qr-section {
-		margin-top: 20px;
-		text-align: center;
-	}
-
-	.qr-code {
-		margin: 15px 0;
-		padding: 20px;
-		background: white;
-		border: 1px solid #ddd;
-		border-radius: 8px;
-	}
-
-	.qr-code img {
-		max-width: 256px;
-		height: auto;
-	}
-
-	.qr-text code {
-		background: #f8f9fa;
-		padding: 10px;
-		border-radius: 4px;
-		font-family: monospace;
-		word-break: break-all;
-		display: block;
-		margin: 10px 0;
-		font-size: 12px;
-		max-height: 100px;
-		overflow-y: auto;
-	}
-
-	.qr-text button {
-		margin-top: 10px;
-		background: #28a745;
-		font-size: 14px;
-	}
-
-	.qr-text button:hover {
-		background: #218838;
-	}
-
-	.ticket-link {
-		margin-top: 15px;
-	}
-
-	.ticket-link a {
-		color: #007bff;
-		text-decoration: none;
-		font-weight: bold;
-	}
-
-	.ticket-link a:hover {
-		text-decoration: underline;
-	}
-
-	.instructions {
-		font-size: 14px;
-		color: #666;
-		margin-top: 15px;
-	}
-
 	.error-details {
 		margin: 15px 0;
 	}
@@ -520,39 +440,6 @@
 
 	.error-item.main-error {
 		border-left: 4px solid #dc3545;
-	}
-
-	.error-help {
-		margin: 15px 0 0 0;
-		padding: 15px;
-		background: #d1ecf1;
-		border: 1px solid #bee5eb;
-		border-radius: 4px;
-		border-left: 4px solid #17a2b8;
-	}
-
-	.error-help h4 {
-		margin-top: 0;
-		color: #0c5460;
-	}
-
-	.error-help code {
-		background: #e2e3e5;
-		padding: 2px 4px;
-		border-radius: 3px;
-		font-family: monospace;
-	}
-
-	details {
-		margin-top: 10px;
-	}
-
-	pre {
-		background: #f8f9fa;
-		padding: 10px;
-		border-radius: 4px;
-		overflow-x: auto;
-		font-size: 12px;
 	}
 
 	button {
