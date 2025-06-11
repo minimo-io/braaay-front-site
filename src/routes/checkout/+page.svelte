@@ -12,6 +12,7 @@
 		CHECKOUT_UPDATE_CUSTOMER_EMAIL
 	} from '$lib/graphql/mutations';
 	import type {
+		CreditCardFormData,
 		Customer,
 		CustomerAddress,
 		PaymentMethod,
@@ -19,7 +20,12 @@
 		ShippingOption
 	} from '$lib/types';
 	import { DeliveryUIType } from '$lib/types';
-	import { generateBasicAuthorization, launchToast, truncate } from '$lib/utils';
+	import {
+		generateBasicAuthorization,
+		launchToast,
+		truncate,
+		validateCreditCard
+	} from '$lib/utils';
 	import { goto } from '$app/navigation';
 
 	import CheckoutMobileSummary from '$components/ui/checkout/CheckoutMobileSummary.svelte';
@@ -74,6 +80,7 @@
 	let cartDiscounts = $state(0);
 	let couponsCount = $state(0);
 	let isGuestUser = $state(isAuthenticated() ? false : true);
+	let creditCardData = $state<CreditCardFormData | undefined>();
 
 	let customer: Customer | undefined = $state();
 
@@ -432,11 +439,38 @@
 								onUpdatePayment={(method: PaymentMethod) => {
 									paymentMethodSelected = method;
 								}}
+								onCreditCardChange={(formData: CreditCardFormData) => {
+									creditCardData = formData;
+								}}
 								onCheckoutDone={async (newsletter: boolean) => {
 									if (!paymentMethodSelected) {
 										launchToast('Selecione um método de pagamento', 'error', 2500);
 									} else {
 										toggleLoader();
+
+										// Credit card validation (IF NEEDED) ------------------------------------------
+										if (paymentMethodSelected.id == 'woo-mercado-pago-custom') {
+											if (
+												!creditCardData ||
+												!creditCardData.cardNumber ||
+												!creditCardData.cardholderName ||
+												!creditCardData.expiryDate ||
+												!creditCardData.securityCode
+											) {
+												launchToast('Adicionar todos os dados do cartão de crédito.', 'error');
+												toggleLoader();
+												return;
+											} else if (!validateCreditCard(creditCardData)) {
+												launchToast(
+													'Alguns dados do cartão de crédito são inválidos. Verifique.',
+													'error'
+												);
+												toggleLoader();
+												return;
+											}
+										}
+										// -----------------------------------------------------------------------------
+
 										let orderCreateResult = await checkoutCreateOrder();
 										if (orderCreateResult && orderCreateResult.orderId) {
 											// console.log(`ORDER ID FINAL STAGE: ${orderId}`);
@@ -513,6 +547,18 @@
 			{deliveryType} - <strong>DeliveryOption:</strong>
 			{shippingOption || 'undefined'}
 		</div>
-		<div><strong>Session:</strong> {truncate(userSessionToken, 50) || 'undefined'}</div>
+		<div class="pb-2">
+			<strong>Session:</strong>
+			{truncate(userSessionToken, 50) || 'undefined'}
+		</div>
+		<div class="py-2 border-t border-grey-light">
+			<strong>Credit Card Data:</strong>
+			{#if creditCardData}
+				{creditCardData.cardNumber} - {creditCardData.cardholderName} - {creditCardData.expiryDate} -
+				{creditCardData.securityCode}
+			{:else}
+				undefined
+			{/if}
+		</div>
 	</div>
 {/if}

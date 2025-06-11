@@ -11,6 +11,13 @@ export interface PaymentMethod {
 	feeDetails: PaymentFeeDetail[];
 }
 
+export interface CreditCardFormData {
+	cardNumber: string;
+	cardholderName: string;
+	expiryDate: string;
+	securityCode: string;
+}
+
 export interface OrderData {
 	total: string;
 	email: string;

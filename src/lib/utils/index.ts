@@ -9,6 +9,7 @@ export * from './launchToast.util';
 export * from './cpfs.util';
 export * from './emails.util';
 export * from './phones.util';
+export * from './creditCards.util';
 
 /**
  * Truncate a string to a maximum length and add ellipsis if needed.

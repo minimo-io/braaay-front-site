@@ -12,6 +12,7 @@
 
 	import {
 		DeliveryUIType,
+		type CreditCardFormData,
 		type CustomerAddress,
 		type PaymentMethod,
 		type ProductGraphQL,
@@ -24,6 +25,7 @@
 	} from '$lib/graphql/mutations';
 
 	import { cart } from '$stores/cart.store.svelte';
+	import CheckoutCreditCardInfo from './CheckoutCreditCardInfo.svelte';
 
 	interface Props {
 		deliveryType: DeliveryUIType | null;
@@ -33,6 +35,7 @@
 		cartTotal: number;
 		onUpdatePayment: (method) => void;
 		onCheckoutDone: (newsletter: boolean) => void;
+		onCreditCardChange: (creditCardData: CreditCardFormData) => void;
 	}
 
 	let {
@@ -42,7 +45,8 @@
 		onUpdatePayment,
 		shippingOption,
 		cartTotal,
-		onCheckoutDone
+		onCheckoutDone,
+		onCreditCardChange
 	}: Props = $props();
 
 	let loading = $state(false);
@@ -57,6 +61,7 @@
 	let countryCode = $state(address ? address.country : 'BR');
 	let postCode = $state(address ? address.postcode : '05411-000');
 	let paymentMethods = $state<PaymentMethod[] | undefined>();
+	let methodSelected = $state<PaymentMethod | undefined>();
 	let newsletter = $state(false);
 
 	onMount(async () => {
@@ -182,7 +187,7 @@
 		</h2>
 	</div>
 
-	<form class="">
+	<form>
 		{#if paymentMethods}
 			{#each paymentMethods as method, i (i)}
 				{@const discountPercentage = calculateDiscountPercentage(
@@ -200,6 +205,7 @@
 								name="radio1"
 								value={method.id}
 								onclick={() => {
+									methodSelected = method;
 									onUpdatePayment(method);
 								}}
 							/>
@@ -222,6 +228,20 @@
 		{:else}
 			<div class="text-xs">{m.checkoutLoadingPayments()}</div>
 		{/if}
+
+		<!-- Method details -->
+		<!-- {#if method.id == 'woo-mercado-pago-pix'} -->
+		{#if methodSelected?.id == 'woo-mercado-pago-pix'}
+			<!-- <div>PIX DETAILS</div> -->
+		{:else if methodSelected?.id == 'woo-mercado-pago-custom'}
+			<!-- <div>CARD DETAILS</div> -->
+			<CheckoutCreditCardInfo
+				onCreditCardChange={(formData: CreditCardFormData) => {
+					onCreditCardChange(formData);
+				}}
+			/>
+		{/if}
+		<!-- {/if} -->
 
 		<!-- Promocoes -->
 		<div class="flex items-center text-sm my-5 px-3">
