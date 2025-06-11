@@ -198,7 +198,7 @@
 				});
 			});
 
-			if (cart.coupons.length > 0) {
+			if (cart.coupons && cart.coupons.length > 0) {
 				cart.coupons.forEach((item) => {
 					couponsForGraphQL.push(item);
 				});
