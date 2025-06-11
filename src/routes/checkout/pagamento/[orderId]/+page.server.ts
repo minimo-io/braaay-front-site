@@ -108,6 +108,11 @@ export const load: PageServerLoad = async ({ params, url }) => {
 					if (!payment) {
 						throw new Error('No payment data found in response');
 					}
+
+					// Save mutation with order id ---------------------------------------------------------------------
+
+					// -------------------------------------------------------------------------------------------------
+
 					const orderMpResponse = {
 						success: true,
 						payment: {
