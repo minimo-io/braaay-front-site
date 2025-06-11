@@ -59,6 +59,8 @@ export async function POST({ request, url }) {
 		const dataId = url.searchParams.get('data.id');
 		const type = url.searchParams.get('type');
 
+		console.log('Starting webhook...');
+
 		// Validate required parameters first
 		if (!dataId || !type) {
 			return json({ error: 'Missing required parameters' }, { status: 400 });
