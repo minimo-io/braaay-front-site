@@ -388,22 +388,22 @@
 			<div class="error-details">
 				{#if data.errors.length > 0}
 					{#each data.errors as error, index}
-						<!-- <div class="error-item" class:main-error={index === 0}>
-						<p><strong>Mensaje:</strong> {error.message}</p>
-						<p><strong>Código:</strong> {error.code}</p>
+						<div class="error-item" class:main-error={index === 0}>
+							<p><strong>Mensaje:</strong> {error.message}</p>
+							<p><strong>Código:</strong> {error.code}</p>
 
-						{#if error.code === 'invalid_email_for_sandbox'}
-							<div class="error-help">
-								<h4>💡 Solución:</h4>
-								<p>
-									Para el entorno de pruebas (sandbox), el email debe tener el formato: <code
-										>usuario@testuser.com</code
-									>
-								</p>
-								<p>Ejemplo: <code>nicolas@testuser.com</code></p>
-							</div>
-						{/if}
-					</div> -->
+							{#if error.code === 'invalid_email_for_sandbox'}
+								<div class="error-help">
+									<h4>💡 Solución:</h4>
+									<p>
+										Para el entorno de pruebas (sandbox), el email debe tener el formato: <code
+											>usuario@testuser.com</code
+										>
+									</p>
+									<p>Ejemplo: <code>nicolas@testuser.com</code></p>
+								</div>
+							{/if}
+						</div>
 					{/each}
 				{/if}
 			</div>
