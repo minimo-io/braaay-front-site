@@ -198,9 +198,11 @@
 				});
 			});
 
-			cart.coupons.forEach((item) => {
-				couponsForGraphQL.push(item);
-			});
+			if (cart.coupons.length > 0) {
+				cart.coupons.forEach((item) => {
+					couponsForGraphQL.push(item);
+				});
+			}
 		});
 
 		// Prepare billing address
