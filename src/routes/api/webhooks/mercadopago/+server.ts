@@ -57,7 +57,11 @@ export async function POST({ request, url }) {
 
 		// Get query parameters
 		const dataId = url.searchParams.get('data.id');
+		const dataExternalReference = url.searchParams.get('data.external_reference');
 		const type = url.searchParams.get('type');
+
+		console.log('Search Params');
+		console.log(url.searchParams);
 
 		console.log('Starting webhook...');
 
@@ -87,6 +91,13 @@ export async function POST({ request, url }) {
 			action: webhookData?.action,
 			liveMode: webhookData?.live_mode
 		});
+		// Result format
+		// Received webhook: {
+		// 	dataId: 'ORD01JXWWX9XYWSENGVC9K3B3P4BA',
+		// 	type: 'order',
+		// 	action: 'order.processed',
+		// 	liveMode: true
+		// }
 
 		// Validate webhook signature
 		const isValidSignature = validateWebhookSignature(xSignature, xRequestId, dataId, secretKey);
