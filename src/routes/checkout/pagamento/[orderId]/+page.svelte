@@ -9,8 +9,12 @@
 	import { Button, MoreInfoButton } from '$components/ui/buttons';
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import CheckoutPaymentQrSteps from '$components/ui/checkout/CheckoutPaymentQRSteps.svelte';
-	import { launchToast } from '$lib/utils';
+	import { generateBasicAuthorization, launchToast } from '$lib/utils';
 	import { AppConfig } from '$config';
+
+	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
+	import { ORDER_QUERY_STATUS } from '$lib/graphql/queries/order-get-status.query';
+	import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
 
 	const orderId = page.params.orderId;
 	const data = $derived(page.data);
@@ -24,6 +28,9 @@
 	let timeRemaining = $state(AppConfig.payments.timeout * 60); // 30 minutes in seconds
 	let timerInterval: NodeJS.Timeout | null = null;
 	let isTimerActive = $state(true);
+	// --- VARIABLE FOR STATUS CHECK INTERVAL ---
+	let statusCheckInterval: NodeJS.Timeout | null = null;
+	// --- END NEW VARIABLE ---
 
 	// Format time as MM:SS
 	const formatTime = (seconds: number): string => {
@@ -34,7 +41,7 @@
 
 	// Auto-disable alerts if payment status changes to approved
 	$effect(() => {
-		if (data?.payment?.payment_status === 'approved') {
+		if (data?.payment?.payment_status === 'COMPLETED') {
 			showNavigationAlert = false;
 		}
 
@@ -67,7 +74,7 @@
 	 * @returns {boolean} true if navigation should proceed, false if it should be cancelled.
 	 */
 	const handleNavigationAttempt = () => {
-		if (!showNavigationAlert || data?.payment?.payment_status === 'approved') {
+		if (!showNavigationAlert || data?.payment?.payment_status === 'COMPLETED') {
 			return true; // Allow navigation if alerts are disabled or payment is approved
 		}
 
@@ -80,6 +87,48 @@
 			return false; // Cancel navigation
 		}
 	};
+
+	// --- NEW FUNCTION TO CHECK ORDER STATUS ---
+	const checkOrderStatus = async () => {
+		if (!orderId) {
+			console.error('Order ID is not available to check status.');
+			return;
+		}
+
+		const client = getUrqlClient('', false).client; // Get your Urql client
+		try {
+			const result = await client
+				.query(
+					ORDER_QUERY_STATUS,
+					{ orderId },
+					{
+						fetchOptions: {
+							headers: {
+								authorization: `Basic ${generateBasicAuthorization(PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY)}`
+							}
+						}
+					}
+				)
+				.toPromise();
+
+			if (result.error) {
+				console.error('Error fetching order status:', result.error.message);
+			} else if (result.data?.order?.status) {
+				console.log('Current Order Status:', result.data.order.status);
+				const currentOrderStatus = result.data.order.status;
+				if (currentOrderStatus == 'COMPLETED') {
+					console.log(`Order completed: ${currentOrderStatus}. Redirecting...`);
+					showNavigationAlert = false;
+					goto(localizeHref(`/checkout/confirmation/${orderId}/`));
+				}
+			} else {
+				console.log('Order status not found or unexpected data:', result);
+			}
+		} catch (error) {
+			console.error('Exception during order status check:', error);
+		}
+	};
+	// --- END NEW FUNCTION ---
 
 	onMount(() => {
 		// Handle the pushState call asynchronously but don't make onMount async
@@ -134,9 +183,20 @@
 		window.addEventListener('beforeunload', handleBeforeUnload);
 		window.addEventListener('popstate', handlePopState);
 
+		// --- NEW STATUS CHECKER ---
+		// Call it immediately once, then set the interval
+		checkOrderStatus(); // Initial check
+		statusCheckInterval = setInterval(checkOrderStatus, AppConfig.statusCheckDuration);
+		// --- END NEW STATUS CHECKER ---
+
 		return () => {
 			window.removeEventListener('beforeunload', handleBeforeUnload);
 			window.removeEventListener('popstate', handlePopState);
+			// --- CLEANUP FOR STATUS CHECK INTERVAL ---
+			if (statusCheckInterval) {
+				clearInterval(statusCheckInterval);
+			}
+			// --- END CLEANUP ---
 		};
 	});
 

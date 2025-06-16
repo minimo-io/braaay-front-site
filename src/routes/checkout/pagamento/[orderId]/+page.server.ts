@@ -32,7 +32,7 @@ const queryOrderFromSession = async (orderId, session: string) => {
 	return wooOrder;
 };
 
-// // Function to update order with MercadoPago data
+// // Function to update order with MercadoPago data for order id (the one from MP) & payment id
 async function updateOrderWithMPData(orderId: string, mpOrderId: string, mpPaymentId: string) {
 	// let processing = true;
 	let error = '';
