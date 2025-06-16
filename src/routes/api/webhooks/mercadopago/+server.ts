@@ -95,7 +95,8 @@ export async function POST({ request, url }) {
 			return json({ error: 'Invalid signature' }, { status: 401 });
 		}
 
-		console.log('EXTERNAL_REFERENCE', webhookData.external_reference);
+		console.log('EXTERNAL_DATA');
+		console.log(webhookData);
 		// TODO: Process your webhook logic here
 		// You have access to:
 		// - webhookData (the full webhook payload)
