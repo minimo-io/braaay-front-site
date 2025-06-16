@@ -30,6 +30,7 @@ function validateWebhookSignature(xSignature, xRequestId, dataId, secretKey) {
 		});
 
 		if (!ts || !hash) {
+			console.log('No ts OR hash');
 			return false;
 		}
 
@@ -106,16 +107,17 @@ export async function POST({ request, url }) {
 		const isValidSignature = validateWebhookSignature(xSignature, xRequestId, dataId, secretKey);
 
 		if (!isValidSignature) {
+			console.error('Invalid signature, 401');
 			return json({ error: 'Invalid signature' }, { status: 401 });
 		}
 
 		console.log('EXTERNAL_DATA');
 		console.log(webhookData);
-		// TODO: Process your webhook logic here
-		// You have access to:
-		// - webhookData (the full webhook payload)
-		// - dataId (the order/payment ID)
-		// - type (order/payment)
+
+		if (type == 'order' && webhookData?.action == 'order.processed') {
+			// TODO: Process your webhook logic here
+			console.log('Process order...');
+		}
 
 		// Return success response (required by MercadoPago)
 		return json({ success: true }, { status: 200 });
