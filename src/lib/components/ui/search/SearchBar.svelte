@@ -33,6 +33,7 @@
 	});
 </script>
 
+<!-- Search Form -->
 <form action={localizeHref('/search/')} method="get" class="w-full">
 	<div class="relative px-5 border-r border-r-1 border-r-grey-lighter h-[45px]">
 		<input
