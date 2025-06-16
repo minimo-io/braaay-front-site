@@ -37,6 +37,24 @@ function validateWebhookSignature(xSignature, xRequestId, dataId, secretKey) {
 			return false;
 		}
 
+		console.log('SecretKey');
+		console.log(secretKey);
+
+		console.log('ts');
+		console.log(ts);
+
+		console.log('hash');
+		console.log(hash);
+
+		console.log('xSignature');
+		console.log(xSignature);
+
+		console.log('xRequestId');
+		console.log(xRequestId);
+
+		console.log('dataId');
+		console.log(dataId);
+
 		// 4. Construir a string do manifesto exatamente como o Mercado Pago faz
 		const manifest = `id:${dataId};request-id:${xRequestId};ts:${ts};`;
 
