@@ -4,6 +4,8 @@ import { createHmac } from 'crypto';
 import { MP_WEBHOOK_SECRET } from '$env/static/private';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 import { UPDATE_ORDER_TO_COMPLETED_MUTATION } from '$lib/graphql/mutations';
+import { generateBasicAuthorization } from '$lib/utils';
+import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
 
 function validateWebhookSignature(xSignature, xRequestId, dataId, secretKey) {
 	// 1. Validar a presença de todos os dados de entrada
@@ -153,14 +155,24 @@ export async function POST({ request, url }) {
 			// TODO: Process your webhook logic here
 			console.log('Process order...');
 
-			// --- Execute the mutation here as requested ---
+			// --- Execute the mutation to update the status ---
 			if (dataExternalReference) {
-				const urqlClient = getUrqlClient('', true).client; // Assuming this initializes your client for server-side
+				const urqlClient = getUrqlClient('', true).client;
 				try {
 					const result = await urqlClient
-						.mutation(UPDATE_ORDER_TO_COMPLETED_MUTATION, {
-							orderId: dataExternalReference
-						})
+						.mutation(
+							UPDATE_ORDER_TO_COMPLETED_MUTATION,
+							{
+								orderId: dataExternalReference
+							},
+							{
+								fetchOptions: {
+									headers: {
+										authorization: `Basic ${generateBasicAuthorization(PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY)}`
+									}
+								}
+							}
+						)
 						.toPromise();
 
 					if (result.error) {
