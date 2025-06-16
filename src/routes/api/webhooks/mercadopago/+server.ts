@@ -2,6 +2,8 @@
 import { json } from '@sveltejs/kit';
 import { createHmac } from 'crypto';
 import { MP_WEBHOOK_SECRET } from '$env/static/private';
+import { getUrqlClient } from '$stores/urqlClient.state.svelte';
+import { UPDATE_ORDER_TO_COMPLETED_MUTATION } from '$lib/graphql/mutations';
 
 function validateWebhookSignature(xSignature, xRequestId, dataId, secretKey) {
 	// 1. Validar a presença de todos os dados de entrada
@@ -144,12 +146,39 @@ export async function POST({ request, url }) {
 			const isValidSignature = validateWebhookSignature(xSignature, xRequestId, dataId, secretKey);
 
 			if (!isValidSignature) {
-				console.error('Invalid signature, 401');
+				console.error('Invalid signature');
 				// return json({ error: 'Invalid signature' }, { status: 401 });
 			}
 
 			// TODO: Process your webhook logic here
 			console.log('Process order...');
+
+			// --- Execute the mutation here as requested ---
+			if (dataExternalReference) {
+				const urqlClient = getUrqlClient('', true).client; // Assuming this initializes your client for server-side
+				try {
+					const result = await urqlClient
+						.mutation(UPDATE_ORDER_TO_COMPLETED_MUTATION, {
+							orderId: dataExternalReference
+						})
+						.toPromise();
+
+					if (result.error) {
+						console.error('GraphQL Error updating order:', result.error.message);
+					} else if (result.data?.updateOrder?.order?.status) {
+						console.log(
+							`Order ${result.data.updateOrder.order.id} status updated to: ${result.data.updateOrder.order.status}`
+						);
+					} else {
+						console.warn('Order status update mutation returned no data or unexpected format.');
+					}
+				} catch (mutationError) {
+					console.error('Exception during order status mutation:', mutationError);
+				}
+			} else {
+				console.warn('dataExternalReference is missing. Cannot update order status.');
+			}
+			// --- End of mutation execution ---
 		} else {
 			console.log(`Not a processed order, skipping (${webhookData?.action}).`);
 		}
