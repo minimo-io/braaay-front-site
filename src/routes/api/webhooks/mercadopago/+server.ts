@@ -6,65 +6,137 @@ import { MP_WEBHOOK_SECRET } from '$env/static/private';
 /**
  * Validates the webhook signature from MercadoPago
  */
+// function validateWebhookSignature(xSignature, xRequestId, dataId, secretKey) {
+// 	if (!xSignature || !secretKey) {
+// 		console.log(`Not signature OR secretKey (Signature: ${xSignature}, SecretKey: ${secretKey})`);
+// 		return false;
+// 	}
+
+// 	console.log('SecretKey');
+// 	console.log(secretKey);
+
+// 	console.log('xSignature');
+// 	console.log(xSignature);
+
+// 	console.log('xRequestId');
+// 	console.log(xRequestId);
+
+// 	console.log('dataId');
+// 	console.log(dataId);
+
+// 	try {
+// 		// Parse x-signature header to extract ts and v1
+// 		const parts = xSignature.split(',');
+// 		let ts, hash;
+
+// 		parts.forEach((part) => {
+// 			const [key, value] = part.split('=');
+// 			if (key && value) {
+// 				const trimmedKey = key.trim();
+// 				const trimmedValue = value.trim();
+// 				if (trimmedKey === 'ts') {
+// 					ts = trimmedValue;
+// 				} else if (trimmedKey === 'v1') {
+// 					hash = trimmedValue;
+// 				}
+// 			}
+// 		});
+
+// 		if (!ts || !hash) {
+// 			console.log(`No ts OR hash (ts: ${ts}, hash: ${hash})`);
+// 			return false;
+// 		}
+
+// 		// Generate the manifest string
+// 		const manifest = `id:${dataId};request-id:${xRequestId};ts:${ts};`;
+
+// 		// Create HMAC signature
+// 		const hmac = createHmac('sha256', secretKey);
+// 		hmac.update(manifest);
+// 		const calculatedHash = hmac.digest('hex');
+
+// 		// Compare signatures
+// 		if (calculatedHash !== hash) {
+// 			console.log(
+// 				`Calculated hash different than hash (calculatedHash: ${calculatedHash}, hash: ${hash})`
+// 			);
+// 		}
+
+// 		return calculatedHash === hash;
+// 	} catch (error) {
+// 		console.error('Error validating webhook signature:', error);
+// 		return false;
+// 	}
+// }
+
+/**
+ * Valida a assinatura do webhook do Mercado Pago de forma robusta.
+ * @param {string | null} xSignature - O valor do header 'x-signature'.
+ * @param {string | null} xRequestId - O valor do header 'x-request-id'.
+ * @param {string | null} dataId - O 'data.id' dos parâmetros da query da URL.
+ * @param {string | undefined | null} secretKey - A chave secreta do webhook, vinda das variáveis de ambiente.
+ * @returns {boolean} - Retorna true se a assinatura for válida, caso contrário, false.
+ */
 function validateWebhookSignature(xSignature, xRequestId, dataId, secretKey) {
-	if (!xSignature || !secretKey) {
-		console.log(`Not signature OR secretKey (Signature: ${xSignature}, SecretKey: ${secretKey})`);
+	// 1. Validar a presença de todos os dados de entrada
+	if (!xSignature || !xRequestId || !dataId || !secretKey) {
+		console.error(
+			'Falha na validação: Faltam dados essenciais. Verifique os headers e a secretKey.'
+		);
+		console.error(
+			`Recebido: x-signature: ${!!xSignature}, x-request-id: ${!!xRequestId}, data.id: ${!!dataId}, secretKey: ${!!secretKey}`
+		);
 		return false;
 	}
 
-	console.log('SecretKey');
-	console.log(secretKey);
-
-	console.log('xSignature');
-	console.log(xSignature);
-
-	console.log('xRequestId');
-	console.log(xRequestId);
-
-	console.log('dataId');
-	console.log(dataId);
+	// 2. Limpar a chave secreta para remover espaços/quebras de linha (causa comum de erros)
+	const cleanSecretKey = secretKey.trim();
 
 	try {
-		// Parse x-signature header to extract ts and v1
+		// 3. Extrair 'ts' (timestamp) e 'v1' (hash) do header x-signature
 		const parts = xSignature.split(',');
-		let ts, hash;
+		const signatureData = parts.reduce((acc, part) => {
+			const [key, value] = part.split('=', 2);
+			if (key && value) acc[key.trim()] = value.trim();
+			return acc;
+		}, {});
 
-		parts.forEach((part) => {
-			const [key, value] = part.split('=');
-			if (key && value) {
-				const trimmedKey = key.trim();
-				const trimmedValue = value.trim();
-				if (trimmedKey === 'ts') {
-					ts = trimmedValue;
-				} else if (trimmedKey === 'v1') {
-					hash = trimmedValue;
-				}
-			}
-		});
+		const ts = signatureData.ts;
+		const hash = signatureData.v1;
 
 		if (!ts || !hash) {
-			console.log(`No ts OR hash (ts: ${ts}, hash: ${hash})`);
+			console.error(
+				`Falha na validação: Não foi possível extrair 'ts' ou 'v1' do header x-signature: "${xSignature}"`
+			);
 			return false;
 		}
 
-		// Generate the manifest string
+		// 4. Construir a string do manifesto exatamente como o Mercado Pago faz
 		const manifest = `id:${dataId};request-id:${xRequestId};ts:${ts};`;
 
-		// Create HMAC signature
-		const hmac = createHmac('sha256', secretKey);
+		// 5. Gerar o nosso próprio hash HMAC-SHA256
+		const hmac = createHmac('sha256', cleanSecretKey);
 		hmac.update(manifest);
 		const calculatedHash = hmac.digest('hex');
 
-		// Compare signatures
-		if (calculatedHash !== hash) {
-			console.log(
-				`Calculated hash different than hash (calculatedHash: ${calculatedHash}, hash: ${hash})`
+		// 6. Comparar o hash calculado com o hash recebido
+		const isValid = calculatedHash === hash;
+
+		if (!isValid) {
+			console.error('--- DIVERGÊNCIA DE ASSINATURA DETETADA ---');
+			console.log(`   String do Manifesto usada: "${manifest}"`);
+			console.log(`   Hash do MP (v1):    ${hash}`);
+			console.log(`   Nosso Hash (calculado): ${calculatedHash}`);
+			console.error(
+				'   Causas prováveis: 1) A Secret Key ainda está incorreta. 2) O manifesto não corresponde (verifique os valores de id, request-id, ts).'
 			);
+		} else {
+			console.log('Assinatura do webhook validada com sucesso!');
 		}
 
-		return calculatedHash === hash;
+		return isValid;
 	} catch (error) {
-		console.error('Error validating webhook signature:', error);
+		console.error('Ocorreu uma exceção ao validar a assinatura do webhook:', error);
 		return false;
 	}
 }
