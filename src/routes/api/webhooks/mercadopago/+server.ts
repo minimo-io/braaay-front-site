@@ -12,6 +12,18 @@ function validateWebhookSignature(xSignature, xRequestId, dataId, secretKey) {
 		return false;
 	}
 
+	console.log('SecretKey');
+	console.log(secretKey);
+
+	console.log('xSignature');
+	console.log(xSignature);
+
+	console.log('xRequestId');
+	console.log(xRequestId);
+
+	console.log('dataId');
+	console.log(dataId);
+
 	try {
 		// Parse x-signature header to extract ts and v1
 		const parts = xSignature.split(',');
@@ -49,6 +61,7 @@ function validateWebhookSignature(xSignature, xRequestId, dataId, secretKey) {
 				`Calculated hash different than hash (calculatedHash: ${calculatedHash}, hash: ${hash})`
 			);
 		}
+
 		return calculatedHash === hash;
 	} catch (error) {
 		console.error('Error validating webhook signature:', error);
