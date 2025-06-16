@@ -145,11 +145,8 @@ export async function POST({ request, url }) {
 
 			if (!isValidSignature) {
 				console.error('Invalid signature, 401');
-				return json({ error: 'Invalid signature' }, { status: 401 });
+				// return json({ error: 'Invalid signature' }, { status: 401 });
 			}
-
-			console.log('EXTERNAL_DATA');
-			console.log(webhookData);
 
 			// TODO: Process your webhook logic here
 			console.log('Process order...');
