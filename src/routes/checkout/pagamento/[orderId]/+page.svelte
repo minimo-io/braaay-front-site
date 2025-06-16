@@ -115,7 +115,7 @@
 			if (result.error) {
 				console.error('Error fetching order status:', result.error.message);
 			} else if (result.data?.order?.status) {
-				console.log('Current Order Status:', result.data.order.status);
+				// console.log('Current Order Status:', result.data.order.status);
 				const currentOrderStatus = result.data.order.status;
 				if (currentOrderStatus == 'COMPLETED') {
 					console.log(`Order completed: ${currentOrderStatus}. Redirecting...`);
