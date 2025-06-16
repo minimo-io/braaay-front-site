@@ -87,9 +87,7 @@
 			</div>
 		</div>
 
-		<!-- Search-->
 		<div class="hidden lg:flex flex-1 lg:gap-x-12">
-			<!-- Search form -->
 			<SearchBar />
 		</div>
 
