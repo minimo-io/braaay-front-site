@@ -124,16 +124,6 @@ export const removeCoupon = (couponCode: string) => {
 	});
 };
 
-// export async function logout() {
-// 	try {
-// 		await getUrqlClient().client.mutation(EMPTY_CART_MUTATION, {}).toPromise();
-// 		emptyCart();
-// 	} catch (err) {
-// 		console.warn('Failed to log out via GraphQL:', err);
-// 	}
-// 	clearAuth();
-// }
-
 // Clear all coupons from the cart
 export const clearAllCoupons = () => {
 	cart.update((currentCart: Cart) => {

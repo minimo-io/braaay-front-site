@@ -7,3 +7,4 @@ export * from './coupon-clear-all.mutation';
 export * from './checkout-payment-methods.mutation';
 export * from './checkout-create-order.mutation';
 export * from './checkout-update-customer.mutation';
+export * from './update-order-mp-data.mutation'; // update order with mercado pago data
