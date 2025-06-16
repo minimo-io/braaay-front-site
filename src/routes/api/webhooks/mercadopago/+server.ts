@@ -89,35 +89,37 @@ export async function POST({ request, url }) {
 			return json({ error: 'Invalid JSON payload' }, { status: 400 });
 		}
 
-		console.log('Received webhook:', {
-			dataId,
-			type,
-			action: webhookData?.action,
-			liveMode: webhookData?.live_mode
-		});
-		// Result format
-		// Received webhook: {
-		// 	dataId: 'ORD01JXWWX9XYWSENGVC9K3B3P4BA',
-		// 	type: 'order',
-		// 	action: 'order.processed',
-		// 	liveMode: true
-		// }
-
-		// Validate webhook signature
-		const isValidSignature = validateWebhookSignature(xSignature, xRequestId, dataId, secretKey);
-
-		if (!isValidSignature) {
-			console.error('Invalid signature, 401');
-			return json({ error: 'Invalid signature' }, { status: 401 });
-		}
-
-		console.log('EXTERNAL_DATA');
-		console.log(webhookData);
-
+		// Only process webhook processed orders -----------------------------------------------------------------------
 		if (type == 'order' && webhookData?.action == 'order.processed') {
+			console.log('Received webhook:', {
+				dataId,
+				type,
+				action: webhookData?.action,
+				liveMode: webhookData?.live_mode
+			});
+			// Result format
+			// Received webhook: {
+			// 	dataId: 'ORD01JXWWX9XYWSENGVC9K3B3P4BA',
+			// 	type: 'order',
+			// 	action: 'order.processed',
+			// 	liveMode: true
+			// }
+
+			// Validate webhook signature
+			const isValidSignature = validateWebhookSignature(xSignature, xRequestId, dataId, secretKey);
+
+			if (!isValidSignature) {
+				console.error('Invalid signature, 401');
+				return json({ error: 'Invalid signature' }, { status: 401 });
+			}
+
+			console.log('EXTERNAL_DATA');
+			console.log(webhookData);
+
 			// TODO: Process your webhook logic here
 			console.log('Process order...');
 		}
+		// -------------------------------------------------------------------------------------------------------------
 
 		// Return success response (required by MercadoPago)
 		return json({ success: true }, { status: 200 });
