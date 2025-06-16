@@ -95,13 +95,14 @@
 			return;
 		}
 
-		const client = getUrqlClient('', false).client; // Get your Urql client
+		const client = getUrqlClient('', true).client; // Get your Urql client
 		try {
 			const result = await client
 				.query(
 					ORDER_QUERY_STATUS,
 					{ orderId },
 					{
+						requestPolicy: 'network-only',
 						fetchOptions: {
 							headers: {
 								authorization: `Basic ${generateBasicAuthorization(PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY)}`
