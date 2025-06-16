@@ -63,6 +63,9 @@ export async function POST({ request, url }) {
 		console.log('Search Params');
 		console.log(url.searchParams);
 
+		console.log('External Reference');
+		console.log(dataExternalReference);
+
 		console.log('Starting webhook...');
 
 		// Validate required parameters first

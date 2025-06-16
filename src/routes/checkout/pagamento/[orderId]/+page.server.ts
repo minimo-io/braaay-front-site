@@ -96,7 +96,8 @@ export const load: PageServerLoad = async ({ params, url }) => {
 		console.log(orderData);
 
 		const orderPaymentId = orderData.paymentMethod;
-		const orderAmount = orderData.total;
+		// const orderAmount = orderData.total;
+		const orderAmount = 1;
 
 		// Order not founded
 		if (!orderData) {
