@@ -8,6 +8,7 @@ import { MP_WEBHOOK_SECRET } from '$env/static/private';
  */
 function validateWebhookSignature(xSignature, xRequestId, dataId, secretKey) {
 	if (!xSignature || !secretKey) {
+		console.log(`Not signature OR secretKey (Signature: ${xSignature}, SecretKey: ${secretKey})`);
 		return false;
 	}
 
@@ -30,7 +31,7 @@ function validateWebhookSignature(xSignature, xRequestId, dataId, secretKey) {
 		});
 
 		if (!ts || !hash) {
-			console.log('No ts OR hash');
+			console.log(`No ts OR hash (ts: ${ts}, hash: ${hash})`);
 			return false;
 		}
 
@@ -43,6 +44,11 @@ function validateWebhookSignature(xSignature, xRequestId, dataId, secretKey) {
 		const calculatedHash = hmac.digest('hex');
 
 		// Compare signatures
+		if (calculatedHash !== hash) {
+			console.log(
+				`Calculated hash different than hash (calculatedHash: ${calculatedHash}, hash: ${hash})`
+			);
+		}
 		return calculatedHash === hash;
 	} catch (error) {
 		console.error('Error validating webhook signature:', error);
@@ -119,7 +125,7 @@ export async function POST({ request, url }) {
 			// TODO: Process your webhook logic here
 			console.log('Process order...');
 		} else {
-			console.log('Not a processed order, skipping.');
+			console.log(`Not a processed order, skipping (${webhookData?.action}).`);
 		}
 		// -------------------------------------------------------------------------------------------------------------
 
