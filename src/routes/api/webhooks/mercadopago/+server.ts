@@ -118,6 +118,8 @@ export async function POST({ request, url }) {
 
 			// TODO: Process your webhook logic here
 			console.log('Process order...');
+		} else {
+			console.log('Not a processed order, skipping.');
 		}
 		// -------------------------------------------------------------------------------------------------------------
 
