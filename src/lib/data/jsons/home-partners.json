@@ -38,9 +38,15 @@
 		},
 
 		{
-			"name": "Familia Capoani",
-			"logo": "/images/partners/capoani-logo-3.webp",
-			"url": "/produtores-de-vinho/familia-capoani/",
+			"name": "Cerros de San Juan",
+			"logo": "/images/partners/cerros-de-san-juan-logo-2.png",
+			"url": "/produtores-de-vinho/cerros-de-san-juan/",
+			"count": 0
+		},
+		{
+			"name": "Cerros de San Juan",
+			"logo": "/images/partners/cerro-del-toro-logo-2.webp",
+			"url": "/produtores-de-vinho/bodega-cerro-del-toro/",
 			"count": 0
 		},
 		{
