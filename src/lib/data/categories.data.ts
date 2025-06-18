@@ -35,7 +35,7 @@ export function getSiteCategories(site: 'pt' | 'uy' = 'pt') {
 				icon: CalendarDays
 			},
 			{ id: 104, name: 'Orgânicos', url: '/tag/vinhos-organicos/', icon: Leaf, color: 'green' },
-			{ id: 105, name: 'Premium', url: '/tag/premiados/', icon: Award }
+			{ id: 105, name: 'Premium', url: '/tag/premium/', icon: Award }
 		],
 		uy: [
 			{

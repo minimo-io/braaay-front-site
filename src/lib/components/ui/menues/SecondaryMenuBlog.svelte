@@ -57,7 +57,7 @@
 				<a href="/kits/"> Curiosidades e dicas </a>
 			</li>
 			<li class="relative group transition-all duration-300">
-				<a href="/tag/premiados/"> Entrevistas </a>
+				<a href="/tag/premium/"> Entrevistas </a>
 			</li>
 			<li class="relative group transition-all duration-300">
 				<a href="/tag/oportunidades/"> Accesórios </a>
