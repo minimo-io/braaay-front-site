@@ -10,6 +10,7 @@ import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 import { ORDER_QUERY } from '$lib/graphql/queries';
 import { generateBasicAuthorization } from '$lib/utils';
 import { type OrderData } from '$lib/types';
+import type { CreateOrderRequest } from 'mercadopago/dist/clients/order/create/types';
 
 // Query Woocommerce order from orderId, in the future will also consider the session
 // Currently it just uses an application password
@@ -96,8 +97,8 @@ export const load: PageServerLoad = async ({ params, url }) => {
 		console.log(orderData);
 
 		const orderPaymentId = orderData.paymentMethod;
-		// const orderAmount = orderData.total;
-		const orderAmount = 1;
+		const orderAmount = orderData.total;
+		// const orderAmount = 1;
 
 		// Order not founded
 		if (!orderData) {
@@ -120,13 +121,19 @@ export const load: PageServerLoad = async ({ params, url }) => {
 					const order = new Order(client);
 
 					// Create the request object
-					const body = {
+					const body: CreateOrderRequest = {
 						type: 'online',
 						processing_mode: 'automatic',
 						total_amount: `${orderAmount}`,
 						external_reference: `${orderId}`,
 						payer: {
-							email: 'nicolas@futurewise.lat'
+							email: orderData.email,
+							first_name: orderData.billingFirstName,
+							last_name: orderData.billingLastName
+							// identification: {
+							// 	type: "CPF",
+							// 	number: orderData.cpf
+							// }
 						},
 						transactions: {
 							payments: [
@@ -204,21 +211,32 @@ export const load: PageServerLoad = async ({ params, url }) => {
 					}
 					// -------------------------------------------------------------------------------------------------
 				} catch (err: any) {
-					console.error('MercadoPago Error:', err);
+					console.error('MercadoPago Error!!:');
+					console.error(err.errors);
 
-					// Handle our custom errors with appropriate redirects
 					if (err.message === 'UPDATE_ORDER_FAILED') {
-						throw redirect(302, localizeHref('/checkout/error/?code=order-mp-update-error'));
-					}
-
-					if (err.message === 'NO_MP_PAYMENT_CREATED') {
-						throw redirect(302, localizeHref('/checkout/error/?code=no-mp-payment-created'));
-					}
-
-					if (err.message === 'MP_PAYMENT_ORDER_CREATION_ERROR') {
 						throw redirect(
 							302,
-							localizeHref('/checkout/error/?code=mp-payment-order-creation-error')
+							localizeHref(`/checkout/error/?code=order-mp-update-error&orderId=${orderId}`)
+						);
+					} else if (err.message === 'NO_MP_PAYMENT_CREATED') {
+						throw redirect(
+							302,
+							localizeHref(`/checkout/error/?code=no-mp-payment-created&orderId=${orderId}`)
+						);
+					} else if (err.message === 'MP_PAYMENT_ORDER_CREATION_ERROR') {
+						throw redirect(
+							302,
+							localizeHref(
+								`/checkout/error/?code=mp-payment-order-creation-error&orderId=${orderId}`
+							)
+						);
+					} else {
+						throw redirect(
+							302,
+							localizeHref(
+								`/checkout/error/?code=mp-payment-order-creation-error&orderId=${orderId}&details=${err.errors[0].details}`
+							)
 						);
 					}
 
