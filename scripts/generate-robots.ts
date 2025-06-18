@@ -1,107 +1,292 @@
-// scripts/generate-robots.ts
+// scripts/generate-sitemaps.ts
 import { writeFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
 
-interface SitemapEntry {
+// Configuration
+const ORIGINAL_DOMAIN = 'https://braaay.com';
+const SITEMAP_INDEX_URL = 'https://braaay.com/sitemap_index.xml';
+const REQUEST_DELAY = 100; // ms between requests
+
+interface SitemapIndex {
 	loc: string;
 	lastmod?: string;
 }
 
-async function fetchSitemapIndex(url: string): Promise<SitemapEntry[]> {
+interface UrlEntry {
+	loc: string;
+	lastmod?: string;
+	changefreq?: string;
+	priority?: string;
+}
+
+async function fetchRobotsTxt(): Promise<string> {
 	try {
-		const response = await fetch(url);
+		const response = await fetch(`${ORIGINAL_DOMAIN}/robots.txt`);
+		const robotsText = await response.text();
+		console.log(`✅ Fetched robots.txt from ${ORIGINAL_DOMAIN}`);
+		return robotsText;
+	} catch (error) {
+		console.error('Error fetching robots.txt:', error);
+		return '';
+	}
+}
+
+async function fetchSitemapIndex(): Promise<SitemapIndex[]> {
+	try {
+		const response = await fetch(SITEMAP_INDEX_URL);
 		const xmlText = await response.text();
 
-		// Parse XML to extract sitemap URLs
-		const sitemapUrls = extractSitemapUrls(xmlText);
-		console.log(`Found ${sitemapUrls.length} sitemaps`);
-
-		return sitemapUrls;
+		const sitemaps = extractSitemapIndexEntries(xmlText);
+		console.log(`✅ Found ${sitemaps.length} sitemaps in index`);
+		return sitemaps;
 	} catch (error) {
 		console.error('Error fetching sitemap index:', error);
 		return [];
 	}
 }
 
-function extractSitemapUrls(xmlText: string): SitemapEntry[] {
-	const sitemaps: SitemapEntry[] = [];
-
-	// Simple regex to extract sitemap URLs (you might want to use a proper XML parser)
+function extractSitemapIndexEntries(xmlText: string): SitemapIndex[] {
+	const sitemaps: SitemapIndex[] = [];
 	const sitemapRegex =
-		/<sitemap>\s*<loc>(.*?)<\/loc>(?:\s*<lastmod>(.*?)<\/lastmod>)?\s*<\/sitemap>/g;
+		/<sitemap>\s*<loc>(.*?)<\/loc>(?:\s*<lastmod>(.*?)<\/lastmod>)?\s*<\/sitemap>/gs;
 
 	let match;
 	while ((match = sitemapRegex.exec(xmlText)) !== null) {
 		sitemaps.push({
-			loc: match[1],
-			lastmod: match[2] || undefined
+			loc: match[1].trim(),
+			lastmod: match[2]?.trim()
 		});
 	}
 
 	return sitemaps;
 }
 
-function generateRobotsTxt(sitemaps: SitemapEntry[], baseDomain: string): string {
-	const robotsContent = `User-agent: *
-Allow: /
+async function fetchSitemap(url: string): Promise<{ urls: UrlEntry[]; hasImages: boolean }> {
+	try {
+		console.log(`Fetching sitemap: ${url}`);
+		const response = await fetch(url);
+		const xmlText = await response.text();
 
-# Disallow admin and API routes
-Disallow: /admin/
-Disallow: /api/private/
+		// Check if the original sitemap contains image elements
+		const hasImages = xmlText.includes('<image:') || xmlText.includes('xmlns:image');
+		const urls = extractUrlEntries(xmlText);
 
-# Allow specific bots
-User-agent: Googlebot
-Allow: /
+		return { urls, hasImages };
+	} catch (error) {
+		console.error(`Error fetching sitemap ${url}:`, error);
+		return { urls: [], hasImages: false };
+	}
+}
 
-User-agent: Bingbot
-Allow: /
+function extractUrlEntries(xmlText: string): UrlEntry[] {
+	const urls: UrlEntry[] = [];
 
-# Sitemaps from ${new URL('https://braaay.com/sitemap_index.xml').hostname}
-${sitemaps
-	.map((sitemap) => {
-		// Replace the original domain with our base domain
-		const newUrl = sitemap.loc.replace('https://braaay.com', baseDomain);
-		return `Sitemap: ${newUrl}`;
-	})
-	.join('\n')}
+	// Use a more flexible approach - capture the entire <url> block
+	const urlBlockRegex = /<url>([\s\S]*?)<\/url>/g;
 
-# Main sitemap index
-Sitemap: ${baseDomain}/sitemap_index.xml
+	let match;
+	while ((match = urlBlockRegex.exec(xmlText)) !== null) {
+		const urlBlock = match[1];
 
-Crawl-delay: 1`;
+		// Extract the basic required and optional elements
+		const locMatch = urlBlock.match(/<loc>(.*?)<\/loc>/);
+		const lastmodMatch = urlBlock.match(/<lastmod>(.*?)<\/lastmod>/);
+		const changefreqMatch = urlBlock.match(/<changefreq>(.*?)<\/changefreq>/);
+		const priorityMatch = urlBlock.match(/<priority>(.*?)<\/priority>/);
 
-	return robotsContent;
+		// Only add the URL if we found a <loc> element (required)
+		if (locMatch) {
+			urls.push({
+				loc: locMatch[1].trim(),
+				lastmod: lastmodMatch?.[1]?.trim(),
+				changefreq: changefreqMatch?.[1]?.trim(),
+				priority: priorityMatch?.[1]?.trim()
+			});
+		}
+	}
+
+	return urls;
+}
+
+function replaceBaseDomain(url: string, newDomain: string): string {
+	return url.replace(ORIGINAL_DOMAIN, newDomain);
+}
+
+function generateSitemapXml(
+	urls: UrlEntry[],
+	newDomain: string,
+	hasImages: boolean = false
+): string {
+	const urlsXml = urls
+		.map((url) => {
+			const newUrl = replaceBaseDomain(url.loc, newDomain);
+
+			let urlXml = `  <url>
+    <loc>${newUrl}</loc>`;
+
+			if (url.lastmod) {
+				urlXml += `
+    <lastmod>${url.lastmod}</lastmod>`;
+			}
+
+			if (url.changefreq) {
+				urlXml += `
+    <changefreq>${url.changefreq}</changefreq>`;
+			}
+
+			if (url.priority) {
+				urlXml += `
+    <priority>${url.priority}</priority>`;
+			}
+
+			urlXml += `
+  </url>`;
+
+			return urlXml;
+		})
+		.join('\n');
+
+	// Include image namespace if the original sitemap had images
+	const namespaces = hasImages
+		? 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"'
+		: 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
+
+	return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset ${namespaces}>
+${urlsXml}
+</urlset>`;
+}
+
+// function escapeXml(text: string): string {
+// 	return text
+// 		.replace(/&/g, '&amp;')
+// 		.replace(/</g, '&lt;')
+// 		.replace(/>/g, '&gt;')
+// 		.replace(/"/g, '&quot;')
+// 		.replace(/'/g, '&apos;');
+// }
+
+function generateSitemapIndex(sitemapFiles: string[], newDomain: string): string {
+	const now = new Date().toISOString();
+
+	const sitemapsXml = sitemapFiles
+		.map((filename) => {
+			return `  <sitemap>
+    <loc>${newDomain}/${filename}</loc>
+    <lastmod>${now}</lastmod>
+  </sitemap>`;
+		})
+		.join('\n');
+
+	return `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapsXml}
+</sitemapindex>`;
+}
+
+function processRobotsTxt(
+	originalRobots: string,
+	newDomain: string,
+	sitemapFiles: string[]
+): string {
+	// Replace domain references
+	let newRobots = originalRobots.replace(
+		new RegExp(ORIGINAL_DOMAIN.replace('https://', '').replace('http://', ''), 'g'),
+		newDomain.replace('https://', '').replace('http://', '')
+	);
+
+	// Replace sitemap URLs
+	newRobots = newRobots.replace(/Sitemap:\s*(.*)/g, (match, url) => {
+		if (url.includes(ORIGINAL_DOMAIN)) {
+			return `Sitemap: ${replaceBaseDomain(url, newDomain)}`;
+		}
+		return match;
+	});
+
+	// Add our generated sitemaps
+	newRobots += '\n\n# Generated sitemaps\n';
+	sitemapFiles.forEach((file) => {
+		newRobots += `Sitemap: ${newDomain}/${file}\n`;
+	});
+
+	return newRobots;
 }
 
 async function main() {
-	const baseDomain = process.env.BASE_DOMAIN || 'https://localhost:5173';
-	const sitemapIndexUrl = 'https://braaay.com/sitemap_index.xml';
+	const newDomain = process.env.BASE_DOMAIN || 'https://localhost:4000';
+	const staticDir = join(process.cwd(), 'static');
 
-	console.log(`Generating robots.txt for domain: ${baseDomain}`);
-	console.log(`Fetching sitemap from: ${sitemapIndexUrl}`);
-
-	// Fetch and parse sitemap index
-	const sitemaps = await fetchSitemapIndex(sitemapIndexUrl);
-
-	// Generate robots.txt content
-	const robotsContent = generateRobotsTxt(sitemaps, baseDomain);
+	console.log(`🚀 Starting sitemap generation`);
+	console.log(`Original domain: ${ORIGINAL_DOMAIN}`);
+	console.log(`New domain: ${newDomain}`);
 
 	// Ensure static directory exists
-	const staticDir = join(process.cwd(), 'static');
-	try {
-		mkdirSync(staticDir, { recursive: true });
-	} catch (err) {
-		// Directory might already exist
-		console.error(err);
+	mkdirSync(staticDir, { recursive: true });
+
+	// 1. Fetch original robots.txt
+	console.log('\n📋 Fetching robots.txt...');
+	const originalRobots = await fetchRobotsTxt();
+
+	// 2. Fetch sitemap index
+	console.log('\n🗂️  Fetching sitemap index...');
+	const sitemapIndex = await fetchSitemapIndex();
+
+	// 3. Fetch all individual sitemaps and their URLs
+	console.log('\n📥 Fetching individual sitemaps...');
+	const allUrls: UrlEntry[] = [];
+	const sitemapFiles: string[] = [];
+
+	for (let i = 0; i < sitemapIndex.length; i++) {
+		const sitemapEntry = sitemapIndex[i];
+		const { urls, hasImages } = await fetchSitemap(sitemapEntry.loc);
+
+		if (urls.length > 0) {
+			// Extract filename from original URL
+			const urlPath = new URL(sitemapEntry.loc).pathname;
+			const filename = urlPath.split('/').pop() || `sitemap-${i + 1}.xml`;
+			sitemapFiles.push(filename);
+
+			// Generate sitemap XML with proper namespace if original had images
+			const sitemapXml = generateSitemapXml(urls, newDomain, hasImages);
+
+			// Write sitemap file
+			const sitemapPath = join(staticDir, filename);
+			writeFileSync(sitemapPath, sitemapXml, 'utf8');
+
+			console.log(
+				`✅ Generated ${filename} with ${urls.length} URLs${hasImages ? ' (with image namespace)' : ''}`
+			);
+
+			// Collect all URLs for potential use
+			allUrls.push(...urls);
+
+			// Add delay to be respectful
+			await new Promise((resolve) => setTimeout(resolve, REQUEST_DELAY));
+		}
 	}
 
-	// Write robots.txt to static folder
-	const robotsPath = join(staticDir, 'robots.txt');
-	writeFileSync(robotsPath, robotsContent, 'utf8');
+	// 5. Generate sitemap index
+	console.log('\n📑 Generating sitemap index...');
+	const sitemapIndexXml = generateSitemapIndex(sitemapFiles, newDomain);
+	const indexPath = join(staticDir, 'sitemap_index.xml');
+	writeFileSync(indexPath, sitemapIndexXml, 'utf8');
+	console.log(`✅ Generated sitemap_index.xml`);
 
-	console.log(`✅ Generated robots.txt at ${robotsPath}`);
-	console.log('\nContent preview:');
-	console.log(robotsContent.split('\n').slice(0, 10).join('\n') + '\n...');
+	// 6. Generate robots.txt
+	console.log('\n🤖 Generating robots.txt...');
+	const newRobots = processRobotsTxt(originalRobots, newDomain, [
+		'sitemap_index.xml',
+		...sitemapFiles
+	]);
+	const robotsPath = join(staticDir, 'robots.txt');
+	writeFileSync(robotsPath, newRobots, 'utf8');
+	console.log(`✅ Generated robots.txt`);
+
+	console.log('\n🎉 Generation complete!');
+	console.log(`📁 Files generated in ${staticDir}:`);
+	console.log(`   - robots.txt`);
+	console.log(`   - sitemap_index.xml`);
+	sitemapFiles.forEach((file) => console.log(`   - ${file}`));
 }
 
 // Run the script

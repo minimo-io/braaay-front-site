@@ -3,7 +3,7 @@
 User-agent: *
 Crawl-delay: 5 #1 page per 10 seconds
 
-# User-Agent:  FacebookBot
+# User-Agent:  FacebookBot                              
 
 
 Disallow: /wp-admin/
@@ -18,8 +18,8 @@ Disallow: /*?*
 # Disallow: /*/?tax_uva=*
 # Disallow: /*/?filter_produtores-de-vinho=*
 
-Sitemap: https://braaay.com/sitemap_index.xml
-Sitemap: https://braaay.com/uy/sitemap_index.xml
+Sitemap: https://localhost:4000/sitemap_index.xml
+Sitemap: https://localhost:4000/uy/sitemap_index.xml
 # ---------------------------
 # END YOAST BLOCK
 
@@ -47,3 +47,15 @@ User-agent: Barkrowler
 User-agent: BLEXBot
 User-agent: magpie-crawler
 Disallow: /
+
+# Generated sitemaps
+Sitemap: https://localhost:4000/sitemap_index.xml
+Sitemap: https://localhost:4000/post-sitemap.xml
+Sitemap: https://localhost:4000/page-sitemap.xml
+Sitemap: https://localhost:4000/product-sitemap.xml
+Sitemap: https://localhost:4000/category-sitemap.xml
+Sitemap: https://localhost:4000/post_tag-sitemap.xml
+Sitemap: https://localhost:4000/product_cat-sitemap.xml
+Sitemap: https://localhost:4000/pa_harmonizacoes-sitemap.xml
+Sitemap: https://localhost:4000/pa_produtores-de-vinho-sitemap.xml
+Sitemap: https://localhost:4000/uva-sitemap.xml

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://localhost:4000/cervejas/</loc>
+    <lastmod>2025-03-10T13:25:10+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://localhost:4000/vinhos/espumantes/</loc>
+    <lastmod>2025-06-17T18:12:19+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://localhost:4000/experiencias/</loc>
+    <lastmod>2025-06-18T14:24:42+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://localhost:4000/kits/</loc>
+    <lastmod>2025-06-12T16:56:49+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://localhost:4000/vinhos/</loc>
+    <lastmod>2025-06-09T19:31:57+00:00</lastmod>
+  </url>
+</urlset>
