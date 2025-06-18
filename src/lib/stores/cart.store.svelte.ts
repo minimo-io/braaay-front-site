@@ -4,6 +4,8 @@ import { writable, get } from 'svelte/store';
 import type { CartItem, Cart } from '$lib/types/cart.types';
 import { AppConfig } from '$config';
 import { shippingDetails, setShippingDetails } from './shippingDetails.state.svelte';
+import { getUrqlClient } from './urqlClient.state.svelte';
+import { EMPTY_CART_MUTATION } from '$lib/graphql/mutations';
 
 // Main cart
 const initialCart: Cart = browser
@@ -89,7 +91,8 @@ export const adjustQuantity = (itemId: number, delta: number, specific?: number)
 };
 
 // Clear the whole cart
-export const emptyCart = () => {
+export const emptyCart = async () => {
+	await getUrqlClient().client.mutation(EMPTY_CART_MUTATION, {}).toPromise();
 	cart.update(() => {
 		shippingDetails.details = [];
 		return { items: [], coupons: [], zip: '' };

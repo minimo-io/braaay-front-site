@@ -15,6 +15,7 @@
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { ORDER_QUERY_STATUS } from '$lib/graphql/queries/order-get-status.query';
 	import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
+	import { emptyCart } from '$stores/cart.store.svelte';
 
 	const orderId = page.params.orderId;
 	const data = $derived(page.data);
@@ -120,6 +121,8 @@
 				if (currentOrderStatus == 'COMPLETED') {
 					console.log(`Order completed: ${currentOrderStatus}. Redirecting...`);
 					showNavigationAlert = false;
+					// Empty cart
+					emptyCart();
 					goto(localizeHref(`/checkout/confirmation/${orderId}/`));
 				}
 			} else {

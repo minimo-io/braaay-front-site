@@ -5,7 +5,8 @@ import { setAuthToken, clearAuth, getAuthState } from '$lib/stores/auth.state.sv
 import type { RequestEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import he from 'he';
-import { EMPTY_CART_MUTATION, LOGIN_MUTATION } from './mutations';
+import { LOGIN_MUTATION } from './mutations';
+// import { EMPTY_CART_MUTATION } from './mutations';
 import { emptyCart } from '$stores/cart.store.svelte';
 
 export const protectedRoutes = ['/account', '/thank-you'];
@@ -74,7 +75,7 @@ export async function login(username: string, password: string): Promise<LoginRe
 // Function to logout
 export async function logout() {
 	try {
-		await getUrqlClient().client.mutation(EMPTY_CART_MUTATION, {}).toPromise();
+		// await getUrqlClient().client.mutation(EMPTY_CART_MUTATION, {}).toPromise();
 		emptyCart();
 	} catch (err) {
 		console.warn('Failed to log out via GraphQL:', err);
