@@ -91,6 +91,7 @@ export const adjustQuantity = (itemId: number, delta: number, specific?: number)
 };
 
 // Clear the whole cart
+// including the woocommerce remote cart
 export const emptyCart = async () => {
 	await getUrqlClient().client.mutation(EMPTY_CART_MUTATION, {}).toPromise();
 	cart.update(() => {
