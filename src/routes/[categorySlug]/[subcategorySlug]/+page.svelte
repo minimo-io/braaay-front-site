@@ -7,6 +7,8 @@
 	import LoadMoreButton from '$components/ui/buttons/LoadMoreButton.svelte';
 	import { loadMoreProducts } from '$lib/utils/loadMoreProducts.util.js';
 	import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/products-category.query.js';
+	import Meta from '$components/layout/Meta.svelte';
+	import { m } from '$lib/paraglide/messages.js';
 
 	// Destructure props at the top level
 	let { data } = $props();
@@ -75,10 +77,12 @@
 	}
 </script>
 
+<Meta title="{category.name} {m.seoDivider()} {m.seoBase()}" description={category.description} />
+<!-- 
 <svelte:head>
 	<title>{category.name} - Braaay</title>
 	<meta name="description" content={category.description} />
-</svelte:head>
+</svelte:head> -->
 
 <GlobalCategory {products} {category} />
 <LoadMoreButton {isLoading} {pagination} {handleLoadMore} />

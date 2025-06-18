@@ -11,6 +11,7 @@
 	import WineBox from '$components/ui/products/WineBox.svelte';
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
 	import SearchHeader from '$components/ui/headers/SearchHeader.svelte';
+	import Meta from '$lib/components/layout/Meta.svelte';
 
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { SEARCH_QUERY } from '$lib/graphql/queries/search.query';
@@ -25,6 +26,16 @@
 
 	let products: Product[] = $state([]);
 	let productsCount: number = $derived(products.length);
+
+	// Dynamic meta data for search results
+	const searchTitle = $derived(
+		searchTermTyped ? `Resultados para "${searchTermTyped}" - Braaay` : 'Busca - Braaay'
+	);
+	const searchDescription = $derived(
+		searchTermTyped
+			? `Encontre vinhos e cervejas relacionados a "${searchTermTyped}" na Braaay. ${productsCount} produtos encontrados.`
+			: 'Busque por vinhos boutique, orgânicos e cervejas locais na Braaay.'
+	);
 
 	let categoryHeader: Category = $state({
 		name: '',
@@ -92,36 +103,10 @@
 		console.log('Component is being destroyed via onDestroy hook.');
 		// Any other cleanup logic not directly tied to an effect
 	});
-
-	// onMount(async () => {
-	// 	if (searchTermTyped) {
-	// 		console.log(`Searching for mounted: ${searchTermTyped}`);
-
-	// 		toggleLoader();
-	// 		try {
-	// 			const searchResult = await getUrqlClient()
-	// 				.client.query(
-	// 					SEARCH_QUERY,
-	// 					{
-	// 						searchTerm: searchTermTyped,
-	// 						first: 10,
-	// 						after: after
-	// 					},
-	// 					{
-	// 						// fetchOptions: { headers: sessionHeaders }
-	// 					}
-	// 				)
-	// 				.toPromise();
-
-	// 			console.log(searchResult);
-	// 		} catch (err) {
-	// 			console.log(`Error: ${err}`);
-	// 		}
-	// 		justMonted = false;
-	// 		toggleLoader();
-	// 	}
-	// });
 </script>
+
+<!-- Meta tags for search page - noindex to prevent indexing -->
+<Meta title={searchTitle} description={searchDescription} noindex={true} />
 
 <SearchHeader
 	title={loadingSearch ? `${m.searching()}` : `Resultados: "${searchTermTyped}"`}

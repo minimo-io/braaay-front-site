@@ -10,6 +10,8 @@
 	import type { PageData } from './$types';
 	import type { Post } from '$lib/types';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
+	import Meta from '$components/layout/Meta.svelte';
+	import { m } from '$lib/paraglide/messages';
 
 	let { data }: { data: PageData } = $props();
 
@@ -20,13 +22,10 @@
 	let firstPost: Post | undefined = postsCopy.shift();
 </script>
 
-<svelte:head>
-	<title>Blog da Braaay: Dicas, Novidades e Harmonizações com vinhos</title>
-	<meta
-		name="description"
-		content="Acesse nosso blog e descubra dicas, curiosidades e novidades sobre vinhos uruguaios e brasileiros. Inspire-se e aproveite ofertas exclusivas!"
-	/>
-</svelte:head>
+<Meta
+	title="{m.seoBlogTitle()} {m.seoDivider()} {m.seoBase()}"
+	description={m.seoBlogDescription()}
+/>
 
 {#if firstPost}
 	<main class="w-full mx-auto">

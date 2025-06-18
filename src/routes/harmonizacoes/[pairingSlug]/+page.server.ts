@@ -12,7 +12,8 @@ import {
 	type Product,
 	type ProductsForPairingQueryResult,
 	type GraphQLProductNode,
-	type Pagination
+	type Pagination,
+	type YoastSeoData
 } from '$lib/types/index';
 
 import { error } from '@sveltejs/kit';
@@ -38,6 +39,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 
 	try {
 		const category: Category = mapCategory(result.data.allPaHarmonizacoes.nodes[0]);
+		const seo: YoastSeoData | undefined = result.data.allPaHarmonizacoes.nodes[0].seo;
+
 		const pagination: Pagination = mapPagination(result.data.products.pageInfo);
 
 		// Get products para of the query
@@ -48,7 +51,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		return {
 			products: products,
 			category: category,
-			pagination
+			pagination,
+			seo
 		};
 	} catch (err) {
 		throw error(404, `Failed to fetch the pairing category: ${err}`);

@@ -1,5 +1,6 @@
 import { type Icon as IconType } from '@lucide/svelte';
 import type { ImageGeneral } from './image.types';
+import type { YoastSeoData } from './seo.types';
 
 // Custom for menu
 export interface MenuCategory {
@@ -24,6 +25,7 @@ export interface Category {
 		firstParagraph?: string;
 		firstTitle?: string;
 	};
+	seo?: YoastSeoData;
 }
 
 export interface GraphQLCategory {
@@ -49,6 +51,7 @@ export interface GraphQLCategory {
 			};
 		};
 	};
+	seo?: YoastSeoData;
 }
 
 export function mapCategory(category: GraphQLCategory): Category {
@@ -56,7 +59,7 @@ export function mapCategory(category: GraphQLCategory): Category {
 		name: category.name,
 		description: category.description,
 		count: category.count || 0,
-
+		seo: category.seo,
 		header: {
 			title: category.categoryHeader?.customCatalogTitle || '',
 			image: {

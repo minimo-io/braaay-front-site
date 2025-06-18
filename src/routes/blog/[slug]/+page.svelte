@@ -5,11 +5,19 @@
 	import ArticleContent from '$components/ui/articles/components/ArticleContent.svelte';
 
 	import type { PageData } from './$types';
+	import Meta from '$components/layout/Meta.svelte';
+	import { m } from '$lib/paraglide/messages';
+	import type { YoastSeoData } from '$lib/types';
 	// import type { Post } from '$lib/types';
 
 	let { data }: { data: PageData } = $props();
 	const article = $state(data.post);
+	const seo: YoastSeoData | undefined = $state(data.seo);
 </script>
+
+{#if seo}
+	<Meta seoData={seo} />
+{/if}
 
 <main class="w-full mx-auto">
 	{#if article}

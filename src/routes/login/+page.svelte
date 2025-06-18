@@ -4,7 +4,11 @@
 	import DrawerAccount from '$components/ui/drawer/DrawerAccount.svelte';
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
 	import SignupBenefits from '$components/ui/SignupBenefits.svelte';
+	import Meta from '$components/layout/Meta.svelte';
+	import { m } from '$lib/paraglide/messages';
 </script>
+
+<Meta title={m.seoLoginTitle()} description={m.seoLoginDescription()} />
 
 <main class="w-full mx-auto">
 	<!-- Header menu -->

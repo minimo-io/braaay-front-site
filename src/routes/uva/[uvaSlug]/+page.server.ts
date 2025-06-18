@@ -12,7 +12,8 @@ import {
 	type Product,
 	type ProductsForUvaQueryResult,
 	type GraphQLProductNode,
-	type Pagination
+	type Pagination,
+	type YoastSeoData
 } from '$lib/types/index';
 
 import { error } from '@sveltejs/kit';
@@ -40,6 +41,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	try {
 		const category: Category = mapCategory(result.data.uva);
 		const pagination: Pagination = mapPagination(result.data.products.pageInfo);
+		const seo: YoastSeoData | undefined = result.data.uva.seo;
 
 		// Get products para of the query
 		const products: Product[] = result.data.products.edges.map((product: GraphQLProductNode) =>
@@ -49,7 +51,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		return {
 			products: products,
 			category: category,
-			pagination
+			pagination,
+			seo
 		};
 	} catch (err) {
 		throw error(404, `Failed to fetch the pairing category: ${err}`);

@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 import { PRODUCT_QUERY } from '$lib/graphql/queries/index';
 // import { SLUGS_QUERY } from '$lib/graphql/queries/index';
-import { type Product, type GraphQLSingleProduct, mapProduct } from '$lib/types';
+import { type Product, type GraphQLSingleProduct, mapProduct, type YoastSeoData } from '$lib/types';
 // import type { EntryGenerator } from './$types';
 import { error } from '@sveltejs/kit';
 // import { building } from '$app/environment';
@@ -30,7 +30,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 
 	try {
 		const product: Product = mapProduct({ node: result.data.product });
-		return { product };
+		const seo: YoastSeoData | undefined = result.data.product.seo;
+		return { product, seo };
 	} catch (errorMsg) {
 		console.error('ERROR', errorMsg);
 		// throw error(404, 'Hey, product not found');

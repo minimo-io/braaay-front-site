@@ -2,7 +2,7 @@
 import type { PageServerLoad } from './$types';
 import { POST_QUERY } from '$lib/graphql/queries/index';
 // import { SLUGS_QUERY } from '$lib/graphql/queries/index';
-import { type Post, type GraphQLPostSingle, mapPost } from '$lib/types';
+import { type Post, type GraphQLPostSingle, type YoastSeoData, mapPost } from '$lib/types';
 // import type { EntryGenerator } from './$types';
 import { error } from '@sveltejs/kit';
 // import { building } from '$app/environment';
@@ -31,7 +31,9 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	// Map the raw GraphQL data to your Post interface.
 	try {
 		const post: Post = mapPost(result.data);
-		return { post };
+		const seo: YoastSeoData | undefined = result.data.post.seo;
+
+		return { post, seo };
 	} catch (errorMsg) {
 		console.error('ERROR', errorMsg);
 		// throw error(404, 'Post not found');

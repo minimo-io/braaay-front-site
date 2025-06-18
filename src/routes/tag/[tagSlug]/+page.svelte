@@ -1,18 +1,27 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import type { Category, Product, Post, ArticleCreator, Pagination } from '$lib/types';
+	import type {
+		Category,
+		Product,
+		Post,
+		ArticleCreator,
+		Pagination,
+		YoastSeoData
+	} from '$lib/types';
 	import GlobalCategory from '$components/layout/GlobalCategory.svelte';
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 	import { loadMoreProducts } from '$lib/utils/loadMoreProducts.util.js';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte.js';
 	import { PAIRING_PRODUCTS, TAG_PRODUCTS } from '$lib/graphql/queries/index';
 	import LoadMoreButton from '$components/ui/buttons/LoadMoreButton.svelte';
+	import Meta from '$components/layout/Meta.svelte';
 
 	const { data } = $props();
 
 	let products: Product[] = $state(data.products);
 	let category: Category = $state(data.category);
 	let pagination: Pagination = $state(data.pagination);
+	let seo: YoastSeoData | undefined = $state(data.seo);
 	let isLoading = $state(false);
 
 	$effect(() => {
@@ -71,10 +80,9 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{category.name} - Braaay</title>
-	<meta name="description" content="" />
-</svelte:head>
+{#if seo}
+	<Meta seoData={seo} />
+{/if}
 
 <GlobalCategory {products} {category} />
 <LoadMoreButton {isLoading} {pagination} {handleLoadMore} />

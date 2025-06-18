@@ -11,6 +11,7 @@
 	import { authState } from '$stores/auth.state.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { AppConfig } from '$config';
+	import Meta from '$components/layout/Meta.svelte';
 
 	let returnUrl = $derived('/login');
 	let userName = $state('');
@@ -30,6 +31,11 @@
 	}
 </script>
 
+<Meta
+	title="{m.seoMyAccountTitle()} {m.seoDivider()} {m.seoBase()}"
+	description={m.seoMyAccountDescription()}
+	noindex={true}
+/>
 <main class="w-full mx-auto">
 	<!-- Header menu -->
 	<div class="bg-white border-b border-b-grey-lighter">

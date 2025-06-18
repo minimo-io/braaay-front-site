@@ -1,5 +1,6 @@
 import type { ArticleCreator } from './article-creator.types';
 import { stripHtml } from '$lib/utils/index';
+import type { YoastSeoData } from './seo.types';
 
 // For list of posts
 export interface PostsQueryResult {
@@ -51,6 +52,7 @@ export interface BasePost {
 		firstSubtitle?: string;
 		firstParagraph?: string;
 	};
+	seo?: YoastSeoData;
 }
 
 // And the raw GraphQL node structure for posts:

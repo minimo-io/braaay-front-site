@@ -5,6 +5,7 @@
 	import ProductImage from '$components/ui/products/ProductImage.svelte';
 	import type { ArticleCreator, ImageGeneral, Post } from '$lib/types';
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
+	import Meta from '$components/layout/Meta.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -13,6 +14,7 @@
 		altText: 'placeholder-wine'
 	};
 	const product = $state(data.product);
+	const seo = $state(data.seo);
 
 	const article: Post = {
 		id: '',
@@ -34,6 +36,10 @@
 		}
 	};
 </script>
+
+{#if seo}
+	<Meta seoData={seo} />
+{/if}
 
 <main class="max-w-screen-lg mx-auto">
 	<!-- Main Product section -->

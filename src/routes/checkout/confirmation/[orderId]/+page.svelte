@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import Meta from '$components/layout/Meta.svelte';
 	import { Button } from '$components/ui/buttons';
 	import { m } from '$lib/paraglide/messages';
 	import { localizeHref } from '$lib/paraglide/runtime';
@@ -8,6 +9,12 @@
 
 	const orderId = $state(page.params.orderId);
 </script>
+
+<Meta
+	title="{m.seoCheckoutConfirmationTitle()} {m.seoDivider()} {m.seoBase()}"
+	description={m.seoCheckoutConfirmationDescription()}
+	noindex={true}
+/>
 
 <!-- CONFIRMACON / SUCESSO: {orderId} -->
 <div class="text-center max-w-screen-lg mx-auto my-20">

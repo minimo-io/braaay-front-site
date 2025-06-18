@@ -4,7 +4,8 @@ import type {
 	ArticleCreator,
 	PageCustomColors,
 	ImageGeneral,
-	GraphQLCategory
+	GraphQLCategory,
+	YoastSeoData
 } from './index';
 
 export interface ProductsForCategoryQueryResult {
@@ -64,6 +65,7 @@ export interface Product {
 		title?: string;
 		content?: string;
 	};
+	seo?: YoastSeoData;
 }
 
 export interface GraphQLSingleProduct {
@@ -122,6 +124,8 @@ export interface GraphQLProduct {
 		firstSubtitle?: string;
 		firstParagraph?: string;
 	};
+
+	seo?: YoastSeoData;
 }
 
 export function mapProduct(data: GraphQLProductNode): Product {
@@ -174,6 +178,7 @@ export function mapProduct(data: GraphQLProductNode): Product {
 		header: {
 			title: data.node.header?.firstSubtitle,
 			content: data.node.header?.firstParagraph
-		}
+		},
+		seo: data.node.seo
 	};
 }

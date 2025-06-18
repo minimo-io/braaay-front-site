@@ -25,6 +25,7 @@
 	"addingToCart": "Añadiendo...",
 	"addingToCartOk": "Añadido con éxito",
 	"cartSummary": "Resumen del carrito",
+	"cartMyCart": "Mi carrito",
 
 	"discountCouponTitle": "Cupón de descuento",
 
@@ -53,5 +54,34 @@
 	"checkoutLoadingPayments": "Cargando métodos de pago...",
 	"checkoutNewsletterOptIn": "Quiero recibir noticias y promociones",
 	"checkoutAreYouSureToLeave": "¿Estás seguro de que quieres volver? Tu pago aún se está procesando.",
-	"checkoutStorePickup": "Retiro en el showroom"
+	"checkoutStorePickup": "Retiro en el showroom",
+
+	"seoBase": "Braaay",
+
+	"seoHomeTitle": "🍻 Cervezas locales y vinos boutique, unite a lo artesanal",
+	"seoHomeDescription": "Promovemos la cultura de la cerveza artesanal y vinos boutique de vinícolas familiares en Uruguay",
+
+	"seoMyAccountTitle": "Mi cuenta",
+	"seoMyAccountDescription": "",
+
+	"seoBlogTitle": "Blog da Braaay: Dicas, Novidades e Harmonizações com vinhos",
+	"seoBlogDescription": "Conectate con la escena de cerveza artesanal & vinos boutique de Uruguay: entrevistas, eventos y experiencias que complementan la mejor comunidad.",
+
+	"seoCartTitle": "Carrito",
+	"seoCartDescription": "Revise su carrito en Braaay: vinos y cervezas seleccionados con pasión. Finalice su compra con descuentos.",
+
+	"seoCheckoutTitle": "Finalizar compra - Checkout",
+	"seoCheckoutDescription": "",
+
+	"seoCheckoutConfirmationTitle": "Gracias por su compra",
+	"seoCheckoutConfirmationDescription": "",
+
+	"seoCheckoutErrorTitle": "Ocorreu um erro",
+	"seoCheckoutErrorDescription": "",
+
+	"seoCheckoutPaymentTitle": "Finalice su pago",
+	"seoCheckoutPaymentDescription": "",
+
+	"seoLoginTitle": "Iniciar sesión en Braaay",
+	"seoLoginDescription": "Acceda a su cuenta para ver pedidos, descuentos y disfrutar de una experiencia personalizada con vinos boutique y cervezas seleccionadas."
 }

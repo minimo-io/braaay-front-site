@@ -9,6 +9,7 @@
 	import { launchToast } from '$lib/utils';
 	import { Check, X } from '@lucide/svelte';
 	import { AppConfig } from '$config';
+	import Meta from '$components/layout/Meta.svelte';
 
 	const routeId = page.route.id;
 	const orderId = $derived(page.url.searchParams.get('orderId'));
@@ -21,6 +22,12 @@
 
 	// const orderId = $state(page.params.orderId);
 </script>
+
+<Meta
+	title="{m.seoCheckoutErrorTitle()} {m.seoDivider()} {m.seoBase()}"
+	description={m.seoCheckoutErrorDescription()}
+	noindex={true}
+/>
 
 <!-- CONFIRMACON / SUCESSO: {orderId} -->
 <div class="text-center max-w-screen-lg mx-auto my-20">

@@ -3,7 +3,7 @@
     {
       "name": "Tannat",
       "url": "/uva/tannat/",
-      "count": 28
+      "count": 29
     },
     {
       "name": "Uva Chardonnay",
@@ -124,6 +124,11 @@
       "name": "Sauvignon Blanc",
       "url": "/uva/sauvignon-blanc/",
       "count": 2
+    },
+    {
+      "name": "Manseng Noir",
+      "url": "/uva/manseng-noir/",
+      "count": 1
     },
     {
       "name": "Moscatel de Setúbal",

@@ -12,6 +12,11 @@
 		"skipLibCheck": true
 	},
 	// "include": ["./**/*.ts"]
-	"include": ["update-grapes.ts", "update-subcategories.ts", "update-countries.ts"],
+	"include": [
+		"update-grapes.ts",
+		"update-subcategories.ts",
+		"update-countries.ts",
+		"generate-robots.ts"
+	],
 	"exclude": []
 }

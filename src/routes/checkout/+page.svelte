@@ -53,6 +53,7 @@
 	import { m } from '$lib/paraglide/messages';
 
 	import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
+	import Meta from '$components/layout/Meta.svelte';
 
 	interface Steps {
 		step1: boolean | object;
@@ -348,13 +349,15 @@
 	// }
 </script>
 
+<Meta title="{m.seoCheckoutTitle()} {m.seoDivider()} {m.seoBase()}" noindex={true} />
+
 <main>
 	<!-- Cart -->
 	<div class="max-w-screen-lg mx-[10px] md:mx-auto">
 		<div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-0 md:gap-7">
 			<div class="mt-8">
 				<div class="flex justify-start mb-3 mx-3 md:mx-1">
-					<h2 class="text-[19px] font-roboto font-extrabold ml-1">Checkout</h2>
+					<h1 class="text-[19px] font-roboto font-extrabold ml-1">Checkout</h1>
 				</div>
 
 				<!-- On mobile -->

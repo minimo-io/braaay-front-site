@@ -1,5 +1,6 @@
 <script lang="ts">
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
+	import Meta from '$components/layout/Meta.svelte';
 	import Carrousel from '$components/ui/Carrousel.svelte';
 	import CountryBox from '$components/ui/CountryBox.svelte';
 	import PartnersList from '$components/ui/PartnersList.svelte';
@@ -7,24 +8,23 @@
 	import Button from '$components/ui/buttons/Button.svelte';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 	import WineBox from '$components/ui/products/WineBox.svelte';
+	import { AppConfig } from '$config';
 	import { HomeProducts } from '$data/home-products.data';
 	import { allCountries } from '$lib/data/countries.data';
-	import { getLocale } from '$lib/paraglide/runtime';
+	import { m } from '$lib/paraglide/messages';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 
-	import { Calendar, ChefHat } from '@lucide/svelte';
+	import { Calendar, ChefHat, MapPin, Pin } from '@lucide/svelte';
 
 	let pageCountries = $state(allCountries[getLocale()]);
 	let homeProducts = HomeProducts();
 	// console.log('HomeProducts', homeProducts);
 </script>
 
-<svelte:head>
-	<title>Braaay - 🍷Vinhos boutique e Orgânicos & 🍻Cervejas locais</title>
-	<meta
-		name="description"
-		content="Para quem aprecia vinhos autênticos, culturas e experiências enriquecedoras. Especialistas em vinhos uruguaios, nacionais & kits e presentes."
-	/>
-</svelte:head>
+<Meta
+	title="{m.seoBase()} {m.seoDivider()} {m.seoHomeTitle()}"
+	description={m.seoHomeDescription()}
+/>
 
 <main>
 	<Carrousel />
@@ -36,11 +36,20 @@
 			description="Seu próximo vinho, espumante ou evento privado com curadoría da nossa sommelier. Somos especialistas no melhor de 🇺🇾 Uruguai, do 🇧🇷 Brasil e do Mundo. Visite nosso showroom; venha descobrir o inesperado!"
 		>
 			{#snippet button()}
-				<Button title="Reserve o espaço / Consulte" size="md" type="sun" url="/experiencias">
-					{#snippet icon()}
-						<Calendar class="lucide-button" />
-					{/snippet}
-				</Button>
+				<div class="flex flex-col gap-2 md:top-7 relative items-end">
+					<Button title="Reserve o espaço" size="md" type="sun" url={AppConfig.whatsappLink} newTab>
+						{#snippet icon()}
+							<Calendar class="lucide-button" />
+						{/snippet}
+					</Button>
+					<div class="w-fit">
+						<Button title="Onde fica?" size="md" type="blue" url={AppConfig.mapLink} newTab>
+							{#snippet icon()}
+								<MapPin class="lucide-button" />
+							{/snippet}
+						</Button>
+					</div>
+				</div>
 			{/snippet}
 		</TitleSection>
 	</div>
@@ -100,7 +109,7 @@
 			sugestões para presentes empresariais."
 		>
 			{#snippet button()}
-				<Button title="Ver todos" size="md" type="sun" url="/category" />
+				<Button title="Ver todos" size="md" type="sun" url={localizeHref('/vinhos/')} />
 			{/snippet}
 		</TitleSection>
 

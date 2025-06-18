@@ -12,7 +12,8 @@ import {
 	type Product,
 	type ProductsForCountryQueryResult,
 	type GraphQLProductNode,
-	type Pagination
+	type Pagination,
+	type YoastSeoData
 } from '$lib/types/index';
 
 import { error } from '@sveltejs/kit';
@@ -41,6 +42,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		const category: Category = mapCategory(result.data.allPaPais.nodes[0]);
 		const pagination: Pagination = mapPagination(result.data.products.pageInfo);
 
+		const seo: YoastSeoData | undefined = result.data.allPaPais.nodes[0].seo;
+
 		// Get products para of the query
 		const products: Product[] = result.data.products.edges.map((product: GraphQLProductNode) =>
 			mapProduct(product)
@@ -49,7 +52,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		return {
 			products: products,
 			category: category,
-			pagination
+			pagination,
+			seo
 		};
 	} catch (err) {
 		throw error(404, `Failed to fetch the category: ${err}`);

@@ -16,6 +16,7 @@
 	import { ORDER_QUERY_STATUS } from '$lib/graphql/queries/order-get-status.query';
 	import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
 	import { emptyCart } from '$stores/cart.store.svelte';
+	import Meta from '$components/layout/Meta.svelte';
 
 	const orderId = page.params.orderId;
 	const data = $derived(page.data);
@@ -215,7 +216,12 @@
 	});
 </script>
 
-<!-- --- PAGO: {orderId} -->
+<Meta
+	title="{m.seoCheckoutPaymentTitle()} {m.seoDivider()} {m.seoBase()}"
+	description={m.seoCheckoutPaymentDescription()}
+	noindex={true}
+/>
+
 <main>
 	{#if data.success}
 		<div class="max-w-screen-lg md:mx-auto mt-8">

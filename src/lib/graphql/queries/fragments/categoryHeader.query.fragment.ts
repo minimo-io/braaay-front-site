@@ -1,7 +1,10 @@
+import { SEO_FRAGMENT } from './seo.fragment';
+
 export const CATEGORY_HEADER_FRAGMENT = `
 		name
 		description
 		count
+		${SEO_FRAGMENT}
 
 		header{
 			firstParagraph

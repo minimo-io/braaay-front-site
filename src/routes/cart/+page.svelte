@@ -3,7 +3,7 @@
 	import { slide } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
-	import { m } from '$lib/paraglide/messages';
+	import { m, seoDivider } from '$lib/paraglide/messages';
 
 	import { cart, calculateDiscount, clearAllCoupons } from '$stores/cart.store.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
@@ -20,6 +20,7 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import ShippingForm from '$components/ui/forms/shippingForm.svelte';
 	import { shippingDetails } from '$stores/shippingDetails.state.svelte';
+	import Meta from '$components/layout/Meta.svelte';
 
 	// Cart amount
 	let hasItems = $state(false);
@@ -44,6 +45,10 @@
 	let totalCartAmountWithDiscounts = $derived(totalAmount - discounts);
 </script>
 
+<Meta
+	title="{m.seoCartTitle()} {m.seoDivider()} {m.seoBase()}"
+	description={m.seoCartDescription()}
+/>
 <main>
 	<!-- Cart -->
 	<div class="max-w-screen-lg mx-[30px] md:mx-auto">
@@ -61,7 +66,7 @@
 						</a>
 					</div>
 
-					<h2 class="text-[19px] ml-0 font-roboto font-extrabold">Meu carrinho</h2>
+					<h1 class="text-[19px] ml-0 font-roboto font-extrabold">{m.cartMyCart()}</h1>
 				</div>
 				<div class="flex flex-col">
 					<div class="border border-grey-lighter bg-white rounded-lg p-5 order-1">
