@@ -39,6 +39,7 @@
 	"login": "Entrar",
 
 	"viewOnMap": "Ver en el mapa",
+	"myAccount": "Mi cuenta",
 
 	"checkoutStep1NoEmail": "Email obligatorio.",
 	"checkoutStep1EnterValidEmail": "Introduce una dirección de correo electrónico válida.",
@@ -83,5 +84,15 @@
 	"seoCheckoutPaymentDescription": "",
 
 	"seoLoginTitle": "Iniciar sesión en Braaay",
-	"seoLoginDescription": "Acceda a su cuenta para ver pedidos, descuentos y disfrutar de una experiencia personalizada con vinos boutique y cervezas seleccionadas."
+	"seoLoginDescription": "Acceda a su cuenta para ver pedidos, descuentos y disfrutar de una experiencia personalizada con vinos boutique y cervezas seleccionadas.",
+
+	"seoSignUpTitle": "Crea tu cuenta | Cervezas Artesanales y Vinos Boutique en Braaay",
+	"seoSignUpDescription": "Regístrate en Braaay y vive una experiencia boutique con cervezas premium de Uruguay,  y del mundo. Accede a ofertas exclusivas y beneficios especiales.",
+
+	"signUpNoUsername": "Ingresa un nombre de usuario para continuar",
+	"signUpInvalidUsername": "Nombre de usuario inválido. Usa solo letras, números o los símbolos _ . -, entre 5 y 20 caracteres",
+	"signUpNoPassword": "Ingresa una contraseña para proteger tu cuenta",
+	"signUpPasswordTooShort": "La contraseña debe tener al menos 6 caracteres",
+	"signUpTelephoneInvalid": "Teléfono inválido. Usa un número uruguayo que comience con 09 y tenga 9 dígitos en total.",
+	"signUpInvalidCpf": "CPF inválido. Por favor, ingrese un número válido de 11 dígitos."
 }

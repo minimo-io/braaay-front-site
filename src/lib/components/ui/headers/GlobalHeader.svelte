@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	// import { onMount } from 'svelte';
 	import { drawerState, toggleDrawer } from '$stores/drawerState.state.svelte';
-	import { X, Search, CircleUser, Heart, AlignJustify } from '@lucide/svelte';
+	import { X, Search, CircleUser, Heart, AlignJustify, User, Circle, Check } from '@lucide/svelte';
 
 	import SecondaryMenuGeneral from '$components/ui/menues/SecondaryMenuGeneral.svelte';
 	import SecondaryMenuBlog from '$components/ui/menues/SecondaryMenuBlog.svelte';
@@ -91,6 +91,7 @@
 			<SearchBar />
 		</div>
 
+		<!-- Desktop -->
 		<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
 			{#if !isAuthenticated()}
 				<!--Entrar -->
@@ -98,7 +99,7 @@
 					chevron={false}
 					customPx="!pr-[12px] !pl-3 !pr-[20px]"
 					title="Entrar"
-					url="/login"
+					url={localizeHref('/login/')}
 					type="blue"
 					size="xl"
 				>
@@ -141,15 +142,42 @@
 			<CashbackButton title="Cashback" currency="R$" value={0.0} />
 		</div>
 
-		<!-- Bag -->
-		<a href={localizeHref('/cart/')} class="bry-cart relative h-[45px] uppercase flex items-center">
-			<i class="bry-bag"></i>
-			<span
-				class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
+		<div class="flex">
+			<!-- Account Mobile -->
+			<a
+				href={localizeHref('/login/')}
+				class="bry-cart relative h-[45px] uppercase flex items-center md:hidden"
 			>
-				{totalCartAmount}
-			</span>
-		</a>
+				<!-- <i class="bry-bag"></i> -->
+				<!-- <CircleUser strokeWidth="1" class="text-blue h-[45px] scale-125" /> -->
+				<img src="/images/bry-user.png" alt="bry-user" class="h-[29px] top-[1px] relative" />
+				{#if isAuthenticated()}
+					<span
+						class="flex justify-center items-center rounded-full bg-green-medium p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
+					>
+						<Check class="self-center h-[10px] left-[2px] relative" />
+					</span>
+				{:else}
+					<!-- <span
+						class="flex justify-center items-center rounded-full bg-red-medium p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
+					>
+						<span>!</span>
+					</span> -->
+				{/if}
+			</a>
+			<!-- Bag -->
+			<a
+				href={localizeHref('/cart/')}
+				class="bry-cart relative h-[45px] uppercase flex items-center"
+			>
+				<i class="bry-bag"></i>
+				<span
+					class="flex justify-center items-center rounded-full bg-sun p-0 w-4 h-4 lg:w-5 lg:h-5 font-roboto text-[10px] text-white ring-inset absolute top-1 lg:top-0 -right-2"
+				>
+					{totalCartAmount}
+				</span>
+			</a>
+		</div>
 	</nav>
 
 	<!-- Mobile search -->

@@ -32,3 +32,26 @@ export function formatPhone(lang: 'pt' | 'uy', phone: string) {
 		return formatUruguayPhone(phone);
 	}
 }
+
+/**
+ * Validates a Brazilian mobile phone number in the format: (00) 0 0000-0000
+ * Allows optional spaces and symbols due to masking.
+ */
+export function isValidCellphone(maskedPhone: string, lang: 'pt' | 'uy'): boolean {
+	const rawPhone = maskedPhone.replace(/\D/g, '');
+
+	if (lang === 'pt') {
+		// Formato BR: 11 dígitos, DDD de 2 dígitos (não começando com 0) + 9 + 8 dígitos
+		// Ex: (11) 9 9999-9999 → 11999999999
+		return /^[1-9]{2}9\d{8}$/.test(rawPhone);
+	}
+
+	if (lang === 'uy') {
+		// Formato UY: 9 dígitos no total, começando com 09 (móvel)
+		// Ex: 099123456 → geralmente usado em forma: 099 123 456
+		return /^09\d{7}$/.test(rawPhone);
+	}
+
+	// Default: inválido se país não suportado
+	return false;
+}

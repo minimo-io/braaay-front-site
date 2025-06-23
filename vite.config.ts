@@ -46,6 +46,24 @@ export default defineConfig({
 					]
 				},
 
+				// Login
+				{
+					pattern: '/login/',
+					localized: [
+						['pt', '/entrar/'],
+						['uy', '/uy/entrar/']
+					]
+				},
+
+				// Sign-up
+				{
+					pattern: '/sign-up/',
+					localized: [
+						['pt', '/cadastro/'],
+						['uy', '/uy/registro/']
+					]
+				},
+
 				// Account
 				{
 					pattern: '/account/',

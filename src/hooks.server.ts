@@ -36,7 +36,10 @@ const authHandle: Handle = async ({ event, resolve }) => {
 
 	if (requiresAuth(pathDelocalized.pathname) && !event.locals.authToken) {
 		// Redirect to login page with return URL as a query parameter
-		throw redirect(303, `/login?returnUrl=${encodeURIComponent(pathDelocalized.pathname)}`);
+		throw redirect(
+			303,
+			localizeHref(`/login/?returnUrl=${encodeURIComponent(pathDelocalized.pathname)}`)
+		);
 	}
 
 	return resolve(event);

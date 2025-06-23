@@ -26,8 +26,12 @@
 		vinícolas e no showroom
 	</li>
 	<hr class="my-4 text-grey-lighter" />
+	<div class="text-center text-black text-sm font-bold">
+		R$69/mês <br />
+	</div>
+	<hr class="my-4 text-grey-lighter" />
 	<div class="text-center text-black text-xs">
-		R$69/ano <br />Se paga em 2 pedidos <br />*Aplicam-se exceções. Veja os
+		Se paga em 2 pedidos<br />*Aplicam-se exceções. Veja os
 		<a href="/termos-e-condicoes/">termos</a>.
 	</div>
 </ul>

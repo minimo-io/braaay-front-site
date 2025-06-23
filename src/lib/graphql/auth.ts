@@ -5,12 +5,12 @@ import { setAuthToken, clearAuth, getAuthState } from '$lib/stores/auth.state.sv
 import type { RequestEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import he from 'he';
-import { LOGIN_MUTATION } from './mutations';
+import { LOGIN_MUTATION, SIGNUP_MUTATION } from './mutations';
 // import { EMPTY_CART_MUTATION } from './mutations';
 import { emptyCart } from '$stores/cart.store.svelte';
 
-export const protectedRoutes = ['/account', '/thank-you'];
-export const authRoutes = ['/login', '/signup'];
+export const protectedRoutes = ['/account/'];
+export const authRoutes = ['/login/', '/sign-up/'];
 
 // Helper function to check if a path requires authentication
 export function requiresAuth(path: string): boolean {
@@ -81,6 +81,69 @@ export async function logout() {
 		console.warn('Failed to log out via GraphQL:', err);
 	}
 	clearAuth();
+}
+
+// Function to signup at Braaay
+export async function signup({
+	username,
+	email,
+	password,
+	firstName,
+	lastName,
+	telephone,
+	cpf,
+	birthDate
+}: {
+	username: string;
+	email: string;
+	password: string;
+	firstName?: string;
+	lastName?: string;
+	telephone?: string;
+	cpf?: string;
+	birthDate?: string;
+}): Promise<{
+	success: boolean;
+	message: string;
+	customer: any | null;
+}> {
+	const client = getUrqlClient().client;
+
+	try {
+		const result = await client
+			.mutation(SIGNUP_MUTATION, {
+				username,
+				email,
+				password,
+				firstName,
+				lastName,
+				telephone,
+				cpf,
+				birthDate
+			})
+			.toPromise();
+
+		if (result.data?.registerNewCustomer?.customer?.id) {
+			return {
+				success: true,
+				customer: result.data.registerNewCustomer.customer,
+				message: result.data.registerNewCustomer.message || 'Conta criada com sucesso!'
+			};
+		} else {
+			let errorText = '';
+			if (result.error) {
+				errorText = he
+					.decode(result.error.message.replaceAll('[GraphQL]', '').trim())
+					.replace(/<[^>]*>/g, '');
+			} else {
+				errorText = 'Erro ao criar conta.';
+			}
+			return { success: false, message: errorText, customer: null };
+		}
+	} catch (error) {
+		console.error('Signup error:', error);
+		return { success: false, message: String(error), customer: null };
+	}
 }
 
 // Check if user is authenticated

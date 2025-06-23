@@ -40,6 +40,8 @@
 
 	"viewOnMap": "Ver no mapa",
 
+	"myAccount": "Minha conta",
+
 	"checkoutStep1NoEmail": "E-mail é obrigatório.",
 	"checkoutStep1EnterValidEmail": "Insira um endereço de e-mail válido.",
 	"checkoutStep1NoId": "CPF é necessário.",
@@ -60,7 +62,7 @@
 	"seoBase": "Braaay",
 	"seoDivider": "-",
 
-	"seoHomeTitle": "🍷Vinhos boutique e Orgânicos & 🍻Cervejas locais",
+	"seoHomeTitle": "🍷Vinhos fora do comum, rótulos raros e vinícolas boutique",
 	"seoHomeDescription": "Somos especialistas no melhores Vinhos boutique & Cervejas de Uruguai, do Brasil e do Mundo, Kits & Presentes. Visite nosso showroom, venha descobrir!",
 
 	"seoMyAccountTitle": "Minha conta",
@@ -85,5 +87,15 @@
 	"seoCheckoutPaymentDescription": "",
 
 	"seoLoginTitle": "Fazer login na Braaay",
-	"seoLoginDescription": "Acesse sua conta para ver pedidos, descontos e aproveitar uma experiência personalizada com vinhos boutique e cervejas selecionadas."
+	"seoLoginDescription": "Acesse sua conta para ver pedidos, descontos e aproveitar uma experiência personalizada com vinhos boutique e cervejas selecionadas.",
+
+	"seoSignUpTitle": "Crie sua conta | Vinhos Premium e Boutique na Braaay",
+	"seoSignUpDescription": "Cadastre-se na Braaay e viva uma experiência boutique com vinhos premium do Uruguai, do Brasil e do Mundo. Acesso a ofertas exclusivas e vantagens especiais.",
+
+	"signUpNoUsername": "Informe um nome de usuário para continuar",
+	"signUpInvalidUsername": "Nome de usuário inválido. Use apenas letras, números ou os símbolos _ . -, entre 5 e 20 caracteres",
+	"signUpNoPassword": "Informe uma senha para proteger sua conta",
+	"signUpPasswordTooShort": "A senha deve ter pelo menos 6 caracteres",
+	"signUpTelephoneInvalid": "Telefone inválido. Use o formato com DDD e número móvel: (11) 9 9999-9999.",
+	"signUpInvalidCpf": "CPF inválido. Por favor, insira um número válido com 11 dígitos."
 }

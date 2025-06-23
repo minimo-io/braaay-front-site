@@ -6,6 +6,7 @@
 	import SignupBenefits from '$components/ui/SignupBenefits.svelte';
 	import Meta from '$components/layout/Meta.svelte';
 	import { m } from '$lib/paraglide/messages';
+	import { localizeHref } from '$lib/paraglide/runtime';
 </script>
 
 <Meta title={m.seoLoginTitle()} description={m.seoLoginDescription()} />
@@ -47,7 +48,7 @@
 				</div>
 				<div class="block">
 					<img
-						src="/images/my-account.png"
+						src="/images/sign-up-3.jpeg"
 						alt="minha-conta"
 						class="md:min-h-40 md:max-h-40 max-h-32 h-32 md:full-width-r object-cover"
 					/>
@@ -67,7 +68,13 @@
 			<div class="text-center flex flex-col p-0 md:px-9 font-bold">
 				<!-- <Info class="h-5 self-center" /> -->
 				<span class="mb-2 block">Não tem uma conta?</span>
-				<Button rounded="lg" shineEffect={false} title="Cadastre-se" type="sun" />
+				<Button
+					rounded="lg"
+					shineEffect={false}
+					title="Cadastre-se grátis"
+					type="sun"
+					url={localizeHref('/sign-up/')}
+				/>
 
 				<SignupBenefits />
 			</div>

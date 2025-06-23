@@ -150,12 +150,13 @@
 				<button type="submit" class="btn form-btn !text-xs mt-0" disabled={processing}
 					>Entrar</button
 				>
-				<button class="text-xs font-bold self-center pr-5 underline" onclick={toggleForms}
-					>Esqueceu sua senha?</button
+				<button
+					class="text-xs md:text-sm font-bold self-center pr-5 underline"
+					onclick={toggleForms}>Esqueceu sua senha?</button
 				>
 			</div>
 			{#if error}
-				<div class="text-left text-red-medium text-sm pt-4">{error}</div>
+				<div class="font-bold text-red-medium text-sm pt-4 text-center md:text-left">{error}</div>
 			{/if}
 		</form>
 	</div>
@@ -165,7 +166,12 @@
 >
 	<div class="text-center flex flex-col p-0 md:p-10 font-bold">
 		<span class="mb-2 block">Não tem uma conta?</span>
-		<Button shineEffect={false} title="Cadastre-se" type="sun" />
+		<Button
+			shineEffect={false}
+			title="Cadastre-se grátis"
+			type="sun"
+			url={localizeHref('/sign-up/')}
+		/>
 	</div>
 	<div class="px-5">
 		<SignupBenefits />

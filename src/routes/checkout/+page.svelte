@@ -7,10 +7,7 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { CUSTOMER_QUERY, mapCustomerToUser } from '$lib/graphql/queries';
-	import {
-		CHECKOUT_CREATE_ORDER_MUTATION,
-		CHECKOUT_UPDATE_CUSTOMER_EMAIL
-	} from '$lib/graphql/mutations';
+	import { CHECKOUT_CREATE_ORDER_MUTATION } from '$lib/graphql/mutations';
 	import type {
 		CreditCardFormData,
 		Customer,

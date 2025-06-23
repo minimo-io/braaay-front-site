@@ -1,14 +1,15 @@
 <script lang="ts">
 	import Button from '../buttons/Button.svelte';
 	import { Lock } from '@lucide/svelte';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages';
 	import { CircleUserRound } from '@lucide/svelte';
 	import IMask from 'imask';
 	import type { Customer } from '$lib/types';
 	import { onMount, onDestroy } from 'svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
-	import { launchToast, isValidEmail, alphaOnly } from '$lib/utils';
+	import { launchToast, isValidEmail, alphaOnly, isValidCellphone } from '$lib/utils';
+	import { cpf } from 'cpf-cnpj-validator';
 
 	interface Props {
 		customer: Customer | undefined;
@@ -151,18 +152,26 @@
 		}
 
 		// CPF (Brazilian ID) – simple placeholder example
-		if (values.cpf.trim() === '') {
-			errors.cpf = m.checkoutStep1NoId();
-		} else if (!/^[0-9]{11}$/.test(values.cpf)) {
-			errors.cpf = m.checkoutStep1CPF11Digits();
+		// if (values.cpf.trim() === '') {
+		// 	errors.cpf = m.checkoutStep1NoId();
+		// } else if (!/^[0-9]{11}$/.test(values.cpf)) {
+		// 	errors.cpf = m.checkoutStep1CPF11Digits();
+		// }
+		if (!cpf.isValid(values.cpf)) {
+			errors.cpf = m.signUpInvalidCpf();
 		}
 
 		// Telephone
 		if (values.telephone.trim() === '') {
 			errors.telephone = m.checkoutStep1NoTel();
-		} else if (!/^[0-9\s()+-]+$/.test(values.telephone)) {
-			errors.telephone = m.checkoutStep1TelInvalid();
+		} else if (!isValidCellphone(values.telephone, getLocale())) {
+			errors.telephone = m.signUpTelephoneInvalid();
 		}
+		// if (values.telephone.trim() === '') {
+		// 	errors.telephone = m.checkoutStep1NoTel();
+		// } else if (!/^[0-9\s()+-]+$/.test(values.telephone)) {
+		// 	errors.telephone = m.checkoutStep1TelInvalid();
+		// }
 
 		// Birth date
 		if (values.birthDate.trim() === '') {
