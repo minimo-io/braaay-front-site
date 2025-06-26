@@ -1,5 +1,5 @@
 <script lang="ts">
-	// import { page } from '$app/state';
+	import { onMount } from 'svelte';
 	import Button from '../buttons/Button.svelte';
 
 	import WhatsappButton from '$components/ui/buttons/WhatsappButton.svelte';
@@ -10,33 +10,45 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { Eye, EyeOff } from '@lucide/svelte';
 	import SignupBenefits from '../SignupBenefits.svelte';
-	// import { onMount } from 'svelte';
+	import ResetPasswordForm from '../forms/resetPasswordForm.svelte';
 
+	// State for toggling between login and reset password forms
 	let showReset = $state(false);
 
 	let email = $state('');
 	let password = $state('');
 	let processing = $state(false);
-	// let returnUrl = $derived(page.url.href);
 	let error = $state('');
 	let showPassword = $state(false);
 
-	// Add this function to toggle password visibility
-	function togglePasswordVisibility() {
-		showPassword = !showPassword;
-	}
-
+	// Props for the component
 	interface Props {
 		showBottomBorder?: boolean;
 	}
 	let { showBottomBorder = true }: Props = $props();
 
-	// onMount(() => {
-	// 	document.getElementById('username')?.focus();
-	// });
+	// On component mount, check for 'reset-password' URL parameter
+	onMount(() => {
+		// Ensure this code runs only in the browser environment
+		if (typeof window !== 'undefined') {
+			const url = new URL(window.location.href);
+			// Check if the 'reset-password' search parameter exists
+			if (url.searchParams.has('reset-password')) {
+				showReset = true; // Show the reset password form
+			}
 
-	// Derived state with runes
-	function toggleForms(e) {
+			// You can optionally focus the username input if not showing reset form
+			// document.getElementById('username')?.focus();
+		}
+	});
+
+	// Function to toggle password visibility
+	function togglePasswordVisibility() {
+		showPassword = !showPassword;
+	}
+
+	// Function to toggle between login and reset password forms
+	function toggleForms(e: MouseEvent) {
 		e.preventDefault();
 		showReset = !showReset;
 	}
@@ -67,7 +79,6 @@
 			}
 		} catch (error) {
 			processing = false;
-
 			toggleLoader();
 			document.body.classList.toggle('no-scroll');
 		}
@@ -75,29 +86,7 @@
 </script>
 
 {#if showReset}
-	<form
-		id="frm-reset-password"
-		action=""
-		class="px-[30px] my-5 border-b pb-8 border-grey-lighter"
-		in:slide={{ duration: 200 }}
-	>
-		<fieldset>
-			<label for="username" class="text-sm font-bold">REDEFINIR SENHA</label>
-
-			<input
-				id="username"
-				type="email"
-				class="w-full px-3 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none mt-2 text-sm"
-				placeholder="contato@braaay.com"
-			/>
-		</fieldset>
-		<div class="flex justify-start gap-3 mt-3">
-			<button type="submit" class="btn form-btn !text-xs mt-0">Redefinir</button>
-			<button class="text-xs font-bold self-center pr-5 underline" onclick={toggleForms}
-				>Voltar</button
-			>
-		</div>
-	</form>
+	<ResetPasswordForm {toggleForms} />
 {:else}
 	<div class="border-b pb-8 border-grey-lighter">
 		<form

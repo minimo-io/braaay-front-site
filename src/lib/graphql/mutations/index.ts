@@ -14,3 +14,5 @@ export * from './login.mutation';
 export * from './signup.mutation';
 
 export * from './customer-update-email.mutation';
+export * from './customer-send-reset-password-email.mutation';
+export * from './customer-reset-password.mutation';

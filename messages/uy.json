@@ -2,6 +2,7 @@
 	"loading": "Cargando...",
 	"search": "Buscar...",
 	"searching": "Buscando...",
+	"back": "Volver",
 	"copy": "Copiar",
 	"copiedToClipboard": "Copiado al portapapeles",
 	"copiedError": "Error al copiar:",
