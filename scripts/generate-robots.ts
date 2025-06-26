@@ -4,207 +4,207 @@ import { join } from 'path';
 
 // Configuration
 const API_DOMAIN = 'https://braaay.com';
-const FRONT_DOMAIN = 'https://braaay-front-site.vercel.app';
+const FRONT_DOMAIN = 'https://braaay-front-site.vercel.app'; // No trailing slash
 const REQUEST_DELAY = 100; // ms between requests
 
-async function fetchRobotsTxt(): Promise<string> {
+async function fetchContent(url: string): Promise<string> {
 	try {
-		const response = await fetch(`${API_DOMAIN}/robots.txt`);
-		const robotsText = await response.text();
-		console.log(`✅ Fetched robots.txt from ${API_DOMAIN}`);
-		return robotsText;
-	} catch (error) {
-		console.error('Error fetching robots.txt:', error);
-		return '';
-	}
-}
-
-function extractSitemapUrls(robotsText: string): string[] {
-	const sitemapUrls: string[] = [];
-	const lines = robotsText.split('\n');
-
-	for (const line of lines) {
-		const trimmedLine = line.trim();
-		if (trimmedLine.toLowerCase().startsWith('sitemap:')) {
-			const url = trimmedLine.substring(8).trim(); // Remove "Sitemap:" prefix
-			if (url) {
-				sitemapUrls.push(url);
-			}
-		}
-	}
-
-	console.log(`📋 Found ${sitemapUrls.length} sitemap URLs in robots.txt`);
-	return sitemapUrls;
-}
-
-async function downloadAndProcessFile(url: string): Promise<string> {
-	try {
-		console.log(`📥 Downloading: ${url}`);
+		console.log(`Fetching: ${url}`);
 		const response = await fetch(url);
-		const content = await response.text();
-
-		// Simple domain replacement
-		const processedContent = content.replace(new RegExp(API_DOMAIN, 'g'), FRONT_DOMAIN);
-
-		return processedContent;
+		if (!response.ok) {
+			throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
+		}
+		return await response.text();
 	} catch (error) {
-		console.error(`❌ Error downloading ${url}:`, error);
+		console.error(`Error fetching ${url}:`, error);
 		return '';
 	}
 }
 
-function getFilenameFromUrl(url: string): string {
-	try {
-		const urlObj = new URL(url);
-		const pathname = urlObj.pathname;
-
-		// Handle URLs with path segments (e.g., /uy/sitemap_index.xml)
-		const segments = pathname.split('/').filter((segment) => segment);
-
-		if (segments.length === 0) {
-			return 'sitemap.xml';
-		}
-
-		// If the last segment has .xml extension, use it
-		const lastSegment = segments[segments.length - 1];
-		if (lastSegment.endsWith('.xml')) {
-			// For paths like /uy/sitemap_index.xml, we might want to preserve the path info
-			// You can choose to flatten it or preserve directory structure
-			if (segments.length > 1) {
-				// Option 1: Flatten with prefix (e.g., uy_sitemap_index.xml)
-				return segments.join('_');
-
-				// Option 2: Preserve directory structure (uncomment the lines below instead)
-				// const dir = segments.slice(0, -1).join('/');
-				// return { filename: lastSegment, dir };
-			}
-			return lastSegment;
-		}
-
-		// Fallback
-		return segments.join('_') + '.xml';
-	} catch (error) {
-		console.error(`Error parsing URL ${url}:`, error);
-		return 'sitemap.xml';
-	}
-}
-
-async function downloadSitemapsRecursively(
-	sitemapUrls: string[],
-	processedUrls: Set<string> = new Set()
-): Promise<string[]> {
-	const generatedFiles: string[] = [];
-
-	for (const url of sitemapUrls) {
-		if (processedUrls.has(url)) {
-			console.log(`⏭️  Skipping already processed: ${url}`);
-			continue;
-		}
-
-		processedUrls.add(url);
-
-		const content = await downloadAndProcessFile(url);
-		if (!content) continue;
-
-		const filename = getFilenameFromUrl(url);
-		const filePath = join(process.cwd(), 'static', filename);
-
-		writeFileSync(filePath, content, 'utf8');
-		generatedFiles.push(filename);
-		console.log(`✅ Generated: ${filename}`);
-
-		// Check if this is a sitemap index that references other sitemaps
-		if (content.includes('<sitemapindex') || content.includes('<sitemap>')) {
-			const referencedSitemaps = extractSitemapReferences(content);
-			if (referencedSitemaps.length > 0) {
-				console.log(`🔍 Found ${referencedSitemaps.length} referenced sitemaps in ${filename}`);
-				const additionalFiles = await downloadSitemapsRecursively(
-					referencedSitemaps,
-					processedUrls
-				);
-				generatedFiles.push(...additionalFiles);
-			}
-		}
-
-		// Be respectful with delays
-		await new Promise((resolve) => setTimeout(resolve, REQUEST_DELAY));
-	}
-
-	return generatedFiles;
-}
-
-function extractSitemapReferences(xmlContent: string): string[] {
+/**
+ * Fetches the robots.txt from the API_DOMAIN and extracts all Sitemap URLs.
+ * @returns An array of Sitemap URLs found in robots.txt.
+ */
+async function fetchRobotsTxtSitemapUrls(robotsTxtUrl: string): Promise<string[]> {
+	console.log(`📋 Fetching robots.txt from ${robotsTxtUrl}...`);
+	const robotsText = await fetchContent(robotsTxtUrl);
 	const sitemapUrls: string[] = [];
-	const sitemapRegex = /<loc>(.*?)<\/loc>/g;
-
+	const sitemapRegex = /Sitemap:\s*(.*)/g;
 	let match;
-	while ((match = sitemapRegex.exec(xmlContent)) !== null) {
-		const url = match[1].trim();
-		// Only include URLs that are from our API domain and look like sitemaps
-		if (url.startsWith(API_DOMAIN) && (url.includes('sitemap') || url.endsWith('.xml'))) {
-			sitemapUrls.push(url);
+	while ((match = sitemapRegex.exec(robotsText)) !== null) {
+		const sitemapUrl = match[1].trim();
+		// Only include sitemaps from the API_DOMAIN
+		if (sitemapUrl.startsWith(API_DOMAIN)) {
+			sitemapUrls.push(sitemapUrl);
 		}
 	}
-
+	console.log(`✅ Found ${sitemapUrls.length} sitemaps in robots.txt`);
 	return sitemapUrls;
 }
 
-function processRobotsTxt(originalRobots: string, generatedFiles: string[]): string {
-	// Replace domain references
-	const newRobots = originalRobots.replace(new RegExp(API_DOMAIN, 'g'), FRONT_DOMAIN);
+/**
+ * Processes a sitemap file (index or regular) by downloading it,
+ * replacing domains, and saving it. If it's an index, it recursively
+ * processes its children.
+ * @param sitemapUrl The URL of the sitemap file to process.
+ * @param staticDir The base directory to save the processed files.
+ * @returns A list of relative paths (e.g., 'sitemap_index.xml', 'uy/sitemap_index.xml')
+ * that were generated (including children if it's an index).
+ */
+async function processSitemapFile(sitemapUrl: string, staticDir: string): Promise<string[]> {
+	console.log(`📥 Processing sitemap: ${sitemapUrl}`);
+	const sitemapContent = await fetchContent(sitemapUrl);
 
-	// Remove existing sitemap entries (we'll add our own)
-	const lines = newRobots.split('\n');
-	const filteredLines = lines.filter((line) => !line.trim().toLowerCase().startsWith('sitemap:'));
+	if (!sitemapContent) {
+		console.warn(`Skipping empty sitemap content for ${sitemapUrl}`);
+		return [];
+	}
 
-	let processedRobots = filteredLines.join('\n').trim();
+	// --- CRITICAL FIX START ---
+	// Get the path relative to the API_DOMAIN's base path (e.g., 'sitemap_index.xml' or 'uy/sitemap_index.xml')
+	const urlObj = new URL(sitemapUrl);
+	// Remove leading slash if present from pathname to make it truly relative for join
+	let relativeOutputPath = urlObj.pathname.startsWith('/')
+		? urlObj.pathname.substring(1)
+		: urlObj.pathname;
 
-	// Add our generated sitemaps
-	processedRobots += '\n\n# Generated sitemaps\n';
-	generatedFiles.forEach((file) => {
-		processedRobots += `Sitemap: ${FRONT_DOMAIN}/${file}\n`;
+	// Ensure the relative path doesn't contain query parameters or fragments
+	relativeOutputPath = relativeOutputPath.split('?')[0].split('#')[0];
+
+	const filename = relativeOutputPath.split('/').pop() || 'sitemap.xml';
+	// The directory part for the file, e.g., 'uy/' or '' for root sitemaps
+	const fileDir = relativeOutputPath.substring(0, relativeOutputPath.lastIndexOf(filename));
+
+	// Full absolute path for the directory where the file should be saved
+	const targetDir = join(staticDir, fileDir);
+
+	// Ensure the directory structure exists (e.g., static/uy/)
+	mkdirSync(targetDir, { recursive: true });
+	// --- CRITICAL FIX END ---
+
+	// Replace API_DOMAIN with FRONT_DOMAIN in the content
+	const escapedApiDomainForContent = API_DOMAIN.replace(/\./g, '\\.');
+	const processedContent = sitemapContent.replace(
+		new RegExp(escapedApiDomainForContent, 'g'),
+		FRONT_DOMAIN
+	);
+
+	// Correctly join target directory and filename to create the full output path
+	const outputPath = join(targetDir, filename);
+	writeFileSync(outputPath, processedContent, 'utf8');
+	console.log(`✅ Generated ${join(staticDir.split(join()).pop() || '', relativeOutputPath)}`); // Log path relative to static/ for clarity
+
+	const generatedRelativePaths = [relativeOutputPath]; // Store the relative path for this file
+
+	// Check if it's a sitemap index (contains <sitemapindex> tag)
+	if (sitemapContent.includes('<sitemapindex')) {
+		const sitemapRegex = /<loc>(.*?)<\/loc>/g;
+		let match;
+		const childSitemapUrls: string[] = [];
+		while ((match = sitemapRegex.exec(sitemapContent)) !== null) {
+			const childUrl = match[1].trim();
+			// Only process children that start with API_DOMAIN
+			if (childUrl.startsWith(API_DOMAIN)) {
+				childSitemapUrls.push(childUrl);
+			}
+		}
+
+		for (const childUrl of childSitemapUrls) {
+			await new Promise((resolve) => setTimeout(resolve, REQUEST_DELAY)); // Be respectful
+			const childrenPaths = await processSitemapFile(childUrl, staticDir);
+			generatedRelativePaths.push(...childrenPaths);
+		}
+	} else if (!sitemapContent.includes('<urlset')) {
+		console.warn(
+			`⁉️  Unexpected sitemap format for ${sitemapUrl}. Neither <sitemapindex> nor <urlset> found.`
+		);
+	}
+
+	return generatedRelativePaths;
+}
+
+/**
+ * Generates the robots.txt content for the front-end site.
+ * It will only list the top-level sitemap index URLs discovered from the original robots.txt.
+ * @param originalRobotsText The original robots.txt content (for other directives).
+ * @param newDomain The front-end domain.
+ * @param topLevelSitemapUrls The URLs (from the API_DOMAIN) that were found in the original robots.txt
+ * and represent the root sitemaps to be listed.
+ * @returns The generated robots.txt content.
+ */
+function generateRobotsTxt(
+	originalRobotsText: string,
+	newDomain: string,
+	topLevelSitemapUrls: string[]
+): string {
+	let newRobots = originalRobotsText;
+
+	// Remove ALL existing Sitemap entries to start fresh with our new ones
+	newRobots = newRobots.replace(/Sitemap:\s*.*\n?/g, '');
+
+	// Replace other API_DOMAIN occurrences with FRONT_DOMAIN
+	// Escape dots in API_DOMAIN for regex
+	const escapedApiDomainForRobots = API_DOMAIN.replace(/\./g, '\\.');
+	newRobots = newRobots.replace(new RegExp(escapedApiDomainForRobots, 'g'), newDomain);
+
+	// Add generated sitemap index URLs from the top-level list
+	newRobots += '\n\n# Generated Sitemaps for Front-End\n';
+	topLevelSitemapUrls.forEach((sitemapUrl) => {
+		// Construct the new sitemap URL using FRONT_DOMAIN and the relative path
+		const urlObj = new URL(sitemapUrl);
+		let relativePath = urlObj.pathname.startsWith('/')
+			? urlObj.pathname.substring(1)
+			: urlObj.pathname;
+		relativePath = relativePath.split('?')[0].split('#')[0]; // Clean up any query/fragment
+		const newSitemapUrl = `${newDomain}/${relativePath}`;
+		newRobots += `Sitemap: ${newSitemapUrl}\n`;
 	});
 
-	return processedRobots;
+	return newRobots;
 }
 
 async function main() {
 	const staticDir = join(process.cwd(), 'static');
-
-	console.log(`🚀 Starting simplified sitemap generation`);
+	console.log(`🚀 Starting sitemap generation`);
 	console.log(`API domain: ${API_DOMAIN}`);
-	console.log(`Front domain: ${FRONT_DOMAIN}`);
+	console.log(`New domain: ${FRONT_DOMAIN}`);
 
 	// Ensure static directory exists
 	mkdirSync(staticDir, { recursive: true });
 
-	// 1. Fetch and parse robots.txt to get all sitemap URLs
-	console.log('\n📋 Fetching robots.txt...');
-	const originalRobots = await fetchRobotsTxt();
-	const sitemapUrls = extractSitemapUrls(originalRobots);
+	// 1. Fetch original robots.txt (for other directives like User-agent, Disallow etc.)
+	const robotsTxtUrl = `${API_DOMAIN}/robots.txt`;
+	const originalRobotsText = await fetchContent(robotsTxtUrl);
 
-	if (sitemapUrls.length === 0) {
-		console.log('❌ No sitemap URLs found in robots.txt');
-		return;
+	// 2. Discover all top-level sitemap URLs from the original robots.txt
+	const topLevelSitemapUrlsFromRobotsTxt = await fetchRobotsTxtSitemapUrls(robotsTxtUrl);
+
+	// Store all unique relative paths of generated files (including children)
+	const allGeneratedRelativePaths: Set<string> = new Set();
+
+	// 3. Process each discovered top-level sitemap URL
+	for (const sitemapUrl of topLevelSitemapUrlsFromRobotsTxt) {
+		const processedFiles = await processSitemapFile(sitemapUrl, staticDir);
+		processedFiles.forEach((path) => allGeneratedRelativePaths.add(path));
+		await new Promise((resolve) => setTimeout(resolve, REQUEST_DELAY)); // Be respectful
 	}
 
-	// 2. Download all sitemaps recursively (handles sitemap indexes)
-	console.log('\n📥 Downloading and processing sitemaps...');
-	const generatedFiles = await downloadSitemapsRecursively(sitemapUrls);
-
-	// 3. Generate new robots.txt
-	console.log('\n🤖 Generating robots.txt...');
-	const newRobots = processRobotsTxt(originalRobots, generatedFiles);
+	// 4. Generate robots.txt for the front-end site
+	console.log('\n🤖 Generating robots.txt for the front-end...');
+	// Pass the original top-level sitemap URLs (from robots.txt) to be re-listed
+	const newRobotsTxtContent = generateRobotsTxt(
+		originalRobotsText,
+		FRONT_DOMAIN,
+		topLevelSitemapUrlsFromRobotsTxt
+	);
 	const robotsPath = join(staticDir, 'robots.txt');
-	writeFileSync(robotsPath, newRobots, 'utf8');
+	writeFileSync(robotsPath, newRobotsTxtContent, 'utf8');
 	console.log(`✅ Generated robots.txt`);
 
-	// Summary
 	console.log('\n🎉 Generation complete!');
 	console.log(`📁 Files generated in ${staticDir}:`);
+	Array.from(allGeneratedRelativePaths).forEach((file) => console.log(`   - ${file}`));
 	console.log(`   - robots.txt`);
-	generatedFiles.forEach((file) => console.log(`   - ${file}`));
-	console.log(`\n📊 Total files: ${generatedFiles.length + 1}`);
 }
 
 // Run the script
