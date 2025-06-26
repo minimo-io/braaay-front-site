@@ -1,3 +1,4 @@
+<!-- src/lib/components/ui/drawer/DrawerAccount.svelte -->
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Button from '../buttons/Button.svelte';
@@ -24,8 +25,16 @@
 	// Props for the component
 	interface Props {
 		showBottomBorder?: boolean;
+		onResetToggle?: (isReset: boolean) => void; // New callback prop
 	}
-	let { showBottomBorder = true }: Props = $props();
+	let { showBottomBorder = true, onResetToggle }: Props = $props();
+
+	// Watch showReset changes and notify parent
+	$effect(() => {
+		if (onResetToggle) {
+			onResetToggle(showReset);
+		}
+	});
 
 	// On component mount, check for 'reset-password' URL parameter
 	onMount(() => {

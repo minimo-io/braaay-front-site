@@ -20,7 +20,7 @@
 	"showroom": "SHOWROOM",
 
 	"cartSummaryTitle": "Resumo da compra",
-	"emptyCart": "¡Tu carrito está vacío!",
+	"emptyCart": "¡Tu carrito está vacío! <br /><span class='font-medium text-sm'>Vamos a ganar cashback</span> ⚡️",
 	"addToCart": "Añadir al carrito",
 	"add": "Agregar",
 	"addingToCart": "Añadiendo...",

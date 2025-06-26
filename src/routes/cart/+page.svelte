@@ -82,7 +82,7 @@
 								</div>
 							{/each}
 						{:else}
-							<p class="text-center font-bold">{m.emptyCart()}</p>
+							<p class="text-center font-bold">{@html m.emptyCart()}</p>
 						{/if}
 					</div>
 

@@ -4,8 +4,11 @@
 	import { slide } from 'svelte/transition';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { CUSTOMER_SEND_RESET_PASSWORD_EMAIL_MUTATION } from '$lib/graphql/mutations';
+	import { CUSTOMER_RESET_PASSWORD_MUTATION } from '$lib/graphql/mutations/customer-reset-password.mutation';
 	import { launchToast } from '$lib/utils';
 	import { Check, CircleCheck, Eye, EyeOff } from '@lucide/svelte'; // Import Lucide icons
+	import { goto } from '$app/navigation';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	// Define the props the component accepts
 	interface Props {
@@ -32,6 +35,11 @@
 	// States for password visibility in the new password form
 	let showNewPassword = $state(false);
 	let showConfirmPassword = $state(false);
+
+	// Loading and error states for the new password form
+	let resetLoading = $state(false);
+	let resetError = $state('');
+	let resetSuccess = $state(false);
 
 	// Toggle function for new password visibility
 	function toggleNewPasswordVisibility() {
@@ -60,7 +68,7 @@
 	});
 
 	// Handle submission for "Request Reset Email" form (existing logic)
-	async function handleSubmit(event: Event) {
+	async function handleResetPasswordSendEmailSubmit(event: Event) {
 		// Reverted to original name
 		event.preventDefault();
 
@@ -104,21 +112,94 @@
 		}
 	}
 
-	// Placeholder function for the new password form submission
-	// (Actual logic for setting new password is not included as per request,
-	// this is just a sample form structure.)
-	function handleSampleSetNewPassword(event: Event) {
+	// Function to validate password requirements
+	function validatePassword(password: string): string | null {
+		if (password.length < 8) {
+			return 'A senha deve ter pelo menos 8 caracteres.';
+		}
+		// Add more validation rules as needed
+		// if (!/(?=.*[a-z])/.test(password)) {
+		// 	return 'A senha deve conter pelo menos uma letra minúscula.';
+		// }
+		// if (!/(?=.*[A-Z])/.test(password)) {
+		// 	return 'A senha deve conter pelo menos uma letra maiúscula.';
+		// }
+		// if (!/(?=.*\d)/.test(password)) {
+		// 	return 'A senha deve conter pelo menos um número.';
+		// }
+		return null;
+	}
+
+	// Handle submission for "Set New Password" form
+	async function handleResetPasswordByKeySubmit(event: Event) {
 		event.preventDefault();
-		// You would add your GraphQL mutation for setting the new password here
-		// using resetKey, resetLogin, newPassword, and confirmNewPassword.
-		console.log('Attempting to set new password:', {
-			key: resetKey,
-			login: resetLogin,
-			newPassword: newPassword,
-			confirmNewPassword: confirmNewPassword
-		});
-		// Add your actual password reset logic (GraphQL mutation) here later
-		// For now, this is just a sample submit handler.
+
+		// Reset states
+		resetError = '';
+		resetSuccess = false;
+
+		// Validate inputs
+		if (!newPassword || !confirmNewPassword) {
+			resetError = 'Por favor, preencha todos os campos.';
+			// return;
+		}
+
+		if (newPassword !== confirmNewPassword) {
+			resetError = 'As senhas não coincidem.';
+			// return;
+		}
+
+		// Validate password strength
+		const passwordValidation = validatePassword(newPassword);
+		if (passwordValidation) {
+			resetError = passwordValidation;
+			// return;
+		}
+
+		if (resetError) {
+			launchToast(resetError, 'error', 3000);
+			return;
+		}
+
+		resetLoading = true;
+
+		try {
+			const result = await getUrqlClient()
+				.client.mutation(CUSTOMER_RESET_PASSWORD_MUTATION, {
+					key: resetKey,
+					login: resetLogin,
+					password: newPassword
+				})
+				.toPromise();
+
+			if (result.error) {
+				throw new Error(result.error.message);
+			}
+
+			if (result.data?.resetUserPassword?.user) {
+				resetSuccess = true;
+				launchToast('Senha redefinida com sucesso! Você já pode fazer login.', 'success', 3000);
+
+				// Clear the form
+				newPassword = '';
+				confirmNewPassword = '';
+
+				// Optionally redirect to login page after a delay
+				setTimeout(() => {
+					// You might want to redirect to login page here
+					goto(localizeHref('/login/'));
+					// window.location.href = '/login';
+					// Or call a parent function to switch to login form
+				}, 2000);
+			} else {
+				throw new Error('Falha ao redefinir a senha. Tente novamente.');
+			}
+		} catch (err) {
+			resetError = err instanceof Error ? err.message : 'Erro ao redefinir a senha.';
+			launchToast(resetError, 'error', 3000);
+		} finally {
+			resetLoading = false;
+		}
 	}
 </script>
 
@@ -128,7 +209,7 @@
 		id="frm-set-new-password"
 		class="px-[30px] my-5 border-b pb-8 border-grey-lighter"
 		in:slide={{ duration: 200 }}
-		onsubmit={handleSampleSetNewPassword}
+		onsubmit={handleResetPasswordByKeySubmit}
 	>
 		<fieldset>
 			<label for="new-password" class="text-sm font-bold">NOVA SENHA</label>
@@ -137,7 +218,8 @@
 					id="new-password"
 					type={showNewPassword ? 'text' : 'password'}
 					bind:value={newPassword}
-					class="w-full px-3 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
+					disabled={resetLoading || resetSuccess}
+					class="w-full px-3 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm disabled:opacity-50"
 					placeholder="Sua nova senha"
 					required
 				/>
@@ -162,7 +244,8 @@
 					id="confirm-password"
 					type={showConfirmPassword ? 'text' : 'password'}
 					bind:value={confirmNewPassword}
-					class="w-full px-3 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
+					disabled={resetLoading || resetSuccess}
+					class="w-full px-3 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm disabled:opacity-50"
 					placeholder="Confirme sua nova senha"
 					required
 				/>
@@ -180,11 +263,34 @@
 			</div>
 		</fieldset>
 
+		{#if resetError}
+			<div class="mt-3 p-2 bg-red-100 border border-red-300 rounded text-red-700 text-sm">
+				{resetError}
+			</div>
+		{/if}
+
+		{#if resetSuccess}
+			<div
+				class="flex gap-1 mt-3 p-2 border-green-dark bg-green-light rounded-lg shadow-sm border text-green-medium text-sm"
+			>
+				<CircleCheck class="h-5" />
+				<div>
+					<strong>Senha redefinida com sucesso!</strong> Você já pode fazer login.
+				</div>
+			</div>
+		{/if}
+
 		<div class="flex justify-start gap-3 mt-3">
-			<button type="submit" class="btn form-btn !text-xs mt-0"> Definir Nova Senha </button>
+			<button
+				type="submit"
+				disabled={resetLoading || resetSuccess}
+				class="btn form-btn !text-xs mt-0 disabled:opacity-50"
+			>
+				{resetLoading ? 'Definindo...' : 'Definir Nova Senha'}
+			</button>
 			<button
 				type="button"
-				class="text-sm font-bold self-center pr-5 underline"
+				class="text-xs md:text-sm font-bold self-center pr-5 underline"
 				onclick={toggleForms}>{m.back()}</button
 			>
 		</div>
@@ -195,7 +301,7 @@
 		id="frm-request-reset-password"
 		class="px-[30px] my-5 border-b pb-8 border-grey-lighter"
 		in:slide={{ duration: 200 }}
-		onsubmit={handleSubmit}
+		onsubmit={handleResetPasswordSendEmailSubmit}
 	>
 		<fieldset>
 			<label for="username" class="text-sm font-bold">REDEFINIR SENHA</label>
@@ -239,7 +345,7 @@
 			<!-- This now correctly calls the function passed from the parent -->
 			<button
 				type="button"
-				class="text-sm font-bold self-center pr-5 underline"
+				class="text-xs md:text-sm font-bold self-center pr-5 underline"
 				onclick={toggleForms}>{m.back()}</button
 			>
 		</div>
