@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//braaay.com/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/ariano-hermanos/</loc>
 		<lastmod>2025-06-09T12:49:22+00:00</lastmod>
@@ -47,9 +47,7 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/vinicola-casa-eva/</loc>
 		<lastmod>2025-06-09T19:06:35+00:00</lastmod>
-		<image:image>
-			<image:loc>https://braaay-front-site.vercel.app/wp-content/uploads/2024/08/divider-green.png</image:loc>
-		</image:image>
+		
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/casa-perini/</loc>
@@ -66,23 +64,17 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/don-pascual/</loc>
 		<lastmod>2025-06-10T18:16:53+00:00</lastmod>
-		<image:image>
-			<image:loc>https://braaay-front-site.vercel.app/wp-content/uploads/2024/08/divider-green.png</image:loc>
-		</image:image>
+		
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/familia-deicas/</loc>
 		<lastmod>2025-06-18T13:41:16+00:00</lastmod>
-		<image:image>
-			<image:loc>https://braaay-front-site.vercel.app/wp-content/uploads/2024/08/divider-green.png</image:loc>
-		</image:image>
+		
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/manus/</loc>
 		<lastmod>2025-06-12T16:56:49+00:00</lastmod>
-		<image:image>
-			<image:loc>https://braaay-front-site.vercel.app/wp-content/uploads/2024/08/divider-green.png</image:loc>
-		</image:image>
+		
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/menhir-salento/</loc>
@@ -103,9 +95,7 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/pizzato/</loc>
 		<lastmod>2025-06-09T19:24:53+00:00</lastmod>
-		<image:image>
-			<image:loc>https://braaay-front-site.vercel.app/wp-content/uploads/2024/08/divider-green.png</image:loc>
-		</image:image>
+		
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/quinta-dos-termos/</loc>
@@ -122,16 +112,12 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/vina-eden/</loc>
 		<lastmod>2025-02-27T19:38:44+00:00</lastmod>
-		<image:image>
-			<image:loc>https://braaay-front-site.vercel.app/wp-content/uploads/2024/08/divider-green.png</image:loc>
-		</image:image>
+		
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/vinhedos-do-monte-agudo/</loc>
 		<lastmod>2025-06-09T19:24:08+00:00</lastmod>
-		<image:image>
-			<image:loc>https://braaay-front-site.vercel.app/wp-content/uploads/2024/08/divider-green.png</image:loc>
-		</image:image>
+		
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/vinicola-settesoli/</loc>

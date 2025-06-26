@@ -1,5 +1,5 @@
 // scripts/generate-sitemaps.ts
-import { writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync, mkdirSync, readFileSync, readdirSync, statSync } from 'fs'; // Adicionado readFileSync, readdirSync, statSync
 import { join } from 'path';
 // Configuration
 const API_DOMAIN = 'https://braaay.com';
@@ -50,41 +50,38 @@ async function fetchRobotsTxtSitemapUrls(robotsTxtUrl) {
  */
 async function processSitemapFile(sitemapUrl, staticDir) {
     console.log(`📥 Processing sitemap: ${sitemapUrl}`);
-    const sitemapContent = await fetchContent(sitemapUrl);
+    const sitemapContent = await fetchContent(sitemapUrl); // <<< MANTIDO COMO 'CONST' AQUI!
     if (!sitemapContent) {
         console.warn(`Skipping empty sitemap content for ${sitemapUrl}`);
         return [];
     }
-    // --- CRITICAL FIX START ---
-    // Get the path relative to the API_DOMAIN's base path (e.g., 'sitemap_index.xml' or 'uy/sitemap_index.xml')
+    // --- CRITICAL FIX START (Lógica original de path, mantida) ---
     const urlObj = new URL(sitemapUrl);
-    // Remove leading slash if present from pathname to make it truly relative for join
     let relativeOutputPath = urlObj.pathname.startsWith('/')
         ? urlObj.pathname.substring(1)
         : urlObj.pathname;
-    // Ensure the relative path doesn't contain query parameters or fragments
     relativeOutputPath = relativeOutputPath.split('?')[0].split('#')[0];
     const filename = relativeOutputPath.split('/').pop() || 'sitemap.xml';
-    // The directory part for the file, e.g., 'uy/' or '' for root sitemaps
     const fileDir = relativeOutputPath.substring(0, relativeOutputPath.lastIndexOf(filename));
-    // Full absolute path for the directory where the file should be saved
     const targetDir = join(staticDir, fileDir);
-    // Ensure the directory structure exists (e.g., static/uy/)
     mkdirSync(targetDir, { recursive: true });
     // --- CRITICAL FIX END ---
     // Replace API_DOMAIN with FRONT_DOMAIN in the content
     const escapedApiDomainForContent = API_DOMAIN.replace(/\./g, '\\.');
+    // <<< processedContent é onde a substituição de domínio acontece.
     const processedContent = sitemapContent.replace(new RegExp(escapedApiDomainForContent, 'g'), FRONT_DOMAIN);
     // Correctly join target directory and filename to create the full output path
     const outputPath = join(targetDir, filename);
-    writeFileSync(outputPath, processedContent, 'utf8');
+    writeFileSync(outputPath, processedContent, 'utf8'); // <<< Escrevendo processedContent
     console.log(`✅ Generated ${join(staticDir.split(join()).pop() || '', relativeOutputPath)}`); // Log path relative to static/ for clarity
     const generatedRelativePaths = [relativeOutputPath]; // Store the relative path for this file
     // Check if it's a sitemap index (contains <sitemapindex> tag)
+    // <<< IMPORTANT: Continuamos usando sitemapContent (original) para esta checagem
+    // para não interferir na descoberta de sitemaps filhos. A remoção de imagens será pós-processada.
     if (sitemapContent.includes('<sitemapindex')) {
         const sitemapRegex = /<loc>(.*?)<\/loc>/g;
         let match;
-        const childSitemapUrls = [];
+        const childSitemapUrls = []; // <<< CORREÇÃO DE DECLARAÇÃO
         while ((match = sitemapRegex.exec(sitemapContent)) !== null) {
             const childUrl = match[1].trim();
             // Only process children that start with API_DOMAIN
@@ -134,6 +131,37 @@ function generateRobotsTxt(originalRobotsText, newDomain, topLevelSitemapUrls) {
     });
     return newRobots;
 }
+/**
+ * Recursively finds all XML files in a directory and its subdirectories.
+ * @param dir The directory to start searching from.
+ * @param fileList The list to populate with file paths.
+ */
+function findXmlFiles(dir, fileList = []) {
+    const files = readdirSync(dir);
+    files.forEach((file) => {
+        const filePath = join(dir, file);
+        const stats = statSync(filePath);
+        if (stats.isDirectory()) {
+            findXmlFiles(filePath, fileList);
+        }
+        else if (file.endsWith('.xml')) {
+            fileList.push(filePath);
+        }
+    });
+    return fileList;
+}
+/**
+ * Removes image tags and namespaces from a given XML content string.
+ * @param xmlContent The XML content to process.
+ * @returns The XML content with image tags and namespaces removed.
+ */
+function removeImageTags(xmlContent) {
+    // Regex para remover as tags <image:image> e seu conteúdo
+    let cleanedContent = xmlContent.replace(/<image:image[^>]*>[\s\S]*?<\/image:image>/g, '');
+    // Regex para remover a declaração de namespace de imagem se existir
+    cleanedContent = cleanedContent.replace(/ xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1"/g, '');
+    return cleanedContent;
+}
 async function main() {
     const staticDir = join(process.cwd(), 'static');
     console.log(`🚀 Starting sitemap generation`);
@@ -148,21 +176,42 @@ async function main() {
     const topLevelSitemapUrlsFromRobotsTxt = await fetchRobotsTxtSitemapUrls(robotsTxtUrl);
     // Store all unique relative paths of generated files (including children)
     const allGeneratedRelativePaths = new Set();
-    // 3. Process each discovered top-level sitemap URL
+    // 3. Process each discovered top-level sitemap URL - THIS WILL GENERATE ALL FILES FIRST
+    console.log('\nGenerating all sitemap files without image removal (first pass)...');
     for (const sitemapUrl of topLevelSitemapUrlsFromRobotsTxt) {
         const processedFiles = await processSitemapFile(sitemapUrl, staticDir);
         processedFiles.forEach((path) => allGeneratedRelativePaths.add(path));
         await new Promise((resolve) => setTimeout(resolve, REQUEST_DELAY)); // Be respectful
     }
+    console.log('✅ First pass complete: All sitemap files generated.');
     // 4. Generate robots.txt for the front-end site
     console.log('\n🤖 Generating robots.txt for the front-end...');
-    // Pass the original top-level sitemap URLs (from robots.txt) to be re-listed
     const newRobotsTxtContent = generateRobotsTxt(originalRobotsText, FRONT_DOMAIN, topLevelSitemapUrlsFromRobotsTxt);
     const robotsPath = join(staticDir, 'robots.txt');
     writeFileSync(robotsPath, newRobotsTxtContent, 'utf8');
     console.log(`✅ Generated robots.txt`);
-    console.log('\n🎉 Generation complete!');
-    console.log(`📁 Files generated in ${staticDir}:`);
+    // 5. POST-PROCESSING: Remove image tags from all generated XML files
+    console.log('\n🧹 Starting post-processing: Removing image tags from XML files...');
+    const allXmlFiles = findXmlFiles(staticDir);
+    for (const filePath of allXmlFiles) {
+        if (filePath.includes('robots.txt')) {
+            // Skip robots.txt if it was mistakenly included
+            continue;
+        }
+        console.log(`   Processing file for image removal: ${filePath}`);
+        try {
+            const fileContent = readFileSync(filePath, 'utf8');
+            const cleanedContent = removeImageTags(fileContent);
+            writeFileSync(filePath, cleanedContent, 'utf8');
+            console.log(`   ✅ Images removed from ${filePath}`);
+        }
+        catch (error) {
+            console.error(`   ❌ Error processing ${filePath} for image removal:`, error);
+        }
+    }
+    console.log('✅ Post-processing complete: Image tags removed.');
+    console.log('\n🎉 Generation and Post-processing complete!');
+    console.log(`📁 Files generated and processed in ${staticDir}:`);
     Array.from(allGeneratedRelativePaths).forEach((file) => console.log(`   - ${file}`));
     console.log(`   - robots.txt`);
 }

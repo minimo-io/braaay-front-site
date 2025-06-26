@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//braaay.com/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://braaay-front-site.vercel.app/harmonizacoes/carnes-brancas/</loc>
 		<lastmod>2025-06-18T16:30:46+00:00</lastmod>
@@ -39,9 +39,7 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/harmonizacoes/risotos/</loc>
 		<lastmod>2025-06-17T18:08:55+00:00</lastmod>
-		<image:image>
-			<image:loc>https://braaay-front-site.vercel.app/wp-content/uploads/2024/08/divider-green.png</image:loc>
-		</image:image>
+		
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/harmonizacoes/saladas/</loc>
