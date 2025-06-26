@@ -12,7 +12,7 @@
 	import { onDestroy, onMount } from 'svelte';
 	import IMask from 'imask';
 	import { fade, slide } from 'svelte/transition';
-	import { signup } from '$lib/graphql/auth';
+	import { login, signup } from '$lib/graphql/auth';
 	import { cpf } from 'cpf-cnpj-validator';
 
 	// Some local type
@@ -173,14 +173,29 @@
 
 					// After signup > auto-login -----------------------------------------------------------------------
 					launchToast('Bem-vindo!', 'success', 3000);
-					// -------------------------------------------------------------------------------------------------
-
-					// if there is a return url then redirect there else to wines
-					if (returnUrl) {
-						redirectHref(localizeHref(returnUrl));
+					let loginResult = await login(frmValues.email, frmValues.password);
+					if (loginResult && loginResult.success) {
+						const url = new URL(window.location.href);
+						const returnUrl = url.searchParams.get('returnUrl');
+						// if there is a return url then redirect there else to wines
+						if (returnUrl) {
+							redirectHref(localizeHref(returnUrl));
+						} else {
+							if (getLocale() == 'pt') {
+								redirectHref(localizeHref('/vinhos/'));
+							} else {
+								redirectHref(localizeHref('/uy/cervezas/'));
+							}
+						}
 					} else {
-						redirectHref(localizeHref('/login/'));
+						// if the login does not work then goto login form
+						if (returnUrl) {
+							redirectHref(localizeHref(returnUrl));
+						} else {
+							redirectHref(localizeHref('/login/'));
+						}
 					}
+					// -------------------------------------------------------------------------------------------------
 				} else {
 					error = signUpResult.message;
 					processing = false;

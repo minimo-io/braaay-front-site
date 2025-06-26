@@ -79,13 +79,15 @@
 			<div class="text-center flex flex-col p-0 md:px-9 font-bold">
 				<!-- <Info class="h-5 self-center" /> -->
 				<span class="mb-2 block">Não tem uma conta?</span>
-				<Button
-					rounded="lg"
-					shineEffect={false}
-					title="Cadastre-se grátis"
-					type="sun"
-					url={localizeHref('/sign-up/')}
-				/>
+				<div class="animate__animated animate__pulse animate__infinite">
+					<Button
+						rounded="lg"
+						shineEffect={false}
+						title="Cadastre-se grátis"
+						type="sun"
+						url={localizeHref('/sign-up/')}
+					/>
+				</div>
 
 				<SignupBenefits />
 			</div>
