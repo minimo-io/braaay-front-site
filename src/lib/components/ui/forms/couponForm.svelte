@@ -8,6 +8,9 @@
 	import { COUPON_APPLY } from '$lib/graphql/mutations';
 	import { launchToast } from '$lib/utils';
 
+	// let { initialValue = '' } = $props<{ initialValue?: string }>();
+
+	// let couponCode = $state(initialValue);
 	let couponCode = $state('');
 	let error = $state('');
 	let couponCodeSanitized = $derived(couponCode.trim());

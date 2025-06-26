@@ -12,6 +12,7 @@
 	import { Eye, EyeOff } from '@lucide/svelte';
 	import SignupBenefits from '../SignupBenefits.svelte';
 	import ResetPasswordForm from '../forms/resetPasswordForm.svelte';
+	import { page } from '$app/state';
 
 	// State for toggling between login and reset password forms
 	let showReset = $state(false);
@@ -36,18 +37,10 @@
 		}
 	});
 
-	// On component mount, check for 'reset-password' URL parameter
-	onMount(() => {
-		// Ensure this code runs only in the browser environment
-		if (typeof window !== 'undefined') {
-			const url = new URL(window.location.href);
-			// Check if the 'reset-password' search parameter exists
-			if (url.searchParams.has('reset-password')) {
-				showReset = true; // Show the reset password form
-			}
-
-			// You can optionally focus the username input if not showing reset form
-			// document.getElementById('username')?.focus();
+	// Detect param to show the reset password form
+	$effect(() => {
+		if (page.url.searchParams.has('reset-password')) {
+			showReset = true; // Show the reset password form
 		}
 	});
 

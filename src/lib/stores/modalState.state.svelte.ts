@@ -14,7 +14,13 @@ export let modalState = $state({
 	content: null as Component | null
 });
 
-export function openModal({ header, content }: { header?: string | null; content: Component }) {
+interface OpenModalOptions {
+	header?: string | null;
+	content: Component;
+	// Add an optional 'props' field to the openModal function's options
+}
+
+export function openModal({ header, content }: OpenModalOptions) {
 	modalState.header = header || null;
 	modalState.content = content;
 

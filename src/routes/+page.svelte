@@ -36,12 +36,25 @@
 			description="Seu próximo vinho, espumante ou evento privado com curadoría da nossa sommelier. Somos especialistas no melhor de 🇺🇾 Uruguai, do 🇧🇷 Brasil e do Mundo. Visite nosso showroom; venha descobrir o inesperado!"
 		>
 			{#snippet button()}
-				<div class="flex flex-col gap-2 md:top-7 relative items-end">
-					<Button title="Reserve o espaço" size="md" type="sun" url={AppConfig.whatsappLink} newTab>
-						{#snippet icon()}
-							<Calendar class="lucide-button" />
-						{/snippet}
-					</Button>
+				<div
+					class="mt-2 md:mt-0 flex flex-row md:flex-col gap-2 md:top-7 relative items-end scale-95 md:scale-100 -left-[3%] md:-left-0"
+				>
+					<div class="">
+						<Button
+							title="Reserve o espaço"
+							size="md"
+							type="sun"
+							url={AppConfig.whatsappLink}
+							newTab
+						>
+							{#snippet icon()}
+								<div class="hidden md:block">
+									<Calendar class="lucide-button" />
+								</div>
+							{/snippet}
+						</Button>
+					</div>
+
 					<div class="w-fit">
 						<Button title="Onde fica?" size="md" type="blue" url={AppConfig.mapLink} newTab>
 							{#snippet icon()}

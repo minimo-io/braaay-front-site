@@ -2,6 +2,13 @@
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import { page } from '$app/state';
+	import { localizeHref } from '$lib/paraglide/runtime';
+	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
+	import { COUPON_APPLY } from '$lib/graphql/mutations';
+	import { addCouponToCart, launchToast } from '$lib/utils';
+	import { addCoupon, hasCoupon, removeCoupon } from '$stores/cart.store.svelte';
+	import { toggleLoader } from '$stores/loaderStore.state.svelte';
+	import { goto } from '$app/navigation';
 
 	// Determines if the banner should be shown
 	let showBanner = $state(false);
@@ -24,7 +31,13 @@
 {#if showBanner && (path == '/' || path == '/uy/')}
 	<!-- {#if } -->
 	<div class="bry-banner" transition:slide={{ duration: 300 }}>
-		<a href="/vinhos/">
+		<a
+			onclick={(e: Event) => {
+				e.preventDefault();
+				addCouponToCart();
+			}}
+			href={localizeHref('/cart/?add-coupon=primeira10')}
+		>
 			<img src="/images/primeira-compra-1.png" alt="primeira-compra" class="hidden lg:inline" />
 
 			<div class="relative overflow-hidden lg:hidden">

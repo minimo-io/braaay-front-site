@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Component } from 'svelte';
+	import { onMount, type Component } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
@@ -13,7 +13,7 @@
 	import CouponForm from '$components/ui/forms/couponForm.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import CartItemElement from '$components/ui/cart/CartItemElement.svelte';
-	import { correctPrice } from '$lib/utils';
+	import { addCouponToCart, correctPrice } from '$lib/utils';
 	import { MoreInfoButton } from '$components/ui/buttons';
 	import { COUPON_CLEAR_ALL } from '$lib/graphql/mutations';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
@@ -21,6 +21,7 @@
 	import ShippingForm from '$components/ui/forms/shippingForm.svelte';
 	import { shippingDetails } from '$stores/shippingDetails.state.svelte';
 	import Meta from '$components/layout/Meta.svelte';
+	import { page } from '$app/state';
 
 	// Cart amount
 	let hasItems = $state(false);
@@ -28,6 +29,7 @@
 	let totalAmount = $state(0);
 	let discounts = $state(0);
 	let couponsCount = $state(0);
+	let couponName = $state('');
 
 	cart.subscribe((cart) => {
 		totalCartAmount = cart.items.reduce((count, item) => count + item.quantity, 0);
@@ -36,6 +38,7 @@
 			couponsCount = cart.coupons.length;
 			for (const couponCode of cart.coupons) {
 				discounts = calculateDiscount(couponCode);
+				couponName = couponCode;
 				break; // just one coupon allowed
 			}
 		}
@@ -43,11 +46,21 @@
 		hasItems = cart.items.length > 0;
 	});
 	let totalCartAmountWithDiscounts = $derived(totalAmount - discounts);
+
+	onMount(() => {
+		if (
+			page.url.searchParams.has('adicionar-cupom') ||
+			page.url.searchParams.has('agregar-cupon')
+		) {
+			addCouponToCart();
+		}
+	});
 </script>
 
 <Meta
 	title="{m.seoCartTitle()} {m.seoDivider()} {m.seoBase()}"
 	description={m.seoCartDescription()}
+	noindex={true}
 />
 <main>
 	<!-- Cart -->
@@ -170,7 +183,13 @@
 					<!-- Coupons -->
 					<div class="flex justify-between items-center">
 						<div class="!font-light font-roboto text-[15px] self-center flex flex-col">
-							{m.discountCouponTitle()}
+							{#if couponsCount < 1}
+								{m.discountCouponTitle()}
+							{:else}
+								<div>
+									Cupom: <span class="font-bold">{couponName}</span>
+								</div>
+							{/if}
 							{#if couponsCount >= 1}
 								<MoreInfoButton
 									title="Remover"
@@ -197,6 +216,7 @@
 								width="130px"
 								size="sm-short"
 								type="grey"
+								disabled={!hasItems}
 								borderDark={true}
 								customPx="max-h-min"
 								action={() => {
