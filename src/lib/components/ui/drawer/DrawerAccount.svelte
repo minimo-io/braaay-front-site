@@ -8,7 +8,7 @@
 	import { login } from '$lib/graphql/auth';
 	import { redirectHref } from '$lib/utils';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { Eye, EyeOff } from '@lucide/svelte';
 	import SignupBenefits from '../SignupBenefits.svelte';
 	import ResetPasswordForm from '../forms/resetPasswordForm.svelte';
@@ -78,7 +78,11 @@
 				if (returnUrl) {
 					redirectHref(localizeHref(returnUrl));
 				} else {
-					redirectHref(localizeHref('/vinhos/'));
+					if (getLocale() == 'pt') {
+						redirectHref(localizeHref('/vinhos/'));
+					} else {
+						redirectHref(localizeHref('/uy/cervezas/'));
+					}
 				}
 			} else {
 				error = loginResult.message;

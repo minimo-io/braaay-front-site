@@ -12,8 +12,9 @@
 	import { m } from '$lib/paraglide/messages';
 	import { AppConfig } from '$config';
 	import Meta from '$components/layout/Meta.svelte';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
-	let returnUrl = $derived('/login');
+	let returnUrl = $derived('/login/');
 	let userName = $state('');
 	let userEmail = $state('');
 	authState.subscribe((auth) => {
@@ -27,7 +28,7 @@
 		// event.preventDefault();
 		toggleLoader();
 		let logoutResult = await logout();
-		redirectHref(returnUrl);
+		redirectHref(localizeHref(returnUrl));
 	}
 </script>
 

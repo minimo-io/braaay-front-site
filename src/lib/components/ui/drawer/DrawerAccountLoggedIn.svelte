@@ -16,6 +16,7 @@
 	import { logout } from '$lib/graphql/auth';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { m } from '$lib/paraglide/messages';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	let returnUrl = $derived(page.url.href);
 
@@ -23,7 +24,7 @@
 		// event.preventDefault();
 		toggleLoader();
 		let logoutResult = logout();
-		redirectHref(returnUrl);
+		redirectHref(localizeHref(returnUrl));
 	}
 </script>
 
