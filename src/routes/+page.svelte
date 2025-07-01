@@ -4,6 +4,7 @@
 	import Carrousel from '$components/ui/Carrousel.svelte';
 	import CountryBox from '$components/ui/CountryBox.svelte';
 	import PartnersList from '$components/ui/PartnersList.svelte';
+	import PresenteSlide from '$components/ui/PresenteSlide.svelte';
 	import TitleSection from '$components/ui/TitleSection.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
@@ -77,7 +78,14 @@
 					alt="1 description"
 					class="rounded-lg w-full h-auto"
 				/>
-				<a href="/" class="play-button not-hover-effect" aria-label="play-button" role="button">
+				<a
+					href="https://www.instagram.com/p/C-Vex79MV3k/"
+					target="_blank"
+					rel="nofollow noopener"
+					class="play-button not-hover-effect"
+					aria-label="play-button"
+					role="button"
+				>
 					<span>&nbsp;</span>
 				</a>
 			</div>
@@ -101,13 +109,7 @@
 			</div>
 
 			<!-- Image 4 -->
-			<div>
-				<img
-					src="/images/home-braaay-4-2.webp"
-					alt=" 4 description"
-					class="rounded-lg w-full h-auto"
-				/>
-			</div>
+			<PresenteSlide />
 		</div>
 	</div>
 
@@ -116,7 +118,7 @@
 		<SectionDivider color="green" />
 
 		<TitleSection
-			title="Vinhos & Presentes"
+			title="Novidades: Vinhos & Presentes"
 			subTitle="E-Commerce"
 			description="Dê uma olhada em nossa seleção com os melhores vinhos uruguaios e brasileiros e nossas
 			sugestões para presentes empresariais."
@@ -129,6 +131,7 @@
 		<!-- Wine list -->
 		<section class="bg-white max-w-screen-lg-2x py-10 mx-[20px] lg:mx-auto">
 			<div class="bry-product-list">
+				<!-- Wines -->
 				{#each homeProducts.products as product, i (i)}
 					<WineBox
 						image={{
@@ -159,21 +162,6 @@
 						discount={product.discount}
 					/>
 				{/each}
-
-				<!-- Wine Box 6 (with discount) -->
-				<!-- <WineBox
-					image={{
-						src: '/images/wines/vinho-mayos-jovem-branco.webp',
-						alt: 'Artesana Cabernet Franc/Merlot Reserva'
-					}}
-					wine={{
-						title: 'Artesana Cabernet Franc/Merlot Reserva',
-						price: '100.0',
-						url: '/produto/vinho-familia-deicas-massimo-tannat/',
-						score: '4.5'
-					}}
-					discount={'50%'}
-				/> -->
 			</div>
 		</section>
 

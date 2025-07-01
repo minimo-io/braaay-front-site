@@ -29,6 +29,7 @@ export const COUPONS_QUERY = gql`
 				productCategories {
 					nodes {
 						name
+						slug
 					}
 				}
 				products {

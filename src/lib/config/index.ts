@@ -21,5 +21,7 @@ export const AppConfig = {
 	},
 	payments: {
 		timeout: 30
-	}
+	},
+	// for those categories whose products need the image to be full width
+	kitsImageCategories: ['kits', 'experiencias']
 };

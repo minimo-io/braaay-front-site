@@ -1,5 +1,9 @@
 import { gql } from '@urql/core';
-import { PRODUCT_LIST_FRAGMENT, SEO_FRAGMENT } from './fragments';
+import {
+	PRODUCT_EXTRA_ATTRIBUTES_FRAGMENT,
+	PRODUCT_LIST_FRAGMENT,
+	SEO_FRAGMENT
+} from './fragments';
 // Here we do not use the product fragment because it is not the same answer
 
 export const PRODUCT_QUERY = gql`
@@ -9,10 +13,14 @@ export const PRODUCT_QUERY = gql`
 			
 				${SEO_FRAGMENT}
 
+				${PRODUCT_EXTRA_ATTRIBUTES_FRAGMENT}
+
 				productCategories {
 					edges {
 						node {
 							name
+							slug
+							uri
 						}
 					}
 				}

@@ -65,7 +65,7 @@ mutation UpdateGuestShippingAddress {
   }
 
   updateCustomer(
-    input: {shipping: {postcode: "01222-001", country: BR, overwrite: true}}
+    input: {shipping: {postcode: "---", country: BR, overwrite: true}}
   ) {
     customer {
       sessionToken

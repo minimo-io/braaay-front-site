@@ -1,7 +1,7 @@
 import { localizeHref } from '$lib/paraglide/runtime';
 
 export * from './smoothScroll.util';
-export * from './stripHtml.util';
+export * from './html.util';
 export * from './removeWPBakery.util';
 export * from './prices.util';
 export * from './loadMoreProducts.util';

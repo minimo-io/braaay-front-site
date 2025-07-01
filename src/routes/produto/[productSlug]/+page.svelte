@@ -14,6 +14,8 @@
 		altText: 'placeholder-wine'
 	};
 	const product = $state(data.product);
+	const productCategories = $state(data.productCategories);
+	const attributes = $state(data.attributes);
 	const seo = $state(data.seo);
 
 	const article: Post = {
@@ -46,14 +48,19 @@
 	<section class="flex flex-col md:flex-row mx-auto">
 		<!-- Left side - Image -->
 		{#if product && product.image}
-			<ProductImage image={product?.image!} colors={product?.pageCustomColors!} />
+			<ProductImage
+				{productCategories}
+				image={product?.image!}
+				colors={product?.pageCustomColors!}
+			/>
 		{:else}
+			<!-- Placeholder -->
 			<ProductImage image={placeholderImage} />
 		{/if}
 
 		<!-- Right side - Product details -->
 		{#if product}
-			<ProductDetails {product} />
+			<ProductDetails {product} {attributes} {productCategories} />
 		{/if}
 	</section>
 </main>

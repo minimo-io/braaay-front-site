@@ -2,7 +2,7 @@
 	import ProductAccordion from '$components/ui/products/ProductAccordion.svelte';
 	import MoreInfoButton from '$components/ui/buttons/MoreInfoButton.svelte';
 	import { stripHtml, correctPrice } from '$lib/utils/index';
-	import type { Product } from '$lib/types';
+	import type { Product, ProductAttributes, ProductCategory } from '$lib/types';
 	import { m } from '$lib/paraglide/messages';
 	import { type CartItem } from '$lib/types/cart.types';
 	import { activateMiniCart, addToCart } from '$stores/cart.store.svelte';
@@ -12,9 +12,11 @@
 
 	interface Props {
 		product: Product;
+		attributes: ProductAttributes | undefined;
+		productCategories: ProductCategory[] | undefined;
 	}
 
-	let { product }: Props = $props();
+	let { product, attributes, productCategories }: Props = $props();
 
 	let stockStatus = $state('');
 	if (product.stockStatus == 'OUT_OF_STOCK') {
@@ -108,5 +110,5 @@
 	</div>
 
 	<!-- Product accordion -->
-	<ProductAccordion {product} />
+	<ProductAccordion {product} {attributes} {productCategories} />
 </div>

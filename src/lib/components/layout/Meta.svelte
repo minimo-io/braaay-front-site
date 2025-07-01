@@ -4,6 +4,7 @@
 	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
 	import type { YoastSeoData } from '$lib/types';
+	import { stripHtml } from '$lib/utils';
 
 	interface Props {
 		title: string;
@@ -35,18 +36,18 @@
 	const defaultDescription = '';
 
 	// Helper function to strip HTML tags and decode HTML entities
-	function stripHtml(html) {
-		if (!html) return '';
-		return html
-			.replace(/<[^>]*>/g, '') // Remove HTML tags
-			.replace(/&nbsp;/g, ' ') // Replace &nbsp; with regular space
-			.replace(/&amp;/g, '&') // Replace &amp; with &
-			.replace(/&quot;/g, '"') // Replace &quot; with "
-			.replace(/&#39;/g, "'") // Replace &#39; with '
-			.replace(/&lt;/g, '<') // Replace &lt; with <
-			.replace(/&gt;/g, '>') // Replace &gt; with >
-			.trim(); // Remove leading/trailing whitespace
-	}
+	// function stripHtml(html) {
+	// 	if (!html) return '';
+	// 	return html
+	// 		.replace(/<[^>]*>/g, '') // Remove HTML tags
+	// 		.replace(/&nbsp;/g, ' ') // Replace &nbsp; with regular space
+	// 		.replace(/&amp;/g, '&') // Replace &amp; with &
+	// 		.replace(/&quot;/g, '"') // Replace &quot; with "
+	// 		.replace(/&#39;/g, "'") // Replace &#39; with '
+	// 		.replace(/&lt;/g, '<') // Replace &lt; with <
+	// 		.replace(/&gt;/g, '>') // Replace &gt; with >
+	// 		.trim(); // Remove leading/trailing whitespace
+	// }
 
 	// Helper function to truncate description to max 155 characters
 	function truncateDescription(text) {

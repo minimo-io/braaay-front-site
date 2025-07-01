@@ -10,43 +10,37 @@
 		};
 		discount?: string;
 	}
-	let props: Props = $props();
+	let { wine, image, discount }: Props = $props();
 </script>
 
 <div class="wine wine-transparent">
 	<div class="mb-3 flex-grow">
-		<a href={props.wine.url}>
+		<a href={wine.url}>
 			<img
-				src={props.image.src}
-				alt={JSON.stringify(props.image.alt ? props.image.alt : props.wine.title)}
+				src={image.src}
+				alt={JSON.stringify(image.alt ? image.alt : wine.title)}
 				class="mx-auto rounded-lg"
 			/>
 		</a>
 	</div>
-	{#if props.wine.score != '0.0'}
+	{#if wine.score != '0.0'}
 		<div class="absolute top-4 left-4">
 			<div class="wine-stars">
 				<span>★</span>
-				{props.wine.score}
+				{wine.score}
 			</div>
 		</div>
 	{/if}
-	<h5 class="wine-title">{props.wine.title}</h5>
-	<p class="wine-price">{props.wine.price}</p>
+	<h5 class="wine-title">{wine.title}</h5>
+	<p class="wine-price">{wine.price}</p>
 
-	<!-- <a href={props.wine.url} class="wine-button">VER DETALHES</a> -->
+	<!-- <a href={wine.url} class="wine-button">VER DETALHES</a> -->
 	<div class="mt-2">
-		<Button
-			title="DETALHES"
-			type="light"
-			url={props.wine.url}
-			borderDark={true}
-			tracking="normal"
-		/>
+		<Button title="DETALHES" type="light" url={wine.url} borderDark={true} tracking="normal" />
 	</div>
-	{#if props.discount}
+	{#if discount}
 		<div class="absolute top-4 right-4 bg-black text-white px-2 py-1 text-xs rounded-lg">
-			{props.discount} OFF
+			{discount} OFF
 		</div>
 	{/if}
 </div>

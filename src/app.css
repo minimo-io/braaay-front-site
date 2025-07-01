@@ -142,6 +142,9 @@ html {
 		outline: 1px solid var(--bry-sun);
 		outline-offset: 0px;
 	}
+	.bry-image-kits {
+		@apply !max-w-[100%] !h-full;
+	}
 }
 @layer components {
 	.btn {

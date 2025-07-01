@@ -15,7 +15,7 @@
 	import { GET_SHIPPING_ESTIMATES } from '$lib/graphql/mutations/shipping-estimates.mutation';
 	import ZipQueryButton from '../buttons/ZipQueryButton.svelte';
 
-	let zipCode = $state('01222-001');
+	let zipCode = $state('');
 	let error = $state('');
 	let zipCodeSanitized = $derived(zipCode.trim());
 	let processing = $state(false);

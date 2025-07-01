@@ -1,4 +1,5 @@
 // src/lib/types/products.types.ts
+import { createExcerpt, stripHtml } from '$lib/utils';
 import type {
 	GraphQLPagination,
 	ArticleCreator,
@@ -67,6 +68,34 @@ export interface Product {
 	};
 	seo?: YoastSeoData;
 }
+export interface ProductCategory {
+	name: string;
+	slug: string;
+	uri: string;
+}
+export interface ProductAttributes {
+	maturation: string;
+	agingPotential: string;
+	bottle: string;
+	country: {
+		name: string;
+		uri: string;
+	};
+	region: string;
+	typicalPalate: string;
+	producer: {
+		name: string;
+		uri: string;
+		shortDescription: string;
+	};
+	vintage: string; // safra
+	servingTemperature: string;
+	abv: string;
+	grapes: {
+		name: string;
+		uri: string;
+	}[];
+}
 
 export interface GraphQLSingleProduct {
 	product: GraphQLProduct;
@@ -74,6 +103,65 @@ export interface GraphQLSingleProduct {
 
 export interface GraphQLProductNode {
 	node: GraphQLProduct;
+}
+
+interface GraphQLProductExtraAttributes {
+	extraAttributes: {
+		amadurecimento: string;
+		potencialDeGuarda: string;
+	};
+	allPaGarrafa: {
+		nodes: {
+			name: string;
+		};
+	};
+	allPaPais: {
+		nodes: {
+			name: string;
+			uri: string;
+		};
+	};
+	allPaRegiao: {
+		nodes: {
+			name: string;
+		};
+	};
+	allPaPaladarTipico: {
+		nodes: {
+			name: string;
+		};
+	};
+	allPaProdutoresDeVinho: {
+		nodes: {
+			name: string;
+			uri: string;
+			description: string;
+			dadosExtraProdutores: {
+				textoDestaque: string;
+			};
+		};
+	};
+	allPaSafra: {
+		nodes: {
+			name: string;
+		};
+	};
+	allPaTemperaturaDeServico: {
+		nodes: {
+			name: string;
+		};
+	};
+	allPaTeorAlcoolico: {
+		nodes: {
+			name: string;
+		};
+	};
+
+	uvas: {
+		nodes: {
+			name: string;
+		}[];
+	};
 }
 
 export interface GraphQLProduct {
@@ -85,6 +173,9 @@ export interface GraphQLProduct {
 	price: string;
 	regularPrice: string;
 	stockStatus: string;
+
+	productCategories?: any;
+	extraAttributes?: GraphQLProductExtraAttributes;
 
 	outrosDadosDeProduto: {
 		bgGradientStart?: string;
@@ -181,4 +272,47 @@ export function mapProduct(data: GraphQLProductNode): Product {
 		},
 		seo: data.node.seo
 	};
+}
+
+export function mapProductCategory(data: any): ProductCategory {
+	return {
+		name: data.node.name,
+		slug: data.node.slug,
+		uri: data.node.uri
+	};
+}
+export function mapProductExtraAttributes(data): ProductAttributes {
+	// dadosExtraProdutores: {
+	// textoDestaque: string;
+	const attributes = {
+		maturation: data?.extraAttributes?.amadurecimento ?? '',
+		agingPotential: data?.extraAttributes.potencialDeGuarda ?? '',
+		bottle: data?.allPaGarrafa.nodes.map((n) => n.name).join(', ') ?? '',
+
+		country: {
+			name: data?.allPaPais.nodes[0]?.name ?? '',
+			uri: data?.allPaPais.nodes[0]?.uri ?? ''
+		},
+
+		region: data?.allPaRegiao.nodes.map((n) => n.name).join(', ') ?? '',
+		typicalPalate: data?.allPaPaladarTipico.nodes.map((n) => n.name).join(', ') ?? '',
+
+		producer: {
+			name: data?.allPaProdutoresDeVinho.nodes[0]?.name ?? '',
+			uri: data?.allPaProdutoresDeVinho.nodes[0]?.uri ?? '',
+			shortDescription:
+				data?.allPaProdutoresDeVinho.nodes[0]?.dadosExtraProdutores.textoDestaque ??
+				createExcerpt(stripHtml(data?.allPaProdutoresDeVinho.nodes[0]?.description || ''), 150)
+		},
+
+		vintage: data?.allPaSafra.nodes.map((n) => n.name).join(', ') ?? '',
+		servingTemperature: data?.allPaTemperaturaDeServico.nodes.map((n) => n.name).join(', ') ?? '',
+		abv: data?.allPaTeorAlcoolico.nodes.map((n) => n.name).join(', ') ?? '',
+		grapes:
+			data?.uvas.nodes.map((g) => ({
+				name: g.name,
+				uri: g.uri
+			})) ?? []
+	};
+	return attributes;
 }

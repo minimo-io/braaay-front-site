@@ -1,12 +1,19 @@
 <script lang="ts">
-	import type { PageCustomColors, ImageGeneral } from '$lib/types';
+	import { AppConfig } from '$config';
+	import type { PageCustomColors, ImageGeneral, ProductCategory } from '$lib/types';
 	import { Heart, Share2 } from '@lucide/svelte';
 
 	interface Props {
 		colors?: PageCustomColors;
 		image: ImageGeneral;
+		productCategories?: ProductCategory[];
 	}
-	let { colors, image }: Props = $props();
+	let { colors, image, productCategories }: Props = $props();
+
+	// For kits
+	const isFullImage = productCategories?.some((category) =>
+		AppConfig.kitsImageCategories.includes(category.slug)
+	);
 
 	function shareContent() {
 		if (navigator.share) {
@@ -25,7 +32,7 @@
 </script>
 
 <div
-	class="p-8 flex items-center relative"
+	class={['flex items-center relative', isFullImage ? 'p-0' : 'p-8']}
 	style:--bry-current-gradient-start={colors?.gradientStart}
 	style:--bry-current-gradient-end={colors?.gradientEnd}
 	style="
@@ -67,8 +74,11 @@
 	<img
 		src={image.url}
 		alt={image.altText}
-		class="mx-auto max-w-[50%] md:max-w-[70%]"
+		class={['mx-auto max-w-[50%] md:max-w-[70%]', isFullImage && 'bry-image-kits']}
 		width="680"
 		height="578"
 	/>
 </div>
+
+<style class="postcss">
+</style>
