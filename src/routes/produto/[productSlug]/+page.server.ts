@@ -33,7 +33,9 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 
 	if (result.error || !result.data) {
 		// throw new Error('Failed to fetch the post');
-		throw error(404, 'Product not founded');
+		if (result.error) console.error(result.error);
+		if (!result.data) console.error(result.data);
+		throw error(404, 'Product not founded, error');
 	}
 
 	try {
