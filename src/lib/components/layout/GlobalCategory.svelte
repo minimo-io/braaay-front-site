@@ -37,6 +37,7 @@
 						wine={{
 							title: product.title,
 							price: product.price,
+							regularPrice: product.regularPrice,
 							url: localizeHref(`/produto/${product.slug}/`),
 							score: product.averageRating
 						}}

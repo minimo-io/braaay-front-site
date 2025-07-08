@@ -30,8 +30,14 @@ export const PRODUCT_EXTRA_ATTRIBUTES_FRAGMENT = `
         name
         uri
         description
-        dadosExtraProdutores{
+        additionalProducerData{
           textoDestaque
+          image{
+            node{
+              altText
+              mediaItemUrl
+            }
+          }
         }        
       }
     }

@@ -1,15 +1,20 @@
 <script lang="ts">
 	import { AppConfig } from '$config';
-	import type { PageCustomColors, ImageGeneral, ProductCategory } from '$lib/types';
+	import { m } from '$lib/paraglide/messages';
+	import type { PageCustomColors, ImageGeneral, ProductCategory, Product } from '$lib/types';
+	import { calculatePercentageDifference } from '$lib/utils';
 	import { Heart, Share2 } from '@lucide/svelte';
 
 	interface Props {
 		colors?: PageCustomColors;
+
 		image: ImageGeneral;
 		productCategories?: ProductCategory[];
+		product?: Product;
 	}
-	let { colors, image, productCategories }: Props = $props();
+	let { colors, image, productCategories, product }: Props = $props();
 
+	let hasPriceDiscount = product && product.regularPrice != product.price;
 	// For kits
 	const isFullImage = productCategories?.some((category) =>
 		AppConfig.kitsImageCategories.includes(category.slug)
@@ -43,23 +48,35 @@
                 );
             "
 >
-	<div class="absolute top-[42px] md:top-[58px] left-[35px]">
+	<!-- <div class="absolute top-[42px] md:top-[58px] left-[35px]">
 		<div class="wine-stars text-[15px] md:text-[15px]">
 			<span>★</span>
 			4.5
 		</div>
-	</div>
-	<!-- Tag -->
-	{#if 1 == 1}
+	</div> -->
+
+	<!-- Offer tag -->
+	{#if hasPriceDiscount}
 		<div
-			class="absolute top-[15px] md:top-[30px] left-[30px] md:right-auto bg-red-dark text-white px-2 py-1 text-[11px] md:text-xs rounded-lg"
+			class="absolute top-[15px] md:top-[30px] left-[30px] md:right-auto bg-red-dark text-white px-2 py-1 text-[11px] md:text-sm rounded-lg font-bold"
 		>
-			EM OFERTA
+			<!-- {m.onSale()} -->
+			{calculatePercentageDifference(
+				product!.regularPrice,
+				product!.price,
+				m.currencySymbol(),
+				undefined,
+				1
+			)}% OFF
 		</div>
 	{/if}
 
+	<!-- Mobile -->
 	<div
-		class="md:hidden absolute -bottom-[1px] right-[10px] bg-grey-background p-2 px-2 rounded-t-lg"
+		class={[
+			'md:block absolute -bottom-[1px] md:bottom-auto md:top-[65px] right-[10px] md:right-auto md:left-[31px] bg-grey-background p-2 px-2 rounded-t-lg md:rounded-b-lg',
+			!hasPriceDiscount && 'md:!top-[30px]'
+		]}
 	>
 		<div class="flex gap-0 items-center">
 			<div class="pr-2 flex border-r border-grey-medium">
@@ -71,6 +88,7 @@
 			</div>
 		</div>
 	</div>
+
 	<img
 		src={image.url}
 		alt={image.altText}

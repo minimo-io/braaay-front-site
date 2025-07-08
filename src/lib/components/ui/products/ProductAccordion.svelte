@@ -192,53 +192,59 @@
 			</div>
 
 			<!-- A VINÍCOLA -->
-			<div>
-				<button
-					type="button"
-					onclick={() => toggleAccordion('vinicola')}
-					class="flex items-center w-full justify-between py-2 cursor-pointer transition-colors duration-200 ease-in-out"
-				>
-					<div class="flex items-center">
-						<MapPinHouse class="lucide-icon" />
-						<span class="font-roboto text-[13px] tracking-[1.1px] font-semibold text-grey-blueish">
-							A VINÍCOLA
-						</span>
-					</div>
-					{#if activeAccordion === 'vinicola'}
-						<CircleChevronUp
-							class="lucide-icon !mr-0 transform transition-transform duration-200 ease-in-out"
-						/>
-					{:else}
-						<CircleChevronDown
-							class="lucide-icon !mr-0 transform transition-transform duration-200 ease-in-out"
-						/>
-					{/if}
-				</button>
-				{#if activeAccordion === 'vinicola'}
-					<div transition:slide>
-						<div class="flex items-center px-3 mt-3 mb-1">
-							<img
-								src="/images/partners/familia-deicas-uruguai-150x150.webp"
-								alt="Vinicola logo"
-								class="w-8 h-8 mr-4"
-								height="32"
-								width="32"
-							/>
-							<h4 class="text-[18px] font-prata normal-case">{attributes?.producer.name}</h4>
+			{#if attributes?.producer.name}
+				<div>
+					<button
+						type="button"
+						onclick={() => toggleAccordion('vinicola')}
+						class="flex items-center w-full justify-between py-2 cursor-pointer transition-colors duration-200 ease-in-out"
+					>
+						<div class="flex items-center">
+							<MapPinHouse class="lucide-icon" />
+							<span
+								class="font-roboto text-[13px] tracking-[1.1px] font-semibold text-grey-blueish"
+							>
+								A VINÍCOLA
+							</span>
 						</div>
-						<p class="pt-2 px-3 !text-[14px] !leading-normal">
-							{attributes?.producer.shortDescription}
-						</p>
-						<a
-							href={localizeHref(`${attributes?.producer.uri}`)}
-							style="background-color: var(--bry-current-color)"
-							class="opacity-55 text-white px-4 py-1 text-[12px] rounded-full my-3 inline-block mx-3 uppercase"
-						>
-							Saiba mais
-						</a>
-					</div>
-				{/if}
-			</div>
+						{#if activeAccordion === 'vinicola'}
+							<CircleChevronUp
+								class="lucide-icon !mr-0 transform transition-transform duration-200 ease-in-out"
+							/>
+						{:else}
+							<CircleChevronDown
+								class="lucide-icon !mr-0 transform transition-transform duration-200 ease-in-out"
+							/>
+						{/if}
+					</button>
+					{#if activeAccordion === 'vinicola'}
+						<div transition:slide>
+							<div class="flex items-center px-3 mt-3 mb-1">
+								{#if attributes?.producer.image && attributes?.producer.image.url}
+									<img
+										src={attributes?.producer.image.url}
+										alt={attributes?.producer.image.altText}
+										class="w-8 h-8 mr-4"
+										height="32"
+										width="32"
+									/>
+								{/if}
+								<h4 class="text-[18px] font-prata normal-case">{attributes?.producer.name}</h4>
+							</div>
+							<p class="pt-2 px-3 !text-[14px] !leading-normal">
+								{attributes?.producer.shortDescription}
+							</p>
+							<a
+								href={localizeHref(`${attributes?.producer.uri}`)}
+								style="background-color: var(--bry-current-color)"
+								class="opacity-55 text-white px-4 py-1 text-[12px] rounded-full my-3 inline-block mx-3 uppercase"
+							>
+								Saiba mais
+							</a>
+						</div>
+					{/if}
+				</div>
+			{/if}
 		{/if}
 	{/if}
 

@@ -6,6 +6,7 @@
 	"copy": "Copiar",
 	"copiedToClipboard": "Copiado para a área de transferência",
 	"copiedError": "Erro ao copiar:",
+	"moreResults": "Mais resultados",
 
 	"currencySymbol": "R$",
 
@@ -13,6 +14,8 @@
 	"inStock": "Em estoque",
 
 	"cashDiscountText": "NO PIX (5% OFF)",
+
+	"onSale": "EM OFERTA",
 
 	"sobreNos": "SOBRE NÓS",
 	"afiliados": "AFILIADOS",

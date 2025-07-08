@@ -86,6 +86,7 @@ export interface ProductAttributes {
 	producer: {
 		name: string;
 		uri: string;
+		image: ImageGeneral;
 		shortDescription: string;
 	};
 	vintage: string; // safra
@@ -136,8 +137,14 @@ interface GraphQLProductExtraAttributes {
 			name: string;
 			uri: string;
 			description: string;
-			dadosExtraProdutores: {
+			additionalProducerData: {
 				textoDestaque: string;
+				image: {
+					node: {
+						altText: string;
+						mediaItemUrl: string;
+					};
+				};
 			};
 		};
 	};
@@ -282,8 +289,6 @@ export function mapProductCategory(data: any): ProductCategory {
 	};
 }
 export function mapProductExtraAttributes(data): ProductAttributes {
-	// dadosExtraProdutores: {
-	// textoDestaque: string;
 	const attributes = {
 		maturation: data?.extraAttributes?.amadurecimento ?? '',
 		agingPotential: data?.extraAttributes.potencialDeGuarda ?? '',
@@ -300,8 +305,15 @@ export function mapProductExtraAttributes(data): ProductAttributes {
 		producer: {
 			name: data?.allPaProdutoresDeVinho.nodes[0]?.name ?? '',
 			uri: data?.allPaProdutoresDeVinho.nodes[0]?.uri ?? '',
+			image: {
+				url:
+					data?.allPaProdutoresDeVinho.nodes[0]?.additionalProducerData.image?.node?.mediaItemUrl ??
+					'',
+				altText:
+					data?.allPaProdutoresDeVinho.nodes[0]?.additionalProducerData.image?.node?.altText ?? ''
+			},
 			shortDescription:
-				data?.allPaProdutoresDeVinho.nodes[0]?.dadosExtraProdutores.textoDestaque ??
+				data?.allPaProdutoresDeVinho.nodes[0]?.additionalProducerData.textoDestaque ??
 				createExcerpt(stripHtml(data?.allPaProdutoresDeVinho.nodes[0]?.description || ''), 150)
 		},
 

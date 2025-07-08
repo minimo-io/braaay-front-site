@@ -22,3 +22,63 @@ export function subtractPercentage(amount: number, percentage: number): number {
 	const subtraction = amount * (percentage / 100);
 	return parseFloat((amount - subtraction).toFixed(3));
 }
+
+// Calculate price differences when we have a product in promotion
+export function calculatePercentageDifference(
+	originalPriceStr: string,
+	discountedPriceStr: string,
+	currencySymbol: string = 'R$', // Defaults to "R$"
+	decimalSeparator: string = ',', // Defaults to "," (for both input parsing and output formatting)
+	outputDecimalPlaces: number = 1 // Defaults to 1 decimal place for output
+): string | null {
+	// Helper function to convert a currency string to a number
+	const parseCurrency = (currencyStr: string, symbol: string, separator: string): number => {
+		let cleanedStr = currencyStr.replace(symbol, '').trim();
+
+		// Determine how to clean based on the specified decimal separator
+		if (separator === ',') {
+			// Brazilian/European format: dot for thousands, comma for decimal
+			cleanedStr = cleanedStr.replace(/\./g, ''); // Remove all thousands dots
+			cleanedStr = cleanedStr.replace(',', '.'); // Replace decimal comma with a dot for parseFloat
+		} else if (separator === '.') {
+			// US/English format: comma for thousands, dot for decimal
+			cleanedStr = cleanedStr.replace(/,/g, ''); // Remove all thousands commas
+			// Decimal is already a dot, no replacement needed for parseFloat
+		} else {
+			// Fallback for unexpected separators - try to parse directly
+			// This case might need more robust error handling or stricter input validation
+			console.warn(`Unexpected decimal separator '${separator}'. Attempting direct parseFloat.`);
+		}
+
+		return parseFloat(cleanedStr);
+	};
+
+	const originalPrice = parseCurrency(originalPriceStr, currencySymbol, decimalSeparator);
+	const discountedPrice = parseCurrency(discountedPriceStr, currencySymbol, decimalSeparator);
+
+	// Input validation
+	if (isNaN(originalPrice) || isNaN(discountedPrice)) {
+		console.error('Invalid input: One or both price strings could not be converted to numbers.');
+		return null;
+	}
+
+	// Handle division by zero
+	if (originalPrice === 0) {
+		console.warn('Original price is zero, cannot calculate percentage difference.');
+		return null;
+	}
+
+	const difference = originalPrice - discountedPrice;
+	const percentageDifference = (difference / originalPrice) * 100;
+
+	// Format the output number to the specified decimal places using toFixed()
+	let formattedResult = percentageDifference.toFixed(outputDecimalPlaces);
+
+	// Replace dot with the specified decimalSeparator for the final output string.
+	// This makes the output decimal separator match the input's assumed decimal separator.
+	if (decimalSeparator === ',') {
+		formattedResult = formattedResult.replace('.', ',');
+	}
+
+	return formattedResult;
+}

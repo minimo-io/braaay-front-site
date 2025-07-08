@@ -3,9 +3,21 @@
 	import { ChevronDown, ChevronRight } from '@lucide/svelte';
 	import { getSiteCategories } from '$lib/data/categories.data';
 	import { allCountries } from '$data/countries.data';
+	import { onMount } from 'svelte';
 
 	let currentCategories = getSiteCategories(getLocale());
 	let pageCountries = $state(allCountries[getLocale()]);
+
+	onMount(() => {
+		const element = document.querySelector('.animate__swing');
+
+		if (element) {
+			setTimeout(() => {
+				element.classList.add('animate__pulse', 'animate__infinite');
+				element.classList.remove('animate__swing');
+			}, 1000);
+		}
+	});
 </script>
 
 <div class="bry-secondary-menu" data-sveltekit-preload-data="false">
@@ -127,9 +139,13 @@
 						height="40px"
 						class="pr-3"
 					/>
-					<div class="flex flex-col gap-0 self-center">
+					<!-- <div class="flex flex-col gap-0 self-center">
 						<span class="text-xs text-left leading-none">Compre por</span>
 						<span class="text-sm font-bold text-left leading-5">R$45 ou menos</span>
+					</div> -->
+					<div class="flex flex-col gap-0 self-center">
+						<span class="text-xs text-left leading-none">Produtos até</span>
+						<span class="text-sm font-bold text-left leading-5">20% OFF</span>
 					</div>
 				</a>
 			</li>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { m } from '$lib/paraglide/messages';
 	import type { Pagination } from '$lib/types';
 	import Button from './Button.svelte';
 	interface Props {
@@ -18,7 +19,7 @@
 			type="sun"
 			size="xl"
 			shineEffect={false}
-			title={isLoading ? 'Loading...' : 'More results'}
+			title={isLoading ? m.loading() : m.moreResults()}
 		/>
 	{/if}
 </div>

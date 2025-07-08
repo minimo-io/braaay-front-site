@@ -19,6 +19,7 @@ export * from './seo.types';
 export interface Wine {
 	title: string;
 	price: string;
+	regularPrice: string;
 	url: string;
 	score: string;
 }

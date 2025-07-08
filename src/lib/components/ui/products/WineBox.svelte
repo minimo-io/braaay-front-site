@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { m } from '$lib/paraglide/messages';
 	import type { Wine } from '$lib/types';
+	import { calculatePercentageDifference } from '$lib/utils';
 	import Button from '../buttons/Button.svelte';
 
 	interface Props {
@@ -11,6 +13,8 @@
 		discount?: string;
 	}
 	let { wine, image, discount }: Props = $props();
+
+	let hasPriceDiscount = wine.regularPrice != wine.price;
 </script>
 
 <div class="wine wine-transparent">
@@ -24,23 +28,57 @@
 		</a>
 	</div>
 	{#if wine.score != '0.0'}
-		<div class="absolute top-4 left-4">
+		<!-- <div class="absolute top-4 left-4">
 			<div class="wine-stars">
 				<span>★</span>
 				{wine.score}
 			</div>
-		</div>
+		</div> -->
 	{/if}
 	<h5 class="wine-title">{wine.title}</h5>
-	<p class="wine-price">{wine.price}</p>
+
+	<!-- Price -->
+	<div class="wine-price flex flex-col">
+		{#if hasPriceDiscount}
+			<span
+				class="line-through text-gray-500 font-normal text-sm mr-2 text-grey-darkest font-roboto"
+				>{wine.regularPrice}</span
+			>
+		{/if}
+		{wine.price}
+	</div>
 
 	<!-- <a href={wine.url} class="wine-button">VER DETALHES</a> -->
 	<div class="mt-2">
 		<Button title="DETALHES" type="light" url={wine.url} borderDark={true} tracking="normal" />
 	</div>
-	{#if discount}
-		<div class="absolute top-4 right-4 bg-black text-white px-2 py-1 text-xs rounded-lg">
-			{discount} OFF
+	{#if discount || hasPriceDiscount}
+		<div class="absolute top-4 left-4 font-bold bg-black text-white px-2 py-1 text-xs rounded-lg">
+			{#if discount}
+				{discount} OFF
+			{:else if hasPriceDiscount}
+				{calculatePercentageDifference(
+					wine.regularPrice,
+					wine.price,
+					m.currencySymbol(),
+					undefined,
+					1
+				)}% OFF
+			{/if}
 		</div>
 	{/if}
 </div>
+
+<!-- {#if product && product.regularPrice != product.price}
+		<div
+			class="absolute top-[15px] md:top-[30px] left-[30px] md:right-auto bg-red-dark text-white px-2 py-1 text-[11px] md:text-sm rounded-lg font-bold"
+		>
+			{calculatePercentageDifference(
+				product.regularPrice,
+				product.price,
+				m.currencySymbol(),
+				undefined,
+				1
+			)}% OFF
+		</div>
+	{/if} -->

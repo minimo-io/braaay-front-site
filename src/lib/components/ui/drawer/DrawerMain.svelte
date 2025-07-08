@@ -82,19 +82,7 @@
 				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
 			</div>
 		</a>
-		<!-- Item with submenu -->
-		<button
-			onclick={() => alert('Em breve')}
-			class="py-3 border-b border-t border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
-		>
-			<div class="text-left self-center flex align-middle justify-center">
-				<Heart class="w-4 h-4 self-center mr-2" fill="red" color="red" />
-				<span class="self-center font-semibold">Minha adega</span>
-			</div>
-			<div class="text-grey-medium flex flex-row align-middle self-center">
-				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
-			</div>
-		</button>
+
 		<!-- Item with submenu -->
 		<!-- <a
 			href="/account/"
@@ -109,6 +97,19 @@
 			</div>
 		</a> -->
 	{/if}
+	<!-- Minha adega -->
+	<button
+		onclick={() => alert('Em breve')}
+		class="py-3 border-b border-t border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
+	>
+		<div class="text-left self-center flex align-middle justify-center">
+			<Heart class="w-4 h-4 self-center mr-2" fill="red" color="red" />
+			<span class="self-center font-semibold">Minha adega</span>
+		</div>
+		<div class="text-grey-medium flex flex-row align-middle self-center">
+			<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+		</div>
+	</button>
 	<a
 		href="/clube/"
 		class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px]"

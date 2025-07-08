@@ -128,7 +128,7 @@
 			<Button
 				chevron={false}
 				customPx="!pl-3 ml-[12px]"
-				title="Minha adega"
+				title="Adega"
 				url={localizeHref('/login/')}
 				type="light"
 				size="xl"

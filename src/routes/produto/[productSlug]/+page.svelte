@@ -49,6 +49,7 @@
 		<!-- Left side - Image -->
 		{#if product && product.image}
 			<ProductImage
+				{product}
 				{productCategories}
 				image={product?.image!}
 				colors={product?.pageCustomColors!}

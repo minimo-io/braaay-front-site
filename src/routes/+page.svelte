@@ -140,10 +140,11 @@
 						wine={{
 							title: product.title,
 							price: product.price,
+							regularPrice: product.regularPrice,
 							url: product.url,
 							score: product.score
 						}}
-						discount={product.discount}
+						discount=""
 					/>
 				{/each}
 
@@ -156,10 +157,11 @@
 						wine={{
 							title: product.title,
 							price: product.price,
+							regularPrice: product.regularPrice,
 							url: product.url,
 							score: product.score
 						}}
-						discount={product.discount}
+						discount=""
 					/>
 				{/each}
 			</div>
