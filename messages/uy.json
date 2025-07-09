@@ -8,10 +8,13 @@
 	"copiedError": "Error al copiar:",
 	"moreResults": "Mas resultados",
 
+	"productsUpTo": "Productos hasta",
+
 	"currencySymbol": "$",
 
 	"outOfStock": "Fuera de stock",
 	"inStock": "Con stock",
+	"maxStockIs": "Tenemos {maxStock} producto en stock en este momento. Para más cantidad, contáctanos.",
 
 	"cashDiscountText": "EN EFECTIVO (5% OFF)",
 
@@ -92,6 +95,9 @@
 
 	"seoSignUpTitle": "Crea tu cuenta | Cervezas Artesanales y Vinos Boutique en Braaay",
 	"seoSignUpDescription": "Regístrate en Braaay y vive una experiencia boutique con cervezas premium de Uruguay,  y del mundo. Accede a ofertas exclusivas y beneficios especiales.",
+
+	"seoOnSaleTitle": "Ofertas imperdibles en cervezas y vinos",
+	"seoOnSaleDescription": "Ofertas exclusivas en cervezas artesanales uruguayas y vinos boutique seleccionados. ¡Descuentos Braaay para brindar a lo grande!",
 
 	"signUpNoUsername": "Ingresa un nombre de usuario para continuar",
 	"signUpInvalidUsername": "Nombre de usuario inválido. Usa solo letras, números o los símbolos _ . -, entre 5 y 20 caracteres",

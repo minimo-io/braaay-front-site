@@ -13,6 +13,7 @@
 	import GlobalBanner from './GlobalBanner.svelte';
 	import { isAuthenticated } from '$lib/graphql/auth';
 	import { cart } from '$stores/cart.store.svelte';
+	import { AppConfig } from '$config';
 
 	// Using runes for reactive state
 	let SecondaryMenuComponent = $state(
@@ -139,7 +140,9 @@
 			</Button>
 
 			<!-- Cashback -->
-			<CashbackButton title="Cashback" currency="R$" value={0.0} />
+			{#if AppConfig.cashbackEnabled}
+				<CashbackButton title="Cashback" currency="R$" value={0.0} />
+			{/if}
 		</div>
 
 		<div class="flex">

@@ -15,6 +15,7 @@
 	import type { Component } from 'svelte';
 	import { Gift } from '@lucide/svelte';
 	import { subtractPercentage, calculateDiscountPercentage } from '$lib/utils';
+	import { AppConfig } from '$config';
 
 	interface Props {
 		items: number;
@@ -170,8 +171,10 @@
 
 					<span class="text-sm text-[#28BA48] font-bold leading-4">
 						ou 4x de {m.currencySymbol()} 5,99 sem juros
-						<br />
-						<a href="/"><u>+ 5% em CASHBACK</u></a>
+						{#if AppConfig.cashbackEnabled}
+							<br />
+							<a href="/"><u>+ {AppConfig.cashbackPercentage}% em CASHBACK</u></a>
+						{/if}
 					</span>
 				{/if}
 			</div>

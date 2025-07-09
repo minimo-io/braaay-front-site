@@ -82,3 +82,15 @@ export function calculatePercentageDifference(
 
 	return formattedResult;
 }
+
+/**
+ * Calculates the cashback amount based on a value and cashback percentage
+ * @param value The original value/amount
+ * @param cashbackPercentage The cashback percentage (e.g., 5 for 5%)
+ * @returns The cashback amount to receive
+ */
+export function calculateCashback(value: number, cashbackPercentage: number): number {
+	if (value <= 0 || cashbackPercentage <= 0) return 0; // Return 0 for invalid inputs
+	const cashbackAmount = value * (cashbackPercentage / 100);
+	return parseFloat(cashbackAmount.toFixed(2));
+}

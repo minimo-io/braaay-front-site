@@ -1,6 +1,5 @@
 // src/lib/api/loadMoreProducts.ts
 import { getUrqlClient } from '$stores/urqlClient.state.svelte.js';
-import { CATALOGS_INITIAL_QUERY_LIMIT } from '$lib';
 import type {
 	Product,
 	Pagination,
@@ -9,6 +8,7 @@ import type {
 } from '$lib/types';
 import { mapProduct, mapPagination } from '$lib/types';
 import type { AnyVariables, TypedDocumentNode } from '@urql/core';
+import { AppConfig } from '$config';
 
 export async function loadMoreProducts({
 	products,
@@ -28,7 +28,7 @@ export async function loadMoreProducts({
 		// Query for additional products.
 		const result = await getUrqlClient()
 			.client.query<ProductsForCategoryQueryResult>(query, {
-				first: CATALOGS_INITIAL_QUERY_LIMIT,
+				first: AppConfig.catalogs_initial_query_limit,
 				after: pagination.endCursor,
 				...params
 				// categorySlug: slug,

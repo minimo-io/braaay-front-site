@@ -7,6 +7,7 @@
 	import { removeFromCart, adjustQuantity } from '$stores/cart.store.svelte';
 	import { correctPrice } from '$lib/utils';
 	import { shippingDetails, setShippingDetails } from '$stores/shippingDetails.state.svelte';
+	import { AppConfig } from '$config';
 
 	interface Props {
 		cartItem: CartItem;
@@ -94,12 +95,14 @@
 		<div class="self-center">
 			<p class="font-medium font-roboto leading-5"><a href={cartItem.uri}>{cartItem.name}</a></p>
 			<p class="text-xs text-grey-medium mt-1">{cartItem.sku}</p>
-			<div class="flex mt-1 font-light text-xs items-center">
-				<label class="flex items-center font-roboto">
-					<input class="mr-1 !accent-black" type="checkbox" />
-					Para presente
-				</label>
-			</div>
+			{#if AppConfig.forPresentEnabled}
+				<div class="flex mt-1 font-light text-xs items-center">
+					<label class="flex items-center font-roboto">
+						<input class="mr-1 !accent-black" type="checkbox" />
+						Para presente
+					</label>
+				</div>
+			{/if}
 		</div>
 	</div>
 
@@ -126,7 +129,9 @@
 
 		<!-- Plus Button -->
 		<button
-			onclick={() => adjustQuantity(cartItem.id, 1)}
+			onclick={() => {
+				adjustQuantity(cartItem.id, 1);
+			}}
 			class="flex items-center justify-center w-7 h-7 rounded-full bg-sun text-white font-bold"
 			aria-label="Add"
 		>

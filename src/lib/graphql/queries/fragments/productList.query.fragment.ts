@@ -7,6 +7,7 @@ export const PRODUCT_LIST_FRAGMENT = `
         price
         regularPrice
         stockStatus
+        stockQuantity
         outrosDadosDeProduto {
             bgGradientStart
             bgGradientEnd

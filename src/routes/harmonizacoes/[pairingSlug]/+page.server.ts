@@ -2,7 +2,6 @@
 import type { PageServerLoad } from './$types';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 import { PAIRING_PRODUCTS } from '$lib/graphql/queries/index';
-import { CATALOGS_INITIAL_QUERY_LIMIT } from '$lib';
 
 import {
 	mapProduct,
@@ -17,6 +16,7 @@ import {
 } from '$lib/types/index';
 
 import { error } from '@sveltejs/kit';
+import { AppConfig } from '$config';
 
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const { pairingSlug } = params;
@@ -25,7 +25,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		.client.query<ProductsForPairingQueryResult>(
 			PAIRING_PRODUCTS,
 			{
-				first: CATALOGS_INITIAL_QUERY_LIMIT,
+				first: AppConfig.catalogs_initial_query_limit,
 				pairingSlug: pairingSlug
 			},
 			{ context: { authToken: locals.authToken } }

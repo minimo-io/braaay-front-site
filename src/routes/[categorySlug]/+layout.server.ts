@@ -10,10 +10,11 @@ import {
 	type GraphQLProductNode,
 	type Product,
 	type ProductsForCategoryQueryResult,
-	type Pagination
+	type Pagination,
+	type YoastSeoData
 } from '$lib/types/index';
-import { CATALOGS_INITIAL_QUERY_LIMIT } from '$lib/index';
 import { error } from '@sveltejs/kit';
+import { AppConfig } from '$config';
 
 export const load: LayoutServerLoad = async ({ params, locals }) => {
 	const { subcategorySlug } = params;
@@ -27,7 +28,7 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 		.client.query<ProductsForCategoryQueryResult>(
 			CATEGORY_PRODUCTS,
 			{
-				first: CATALOGS_INITIAL_QUERY_LIMIT,
+				first: AppConfig.catalogs_initial_query_limit,
 				categorySlug: categorySlug,
 				categoryId: categorySlug
 			},
@@ -44,6 +45,7 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 	try {
 		const productCategory: Category = mapCategory(result.data.productCategory);
 		const pagination: Pagination = mapPagination(result.data.products.pageInfo);
+		const seo: YoastSeoData | undefined = productCategory.seo;
 
 		// Get products para of the query
 		const products: Product[] = result.data.products.edges.map((product: GraphQLProductNode) =>
@@ -53,7 +55,8 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 		return {
 			products: products,
 			category: productCategory,
-			pagination
+			pagination,
+			seo
 		};
 	} catch (err) {
 		throw error(404, `Failed to fetch the category: ${err}`);

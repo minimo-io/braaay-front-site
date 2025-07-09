@@ -27,7 +27,7 @@ export const HomeProducts = () => {
 			},
 			{
 				title: 'Família Deicas Massimo Tannat 750ml',
-				price: `${m.currencySymbol()}950,00`,
+				price: `${m.currencySymbol()}1.199,00`,
 				regularPrice: `${m.currencySymbol()}1.199,00`,
 				url: '/produto/vinho-familia-deicas-massimo-tannat/',
 				score: '5.0',
@@ -49,7 +49,7 @@ export const HomeProducts = () => {
 			},
 			{
 				title: 'Pizzato Concentus Gran Reserva 750ml',
-				price: `${m.currencySymbol()}190,00`,
+				price: `${m.currencySymbol()}171,00`,
 				regularPrice: `${m.currencySymbol()}190,00`,
 				url: '/produto/vinho-pizzato-concentus-gran-reserva/',
 				score: '',

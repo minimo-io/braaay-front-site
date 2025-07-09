@@ -1,32 +1,26 @@
+// src/routes/produtores-de-vinho/[producerSlug]/+page.server.ts
 import type { PageServerLoad } from './$types';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
-import { TAG_PRODUCTS } from '$lib/graphql/queries/index';
+import { ONSALE_PRODUCTS } from '$lib/graphql/queries/index';
 
 import {
 	mapProduct,
 	mapPagination,
-	mapCategory,
-	type Category,
 	type Product,
-	type ProductsForTagQueryResult,
+	type ProductsOnSaleQueryResult,
 	type GraphQLProductNode,
-	type Pagination,
-	type YoastSeoData
+	type Pagination
 } from '$lib/types/index';
 
 import { error } from '@sveltejs/kit';
 import { AppConfig } from '$config';
 
-export const load: PageServerLoad = async ({ params, locals }) => {
-	const { tagSlug } = params;
-
+export const load: PageServerLoad = async ({ locals }) => {
 	const result = await getUrqlClient(locals.authToken)
-		.client.query<ProductsForTagQueryResult>(
-			TAG_PRODUCTS,
+		.client.query<ProductsOnSaleQueryResult>(
+			ONSALE_PRODUCTS,
 			{
-				first: AppConfig.catalogs_initial_query_limit,
-				tagId: tagSlug,
-				tagSlug: tagSlug
+				first: AppConfig.catalogs_initial_query_limit
 			},
 			{ context: { authToken: locals.authToken } }
 		)
@@ -38,9 +32,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	}
 
 	try {
-		const category: Category = mapCategory(result.data.productTag);
+		// const category: Category = mapCategory(result.data.allPaProdutoresDeVinho.nodes[0]);
 		const pagination: Pagination = mapPagination(result.data.products.pageInfo);
-		const seo: YoastSeoData | undefined = result.data.productTag.seo;
 
 		// Get products para of the query
 		const products: Product[] = result.data.products.edges.map((product: GraphQLProductNode) =>
@@ -49,11 +42,9 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 
 		return {
 			products: products,
-			category: category,
-			pagination,
-			seo
+			pagination
 		};
 	} catch (err) {
-		throw error(404, `Failed to fetch the pairing category: ${err}`);
+		throw error(404, `Failed to fetch the category: ${err}`);
 	}
 };

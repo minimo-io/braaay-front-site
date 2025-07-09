@@ -4,6 +4,7 @@
 	import { getSiteCategories } from '$lib/data/categories.data';
 	import { allCountries } from '$data/countries.data';
 	import { onMount } from 'svelte';
+	import { m } from '$lib/paraglide/messages';
 
 	let currentCategories = getSiteCategories(getLocale());
 	let pageCountries = $state(allCountries[getLocale()]);
@@ -130,7 +131,7 @@
 			<li
 				class="!ml-0 md:!ml-5 relative group transition-all duration-300 animate__animated animate__swing order-first md:order-none"
 			>
-				<a href={localizeHref('/blog/')} class="!py-0 !pr-5 !pl-0 h-full">
+				<a href={localizeHref('/onsale/')} class="!py-0 !pr-5 !pl-0 h-full">
 					<!-- <BadgePercent class="lucide-menu badge-percent" color="white" fill="#000" /> -->
 					<img
 						src="/images/badge-offer.png"
@@ -144,7 +145,7 @@
 						<span class="text-sm font-bold text-left leading-5">R$45 ou menos</span>
 					</div> -->
 					<div class="flex flex-col gap-0 self-center">
-						<span class="text-xs text-left leading-none">Produtos até</span>
+						<span class="text-xs text-left leading-none">{m.productsUpTo()}</span>
 						<span class="text-sm font-bold text-left leading-5">20% OFF</span>
 					</div>
 				</a>

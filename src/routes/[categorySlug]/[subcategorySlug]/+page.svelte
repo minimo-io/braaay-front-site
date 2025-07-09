@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte.js';
-	import type { Product, Category, ArticleCreator, Pagination } from '$lib/types';
+	import type { Product, Category, ArticleCreator, Pagination, YoastSeoData } from '$lib/types';
 	import GlobalCategory from '$components/layout/GlobalCategory.svelte';
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 	import LoadMoreButton from '$components/ui/buttons/LoadMoreButton.svelte';
@@ -17,6 +17,7 @@
 	let products: Product[] = $state(data.products);
 	let category: Category = $state(data.category);
 	let pagination: Pagination = $state(data.pagination);
+	let seo: YoastSeoData = $derived(category.seo!);
 
 	$effect(() => {
 		products = data.products;
@@ -77,7 +78,8 @@
 	}
 </script>
 
-<Meta title="{category.name} {m.seoDivider()} {m.seoBase()}" description={category.description} />
+<!-- <Meta title="{category.name} {m.seoDivider()} {m.seoBase()}" description={category.description} /> -->
+<Meta seoData={seo} />
 <!-- 
 <svelte:head>
 	<title>{category.name} - Braaay</title>

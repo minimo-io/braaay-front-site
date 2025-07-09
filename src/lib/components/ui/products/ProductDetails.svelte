@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ProductAccordion from '$components/ui/products/ProductAccordion.svelte';
 	import MoreInfoButton from '$components/ui/buttons/MoreInfoButton.svelte';
-	import { stripHtml, correctPrice } from '$lib/utils/index';
+	import { stripHtml, correctPrice, calculateCashback } from '$lib/utils/index';
 	import type { Product, ProductAttributes, ProductCategory } from '$lib/types';
 	import { m } from '$lib/paraglide/messages';
 	import { type CartItem } from '$lib/types/cart.types';
@@ -24,8 +24,11 @@
 	} else if (product.stockStatus == 'IN_STOCK') {
 		stockStatus = `<span>${m.inStock()}</span>`;
 	}
-	const clubCashbackValue = 10;
-	const clubMoreInfoText = `Ganhe <strong>${m.currencySymbol()}${correctPrice(clubCashbackValue)}</strong> em cashback no Clube`;
+
+	const cashbackValue = calculateCashback(product.floatPrice, AppConfig.cashbackPercentage);
+	const clubMoreInfoText = `Ganhe <strong>${m.currencySymbol()}${correctPrice(cashbackValue)}</strong> em cashback no Clube`;
+
+	console.log('PRO', product);
 
 	const item: CartItem = {
 		id: product.id,
@@ -35,6 +38,7 @@
 		priceString: product.price,
 		price: product.floatPrice,
 		quantity: 1,
+		maxQuantity: product.stockQuantity,
 		image: product.image
 	};
 
@@ -76,7 +80,9 @@
 			>
 			{m.cashDiscountText()}
 		</h4>
-		<MoreInfoButton title={clubMoreInfoText} customStyles="!mx-0 " url="/clube/" />
+		{#if AppConfig.cashbackEnabled}
+			<MoreInfoButton title={clubMoreInfoText} customStyles="!mx-0 " url="/clube/" />
+		{/if}
 	</div>
 
 	{#if stockStatus}

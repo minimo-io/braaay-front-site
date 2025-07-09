@@ -26,7 +26,7 @@
 			<Button
 				title="Adicionar ao carrinho"
 				type="sun"
-				url={localizeHref('/cart/')}
+				url={localizeHref('/club/')}
 				tracking="normal"
 			/>
 		</div>

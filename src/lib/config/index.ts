@@ -1,4 +1,4 @@
-export const AppConfig = {
+export const AppConfig = Object.freeze({
 	debug: false,
 	// the notification duration when adding a product to the cart
 	miniCartDuration: 8000,
@@ -22,6 +22,21 @@ export const AppConfig = {
 	payments: {
 		timeout: 30
 	},
-	// for those categories whose products need the image to be full width
-	kitsImageCategories: ['kits', 'experiencias']
-};
+
+	// for those categories whose product page  image is full width
+	kitsImageCategories: ['kits', 'experiencias'],
+
+	// Number of products to get fromt the catalog on page load
+	catalogs_initial_query_limit: 15,
+
+	// Enable/Disable cashback site wide
+	cashbackEnabled: true,
+	// Cashback value
+	cashbackPercentage: 5,
+
+	// Enable/Disable for present
+	forPresentEnabled: false,
+
+	// Enable/Disable email suscriptions on checkout
+	receiveEmailsEnabled: false
+});

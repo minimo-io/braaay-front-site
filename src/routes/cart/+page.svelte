@@ -22,6 +22,7 @@
 	import { shippingDetails } from '$stores/shippingDetails.state.svelte';
 	import Meta from '$components/layout/Meta.svelte';
 	import { page } from '$app/state';
+	import { AppConfig } from '$config';
 
 	// Cart amount
 	let hasItems = $state(false);
@@ -128,7 +129,7 @@
 								<Button
 									title="Adicionar ao carrinho"
 									type="sun"
-									url={localizeHref('/cart/')}
+									url={localizeHref('/club/')}
 									tracking="normal"
 									bold={false}
 								/>
@@ -301,8 +302,12 @@
 							<span class="text-sm text-[#28BA48] font-bold leading-4 pt-2">
 								ou 4x de {m.currencySymbol()}
 								{correctPrice(totalCartAmountWithDiscounts / 4)} sem juros
-								<br />
-								<a href={localizeHref('/club/')}><u>+ 5% em CASHBACK</u></a>
+								{#if AppConfig.cashbackEnabled}
+									<br />
+									<a href={localizeHref('/club/')}
+										><u>+ {AppConfig.cashbackPercentage}% em CASHBACK</u></a
+									>
+								{/if}
 							</span>
 						</div>
 					</div>
@@ -341,7 +346,12 @@
 							de experiências com outros Passport e compras coletivas!
 						</p>
 						<div class="mx-11 py-2">
-							<Button title="Adicionar ao carrinho" type="sun" url="/cart" tracking="normal" />
+							<Button
+								title="Adicionar ao carrinho"
+								type="sun"
+								url={localizeHref('/club/')}
+								tracking="normal"
+							/>
 						</div>
 
 						<p class="text-xs text-gray-500 mt-2">

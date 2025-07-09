@@ -6,6 +6,8 @@ import { AppConfig } from '$config';
 import { shippingDetails, setShippingDetails } from './shippingDetails.state.svelte';
 import { getUrqlClient } from './urqlClient.state.svelte';
 import { EMPTY_CART_MUTATION } from '$lib/graphql/mutations';
+import { launchToast } from '$lib/utils';
+import { m } from '$lib/paraglide/messages';
 
 // Main cart
 const initialCart: Cart = browser
@@ -80,10 +82,19 @@ export const adjustQuantity = (itemId: number, delta: number, specific?: number)
 				newQuantity = specific;
 			} else {
 				newQuantity = currentCart.items[existingIndex].quantity + delta;
+
 				// Prevent negative quantities
 			}
-
-			currentCart.items[existingIndex].quantity = Math.max(1, newQuantity);
+			// Check if we have enough stock
+			if (newQuantity > currentCart.items[existingIndex].maxQuantity) {
+				launchToast(
+					`${m.maxStockIs({ maxStock: currentCart.items[existingIndex].maxQuantity })}`,
+					'info',
+					3000
+				);
+			} else {
+				currentCart.items[existingIndex].quantity = Math.max(1, newQuantity);
+			}
 		}
 
 		return currentCart;

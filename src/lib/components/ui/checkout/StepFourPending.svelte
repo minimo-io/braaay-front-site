@@ -26,6 +26,7 @@
 
 	import { cart } from '$stores/cart.store.svelte';
 	import CheckoutCreditCardInfo from './CheckoutCreditCardInfo.svelte';
+	import { AppConfig } from '$config';
 
 	interface Props {
 		deliveryType: DeliveryUIType | null;
@@ -244,16 +245,18 @@
 		<!-- {/if} -->
 
 		<!-- Promocoes -->
-		<div class="flex items-center text-sm my-5 px-3">
-			<input
-				type="checkbox"
-				id="radio-promos"
-				name="radio-promos"
-				class="mr-2 cursor-pointer"
-				bind:checked={newsletter}
-			/>
-			<label class="cursor-pointer" for="radio-promos">{m.checkoutNewsletterOptIn()}</label>
-		</div>
+		{#if AppConfig.receiveEmailsEnabled}
+			<div class="flex items-center text-sm my-5 px-3">
+				<input
+					type="checkbox"
+					id="radio-promos"
+					name="radio-promos"
+					class="mr-2 cursor-pointer"
+					bind:checked={newsletter}
+				/>
+				<label class="cursor-pointer" for="radio-promos">{m.checkoutNewsletterOptIn()}</label>
+			</div>
+		{/if}
 
 		<!-- Offers controls -->
 		<CheckoutProductOffers />
@@ -298,7 +301,7 @@
 				com outros Passport e compras coletivas!
 			</p>
 			<div class="mx-10 py-2">
-				<Button title={m.addToCart()} type="sun" url={localizeHref('/cart/')} tracking="normal" />
+				<Button title={m.addToCart()} type="sun" url={localizeHref('/club/')} tracking="normal" />
 			</div>
 			<p class="text-xs text-gray-500 mt-2">
 				<a href={localizeHref('/club/')} class="text-blue-500 underline">Saiba mais</a>

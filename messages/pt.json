@@ -10,8 +10,11 @@
 
 	"currencySymbol": "R$",
 
+	"productsUpTo": "Produtos até",
+
 	"outOfStock": "Fora de estoque",
 	"inStock": "Em estoque",
+	"maxStockIs": "Disponíveis {maxStock} produtos em estoque. Para quantidade superior, favor entrar em contato.",
 
 	"cashDiscountText": "NO PIX (5% OFF)",
 
@@ -95,6 +98,9 @@
 
 	"seoSignUpTitle": "Crie sua conta | Vinhos Premium e Boutique na Braaay",
 	"seoSignUpDescription": "Cadastre-se na Braaay e viva uma experiência boutique com vinhos premium do Uruguai, do Brasil e do Mundo. Acesso a ofertas exclusivas e vantagens especiais.",
+
+	"seoOnSaleTitle": "Ofertas imperdíveis em vinhos & cervejas",
+	"seoOnSaleDescription": "Ofertas exclusivas em vinhos boutique, rótulos raros do Uruguai, Brasil e além. Descubra sua próxima joia na Braaay.com!",
 
 	"signUpNoUsername": "Informe um nome de usuário para continuar",
 	"signUpInvalidUsername": "Nome de usuário inválido. Use apenas letras, números ou os símbolos _ . -, entre 5 e 20 caracteres",

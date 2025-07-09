@@ -26,6 +26,11 @@ export interface ProductsForWineProducerQueryResult {
 	};
 	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
 }
+
+export interface ProductsOnSaleQueryResult {
+	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
+}
+
 export interface ProductsForPairingQueryResult {
 	allPaHarmonizacoes: {
 		nodes: GraphQLCategory[];
@@ -49,6 +54,7 @@ export interface Product {
 	price: string;
 	regularPrice: string;
 	stockStatus: string;
+	stockQuantity: number;
 	sku: string;
 	status: string;
 	pageCustomColors: PageCustomColors;
@@ -180,6 +186,7 @@ export interface GraphQLProduct {
 	price: string;
 	regularPrice: string;
 	stockStatus: string;
+	stockQuantity: number;
 
 	productCategories?: any;
 	extraAttributes?: GraphQLProductExtraAttributes;
@@ -248,6 +255,7 @@ export function mapProduct(data: GraphQLProductNode): Product {
 		price: data.node.price,
 		regularPrice: data.node.regularPrice,
 		stockStatus: data.node.stockStatus,
+		stockQuantity: data.node.stockQuantity,
 		title: data.node.title,
 		sku: data.node.sku,
 		status: data.node.status,

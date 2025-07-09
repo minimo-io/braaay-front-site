@@ -115,6 +115,15 @@ export default defineConfig({
 					]
 				},
 
+				// On sale
+				{
+					pattern: '/onsale/',
+					localized: [
+						['pt', '/com-desconto/'],
+						['uy', '/uy/en-oferta/']
+					]
+				},
+
 				// Produtores de vinho
 				{
 					pattern: '/produtores-de-vinho/:id/',
