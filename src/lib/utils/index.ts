@@ -24,6 +24,11 @@ export function truncate(str, maxLength, ellipsis = '...') {
 	}
 	return str.slice(0, maxLength) + ellipsis;
 }
+// Capitalize string
+export function capitalize(str) {
+	if (typeof str !== 'string' || str.length === 0) return str;
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 export function isBlogPost(path: string) {
 	return /^\/(uy\/)?blog\/[^/]+$/.test(path);

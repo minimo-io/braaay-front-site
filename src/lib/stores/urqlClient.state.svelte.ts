@@ -9,7 +9,7 @@ import { createAuthExchange } from '$lib/graphql/authExchange';
 import { getAuthState } from '$lib/stores/auth.state.svelte';
 
 // Function to get auth token that works in both client and server contexts
-const getAuthToken = () => {
+const getAuthToken = (context?: { context?: { authToken?: string } }) => {
 	// In browser, get from our store or from cookies
 	// In server context, this will return null which is fine
 	// return getAuthState().token; // this was done before
@@ -21,7 +21,7 @@ const getAuthToken = () => {
 		// In server, you'd need to get from the request context
 		// This would be handled in your +page.server.ts or +layout.server.ts files
 		// For now, return null on server
-		return null;
+		return context?.context?.authToken || null;
 	}
 };
 

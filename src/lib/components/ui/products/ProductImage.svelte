@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { AppConfig } from '$config';
+	import {
+		addProductToFavorites,
+		removeProductFromFavorites
+	} from '$lib/services/favoritesService';
 	import { m } from '$lib/paraglide/messages';
 	import type { PageCustomColors, ImageGeneral, ProductCategory, Product } from '$lib/types';
-	import { calculatePercentageDifference } from '$lib/utils';
+	import { calculatePercentageDifference, capitalize, launchToast } from '$lib/utils';
 	import { Heart, Share2 } from '@lucide/svelte';
 
 	interface Props {
@@ -15,6 +19,9 @@
 	let { colors, image, productCategories, product }: Props = $props();
 
 	let hasPriceDiscount = product && product.regularPrice != product.price;
+	let isLoading = $state(false);
+	let isFavorite = $state(product?.isFavorited);
+
 	// For kits
 	const isFullImage = productCategories?.some((category) =>
 		AppConfig.kitsImageCategories.includes(category.slug)
@@ -32,6 +39,31 @@
 				.catch((error) => console.log('Error sharing', error));
 		} else {
 			alert('Sharing not supported on this browser.');
+		}
+	}
+
+	async function handleFavoriteClick() {
+		if (!product) return;
+
+		isLoading = true;
+		const action = isFavorite ? 'removendo' : 'adicionando';
+		launchToast(capitalize(`${action} à adega...`), 'info', 3000);
+
+		try {
+			const result = isFavorite
+				? await removeProductFromFavorites(product.id)
+				: await addProductToFavorites(product.id);
+
+			launchToast(result.message, result.success ? 'success' : 'error');
+
+			if (result.success) {
+				isFavorite = !isFavorite;
+			}
+		} catch (error) {
+			console.error(`Error ${action} favorites:`, error);
+			launchToast(`An error occurred while ${action} favorites.`, 'error');
+		} finally {
+			isLoading = false;
 		}
 	}
 </script>
@@ -84,7 +116,17 @@
 			</div>
 
 			<div class="pl-2 flex">
-				<button onclick={() => alert('Soon')}><Heart class="h-[20px]" /> </button>
+				<button onclick={handleFavoriteClick} disabled={isLoading}>
+					<div class="flex items-center">
+						<Heart
+							class={['h-[20px]', isFavorite && 'text-[#f82000]']}
+							fill={isFavorite ? '#F82000' : 'none'}
+						/>
+						<span class="text-[13px] text-blue">
+							{isFavorite ? 'Favorito' : 'Adicionar'}
+						</span>
+					</div>
+				</button>
 			</div>
 		</div>
 	</div>

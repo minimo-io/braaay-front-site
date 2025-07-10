@@ -28,8 +28,6 @@
 	const cashbackValue = calculateCashback(product.floatPrice, AppConfig.cashbackPercentage);
 	const clubMoreInfoText = `Ganhe <strong>${m.currencySymbol()}${correctPrice(cashbackValue)}</strong> em cashback no Clube`;
 
-	console.log('PRO', product);
-
 	const item: CartItem = {
 		id: product.id,
 		sku: product.sku,

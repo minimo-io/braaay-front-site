@@ -48,6 +48,7 @@ export interface ProductsForTagQueryResult {
 
 export interface Product {
 	id: number;
+	isFavorited: boolean;
 	slug: string;
 	title: string;
 	floatPrice: number;
@@ -179,6 +180,7 @@ interface GraphQLProductExtraAttributes {
 
 export interface GraphQLProduct {
 	databaseId: number;
+	isFavorited: boolean;
 	slug: string;
 	title: string;
 	sku: string;
@@ -250,6 +252,7 @@ export function mapProduct(data: GraphQLProductNode): Product {
 
 	return {
 		id: data.node.databaseId,
+		isFavorited: data.node.isFavorited,
 		slug: data.node.slug,
 		floatPrice: parseFloat(floatPrice),
 		price: data.node.price,

@@ -9,7 +9,12 @@ export const createAuthExchange = (getAuthToken): Exchange => {
 			return pipe(
 				ops$,
 				map((operation) => {
-					const token = getAuthToken();
+					// const token = getAuthToken();
+
+					// console.log('AUTH_TOKEN_INSIDE_PIPE', operation.context.context?.authToken);
+					// const token = getAuthToken(operation.context.context?.authToken);
+					const token = getAuthToken(operation.context);
+
 					if (!token) return operation;
 
 					// grab existing fetchOptions (fn or object)
@@ -34,43 +39,3 @@ export const createAuthExchange = (getAuthToken): Exchange => {
 			);
 		};
 };
-
-// THIS IS FROM CLAUDE
-
-// import { makeOperation, type Exchange, type Operation } from '@urql/core';
-// import { pipe, tap } from 'wonka';
-
-// // Define token getter type
-// export type GetAuthToken = () => string | null;
-
-// // Create an auth exchange factory
-// export const createAuthExchange = (getAuthToken: GetAuthToken): Exchange => {
-// 	return ({ forward }) =>
-// 		(ops$) => {
-// 			return pipe(
-// 				ops$,
-// 				tap((operation: Operation) => {
-// 					const token = getAuthToken();
-
-// 					if (token) {
-// 						const fetchOptions =
-// 							typeof operation.context.fetchOptions === 'function'
-// 								? operation.context.fetchOptions()
-// 								: operation.context.fetchOptions || {};
-
-// 						operation = makeOperation(operation.kind, operation, {
-// 							...operation.context,
-// 							fetchOptions: {
-// 								...fetchOptions,
-// 								headers: {
-// 									...fetchOptions.headers,
-// 									Authorization: `Bearer ${token}`
-// 								}
-// 							}
-// 						});
-// 					}
-// 				}),
-// 				forward
-// 			);
-// 		};
-// };

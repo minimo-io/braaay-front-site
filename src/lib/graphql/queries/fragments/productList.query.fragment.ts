@@ -8,6 +8,7 @@ export const PRODUCT_LIST_FRAGMENT = `
         regularPrice
         stockStatus
         stockQuantity
+        isFavorited
         outrosDadosDeProduto {
             bgGradientStart
             bgGradientEnd
