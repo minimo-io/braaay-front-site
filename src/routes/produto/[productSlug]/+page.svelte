@@ -17,6 +17,7 @@
 	const product = $state(data.product);
 	const productCategories = $state(data.productCategories);
 	const attributes = $state(data.attributes);
+
 	const seo = $state(data.seo);
 
 	const article: Post = {
@@ -46,7 +47,7 @@
 {/if}
 
 <!-- Schema -->
-<SchemaProduct {product} {seo} categories={productCategories} />
+<SchemaProduct {product} {seo} categories={productCategories} productAttributes={attributes} />
 
 <main id="product" class="max-w-screen-lg mx-auto">
 	<!-- Main Product section -->
