@@ -83,7 +83,7 @@
 					"breadcrumb": {
 						"@id": "${pageUrl}#breadcrumb"
 					},
-					"inLanguage": ${pageLanguage},
+					"inLanguage": "${pageLanguage}",
 					"potentialAction": [
 						{
 							"@type": "ReadAction",
