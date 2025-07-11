@@ -87,8 +87,8 @@
 	});
 </script>
 
-<svelte:head>
-	{@html `<script type="application/ld+json">
+<!-- <svelte:head> -->
+{@html `<script type="application/ld+json">
 		{
 			"@context": "http://schema.org",
 			"@type": "Product",
@@ -120,7 +120,7 @@
 		}
 	</script>
 `}
-	<!-- {@html `<script type="application/ld+json">
+<!-- {@html `<script type="application/ld+json">
 		{
 			"@context": "https://schema.org",
 			"@graph": [
@@ -236,4 +236,4 @@
 		}
 	</script>
 `} -->
-</svelte:head>
+<!-- </svelte:head> -->
