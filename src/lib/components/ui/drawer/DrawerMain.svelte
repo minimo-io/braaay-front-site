@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { ChevronRight, CircleUser, Headset, Truck, Heart, Sparkle } from '@lucide/svelte';
 	import { openSubmenu } from '$stores/drawerState.state.svelte';
 	import { drawerData } from '$lib/data/drawer.data';
@@ -8,6 +9,8 @@
 	import { m } from '$lib/paraglide/messages';
 
 	let drawerDataForLang = $state(drawerData[getLocale()]);
+
+	let originRoute = $derived(page.url.href);
 </script>
 
 <div class="flex flex-1 text-xs px-0 flex-col overflow-y-auto">
@@ -56,7 +59,7 @@
 	{#if !isAuthenticated()}
 		<!-- Item with submenu -->
 		<a
-			href={localizeHref('/login')}
+			href={localizeHref(`/login/${originRoute ? `?returnUrl=${originRoute}` : ''}`)}
 			class="py-3 border-b border-t border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
 		>
 			<div class="text-left self-center flex align-middle justify-center">

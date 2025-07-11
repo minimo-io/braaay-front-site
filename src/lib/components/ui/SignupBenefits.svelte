@@ -2,8 +2,10 @@
 	import { CheckCheck, Sparkle } from '@lucide/svelte';
 </script>
 
+<!-- <h2 class="mt-5">Mais?</h2> -->
 <h2 class="text-xl tracking-widest text-sun font-prata flex justify-center scale-90 mt-5 mb-4">
 	<Sparkle class="pr-1" />
+	<span></span>
 	<span>SEJA PASSPORT!</span>
 	<Sparkle class="pl-1" />
 </h2>
@@ -26,7 +28,7 @@
 		vinícolas e no showroom
 	</li>
 	<hr class="my-4 text-grey-lighter" />
-	<div class="text-center text-black text-sm font-bold">
+	<div class="text-center text-black text-lg font-bold">
 		R$69/mês <br />
 	</div>
 	<hr class="my-4 text-grey-lighter" />

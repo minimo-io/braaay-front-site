@@ -30,6 +30,7 @@
 	});
 
 	let isLogin = $derived(page.url.href.includes('/login'));
+	let originRoute = $derived(page.url.href);
 
 	// Cart amount
 	let totalCartAmount = $state(0);
@@ -100,7 +101,7 @@
 					chevron={false}
 					customPx="!pr-[12px] !pl-3 !pr-[20px]"
 					title="Entrar"
-					url={localizeHref('/login/')}
+					url={localizeHref(`/login/${originRoute ? `?returnUrl=${originRoute}` : ''}`)}
 					type="blue"
 					size="xl"
 				>
