@@ -24,7 +24,6 @@
 	} else if (product.stockStatus == 'IN_STOCK') {
 		stockStatus = `<span>${m.inStock()}</span>`;
 	}
-
 	const cashbackValue = calculateCashback(product.floatPrice, AppConfig.cashbackPercentage);
 	const clubMoreInfoText = `Ganhe <strong>${m.currencySymbol()}${correctPrice(cashbackValue)}</strong> em cashback no Clube`;
 

@@ -6,6 +6,7 @@ import { sequence } from '@sveltejs/kit/hooks';
 import { redirect } from '@sveltejs/kit';
 import { requiresAuth, isAuthRoute } from '$lib/graphql/auth';
 import { getLocale, localizeHref, deLocalizeUrl } from '$lib/paraglide/runtime';
+import { mapLocale } from '$lib/utils';
 
 // Auth middleware
 const authHandle: Handle = async ({ event, resolve }) => {
@@ -49,12 +50,13 @@ const authHandle: Handle = async ({ event, resolve }) => {
 const paraglideHandle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
 		// Remap locales to match your real-life settings
-		let mappedLocale: string = locale;
-		if (locale === 'uy') {
-			mappedLocale = 'es-UY';
-		} else if (locale === 'pt') {
-			mappedLocale = 'pt-BR';
-		}
+		// let mappedLocale: string = locale;
+		const mappedLocale: string = mapLocale(locale);
+		// if (locale === 'uy') {
+		// 	mappedLocale = 'es-UY';
+		// } else if (locale === 'pt') {
+		// 	mappedLocale = 'pt-BR';
+		// }
 		event.request = localizedRequest;
 		const eventh = resolve(event, {
 			transformPageChunk: ({ html }) => {

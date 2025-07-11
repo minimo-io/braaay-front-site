@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://braaay-front-site.vercel.app/loja/</loc>
-		<lastmod>2025-06-25T21:37:38+00:00</lastmod>
+		<lastmod>2025-07-10T22:14:19+00:00</lastmod>
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/presente-vinho-premium/</loc>
@@ -130,11 +130,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-rose-brut/</loc>
-		<lastmod>2024-11-28T18:19:51+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-blanc-de-blanc-brut/</loc>
 		<lastmod>2024-11-28T18:22:07+00:00</lastmod>
 		
@@ -150,22 +145,12 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-vinhedos-do-monte-agudo-cabernet-sauvignon-merlot-750ml/</loc>
-		<lastmod>2024-12-12T17:54:01+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/terrenus-tinto-suave-premium/</loc>
 		<lastmod>2024-12-16T18:31:25+00:00</lastmod>
 		
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/espumante-pizzato-brut-rose/</loc>
-		<lastmod>2024-12-26T12:17:56+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-extra-brut/</loc>
 		<lastmod>2024-12-26T12:17:56+00:00</lastmod>
 		
 	</url>
@@ -182,11 +167,6 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-sierra-batuco-carmenere-chile/</loc>
 		<lastmod>2025-01-14T12:53:01+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-pizzato-concentus-gran-reserva/</loc>
-		<lastmod>2025-01-14T17:13:16+00:00</lastmod>
 		
 	</url>
 	<url>
@@ -255,11 +235,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-rio-sol-tradition-750ml-braaay/</loc>
-		<lastmod>2025-03-06T10:11:55+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/cerveja-especial-4reasons-apa-for-all-lata/</loc>
 		<lastmod>2025-03-10T13:25:08+00:00</lastmod>
 		
@@ -290,11 +265,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-argentino-tapiz-cabernet-sauvignon/</loc>
-		<lastmod>2025-03-11T18:03:45+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-zinfandel-uruguai/</loc>
 		<lastmod>2025-03-11T18:03:45+00:00</lastmod>
 		
@@ -302,16 +272,6 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-aresti-picaron-sauvignon-blanc-chile/</loc>
 		<lastmod>2025-03-12T22:53:26+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-rose-de-merlot-kasta/</loc>
-		<lastmod>2025-03-24T12:55:58+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-terrenus-tinto-fino-meio-seco-serra-gaucha/</loc>
-		<lastmod>2025-03-24T13:36:40+00:00</lastmod>
 		
 	</url>
 	<url>
@@ -404,43 +364,13 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-bouza-albarino-2024-uruguai/</loc>
-		<lastmod>2025-05-06T15:21:23+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-nacional-casa-eva-pinot-noir/</loc>
 		<lastmod>2025-05-08T16:01:00+00:00</lastmod>
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-mayos-cabernet-sauvignon-reserva/</loc>
-		<lastmod>2025-05-08T16:01:54+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-brasileiro-santropa-rose-suave/</loc>
 		<lastmod>2025-05-08T16:02:59+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-don-pascual-tannat-varietal/</loc>
-		<lastmod>2025-05-08T16:02:59+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-italiano-tinto-castorani-majolica-montepulciano-dabruzzo-2020/</loc>
-		<lastmod>2025-05-14T18:48:25+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-italiano-majolica-cerasuolo-dabruzzo-doc/</loc>
-		<lastmod>2025-05-14T19:13:18+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-bestia-collection-cabernet-sauvignon/</loc>
-		<lastmod>2025-05-21T01:38:59+00:00</lastmod>
 		
 	</url>
 	<url>
@@ -495,21 +425,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-picaron-aresti-cabernet-sauvignon/</loc>
-		<lastmod>2025-06-09T16:37:18+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-picaron-carmenere/</loc>
-		<lastmod>2025-06-09T16:37:18+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-don-pascual-cabernet-merlot/</loc>
-		<lastmod>2025-06-09T16:37:18+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-chardonnay-petit-manseng/</loc>
 		<lastmod>2025-06-09T18:56:00+00:00</lastmod>
 		
@@ -530,11 +445,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-braccobosca-tannat-reserva-ombu-single-block/</loc>
-		<lastmod>2025-06-09T19:03:53+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-capoani-chardonnay-2022/</loc>
 		<lastmod>2025-06-09T19:04:42+00:00</lastmod>
 		
@@ -552,15 +462,6 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-don-nicolas-malbec-argentino/</loc>
 		<lastmod>2025-06-09T19:08:03+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-economico-4-unidades/</loc>
-		<lastmod>2025-06-09T19:08:04+00:00</lastmod>
-		
-		
-		
-		
 		
 	</url>
 	<url>
@@ -624,11 +525,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-santa-magdalena-reserva-cabernet-sauvignon/</loc>
-		<lastmod>2025-06-09T19:28:54+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-tannat-reserva-artesana-uruguai/</loc>
 		<lastmod>2025-06-09T19:29:32+00:00</lastmod>
 		
@@ -654,22 +550,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-familia-deicas-preludio-barrel-select-blend/</loc>
-		<lastmod>2025-06-16T15:40:06+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-deicas-atlantico-sur-reserve-pinot-noir/</loc>
-		<lastmod>2025-06-16T15:40:06+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-familia-deicas-massimo-tannat/</loc>
-		<lastmod>2025-06-17T15:16:21+00:00</lastmod>
-		
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-maderos-tannat-gran-reserva-single-vineyard-750ml/</loc>
 		<lastmod>2025-06-17T18:08:55+00:00</lastmod>
 		
@@ -680,23 +560,143 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-alvarinho-atlantico-sur-deicas-uruguai/</loc>
-		<lastmod>2025-06-18T13:41:16+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-bouza-tannat-b6-parcela-unica-uruguai/</loc>
 		<lastmod>2025-06-18T19:55:40+00:00</lastmod>
 		
 	</url>
 	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-braccobosca-tannat-reserva-ombu-single-block/</loc>
+		<lastmod>2025-07-01T13:55:38+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/espumante-rio-sol-tradition-750ml-braaay/</loc>
+		<lastmod>2025-07-01T20:48:28+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-picaron-aresti-cabernet-sauvignon/</loc>
+		<lastmod>2025-07-02T13:38:01+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/kit-economico-4-unidades/</loc>
+		<lastmod>2025-07-02T13:38:02+00:00</lastmod>
+		
+		
+		
+		
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-bestia-collection-cabernet-sauvignon/</loc>
+		<lastmod>2025-07-02T13:38:02+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-alvarinho-atlantico-sur-deicas-uruguai/</loc>
+		<lastmod>2025-07-02T18:22:30+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-familia-deicas-massimo-tannat/</loc>
+		<lastmod>2025-07-02T18:57:26+00:00</lastmod>
+		
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-familia-deicas-preludio-barrel-select-blend/</loc>
+		<lastmod>2025-07-02T18:59:00+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-rose-de-merlot-kasta/</loc>
+		<lastmod>2025-07-03T16:26:19+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-pizzato-concentus-gran-reserva/</loc>
+		<lastmod>2025-07-07T03:00:10+00:00</lastmod>
+		
+	</url>
+	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/confraria-entre-tacas-e-mulheres/</loc>
-		<lastmod>2025-06-25T19:34:43+00:00</lastmod>
+		<lastmod>2025-07-07T14:19:45+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-santa-magdalena-reserva-cabernet-sauvignon/</loc>
+		<lastmod>2025-07-08T16:06:02+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-argentino-tapiz-cabernet-sauvignon/</loc>
+		<lastmod>2025-07-08T16:06:03+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-don-pascual-cabernet-merlot/</loc>
+		<lastmod>2025-07-08T16:06:03+00:00</lastmod>
 		
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-chileno-kasta-carmenere/</loc>
-		<lastmod>2025-06-25T21:37:38+00:00</lastmod>
+		<lastmod>2025-07-08T16:06:03+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-mayos-cabernet-sauvignon-reserva/</loc>
+		<lastmod>2025-07-08T16:06:17+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-picaron-carmenere/</loc>
+		<lastmod>2025-07-08T16:06:18+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-deicas-atlantico-sur-reserve-pinot-noir/</loc>
+		<lastmod>2025-07-08T16:06:18+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-don-pascual-tannat-varietal/</loc>
+		<lastmod>2025-07-08T16:06:37+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-extra-brut/</loc>
+		<lastmod>2025-07-08T16:48:41+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-rose-brut/</loc>
+		<lastmod>2025-07-08T16:48:41+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-terrenus-tinto-fino-meio-seco-serra-gaucha/</loc>
+		<lastmod>2025-07-08T16:57:21+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-italiano-tinto-castorani-majolica-montepulciano-dabruzzo-2020/</loc>
+		<lastmod>2025-07-09T03:00:19+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-italiano-majolica-cerasuolo-dabruzzo-doc/</loc>
+		<lastmod>2025-07-09T03:00:36+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-vinhedos-do-monte-agudo-cabernet-sauvignon-merlot-750ml/</loc>
+		<lastmod>2025-07-10T17:10:13+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-bouza-albarino-2024-uruguai/</loc>
+		<lastmod>2025-07-10T22:14:19+00:00</lastmod>
 		
 	</url>
 </urlset>

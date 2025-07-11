@@ -3,9 +3,10 @@
 	import BottomArticle from '$components/ui/articles/BottomArticle.svelte';
 	import ProductDetails from '$components/ui/products/ProductDetails.svelte';
 	import ProductImage from '$components/ui/products/ProductImage.svelte';
-	import type { ArticleCreator, ImageGeneral, Post } from '$lib/types';
+	import { type ArticleCreator, type ImageGeneral, type Post } from '$lib/types';
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
 	import Meta from '$components/layout/Meta.svelte';
+	import SchemaProduct from '$components/layout/Schemas/SchemaProduct.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -39,11 +40,15 @@
 	};
 </script>
 
+<!-- Seo Headers -->
 {#if seo}
 	<Meta seoData={seo} />
 {/if}
 
-<main class="max-w-screen-lg mx-auto">
+<!-- Schema -->
+<SchemaProduct {product} {seo} categories={productCategories} />
+
+<main id="product" class="max-w-screen-lg mx-auto">
 	<!-- Main Product section -->
 	<section class="flex flex-col md:flex-row mx-auto">
 		<!-- Left side - Image -->

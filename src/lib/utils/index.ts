@@ -11,6 +11,15 @@ export * from './emails.util';
 export * from './phones.util';
 export * from './creditCards.util';
 export * from './coupons.util';
+export * from './dates.util';
+
+export function mapLocale(locale: string) {
+	if (locale === 'uy') {
+		return 'es-UY';
+	} else {
+		return 'pt-BR';
+	}
+}
 
 /**
  * Truncate a string to a maximum length and add ellipsis if needed.

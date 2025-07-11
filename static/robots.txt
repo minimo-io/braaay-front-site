@@ -17,6 +17,11 @@ Disallow: /*?*
 # Disallow: /*/?filter_pais=*
 # Disallow: /*/?tax_uva=*
 # Disallow: /*/?filter_produtores-de-vinho=*
+Disallow: /*?filter_pais=
+Disallow: /*?orderby=
+Disallow: /*?tax_product_cat=
+Disallow: /*?tax_uva=
+Disallow: /*?*unfilter=1
 
 
 
@@ -28,7 +33,7 @@ User-agent: Vegi bot
 User-agent: seostats
 User-agent: MauiBot
 User-agent: TechSEO360
-User-agent: AhrefsBot
+# User-agent: AhrefsBot
 User-agent: MJ12bot
 User-agent: dotbot
 User-agent: serpstatbot

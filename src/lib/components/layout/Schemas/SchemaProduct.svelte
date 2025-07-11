@@ -1,0 +1,180 @@
+<script lang="ts">
+	import { page } from '$app/state';
+	import { m } from '$lib/paraglide/messages';
+	import { getLocale } from '$lib/paraglide/runtime';
+	import type { Product, ProductCategory, YoastSeoData } from '$lib/types';
+	import { addYearsAndFormat, mapLocale, stripHtml } from '$lib/utils';
+
+	interface Props {
+		product?: Product;
+		seo?: YoastSeoData;
+		categories?: ProductCategory[];
+	}
+	let { product, seo, categories }: Props = $props();
+
+	// Page
+	let basePath = `${page.url.origin}/`;
+	let pageUrl = $derived(page.url);
+	let pageDescription = $derived(seo?.metaDesc ?? product!.shortDescription);
+	let pageLanguage = mapLocale(getLocale());
+	let pageDatePublished = $derived(product?.date);
+
+	// Image
+	let pageImage = $derived(product?.image.url);
+	let pageImageAlt = $derived(product?.image.altText);
+	let pageImageWidth = 674;
+	let pageImageHeight = 1024;
+
+	// Breadcrumb
+	let breadcrumbName = $derived(categories ? categories[0].name : '');
+	let breadcrumbUrl = $derived(categories ? `${page.url.origin + categories[0].uri}` : '');
+
+	// Product
+	// --- Price Transformation ---
+	let productSchemaPrice = $derived.by(() => {
+		if (!product?.price) {
+			return undefined; // Or null, or 0, depending on how you want to handle missing prices
+		}
+		// Remove "R$" and thousands separator (the dot)
+		const cleanedPrice = product.price.replaceAll('R$', '').replaceAll('.', '');
+		// Replace decimal comma with a decimal point and convert to a number
+		return parseFloat(cleanedPrice.replaceAll(',', '.'));
+	});
+
+	// --- Currency Definition ---
+	let productSchemaPriceCurrency = $derived.by(() => {
+		if (product?.price?.includes('R$')) {
+			return 'BRL'; // Brazilian Real
+		} else if (product?.price?.includes('$')) {
+			return 'UYU'; // Uruguayan Peso (based on your assumption for "$" only)
+		}
+		// Default to USD if no specific currency symbol is found
+		return 'USD';
+	});
+
+	// --- Date Transformation ---
+	let productValidThrough = $derived.by(() => {
+		// We can directly use our helper function here
+		return addYearsAndFormat(product?.date, 2);
+	});
+</script>
+
+<svelte:head>
+	{@html `<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "WebPage",
+					"@id": "${pageUrl}",
+					"url": "${pageUrl}",
+					"name": "O melhor vinho tannat do mundo🥇 O Massimo Tannat da Deicas - Braaay",
+					"isPartOf": { "@id": "${basePath}#website" },
+					"primaryImageOfPage": {
+						"@id": "${pageUrl}#primaryimage"
+					},
+					"image": {
+						"@id": "${pageUrl}#primaryimage"
+					},
+					"thumbnailUrl": "${pageImage}",
+					"datePublished": "${pageDatePublished}",
+					"dateModified": "2025-07-02T18:57:26+00:00",
+					"description": "${stripHtml(pageDescription)}",
+					"breadcrumb": {
+						"@id": "${pageUrl}#breadcrumb"
+					},
+					"inLanguage": ${pageLanguage},
+					"potentialAction": [
+						{
+							"@type": "ReadAction",
+							"target": ["${pageUrl}"]
+						}
+					],
+					"mainEntity": {
+						"@id": "${pageUrl}#product"
+					}
+				},
+				{
+					"@type": "ImageObject",
+					"inLanguage": "${pageLanguage}",
+					"@id": "${pageUrl}#primaryimage",
+					"url": "${pageImage}",
+					"contentUrl": "${pageImage}",
+					"width": ${pageImageWidth},
+					"height": ${pageImageHeight},
+					"caption": "${pageImageAlt}"
+				},
+				{
+					"@type": "BreadcrumbList",
+					"@id": "${pageUrl}#breadcrumb",
+					"itemListElement": [
+						{ "@type": "ListItem", "position": 1, "name": "${m.start()}", "item": "${basePath}" },
+						{
+							"@type": "ListItem",
+							"position": 2,
+							"name": "${breadcrumbName}",
+							"item": "${breadcrumbUrl}"
+						},
+						{
+							"@type": "ListItem",
+							"position": 3,
+							"name": "${product?.title}"
+						}
+					]
+				},
+				{
+					"@type": "WebSite",
+					"@id": "${basePath}#website",
+					"url": "${basePath}",
+					"name": "${m.seoBase()}",
+					"description": "${m.seoHomeDescription()}",
+					"potentialAction": [
+						{
+							"@type": "SearchAction",
+							"target": {
+								"@type": "EntryPoint",
+								"urlTemplate": "${basePath}?s={s}"
+							},
+							"query-input": {
+								"@type": "PropertyValueSpecification",
+								"valueRequired": true,
+								"valueName": "s"
+							}
+						}
+					],
+					"inLanguage": "${pageLanguage}"
+				},
+				{
+					"@type": "Product",
+					"@id": "${pageUrl}#product",
+					"name": "${product?.title}",
+					"url": "${pageUrl}",
+					"description": "${stripHtml(product?.shortDescription || seo?.metaDesc || '')}",
+					"image": "${pageImage}",
+					"sku": "${product?.sku}",
+					"offers": [
+						{
+							"@type": "Offer",
+							// priceSpecification is a more detailed way to define price, useful if you have tax or other breakdowns
+							// However, for Google's rich results, "price" and "priceCurrency" directly on Offer are usually sufficient and often preferred for simplicity.
+							// I've kept it here as you had it, but simplified the structure to avoid an array for a single price.
+							"priceSpecification": {
+								"@type": "UnitPriceSpecification",
+								"price": "${productSchemaPrice}",
+								"priceCurrency": "${productSchemaPriceCurrency}",
+								"valueAddedTaxIncluded": false,
+								"validThrough": "${productValidThrough}" // Consider if this "validThrough" date is always applicable or should be dynamic
+							},
+							"priceValidUntil": "${productValidThrough}", // Duplicated from priceSpecification validThrough, but good to have
+							"availability": "https://schema.org/InStock", // Use the full URL for clarity
+							"url": "${pageUrl}",
+							"seller": { "@type": "Organization", "name": "${m.seoBase()}", "url": "${basePath}" }
+						}
+					]
+				}
+			]
+		}
+	</script>
+
+`}
+</svelte:head>

@@ -15,6 +15,7 @@ export * from './shipping.types';
 export * from './payments.types';
 export * from './partners.types';
 export * from './seo.types';
+export * from './schema.types';
 
 export interface Wine {
 	title: string;

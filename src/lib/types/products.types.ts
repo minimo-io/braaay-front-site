@@ -9,6 +9,36 @@ import type {
 	YoastSeoData
 } from './index';
 
+export interface Product {
+	id: number;
+	isFavorited: boolean;
+	slug: string;
+	title: string;
+	floatPrice: number;
+	price: string;
+	regularPrice: string;
+	stockStatus: string;
+	stockQuantity: number;
+	sku: string;
+	status: string;
+	pageCustomColors: PageCustomColors;
+	uri: string;
+	date: string;
+	modified: string;
+	author: ArticleCreator;
+	averageRating: string;
+	excerpt: string;
+	image: ImageGeneral;
+	reviewCount: number;
+	content?: string;
+	shortDescription: string;
+	header?: {
+		title?: string;
+		content?: string;
+	};
+	seo?: YoastSeoData;
+}
+
 export interface ProductsForCategoryQueryResult {
 	productCategory: GraphQLCategory;
 	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
@@ -46,35 +76,6 @@ export interface ProductsForTagQueryResult {
 	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
 }
 
-export interface Product {
-	id: number;
-	isFavorited: boolean;
-	slug: string;
-	title: string;
-	floatPrice: number;
-	price: string;
-	regularPrice: string;
-	stockStatus: string;
-	stockQuantity: number;
-	sku: string;
-	status: string;
-	pageCustomColors: PageCustomColors;
-	uri: string;
-	date: string;
-	modified: string;
-	author: ArticleCreator;
-	averageRating: string;
-	excerpt: string;
-	image: ImageGeneral;
-	reviewCount: number;
-	content?: string;
-	shortDescription: string;
-	header?: {
-		title?: string;
-		content?: string;
-	};
-	seo?: YoastSeoData;
-}
 export interface ProductCategory {
 	name: string;
 	slug: string;
@@ -247,7 +248,8 @@ export function mapProduct(data: GraphQLProductNode): Product {
 			.replaceAll('R$', '')
 			.replaceAll('$', '')
 			.replaceAll(' ', '')
-			.replaceAll(',', '.');
+			.replaceAll('.', '') // Remove thousands separator FIRST
+			.replaceAll(',', '.'); // Then change comma to decimal point
 	}
 
 	return {
