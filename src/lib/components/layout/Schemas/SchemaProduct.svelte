@@ -100,7 +100,7 @@
 			"brand": {
 				"@type": "Thing",
 				"name": "${productWineryName}"
-			}
+			},
 			"offers": [
 				{
 					"@type": "Offer",
@@ -118,7 +118,8 @@
 				}
 			]
 		}
-	</script>`}
+	</script>
+`}
 	<!-- {@html `<script type="application/ld+json">
 		{
 			"@context": "https://schema.org",
