@@ -60,11 +60,11 @@
 		<!-- Item with submenu -->
 		<a
 			href={localizeHref(`/login/${originRoute ? `?returnUrl=${originRoute}` : ''}`)}
-			class="py-3 border-b border-t border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
+			class="py-3 border-t border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
 		>
 			<div class="text-left self-center flex align-middle justify-center">
 				<CircleUser class="w-4 h-4 self-center mr-2" />
-				<span class="self-center font-semibold">Acesso / Cadastro</span>
+				<span class="self-center font-semibold">{m.accessSignUp()}</span>
 			</div>
 			<div class="text-grey-medium flex flex-row align-middle self-center">
 				<ChevronRight class="w-4 aspect-1 text-grey-dark" />
