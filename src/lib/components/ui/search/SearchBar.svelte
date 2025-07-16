@@ -16,15 +16,15 @@
 		}
 	}
 	// Trigger an action when the search input is focused
-	function onFocus(): void {
-		// console.log('Search input focused');
-		// Later, trigger the floating default results here.
-	}
-	// Triggered when the search input loses focus
-	function onBlur(): void {
-		// console.log('Search input lost focus');
-		// Later: hide the floating default results
-	}
+	// function onFocus(): void {
+	// 	// console.log('Search input focused');
+	// 	// Later, trigger the floating default results here.
+	// }
+	// // Triggered when the search input loses focus
+	// function onBlur(): void {
+	// 	// console.log('Search input lost focus');
+	// 	// Later: hide the floating default results
+	// }
 
 	onMount(() => {
 		isMac = /Mac/i.test(navigator.userAgent);
@@ -44,8 +44,6 @@
 			placeholder={m.search()}
 			bind:this={searchInput}
 			name="s"
-			onfocus={onFocus}
-			onblur={onBlur}
 		/>
 		<!-- KBD -->
 		{#if isMac !== null}
