@@ -3,7 +3,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import type { Product, ProductAttributes, ProductCategory, YoastSeoData } from '$lib/types';
-	import { addYearsAndFormat, mapLocale, stripHtml } from '$lib/utils';
+	import { addYearsAndFormat, mapLocale, serializeSchema, stripHtml } from '$lib/utils';
 
 	interface Props {
 		product?: Product;
@@ -31,16 +31,6 @@
 	let breadcrumbUrl = $derived(categories ? `${page.url.origin + categories[0].uri}` : '');
 
 	// Product
-	// --- Price Transformation ---
-	// let productSchemaPrice = $derived.by(() => {
-	// 	if (!product?.price) {
-	// 		return undefined; // Or null, or 0, depending on how you want to handle missing prices
-	// 	}
-	// 	// Remove "R$" and thousands separator (the dot)
-	// 	const cleanedPrice = product.price.replaceAll('R$', '').replaceAll('.', '');
-	// 	// Replace decimal comma with a decimal point and convert to a number
-	// 	return parseFloat(cleanedPrice.replaceAll(',', '.'));
-	// });
 	// --- Price Transformation ---
 	let productSchemaPrice = $derived.by(() => {
 		const price = product?.price;
@@ -88,35 +78,33 @@
 </script>
 
 <svelte:head>
-	<script type="application/ld+json">
-		{
-			"@context": "http://schema.org",
-			"@type": "Product",
-			"url": "${pageUrl}",
-			"name": "${product?.title}",
-			"sku": "${product?.sku}",
-			"image": "${pageImage}",
-			"description": "${stripHtml(product?.shortDescription || seo?.metaDesc || '').replaceAll('\n', '')}",
-			"brand": {
-				"@type": "Thing",
-				"name": "${productWineryName}"
-			},
-			"offers": [
-				{
-					"@type": "Offer",
-					"priceSpecification": {
-						"@type": "UnitPriceSpecification",
-						"price": "${productSchemaPrice}",
-						"priceCurrency": "${productSchemaPriceCurrency}",
-						"valueAddedTaxIncluded": false,
-						"validThrough": "${productValidThrough}" // Consider if this "validThrough" date is always applicable or should be dynamic
-					},
-					"priceValidUntil": "${productValidThrough}", // Duplicated from priceSpecification validThrough, but good to have
-					"availability": "https://schema.org/InStock", // Use the full URL for clarity
-					"url": "${pageUrl}",
-					"seller": { "@type": "Organization", "name": "${m.seoBase()}", "url": "${basePath}" }
-				}
-			]
-		}
-	</script>
+	{@html serializeSchema({
+		'@context': 'http://schema.org',
+		'@type': 'Product',
+		url: pageUrl,
+		name: product?.title,
+		sku: product?.sku,
+		image: pageImage,
+		description: stripHtml(product?.shortDescription || seo?.metaDesc || '').replaceAll('\n', ''),
+		brand: {
+			'@type': 'Thing',
+			name: productWineryName
+		},
+		offers: [
+			{
+				'@type': 'Offer',
+				priceSpecification: {
+					'@type': 'UnitPriceSpecification',
+					price: productSchemaPrice,
+					priceCurrency: productSchemaPriceCurrency,
+					valueAddedTaxIncluded: false,
+					validThrough: productValidThrough // Consider if this "validThrough" date is always applicable or should be dynamic
+				},
+				priceValidUntil: productValidThrough, // Duplicated from priceSpecification validThrough, but good to have
+				availability: 'https://schema.org/InStock', // Use the full URL for clarity
+				url: pageUrl,
+				seller: { '@type': 'Organization', name: m.seoBase(), url: basePath }
+			}
+		]
+	})}
 </svelte:head>

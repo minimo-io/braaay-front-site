@@ -8,7 +8,7 @@
     {
       "name": "Uva Chardonnay",
       "url": "/uva/chardonnay/",
-      "count": 25
+      "count": 26
     },
     {
       "name": "Cabernet Sauvignon",
@@ -36,14 +36,14 @@
       "count": 9
     },
     {
-      "name": "Moscato Bianco",
-      "url": "/uva/moscato-bianco/",
+      "name": "Alvarinho",
+      "url": "/uva/alvarinho/",
       "count": 6
     },
     {
-      "name": "Alvarinho",
-      "url": "/uva/alvarinho/",
-      "count": 5
+      "name": "Moscato Bianco",
+      "url": "/uva/moscato-bianco/",
+      "count": 6
     },
     {
       "name": "Cabernet Franc",
@@ -58,6 +58,11 @@
     {
       "name": "Syrah",
       "url": "/uva/syrah/",
+      "count": 3
+    },
+    {
+      "name": "Pinot Grigio",
+      "url": "/uva/pinot-grigio/",
       "count": 3
     },
     {
@@ -103,11 +108,6 @@
     {
       "name": "Touriga Nacional",
       "url": "/uva/touriga-nacional/",
-      "count": 2
-    },
-    {
-      "name": "Pinot Grigio",
-      "url": "/uva/pinot-grigio/",
       "count": 2
     },
     {

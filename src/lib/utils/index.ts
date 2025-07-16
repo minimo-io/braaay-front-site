@@ -21,6 +21,11 @@ export function mapLocale(locale: string) {
 	}
 }
 
+// Serialize a ld+json schema to print on the head
+export function serializeSchema(thing) {
+	return `<script type="application/ld+json">${JSON.stringify(thing, null, 2)}</script>`;
+}
+
 /**
  * Truncate a string to a maximum length and add ellipsis if needed.
  */
