@@ -22,13 +22,13 @@
 
 	// Image
 	let pageImage = $derived(product?.image.url);
-	let pageImageAlt = $derived(product?.image.altText);
-	let pageImageWidth = 674;
-	let pageImageHeight = 1024;
+	// let pageImageAlt = $derived(product?.image.altText);
+	// let pageImageWidth = 674;
+	// let pageImageHeight = 1024;
 
 	// Breadcrumb
-	let breadcrumbName = $derived(categories ? categories[0].name : '');
-	let breadcrumbUrl = $derived(categories ? `${page.url.origin + categories[0].uri}` : '');
+	// let breadcrumbName = $derived(categories ? categories[0].name : '');
+	// let breadcrumbUrl = $derived(categories ? `${page.url.origin + categories[0].uri}` : '');
 
 	// Product
 	// --- Price Transformation ---

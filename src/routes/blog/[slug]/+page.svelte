@@ -8,9 +8,11 @@
 	import Meta from '$components/layout/Meta.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import type { YoastSeoData } from '$lib/types';
+	import SchemaBlogPost from '$components/layout/Schemas/SchemaBlogPost.svelte';
 	// import type { Post } from '$lib/types';
 
 	let { data }: { data: PageData } = $props();
+
 	const article = $state(data.post);
 	const seo: YoastSeoData | undefined = $state(data.seo);
 </script>
@@ -18,6 +20,9 @@
 {#if seo}
 	<Meta seoData={seo} />
 {/if}
+
+<!-- Schema -->
+<SchemaBlogPost {seo} post={article} />
 
 <main class="w-full mx-auto">
 	{#if article}
