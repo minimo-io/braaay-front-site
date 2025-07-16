@@ -12,6 +12,7 @@ export const POST_QUERY = gql`
 			slug
 			status
 			date
+			modified
 			content
 
 			header {

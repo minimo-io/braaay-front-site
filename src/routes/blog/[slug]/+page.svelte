@@ -14,7 +14,7 @@
 	let { data }: { data: PageData } = $props();
 
 	const article = $state(data.post);
-	const seo: YoastSeoData | undefined = $state(data.seo);
+	const seo: YoastSeoData | undefined = $derived(data.seo);
 </script>
 
 {#if seo}

@@ -18,6 +18,7 @@ export interface Category {
 	name: string;
 	description: string;
 	count: number;
+	uri: string;
 	header: {
 		title: string;
 		image?: ImageGeneral;
@@ -32,6 +33,7 @@ export interface GraphQLCategory {
 	name: string;
 	description: string;
 	count: number;
+	uri: string;
 	header: {
 		firstParagraph: string;
 		firstSubtitle: string;
@@ -57,6 +59,7 @@ export interface GraphQLCategory {
 export function mapCategory(category: GraphQLCategory): Category {
 	return {
 		name: category.name,
+		uri: category.uri,
 		description: category.description,
 		count: category.count || 0,
 		seo: category.seo,

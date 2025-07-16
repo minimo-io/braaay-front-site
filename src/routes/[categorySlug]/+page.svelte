@@ -23,13 +23,14 @@
 	let products: Product[] = $state(data.products);
 	let category: Category = $state(data.category);
 	let pagination: Pagination = $state(data.pagination);
-	let seo: YoastSeoData = $derived(category.seo!);
+	let seo: YoastSeoData | undefined = $state(data.category.seo!);
 	let isLoading = $state(false);
 
 	$effect(() => {
 		products = data.products;
 		category = data.category;
 		pagination = data.pagination;
+		seo = data.category.seo;
 	});
 
 	let article: Post = $derived({

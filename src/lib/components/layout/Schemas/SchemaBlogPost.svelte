@@ -13,13 +13,6 @@
 
 	// // Page
 	let basePath = `${page.url.origin}/`;
-	let pageUrl = $derived(page.url);
-	let pageDescription = $derived(seo?.metaDesc ?? post!.excerpt);
-	// let pageLanguage = mapLocale(getLocale());
-	// let pageDatePublished = $derived(product?.date);
-
-	// // Image
-	// let pageImage = $derived(product?.image.url);
 </script>
 
 <svelte:head>
@@ -30,7 +23,7 @@
 				'@type': 'BlogPosting',
 				headline: `${seo?.title}`,
 				datePublished: post?.date,
-				dateModified: '2024-11-29T18:32:25-02:00',
+				dateModified: post?.modified,
 				publisher: {
 					'@type': 'Organization',
 					name: 'Braaay',
@@ -38,10 +31,10 @@
 				},
 				mainEntityOfPage: {
 					'@type': 'WebPage',
-					'@id': pageUrl
+					'@id': page.url
 				},
-				author: { '@type': 'Person', name: 'Maryene Rocha de Oliveira' },
-				description: stripHtml(pageDescription),
+				author: { '@type': 'Person', name: 'Erika Bezerra' },
+				description: stripHtml(seo?.metaDesc ?? post!.excerpt),
 				image: {
 					'@type': 'ImageObject',
 					url: post?.featuredImage.mediaItemUrl ?? ''

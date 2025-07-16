@@ -4,6 +4,7 @@ export const CATEGORY_HEADER_FRAGMENT = `
 		name
 		description
 		count
+		uri
 		${SEO_FRAGMENT}
 
 		header{

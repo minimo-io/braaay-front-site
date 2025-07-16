@@ -12,6 +12,8 @@
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import Meta from '$components/layout/Meta.svelte';
 	import { m } from '$lib/paraglide/messages';
+	import SchemaPage from '$components/layout/Schemas/SchemaPage.svelte';
+	import { page } from '$app/state';
 
 	let { data }: { data: PageData } = $props();
 
@@ -22,9 +24,24 @@
 	let firstPost: Post | undefined = postsCopy.shift();
 </script>
 
+<!-- Meta -->
 <Meta
 	title="{m.seoBlogTitle()} {m.seoDivider()} {m.seoBase()}"
 	description={m.seoBlogDescription()}
+/>
+
+<!-- Schema -->
+<SchemaPage
+	title={m.seoBlogTitle()}
+	description={m.seoBlogDescription()}
+	breadcrumbs={[
+		{
+			'@type': 'ListItem',
+			position: 2,
+			name: `Blog`,
+			item: page.url.href
+		}
+	]}
 />
 
 {#if firstPost}
