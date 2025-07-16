@@ -68,12 +68,29 @@
 		// Default to USD if no specific currency symbol is found
 		return 'USD';
 	});
-	let productWineryName = $derived(productAttributes?.producer.name);
+	let productProducerName = $derived(productAttributes?.producer.name);
+	let productProducerUrl = $derived(`${basePath.slice(0, -1)}${productAttributes?.producer.uri}`);
+	let productProducerImage = $derived(productAttributes?.producer.image.url);
+
+	console.log('IIMAGE; ', productAttributes?.producer.image);
 
 	// --- Date Transformation ---
 	let productValidThrough = $derived.by(() => {
 		// We can directly use our helper function here
 		return addYearsAndFormat(product?.date, 2);
+	});
+
+	let brand = $derived.by(() => {
+		let finalBrand: any = {
+			'@type': 'Thing',
+			name: productProducerName,
+			mainEntityOfPage: productProducerUrl
+		};
+
+		if (productProducerImage?.trim()) {
+			finalBrand.image = productProducerImage;
+		}
+		return finalBrand;
 	});
 </script>
 
@@ -86,10 +103,7 @@
 		sku: product?.sku,
 		image: pageImage,
 		description: stripHtml(product?.shortDescription || seo?.metaDesc || '').replaceAll('\n', ''),
-		brand: {
-			'@type': 'Thing',
-			name: productWineryName
-		},
+		brand: brand,
 		offers: [
 			{
 				'@type': 'Offer',
