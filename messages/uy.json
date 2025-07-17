@@ -107,5 +107,7 @@
 	"signUpNoPassword": "Ingresa una contraseña para proteger tu cuenta",
 	"signUpPasswordTooShort": "La contraseña debe tener al menos 6 caracteres",
 	"signUpTelephoneInvalid": "Teléfono inválido. Usa un número uruguayo que comience con 09 y tenga 9 dígitos en total.",
-	"signUpInvalidCpf": "CPF inválido. Por favor, ingrese un número válido de 11 dígitos."
+	"signUpInvalidCpf": "CPF inválido. Por favor, ingrese un número válido de 11 dígitos.",
+
+	"watchVideo": "Ver video"
 }

@@ -13,6 +13,7 @@ export const PRODUCT_LIST_FRAGMENT = `
             bgGradientStart
             bgGradientEnd
             pageMainColor
+            youtubeVideo
             bgContentImage {
                 node {
                     mediaItemUrl

@@ -49,7 +49,7 @@ export const HomeProducts = () => {
 			},
 			{
 				title: 'Pizzato Concentus Gran Reserva 750ml',
-				price: `${m.currencySymbol()}171,00`,
+				price: `${m.currencySymbol()}190,00`,
 				regularPrice: `${m.currencySymbol()}190,00`,
 				url: '/produto/vinho-pizzato-concentus-gran-reserva/',
 				score: '',

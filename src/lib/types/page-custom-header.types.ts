@@ -3,4 +3,5 @@ export interface PageCustomColors {
 	gradientEnd?: string;
 	color?: string;
 	bgImage?: string;
+	youtubeVideo?: string;
 }

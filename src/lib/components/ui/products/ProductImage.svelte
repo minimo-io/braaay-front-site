@@ -7,7 +7,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import type { PageCustomColors, ImageGeneral, ProductCategory, Product } from '$lib/types';
 	import { calculatePercentageDifference, capitalize, launchToast } from '$lib/utils';
-	import { Heart, Share2 } from '@lucide/svelte';
+	import { Heart, Share2, Youtube } from '@lucide/svelte';
 
 	interface Props {
 		colors?: PageCustomColors;
@@ -103,7 +103,7 @@
 		</div>
 	{/if}
 
-	<!-- Mobile -->
+	<!-- Actions -->
 	<div
 		class={[
 			'md:block absolute -bottom-[1px] md:bottom-auto md:top-[65px] right-[10px] md:right-auto md:left-[31px] bg-grey-background p-2 px-2 rounded-t-lg md:rounded-b-lg',
@@ -111,10 +111,11 @@
 		]}
 	>
 		<div class="flex gap-0 items-center">
+			<!-- Share -->
 			<div class="pr-2 flex border-r border-grey-medium">
 				<button onclick={shareContent}><Share2 class="h-[20px]" /> </button>
 			</div>
-
+			<!-- Favorites -->
 			<div class="pl-2 flex">
 				<button onclick={handleFavoriteClick} disabled={isLoading}>
 					<div class="flex items-center">
@@ -130,6 +131,28 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Youtube video -->
+	{#if product?.pageCustomColors.youtubeVideo}
+		<div
+			class={[
+				'md:block absolute -bottom-[1px] md:bottom-auto md:top-[108px] left-[30px] md:right-auto md:left-[31px] bg-grey-background px-2 rounded-t-lg md:rounded-b-lg h-[36px]',
+				!hasPriceDiscount && 'md:!top-[71px]'
+			]}
+		>
+			<div class=" items-center self-center relative mt-[6px]">
+				<a
+					href={product?.pageCustomColors.youtubeVideo}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex gap-1 items-center"
+				>
+					<Youtube class="w-[23px]" />
+					<span class="text-[13px] text-blue">{m.watchVideo()}</span>
+				</a>
+			</div>
+		</div>
+	{/if}
 
 	<img
 		id="primaryimage"

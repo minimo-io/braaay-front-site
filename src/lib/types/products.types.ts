@@ -198,6 +198,7 @@ export interface GraphQLProduct {
 		bgGradientStart?: string;
 		bgGradientEnd?: string;
 		pageMainColor?: string;
+		youtubeVideo?: string;
 
 		bgContentImage: {
 			node: {
@@ -270,7 +271,8 @@ export function mapProduct(data: GraphQLProductNode): Product {
 			gradientStart: data.node.outrosDadosDeProduto?.bgGradientStart || undefined,
 			gradientEnd: data.node.outrosDadosDeProduto?.bgGradientEnd || undefined,
 			color: data.node.outrosDadosDeProduto?.pageMainColor || undefined,
-			bgImage: data.node.outrosDadosDeProduto?.bgContentImage?.node?.mediaItemUrl || undefined
+			bgImage: data.node.outrosDadosDeProduto?.bgContentImage?.node?.mediaItemUrl || undefined,
+			youtubeVideo: data.node.outrosDadosDeProduto?.youtubeVideo || undefined
 		},
 		uri: data.node.uri,
 		date: data.node.date,

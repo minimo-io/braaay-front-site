@@ -38,11 +38,11 @@
 				<div class="bry-article-content">
 					<ArticleContent {content} />
 					{#if twoColumns}
-						<div class="w-full md:w-1/3 pl-0 md:pl-6">
+						<!-- <div class="w-full md:w-1/3 pl-0 md:pl-6">
 							<div class="md:sticky md:top-1">
 								<ArticleRightBannerBox />
 							</div>
-						</div>
+						</div> -->
 					{/if}
 				</div>
 			</div>

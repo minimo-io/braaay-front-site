@@ -1,3 +1,4 @@
+import { logout } from '$lib/graphql/auth';
 import { localizeHref } from '$lib/paraglide/runtime';
 
 export * from './smoothScroll.util';
@@ -49,6 +50,7 @@ export function isBlogPost(path: string) {
 }
 
 export function redirectLocale(newLocale: string) {
+	logout();
 	window.location.href = localizeHref('/', { locale: newLocale });
 }
 

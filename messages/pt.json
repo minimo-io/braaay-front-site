@@ -110,5 +110,7 @@
 	"signUpNoPassword": "Informe uma senha para proteger sua conta",
 	"signUpPasswordTooShort": "A senha deve ter pelo menos 6 caracteres",
 	"signUpTelephoneInvalid": "Telefone inválido. Use o formato com DDD e número móvel: (11) 9 9999-9999.",
-	"signUpInvalidCpf": "CPF inválido. Por favor, insira um número válido com 11 dígitos."
+	"signUpInvalidCpf": "CPF inválido. Por favor, insira um número válido com 11 dígitos.",
+
+	"watchVideo": "Assistir vídeo"
 }
