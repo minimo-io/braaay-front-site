@@ -31,7 +31,7 @@
 <div class="flex flex-1 text-xs px-0 flex-col">
 	<!-- Item with submenu -->
 	<button
-		onclick={() => alert('Em breve')}
+		onclick={() => localizeHref('/account/my-favoritess/')}
 		class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
 	>
 		<div class="text-left self-center flex align-middle justify-center">

@@ -131,7 +131,7 @@
 				chevron={false}
 				customPx="!pl-3 ml-[12px]"
 				title="Adega"
-				url={localizeHref('/login/')}
+				url={localizeHref('/account/my-favorites/')}
 				type="light"
 				size="xl"
 			>

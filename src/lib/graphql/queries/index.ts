@@ -15,6 +15,8 @@ export * from './products-on-sale.query';
 export * from './slugs-query.query';
 export * from './order-get.query';
 
+export * from './favorites-list.query';
+
 // query all coupons for the pre-fetch query script
 export * from './coupon-get-all.query';
 

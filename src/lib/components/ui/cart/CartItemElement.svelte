@@ -14,7 +14,10 @@
 	}
 	let { cartItem }: Props = $props();
 
+	console.log(cartItem);
 	let currentPrice = $derived(cartItem.price * cartItem.quantity);
+	let hasPriceDiscount = cartItem.regularPrice != cartItem.priceString;
+
 	// handle manual quantity
 	const handleQuantityChange = (cartItemId, e) => {
 		// Get the input value and parse it as an integer
@@ -138,9 +141,17 @@
 			<Plus class="h-4 pl-1" />
 		</button>
 	</div>
-
 	<div class="flex w-[100px] flex-col self-center justify-center pr-0 md:pr-3">
-		<div class="relative h-[25px] overflow-hidden">
+		<div class="relative Xh-[25px] overflow-hidden">
+			<!-- Regular price -->
+			{#if hasPriceDiscount}
+				<div
+					class="line-through text-gray-500 text-right font-normal text-sm mr-2 text-grey-darkest font-roboto"
+				>
+					{cartItem.regularPrice}
+				</div>
+			{/if}
+
 			{#key currentPrice}
 				<p
 					class="font-semibold text-center md:text-right text-lg md:text-base"
@@ -155,7 +166,7 @@
 			onclick={() => removeFromCart(cartItem.id)}
 			class="text-grey-medium font-normal text-xs text-center md:text-right mt-4 md:mt-[2px]"
 		>
-			remover
+			{m.remove()}
 		</button>
 	</div>
 </div>

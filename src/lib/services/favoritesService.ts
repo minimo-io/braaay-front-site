@@ -1,34 +1,18 @@
 // src/lib/services/favoritesService.ts
 import { FAVORITES_ADD_MUTATION } from '$lib/graphql/mutations/favorites-add.mutation';
 import { FAVORITES_REMOVE_MUTATION } from '$lib/graphql/mutations/favorites-remove.mutation';
+import { FAVORITES_PRODUCTS_FOR_USER } from '$lib/graphql/queries';
 import { getUrqlClient } from '$lib/stores/urqlClient.state.svelte';
-import type { FavoriteProduct } from '$lib/types/favoriteProduct.type';
-
-interface AddFavoriteProductResponse {
-	addFavoriteProduct: {
-		success: boolean;
-		message: string;
-		favoriteProduct: FavoriteProduct;
-	};
-}
-
-interface RemoveFavoriteProductResponse {
-	removeFavoriteProduct: {
-		success: boolean;
-		message: string;
-	};
-}
-
-interface AddToFavoritesResult {
-	success: boolean;
-	message: string;
-	favoriteProduct?: FavoriteProduct;
-}
-
-interface RemoveFromFavoritesResult {
-	success: boolean;
-	message: string;
-}
+import {
+	type FavoriteProduct,
+	type AddToFavoritesResult,
+	type AddFavoriteProductResponse,
+	type RemoveFromFavoritesResult,
+	type RemoveFavoriteProductResponse,
+	type GraphQLFavoriteProducts,
+	mapProduct,
+	type GraphQLFavoriteSigleProduct
+} from '$lib/types';
 
 /**
  * Adds a product to the user's favorites.
@@ -111,4 +95,38 @@ export async function removeProductFromFavorites(
 			message: 'An unexpected error occurred. Please try again later.'
 		};
 	}
+}
+
+export async function getFavoriteProducts(): Promise<FavoriteProduct[] | undefined> {
+	try {
+		const favoritesResult = await getUrqlClient().client.query<GraphQLFavoriteProducts>(
+			FAVORITES_PRODUCTS_FOR_USER,
+			{}
+		);
+		if (favoritesResult.error && !favoritesResult.data) {
+			const error = `Favorites fetch failed: ${favoritesResult.error.message}`;
+			console.error(error);
+			throw new Error(error);
+		}
+
+		const favoriteProducts = favoritesResult.data?.viewer.favoriteProducts.map((fav) =>
+			mapFavoriteProducts(fav)
+		);
+
+		return favoriteProducts;
+	} catch (err) {
+		console.error('Failed to get favorites', err);
+	}
+}
+
+function mapFavoriteProducts(graphQLFavoriteProduct: GraphQLFavoriteSigleProduct): FavoriteProduct {
+	return {
+		id: graphQLFavoriteProduct.product.databaseId,
+		product: mapProduct({ node: graphQLFavoriteProduct.product }),
+		user: {
+			databaseId: graphQLFavoriteProduct.user.databaseId,
+			username: graphQLFavoriteProduct.user.username
+		},
+		addedDate: graphQLFavoriteProduct.addedDate
+	};
 }

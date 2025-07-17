@@ -1,20 +1,6 @@
 import { gql } from '@urql/core';
 import type { Customer, CustomerGraphQLResponse } from '$lib/types';
 
-// Other ways to query a customer
-// {
-// 	customer(id: "VXNlcjo1") {
-// 	  cpf
-// 	}
-//   }
-
-// logged in
-//   {
-// 	customer {
-// 	  cpf
-// 	}
-//   }
-
 export const CUSTOMER_QUERY = gql`
 	query GetCustomerData {
 		customer {

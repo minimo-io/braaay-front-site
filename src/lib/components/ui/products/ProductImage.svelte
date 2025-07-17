@@ -54,14 +54,14 @@
 				? await removeProductFromFavorites(product.id)
 				: await addProductToFavorites(product.id);
 
-			launchToast(result.message, result.success ? 'success' : 'error');
+			launchToast(result.message, result.success ? 'success' : 'error', 3000);
 
 			if (result.success) {
 				isFavorite = !isFavorite;
 			}
 		} catch (error) {
 			console.error(`Error ${action} favorites:`, error);
-			launchToast(`An error occurred while ${action} favorites.`, 'error');
+			launchToast(`An error occurred while ${action} favorites.`, 'error', 3000);
 		} finally {
 			isLoading = false;
 		}

@@ -72,6 +72,30 @@ export default defineConfig({
 						['uy', '/uy/cuenta/']
 					]
 				},
+				// Account Favorites
+				{
+					pattern: '/account/my-favorites/',
+					localized: [
+						['pt', '/conta/adega/'],
+						['uy', '/uy/cuenta/bodega/']
+					]
+				},
+				// Account Cashback
+				{
+					pattern: '/account/my-cashback/',
+					localized: [
+						['pt', '/conta/cashback/'],
+						['uy', '/uy/cuenta/cashback/']
+					]
+				},
+				// Account Cashback
+				{
+					pattern: '/account/my-orders/',
+					localized: [
+						['pt', '/conta/pedidos/'],
+						['uy', '/uy/cuenta/pedidos/']
+					]
+				},
 
 				// Carrinho
 				{

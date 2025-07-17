@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { localizeHref } from '$lib/paraglide/runtime';
 	import { Coins } from '@lucide/svelte';
 	interface Props {
 		title: string;
@@ -9,7 +10,7 @@
 </script>
 
 <a
-	href="/clube/"
+	href={localizeHref('/account/my-cashback/')}
 	class="btn h-[35px] lg:h-[45px] text-blue uppercase relative flex items-center justify-center ml-3 border shine-effect"
 >
 	<Coins class="h-[15px] text-sun" fill="#BD8836" />

@@ -61,7 +61,7 @@
 				{m.discountCouponTitle()}
 				{#if couponsCount >= 1}
 					<MoreInfoButton
-						title="Remover"
+						title={m.remove()}
 						action={async () => {
 							// Clear remote coupons session
 							toggleLoader();

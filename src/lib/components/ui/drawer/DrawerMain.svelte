@@ -101,8 +101,8 @@
 		</a> -->
 	{/if}
 	<!-- Minha adega -->
-	<button
-		onclick={() => alert('Em breve')}
+	<a
+		href={localizeHref('/account/my-favorites/')}
 		class="py-3 border-b border-t border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
 	>
 		<div class="text-left self-center flex align-middle justify-center">
@@ -112,7 +112,7 @@
 		<div class="text-grey-medium flex flex-row align-middle self-center">
 			<ChevronRight class="w-4 aspect-1 text-grey-dark" />
 		</div>
-	</button>
+	</a>
 	<a
 		href="/clube/"
 		class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px]"

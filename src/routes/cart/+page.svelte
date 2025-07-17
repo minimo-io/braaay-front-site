@@ -8,7 +8,7 @@
 	import { cart, calculateDiscount, clearAllCoupons } from '$stores/cart.store.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
-	import { CircleX, Gift, Sparkle, Truck, X } from '@lucide/svelte';
+	import { Gift, Sparkle, Truck, X } from '@lucide/svelte';
 	import { openModal } from '$stores/modalState.state.svelte';
 	import CouponForm from '$components/ui/forms/couponForm.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
@@ -193,7 +193,7 @@
 							{/if}
 							{#if couponsCount >= 1}
 								<MoreInfoButton
-									title="Remover"
+									title={m.remove()}
 									action={async () => {
 										// Clear remote coupons session
 										toggleLoader();

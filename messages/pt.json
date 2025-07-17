@@ -21,6 +21,15 @@
 	"cashDiscountText": "NO PIX (5% OFF)",
 
 	"onSale": "EM OFERTA",
+	"soon": "Em breve",
+	"remove": "remover",
+	"removing": "removendo...",
+	"saved": "salvo",
+	"availableViaWhatsapp": "Disponível pelo WhatsApp",
+	"details": "Detalhes",
+	"myFavorites": "Minha adega",
+	"favorites": "Adega",
+	"shareFavorites": "Compartilhar adega",
 
 	"sobreNos": "SOBRE NÓS",
 	"afiliados": "AFILIADOS",
@@ -30,6 +39,7 @@
 	"cartSummaryTitle": "Resumo da compra",
 	"emptyCart": "Seu carrinho está vazio! <br /><span class='font-medium text-sm'>Vamos ganhar cashback</span> ⚡️",
 	"addToCart": "ADICIONAR À SACOLA",
+
 	"add": "Adicionar",
 	"addingToCart": "Adicionando...",
 	"addingToCartOk": "Adicionado com sucesso",

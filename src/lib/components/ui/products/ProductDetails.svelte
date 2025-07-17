@@ -34,6 +34,7 @@
 		name: product.title,
 		priceString: product.price,
 		price: product.floatPrice,
+		regularPrice: product.regularPrice,
 		quantity: 1,
 		maxQuantity: product.stockQuantity,
 		image: product.image
@@ -107,7 +108,7 @@
 				class="px-8 py-2 text-white rounded-lg uppercase font-roboto text-[13px] tracking-[2.5px] text-center w-full md:w-auto !bg-green-dark font-semibold"
 				style="background-color: var(--bry-current-color)"
 			>
-				{'Disponível pelo WhatsApp'}
+				{m.availableViaWhatsapp()}
 			</button>
 		{/if}
 	</div>

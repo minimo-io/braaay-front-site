@@ -50,7 +50,7 @@
 
 	<!-- <a href={wine.url} class="wine-button">VER DETALHES</a> -->
 	<div class="mt-2">
-		<Button title="DETALHES" type="light" url={wine.url} borderDark={true} tracking="normal" />
+		<Button title={m.details()} type="light" url={wine.url} borderDark={true} tracking="normal" />
 	</div>
 	{#if discount || hasPriceDiscount}
 		<div class="absolute top-4 left-4 font-bold bg-black text-white px-2 py-1 text-xs rounded-lg">
