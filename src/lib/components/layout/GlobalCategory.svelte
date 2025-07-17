@@ -39,7 +39,9 @@
 							price: product.price,
 							regularPrice: product.regularPrice,
 							url: localizeHref(`/produto/${product.slug}/`),
-							score: product.averageRating
+							score: product.averageRating,
+							isFavorited: product.isFavorited,
+							productId: product.id
 						}}
 					/>
 				</span>

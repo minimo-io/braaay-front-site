@@ -142,9 +142,12 @@
 							price: product.price,
 							regularPrice: product.regularPrice,
 							url: product.url,
-							score: product.score
+							score: product.score,
+							isFavorited: false,
+							productId: 0
 						}}
 						discount=""
+						hideFavs={true}
 					/>
 				{/each}
 
@@ -159,9 +162,12 @@
 							price: product.price,
 							regularPrice: product.regularPrice,
 							url: product.url,
-							score: product.score
+							score: product.score,
+							isFavorited: false,
+							productId: 0
 						}}
 						discount=""
+						hideFavs={true}
 					/>
 				{/each}
 			</div>

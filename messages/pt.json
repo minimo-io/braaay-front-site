@@ -1,4 +1,6 @@
 {
+	"letsExploreSlug": "/vinhos/",
+
 	"loading": "Carregando...",
 	"search": "Pesquisar...",
 	"searching": "Pesquisando...",
@@ -30,6 +32,8 @@
 	"myFavorites": "Minha adega",
 	"favorites": "Adega",
 	"shareFavorites": "Compartilhar adega",
+	"loadingFavorites": "Carregando sua adega...",
+	"noFavoriteProducts": "Nenhum produto na sua adega! Vamos completar-la!",
 
 	"sobreNos": "SOBRE NÓS",
 	"afiliados": "AFILIADOS",

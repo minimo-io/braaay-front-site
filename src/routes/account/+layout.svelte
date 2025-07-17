@@ -123,7 +123,7 @@
 						<li>
 							<a href={localizeHref('/account/my-favorites/')} class="text-grey-blueish flex gap-1">
 								<Heart class="w-4 h-4 self-center mr-2" fill="red" color="red" />
-								<span class={[myFavoritesBold && 'font-bold']}> Minha adega </span>
+								<span class={[myFavoritesBold && 'font-bold']}> {m.myFavorites()} </span>
 							</a>
 						</li>
 						<li>

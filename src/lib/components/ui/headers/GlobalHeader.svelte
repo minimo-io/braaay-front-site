@@ -14,6 +14,7 @@
 	import { isAuthenticated } from '$lib/graphql/auth';
 	import { cart } from '$stores/cart.store.svelte';
 	import { AppConfig } from '$config';
+	import { m } from '$lib/paraglide/messages';
 
 	// Using runes for reactive state
 	let SecondaryMenuComponent = $state(
@@ -130,7 +131,7 @@
 			<Button
 				chevron={false}
 				customPx="!pl-3 ml-[12px]"
-				title="Adega"
+				title={m.favorites()}
 				url={localizeHref('/account/my-favorites/')}
 				type="light"
 				size="xl"

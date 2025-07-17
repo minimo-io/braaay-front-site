@@ -36,7 +36,7 @@
 	>
 		<div class="text-left self-center flex align-middle justify-center">
 			<Heart class="w-4 h-4 self-center mr-2" fill="red" color="red" />
-			<span class="self-center font-semibold">Minha adega</span>
+			<span class="self-center font-semibold">{m.myFavorites()}</span>
 		</div>
 		<div class="text-grey-medium flex flex-row align-middle self-center">
 			<ChevronRight class="w-4 aspect-1 text-grey-dark" />

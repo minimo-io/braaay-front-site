@@ -19,11 +19,13 @@ export * from './favoriteProduct.type';
 // export * from './schema.types';
 
 export interface Wine {
+	productId: number;
 	title: string;
 	price: string;
 	regularPrice: string;
 	url: string;
 	score: string;
+	isFavorited?: boolean;
 }
 
 // For country box

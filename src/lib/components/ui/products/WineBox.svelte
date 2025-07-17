@@ -1,8 +1,13 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
 	import type { Wine } from '$lib/types';
-	import { calculatePercentageDifference } from '$lib/utils';
+	import { calculatePercentageDifference, capitalize, launchToast } from '$lib/utils';
+	import { Heart } from '@lucide/svelte';
 	import Button from '../buttons/Button.svelte';
+	import {
+		addProductToFavorites,
+		removeProductFromFavorites
+	} from '$lib/services/favoritesService';
 
 	interface Props {
 		wine: Wine;
@@ -11,10 +16,38 @@
 			alt?: string;
 		};
 		discount?: string;
+		hideFavs?: boolean;
 	}
-	let { wine, image, discount }: Props = $props();
+	let { wine, image, discount, hideFavs = false }: Props = $props();
 
 	let hasPriceDiscount = wine.regularPrice != wine.price;
+	let isLoading = $state(false);
+	let isFavorite = $state(wine.isFavorited);
+	let justFavorited = $state(false);
+
+	async function handleFavoriteClick() {
+		isLoading = true;
+		const action = isFavorite ? 'removendo' : 'adicionando';
+		launchToast(capitalize(`${action} à adega...`), 'info', 3000);
+
+		try {
+			const result = isFavorite
+				? await removeProductFromFavorites(wine.productId)
+				: await addProductToFavorites(wine.productId);
+
+			launchToast(result.message, result.success ? 'success' : 'error', 3000);
+
+			if (result.success) {
+				isFavorite = !isFavorite;
+				justFavorited = true;
+			}
+		} catch (error) {
+			console.error(`Error ${action} favorites:`, error);
+			launchToast(`An error occurred while ${action} favorites.`, 'error', 3000);
+		} finally {
+			isLoading = false;
+		}
+	}
 </script>
 
 <div class="wine wine-transparent">
@@ -27,6 +60,22 @@
 			/>
 		</a>
 	</div>
+
+	<!-- Favorite -->
+	{#if !hideFavs}
+		{#if isFavorite}
+			<button onclick={handleFavoriteClick} class="absolute top-4 left-4">
+				<Heart class="text-[#f82000] h-[20px]" strokeWidth="1" fill="#f82000" />
+			</button>
+		{:else}
+			<div class="absolute top-4 left-4">
+				<button onclick={handleFavoriteClick}>
+					<Heart class="h-[20px]" strokeWidth="1" />
+				</button>
+			</div>
+		{/if}
+	{/if}
+
 	{#if wine.score != '0.0'}
 		<!-- <div class="absolute top-4 left-4">
 			<div class="wine-stars">
@@ -70,15 +119,15 @@
 </div>
 
 <!-- {#if product && product.regularPrice != product.price}
-		<div
-			class="absolute top-[15px] md:top-[30px] left-[30px] md:right-auto bg-red-dark text-white px-2 py-1 text-[11px] md:text-sm rounded-lg font-bold"
-		>
-			{calculatePercentageDifference(
-				product.regularPrice,
-				product.price,
-				m.currencySymbol(),
-				undefined,
-				1
-			)}% OFF
-		</div>
-	{/if} -->
+	<div
+		class="absolute top-[15px] md:top-[30px] left-[30px] md:right-auto bg-red-dark text-white px-2 py-1 text-[11px] md:text-sm rounded-lg font-bold"
+	>
+		{calculatePercentageDifference(
+			product.regularPrice,
+			product.price,
+			m.currencySymbol(),
+			undefined,
+			1
+		)}% OFF
+	</div>
+{/if} -->

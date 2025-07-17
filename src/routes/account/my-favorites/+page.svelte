@@ -6,6 +6,8 @@
 	import FavoriteItem from '$components/ui/account/favoriteItem.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { launchToast } from '$lib/utils';
+	import { Button } from '$components/ui/buttons';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	let userFavoriteProducts: FavoriteProduct[] | undefined = $state();
 	let isLoading = $state(false);
@@ -54,9 +56,13 @@
 			</ul>
 		</div>
 	{:else if isLoading}
-		<div class="text-sm">Carregando produtos favoritos...</div>
-	{:else}
-		<div class="text-sm">No favorite products</div>
+		<div class="text-sm text-grey-medium-dark">{m.loadingFavorites()}</div>
+	{/if}
+
+	<!-- No products -->
+	{#if userFavoriteProducts && userFavoriteProducts?.length < 1}
+		<div class="text-base mb-5 text-grey-medium-dark">{m.noFavoriteProducts()}</div>
+		<Button title="Vamos a explorar 🚀" size="md" type="light" url={m.letsExploreSlug()} />
 	{/if}
 </div>
 

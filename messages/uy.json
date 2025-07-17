@@ -1,4 +1,6 @@
 {
+	"letsExploreSlug": "/uy/cervezas/",
+
 	"loading": "Cargando...",
 	"search": "Buscar...",
 	"searching": "Buscando...",
@@ -30,6 +32,8 @@
 	"myFavorites": "Mis favoritos",
 	"favorites": "Favoritos",
 	"shareFavorites": "Compartir favoritos",
+	"loadingFavorites": "Cargando favoritos...",
+	"noFavoriteProducts": "¡Ningún producto favorito! ¡Vamos a completarlos!",
 
 	"sobreNos": "SOBRE NOSOTROS",
 	"afiliados": "AFILIADOS",

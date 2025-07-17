@@ -37,18 +37,18 @@
 			: 'Busque por vinhos boutique, orgânicos e cervejas locais na Braaay.'
 	);
 
-	let categoryHeader: Category = $state({
-		name: '',
-		description: 'asdas',
-		count: 0,
-		header: {
-			title: 'Searching...'
-			// image?: ImageGeneral;
-			// icon?: ImageGeneral;
-			// firstParagraph?: string;
-			// firstTitle?: string;
-		}
-	});
+	// let categoryHeader: Category = $state({
+	// 	name: '',
+	// 	description: 'asdas',
+	// 	count: 0,
+	// 	header: {
+	// 		title: 'Searching...'
+	// 		// image?: ImageGeneral;
+	// 		// icon?: ImageGeneral;
+	// 		// firstParagraph?: string;
+	// 		// firstTitle?: string;
+	// 	}
+	// });
 
 	// Redirect to homepage if no search term
 	$effect(() => {
@@ -137,7 +137,9 @@
 									price: product.price,
 									regularPrice: product.regularPrice,
 									url: localizeHref(`/produto/${product.slug}/`),
-									score: product.averageRating
+									score: product.averageRating,
+									isFavorited: product.isFavorited,
+									productId: product.id
 								}}
 							/>
 						</span>
