@@ -252,13 +252,13 @@ html {
 	.bry-footer-features {
 		@apply grid grid-cols-1 md:grid-cols-3 gap-8 mb-0;
 	}
-	.bry-footer-features > div {
+	.bry-footer-features div.bry-footer-features-item {
 		@apply py-[32px] px-[48px] border border-grey-light bg-white rounded-lg mx-5 lg:mx-auto;
 	}
-	.bry-footer-features > div > h2 {
-		@apply text-grey-dark text-center text-[28px] font-roboto font-semibold mb-4 leading-8 partial-border;
+	.bry-footer-features div.bry-footer-features-item > h2 {
+		@apply text-grey-dark text-center text-[23px] font-roboto font-semibold mb-4 leading-8 partial-border;
 	}
-	.bry-footer-features > div > p {
+	.bry-footer-features div.bry-footer-features-item > p {
 		@apply text-grey-blueish font-light leading-5 text-[15px] mt-8 font-roboto;
 	}
 

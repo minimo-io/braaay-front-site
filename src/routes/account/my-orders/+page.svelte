@@ -59,7 +59,7 @@
 	<!-- No products -->
 	{#if customerOrders.products && customerOrders?.products.length < 1}
 		<div class="text-base mb-5 text-grey-medium-dark">{m.noOrders()}</div>
-		<Button title="Vamos a explorar 🚀" size="md" type="light" url={m.letsExploreSlug()} />
+		<Button title={m.letsExplore()} size="md" type="light" url={m.letsExploreSlug()} />
 	{/if}
 </div>
 

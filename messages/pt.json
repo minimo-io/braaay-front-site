@@ -1,5 +1,6 @@
 {
 	"letsExploreSlug": "/vinhos/",
+	"letsExplore": "Vamos a explorar 🚀",
 
 	"loading": "Carregando...",
 	"search": "Pesquisar...",
@@ -54,7 +55,7 @@
 	"showroom": "SHOWROOM",
 
 	"cartSummaryTitle": "Resumo da compra",
-	"emptyCart": "Seu carrinho está vazio! <br /><span class='font-medium text-sm'>Vamos ganhar cashback</span> ⚡️",
+	"emptyCart": "Seu carrinho está vazio! <br /><span class='font-medium text-sm'>Como assim?</span>",
 	"addToCart": "ADICIONAR À SACOLA",
 
 	"add": "Adicionar",

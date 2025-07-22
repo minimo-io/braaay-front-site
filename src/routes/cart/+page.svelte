@@ -98,6 +98,10 @@
 							{/each}
 						{:else}
 							<p class="text-center font-bold">{@html m.emptyCart()}</p>
+
+							<div class="mt-2 w-[90%] mx-auto">
+								<Button title={m.letsExplore()} size="md" type="light" url={m.letsExploreSlug()} />
+							</div>
 						{/if}
 					</div>
 
@@ -325,7 +329,7 @@
 								trackEvent={() => {
 									trackEvent('button_click', {
 										event_category: 'navigation',
-										event_label: 'From_cart_to_checkout'
+										event_label: 'from_cart_to_checkout'
 									});
 								}}
 							/>

@@ -61,7 +61,7 @@
 	<!-- No products -->
 	{#if userFavoriteProducts && userFavoriteProducts?.length < 1}
 		<div class="text-base mb-5 text-grey-medium-dark">{m.noFavoriteProducts()}</div>
-		<Button title="Vamos a explorar 🚀" size="md" type="light" url={m.letsExploreSlug()} />
+		<Button title={m.letsExplore()} size="md" type="light" url={m.letsExploreSlug()} />
 	{/if}
 </div>
 

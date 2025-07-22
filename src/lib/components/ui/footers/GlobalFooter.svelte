@@ -4,10 +4,22 @@
 	import { redirectLocale } from '$lib/utils';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 	import { AppConfig } from '$config';
+	import { trackEvent } from '$components/analytics';
+	import FeaturesFooter from './FeaturesFooter.svelte';
+
+	function handleFwClick() {
+		trackEvent('button_click_external', {
+			event_category: 'navigation',
+			event_label: 'to_futurewise'
+		});
+	}
 </script>
 
 <footer class="relative bg-grey-background py-0 mt-0">
+	<!-- Divider -->
 	<SectionDivider color="blue" />
+
+	<!-- Footer -->
 	<div class="max-w-screen-lg mx-auto px-[30px] lg:px-0">
 		<!-- Logo -->
 		<div class="flex justify-center mb-12">
@@ -19,34 +31,7 @@
 		</div>
 
 		<!-- Features Grid -->
-		<div class="bry-footer-features">
-			<!-- Feature 1 -->
-			<div>
-				<h2 class="partial-border">Especialistas em 🇺🇾 e 🇧🇷</h2>
-				<p>
-					Viajamos, conhecemos, nos aventuramos e trazemos a melhor seleção de vinhos uruguaios e
-					nacionais.
-				</p>
-			</div>
-
-			<!-- Feature 2 -->
-			<div>
-				<h2 class="text-xl font-semibold mb-4">Pagamento em até 4x</h2>
-				<p>
-					Você pode pagar no cartão sem juros com parcela mínima de R$50, no boleto, PIX ou usar sua
-					e-Wallet preferida.
-				</p>
-			</div>
-
-			<!-- Feature 3 -->
-			<div>
-				<h2 class="text-xl font-semibold mb-4">Experiências além da taça</h2>
-				<p>
-					Venha explorar e conhecer o showroom, participe dos workshops ou faça parte do grupo de
-					viagens e aventuras!
-				</p>
-			</div>
-		</div>
+		<FeaturesFooter />
 
 		<hr class="border-b-1 border-grey-lighter my-10 w-full relative" />
 
@@ -156,6 +141,36 @@
 						{/if}
 					{/each}
 				{/if}
+			</div>
+		</div>
+		<!-- Futurewise -->
+		<div class="border-t border-grey-lighter py-5 flex flex-col md:flex-row justify-between">
+			<div
+				class="text-xs text-grey-medium flex flex-col justify-center mb-4 text-center md:text-left"
+			>
+				<span> Bagity by Futurewise, criação de loja virtual. </span>
+
+				<a
+					onclick={() => handleFwClick}
+					href="https://futurewise.lat/baity"
+					target="_blank"
+					rel="noopener"
+					class="underline text-grey-darkest"
+				>
+					Monte a sua agora!
+				</a>
+			</div>
+			<div class="text-xs text-center">
+				<div class="text-right justify-center md:justify-end self-end flex relative md:-top-2">
+					<a
+						target="_blank"
+						rel="noopener"
+						href="https://futurewise.lat/bagity"
+						onclick={() => handleFwClick}
+					>
+						<img src="/images/futurewise-logo-2.svg" class="h-10" alt="futurewise-bagity" />
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -114,7 +114,7 @@
 	</div>
 
 	<!-- Section with white background and divider -->
-	<section class="relative bg-white py-10 mt-14">
+	<section class="relative bg-white pb-4 md:py-8 mt-14">
 		<SectionDivider color="green" />
 
 		<TitleSection
@@ -269,6 +269,7 @@
 		<PartnersList />
 	</section>
 </main>
+
 <FunMessageSection />
 
 <style>
