@@ -65,13 +65,15 @@
 				{#if order.status == 'CANCELLED'}
 					<CircleOff class="h-4 w-4 mr-1 text-red-medium" />
 				{:else if order.status == 'completed'}
-					<CircleCheckBig class="h-4 w-4 mr-1" />
+					<CircleCheckBig class="h-4 w-4 mr-1 text-green-medium" />
+				{:else}
+					<CircleCheckBig class="h-4 w-4 mr-1 text-green-medium" />
 				{/if}
 
 				<span
 					class={[
-						'font-medium text-xs sm:text-sm whitespace-nowrap',
-						order.status == 'CANCELLED' && 'text-red-medium'
+						'font-medium text-xs sm:text-sm whitespace-nowrap text-green-medium',
+						order.status == 'CANCELLED' && '!text-red-medium'
 					]}
 				>
 					{OrderStatus[order.status] || order.status}
