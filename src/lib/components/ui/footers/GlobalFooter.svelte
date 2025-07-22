@@ -148,11 +148,11 @@
 			<div
 				class="text-xs text-grey-medium flex flex-col justify-center mb-4 text-center md:text-left"
 			>
-				<span> Bagity by Futurewise, criação de loja virtual. </span>
+				<span> Futurewise, criação de loja virtual. </span>
 
 				<a
 					onclick={() => handleFwClick}
-					href="https://futurewise.lat/baity"
+					href="https://futurewise.lat/bagity"
 					target="_blank"
 					rel="noopener"
 					class="underline text-grey-darkest"
