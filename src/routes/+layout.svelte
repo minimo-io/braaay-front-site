@@ -38,6 +38,7 @@
 	// Mini cart
 	import { miniCart } from '$stores/cart.store.svelte';
 	import CartToast from '$components/ui/cart/CartToast.svelte';
+	import Analytics from '$components/Analytics.svelte';
 
 	afterNavigate(() => {
 		// Close drawer if active
@@ -97,6 +98,8 @@
 		}
 	});
 </script>
+
+<Analytics />
 
 {#if showLoader}
 	<div class="loader-wrapper">

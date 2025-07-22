@@ -15,8 +15,16 @@ declare global {
 			// The “live” cart on every request to send to the server
 			cart?: Cart;
 		}
-		// Other existing interface declarations...
+	}
+	// For Analytics
+	interface Window {
+		dataLayer: unknown[];
+		gtag: (...args: unknown[]) => void;
 	}
 }
+
+// declare global {
+
+// }
 
 export {};

@@ -23,6 +23,7 @@
 	import Meta from '$components/layout/Meta.svelte';
 	import { page } from '$app/state';
 	import { AppConfig } from '$config';
+	import { trackEvent } from '$components/analytics';
 
 	// Cart amount
 	let hasItems = $state(false);
@@ -321,6 +322,12 @@
 								tracking="normal"
 								font="xl"
 								bold={false}
+								trackEvent={() => {
+									trackEvent('button_click', {
+										event_category: 'navigation',
+										event_label: 'From_cart_to_checkout'
+									});
+								}}
 							/>
 						{/if}
 					</div>

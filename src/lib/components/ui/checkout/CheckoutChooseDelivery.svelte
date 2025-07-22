@@ -41,7 +41,7 @@
 		/>
 		<span class="flex flex-col">
 			<div class="flex text-sm">
-				Retirada no Showroom -
+				Retirada no Showroom - São Paulo →
 				<div class="flex items-center">
 					<MapPin class="h-3 !mx-0 !px-0" />
 					<a rel="nofollow noreferrer" target="_blank" href={AppConfig.mapLink}>{m.viewOnMap()}</a>
