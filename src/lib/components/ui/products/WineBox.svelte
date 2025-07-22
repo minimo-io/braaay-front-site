@@ -4,10 +4,7 @@
 	import { calculatePercentageDifference, capitalize, launchToast } from '$lib/utils';
 	import { Heart } from '@lucide/svelte';
 	import Button from '../buttons/Button.svelte';
-	import {
-		addProductToFavorites,
-		removeProductFromFavorites
-	} from '$lib/services/favoritesService';
+	import { addProductToFavorites, removeProductFromFavorites } from '$lib/services/index';
 
 	interface Props {
 		wine: Wine;

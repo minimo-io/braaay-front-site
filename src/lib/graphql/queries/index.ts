@@ -22,3 +22,4 @@ export * from './coupon-get-all.query';
 
 // customer
 export * from './customer.query';
+export * from './customer-orders.query';

@@ -11,6 +11,13 @@
 	"moreResults": "Mas resultados",
 
 	"start": "Inicio",
+	"hide": "Ocultar",
+	"view": "Ver",
+	"customer": "Cliente",
+	"payment": "Pago",
+	"shipping": "Envio",
+	"products": "Productos",
+	"qty": "Cant.",
 
 	"productsUpTo": "Productos hasta",
 
@@ -34,6 +41,12 @@
 	"shareFavorites": "Compartir favoritos",
 	"loadingFavorites": "Cargando favoritos...",
 	"noFavoriteProducts": "¡Ningún producto favorito! ¡Vamos a completarlos!",
+	"loadingOrders": "Cargando pedidos anteriores...",
+
+	"myOrders": "Mis pedidos",
+	"noOrders": "¡Aún no hay pedidos! ¡Echa un vistazo a las oportunidades!",
+	"order": "Pedido",
+	"discountApplied": "Descuento aplicado",
 
 	"sobreNos": "SOBRE NOSOTROS",
 	"afiliados": "AFILIADOS",
@@ -122,5 +135,14 @@
 	"signUpTelephoneInvalid": "Teléfono inválido. Usa un número uruguayo que comience con 09 y tenga 9 dígitos en total.",
 	"signUpInvalidCpf": "CPF inválido. Por favor, ingrese un número válido de 11 dígitos.",
 
-	"watchVideo": "Ver video"
+	"watchVideo": "Ver video",
+
+	"wooStatusPending": "Pago pendiente",
+	"wooStatusProcessing": "Procesando",
+	"wooStatusOnHold": "En espera",
+	"wooStatusCompleted": "Finalizado",
+	"wooStatusCancelled": "Cancelado",
+	"wooStatusRefunded": "Reembolsado",
+	"wooStatusFailed": "Fallido",
+	"wooStatusTrash": "Papelera"
 }

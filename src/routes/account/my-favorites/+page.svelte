@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { Heart, Share2 } from '@lucide/svelte';
 	import { onMount } from 'svelte';
-	import { getFavoriteProducts } from '$lib/services/favoritesService';
+	import { getFavoriteProducts } from '$lib/services/index';
 	import type { FavoriteProduct } from '$lib/types';
 	import FavoriteItem from '$components/ui/account/favoriteItem.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { launchToast } from '$lib/utils';
 	import { Button } from '$components/ui/buttons';
-	import { localizeHref } from '$lib/paraglide/runtime';
 
 	let userFavoriteProducts: FavoriteProduct[] | undefined = $state();
 	let isLoading = $state(false);

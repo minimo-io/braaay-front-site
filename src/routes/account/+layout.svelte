@@ -135,7 +135,7 @@
 						<li>
 							<a href={localizeHref('/account/my-orders/')} class="text-grey-blueish flex gap-1">
 								<PackageOpen class="w-4 h-4 self-center mr-2" />
-								<span class={[myOrdersBold && 'font-bold']}> Meus pedidos </span>
+								<span class={[myOrdersBold && 'font-bold']}> {m.myOrders()} </span>
 							</a>
 						</li>
 						<li>

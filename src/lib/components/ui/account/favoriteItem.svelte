@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
-	import { capitalize, correctPrice, formatDate, launchToast } from '$lib/utils';
-	import { slide } from 'svelte/transition';
+	import { capitalize, formatDate, launchToast } from '$lib/utils';
 	import type { CartItem, FavoriteProduct } from '$lib/types';
 	import { localizeHref } from '$lib/paraglide/runtime';
-	import { removeProductFromFavorites } from '$lib/services/favoritesService';
-	import { Check, CircleCheckBig } from '@lucide/svelte';
+	import { removeProductFromFavorites } from '$lib/services/index';
+	import { CircleCheckBig } from '@lucide/svelte';
 	import { setShippingDetails } from '$stores/shippingDetails.state.svelte';
 	import { browser } from '$app/environment';
 	import { activateMiniCart } from '$stores/cart.store.svelte';

@@ -11,6 +11,13 @@
 	"moreResults": "Mais resultados",
 
 	"start": "Início",
+	"hide": "Ocultar",
+	"view": "Ver",
+	"customer": "Cliente",
+	"payment": "Pagamento",
+	"shipping": "Envío",
+	"products": "Produtos",
+	"qty": "Qde",
 
 	"currencySymbol": "R$",
 
@@ -34,6 +41,12 @@
 	"shareFavorites": "Compartilhar adega",
 	"loadingFavorites": "Carregando sua adega...",
 	"noFavoriteProducts": "Nenhum produto na sua adega! Vamos completar-la!",
+
+	"myOrders": "Meus pedidos",
+	"loadingOrders": "Carregando pedidos previos...",
+	"noOrders": "Nenhum pedido! Dá uma olhada nas oportunidades!",
+	"order": "Pedido",
+	"discountApplied": "Desconto aplicado",
 
 	"sobreNos": "SOBRE NÓS",
 	"afiliados": "AFILIADOS",
@@ -126,5 +139,14 @@
 	"signUpTelephoneInvalid": "Telefone inválido. Use o formato com DDD e número móvel: (11) 9 9999-9999.",
 	"signUpInvalidCpf": "CPF inválido. Por favor, insira um número válido com 11 dígitos.",
 
-	"watchVideo": "Assistir vídeo"
+	"watchVideo": "Assistir vídeo",
+
+	"wooStatusPending": "Aguardando pagamento",
+	"wooStatusProcessing": "Processando",
+	"wooStatusOnHold": "Em espera",
+	"wooStatusCompleted": "Finalizado",
+	"wooStatusCancelled": "Cancelado",
+	"wooStatusRefunded": "Reembolsado",
+	"wooStatusFailed": "Falhou",
+	"wooStatusTrash": "Lixeira"
 }

@@ -1,9 +1,6 @@
 <script lang="ts">
 	import { AppConfig } from '$config';
-	import {
-		addProductToFavorites,
-		removeProductFromFavorites
-	} from '$lib/services/favoritesService';
+	import { addProductToFavorites, removeProductFromFavorites } from '$lib/services/index';
 	import { m } from '$lib/paraglide/messages';
 	import type { PageCustomColors, ImageGeneral, ProductCategory, Product } from '$lib/types';
 	import { calculatePercentageDifference, capitalize, launchToast } from '$lib/utils';

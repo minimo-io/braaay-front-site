@@ -1,11 +1,10 @@
 <script lang="ts">
 	import Button from '../buttons/Button.svelte';
-	import { Lock, Search } from '@lucide/svelte';
+	import { Lock } from '@lucide/svelte';
 	import IMask from 'imask';
 	import type { Customer } from '$lib/types';
 	import { onMount, onDestroy } from 'svelte';
-	import { getAddressFromCep } from '$lib/services/zipService';
-	import { AppConfig } from '$config';
+	import { getAddressFromCep } from '$lib/services/index';
 	import type { CustomerAddress } from '$lib/types';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import { launchToast, numbersOnly } from '$lib/utils';
