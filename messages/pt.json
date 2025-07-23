@@ -149,5 +149,10 @@
 	"wooStatusCancelled": "Cancelado",
 	"wooStatusRefunded": "Reembolsado",
 	"wooStatusFailed": "Falhou",
-	"wooStatusTrash": "Lixeira"
+	"wooStatusTrash": "Lixeira",
+
+	"teaserText": "Ganhe 15% OFF",
+	"teaserTitle": "<strong>Ganhe <span class='text-[#FAD83E]'>15%</span> OFF</strong><br />na sua primeira compra",
+	"teaserContent": "Comece sua jornada pelos vinhos especiáis com a Braaay (promocode no primeiro email)",
+	"teaserButton": "Vamos lá — É grátis!"
 }

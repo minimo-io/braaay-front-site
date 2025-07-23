@@ -101,7 +101,7 @@
 				<Button
 					chevron={false}
 					customPx="!pr-[12px] !pl-3 !pr-[20px]"
-					title="Entrar"
+					title="Conectar"
 					url={localizeHref(`/login/${originRoute ? `?returnUrl=${originRoute}` : ''}`)}
 					type="blue"
 					size="xl"

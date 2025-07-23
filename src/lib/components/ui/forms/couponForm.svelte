@@ -104,6 +104,6 @@
 		/>
 	</div>
 	{#if error}
-		<div class="text-center text-xs mt-2 text-red-medium">{error}</div>
+		<div class="text-center text-xs mt-2 text-red-medium">{@html error}</div>
 	{/if}
 </form>

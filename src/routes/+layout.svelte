@@ -39,6 +39,7 @@
 	import { miniCart } from '$stores/cart.store.svelte';
 	import CartToast from '$components/ui/cart/CartToast.svelte';
 	import Analytics from '$components/Analytics.svelte';
+	import Teaser from '$components/ui/Teaser.svelte';
 
 	afterNavigate(() => {
 		// Close drawer if active
@@ -136,11 +137,8 @@
 
 <Toasts position="bottom-center" />
 
-<!-- <div style="display:none">
-	{#each locales as locale}
-		<a href={localizeHref(page.url.pathname, { locale })}>{locale}</a>
-	{/each}
-</div> -->
+<!-- Teaser -->
+<Teaser />
 
 <style global>
 	:root {

@@ -145,5 +145,10 @@
 	"wooStatusCancelled": "Cancelado",
 	"wooStatusRefunded": "Reembolsado",
 	"wooStatusFailed": "Fallido",
-	"wooStatusTrash": "Papelera"
+	"wooStatusTrash": "Papelera",
+
+	"teaserText": "Ganá 15% OFF",
+	"teaserTitle": "<strong>Obtené <span class='text-[#FAD83E]'>15%</span> OFF</strong> <br/> en tu primera compra",
+	"teaserContent": "Empieza tu viaje por las cervezas artesanales y vinos boutique con Braaay",
+	"teaserButton": "Genial, ¡quiero!"
 }
