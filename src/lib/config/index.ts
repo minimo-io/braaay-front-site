@@ -10,15 +10,7 @@ export const AppConfig = Object.freeze({
 	showProductFilters: false,
 	// Toggle the sorting buttons normally above the filtering menu (mobile & desktop)
 	showSortingMenu: false,
-	// list all coupons, this will be fetched from a pre-fetched json
-	coupons: {
-		primeira10: {
-			discountType: 'PERCENT',
-			amount: 10,
-			description: '10% de desconto na sua primeira compra no site, sem mínimo.',
-			usageLimitPerUser: 1
-		}
-	},
+
 	payments: {
 		timeout: 30
 	},

@@ -3,7 +3,7 @@
 	import Button from '$components/ui/buttons/Button.svelte';
 	import MoreInfoButton from '$components/ui/buttons/MoreInfoButton.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
-	import { CircleUser, Coins, Heart, PackageOpen, User } from '@lucide/svelte';
+	import { CircleUser, Coins, Database, Heart, PackageOpen, User } from '@lucide/svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { logout } from '$lib/graphql/auth';
 	import { redirectHref } from '$lib/utils';
@@ -129,7 +129,7 @@
 						<li>
 							<a href={localizeHref('/account/my-cashback/')} class="text-grey-blueish flex gap-1">
 								<Coins class="w-4 h-4 text-sun" fill="#BD8836" />
-								<span class={[myCashbackBold && 'font-bold']}> Meu cashback </span>
+								<span class={[myCashbackBold && 'font-bold']}> {m.myCashback()} </span>
 							</a>
 						</li>
 						<li>
@@ -139,16 +139,9 @@
 							</a>
 						</li>
 						<li>
-							<a
-								onclick={(event) => {
-									event.preventDefault();
-									alert('Em breve');
-								}}
-								href={localizeHref('/account/my-orders/')}
-								class="text-grey-blueish flex gap-1"
-							>
-								<CircleUser class="w-4 h-4 self-center mr-2" />
-								<span> Meus dados </span>
+							<a href={localizeHref('/account/my-info/')} class="text-grey-blueish flex gap-1">
+								<Database class="w-4 h-4 self-center mr-2" />
+								<span> {m.myInfo()} </span>
 							</a>
 						</li>
 

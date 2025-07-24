@@ -4,6 +4,9 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { isAuthenticated } from '$lib/graphql/auth';
 	import { AppConfig } from '$config';
+	import { page } from '$app/state';
+
+	let originRoute = $derived(page.url.href);
 </script>
 
 <header class="bg-white border-b border-b-grey-lighter">
@@ -49,8 +52,8 @@
 					<Button
 						chevron={false}
 						customPx="!pr-[12px] !pl-3 !pr-[20px] mr-3"
-						title="Entrar"
-						url="/login"
+						title="Conectar"
+						url={localizeHref(`/login/${originRoute ? `?returnUrl=${originRoute}` : ''}`)}
 						type="blue"
 						size="xl"
 					>

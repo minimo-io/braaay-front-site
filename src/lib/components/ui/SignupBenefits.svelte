@@ -1,39 +1,41 @@
 <script lang="ts">
-	import { CheckCheck, Sparkle } from '@lucide/svelte';
+	import { localizeHref } from '$lib/paraglide/runtime';
+	import { CheckCheck, PackageOpen, Sparkle } from '@lucide/svelte';
+	import { Button } from './buttons';
 </script>
 
 <!-- <h2 class="mt-5">Mais?</h2> -->
 <h2 class="text-xl tracking-widest text-sun font-prata flex justify-center scale-90 mt-5 mb-4">
 	<Sparkle class="pr-1" />
 	<span></span>
-	<span>SEJA PASSPORT!</span>
+	<span>BENEFÍCIOS DO CADASTRO!</span>
 	<Sparkle class="pl-1" />
 </h2>
 <ul class="font-medium text-grey-medium-dark text-sm text-left">
 	<li class="mb-2 flex">
-		<CheckCheck class="w-[18px] min-w-[18px] aspect-1 text-sun" /> Cashback de 5% em cada compra
+		<CheckCheck class="w-[18px] min-w-[18px] aspect-1 text-sun" /> Cupons de até 15% OFF
 	</li>
 	<li class="mb-2 flex">
-		<CheckCheck class="w-[18px] min-w-[18px] aspect-1 text-sun" /> Até 3 frete grátis por mês
+		<CheckCheck class="w-[18px] min-w-[18px] aspect-1 text-sun" /> 2% de cashback em cada compra
 	</li>
 	<li class="mb-2 flex">
-		<CheckCheck class="w-[18px] min-w-[18px] aspect-1 text-sun" /> Compras coletivas com até 50% OFF
+		<CheckCheck class="w-[18px] min-w-[18px] aspect-1 text-sun" /> Guarde produtos na sua adega e seja
+		notificado sobre descontos e reposições
 	</li>
 	<li class="mb-2 flex">
-		<CheckCheck class="w-[18px] min-w-[18px] aspect-1 text-sun" /> Harmonizações e receitas de chefs
-		& sommeliers
+		<CheckCheck class="w-[18px] min-w-[18px] aspect-1 text-sun" /> Siga chefs e sommeliers para harmonizações
+		e receitas
 	</li>
 	<li class="mb-2 flex">
-		<CheckCheck class="w-[18px] min-w-[18px] aspect-1 text-sun" /> Eventos especiais e experiências em
-		vinícolas e no showroom
+		<CheckCheck class="w-[18px] min-w-[18px] aspect-1 text-sun" /> Participe do sorteio mensal de 1 ingresso
+		para eventos no showroom
 	</li>
 	<hr class="my-4 text-grey-lighter" />
-	<div class="text-center text-black text-lg font-bold">
-		R$69/mês <br />
-	</div>
-	<hr class="my-4 text-grey-lighter" />
-	<div class="text-center text-black text-xs">
-		Se paga em 2 pedidos<br />*Aplicam-se exceções. Veja os
-		<a href="/termos-e-condicoes/">termos</a>.
-	</div>
+	<li class="mb-2 flex items-center self-center justify-center">
+		<PackageOpen class="w-[18px] min-w-[18px] aspect-1 text-sun" />
+		<strong class="tracking-wide">Quer mais?</strong>
+		<a href={localizeHref('/club/')} class="font-bold ml-1 text-blue underline"
+			>Venha para o Clube</a
+		>
+	</li>
 </ul>

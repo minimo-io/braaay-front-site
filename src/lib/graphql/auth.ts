@@ -7,7 +7,7 @@ import { error } from '@sveltejs/kit';
 import he from 'he';
 import { LOGIN_MUTATION, SIGNUP_MUTATION } from './mutations';
 // import { EMPTY_CART_MUTATION } from './mutations';
-import { emptyCart } from '$stores/cart.store.svelte';
+import { clearAllCoupons, emptyCart } from '$stores/cart.store.svelte';
 
 export const protectedRoutes = ['/account/'];
 export const authRoutes = ['/login/', '/sign-up/'];
@@ -76,7 +76,8 @@ export async function login(username: string, password: string): Promise<LoginRe
 export async function logout() {
 	try {
 		// await emptyRemoteCart();
-		emptyCart();
+		clearAllCoupons();
+		await emptyCart();
 	} catch (err) {
 		console.warn('Failed to log out via GraphQL:', err);
 	}

@@ -106,6 +106,7 @@ export const adjustQuantity = (itemId: number, delta: number, specific?: number)
 export const emptyCart = async () => {
 	await emptyRemoteCart();
 	cart.update(() => {
+		console.log('emptyiiing cart...');
 		shippingDetails.details = [];
 		return { items: [], coupons: [], zip: '' };
 	});
@@ -200,9 +201,9 @@ export const getCartSubtotal = (): number => {
 };
 
 // Get coupon details from config
-export const getCouponDetails = (couponCode: string) => {
-	return AppConfig.coupons[couponCode] || null;
-};
+// export const getCouponDetails = (couponCode: string) => {
+// 	return AppConfig.coupons[couponCode] || null;
+// };
 
 // Calculate the discount value based on applied coupons
 // export const calculateDiscount = (couponCode: string): number => {

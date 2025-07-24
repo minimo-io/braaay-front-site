@@ -21,9 +21,16 @@ html {
 	-webkit-font-smoothing: antialiased;
 	display: block;
 }
-/* #braaay {
-	overflow: hidden;
-} */
+/* Target the toast container */
+.svoast-container {
+	z-index: 10001 !important; /* Adjust the value as needed */
+}
+
+/* Or target individual toasts */
+.svoast-toast {
+	z-index: 10001 !important;
+}
+
 @layer base {
 	@keyframes zoomIn {
 		from {
@@ -43,7 +50,6 @@ html {
 			opacity: 1;
 		}
 	}
-
 	.glass {
 		background: rgba(255, 255, 255, 0.1); /* Light transparent layer */
 		backdrop-filter: blur(2px); /* Frosted glass effect */

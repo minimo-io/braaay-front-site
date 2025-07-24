@@ -96,6 +96,14 @@ export default defineConfig({
 						['uy', '/uy/cuenta/pedidos/']
 					]
 				},
+				// Account My Info
+				{
+					pattern: '/account/my-info/',
+					localized: [
+						['pt', '/conta/meus-dados/'],
+						['uy', '/uy/cuenta/mis-datos/']
+					]
+				},
 
 				// Carrinho
 				{

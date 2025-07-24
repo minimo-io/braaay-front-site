@@ -155,7 +155,7 @@
 		height: 4px;
 		width: 0%;
 		background: linear-gradient(90deg, #bd8836, #212639);
-		z-index: 9999;
+		z-index: 9000;
 		transition: width 0.3s ease;
 	}
 	/* When active, the width can animate (you can customize this) */
@@ -192,7 +192,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: 9999;
+		z-index: 9998;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -207,7 +207,7 @@
 		/* height: 100%; */
 		height: 100dvh;
 		background-color: rgba(33, 38, 128, 0.2);
-		z-index: 9998;
+		z-index: 9997;
 		animation: fadeIn 0.3s ease-in-out;
 		pointer-events: all;
 	}

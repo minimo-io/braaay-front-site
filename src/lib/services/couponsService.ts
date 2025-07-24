@@ -20,6 +20,9 @@ export async function processCoupon(couponCode: string): Promise<CouponResult> {
 			};
 		}
 
+		// Step 0: Remove previous items if needed
+		await emptyRemoteCart();
+
 		// Step 1: Prepare cart items
 		const cartItemsForGraphQL: { productId: number; quantity: number }[] = [];
 		cart.subscribe((cart) => {

@@ -7,7 +7,6 @@
 	import { launchToast } from '$lib/utils';
 	import { gql } from '@urql/core';
 	import { m } from '$lib/paraglide/messages';
-	import { Search } from '@lucide/svelte';
 	import type { ShippingRate } from '$lib/types/cart.types';
 	import { setShippingDetails } from '$stores/shippingDetails.state.svelte';
 	import { updateZip } from '$stores/cart.store.svelte';

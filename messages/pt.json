@@ -1,6 +1,6 @@
 {
 	"letsExploreSlug": "/vinhos/",
-	"letsExplore": "Vamos a explorar 🚀",
+	"letsExplore": "Vamos explorar 🚀",
 
 	"loading": "Carregando...",
 	"search": "Pesquisar...",
@@ -50,6 +50,10 @@
 	"order": "Pedido",
 	"discountApplied": "Desconto aplicado",
 
+	"myInfo": "Meus dados",
+	"myCashback": "Meu cashback",
+	"contactUs": "Entre em contato",
+
 	"sobreNos": "SOBRE NÓS",
 	"afiliados": "AFILIADOS",
 	"blog": "BLOG",
@@ -68,6 +72,8 @@
 	"discountCouponTitle": "Cupom de desconto",
 	"addCoupon": "Adicionar cupom",
 	"coupon": "Cupom",
+	"updatingDiscount": "Atualizando desconto...",
+	"discountUpdated": "Desconto atualizado!",
 
 	"continue": "Continuar",
 

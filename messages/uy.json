@@ -32,6 +32,12 @@
 	"cashDiscountText": "EN EFECTIVO (5% OFF)",
 	"addCoupon": "Agregar cupon",
 	"coupon": "Cupon",
+	"updatingDiscount": "Actualizando descuento...",
+	"discountUpdated": "¡Descuento actualizado con éxito!",
+
+	"myInfo": "Mis datos",
+	"myCashback": "Mi cashback",
+	"contactUs": "Entre en contacto",
 
 	"onSale": "EN OFERTA",
 	"soon": "Próximamente",

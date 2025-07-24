@@ -25,7 +25,7 @@
 			Conta
 		</h2>
 		{#if isAuthenticated()}
-			<Button title="Alterar" type="light" url={localizeHref('/account/')} size="xs" />
+			<Button title="Alterar" type="light" url={localizeHref('/account/my-info/')} size="xs" />
 		{:else}
 			<Button
 				title="Alterar"

@@ -16,7 +16,7 @@
 		COUPON_APPLY,
 		EMPTY_CART_MUTATION
 	} from '$lib/graphql/mutations';
-	import { isNumber, launchToast, toFloatPrice } from '$lib/utils';
+	import { isNumber, launchToast, stripHtml, toFloatPrice } from '$lib/utils';
 	import { processCoupon } from '$lib/services/couponsService';
 
 	// let { initialValue = '' } = $props<{ initialValue?: string }>();
@@ -157,7 +157,7 @@
 				closeModal();
 			} else {
 				error = result.error || 'Error inesperado com o código do cupom';
-				launchToast(`Error: ${result.error}`, 'error');
+				launchToast(`Error: ${stripHtml(result.error ?? '')}`, 'error', 3000);
 			}
 		} catch (err) {
 			const errorMessage = err instanceof Error ? err.message : String(err);

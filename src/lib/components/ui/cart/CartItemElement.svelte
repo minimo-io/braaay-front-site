@@ -11,20 +11,23 @@
 
 	interface Props {
 		cartItem: CartItem;
+		onQuantityChange?: (event: { itemId: number; newQuantity: number }) => void;
+		onItemRemoved?: (itemId: number) => void;
 	}
-	let { cartItem }: Props = $props();
+	let { cartItem, onQuantityChange, onItemRemoved }: Props = $props();
 
 	console.log(cartItem);
 	let currentPrice = $derived(cartItem.price * cartItem.quantity);
 	let hasPriceDiscount = cartItem.regularPrice != cartItem.priceString;
 
 	// handle manual quantity
-	const handleQuantityChange = (cartItemId, e) => {
+	const handleQuantityChange = (cartItemId: number, e: Event) => {
+		const target = e.target as HTMLInputElement;
 		// Get the input value and parse it as an integer
 		if (shippingDetails.details) {
 			setShippingDetails([]);
 		}
-		const value = e.target.value;
+		const value = target.value;
 		const parsedValue = parseInt(value);
 
 		// Handle cases where the input is empty or not a valid number
@@ -37,29 +40,53 @@
 			} else {
 				// For other invalid inputs like negative numbers, non-numbers, etc.
 				// Set to 1 and update the cart
-				e.target.value = 1;
+				target.value = '1';
 				adjustQuantity(cartItemId, 0, 1);
+				onQuantityChange?.({ itemId: cartItemId, newQuantity: 1 });
 			}
 		} else {
 			// For valid numbers > 0, update normally
 			adjustQuantity(cartItemId, 0, parsedValue);
+			onQuantityChange?.({ itemId: cartItemId, newQuantity: parsedValue });
 		}
 	};
 
 	// Handle when user leaves the input field
-	const handleBlur = (cartItemId, e) => {
-		const value = e.target.value;
+	const handleBlur = (cartItemId: number, e: Event) => {
+		const target = e.target as HTMLInputElement;
+		const value = target.value;
 		const parsedValue = parseInt(value);
 
 		// If the field is empty or has an invalid value when user leaves the field,
 		// set it to 1
 		if (value === '' || isNaN(parsedValue) || parsedValue <= 0) {
-			e.target.value = 1;
+			target.value = '1';
 			adjustQuantity(cartItemId, 0, 1);
+			onQuantityChange?.({ itemId: cartItemId, newQuantity: 1 });
 		}
 	};
+
+	// Handle plus/minus button clicks
+	const handleQuantityAdjust = (cartItemId: number, delta: number) => {
+		const newQuantity = Math.max(1, cartItem.quantity + delta);
+		adjustQuantity(cartItemId, delta);
+		onQuantityChange?.({ itemId: cartItemId, newQuantity });
+		if (shippingDetails.details) {
+			setShippingDetails([]);
+		}
+	};
+
+	// Handle item removal
+	const handleRemoveItem = (itemId: number) => {
+		removeFromCart(itemId);
+		onItemRemoved?.(itemId);
+		if (shippingDetails.details) {
+			setShippingDetails([]);
+		}
+	};
+
 	// Prevent non-numeric key presses (optional extra layer of protection)
-	const handleKeyPress = (e) => {
+	const handleKeyPress = (e: KeyboardEvent) => {
 		// Allow only numbers, backspace, delete, tab, arrows, home, end
 		const allowedKeys = [
 			'0',
@@ -112,7 +139,7 @@
 	<div class="bry-cart-item-quantity">
 		<!-- Minus Button -->
 		<button
-			onclick={() => adjustQuantity(cartItem.id, -1)}
+			onclick={() => handleQuantityAdjust(cartItem.id, -1)}
 			class="flex items-center justify-center w-7 h-7 rounded-full bg-sun text-white font-bold"
 		>
 			<Minus class="h-4 pl-1" />
@@ -124,7 +151,7 @@
 			onchange={(e) => handleQuantityChange(cartItem.id, e)}
 			oninput={(e) => handleQuantityChange(cartItem.id, e)}
 			onblur={(e) => handleBlur(cartItem.id, e)}
-			onkeydown={(e) => handleKeyPress(e)}
+			onkeydown={(e) => handleKeyPress(e as KeyboardEvent)}
 			value={cartItem.quantity}
 			class="w-20 border p-4 border-grey-lighter rounded-full h-7 text-center text-lg font-semibold bg-transparent focus:outline-none"
 			min="1"
@@ -132,9 +159,7 @@
 
 		<!-- Plus Button -->
 		<button
-			onclick={() => {
-				adjustQuantity(cartItem.id, 1);
-			}}
+			onclick={() => handleQuantityAdjust(cartItem.id, 1)}
 			class="flex items-center justify-center w-7 h-7 rounded-full bg-sun text-white font-bold"
 			aria-label="Add"
 		>
@@ -163,7 +188,7 @@
 			{/key}
 		</div>
 		<button
-			onclick={() => removeFromCart(cartItem.id)}
+			onclick={() => handleRemoveItem(cartItem.id)}
 			class="text-grey-medium font-normal text-xs text-center md:text-right mt-4 md:mt-[2px]"
 		>
 			{m.remove()}

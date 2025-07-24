@@ -30,7 +30,6 @@
 		trackEvent?: (event: MouseEvent) => void;
 	}
 
-	let props: Props = $props();
 	let {
 		title,
 		icon,
@@ -52,7 +51,29 @@
 		newTab = false,
 		isSubmit = false,
 		trackEvent
-	} = props;
+	}: Props = $props();
+	// let {
+	// 	title,
+	// 	icon,
+	// 	type,
+	// 	size = 'sm',
+	// 	chevron = false,
+	// 	disabled = false,
+	// 	url,
+	// 	borderDark = false,
+	// 	tracking = 'expanded',
+	// 	font = 'sm',
+	// 	bold = false,
+	// 	action,
+	// 	rounded = 'full',
+	// 	minimalPx = false,
+	// 	width = 'full',
+	// 	customPx = '',
+	// 	shineEffect = true,
+	// 	newTab = false,
+	// 	isSubmit = false,
+	// 	trackEvent
+	// } = props;
 
 	function handleClick(event: MouseEvent) {
 		// 1) run custom tracking if provided
