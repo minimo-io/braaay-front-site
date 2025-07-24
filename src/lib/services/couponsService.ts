@@ -95,6 +95,8 @@ export async function processCoupon(couponCode: string): Promise<CouponResult> {
 			const couponDiscountFromDb = result.data.applyCoupon.applied.discountAmount;
 			const couponDiscountFloat = toFloatPrice(couponDiscountFromDb);
 
+			console.log('📱 toFloatPrice input:', couponDiscountFromDb, 'output:', couponDiscountFloat);
+
 			// Add debugging
 			console.log('📱 COUPON SERVICE DEBUG:', {
 				couponCodeFromDb,

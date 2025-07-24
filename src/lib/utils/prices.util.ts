@@ -5,13 +5,17 @@ export function correctPrice(price: number): string {
 
 // We use this function to chage a price from string format to a floating number
 export function toFloatPrice(price: string): number {
+	console.log('📱 toFloatPrice input:', price);
 	const unsignedPrice = price
 		.replaceAll('R$', '')
 		.replaceAll('$', '')
 		.replaceAll(' ', '')
 		.replaceAll('.', '') // Remove thousands separator FIRST
 		.replaceAll(',', '.');
-	return parseFloat(unsignedPrice);
+	console.log('📱 toFloatPrice processed:', unsignedPrice);
+	const result = parseFloat(unsignedPrice);
+	console.log('📱 toFloatPrice output:', result);
+	return result;
 }
 
 export function isNumber(value) {
