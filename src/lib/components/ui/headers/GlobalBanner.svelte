@@ -19,7 +19,7 @@
 	// Set the flag after 5 seconds from page load
 	onMount(() => {
 		const timer = setTimeout(() => {
-			showBanner = true;
+			showBanner = false;
 		}, 2500);
 
 		// Clear the timer if the component is destroyed
@@ -28,7 +28,7 @@
 </script>
 
 <!-- {#if (showBanner && path == '/') || path == '/uy/' || path.startsWith('/blog') || path.startsWith('/uy/blog') || path.startsWith('/produto') || path.startsWith('/uy/producto')} -->
-{#if 1 == 2 && showBanner && (path == '/' || path == '/uy/')}
+{#if showBanner && (path == '/' || path == '/uy/')}
 	<!-- {#if } -->
 	<div class="bry-banner" transition:slide={{ duration: 300 }}>
 		<a
