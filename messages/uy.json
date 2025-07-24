@@ -5,6 +5,7 @@
 	"loading": "Cargando...",
 	"search": "Buscar...",
 	"searching": "Buscando...",
+	"sending": "Enviando...",
 	"back": "Volver",
 	"copy": "Copiar",
 	"copiedToClipboard": "Copiado al portapapeles",
@@ -29,6 +30,8 @@
 	"maxStockIs": "Tenemos {maxStock} producto en stock en este momento. Para más cantidad, contáctanos.",
 
 	"cashDiscountText": "EN EFECTIVO (5% OFF)",
+	"addCoupon": "Agregar cupon",
+	"coupon": "Cupon",
 
 	"onSale": "EN OFERTA",
 	"soon": "Próximamente",

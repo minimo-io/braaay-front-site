@@ -3,6 +3,21 @@ export function correctPrice(price: number): string {
 	return price.toFixed(2).replace('.', ',');
 }
 
+// We use this function to chage a price from string format to a floating number
+export function toFloatPrice(price: string): number {
+	const unsignedPrice = price
+		.replaceAll('R$', '')
+		.replaceAll('$', '')
+		.replaceAll(' ', '')
+		.replaceAll('.', '') // Remove thousands separator FIRST
+		.replaceAll(',', '.');
+	return parseFloat(unsignedPrice);
+}
+
+export function isNumber(value) {
+	return !isNaN(value) && !isNaN(parseFloat(value));
+}
+
 export function calculateDiscountPercentage(originalPrice, discountedPrice) {
 	if (originalPrice <= 0) return 0; // Avoid division by zero or invalid inputs
 	const discount = originalPrice - discountedPrice;

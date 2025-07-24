@@ -13,9 +13,23 @@ export interface CartItem {
 	uri: string;
 }
 
+// export interface Coupon {
+// 	code: string;
+// 	discount: number;
+// }
+
+// For the coupons services
+export interface CouponResult {
+	success: boolean;
+	error?: string;
+	sessionToken?: string;
+}
+
 export interface Cart {
 	items: CartItem[];
-	coupons: string[]; // Array of coupon codes
+	// coupons: string[];
+	// coupons: Coupon[];
+	coupons: { code: string; discount: number }[];
 	zip: string;
 }
 

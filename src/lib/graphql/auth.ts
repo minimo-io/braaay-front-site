@@ -75,7 +75,7 @@ export async function login(username: string, password: string): Promise<LoginRe
 // Function to logout
 export async function logout() {
 	try {
-		// await getUrqlClient().client.mutation(EMPTY_CART_MUTATION, {}).toPromise();
+		// await emptyRemoteCart();
 		emptyCart();
 	} catch (err) {
 		console.warn('Failed to log out via GraphQL:', err);

@@ -104,11 +104,15 @@ export const adjustQuantity = (itemId: number, delta: number, specific?: number)
 // Clear the whole cart
 // including the woocommerce remote cart
 export const emptyCart = async () => {
-	await getUrqlClient().client.mutation(EMPTY_CART_MUTATION, {}).toPromise();
+	await emptyRemoteCart();
 	cart.update(() => {
 		shippingDetails.details = [];
 		return { items: [], coupons: [], zip: '' };
 	});
+};
+// To remove remote cart only
+export const emptyRemoteCart = async () => {
+	await getUrqlClient().client.mutation(EMPTY_CART_MUTATION, {}).toPromise();
 };
 
 // Set zip code for app wide use
@@ -120,24 +124,40 @@ export const updateZip = (zipCode: string) => {
 };
 
 // ---- Coupon related methods ----
-// Add a coupon to the cart
-export const addCoupon = (couponCode: string) => {
+export const addCoupon = (couponCode: string, couponDiscount: number) => {
 	cart.update((currentCart: Cart) => {
 		// Check if the coupon already exists to avoid duplicates
-		if (!currentCart.coupons.includes(couponCode)) {
-			currentCart.coupons.push(couponCode);
+		const couponExists = currentCart.coupons.some((coupon) => coupon.code === couponCode);
+		if (!couponExists) {
+			currentCart.coupons.push({ code: couponCode, discount: couponDiscount });
 		}
 		return currentCart;
 	});
 };
+// Add a coupon to the cart
+// export const addCoupon = (couponCode: string) => {
+// 	cart.update((currentCart: Cart) => {
+// 		// Check if the coupon already exists to avoid duplicates
+// 		if (!currentCart.coupons.includes(couponCode)) {
+// 			currentCart.coupons.push(couponCode);
+// 		}
+// 		return currentCart;
+// 	});
+// };
 
 // Remove a specific coupon from the cart
 export const removeCoupon = (couponCode: string) => {
 	cart.update((currentCart: Cart) => {
-		currentCart.coupons = currentCart.coupons.filter((code) => code !== couponCode);
+		currentCart.coupons = currentCart.coupons.filter((coupon) => coupon.code !== couponCode);
 		return currentCart;
 	});
 };
+// export const removeCoupon = (couponCode: string) => {
+// 	cart.update((currentCart: Cart) => {
+// 		currentCart.coupons = currentCart.coupons.filter((code) => code !== couponCode);
+// 		return currentCart;
+// 	});
+// };
 
 // Clear all coupons from the cart
 export const clearAllCoupons = () => {
@@ -150,16 +170,15 @@ export const clearAllCoupons = () => {
 // Check if a specific coupon exists in the cart
 export const hasCoupon = (couponCode: string): boolean => {
 	const currentCart = get(cart);
-	return currentCart.coupons.includes(couponCode);
+	return currentCart.coupons.some((coupon) => coupon.code === couponCode);
 };
+// export const hasCoupon = (couponCode: string): boolean => {
+// 	const currentCart = get(cart);
+// 	return currentCart.coupons.includes(couponCode);
+// };
 
 // Get the count of applied coupons
 export const getCouponCount = (): number => {
-	// cart.update((currentCart: Cart): =>{
-
-	// 	return currentCart.coupons.length;
-	// });
-
 	const currentCart = get(cart);
 	return currentCart.coupons.length;
 };
@@ -167,8 +186,12 @@ export const getCouponCount = (): number => {
 // Get all applied coupons
 export const getAppliedCoupons = (): string[] => {
 	const currentCart = get(cart);
-	return [...currentCart.coupons];
+	return currentCart.coupons.map((coupon) => coupon.code);
 };
+// export const getAppliedCoupons = (): string[] => {
+// 	const currentCart = get(cart);
+// 	return [...currentCart.coupons];
+// };
 
 // Calculate the total price of items in cart before any discounts
 export const getCartSubtotal = (): number => {
@@ -182,28 +205,28 @@ export const getCouponDetails = (couponCode: string) => {
 };
 
 // Calculate the discount value based on applied coupons
-export const calculateDiscount = (couponCode: string): number => {
-	const subtotal = getCartSubtotal();
-	let totalDiscount = 0;
+// export const calculateDiscount = (couponCode: string): number => {
+// 	const subtotal = getCartSubtotal();
+// 	let totalDiscount = 0;
 
-	const couponDetails = getCouponDetails(couponCode);
+// 	const couponDetails = getCouponDetails(couponCode);
 
-	if (couponDetails) {
-		// Skip if coupon doesn't exist in config
-		// if (!couponDetails) continue;
+// 	if (couponDetails) {
+// 		// Skip if coupon doesn't exist in config
+// 		// if (!couponDetails) continue;
 
-		let discountAmount = 0;
+// 		let discountAmount = 0;
 
-		// Calculate discount based on type
-		if (couponDetails.discountType === 'PERCENT') {
-			discountAmount = subtotal * (couponDetails.amount / 100);
-		} else if (couponDetails.discountType === 'FIXED_CART') {
-			discountAmount = Math.min(subtotal, couponDetails.amount);
-		}
+// 		// Calculate discount based on type
+// 		if (couponDetails.discountType === 'PERCENT') {
+// 			discountAmount = subtotal * (couponDetails.amount / 100);
+// 		} else if (couponDetails.discountType === 'FIXED_CART') {
+// 			discountAmount = Math.min(subtotal, couponDetails.amount);
+// 		}
 
-		// Add to total and record details
-		totalDiscount += discountAmount;
-	}
+// 		// Add to total and record details
+// 		totalDiscount += discountAmount;
+// 	}
 
-	return totalDiscount;
-};
+// 	return totalDiscount;
+// };

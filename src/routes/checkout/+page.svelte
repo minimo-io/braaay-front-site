@@ -46,7 +46,7 @@
 	import StepFourPending from '$components/ui/checkout/StepFourPending.svelte';
 	import StepFourWaiting from '$components/ui/checkout/StepFourWaiting.svelte';
 
-	import { calculateDiscount, cart } from '$stores/cart.store.svelte';
+	import { cart } from '$stores/cart.store.svelte';
 	import { m } from '$lib/paraglide/messages';
 
 	import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
@@ -110,9 +110,15 @@
 		cartItemsCount = cart.items.reduce((count, item) => count + item.quantity, 0);
 		cartSubTotalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
 		if (cart.coupons) {
+			// couponsCount = cart.coupons.length;
+			// for (const couponCode of cart.coupons) {
+			// 	cartDiscounts = calculateDiscount(couponCode);
+			// 	break; // just one coupon allowed
+			// }
 			couponsCount = cart.coupons.length;
-			for (const couponCode of cart.coupons) {
-				cartDiscounts = calculateDiscount(couponCode);
+			for (const coupon of cart.coupons) {
+				cartDiscounts = coupon.discount;
+				// couponName = coupon.code;
 				break; // just one coupon allowed
 			}
 		}
@@ -205,7 +211,7 @@
 
 			if (cart.coupons && cart.coupons.length > 0) {
 				cart.coupons.forEach((item) => {
-					couponsForGraphQL.push(item);
+					couponsForGraphQL.push(item.code);
 				});
 			}
 		});

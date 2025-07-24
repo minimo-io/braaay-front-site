@@ -6,25 +6,9 @@ export const COUPON_APPLY = gql`
 		applyCoupon(input: { code: $couponCode }) {
 			applied {
 				code
-			}
-			cart {
-				appliedCoupons {
-					code
-					description
-					discountAmount
-					discountTax
-				}
+				discountAmount
+				discountTax
 			}
 		}
 	}
 `;
-
-// export const COUPON_QUERY = gql`
-// query GetCoupon($slug: ID!) {
-// 	coupon(id: $slug, idType: CODE) {
-// 		description
-// 		amount
-// 		discountType
-// 	}
-// }
-// `;

@@ -5,6 +5,7 @@
 	"loading": "Carregando...",
 	"search": "Pesquisar...",
 	"searching": "Pesquisando...",
+	"sending": "Enviando...",
 	"back": "Voltar",
 	"copy": "Copiar",
 	"copiedToClipboard": "Copiado para a área de transferência",
@@ -65,6 +66,8 @@
 	"cartMyCart": "Meu carrinho",
 
 	"discountCouponTitle": "Cupom de desconto",
+	"addCoupon": "Adicionar cupom",
+	"coupon": "Cupom",
 
 	"continue": "Continuar",
 

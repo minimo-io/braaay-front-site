@@ -1,5 +1,5 @@
 // src/lib/types/products.types.ts
-import { createExcerpt, stripHtml } from '$lib/utils';
+import { createExcerpt, stripHtml, toFloatPrice } from '$lib/utils';
 import type {
 	GraphQLPagination,
 	ArticleCreator,
@@ -243,21 +243,13 @@ export function mapProduct(data: GraphQLProductNode): Product {
 		averageRating = data.node.averageRating.toFixed(1);
 	}
 
-	let floatPrice = data.node.price;
-	if (floatPrice) {
-		floatPrice = floatPrice
-			.replaceAll('R$', '')
-			.replaceAll('$', '')
-			.replaceAll(' ', '')
-			.replaceAll('.', '') // Remove thousands separator FIRST
-			.replaceAll(',', '.'); // Then change comma to decimal point
-	}
+	const floatPrice = toFloatPrice(data.node.price) ?? 0;
 
 	return {
 		id: data.node.databaseId,
 		isFavorited: data.node.isFavorited,
 		slug: data.node.slug,
-		floatPrice: parseFloat(floatPrice),
+		floatPrice: floatPrice,
 		price: data.node.price,
 		regularPrice: data.node.regularPrice,
 		stockStatus: data.node.stockStatus,

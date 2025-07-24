@@ -14,7 +14,7 @@
 {#if showCartToast}
 	<div
 		transition:slide={{ duration: 150, axis: 'y' }}
-		class="p-5 bottom-0 left-1/2 w-[90%] md:w-[400px] transform -translate-x-1/2 z-50 fixed bg-grey-lighter border border-grey-lighter shadow-lg rounded-t-xl text-sm text-center"
+		class="p-5 bottom-0 left-1/2 w-[90%] md:w-[400px] transform -translate-x-1/2 z-[101] fixed bg-grey-lighter border border-grey-lighter shadow-lg rounded-t-xl text-sm text-center"
 	>
 		<div class="flex justify-center font-bold uppercase text-base items-center gap-1">
 			<CircleCheckBig class="h-6 aspect-1 text-green-dark" />

@@ -1,11 +1,12 @@
+<!-- src/routes/cart/+page.svelte -->
 <script lang="ts">
 	import { onMount, type Component } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
-	import { m, seoDivider } from '$lib/paraglide/messages';
+	import { m } from '$lib/paraglide/messages';
 
-	import { cart, calculateDiscount, clearAllCoupons } from '$stores/cart.store.svelte';
+	import { cart, clearAllCoupons } from '$stores/cart.store.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import { Gift, Sparkle, Truck, X } from '@lucide/svelte';
@@ -38,9 +39,9 @@
 		totalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
 		if (cart.coupons) {
 			couponsCount = cart.coupons.length;
-			for (const couponCode of cart.coupons) {
-				discounts = calculateDiscount(couponCode);
-				couponName = couponCode;
+			for (const coupon of cart.coupons) {
+				discounts = coupon.discount;
+				couponName = coupon.code;
 				break; // just one coupon allowed
 			}
 		}
@@ -145,34 +146,6 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- Quick Offer -->
-				<!-- <div class="relative">
-                            <a href="#" class="not-hover-effect hidden md:block relative">
-                                <picture>
-                                    <source
-                                        srcset="./images/happy-wine-home-desktop-mobile.webp"
-                                        media="(max-width: 640px)"
-                                    />
-
-                                    <source
-                                        srcset="./images/carousel/braaay-carousel-desktop-1.webp"
-                                        media="(min-width: 768px)"
-                                    />
-                                    <img
-                                        alt="oferta-do-mes"
-                                        class="rounded-lg mb-5 mt-2 border border-grey-lighter opacity-90"
-                                        src="/src/images/carousel/braaay-carousel-desktop-1.webp"
-                                    />
-                                </picture>
-                                <div
-                                    href="#"
-                                    class="btn block absolute not-hover-effect hover:opacity-90 transition-all scale-90 bottom-2 right-2 border-0 text-white bg-blue uppercase md:items-center text-center mt-3 lg:mt-0 self-center"
-                                >
-                                    ADICIONAR AO CARRINHO
-                                </div>
-                            </a>
-                        </div> -->
 			</div>
 
 			<div class="mt-8">
@@ -193,7 +166,7 @@
 								{m.discountCouponTitle()}
 							{:else}
 								<div>
-									Cupom: <span class="font-bold">{couponName}</span>
+									{m.coupon()}: <span class="font-bold">{couponName}</span>
 								</div>
 							{/if}
 							{#if couponsCount >= 1}
@@ -227,7 +200,7 @@
 								customPx="max-h-min"
 								action={() => {
 									openModal({
-										header: 'Adicionar cupom',
+										header: m.addCoupon(),
 										content: CouponForm as Component
 									});
 								}}
