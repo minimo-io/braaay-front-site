@@ -40,6 +40,7 @@
 	import CartToast from '$components/ui/cart/CartToast.svelte';
 	import Analytics from '$components/Analytics.svelte';
 	import Teaser from '$components/ui/Teaser.svelte';
+	import LocalStorageDebugger from '$components/LocalStorageDebugger.svelte';
 
 	afterNavigate(() => {
 		// Close drawer if active
@@ -139,6 +140,9 @@
 
 <!-- Teaser -->
 <Teaser />
+
+<!-- Local Storage Debugger -->
+<LocalStorageDebugger />
 
 <style global>
 	:root {

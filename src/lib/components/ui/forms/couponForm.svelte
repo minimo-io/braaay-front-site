@@ -157,7 +157,12 @@
 				closeModal();
 			} else {
 				error = result.error || 'Error inesperado com o código do cupom';
-				launchToast(`Error: ${stripHtml(result.error ?? '')}`, 'error', 3000);
+				console.error(result.error);
+				launchToast(
+					`Error: ${stripHtml(result.error?.replaceAll('&#82;&#36;', 'R$') ?? '')}`,
+					'error',
+					3000
+				);
 			}
 		} catch (err) {
 			const errorMessage = err instanceof Error ? err.message : String(err);
