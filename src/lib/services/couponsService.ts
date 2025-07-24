@@ -95,6 +95,15 @@ export async function processCoupon(couponCode: string): Promise<CouponResult> {
 			const couponDiscountFromDb = result.data.applyCoupon.applied.discountAmount;
 			const couponDiscountFloat = toFloatPrice(couponDiscountFromDb);
 
+			// Add debugging
+			console.log('📱 COUPON SERVICE DEBUG:', {
+				couponCodeFromDb,
+				couponDiscountFromDb,
+				type: typeof couponDiscountFromDb,
+				couponDiscountFloat,
+				isNumberCheck: isNumber(couponDiscountFloat)
+			});
+
 			if (couponCodeFromDb && couponDiscountFromDb && isNumber(couponDiscountFloat)) {
 				if (hasCoupon(couponCodeFromDb)) {
 					removeCoupon(couponCodeFromDb);

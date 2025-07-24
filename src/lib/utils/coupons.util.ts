@@ -26,11 +26,12 @@ export async function addCouponToCart() {
 		} else if (result.data.applyCoupon && result.data.applyCoupon.applied.code) {
 			// Coupon was appllied OK!
 			const couponCodeFromDb = result.data.applyCoupon.applied.code;
+			const couponDiscountFromDb = result.data.applyCoupon.applied.discount;
 			if (couponCodeFromDb) {
 				if (hasCoupon(couponCodeFromDb)) {
 					removeCoupon(couponCodeFromDb);
 				}
-				addCoupon(couponCodeFromDb);
+				addCoupon(couponCodeFromDb, couponDiscountFromDb);
 			}
 			launchToast(`Desconto aplicado! Agora e só adicionar produtos no carrinho`, 'success', 3500);
 			goto(localizeHref('/vinhos/'));

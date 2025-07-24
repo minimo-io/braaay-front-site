@@ -6,7 +6,6 @@
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { COUPON_APPLY } from '$lib/graphql/mutations';
 	import { addCouponToCart, launchToast } from '$lib/utils';
-	import { addCoupon, hasCoupon, removeCoupon } from '$stores/cart.store.svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { goto } from '$app/navigation';
 
