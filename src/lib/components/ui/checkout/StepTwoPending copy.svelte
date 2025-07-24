@@ -18,86 +18,64 @@
 
 	let { customer, onActionClick }: Props = $props();
 
-	// Form state with $state for reactivity
-	// CRITICAL: Initialize zipValue from customer prop
+	// --- State Management ---
+	// CRITICAL: zipValue is the source of truth for the ZIP code, initialized from customer prop.
 	let zipValue = $state(customer?.addresses?.shipping?.postcode || '');
 	let street = $state(customer?.addresses?.shipping?.address1 || '');
-	let number = $state('');
-	let complement = $state(customer?.addresses?.shipping?.address2 || '');
-	let neighborhood = $state('');
+	let number = $state(''); // Number input by user
+	let complement = $state(customer?.addresses?.shipping?.address2 || ''); // Complement input by user
+	let neighborhood = $state(''); // Fetched or input by user
 	let city = $state(customer?.addresses?.shipping?.city || '');
 	let stateCode = $state(customer?.addresses?.shipping?.state || '');
 
-	// Status flags
 	let isLoading = $state(false);
 	let errorMessage = $state('');
-	// CRITICAL: Initialize visibility correctly if customer data exists
-	// If there's a postcode, we want fields visible to allow editing or show lookup results/errors.
+	// CRITICAL: Initialize visibility based on initial data to allow editing/errors.
 	let addressFieldsVisible = $state(!!customer?.addresses?.shipping?.postcode);
 
-	// CRITICAL FIX 1: Track the customer object reference we have initialized from.
-	// This prevents the $effect from re-running initialization for the same customer object.
-	let initializedCustomerRef: Customer | undefined = $state(undefined);
+	// --- Initialization Logic ---
+	// CRITICAL: Track if we've performed the one-time initialization for the current customer data load.
+	// Using a simple variable instead of $state for this flag as it's internal control logic.
+	let hasInitialized = false;
 
-	// CRITICAL FIX 2: Refine the $effect to depend on `customer` reference and use a guard.
-	// This $effect will now only run its initialization logic when the `customer` object itself changes.
-	$effect(() => {
-		// Check if the customer prop is a new/different object reference than the one we initialized from.
-		// This prevents re-initialization on every reactive update or re-render.
-		if (customer !== initializedCustomerRef) {
-			// Mark this customer object as the one we are initializing from.
-			initializedCustomerRef = customer;
+	// CRITICAL: Dedicated function to initialize the component based on customer data.
+	// This replaces the problematic $effect.
+	function initializeFromCustomer() {
+		// Guard clause: only run initialization once per customer data load.
+		if (hasInitialized) return;
 
-			if (customer?.addresses?.shipping?.postcode) {
-				const shippingAddress = customer.addresses.shipping;
-				// Update all our form fields from customer data ONE TIME for this customer object.
-				zipValue = shippingAddress.postcode || '';
-				// Parse potential existing full address1 if needed (street + number)
-				// Simplified: assuming address1 is just the street name or number is separate.
-				// street = shippingAddress.address1 || ''; // Optional prefill
-				// city = shippingAddress.city || '';      // Optional prefill
-				// stateCode = shippingAddress.state || ''; // Optional prefill
+		if (customer?.addresses?.shipping) {
+			const shippingAddress = customer.addresses.shipping;
 
-				// CRITICAL: Show fields if postcode exists, allowing for edit/error display.
-				addressFieldsVisible = true;
+			// Update form fields from customer data ONE TIME.
+			// zipValue is already initialized, but we can ensure it's set here too if needed.
+			// However, let's trust the initial $state assignment for zipValue for consistency.
+			// zipValue = shippingAddress.postcode || '';
+			street = shippingAddress.address1 || '';
+			// number, complement, neighborhood are user inputs, don't prefill from existing address1/address2
+			// They are already initialized as empty strings.
+			// number = '';
+			// complement = shippingAddress.address2 || '';
+			// neighborhood = '';
+			city = shippingAddress.city || '';
+			stateCode = shippingAddress.state || '';
 
-				// If mask is already initialized, update its value too ONE TIME.
-				// This is safe here because we are doing it only for a new customer object.
-				if (zipMask && shippingAddress.postcode) {
-					zipMask.unmaskedValue = shippingAddress.postcode;
-				}
+			// Ensure address fields are visible for editing or showing initial lookup results/errors.
+			addressFieldsVisible = true;
 
-				// CRITICAL FIX 3: Trigger initial lookup for the new customer's postcode.
-				// Do this after setting the mask value to ensure consistency.
-				if (shippingAddress.postcode.length === 8) {
-					// Use setTimeout to decouple the API call slightly from the reactive cycle.
-					setTimeout(() => {
-						fetchAddressFromCep(shippingAddress.postcode!);
-					}, 0);
-				}
-			} else {
-				// Handle case where customer prop changes to one without shipping address.
-				// Reset fields.
-				zipValue = '';
-				if (zipMask) {
-					zipMask.unmaskedValue = ''; // Clear mask
-				}
-				// Optionally hide fields if preferred for no address.
-				// addressFieldsVisible = false;
-				// Reset other fields if needed
-				street = '';
-				number = '';
-				complement = '';
-				neighborhood = '';
-				city = '';
-				stateCode = '';
+			// CRITICAL: Trigger the initial lookup for the customer's postcode if it's valid.
+			if (shippingAddress.postcode && shippingAddress.postcode.length === 8) {
+				// Decouple the API call slightly from the initialization cycle.
+				setTimeout(() => {
+					fetchAddressFromCep(shippingAddress.postcode!);
+				}, 0);
 			}
 		}
-		// If customer === initializedCustomerRef, this $effect does nothing,
-		// thus preserving any user input that happened after initialization.
-	});
+		// Mark initialization as complete to prevent it from running again.
+		hasInitialized = true;
+	}
 
-	// Input masking logic
+	// --- IMask Logic ---
 	let zipMask: any;
 	let zipInputElement: HTMLInputElement;
 	const zipPlaceholder = '00000-000';
@@ -108,16 +86,14 @@
 			mask: zipPlaceholder
 		});
 
-		// Set initial value if available (handled by $effect, but safe to do here too)
-		// Note: The $effect might run before onMount, so check.
-		if (zipValue && !zipMask.unmaskedValue) {
-			// Only set if mask hasn't been set yet by $effect
+		// CRITICAL: Set the initial mask value from zipValue (which came from customer prop).
+		// This happens only once on mount.
+		if (zipValue) {
 			zipMask.unmaskedValue = zipValue;
 		}
 
-		// CRITICAL FIX 4: Update state when input changes - PRIMARY source of zipValue updates
+		// CRITICAL: Update state when input changes - This is the PRIMARY source of zipValue updates.
 		zipMask.on('accept', () => {
-			// This is the CORRECT place to update zipValue from user input via IMask.
 			// This ensures that whenever the user types, zipValue reflects the mask's current unmasked value.
 			zipValue = zipMask.unmaskedValue;
 			// Reset error when user modifies input
@@ -130,6 +106,9 @@
 		zipMask.on('complete', () => {
 			fetchAddressFromCep(zipMask.unmaskedValue);
 		});
+
+		// CRITICAL: Run the initialization logic after the mask is set up.
+		initializeFromCustomer();
 	});
 
 	onDestroy(() => {
@@ -138,48 +117,40 @@
 		}
 	});
 
-	// Function to handle input changes manually if needed (less critical now with IMask events)
-	// But we can refine it to ensure consistency and prevent potential issues
+	// --- Event Handlers ---
+	// Handle input changes (fallback or specific logic)
 	function handleZipChange(event: Event) {
-		// The main update happens in zipMask.on('accept')
-		// This handler primarily ensures zipValue syncs if mask event doesn't fire or for redundancy.
-		// Prioritize the mask's value if it exists.
+		// Main update is via IMask 'accept' event.
+		// This handler ensures zipValue syncs if needed.
 		if (zipMask) {
-			// Let 'accept' event be the primary driver.
-			// This handler might be slightly redundant but can act as a safeguard.
-			// Ensure we don't cause update loops by checking if the value is actually different.
-			// However, relying on 'accept' is the standard and better approach.
+			// Ensure zipValue reflects the mask state.
+			// This might be slightly redundant with 'accept' but ensures consistency.
+			zipValue = zipMask.unmaskedValue;
 		} else {
-			// Fallback if mask isn't initialized yet (unlikely after onMount)
+			// Fallback if mask isn't ready (unlikely after onMount).
 			const target = event.target as HTMLInputElement;
-			const rawValue = target.value.replace(/\D/g, '');
-			// Only update if it's different to prevent potential loops or redundant updates
-			if (zipValue !== rawValue) {
-				zipValue = rawValue;
-			}
+			zipValue = target.value.replace(/\D/g, '');
 		}
-		// Reset error when user starts typing again
 		if (errorMessage) {
 			errorMessage = '';
 		}
 	}
 
-	// Handle blur event to trigger address lookup when focus leaves the field
+	// Handle blur event to trigger address lookup
 	function handleZipBlur() {
-		// Use the raw unmasked value from the mask instance for length check and API call
 		if (zipMask && zipMask.unmaskedValue?.length === 8) {
 			fetchAddressFromCep(zipMask.unmaskedValue);
 		} else if (zipMask && zipMask.unmaskedValue?.length > 0 && zipMask.unmaskedValue?.length < 8) {
-			// Optionally handle incomplete CEP on blur
 			errorMessage = 'CEP incompleto';
 		}
-		// Reset error if field is empty on blur? Optional.
+		// Clear error if field becomes empty? Optional.
 		// else if (zipMask && !zipMask.unmaskedValue) {
 		//     errorMessage = '';
 		// }
 	}
 
-	// Function to fetch address data from CEP using our service
+	// --- API Call ---
+	// Function to fetch address data from CEP
 	async function fetchAddressFromCep(cep: string) {
 		// Only proceed if we have a complete CEP (8 digits)
 		if (cep.length !== 8) return;
@@ -193,33 +164,26 @@
 
 			if (!addressData) {
 				errorMessage = 'CEP não encontrado';
-				// Clear address fields fetched from API
+				// Clear address fields fetched from API on "not found"
 				street = '';
 				neighborhood = '';
 				city = '';
 				stateCode = '';
-				// CRITICAL FIX 5: Still show the fields so user knows the ZIP was processed and failed
-				// and can potentially correct it or see the error clearly.
-				// addressFieldsVisible is already true from initialization if postcode existed,
-				// or will be set true if user typed a postcode. Keep it true.
-				// addressFieldsVisible = true; // Not strictly needed if already true
+				// CRITICAL: Still show the fields so user knows the ZIP was processed and failed.
+				// addressFieldsVisible should already be true, but ensure it.
+				// addressFieldsVisible = true;
 				return; // Exit early on not found
 			}
 
 			// Update address fields with fetched data
-			// Note: You might need to parse address1 from the API if it includes number
-			// For now, assuming API gives street name separately.
 			street = addressData.street || '';
-			// Number and complement are user inputs, don't overwrite from API
-			// number = ... ;
-			// complement = ...;
 			neighborhood = addressData.neighborhood || '';
 			city = addressData.city || '';
 			stateCode = addressData.state || '';
 
-			// CRITICAL FIX 6: Make address fields visible AFTER populating (or attempting to populate) data
-			// This ensures fields show up whether lookup succeeded or failed (handled above)
+			// CRITICAL: Make address fields visible AFTER populating data.
 			// If user typed a new ZIP, fields might not be visible yet, so ensure they are.
+			// addressFieldsVisible is likely already true from initialization, but ensure it.
 			addressFieldsVisible = true;
 		} catch (err) {
 			console.error('Error fetching CEP ', err);
@@ -229,32 +193,30 @@
 				errorMessage = 'Erro ao buscar o CEP. Tente novamente.';
 			}
 
-			// On any error (network, parsing, etc.), also show fields and clear fetched data
+			// On any error, also show fields and clear fetched data
 			street = '';
 			neighborhood = '';
 			city = '';
 			stateCode = '';
 			// Ensure fields are visible to show error context
-			// addressFieldsVisible is likely already true, but ensure it.
 			addressFieldsVisible = true;
 		} finally {
 			isLoading = false;
 		}
 	}
 
+	// --- Validation ---
 	/**
 	 * Validates the checkout step two form (shipping address)
 	 * @param {CustomerAddress} address - The shipping address data to validate
 	 * @returns {Object} - Validation result with valid flag and any error messages
 	 */
 	function validateCheckoutStepTwo(address: CustomerAddress) {
-		// Initialize validation result
 		const result = {
 			valid: true,
 			errors: {} as Record<string, string>
 		};
 
-		// Required fields validation
 		const requiredFields = [
 			{ field: 'address1', message: 'Endereço é obrigatório' },
 			{ field: 'city', message: 'Cidade é obrigatória' },
@@ -262,7 +224,6 @@
 			{ field: 'state', message: 'Estado é obrigatório' }
 		];
 
-		// Check each required field
 		for (const { field, message } of requiredFields) {
 			if (
 				!address[field as keyof CustomerAddress] ||
@@ -273,21 +234,19 @@
 			}
 		}
 
-		// Validate number (separate input field)
+		// Validate separate number field
 		if (!number.trim()) {
 			result.valid = false;
-			// Use address1 error key as it's part of the combined address1 field
 			result.errors.address1 = 'Número é obrigatório';
 		}
-		// Validate neighborhood (address2)
+		// Validate separate neighborhood field (address2)
 		if (!neighborhood.trim()) {
 			result.valid = false;
 			result.errors.address2 = 'Bairro é obrigatório';
 		}
 
-		// CEP/Postcode validation - should be 8 digits for Brazil
+		// CEP validation for Brazil
 		if (address.country === 'BR' && address.postcode.trim()) {
-			// Remove any non-digit characters for validation
 			const cleanPostcode = address.postcode.replace(/\D/g, '');
 			if (cleanPostcode.length !== 8) {
 				result.valid = false;
@@ -295,7 +254,7 @@
 			}
 		}
 
-		// State validation - should be 2 letters for Brazil
+		// State validation for Brazil
 		if (address.country === 'BR' && address.state) {
 			const stateRegex = /^[A-Z]{2}$/i;
 			if (!stateRegex.test(address.state)) {
@@ -304,34 +263,27 @@
 			}
 		}
 
-		// Address line validation - check for reasonable length (combined street + number)
-		// Combine street and number for validation
+		// Address line validation (combined street + number)
 		const fullStreet = `${street} ${number}`.trim();
 		if (fullStreet.length < 5) {
 			result.valid = false;
 			result.errors.address1 = 'Endereço muito curto';
 		}
 
-		// City validation - check for reasonable length and no digits
+		// City validation
 		if (address.city) {
 			if (address.city.length < 2) {
 				result.valid = false;
 				result.errors.city = 'Nome da cidade muito curto';
 			}
-			// Optional: Check for digits in city name
 			if (/\d/.test(address.city)) {
 				result.valid = false;
 				result.errors.city = 'Nome da cidade não deve conter números';
 			}
 		}
 
-		// Note: Complement validation logic seemed inconsistent (required in one place, optional implied).
-		// If it's truly optional, remove this check. If required, uncomment and adjust:
-		// if (!complement.trim()) {
-		//     result.valid = false;
-		//     // Decide on an appropriate error field key if needed
-		//     // result.errors.complement = 'Complemento é obrigatório';
-		// }
+		// Note: Complement validation was inconsistent. Removed as it's often optional.
+		// If required, add a check for `complement.trim()`.
 
 		return result;
 	}

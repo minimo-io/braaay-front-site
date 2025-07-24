@@ -92,7 +92,7 @@
 							>
 						</li>
 						<li><a href={localizeHref('/blog/')}>BLOG</a></li>
-						<li><a href="/">SHOWROOM</a></li>
+						<li><a href={localizeHref('/club/')}>CLUBE</a></li>
 					</ul>
 				</div>
 				<!-- Social Media -->

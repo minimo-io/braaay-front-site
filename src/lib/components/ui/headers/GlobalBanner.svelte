@@ -28,7 +28,7 @@
 </script>
 
 <!-- {#if (showBanner && path == '/') || path == '/uy/' || path.startsWith('/blog') || path.startsWith('/uy/blog') || path.startsWith('/produto') || path.startsWith('/uy/producto')} -->
-{#if showBanner && (path == '/' || path == '/uy/')}
+{#if 1 == 2 && showBanner && (path == '/' || path == '/uy/')}
 	<!-- {#if } -->
 	<div class="bry-banner" transition:slide={{ duration: 300 }}>
 		<a

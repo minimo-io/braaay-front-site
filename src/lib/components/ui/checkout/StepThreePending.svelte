@@ -169,33 +169,33 @@
 		{:else}
 			<div class="flex flex-col">
 				{#each finalShippingDetails as shipping, i}
-					{#if !shipping.id.startsWith('local_pickup')}
-						<div class="flex flex-row justify-between text-xs items-center my-1">
-							<label
-								class="text-[13px] md:text-[15px] flex cursor-pointer justify-between w-full"
-								for="radio-{i}"
-							>
-								<div class="flex justify-start items-center">
-									<input
-										bind:group={finalShippingValueSelected}
-										onclick={() => (error = '')}
-										name="shippingOption"
-										id="radio-{i}"
-										type="radio"
-										value={{ id: shipping.id, label: shipping.label, cost: shipping.cost }}
-									/>
-									<span class="ml-2 capitalize">
-										{shipping.label.replace('Entrega ', '')}
-									</span>
-								</div>
+					<!-- {#if !shipping.id.startsWith('local_pickup')} -->
+					<div class="flex flex-row justify-between text-xs items-center my-1">
+						<label
+							class="text-[13px] md:text-[15px] flex cursor-pointer justify-between w-full"
+							for="radio-{i}"
+						>
+							<div class="flex justify-start items-center">
+								<input
+									bind:group={finalShippingValueSelected}
+									onclick={() => (error = '')}
+									name="shippingOption"
+									id="radio-{i}"
+									type="radio"
+									value={{ id: shipping.id, label: shipping.label, cost: shipping.cost }}
+								/>
+								<span class="ml-2 capitalize">
+									{shipping.label.replace('Entrega ', '')}
+								</span>
+							</div>
 
-								<div class="font-bold">
-									{m.currencySymbol()}
-									{shipping.cost}
-								</div>
-							</label>
-						</div>
-					{/if}
+							<div class="font-bold">
+								{m.currencySymbol()}
+								{shipping.cost}
+							</div>
+						</label>
+					</div>
+					<!-- {/if} -->
 				{/each}
 			</div>
 		{/if}

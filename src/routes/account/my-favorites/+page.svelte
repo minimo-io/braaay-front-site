@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Heart, Share2 } from '@lucide/svelte';
+	import { Heart, LoaderCircle, Share2 } from '@lucide/svelte';
 	import { onMount } from 'svelte';
 	import { getFavoriteProducts } from '$lib/services/index';
 	import type { FavoriteProduct } from '$lib/types';
@@ -55,7 +55,12 @@
 			</ul>
 		</div>
 	{:else if isLoading}
-		<div class="text-sm text-grey-medium-dark">{m.loadingFavorites()}</div>
+		<div class="text-sm text-grey-medium-dark flex items-center">
+			<LoaderCircle class="spinner" />
+			<span>
+				{m.loadingFavorites()}
+			</span>
+		</div>
 	{/if}
 
 	<!-- No products -->

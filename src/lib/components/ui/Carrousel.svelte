@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import Glide from '@glidejs/glide';
 	import '@glidejs/glide/dist/css/glide.core.css';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	onMount(async () => {
 		let glide = new Glide('#glide-carousel', {
@@ -20,6 +21,33 @@
 <div id="glide-carousel" class="glide">
 	<div class="glide__track" data-glide-el="track">
 		<ul class="glide__slides">
+			<li class="glide__slide w-full">
+				<a
+					href={localizeHref('/produto/confraria-entre-tacas-e-mulheres/')}
+					class="not-hover-effect"
+				>
+					<picture>
+						<!-- Mobile image: for screens up to 767px -->
+						<source
+							srcset="/images/carousel/braaay-carousel-mobile-1.jpg"
+							media="(max-width: 767px)"
+						/>
+						<!-- Desktop image: for screens 768px and above -->
+						<source
+							srcset="/images/carousel/braaay-carousel-desktop-1.jpg"
+							media="(min-width: 768px)"
+						/>
+						<!-- Fallback image -->
+						<img
+							src="/images/carousel/braaay-carousel-desktop-1.jpg"
+							alt="placeholder 2"
+							class="carousel-image w-full"
+							width="800"
+							height="600"
+						/>
+					</picture>
+				</a>
+			</li>
 			<li class="glide__slide w-full">
 				<a href="./" class="not-hover-effect">
 					<picture>
@@ -44,30 +72,7 @@
 					</picture>
 				</a>
 			</li>
-			<li class="glide__slide w-full">
-				<a href="./" class="not-hover-effect">
-					<picture>
-						<!-- Mobile image: for screens up to 767px -->
-						<source
-							srcset="/images/carousel/braaay-carousel-mobile-1.png"
-							media="(max-width: 767px)"
-						/>
-						<!-- Desktop image: for screens 768px and above -->
-						<source
-							srcset="/images/carousel/braaay-carousel-desktop-1.png"
-							media="(min-width: 768px)"
-						/>
-						<!-- Fallback image -->
-						<img
-							src="/images/carousel/braaay-carousel-desktop-1.png"
-							alt="placeholder 2"
-							class="carousel-image w-full"
-							width="800"
-							height="600"
-						/>
-					</picture>
-				</a>
-			</li>
+
 			<li class="glide__slide w-full">
 				<a href="/" class="not-hover-effect">
 					<picture>

@@ -6,7 +6,7 @@
 	import { CheckCheck, Sparkle } from '@lucide/svelte';
 </script>
 
-<main class="md:w-1/2 md:mx-auto my-12 mx-[35px]">
+<main class="md:max-w-screen-lg md:mx-auto my-12 mx-[35px]">
 	<!-- <div class="flex justify-center border-b py-10 border-grey-lighter">CLUB DE BENEFICIOS.</div> -->
 	<h2 class="text-xl tracking-widest text-sun font-prata flex justify-center mt-5 mb-4">
 		<Sparkle class="pr-1" />

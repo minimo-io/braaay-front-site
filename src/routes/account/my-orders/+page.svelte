@@ -7,7 +7,7 @@
 	import { customerOrdersGet } from '$lib/services';
 	import type { CustomerOrder } from '$lib/types';
 	import { launchToast } from '$lib/utils';
-	import { Headset, Share2, ShoppingBag } from '@lucide/svelte';
+	import { Headset, LoaderCircle, Share2, ShoppingBag } from '@lucide/svelte';
 	import { onMount } from 'svelte';
 
 	// let customerOrders = $state({});
@@ -53,7 +53,12 @@
 			</ul>
 		</div>
 	{:else if isLoading}
-		<div class="text-sm text-grey-medium-dark">{m.loadingOrders()}</div>
+		<div class="text-sm text-grey-medium-dark flex items-center">
+			<LoaderCircle class="spinner" />
+			<span>
+				{m.loadingFavorites()}
+			</span>
+		</div>
 	{/if}
 
 	<!-- No products -->

@@ -1,5 +1,5 @@
 export const AppConfig = Object.freeze({
-	debug: false,
+	debug: true,
 	// the notification duration when adding a product to the cart
 	miniCartDuration: 8000,
 	// Frequency to check the order status, for pix

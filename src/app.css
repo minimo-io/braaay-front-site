@@ -94,6 +94,19 @@ html {
 			0 0;
 		transition-duration: 0.8s;
 	}
+	.spinner {
+		animation: spin 1s linear infinite;
+		width: 16px;
+		height: 16px;
+	}
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
 
 	::selection {
 		background: #212639;

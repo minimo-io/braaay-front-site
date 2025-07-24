@@ -171,10 +171,12 @@
 
 					<span class="text-sm text-[#28BA48] font-bold leading-4">
 						ou 4x de {m.currencySymbol()} 5,99 sem juros
-						{#if AppConfig.cashbackEnabled}
+						<br />
+						no cartão
+						<!-- {#if AppConfig.cashbackEnabled}
 							<br />
 							<a href="/"><u>+ {AppConfig.cashbackPercentage}% em CASHBACK</u></a>
-						{/if}
+						{/if} -->
 					</span>
 				{/if}
 			</div>

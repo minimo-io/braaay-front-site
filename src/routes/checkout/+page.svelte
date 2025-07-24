@@ -95,6 +95,7 @@
 				launchToast('Houve um error tentando obter os dados do cliente 2', 'error');
 				goto(localizeHref('/cart/'));
 			}
+			console.log('CUSTOMER_RESULT', customerResult);
 			customer = mapCustomerToUser(customerResult.data);
 		} catch (err) {
 			console.error(`Error: ${err}`);
@@ -355,7 +356,6 @@
 <Meta title="{m.seoCheckoutTitle()} {m.seoDivider()} {m.seoBase()}" noindex={true} />
 
 <main>
-	<!-- Cart -->
 	<div class="max-w-screen-lg mx-[10px] md:mx-auto">
 		<div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-0 md:gap-7">
 			<div class="mt-8">
