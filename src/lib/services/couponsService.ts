@@ -79,6 +79,15 @@ export async function processCoupon(couponCode: string): Promise<CouponResult> {
 			)
 			.toPromise();
 
+		// Add this logging right after the mutation
+		console.log('📱 FULL API RESPONSE:', {
+			data: result.data,
+			error: result.error,
+			hasData: !!result.data,
+			hasApplyCoupon: !!result.data?.applyCoupon,
+			hasApplied: !!result.data?.applyCoupon?.applied
+		});
+
 		if (result.error) {
 			return {
 				success: false,
