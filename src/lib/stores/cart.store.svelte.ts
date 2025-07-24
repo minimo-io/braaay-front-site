@@ -125,13 +125,25 @@ export const updateZip = (zipCode: string) => {
 };
 
 // ---- Coupon related methods ----
-export const addCoupon = (couponCode: string, couponDiscount: number) => {
+export const addCoupon = (couponCode: string, couponDiscount: number | string) => {
+	console.log('📱 INPUT:', { couponCode, couponDiscount, type: typeof couponDiscount });
+
 	cart.update((currentCart: Cart) => {
-		// Check if the coupon already exists to avoid duplicates
+		// Proper number conversion
+		const discountValue =
+			typeof couponDiscount === 'string' ? parseFloat(couponDiscount) : Number(couponDiscount);
+
+		console.log('📱 STORED:', {
+			code: couponCode,
+			discount: discountValue,
+			type: typeof discountValue
+		});
+
 		const couponExists = currentCart.coupons.some((coupon) => coupon.code === couponCode);
 		if (!couponExists) {
-			currentCart.coupons.push({ code: couponCode, discount: couponDiscount });
+			currentCart.coupons.push({ code: couponCode, discount: discountValue });
 		}
+
 		return currentCart;
 	});
 };
