@@ -73,7 +73,7 @@ export async function processCoupon(couponCode: string): Promise<CouponResult> {
 			.client.mutation(
 				COUPON_APPLY,
 				{
-					couponCode: couponCode.trim()
+					couponCode: couponCode.trim().toLowerCase()
 				},
 				{ fetchOptions: { headers: updatedSessionHeaders } }
 			)
