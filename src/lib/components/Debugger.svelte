@@ -6,11 +6,12 @@
 		message: string;
 		timestamp: Date;
 	};
-
 	let storageData: Record<string, any> | null = $state(null);
 	let error: string | null = $state(null);
-	let isMinimized: boolean = $state(false);
-	let isVisible: boolean = $state(true);
+	// Start minimized (if it were visible)
+	let isMinimized: boolean = $state(true);
+	// Start hidden/closed by default
+	let isVisible: boolean = $state(false);
 	let activeTab: 'storage' | 'console' = $state('storage');
 	let consoleLogs: LogEntry[] = $state([]);
 	let logCount: { log: number; warn: number; error: number } = $state({
@@ -20,6 +21,9 @@
 	});
 	let nextId: number = $state(0);
 	let collapsedLogs: Set<number> = $state(new Set());
+
+	// State for auto-update visual feedback
+	let isAutoUpdating: boolean = $state(false);
 
 	// Store original console methods
 	const originalConsole = {
@@ -34,17 +38,14 @@
 			addLog('log', args);
 			originalConsole.log(...args);
 		};
-
 		console.warn = (...args: any[]) => {
 			addLog('warn', args);
 			originalConsole.warn(...args);
 		};
-
 		console.error = (...args: any[]) => {
 			addLog('error', args);
 			originalConsole.error(...args);
 		};
-
 		console.info = (...args: any[]) => {
 			addLog('info', args);
 			originalConsole.info(...args);
@@ -55,7 +56,6 @@
 		const message = args
 			.map((arg) => (typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)))
 			.join(' ');
-
 		consoleLogs = [
 			{
 				id: nextId++,
@@ -64,16 +64,14 @@
 				timestamp: new Date()
 			},
 			...consoleLogs
-		]; // Prepend instead of append
-
-		// Update counts
+		];
 		logCount = { ...logCount };
 		logCount[type] = (logCount[type] || 0) + 1;
 	}
 
 	function loadLocalStorage() {
 		try {
-			const rawData = localStorage.getItem('cart'); // Replace 'cart' with your actual key
+			const rawData = localStorage.getItem('cart');
 			if (rawData) {
 				storageData = JSON.parse(rawData);
 				error = null;
@@ -116,20 +114,45 @@
 		}
 	}
 
-	// Initialize
-	loadLocalStorage();
-	captureConsole();
-
-	// Cleanup on destroy
+	// $effect for auto-updating
 	$effect(() => {
+		let intervalId: ReturnType<typeof setInterval> | undefined;
+
+		if (isVisible && !isMinimized && activeTab === 'storage') {
+			// Set initial state to indicate auto-refresh is active/enabled
+			isAutoUpdating = true;
+
+			intervalId = setInterval(() => {
+				// Set flag to indicate a refresh is happening NOW
+				isAutoUpdating = true;
+				loadLocalStorage();
+				// Immediately reset flag after triggering load
+				// This makes the button flash or show the state briefly
+				isAutoUpdating = false;
+			}, 2000);
+		} else {
+			// If conditions are not met, ensure the state is false
+			isAutoUpdating = false;
+		}
+
+		// Cleanup function
 		return () => {
-			// Restore original console methods
+			if (intervalId !== undefined) {
+				clearInterval(intervalId);
+			}
+			// Ensure state is reset on cleanup
+			isAutoUpdating = false;
+			// Restore original console methods on component destroy or effect cleanup
 			console.log = originalConsole.log;
 			console.warn = originalConsole.warn;
 			console.error = originalConsole.error;
 			console.info = originalConsole.info;
 		};
 	});
+
+	// Initialize
+	loadLocalStorage();
+	captureConsole();
 </script>
 
 {#if isVisible}
@@ -147,7 +170,6 @@
 				<button onclick={toggleVisibility} class="control-btn close-btn" title="Hide"> ✕ </button>
 			</div>
 		</div>
-
 		{#if !isMinimized}
 			<div class="debug-tabs">
 				<button class:active={activeTab === 'storage'} onclick={() => switchTab('storage')}>
@@ -157,15 +179,23 @@
 					Console ({consoleLogs.length})
 				</button>
 			</div>
-
 			<div class="debug-content">
 				{#if activeTab === 'storage'}
-					<button onclick={loadLocalStorage} class="refresh-btn">🔄 Refresh Storage</button>
-
+					<button
+						onclick={loadLocalStorage}
+						class="refresh-btn"
+						class:updating={isAutoUpdating}
+						disabled={isAutoUpdating}
+					>
+						{#if isAutoUpdating}
+							🔄 Auto-Refreshing...
+						{:else}
+							🔄 Refresh Storage
+						{/if}
+					</button>
 					{#if error}
 						<p class="error">{error}</p>
 					{/if}
-
 					{#if storageData}
 						<pre>{JSON.stringify(storageData, null, 2)}</pre>
 					{/if}
@@ -178,24 +208,25 @@
 							<span class="log-count error">error: {logCount.error}</span>
 						</div>
 					</div>
-
 					<div class="console-logs">
 						{#if consoleLogs.length === 0}
 							<p class="no-logs">No console logs captured yet.</p>
 						{:else}
 							{#each consoleLogs as log (log.id)}
 								<div class="log-entry {log.type}">
-									<div
+									<button
+										type="button"
 										class="log-header"
 										onclick={() => toggleLogCollapse(log.id)}
 										title="Click to toggle"
+										aria-expanded={!collapsedLogs.has(log.id)}
 									>
 										<span class="log-type {log.type}">{log.type}</span>
 										<span class="log-time">{formatTime(log.timestamp)}</span>
 										<span class="collapse-indicator">
 											{collapsedLogs.has(log.id) ? '➕' : '➖'}
 										</span>
-									</div>
+									</button>
 									{#if !collapsedLogs.has(log.id)}
 										<pre class="log-message">{log.message}</pre>
 									{/if}
@@ -229,7 +260,6 @@
 		display: flex;
 		flex-direction: column;
 	}
-
 	.debug-header {
 		display: flex;
 		justify-content: space-between;
@@ -240,7 +270,6 @@
 		border-radius: 6px 6px 0 0;
 		flex-shrink: 0;
 	}
-
 	.debug-header h3 {
 		margin: 0;
 		font-size: 1rem;
@@ -248,13 +277,11 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-
 	.debug-controls {
 		display: flex;
 		gap: 0.5rem;
 		flex-shrink: 0;
 	}
-
 	.control-btn {
 		width: 24px;
 		height: 24px;
@@ -270,17 +297,14 @@
 		padding: 0;
 		flex-shrink: 0;
 	}
-
 	.close-btn {
 		background: #dc3545;
 	}
-
 	.debug-tabs {
 		display: flex;
 		border-bottom: 1px solid #ccc;
 		flex-shrink: 0;
 	}
-
 	.debug-tabs button {
 		flex: 1;
 		padding: 0.5rem;
@@ -290,12 +314,10 @@
 		font-family: monospace;
 		font-size: 0.9rem;
 	}
-
 	.debug-tabs button.active {
 		background: #007acc;
 		color: white;
 	}
-
 	.debug-content {
 		padding: 1rem;
 		max-height: 400px;
@@ -304,7 +326,6 @@
 		display: flex;
 		flex-direction: column;
 	}
-
 	.refresh-btn,
 	.clear-btn {
 		margin-bottom: 1rem;
@@ -316,16 +337,20 @@
 		cursor: pointer;
 		align-self: flex-start;
 	}
-
 	.clear-btn {
 		background: #dc3545;
 	}
-
+	.refresh-btn.updating {
+		background-color: #17a2b8;
+	}
+	.refresh-btn:disabled {
+		opacity: 0.7;
+		cursor: not-allowed;
+	}
 	.error {
 		color: red;
 		margin-bottom: 1rem;
 	}
-
 	pre {
 		white-space: pre-wrap;
 		word-break: break-all;
@@ -338,7 +363,6 @@
 		max-width: 100%;
 		box-sizing: border-box;
 	}
-
 	.debug-show-btn {
 		position: fixed;
 		bottom: 20px;
@@ -358,8 +382,6 @@
 		justify-content: center;
 		flex-shrink: 0;
 	}
-
-	/* Console styles */
 	.console-controls {
 		display: flex;
 		justify-content: space-between;
@@ -368,18 +390,15 @@
 		flex-wrap: wrap;
 		gap: 0.5rem;
 	}
-
 	.log-counts {
 		display: flex;
 		gap: 1rem;
 		font-size: 0.8rem;
 	}
-
 	.log-count {
 		padding: 2px 6px;
 		border-radius: 3px;
 	}
-
 	.log-count.log {
 		background: #e0e0e0;
 	}
@@ -391,18 +410,15 @@
 		background: #f8d7da;
 		color: #721c24;
 	}
-
 	.console-logs {
 		flex: 1;
 		overflow-y: auto;
 	}
-
 	.log-entry {
 		margin-bottom: 0.5rem;
 		border-radius: 4px;
 		overflow: hidden;
 	}
-
 	.log-entry.log {
 		border-left: 3px solid #007acc;
 	}
@@ -417,7 +433,6 @@
 	.log-entry.info {
 		border-left: 3px solid #17a2b8;
 	}
-
 	.log-header {
 		display: flex;
 		justify-content: space-between;
@@ -428,12 +443,10 @@
 		cursor: pointer;
 		user-select: none;
 	}
-
 	.log-type {
 		font-weight: bold;
 		text-transform: uppercase;
 	}
-
 	.log-type.log {
 		color: #007acc;
 	}
@@ -446,15 +459,12 @@
 	.log-type.info {
 		color: #17a2b8;
 	}
-
 	.log-time {
 		color: #666;
 	}
-
 	.collapse-indicator {
 		font-size: 12px;
 	}
-
 	.log-message {
 		margin: 0;
 		padding: 0.5rem;
@@ -464,15 +474,12 @@
 		white-space: pre-wrap;
 		word-break: break-word;
 	}
-
 	.no-logs {
 		text-align: center;
 		color: #666;
 		font-style: italic;
 		padding: 2rem;
 	}
-
-	/* Prevent horizontal overflow */
 	.debug-panel,
 	.debug-content,
 	pre {

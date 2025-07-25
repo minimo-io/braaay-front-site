@@ -49,6 +49,30 @@
 				</a>
 			</li>
 			<li class="glide__slide w-full">
+				<a href={localizeHref('/kits/')} class="not-hover-effect">
+					<picture>
+						<!-- Mobile image: for screens up to 767px -->
+						<source
+							srcset="/images/carousel/braaay-carousel-mobile-2.jpg"
+							media="(max-width: 767px)"
+						/>
+						<!-- Desktop image: for screens 768px and above -->
+						<source
+							srcset="/images/carousel/braaay-carousel-desktop-2.jpg"
+							media="(min-width: 768px)"
+						/>
+						<!-- Fallback image -->
+						<img
+							src="/images/carousel/braaay-carousel-desktop-2.jpg"
+							alt="placeholder 3"
+							class="carousel-image w-full"
+							width="800"
+							height="600"
+						/>
+					</picture>
+				</a>
+			</li>
+			<li class="glide__slide w-full">
 				<a href="./" class="not-hover-effect">
 					<picture>
 						<!-- Mobile image: for screens up to 767px -->
@@ -73,30 +97,6 @@
 				</a>
 			</li>
 
-			<li class="glide__slide w-full">
-				<a href="/" class="not-hover-effect">
-					<picture>
-						<!-- Mobile image: for screens up to 767px -->
-						<source
-							srcset="/images/carousel/braaay-carousel-mobile-2.png"
-							media="(max-width: 767px)"
-						/>
-						<!-- Desktop image: for screens 768px and above -->
-						<source
-							srcset="/images/carousel/braaay-carousel-desktop-2.png"
-							media="(min-width: 768px)"
-						/>
-						<!-- Fallback image -->
-						<img
-							src="/images/carousel/braaay-carousel-desktop-2.png"
-							alt="placeholder 3"
-							class="carousel-image w-full"
-							width="800"
-							height="600"
-						/>
-					</picture>
-				</a>
-			</li>
 			<!-- Add more slides as needed -->
 		</ul>
 	</div>
