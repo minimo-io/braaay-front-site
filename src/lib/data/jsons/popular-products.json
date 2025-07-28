@@ -1,6 +1,115 @@
-[
-	{ "title": "Laptop", "url": "/products/laptop" },
-	{ "title": "Smartphone", "url": "/products/smartphone" },
-	{ "title": "Headphones", "url": "/products/headphones" },
-	{ "title": "Tablet", "url": "/products/tablet" }
-]
+{
+  "pt": [
+    {
+      "id": 118859,
+      "title": "Espumante Moscatel Rosé Cume",
+      "url": "/produto/espumante-moscatel-rose-cume-vinicola-nova-alianca/",
+      "price": "R$45,00",
+      "regularPrice": "R$45,00",
+      "image": {
+        "alt": "espumante-cume-mostacal-rose-2",
+        "src": "https://braaay.com/wp-content/uploads/2023/06/espumante-cume-mostacal-rose-2.png"
+      }
+    },
+    {
+      "id": 119676,
+      "title": "Sierra Batuco Carménère",
+      "url": "/produto/vinho-sierra-batuco-carmenere-chile/",
+      "price": "R$28,73",
+      "regularPrice": "R$28,73",
+      "image": {
+        "alt": "vinho-sierra-batuco-chileno-carmenere",
+        "src": "https://braaay.com/wp-content/uploads/2023/08/vinho-sierra-batuco-chileno-carmenere.webp"
+      }
+    },
+    {
+      "id": 130746,
+      "title": "Frisante Rosé Monte Paschoal (250ml)",
+      "url": "/produto/frisante-rose-monte-paschoal-250ml/",
+      "price": "R$15,00",
+      "regularPrice": "R$15,00",
+      "image": {
+        "alt": "frisante-rose-monte-paschoal-250ml",
+        "src": "https://braaay.com/wp-content/uploads/2024/03/frisante-rose-monte-paschoal-250ml.webp"
+      }
+    },
+    {
+      "id": 119954,
+      "title": "Don Nicolás Malbec",
+      "url": "/produto/vinho-don-nicolas-malbec-argentino/",
+      "price": "R$32,90",
+      "regularPrice": "R$32,90",
+      "image": {
+        "alt": "vinho-don-nicolas-malbec-argentino",
+        "src": "https://braaay.com/wp-content/uploads/2023/09/vinho-don-nicolas-malbec-argentino.webp"
+      }
+    },
+    {
+      "id": 130653,
+      "title": "Frisante Mayos Pink",
+      "url": "/produto/vinho-frisante-mayos-pink-monte-paschoal/",
+      "price": "R$48,00",
+      "regularPrice": "R$48,00",
+      "image": {
+        "alt": "fisante-mayos-pink-monte-paschoal",
+        "src": "https://braaay.com/wp-content/uploads/2023/11/fisante-mayos-pink-monte-paschoal.webp"
+      }
+    },
+    {
+      "id": 54,
+      "title": "Pueblo del Sol Roble Cabernet Sauvignon",
+      "url": "/produto/pueblo-del-sol-roble-cabernet-sauvignon-2021/",
+      "price": "R$45,00",
+      "regularPrice": "R$45,00",
+      "image": {
+        "alt": "pueblo-de-sol-cabernet-sauvignon-3",
+        "src": "https://braaay.com/wp-content/uploads/2023/05/pueblo-de-sol-cabernet-sauvignon-3.png"
+      }
+    },
+    {
+      "id": 131554,
+      "title": "Monte Agudo Cabernet Sauvignon/Merlot 750ml",
+      "url": "/produto/vinho-vinhedos-do-monte-agudo-cabernet-sauvignon-merlot-750ml/",
+      "price": "R$164,00",
+      "regularPrice": "R$164,00",
+      "image": {
+        "alt": "Agudos Cabernet S. Merlot",
+        "src": "https://braaay.com/wp-content/uploads/2024/09/Agudos-Cabernet-S.-Merlot-1.webp"
+      }
+    },
+    {
+      "id": 130646,
+      "title": "Frisante Mayos Green",
+      "url": "/produto/frisante-mayos-green-poucas-calorias/",
+      "price": "R$48,00",
+      "regularPrice": "R$48,00",
+      "image": {
+        "alt": "vinho-frisante-mayos-green",
+        "src": "https://braaay.com/wp-content/uploads/2023/11/vinho-frisante-mayos-green.webp"
+      }
+    },
+    {
+      "id": 119457,
+      "title": "Don Pascual Cabernet Merlot",
+      "url": "/produto/vinho-don-pascual-cabernet-merlot/",
+      "price": "R$47,90",
+      "regularPrice": "R$47,90",
+      "image": {
+        "alt": "vinho-don-pascual-cabernet-merlot",
+        "src": "https://braaay.com/wp-content/uploads/2023/08/vinho-don-pascual-cabernet-merlot.webp"
+      }
+    },
+    {
+      "id": 118910,
+      "title": "Sol Sul Malbec",
+      "url": "/produto/vinho-sol-sul-malbec-mendoza-argentina/",
+      "price": "R$47,50",
+      "regularPrice": "R$47,50",
+      "image": {
+        "alt": "vinho-sol-sul-malbec-argentino-2",
+        "src": "https://braaay.com/wp-content/uploads/2023/07/vinho-sol-sul-malbec-argentino-2.png"
+      }
+    }
+  ],
+  "uy": []
+}

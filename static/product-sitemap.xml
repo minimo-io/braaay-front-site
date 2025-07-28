@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://braaay-front-site.vercel.app/loja/</loc>
-		<lastmod>2025-07-16T19:22:42+00:00</lastmod>
+		<lastmod>2025-07-28T19:23:18+00:00</lastmod>
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/presente-vinho-premium/</loc>
@@ -52,11 +52,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-casal-da-coelheira-reserva/</loc>
-		<lastmod>2024-09-05T13:45:09+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-chupasangre-malbec-familia-kretschmar/</loc>
 		<lastmod>2024-09-05T13:45:17+00:00</lastmod>
 		
@@ -77,11 +72,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-casa-eva-chardonnay/</loc>
-		<lastmod>2024-10-04T13:12:07+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/experiencia-happy-wine/</loc>
 		<lastmod>2024-11-04T12:49:48+00:00</lastmod>
 		
@@ -89,11 +79,6 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/kit-x3-espumantes-taca/</loc>
 		<lastmod>2024-11-18T23:16:49+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-vinho-don-pascual-tannat-castanhas/</loc>
-		<lastmod>2024-11-19T12:59:27+00:00</lastmod>
 		
 	</url>
 	<url>
@@ -130,11 +115,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-blanc-de-blanc-brut/</loc>
-		<lastmod>2024-11-28T18:22:07+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/evento-festa-do-espumante-brasileiro/</loc>
 		<lastmod>2024-12-06T16:53:36+00:00</lastmod>
 		
@@ -162,11 +142,6 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-don-nicolas-cabernet-sauvignon/</loc>
 		<lastmod>2025-01-09T16:22:39+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-sierra-batuco-carmenere-chile/</loc>
-		<lastmod>2025-01-14T12:53:01+00:00</lastmod>
 		
 	</url>
 	<url>
@@ -270,18 +245,8 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-aresti-picaron-sauvignon-blanc-chile/</loc>
-		<lastmod>2025-03-12T22:53:26+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-casa-eva-rose/</loc>
 		<lastmod>2025-03-24T13:36:52+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-vinho-artesana-tannat-queijos-brie-e-gouda-pistache-e-caixa/</loc>
-		<lastmod>2025-03-24T15:35:08+00:00</lastmod>
 		
 	</url>
 	<url>
@@ -297,12 +262,6 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-garzon-pinot-noir-rose-reserva/</loc>
 		<lastmod>2025-03-27T17:42:54+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-go-up-sauvignon-blanc-reserva/</loc>
-		<lastmod>2025-04-02T19:34:45+00:00</lastmod>
-		
 		
 	</url>
 	<url>
@@ -328,22 +287,12 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-casa-eva-viognier-safra-2023/</loc>
-		<lastmod>2025-04-17T00:42:59+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-pizzato-chardonnay/</loc>
 		<lastmod>2025-04-17T00:42:59+00:00</lastmod>
 		
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-fino-garzon-estate-cabernet-de-corte/</loc>
-		<lastmod>2025-04-17T00:42:59+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-mayos-jovem-branco/</loc>
 		<lastmod>2025-04-17T00:42:59+00:00</lastmod>
 		
 	</url>
@@ -383,11 +332,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/mayos-moscatel-rose-espumante-nacional/</loc>
-		<lastmod>2025-06-02T16:35:44+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-pizzato-merlot-de-merlots/</loc>
 		<lastmod>2025-06-04T17:49:08+00:00</lastmod>
 		
@@ -408,34 +352,8 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-go-up-carmenere-reserva/</loc>
-		<lastmod>2025-06-09T12:49:22+00:00</lastmod>
-		
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-don-adelio-ariano-tannat/</loc>
-		<lastmod>2025-06-09T12:49:22+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-chardonnay-petit-manseng/</loc>
-		<lastmod>2025-06-09T18:56:00+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-uruguai-tannat/</loc>
-		<lastmod>2025-06-09T18:57:04+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-artesana-tannat-zinfandel-reserva/</loc>
 		<lastmod>2025-06-09T18:58:07+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-braccobosca-cabernet-franc-ombu-gran-reserva/</loc>
-		<lastmod>2025-06-09T19:03:13+00:00</lastmod>
 		
 	</url>
 	<url>
@@ -444,28 +362,8 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-capoani-merlot/</loc>
-		<lastmod>2025-06-09T19:05:42+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-casa-eva-marselan-2022-serra-gaucha/</loc>
-		<lastmod>2025-06-09T19:06:35+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-don-nicolas-malbec-argentino/</loc>
-		<lastmod>2025-06-09T19:08:03+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/espumante-baoba-vino-brut-rose-750ml/</loc>
 		<lastmod>2025-06-09T19:10:48+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-mayos-brut-charmat/</loc>
-		<lastmod>2025-06-09T19:12:16+00:00</lastmod>
 		
 	</url>
 	<url>
@@ -564,30 +462,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-picaron-aresti-cabernet-sauvignon/</loc>
-		<lastmod>2025-07-02T13:38:01+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-economico-4-unidades/</loc>
-		<lastmod>2025-07-02T13:38:02+00:00</lastmod>
-		
-		
-		
-		
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-bestia-collection-cabernet-sauvignon/</loc>
-		<lastmod>2025-07-02T13:38:02+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-alvarinho-atlantico-sur-deicas-uruguai/</loc>
-		<lastmod>2025-07-02T18:22:30+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-familia-deicas-massimo-tannat/</loc>
 		<lastmod>2025-07-02T18:57:26+00:00</lastmod>
 		
@@ -609,18 +483,8 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-argentino-tapiz-cabernet-sauvignon/</loc>
-		<lastmod>2025-07-08T16:06:03+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-chileno-kasta-carmenere/</loc>
 		<lastmod>2025-07-08T16:06:03+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-picaron-carmenere/</loc>
-		<lastmod>2025-07-08T16:06:18+00:00</lastmod>
 		
 	</url>
 	<url>
@@ -630,11 +494,6 @@
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-extra-brut/</loc>
-		<lastmod>2025-07-08T16:48:41+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-rose-brut/</loc>
 		<lastmod>2025-07-08T16:48:41+00:00</lastmod>
 		
 	</url>
@@ -674,27 +533,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/go-up-cabernet-sauvignon-reserva/</loc>
-		<lastmod>2025-07-16T15:22:09+00:00</lastmod>
-		
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-nacional-brut-casa-perini-charmat/</loc>
-		<lastmod>2025-07-16T15:53:04+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/confraria-entre-tacas-e-mulheres/</loc>
-		<lastmod>2025-07-16T17:58:41+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-don-pascual-coastal-white-750ml-uruguai/</loc>
-		<lastmod>2025-07-16T19:22:42+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-don-pascual-tannat-varietal/</loc>
 		<lastmod>2025-07-16T19:22:42+00:00</lastmod>
 		
@@ -702,6 +540,168 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-don-pascual-cabernet-merlot/</loc>
 		<lastmod>2025-07-16T19:22:42+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-sierra-batuco-carmenere-chile/</loc>
+		<lastmod>2025-07-16T19:27:55+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-don-nicolas-malbec-argentino/</loc>
+		<lastmod>2025-07-16T19:27:55+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-casa-eva-marselan-2022-serra-gaucha/</loc>
+		<lastmod>2025-07-16T20:37:52+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-alvarinho-atlantico-sur-deicas-uruguai/</loc>
+		<lastmod>2025-07-16T20:37:52+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-mayos-jovem-branco/</loc>
+		<lastmod>2025-07-16T20:37:52+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-uruguai-tannat/</loc>
+		<lastmod>2025-07-16T20:37:52+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-aresti-picaron-sauvignon-blanc-chile/</loc>
+		<lastmod>2025-07-16T20:38:06+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-don-pascual-coastal-white-750ml-uruguai/</loc>
+		<lastmod>2025-07-17T15:06:04+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-braccobosca-cabernet-franc-ombu-gran-reserva/</loc>
+		<lastmod>2025-07-17T15:19:58+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-casal-da-coelheira-reserva/</loc>
+		<lastmod>2025-07-18T17:14:50+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-go-up-carmenere-reserva/</loc>
+		<lastmod>2025-07-24T17:01:47+00:00</lastmod>
+		
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-go-up-sauvignon-blanc-reserva/</loc>
+		<lastmod>2025-07-24T17:04:07+00:00</lastmod>
+		
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/go-up-cabernet-sauvignon-reserva/</loc>
+		<lastmod>2025-07-24T17:04:37+00:00</lastmod>
+		
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-picaron-aresti-cabernet-sauvignon/</loc>
+		<lastmod>2025-07-24T17:34:52+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-picaron-carmenere/</loc>
+		<lastmod>2025-07-24T17:34:52+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/kit-economico-4-unidades/</loc>
+		<lastmod>2025-07-24T17:34:53+00:00</lastmod>
+		
+		
+		
+		
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-bestia-collection-cabernet-sauvignon/</loc>
+		<lastmod>2025-07-24T17:34:53+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-chardonnay-petit-manseng/</loc>
+		<lastmod>2025-07-24T17:37:25+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/confraria-entre-tacas-e-mulheres/</loc>
+		<lastmod>2025-07-24T22:20:17+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/mayos-moscatel-rose-espumante-nacional/</loc>
+		<lastmod>2025-07-25T01:13:55+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-argentino-tapiz-cabernet-sauvignon/</loc>
+		<lastmod>2025-07-25T01:13:55+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/espumante-mayos-brut-charmat/</loc>
+		<lastmod>2025-07-25T14:53:57+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/espumante-nacional-brut-casa-perini-charmat/</loc>
+		<lastmod>2025-07-25T20:59:26+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/kit-vinho-don-pascual-tannat-castanhas/</loc>
+		<lastmod>2025-07-28T03:00:55+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-capoani-merlot/</loc>
+		<lastmod>2025-07-28T17:31:31+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-blanc-de-blanc-brut/</loc>
+		<lastmod>2025-07-28T18:06:16+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-rose-brut/</loc>
+		<lastmod>2025-07-28T18:10:20+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/kit-vinho-artesana-tannat-queijos-brie-e-gouda-pistache-e-caixa/</loc>
+		<lastmod>2025-07-28T18:15:06+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-don-adelio-ariano-tannat/</loc>
+		<lastmod>2025-07-28T18:18:22+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-casa-eva-chardonnay/</loc>
+		<lastmod>2025-07-28T19:20:57+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-casa-eva-viognier-safra-2023/</loc>
+		<lastmod>2025-07-28T19:23:18+00:00</lastmod>
 		
 	</url>
 </urlset>

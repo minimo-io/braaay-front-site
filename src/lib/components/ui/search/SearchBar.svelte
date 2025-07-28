@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import popularProducts from '$data/jsons/popular-products.json';
@@ -15,7 +15,7 @@
 	let query = $state('');
 	let selectedIndex = $state(-1);
 
-	let POPULAR_SEARCHES = popularProducts; // these are fetched on pre-build
+	let POPULAR_SEARCHES = popularProducts[getLocale()]; // these are fetched on pre-build
 	let filteredResults = $state<Array<{ title: string; url: string }>>([]);
 
 	onMount(() => {
@@ -206,7 +206,10 @@
 			aria-label="Search suggestions"
 			class="absolute top-full left-0 right-0 mt-1 bg-white border border-grey-lighter rounded-lg shadow-lg max-h-60 overflow-auto text-sm z-50"
 		>
-			<h2 class="font-bold mt-5 mb-1 px-5">Popular results</h2>
+			<!-- Title -->
+			<h2 class="font-bold py-3 mb-2 px-5 border-b border-grey-lighter">{m.popularResults()}</h2>
+
+			<!-- Popular results -->
 			{#each filteredResults as item, i (item.url)}
 				<li
 					role="option"

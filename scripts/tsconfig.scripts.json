@@ -16,7 +16,8 @@
 		"update-grapes.ts",
 		"update-subcategories.ts",
 		"update-countries.ts",
-		"generate-robots.ts"
+		"generate-robots.ts",
+		"update-popular-products.ts"
 	],
 	"exclude": []
 }

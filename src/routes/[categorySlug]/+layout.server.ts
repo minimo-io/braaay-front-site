@@ -46,6 +46,7 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 
 	try {
 		const productCategory: Category = mapCategory(result.data.productCategory);
+		console.log(productCategory);
 		const pagination: Pagination = mapPagination(result.data.products.pageInfo);
 		const seo: YoastSeoData | undefined = productCategory.seo;
 
@@ -61,7 +62,9 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 			seo
 		};
 	} catch (err) {
-		throw error(404, `Failed to fetch the category: ${err}`);
+		const errMsg = `Failed to fetch the category: ${err}`;
+		console.error(errMsg);
+		throw error(404, errMsg);
 	}
 };
 

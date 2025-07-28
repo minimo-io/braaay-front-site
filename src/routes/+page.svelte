@@ -12,12 +12,15 @@
 	import { AppConfig } from '$config';
 	import { HomeProducts } from '$data/home-products.data';
 	import { allCountries } from '$lib/data/countries.data';
+	import popularProducts from '$lib/data/jsons/popular-products.json';
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 
 	import { Calendar, ChefHat, MapPin, Pin } from '@lucide/svelte';
 
 	let pageCountries = $state(allCountries[getLocale()]);
+	let mostPopularProducts = $state(popularProducts[getLocale()]);
+
 	let homeProducts = HomeProducts();
 	// console.log('HomeProducts', homeProducts);
 </script>
@@ -184,6 +187,30 @@
 			<div class="flex !flex-row justify-evenly gap-8 overflow-x-auto whitespace-nowrap">
 				{#each pageCountries as country}
 					<CountryBox {country} />
+				{/each}
+			</div>
+		</section>
+
+		<!-- Header section: Popular products -->
+		<TitleSection
+			title="Mais vendidos"
+			subTitle="Oportunidades"
+			description="Confira os produtos que mais fazem sucesso na nossa loja! São os vinhos e presentes que nossos clientes mais amam."
+		/>
+		<section class="bg-white max-w-screen-lg-2x py-10 mx-[20px] lg:mx-auto">
+			<div class="bry-product-list">
+				{#each mostPopularProducts as product}
+					<WineBox
+						image={{ src: product.image.src, alt: product.image.alt }}
+						wine={{
+							productId: product.id,
+							title: product.title,
+							price: product.price,
+							regularPrice: product.regularPrice,
+							url: localizeHref(product.url),
+							score: ''
+						}}
+					/>
 				{/each}
 			</div>
 		</section>
