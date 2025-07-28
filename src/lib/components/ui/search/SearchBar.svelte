@@ -1,10 +1,13 @@
-<!-- src/lib/components/ui/search/SearchBar.svelte -->
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import popularProducts from '$data/jsons/popular-products.json';
+	import { Search as SearchIcon } from '@lucide/svelte'; // Import Search icon
+
+	// New prop: 'mobile' to toggle between desktop and mobile presentation
+	let { mobile = false }: { mobile?: boolean } = $props();
 
 	let searchInput: HTMLInputElement | null = null;
 	let isMac = $state<boolean | null>(null);
@@ -12,15 +15,15 @@
 	let query = $state('');
 	let selectedIndex = $state(-1);
 
-	let POPULAR_SEARCHES = popularProducts;
-
+	let POPULAR_SEARCHES = popularProducts; // these are fetched on pre-build
 	let filteredResults = $state<Array<{ title: string; url: string }>>([]);
 
 	onMount(() => {
 		isMac = /Mac/i.test(navigator.userAgent);
 
 		const handleKeydown = (e: KeyboardEvent) => {
-			if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+			// Only allow shortcut if not in mobile mode
+			if (!mobile && (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
 				e.preventDefault();
 				searchInput?.focus();
 				searchInput?.select();
@@ -31,11 +34,9 @@
 		return () => window.removeEventListener('keydown', handleKeydown);
 	});
 
-	// Use derived state instead of effects to prevent infinite loops
 	let previousFocused = $state(false);
 	let previousQuery = $state('');
 
-	// Update filtered results only when focus or query actually changes
 	$effect(() => {
 		const focusChanged = isFocused !== previousFocused;
 		const queryChanged = query !== previousQuery;
@@ -54,19 +55,15 @@
 				filteredResults = [];
 			}
 
-			// Reset selection when results change
 			selectedIndex = -1;
 
-			// Update previous values
 			previousFocused = isFocused;
 			previousQuery = query;
 		}
 	});
 
-	// Handle scroll behavior separately
 	$effect(() => {
 		if (selectedIndex >= 0 && filteredResults.length > 0) {
-			// Use setTimeout to avoid blocking the main thread
 			setTimeout(() => {
 				const activeElement = document.querySelector('.search-result-item.selected');
 				activeElement?.scrollIntoView?.({ block: 'nearest' });
@@ -79,7 +76,6 @@
 	}
 
 	function handleBlur() {
-		// Delay to allow clicks on dropdown items
 		setTimeout(() => {
 			isFocused = false;
 			selectedIndex = -1;
@@ -158,12 +154,27 @@
 		role="search"
 		onsubmit={handleFormSubmit}
 	>
-		<div class="relative px-5 border-r border-r-1 border-r-grey-lighter h-[45px]">
+		<div
+			class={[
+				'relative',
+				mobile ? 'h-[50px] px-0' : 'px-5 border-r border-r-1 border-r-grey-lighter h-[45px]'
+			]}
+		>
+			{#if mobile}
+				<SearchIcon
+					class="h-[16px] absolute top-1/2 -translate-y-1/2 left-[30px] text-grey-medium"
+				/>
+			{/if}
 			<input
 				id="search"
 				type="search"
 				minlength="3"
-				class="rounded-3xl focus:ring-1 ring-sun w-full text-sm h-[45px] placeholder:tracking-wide placeholder:text-grey-medium border border-grey-lighter px-5 py-2.5 font-roboto placeholder:font-light shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]"
+				class={[
+					'w-full text-sm placeholder:tracking-wide placeholder:text-grey-medium font-roboto placeholder:font-light',
+					mobile
+						? 'h-[50px] focus:ring-0 focus-visible:outline-none border-t border-b border-grey-lighter pl-[60px] pr-[30px]'
+						: 'rounded-3xl focus:ring-1 h-[45px] ring-sun border border-grey-lighter px-5 py-2.5 shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]'
+				]}
 				placeholder={m.search()}
 				bind:this={searchInput}
 				bind:value={query}
@@ -174,8 +185,7 @@
 				autocomplete="off"
 			/>
 
-			<!-- KBD Shortcut -->
-			{#if isMac !== null}
+			{#if !mobile && isMac !== null}
 				{#if isMac}
 					<kbd class="bry-search-kbd">
 						<abbr title="Command" class="no-underline">⌘</abbr>
@@ -190,13 +200,13 @@
 		</div>
 	</form>
 
-	<!-- Dropdown -->
 	{#if isFocused && filteredResults.length > 0}
 		<ul
 			role="listbox"
 			aria-label="Search suggestions"
 			class="absolute top-full left-0 right-0 mt-1 bg-white border border-grey-lighter rounded-lg shadow-lg max-h-60 overflow-auto text-sm z-50"
 		>
+			<h2 class="font-bold mt-5 mb-1 px-5">Popular results</h2>
 			{#each filteredResults as item, i (item.url)}
 				<li
 					role="option"

@@ -188,22 +188,7 @@
 
 	<!-- Mobile search -->
 	<div class="lg:hidden h-[50px]">
-		<form
-			action="/search"
-			method="get"
-			class="w-full flex items-center relative flex-align-items-center"
-		>
-			<Search class="mr-1 h-[16px] absolute top-1/2 -translate-y-1/2 left-[30px]" />
-			<input
-				type="search"
-				minlength="3"
-				class="h-[50px] focus:ring-0 focus-visible:outline-none w-full text-sm placeholder:tracking-wide placeholder:text-grey-medium border-t border-grey-lighter pl-[60px] pr-[30px] py-2.5 font-roboto placeholder:font-light Xshadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]"
-				placeholder="Pesquisar…"
-				value=""
-				name="s"
-				title="Procurar:"
-			/>
-		</form>
+		<SearchBar mobile={true} />
 	</div>
 
 	<!-- Secondary menu -->
