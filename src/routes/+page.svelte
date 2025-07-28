@@ -16,7 +16,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 
-	import { Calendar, ChefHat, MapPin, Pin } from '@lucide/svelte';
+	import { Calendar, ChefHat, MapPin } from '@lucide/svelte';
 
 	let pageCountries = $state(allCountries[getLocale()]);
 	let mostPopularProducts = $state(popularProducts[getLocale()]);
@@ -176,44 +176,48 @@
 			</div>
 		</section>
 
-		<!-- Header section: Paises -->
-		<TitleSection
-			title="Vinhos por País"
-			subTitle="E-Commerce"
-			description="Somos especialistas no melhores vinhos de Uruguai e do Brasil mas a BRAAAY vai além, desde o melhor em vinhos Italianos, até Chilenos, Argentinos e Portugueses."
-		/>
+		{#if pageCountries.length > 0}
+			<!-- Header section: Paises -->
+			<TitleSection
+				title="Vinhos por País"
+				subTitle="E-Commerce"
+				description="Somos especialistas no melhores vinhos de Uruguai e do Brasil mas a BRAAAY vai além, desde o melhor em vinhos Italianos, até Chilenos, Argentinos e Portugueses."
+			/>
 
-		<section class="bg-white max-w-screen-lg-2x py-5 md:py-0 mx-[20px] lg:mx-auto">
-			<div class="flex !flex-row justify-evenly gap-8 overflow-x-auto whitespace-nowrap">
-				{#each pageCountries as country}
-					<CountryBox {country} />
-				{/each}
-			</div>
-		</section>
+			<section class="bg-white max-w-screen-lg-2x py-5 md:py-0 mx-[20px] lg:mx-auto">
+				<div class="flex !flex-row justify-evenly gap-8 overflow-x-auto whitespace-nowrap">
+					{#each pageCountries as country}
+						<CountryBox {country} />
+					{/each}
+				</div>
+			</section>
+		{/if}
 
 		<!-- Header section: Popular products -->
-		<TitleSection
-			title="Mais vendidos"
-			subTitle="Oportunidades"
-			description="Confira os produtos que mais fazem sucesso na nossa loja! São os vinhos e presentes que nossos clientes mais amam."
-		/>
-		<section class="bg-white max-w-screen-lg-2x py-10 mx-[20px] lg:mx-auto">
-			<div class="bry-product-list">
-				{#each mostPopularProducts as product}
-					<WineBox
-						image={{ src: product.image.src, alt: product.image.alt }}
-						wine={{
-							productId: product.id,
-							title: product.title,
-							price: product.price,
-							regularPrice: product.regularPrice,
-							url: localizeHref(product.url),
-							score: ''
-						}}
-					/>
-				{/each}
-			</div>
-		</section>
+		{#if mostPopularProducts.length > 0}
+			<TitleSection
+				title="Mais vendidos"
+				subTitle="Oportunidades"
+				description="Confira os produtos que mais fazem sucesso na nossa loja! São os vinhos e presentes que nossos clientes mais amam."
+			/>
+			<section class="bg-white max-w-screen-lg-2x py-10 mx-[20px] lg:mx-auto">
+				<div class="bry-product-list">
+					{#each mostPopularProducts as product}
+						<WineBox
+							image={{ src: product.image.src, alt: product.image.alt }}
+							wine={{
+								productId: product.id,
+								title: product.title,
+								price: product.price,
+								regularPrice: product.regularPrice,
+								url: localizeHref(product.url),
+								score: ''
+							}}
+						/>
+					{/each}
+				</div>
+			</section>
+		{/if}
 
 		<!-- Header section: Harmonizacoes -->
 		<TitleSection

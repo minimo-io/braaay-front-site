@@ -160,12 +160,16 @@
 					Monte a sua agora!
 				</a>
 			</div>
+			<div class="text-xs text-grey-medium text-center -top-1 relative mb-2 md:mb-0">
+				v{__APP_VERSION__}<br />
+				A venda de bebidas alcoólicas <br />é proibida para menores de 18 anos.
+			</div>
 			<div class="text-xs text-center">
 				<div class="text-right justify-center md:justify-end self-end flex relative md:-top-2">
 					<a
 						target="_blank"
 						rel="noopener"
-						href="https://futurewise.lat/bagity"
+						href="https://futurewise.lat"
 						onclick={() => handleFwClick}
 					>
 						<img src="/images/futurewise-logo-2.svg" class="h-10" alt="futurewise-bagity" />
