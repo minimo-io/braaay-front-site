@@ -100,7 +100,7 @@
 	});
 
 	onDestroy(() => {
-		console.log('Component is being destroyed via onDestroy hook.');
+		// console.log('Component is being destroyed via onDestroy hook.');
 		// Any other cleanup logic not directly tied to an effect
 	});
 </script>

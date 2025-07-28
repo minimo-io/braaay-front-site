@@ -21,10 +21,8 @@
 	});
 	let nextId: number = $state(0);
 	let collapsedLogs: Set<number> = $state(new Set());
-
 	// State for auto-update visual feedback
 	let isAutoUpdating: boolean = $state(false);
-
 	// Store original console methods
 	const originalConsole = {
 		log: console.log,
@@ -33,6 +31,8 @@
 		info: console.info
 	};
 
+	// DO NOT restore console methods in cleanup
+	// Doing so causes infinite loops when logs happen during effect teardown
 	function captureConsole() {
 		console.log = (...args: any[]) => {
 			addLog('log', args);
@@ -87,25 +87,20 @@
 	function toggleMinimize() {
 		isMinimized = !isMinimized;
 	}
-
 	function toggleVisibility() {
 		isVisible = !isVisible;
 	}
-
 	function switchTab(tab: 'storage' | 'console') {
 		activeTab = tab;
 	}
-
 	function clearLogs() {
 		consoleLogs = [];
 		logCount = { log: 0, warn: 0, error: 0 };
 		collapsedLogs = new Set();
 	}
-
 	function formatTime(date: Date): string {
 		return date.toLocaleTimeString();
 	}
-
 	function toggleLogCollapse(logId: number) {
 		if (collapsedLogs.has(logId)) {
 			collapsedLogs = new Set([...collapsedLogs].filter((id) => id !== logId));
@@ -117,36 +112,29 @@
 	// $effect for auto-updating
 	$effect(() => {
 		let intervalId: ReturnType<typeof setInterval> | undefined;
-
 		if (isVisible && !isMinimized && activeTab === 'storage') {
-			// Set initial state to indicate auto-refresh is active/enabled
 			isAutoUpdating = true;
-
 			intervalId = setInterval(() => {
-				// Set flag to indicate a refresh is happening NOW
 				isAutoUpdating = true;
 				loadLocalStorage();
-				// Immediately reset flag after triggering load
-				// This makes the button flash or show the state briefly
 				isAutoUpdating = false;
 			}, 2000);
 		} else {
-			// If conditions are not met, ensure the state is false
 			isAutoUpdating = false;
 		}
 
-		// Cleanup function
+		// 🔥 CRITICAL FIX: REMOVE console.log = originalConsole.log
+		// It causes infinite loop when SearchBar logs during cleanup
 		return () => {
 			if (intervalId !== undefined) {
 				clearInterval(intervalId);
 			}
-			// Ensure state is reset on cleanup
 			isAutoUpdating = false;
-			// Restore original console methods on component destroy or effect cleanup
-			console.log = originalConsole.log;
-			console.warn = originalConsole.warn;
-			console.error = originalConsole.error;
-			console.info = originalConsole.info;
+			// ❌ DO NOT RESTORE CONSOLE METHODS
+			// console.log = originalConsole.log;
+			// console.warn = originalConsole.warn;
+			// console.error = originalConsole.error;
+			// console.info = originalConsole.info;
 		};
 	});
 

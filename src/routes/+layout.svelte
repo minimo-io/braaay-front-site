@@ -41,6 +41,7 @@
 	import Analytics from '$components/Analytics.svelte';
 	import Teaser from '$components/ui/Teaser.svelte';
 	import Debugger from '$components/Debugger.svelte';
+	import { AppConfig } from '$config';
 
 	afterNavigate(() => {
 		// Close drawer if active
@@ -142,7 +143,9 @@
 <Teaser />
 
 <!-- Local Storage Debugger -->
-<Debugger />
+{#if AppConfig.debug}
+	<!-- <Debugger /> -->
+{/if}
 
 <style global>
 	:root {

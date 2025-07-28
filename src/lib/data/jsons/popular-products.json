@@ -1,0 +1,6 @@
+[
+	{ "title": "Laptop", "url": "/products/laptop" },
+	{ "title": "Smartphone", "url": "/products/smartphone" },
+	{ "title": "Headphones", "url": "/products/headphones" },
+	{ "title": "Tablet", "url": "/products/tablet" }
+]
