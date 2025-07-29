@@ -172,7 +172,7 @@
 				class={[
 					'w-full text-sm placeholder:tracking-wide placeholder:text-grey-medium font-roboto placeholder:font-light',
 					mobile
-						? 'h-[50px] focus:ring-0 focus-visible:outline-none border-t border-b border-grey-lighter pl-[60px] pr-[30px]'
+						? 'h-[50px] rounded-none focus:ring-0 focus-visible:outline-none bg-white border-t border-grey-lighter pl-[60px] pr-[30px]'
 						: 'rounded-3xl focus:ring-1 h-[45px] ring-sun border border-grey-lighter px-5 py-2.5 shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]'
 				]}
 				placeholder={m.search()}

@@ -196,9 +196,9 @@
 		<!-- Header section: Popular products -->
 		{#if mostPopularProducts.length > 0}
 			<TitleSection
-				title="Mais vendidos"
+				title="Os Queridinhos"
 				subTitle="Oportunidades"
-				description="Confira os produtos que mais fazem sucesso na nossa loja! São os vinhos e presentes que nossos clientes mais amam."
+				description="Confira os custo-benefício que estão fazendo sucesso! Vinhos, presentes e kits que nossos clientes mais amam."
 			/>
 			<section class="bg-white max-w-screen-lg-2x py-10 mx-[20px] lg:mx-auto">
 				<div class="bry-product-list">
@@ -208,8 +208,8 @@
 							wine={{
 								productId: product.id,
 								title: product.title,
-								price: product.price,
-								regularPrice: product.regularPrice,
+								price: product.price ?? '',
+								regularPrice: product.regularPrice ?? '',
 								url: localizeHref(product.url),
 								score: ''
 							}}

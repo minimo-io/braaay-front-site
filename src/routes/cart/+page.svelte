@@ -22,7 +22,6 @@
 	import { shippingDetails } from '$stores/shippingDetails.state.svelte';
 	import Meta from '$components/layout/Meta.svelte';
 	import { page } from '$app/state';
-	import { AppConfig } from '$config';
 	import { trackEvent } from '$components/analytics';
 	import { processCoupon } from '$lib/services';
 	import { launchToast } from '$lib/utils';
@@ -35,6 +34,10 @@
 	let couponsCount = $state(0);
 	let couponName = $state('');
 	let couponCodeToReapply = $state(''); // Store the coupon code to reapply
+	let modalCartItems: {
+		productId: number;
+		quantity: number;
+	}[] = $state([]); // For shipping cost calculations
 
 	cart.subscribe((cart) => {
 		totalCartAmount = cart.items.reduce((count, item) => count + item.quantity, 0);
@@ -48,6 +51,11 @@
 				break; // just one coupon allowed
 			}
 		}
+		// modalCartItems = cart.items.map((item)=>{productsId: item.id, quantity: item.quantity});
+		modalCartItems = cart.items.map((item) => ({
+			productId: item.id,
+			quantity: item.quantity
+		}));
 		hasItems = cart.items.length > 0;
 	});
 	let totalCartAmountWithDiscounts = $derived(totalAmount - discounts);
@@ -296,7 +304,8 @@
 								action={() => {
 									openModal({
 										header: 'Calcular frete',
-										content: ShippingForm as Component
+										content: ShippingForm as Component,
+										props: { products: modalCartItems }
 									});
 								}}
 							>

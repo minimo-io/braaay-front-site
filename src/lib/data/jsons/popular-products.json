@@ -1,17 +1,6 @@
 {
   "pt": [
     {
-      "id": 118859,
-      "title": "Espumante Moscatel Rosé Cume",
-      "url": "/produto/espumante-moscatel-rose-cume-vinicola-nova-alianca/",
-      "price": "R$45,00",
-      "regularPrice": "R$45,00",
-      "image": {
-        "alt": "espumante-cume-mostacal-rose-2",
-        "src": "https://braaay.com/wp-content/uploads/2023/06/espumante-cume-mostacal-rose-2.png"
-      }
-    },
-    {
       "id": 119676,
       "title": "Sierra Batuco Carménère",
       "url": "/produto/vinho-sierra-batuco-carmenere-chile/",
@@ -56,28 +45,6 @@
       }
     },
     {
-      "id": 54,
-      "title": "Pueblo del Sol Roble Cabernet Sauvignon",
-      "url": "/produto/pueblo-del-sol-roble-cabernet-sauvignon-2021/",
-      "price": "R$45,00",
-      "regularPrice": "R$45,00",
-      "image": {
-        "alt": "pueblo-de-sol-cabernet-sauvignon-3",
-        "src": "https://braaay.com/wp-content/uploads/2023/05/pueblo-de-sol-cabernet-sauvignon-3.png"
-      }
-    },
-    {
-      "id": 131554,
-      "title": "Monte Agudo Cabernet Sauvignon/Merlot 750ml",
-      "url": "/produto/vinho-vinhedos-do-monte-agudo-cabernet-sauvignon-merlot-750ml/",
-      "price": "R$164,00",
-      "regularPrice": "R$164,00",
-      "image": {
-        "alt": "Agudos Cabernet S. Merlot",
-        "src": "https://braaay.com/wp-content/uploads/2024/09/Agudos-Cabernet-S.-Merlot-1.webp"
-      }
-    },
-    {
       "id": 130646,
       "title": "Frisante Mayos Green",
       "url": "/produto/frisante-mayos-green-poucas-calorias/",
@@ -100,16 +67,90 @@
       }
     },
     {
-      "id": 118910,
-      "title": "Sol Sul Malbec",
-      "url": "/produto/vinho-sol-sul-malbec-mendoza-argentina/",
-      "price": "R$47,50",
-      "regularPrice": "R$47,50",
+      "id": 118092,
+      "title": "Capoani Merlot",
+      "url": "/produto/vinho-capoani-merlot/",
+      "price": "R$171,19",
+      "regularPrice": "R$171,19",
       "image": {
-        "alt": "vinho-sol-sul-malbec-argentino-2",
-        "src": "https://braaay.com/wp-content/uploads/2023/07/vinho-sol-sul-malbec-argentino-2.png"
+        "alt": "vinho-capoani-merlot-4-small",
+        "src": "https://braaay.com/wp-content/uploads/2023/06/vinho-capoani-merlot-4-small.webp"
+      }
+    },
+    {
+      "id": 118023,
+      "title": "Casal da Coelheira Reserva",
+      "url": "/produto/vinho-casal-da-coelheira-reserva/",
+      "price": "R$179,00",
+      "regularPrice": "R$179,00",
+      "image": {
+        "alt": "vinho-tinto-casal-da-coelheira-reserva-3",
+        "src": "https://braaay.com/wp-content/uploads/2023/06/vinho-tinto-casal-da-coelheira-reserva-3.webp"
+      }
+    },
+    {
+      "id": 131994,
+      "title": "Braccobosca Tannat Reserva Ombú (Single Block)",
+      "url": "/produto/vinho-braccobosca-tannat-reserva-ombu-single-block/",
+      "price": "R$177,00",
+      "regularPrice": "R$177,00",
+      "image": {
+        "alt": "vinho-tannat-reserve-bracco-bosca",
+        "src": "https://braaay.com/wp-content/uploads/2025/03/vinho-tannat-reserve-bracco-bosca.png"
+      }
+    },
+    {
+      "id": 130753,
+      "title": "Artesana Tannat Reserva",
+      "url": "/produto/vinho-tannat-reserva-artesana-uruguai/",
+      "price": "R$190,00",
+      "regularPrice": "R$190,00",
+      "image": {
+        "alt": "vinho-artesana-tannat-reserva",
+        "src": "https://braaay.com/wp-content/uploads/2024/03/vinho-artesana-tannat-reserva.webp"
       }
     }
   ],
-  "uy": []
+  "uy": [
+    {
+      "id": 878,
+      "title": "Familia Deicas Alvarinho Atlántico Sur 750ml",
+      "url": "/producto/vino-familia-deicas-alvarinho-atlantico-sur-750ml/",
+      "price": "$499.00",
+      "regularPrice": "$499.00",
+      "image": {
+        "alt": "vinho-alvarinho-atlantico-sur-deicas-2",
+        "src": "https://braaay.com/uy/wp-content/uploads/sites/2/2025/04/vinho-alvarinho-atlantico-sur-deicas-2.webp"
+      }
+    },
+    {
+      "id": 742,
+      "title": "Antica Brown IPA",
+      "url": "/producto/cerveza-antica-brown-ipa/",
+      "price": "$300.00",
+      "regularPrice": "$300.00",
+      "image": {
+        "alt": "antica-brown-ale-corsario",
+        "src": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/12/antica-brown-ale-corsario.png"
+      }
+    },
+    {
+      "id": 325,
+      "title": "Davok Blonde",
+      "url": "/producto/cerveza-davok-blonde/",
+      "image": {
+        "alt": "cerveza-artesanak-davok-blonde",
+        "src": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/04/cerveza-artesanak-davok-blonde.webp"
+      }
+    },
+    {
+      "id": 318,
+      "title": "Davok IPA",
+      "url": "/producto/cerveza-davok-ipa/",
+      "image": {
+        "alt": "cerveza-davok-ipa-braaay",
+        "src": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/04/cerveza-davok-ipa-braaay.webp"
+      }
+    }
+  ]
 }

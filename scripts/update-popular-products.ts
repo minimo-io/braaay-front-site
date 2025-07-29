@@ -7,7 +7,11 @@ const POPULAR_PRODUCTS_QUERY = gql`
 	query MostSoldWines {
 		products(
 			first: 10
-			where: { orderby: { field: POPULARITY, order: DESC }, category: "vinhos" }
+			where: {
+				orderby: { order: ASC, field: POPULARITY }
+				stockStatus: IN_STOCK
+				categoryNotIn: ["experiencias"]
+			}
 		) {
 			nodes {
 				databaseId
@@ -18,6 +22,7 @@ const POPULAR_PRODUCTS_QUERY = gql`
 					altText
 				}
 				... on SimpleProduct {
+					stockStatus
 					price
 					regularPrice
 					totalSales

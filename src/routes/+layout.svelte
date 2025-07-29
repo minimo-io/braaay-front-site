@@ -129,6 +129,7 @@
 	bind:showModal={modalState.current}
 	header={modalState.header}
 	content={modalState.content}
+	props={modalState.props}
 />
 
 <!-- Used as a mobile menu -->

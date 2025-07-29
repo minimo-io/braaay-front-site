@@ -11,7 +11,6 @@ export * from './products-pairing.query';
 export * from './products-uva.query';
 export * from './products-tag.query';
 export * from './products-on-sale.query';
-export * from './products-popular.query';
 
 export * from './slugs-query.query';
 export * from './order-get.query';

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Product, ProductAttributes, ProductCategory } from '$lib/types';
+	// import type { Component } from '@lucide/svelte';
 	import { correctPrice } from '$lib/utils';
 	import {
 		CircleChevronDown,
@@ -7,12 +8,17 @@
 		CreditCard,
 		Grape,
 		MapPinHouse,
-		Truck
+		Truck,
+		X
 	} from '@lucide/svelte';
 	import { slide } from 'svelte/transition';
 	import { m } from '$lib/paraglide/messages';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { AppConfig } from '$config';
+	import { Button } from '../buttons';
+	import { openModal } from '$stores/modalState.state.svelte';
+	import ShippingForm from '$components/ui/forms/shippingForm.svelte';
+	import { shippingDetails } from '$stores/shippingDetails.state.svelte';
 
 	// Active tab can be 'frete', 'caracteristicas', 'vinicola', or 'pagamento'
 	let activeAccordion: 'frete' | 'caracteristicas' | 'vinicola' | 'pagamento' | null =
@@ -68,7 +74,57 @@
 			</button>
 			{#if activeAccordion === 'frete'}
 				<div transition:slide>
-					<p class="p-4">Informações sobre frete e prazos aqui.</p>
+					<Button
+						title="ESTIMAR"
+						size="sm-short"
+						type="grey"
+						borderDark={true}
+						customPx="max-h-full disabled:opacity-20"
+						action={() => {
+							openModal({
+								header: 'Calcular frete',
+								content: ShippingForm,
+								props: { products: [{ productId: product.id, quantity: 1 }] }
+							});
+						}}
+					>
+						{#snippet icon()}
+							<Truck class="lucide-button" />
+						{/snippet}
+					</Button>
+
+					<!-- <p class="p-4">Informações sobre frete e prazos aqui.</p> -->
+
+					{#if shippingDetails.details && shippingDetails.details.length > 0}
+						<div in:slide={{ duration: 200 }} out:slide={{ duration: 200 }}>
+							<div class="my-4 border-t border-t-grey-lighter"></div>
+							<div class="flex flex-col">
+								<div class="flex justify-between items-center">
+									<span
+										class="font-bold text-[10px] mb-2 bg-blue w-fit py-1 px-2 rounded text-white uppercase"
+										>Estimativas de envio</span
+									>
+									<button onclick={() => (shippingDetails.details = [])}
+										><X class="h-3 m-0 p-0 ml-2 mb-2 text-grey-medium" /></button
+									>
+								</div>
+								{#each shippingDetails.details as rate, i (i)}
+									<div
+										class={[
+											'flex text-sm justify-between text-grey-dark items-center  border-grey-lighter mb-1 pt-1 border-t',
+											i + 1 == shippingDetails.details.length && '!mb-0',
+											i == 0 && 'mt-2'
+										]}
+									>
+										<div class="text-[11px] truncate">
+											{@html rate.label.replace('(', '<br />(')}
+										</div>
+										<div class="text-xs">{m.currencySymbol()} {rate.cost}</div>
+									</div>
+								{/each}
+							</div>
+						</div>
+					{/if}
 				</div>
 			{/if}
 		</div>

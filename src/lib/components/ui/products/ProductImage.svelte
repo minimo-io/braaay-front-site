@@ -77,13 +77,6 @@
                 );
             "
 >
-	<!-- <div class="absolute top-[42px] md:top-[58px] left-[35px]">
-		<div class="wine-stars text-[15px] md:text-[15px]">
-			<span>★</span>
-			4.5
-		</div>
-	</div> -->
-
 	<!-- Offer tag -->
 	{#if hasPriceDiscount}
 		<div
@@ -160,6 +153,3 @@
 		height="578"
 	/>
 </div>
-
-<style class="postcss">
-</style>

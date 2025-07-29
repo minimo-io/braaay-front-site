@@ -1,7 +1,7 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
-import pkg from './package.json' assert { type: 'json' };
+import pkg from './package.json';
 
 export default defineConfig({
 	define: {
@@ -227,6 +227,7 @@ export default defineConfig({
 		cssCodeSplit: true
 	},
 	server: {
+		host: true,
 		port: 4000
 	}
 });

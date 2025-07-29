@@ -16,7 +16,6 @@
 	}
 	let { cartItem, onQuantityChange, onItemRemoved }: Props = $props();
 
-	console.log(cartItem);
 	let currentPrice = $derived(cartItem.price * cartItem.quantity);
 	let hasPriceDiscount = cartItem.regularPrice != cartItem.priceString;
 

@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { m } from '$lib/paraglide/messages';
-	import { getLocale } from '$lib/paraglide/runtime';
 	import type { Post, Product, ProductAttributes, ProductCategory, YoastSeoData } from '$lib/types';
 	import { addYearsAndFormat, mapLocale, serializeSchema, stripHtml } from '$lib/utils';
 

@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://braaay-front-site.vercel.app/uy/shop/</loc>
-		<lastmod>2025-06-26T15:24:42+00:00</lastmod>
+		<lastmod>2025-07-28T20:00:31+00:00</lastmod>
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/uy/producto/cerveza-braille-ale-session-white-ipa/</loc>
@@ -28,11 +28,6 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/uy/producto/indica-chocolatosienta-vainillosa-pastry-imperial-stout/</loc>
 		<lastmod>2025-04-01T19:36:03+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/uy/producto/cerveza-antica-brown-ipa/</loc>
-		<lastmod>2025-04-01T19:36:04+00:00</lastmod>
 		
 	</url>
 	<url>
@@ -368,6 +363,11 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/uy/producto/cerveza-capitan-fumasa-hemp-ipa-cannabica/</loc>
 		<lastmod>2025-06-26T15:24:42+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/uy/producto/cerveza-antica-brown-ipa/</loc>
+		<lastmod>2025-07-28T20:00:31+00:00</lastmod>
 		
 	</url>
 </urlset>

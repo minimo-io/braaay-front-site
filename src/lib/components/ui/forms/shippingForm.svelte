@@ -13,6 +13,10 @@
 	import { UPDATE_GUEST_SHIPPING_ADDRESS } from '$lib/graphql/mutations/shipping-update.mutation';
 	import { GET_SHIPPING_ESTIMATES } from '$lib/graphql/mutations/shipping-estimates.mutation';
 	import ZipQueryButton from '../buttons/ZipQueryButton.svelte';
+	import { onMount } from 'svelte';
+	import { CART_ADD_ITEMS_MUTATION } from '$lib/graphql/mutations';
+
+	let { products } = $props();
 
 	let zipCode = $state('');
 	let error = $state('');
@@ -27,25 +31,29 @@
 		return `${digits.slice(0, 5)}-${digits.slice(5)}`;
 	}
 
+	onMount(() => {
+		// alert(products);
+	});
+
 	// 1) Define your mutations & queries
 
-	const ADD_TO_CART = gql`
-		mutation {
-			addToCart(input: { productId: 131701, quantity: 1 }) {
-				cart {
-					contents {
-						nodes {
-							product {
-								node {
-									title
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	`;
+	// const ADD_TO_CART = gql`
+	// 	mutation {
+	// 		addToCart(input: { productId: 131701, quantity: 1 }) {
+	// 			cart {
+	// 				contents {
+	// 					nodes {
+	// 						product {
+	// 							node {
+	// 								title
+	// 							}
+	// 						}
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// `;
 
 	async function handleSubmit() {
 		processing = true;
@@ -60,43 +68,38 @@
 
 			// Step 1: First update customer shipping details ----------------------
 			launchToast(`Obtendo parceiros...`, 'info', 2000);
-			// const updateResult = await client
-			// 	.mutation(UPDATE_GUEST_SHIPPING_ADDRESS, {
-			// 		input: {
-			// 			shipping: {
-			// 				postcode: zipCodeSanitized,
-			// 				country: 'BR',
-			// 				overwrite: true
-			// 			}
-			// 		}
-			// 	})
-			// 	.toPromise();
-
-			// if (updateResult.error) {
-			// 	throw new Error(`Shipping update failed: ${updateResult.error.message}`);
-			// }
-
-			// // Get the initial session token
-			// const sessionToken = updateResult.data.updateCustomer.customer.sessionToken;
-			// // console.log('Initial session token:', sessionToken);
-
-			// // Create headers with this session
-			// const sessionHeaders = {
-			// 	'Content-Type': 'application/json',
-			// 	'woocommerce-session': `Session ${sessionToken}`
-			// };
-
-			// ----------------------------------------------------------------------
 
 			// Step 2: Add product to cart with this session, but CAPTURE any new session that's created
 			// let currentSessionToken = sessionToken;
 			let currentSessionToken = '';
 			let addToCartResponse;
 
+			// const addToCartResult = await client
+			// 	.mutation(
+			// 		ADD_TO_CART,
+			// 		{ productId: 131701, quantity: 1 },
+			// 		{
+			// 			// fetchOptions: { headers: sessionHeaders },
+			// 			fetch: (input, init) => {
+			// 				return fetch(input, init).then((response) => {
+			// 					// Capture any new session token if provided
+			// 					const newSession = response.headers.get('woocommerce-session');
+			// 					if (newSession) {
+			// 						currentSessionToken = newSession.replace('Session ', '');
+			// 						// console.log('New session from add to cart:', currentSessionToken);
+			// 					}
+			// 					addToCartResponse = response;
+			// 					return response;
+			// 				});
+			// 			}
+			// 		}
+			// 	)
+			// 	.toPromise();
+
 			const addToCartResult = await client
 				.mutation(
-					ADD_TO_CART,
-					{ productId: 131701, quantity: 1 },
+					CART_ADD_ITEMS_MUTATION,
+					{ items: products },
 					{
 						// fetchOptions: { headers: sessionHeaders },
 						fetch: (input, init) => {
