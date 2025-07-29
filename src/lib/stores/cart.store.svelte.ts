@@ -106,7 +106,6 @@ export const adjustQuantity = (itemId: number, delta: number, specific?: number)
 export const emptyCart = async () => {
 	await emptyRemoteCart();
 	cart.update(() => {
-		console.log('emptyiiing cart...');
 		shippingDetails.details = [];
 		return { items: [], coupons: [], zip: '' };
 	});
@@ -126,18 +125,10 @@ export const updateZip = (zipCode: string) => {
 
 // ---- Coupon related methods ----
 export const addCoupon = (couponCode: string, couponDiscount: number | string) => {
-	console.log('📱 INPUT:', { couponCode, couponDiscount, type: typeof couponDiscount });
-
 	cart.update((currentCart: Cart) => {
 		// Proper number conversion
 		const discountValue =
 			typeof couponDiscount === 'string' ? parseFloat(couponDiscount) : Number(couponDiscount);
-
-		console.log('📱 STORED:', {
-			code: couponCode,
-			discount: discountValue,
-			type: typeof discountValue
-		});
 
 		const couponExists = currentCart.coupons.some((coupon) => coupon.code === couponCode);
 		if (!couponExists) {

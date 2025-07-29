@@ -57,6 +57,7 @@ export async function processCoupon(couponCode: string): Promise<CouponResult> {
 			.toPromise();
 
 		if (addToCartResult.error) {
+			console.error(addToCartResult.error);
 			return {
 				success: false,
 				error: 'Erro ao adicionar itens ao carrinho temporário.'

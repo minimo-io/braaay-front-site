@@ -23,7 +23,7 @@
 	async function handleLogout() {
 		// event.preventDefault();
 		toggleLoader();
-		let logoutResult = logout();
+		logout();
 		redirectHref(localizeHref(returnUrl));
 	}
 </script>
