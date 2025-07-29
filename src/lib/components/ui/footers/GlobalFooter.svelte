@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
-	import { deLocalizeHref, locales, localizeHref } from '$lib/paraglide/runtime';
+	import { deLocalizeHref, getLocale, locales, localizeHref } from '$lib/paraglide/runtime';
 	import { redirectLocale } from '$lib/utils';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 	import { AppConfig } from '$config';
@@ -17,6 +17,7 @@
 
 	// let isProductPage: string | null = $state('');
 	let isProductPage = $state<string | null>(null);
+	const currentYear = new Date().getFullYear();
 
 	$effect(() => {
 		isProductPage = page.route?.id;
@@ -122,8 +123,10 @@
 			class="mx-auto px-[30px] text-center text-[14px] leading-5 font-roboto text-grey-medium mb-5"
 		>
 			<p>
-				A venda de bebidas alcoólicas é proibida para menores de 18 anos © 2024 Braaay – CNPJ:
-				50.260.091/0001-72. • CEP: 05411-000. Todos os direitos reservados. Conheça nossas:
+				A venda de bebidas alcoólicas é proibida para menores de 18 anos © {AppConfig.foundingDate}-{currentYear}
+				• Braaay • {m.companyDocumentType()}:
+				{AppConfig.legal[getLocale()].code}. • {m.zipCodeName()}: {AppConfig.address[getLocale()]
+					.zipCode}. Todos os direitos reservados. Conheça nossas:
 				<a href="/" class="text-black font-medium">Trocas e devoluções</a>
 				|
 				<a href="/" class="text-black font-medium">*Frete Grátis: Confira as regras</a>

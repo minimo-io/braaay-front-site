@@ -1,6 +1,7 @@
 <script lang="ts">
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
 	import Meta from '$components/layout/Meta.svelte';
+	import SchemaHomepage from '$components/layout/Schemas/SchemaHomepage.svelte';
 	import Carrousel from '$components/ui/Carrousel.svelte';
 	import CountryBox from '$components/ui/CountryBox.svelte';
 	import PartnersList from '$components/ui/PartnersList.svelte';
@@ -29,6 +30,8 @@
 	title="{m.seoBase()} {m.seoDivider()} {m.seoHomeTitle()}"
 	description={m.seoHomeDescription()}
 />
+
+<SchemaHomepage />
 
 <main>
 	<Carrousel />
@@ -302,6 +305,3 @@
 </main>
 
 <FunMessageSection />
-
-<style>
-</style>

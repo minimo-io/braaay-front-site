@@ -1,6 +1,8 @@
 {
 	"letsExploreSlug": "/vinhos/",
 	"letsExplore": "Vamos explorar 🚀",
+	"companyDocumentType": "CNPJ",
+	"zipCodeName": "CEP",
 
 	"loading": "Carregando...",
 	"search": "Pesquisar...",

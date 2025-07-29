@@ -30,5 +30,54 @@ export const AppConfig = Object.freeze({
 	forPresentEnabled: false,
 
 	// Enable/Disable email suscriptions on checkout
-	receiveEmailsEnabled: false
+	receiveEmailsEnabled: false,
+
+	// Founding date
+	foundingDate: 2023,
+
+	// Address
+	address: {
+		pt: {
+			street: 'R. Cristiano Viana',
+			number: '62',
+			complement: 'cj 35',
+			neighborhood: 'Cerqueira César',
+			city: 'São Paulo',
+			state: 'SP',
+			zipCode: '05411-000',
+			countryCode: 'BR'
+		},
+		uy: {
+			street: 'Eduardo Acevedo',
+			number: '1376',
+			complement: '901',
+			neighborhood: 'Cordón',
+			city: 'Montevideo',
+			state: 'MVD',
+			zipCode: '11200',
+			countryCode: 'UY'
+		}
+	},
+
+	// Legal name
+	legal: {
+		pt: { name: '50.260.091 NICOLAS ERRAMUSPE ARMANDO', code: '50.260.091/0001-72' },
+		uy: { name: 'BRAAAY', code: '50.260.091/0001-72' }
+	},
+
+	// Telephone
+	tel: {
+		pt: '+55 11 94753-0340',
+		uy: '+55 11 94753-0340'
+	},
+
+	// Socials
+	socials: {
+		pt: {
+			instagram: 'https://www.instagram.com/braaay_com'
+		},
+		uy: {
+			instagram: 'https://www.instagram.com/hops_uy'
+		}
+	}
 });

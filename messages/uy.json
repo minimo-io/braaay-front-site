@@ -1,6 +1,8 @@
 {
 	"letsExploreSlug": "/uy/cervezas/",
 	"letsExplore": "Vamos a explorar 🚀",
+	"companyDocumentType": "RUT",
+	"zipCodeName": "CP",
 
 	"loading": "Cargando...",
 	"search": "Buscar...",

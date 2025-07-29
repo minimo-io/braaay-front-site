@@ -9,6 +9,7 @@
 	import { browser } from '$app/environment';
 	import { setShippingDetails } from '$stores/shippingDetails.state.svelte';
 	import { AppConfig } from '$config';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	interface Props {
 		product: Product;
@@ -26,6 +27,8 @@
 	}
 	const cashbackValue = calculateCashback(product.floatPrice, AppConfig.cashbackPercentage);
 	const clubMoreInfoText = `Ganhe <strong>${m.currencySymbol()}${correctPrice(cashbackValue)}</strong> em cashback no Clube`;
+
+	let reversedCategories: ProductCategory[] = [...(productCategories ?? [])].reverse() ?? [];
 
 	const item: CartItem = {
 		id: product.id,
@@ -81,7 +84,40 @@
 </script>
 
 <div class="md:w-[50%] pt-8 pb-0 pl-8 pr-8 md:pr-0 relative">
+	<!-- Breadcrumbs -->
+	<ul
+		id="breadcrumb"
+		class="flex text-xs text-grey-medium-dark space-x-2 items-center"
+		itemscope
+		itemtype="https://schema.org/BreadcrumbList"
+	>
+		<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<a href={localizeHref('/')} itemprop="item">
+				<span itemprop="name">{m.start()}</span>
+			</a>
+			<meta itemprop="position" content="1" />
+		</li>
+
+		{#if productCategories}
+			<li class="text-grey-medium-dark">›</li>
+			{#each reversedCategories as category, i (i)}
+				<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+					<a href={localizeHref(category.uri)} itemprop="item" class="hover:underline">
+						<span itemprop="name">{category.name}</span>
+					</a>
+					<meta itemprop="position" content={(i + 2).toString()} />
+				</li>
+				{#if i + 1 < reversedCategories.length}
+					<li class="text-grey-medium-dark">›</li>
+				{/if}
+			{/each}
+		{/if}
+	</ul>
+
+	<!-- Product title -->
 	<h1 class="bry-product-title pt-4">{product.title}</h1>
+
+	<!-- Produt short description  -->
 	<p class="mb-4 font-roboto text-[15px] tracking-[0.5px] text-grey-blueish font-normal">
 		{@html stripHtml(product.shortDescription)}
 	</p>
