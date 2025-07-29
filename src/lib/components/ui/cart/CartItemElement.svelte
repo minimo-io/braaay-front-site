@@ -116,8 +116,8 @@
 <div class="flex flex-col md:flex-row justify-between align-middle">
 	<div class="flex w-full md:w-[50%] md:pr-10">
 		<!-- Image -->
-		<a href={cartItem.uri}>
-			<img src={cartItem.image.url} alt={cartItem.image.altText} class="w-16 mr-4" />
+		<a href={cartItem.uri} class="mr-2">
+			<img src={cartItem.image.url} alt={cartItem.image.altText} class="w-16 mr-4 rounded-lg" />
 		</a>
 
 		<!-- Data -->

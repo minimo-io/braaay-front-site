@@ -3,8 +3,10 @@
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import popularProducts from '$data/jsons/popular-products.json';
 	import { Search as SearchIcon } from '@lucide/svelte'; // Import Search icon
+	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 
 	// New prop: 'mobile' to toggle between desktop and mobile presentation
 	let { mobile = false }: { mobile?: boolean } = $props();
@@ -76,10 +78,11 @@
 	}
 
 	function handleBlur() {
+		// Increase timeout to prevent premature closing when clicking on results
 		setTimeout(() => {
 			isFocused = false;
 			selectedIndex = -1;
-		}, 150);
+		}, 200);
 	}
 
 	function handleKeyDown(e: KeyboardEvent) {
@@ -116,6 +119,7 @@
 	function handleSearchSubmit() {
 		if (query.trim()) {
 			const searchUrl = localizeHref(`/search/?s=${encodeURIComponent(query.trim())}`);
+			console.log('Navigating to search:', searchUrl);
 			goto(searchUrl);
 		}
 	}
@@ -125,12 +129,47 @@
 		handleSearchSubmit();
 	}
 
-	function navigateToItem(item: { title: string; url: string }) {
-		const url = localizeHref(item.url);
-		goto(url);
+	async function navigateToItem(item: { title: string; url: string }) {
+		// The URL from JSON is already correct for the locale, so let's use it directly
+		const url = item.url;
+
+		// Let's also try localizeHref to see what it produces
+		const localizedUrl = localizeHref(item.url);
+
+		// Force close the dropdown immediately
+		isFocused = false;
+		selectedIndex = -1;
+
+		try {
+			toggleLoader();
+			window.location.href = url;
+			// document.location = url;
+			// const result = await goto(url, {
+			// 	invalidateAll: true
+			// });
+			// console.log('Navigation result:', result);
+		} catch (error) {
+			console.error('Direct URL navigation failed, trying localized URL:', error);
+			window.location.href = url;
+		}
 	}
 
 	function handleResultClick(item: { title: string; url: string }) {
+		console.log('handleResultClick called for:', item.title, item.url);
+
+		// Prevent the blur event from interfering
+		if (searchInput) {
+			searchInput.blur();
+		}
+
+		// Prevent event bubbling and default behavior
+		if (event) {
+			event.preventDefault();
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+		}
+
+		// Navigate immediately without waiting for state changes
 		navigateToItem(item);
 	}
 
@@ -141,6 +180,7 @@
 	function handleResultKeyDown(e: KeyboardEvent, item: { title: string; url: string }) {
 		if (e.key === 'Enter' || e.key === ' ') {
 			e.preventDefault();
+			e.stopPropagation();
 			navigateToItem(item);
 		}
 	}
@@ -219,7 +259,12 @@
                         {selectedIndex === i
 						? 'bg-sun text-white selected'
 						: 'bg-white text-grey-darker'}"
-					onclick={() => handleResultClick(item)}
+					onmousedown={(e) => {
+						// Use mousedown instead of click to prevent blur interference
+						e.preventDefault();
+						e.stopPropagation();
+						handleResultClick(item);
+					}}
 					onkeydown={(e) => handleResultKeyDown(e, item)}
 					onmouseover={() => handleResultMouseOver(i)}
 					onfocus={() => handleResultMouseOver(i)}

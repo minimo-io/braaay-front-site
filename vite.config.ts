@@ -205,6 +205,7 @@ export default defineConfig({
 				},
 
 				{
+					// pattern: '/produto/:id',
 					pattern: '/produto/:id',
 					localized: [
 						['pt', '/produto/:id(.*)?'],
@@ -227,7 +228,7 @@ export default defineConfig({
 		cssCodeSplit: true
 	},
 	server: {
-		host: true,
+		// host: true,
 		port: 4000
 	}
 });

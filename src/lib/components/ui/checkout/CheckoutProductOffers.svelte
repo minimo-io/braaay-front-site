@@ -76,7 +76,7 @@
 
 							<div class="mt-4">
 								<Button
-									title="Adicionar ao carrinho"
+									title={m.addToCart()}
 									rounded="lg"
 									type="light"
 									size="sm"
@@ -133,7 +133,7 @@
 
 							<div class="mt-4">
 								<Button
-									title="Adicionar ao carrinho"
+									title={m.addToCart()}
 									rounded="lg"
 									type="light"
 									size="sm"
