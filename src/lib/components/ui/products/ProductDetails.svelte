@@ -41,17 +41,38 @@
 	};
 
 	let processing = $state(false);
+	let originalButtonRef: HTMLButtonElement | null = $state(null);
+	let showFixedButton = $state(false);
 
-	// Optionally, you can provide a wrapper function in case you want to extend the behavior.
+	// Track button visibility with Intersection Observer
+	$effect(() => {
+		if (browser && originalButtonRef) {
+			const observer = new IntersectionObserver(
+				([entry]) => {
+					// Show fixed button when original is NOT in viewport
+					showFixedButton = !entry.isIntersecting;
+				},
+				{
+					root: null,
+					threshold: 0 // Trigger when 0% of element is visible
+				}
+			);
+
+			observer.observe(originalButtonRef);
+
+			return () => {
+				observer.unobserve(originalButtonRef!);
+				observer.disconnect();
+			};
+		}
+	});
+
 	const handleAddToCart = async () => {
 		processing = true;
-		// empty previous shippings if any
 		setShippingDetails([]);
 		addToCart(item, () => {
 			if (browser) {
-				// toast.success(m.addingToCartOk(), {
-				// 	closable: true
-				// });
+				// toast.success(m.addingToCartOk(), { closable: true });
 			}
 		});
 		activateMiniCart();
@@ -59,7 +80,7 @@
 	};
 </script>
 
-<div class="md:w-[50%] pt-8 pb-0 pl-8 pr-8 md:pr-0">
+<div class="md:w-[50%] pt-8 pb-0 pl-8 pr-8 md:pr-0 relative">
 	<h1 class="bry-product-title pt-4">{product.title}</h1>
 	<p class="mb-4 font-roboto text-[15px] tracking-[0.5px] text-grey-blueish font-normal">
 		{@html stripHtml(product.shortDescription)}
@@ -87,12 +108,13 @@
 		<p class="text-grey-medium-dark font-roboto text-[15px] mb-4">{@html stockStatus}</p>
 	{/if}
 	<div class="flex items-center mb-4">
-		<!-- {#if product.stockStatus == ""} -->
 		{#if product.stockStatus == 'IN_STOCK'}
 			<button
+				bind:this={originalButtonRef}
 				onclick={() => handleAddToCart()}
 				class="px-8 py-2 text-white rounded-lg uppercase font-roboto text-[13px] tracking-[2.5px] text-center w-full md:w-auto"
 				style="background-color: var(--bry-current-color)"
+				disabled={processing}
 			>
 				{#if processing}
 					{m.addingToCart()}
@@ -102,6 +124,7 @@
 			</button>
 		{:else}
 			<button
+				bind:this={originalButtonRef}
 				onclick={() => {
 					window.location.href = `${AppConfig.whatsappLink}?text=Olá,%20quero%20conhecer%20sobre%20a%20pré-venda%20do%20vinho%20${product.title}`;
 				}}
@@ -115,4 +138,36 @@
 
 	<!-- Product accordion -->
 	<ProductAccordion {product} {attributes} {productCategories} />
+
+	<!-- Fixed bottom button -->
+	{#if showFixedButton}
+		<div
+			class="fixed bottom-0 left-0 right-0 bg-transparent glass px-4 py-3 z-50 md:max-w-screen-lg md:mx-auto rounded-t-lg"
+		>
+			{#if product.stockStatus == 'IN_STOCK'}
+				<button
+					onclick={() => handleAddToCart()}
+					class="w-full py-2 text-white rounded-lg uppercase font-roboto text-[14px] tracking-wider font-medium"
+					style="background-color: var(--bry-current-color)"
+					disabled={processing}
+				>
+					{#if processing}
+						{m.addingToCart()}
+					{:else}
+						{m.addToCart()} — {product.price}
+					{/if}
+				</button>
+			{:else}
+				<button
+					onclick={() => {
+						window.location.href = `${AppConfig.whatsappLink}?text=Olá,%20quero%20conhecer%20sobre%20a%20pré-venda%20do%20vinho%20${product.title}`;
+					}}
+					class="px-8 py-2 text-white rounded-lg uppercase font-roboto text-[13px] tracking-[2.5px] text-center w-full md:w-auto !bg-green-dark font-semibold"
+					style="background-color: var(--bry-current-color)"
+				>
+					{m.availableViaWhatsapp()}
+				</button>
+			{/if}
+		</div>
+	{/if}
 </div>

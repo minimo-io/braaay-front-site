@@ -11,13 +11,17 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true
 	},
-	// "include": ["./**/*.ts"]
 	"include": [
 		"update-grapes.ts",
 		"update-subcategories.ts",
 		"update-countries.ts",
 		"generate-robots.ts",
-		"update-popular-products.ts"
+		"update-popular-products.ts",
+		"prefetch-on-sale-products.ts"
 	],
+	// "include": [
+	// 	"./**/*.ts", // <--- Add this line to include all .ts files in the current directory and subdirectories
+	// 	"../src/**/*.ts" // <--- Add this line to include all .ts files in the src directory and its subdirectories
+	// ],
 	"exclude": []
 }

@@ -115,7 +115,7 @@ async function fetchAllData() {
 		};
 
 		if (!fs.existsSync(outputDir)) {
-			fs.mkdirSync(outputDir, { recursive: true });
+			fs.mkdirSync(outputDir, { recursive: false });
 		}
 
 		const outputPath = path.join(outputDir, 'popular-products.json');

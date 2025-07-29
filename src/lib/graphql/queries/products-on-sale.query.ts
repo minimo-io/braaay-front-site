@@ -1,5 +1,4 @@
-// Country list products query
-
+// src/lib/graphql/queries/products-on-sale.query.ts
 import { gql } from '@urql/core';
 import { PRODUCT_LIST_FRAGMENT, PAGINATION_INFO_FRAGMENT } from './fragments/index';
 

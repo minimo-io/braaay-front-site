@@ -1,0 +1,80 @@
+{
+  "pt": [
+    {
+      "id": 132009,
+      "sku": "UY-26-27-202-132009",
+      "uri": "/produto/vinho-uruguaio-don-adelio-ariano-tannat/",
+      "name": "Don Adelio Ariano Reserve Oak Barrel Tannat 2020 - 750ml",
+      "priceString": "R$93,60",
+      "regularPrice": "R$104,00",
+      "price": 93.6,
+      "quantity": 1,
+      "maxQuantity": 4,
+      "image": {
+        "mediaItemUrl": "https://braaay.com/wp-content/uploads/2025/03/don-adelio-ariano-oak-barrel-tannat.png",
+        "altText": "don-adelio-ariano-oak-barrel-tannat"
+      }
+    },
+    {
+      "id": 131766,
+      "sku": "kit-don-tannat-variet",
+      "uri": "/produto/kit-vinho-don-pascual-tannat-castanhas/",
+      "name": "Kit Vinho Don Pascual Tannat com Castanhas",
+      "priceString": "R$134,10",
+      "regularPrice": "R$149,00",
+      "price": 134.1,
+      "quantity": 1,
+      "maxQuantity": null,
+      "image": {
+        "mediaItemUrl": "https://braaay.com/wp-content/uploads/2024/11/Kit-Vinho-Don-Pascual-Tannat-com-Castanhas.png",
+        "altText": ""
+      }
+    },
+    {
+      "id": 131758,
+      "sku": "kit-art-02",
+      "uri": "/produto/kit-vinho-artesana-tannat-queijos-brie-e-gouda-pistache-e-caixa/",
+      "name": "Kit vinho com quejo: Tannat da Artesana com queijos Brie e Gouda + Pistache para presente",
+      "priceString": "R$224,10",
+      "regularPrice": "R$249,00",
+      "price": 224.1,
+      "quantity": 1,
+      "maxQuantity": 4,
+      "image": {
+        "mediaItemUrl": "https://braaay.com/wp-content/uploads/2024/11/kit-artesana-tannat-1.png",
+        "altText": ""
+      }
+    },
+    {
+      "id": 131616,
+      "sku": "BR-26-27-131616",
+      "uri": "/produto/pizzato-dna-99-vineyard-merlot/",
+      "name": "Pizzato DNA 99 Vineyard Merlot",
+      "priceString": "R$405,00",
+      "regularPrice": "R$450,00",
+      "price": 405,
+      "quantity": 1,
+      "maxQuantity": 6,
+      "image": {
+        "mediaItemUrl": "https://braaay.com/wp-content/uploads/2024/09/Pizzato-99-Merlot.webp",
+        "altText": "Pizzato 99 Merlot"
+      }
+    },
+    {
+      "id": 131417,
+      "sku": "UY-26-27-131417",
+      "uri": "/produto/vinho-braccobosca-cabernet-franc-ombu-gran-reserva/",
+      "name": "Braccobosca Cabernet Franc Ombú Gran Reserva",
+      "priceString": "R$455,00",
+      "regularPrice": "R$501,99",
+      "price": 455,
+      "quantity": 1,
+      "maxQuantity": 1,
+      "image": {
+        "mediaItemUrl": "https://braaay.com/wp-content/uploads/2024/08/BraccoBosca-1-1.webp",
+        "altText": "BraccoBosca (1)"
+      }
+    }
+  ],
+  "uy": []
+}

@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://braaay-front-site.vercel.app/loja/</loc>
-		<lastmod>2025-07-28T19:23:18+00:00</lastmod>
+		<lastmod>2025-07-29T16:19:37+00:00</lastmod>
 	</url>
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/presente-vinho-premium/</loc>
@@ -640,11 +640,6 @@
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/confraria-entre-tacas-e-mulheres/</loc>
-		<lastmod>2025-07-24T22:20:17+00:00</lastmod>
-		
-	</url>
-	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/mayos-moscatel-rose-espumante-nacional/</loc>
 		<lastmod>2025-07-25T01:13:55+00:00</lastmod>
 		
@@ -702,6 +697,11 @@
 	<url>
 		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-casa-eva-viognier-safra-2023/</loc>
 		<lastmod>2025-07-28T19:23:18+00:00</lastmod>
+		
+	</url>
+	<url>
+		<loc>https://braaay-front-site.vercel.app/produto/confraria-entre-tacas-e-mulheres/</loc>
+		<lastmod>2025-07-29T16:19:37+00:00</lastmod>
 		
 	</url>
 </urlset>

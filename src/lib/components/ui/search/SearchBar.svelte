@@ -204,7 +204,7 @@
 		<ul
 			role="listbox"
 			aria-label="Search suggestions"
-			class="absolute top-full left-0 right-0 mt-1 bg-white border border-grey-lighter rounded-lg shadow-lg max-h-60 overflow-auto text-sm z-50"
+			class="absolute top-full left-0 right-0 md:mt-1 bg-white border border-grey-lighter md:rounded-lg shadow-lg max-h-60 overflow-auto text-sm z-50"
 		>
 			<!-- Title -->
 			<h2 class="font-bold py-3 mb-2 px-5 border-b border-grey-lighter">{m.popularResults()}</h2>

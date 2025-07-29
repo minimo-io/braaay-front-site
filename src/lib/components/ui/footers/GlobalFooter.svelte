@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
-	import { locales, localizeHref } from '$lib/paraglide/runtime';
+	import { deLocalizeHref, locales, localizeHref } from '$lib/paraglide/runtime';
 	import { redirectLocale } from '$lib/utils';
 	import SectionDivider from '$components/ui/dividers/SectionDivider.svelte';
 	import { AppConfig } from '$config';
 	import { trackEvent } from '$components/analytics';
 	import FeaturesFooter from './FeaturesFooter.svelte';
+	import { page } from '$app/state';
 
 	function handleFwClick() {
 		trackEvent('button_click_external', {
@@ -13,6 +14,13 @@
 			event_label: 'to_futurewise'
 		});
 	}
+
+	// let isProductPage: string | null = $state('');
+	let isProductPage = $state<string | null>(null);
+
+	$effect(() => {
+		isProductPage = page.route?.id;
+	});
 </script>
 
 <footer class="relative bg-grey-background py-0 mt-0">
@@ -164,7 +172,9 @@
 				v{__APP_VERSION__}<br />
 				A venda de bebidas alcoólicas <br />é proibida para menores de 18 anos.
 			</div>
-			<div class="text-xs text-center">
+
+			<!-- Futurewise logo -->
+			<div class={['text-xs text-center', isProductPage?.startsWith('/produto/') && 'mb-14']}>
 				<div class="text-right justify-center md:justify-end self-end flex relative md:-top-2">
 					<a
 						target="_blank"
