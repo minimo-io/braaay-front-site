@@ -74,30 +74,11 @@
 			</button>
 			{#if activeAccordion === 'frete'}
 				<div transition:slide>
-					<Button
-						title="ESTIMAR"
-						size="sm-short"
-						type="grey"
-						borderDark={true}
-						customPx="max-h-full disabled:opacity-20"
-						action={() => {
-							openModal({
-								header: 'Calcular frete',
-								content: ShippingForm,
-								props: { products: [{ productId: product.id, quantity: 1 }] }
-							});
-						}}
-					>
-						{#snippet icon()}
-							<Truck class="lucide-button" />
-						{/snippet}
-					</Button>
-
 					<!-- <p class="p-4">Informações sobre frete e prazos aqui.</p> -->
 
 					{#if shippingDetails.details && shippingDetails.details.length > 0}
 						<div in:slide={{ duration: 200 }} out:slide={{ duration: 200 }}>
-							<div class="my-4 border-t border-t-grey-lighter"></div>
+							<div class="my-4 mt-2 border-t border-t-grey-lighter"></div>
 							<div class="flex flex-col">
 								<div class="flex justify-between items-center">
 									<span
@@ -123,6 +104,27 @@
 									</div>
 								{/each}
 							</div>
+						</div>
+					{:else}
+						<div class="my-2">
+							<Button
+								title="ESTIMAR ENVIO"
+								size="sm-short"
+								type="grey"
+								borderDark={true}
+								customPx="max-h-full disabled:opacity-20"
+								action={() => {
+									openModal({
+										header: 'Calcular frete',
+										content: ShippingForm,
+										props: { products: [{ productId: product.id, quantity: 1 }] }
+									});
+								}}
+							>
+								{#snippet icon()}
+									<Truck class="lucide-button" />
+								{/snippet}
+							</Button>
 						</div>
 					{/if}
 				</div>

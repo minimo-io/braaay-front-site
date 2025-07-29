@@ -5,7 +5,6 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { launchToast } from '$lib/utils';
-	import { gql } from '@urql/core';
 	import { m } from '$lib/paraglide/messages';
 	import type { ShippingRate } from '$lib/types/cart.types';
 	import { setShippingDetails } from '$stores/shippingDetails.state.svelte';
@@ -30,30 +29,6 @@
 		if (digits.length <= 5) return digits;
 		return `${digits.slice(0, 5)}-${digits.slice(5)}`;
 	}
-
-	onMount(() => {
-		// alert(products);
-	});
-
-	// 1) Define your mutations & queries
-
-	// const ADD_TO_CART = gql`
-	// 	mutation {
-	// 		addToCart(input: { productId: 131701, quantity: 1 }) {
-	// 			cart {
-	// 				contents {
-	// 					nodes {
-	// 						product {
-	// 							node {
-	// 								title
-	// 							}
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// `;
 
 	async function handleSubmit() {
 		processing = true;

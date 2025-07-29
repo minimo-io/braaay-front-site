@@ -18,6 +18,8 @@
 	async function handleCouponSubmit() {
 		processing = true;
 		error = '';
+
+		launchToast('Tentando aplicar cupom...', 'info', 2000);
 		toggleLoader();
 		document.body.classList.toggle('no-scroll');
 
