@@ -2,6 +2,8 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import type { Post } from '$lib/types';
+	import { ArrowRight, ChevronRight } from '@lucide/svelte';
+	import { formatDate } from '$lib/utils';
 	interface Props {
 		post: Post;
 	}
@@ -14,11 +16,13 @@
 >
 	<!-- Image Section -->
 	<div class="lg:w-1/2 max-h-[300px] self-center">
-		<img
-			src={post.featuredImage.mediaItemUrl}
-			alt="Receita de Geleia de Vinho"
-			class="w-full h-[300px] object-cover rounded-2xl"
-		/>
+		<a href={localizeHref(post.uri)}>
+			<img
+				src={post.featuredImage.mediaItemUrl}
+				alt="Receita de Geleia de Vinho"
+				class="w-full h-[300px] object-cover rounded-2xl"
+			/>
+		</a>
 	</div>
 
 	<!-- Text Content Section -->
@@ -33,13 +37,15 @@
 				/>
 				<span class="self-center text-sm md:text-lg">{post.author.name}</span>
 			</span>
-			<span>•</span>
-			<div class="text-grey-medium">
-				{new Date(post.date).toLocaleDateString()}
-				{#if post.date !== post.modified}
-					<span class="hidden md:inline">(atualizado)</span>
-				{/if}
-			</div>
+			{#if post.date}
+				<span>•</span>
+				<div class="text-grey-medium">
+					{formatDate(post.date)}
+					{#if post.date !== post.modified}
+						<span class="hidden md:inline">(atualizado)</span>
+					{/if}
+				</div>
+			{/if}
 		</div>
 
 		<!-- Title -->
@@ -59,9 +65,26 @@
 
 		<!-- Tags -->
 		<div class="text-sm text-grey-medium-dark flex items-center space-x-2">
-			<a href="/category" class="text-sun font-bold py-1 rounded">Dica do Chef</a>
-			<span>•</span>
-			<span>Leitura em 6 min</span>
+			<div class="flex items-center gap-0">
+				{#each post.categories as category, i (i)}
+					{#if category.name != 'Blog'}
+						<!-- <a href={localizeHref(category.uri)} class="text-sun font-bold py-1 rounded">
+						{category.name}
+					</a> -->
+						<span class="text-sun font-bold py-1 rounded">
+							{category.name}
+						</span>
+						{#if i + 1 != post.categories.length}
+							<span class="text-xs font-bold">
+								<ChevronRight class="h-3" />
+							</span>
+						{/if}
+					{/if}
+				{/each}
+			</div>
+
+			<!-- <span>•</span>
+			<span>Leitura em 6 min</span> -->
 		</div>
 	</div>
 </div>

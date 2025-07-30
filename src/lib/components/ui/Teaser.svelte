@@ -6,6 +6,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
+	import { page } from '$app/state';
 
 	// Cookie management functions
 	function setCookie(name: string, value: string, days: number) {
@@ -39,17 +40,25 @@
 
 	// Initialize visibility after component mounts
 	$effect(() => {
-		if (browser) {
-			const cookieValue = getCookie('teaserVisible');
-			if (cookieValue === null) {
-				// No cookie exists, set default to true
-				setCookie('teaserVisible', 'true', 7);
-				isTeaserButtonVisible = true;
-			} else {
-				// Cookie exists, use its value
-				isTeaserButtonVisible = cookieValue === 'true';
-			}
-			isLoaded = true;
+		if (!browser) return;
+
+		// Restore visibility from cookie
+		const cookieValue = getCookie('teaserVisible');
+		if (cookieValue === null) {
+			setCookie('teaserVisible', 'true', 7);
+			isTeaserButtonVisible = true;
+		} else {
+			isTeaserButtonVisible = cookieValue === 'true';
+		}
+		isLoaded = true;
+
+		// Listen for teaser url changes
+		const teaserParam = page.url.searchParams.get('teaser');
+		if (teaserParam === 'true' && isTeaserButtonVisible && !isModalOpen) {
+			openTeaserModal();
+			// Clean up URL
+			page.url.searchParams.delete('teaser');
+			history.replaceState({}, '', page.url.toString());
 		}
 	});
 

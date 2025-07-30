@@ -14,6 +14,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import SchemaPage from '$components/layout/Schemas/SchemaPage.svelte';
 	import { page } from '$app/state';
+	import { goto } from '$app/navigation';
 
 	let { data }: { data: PageData } = $props();
 
@@ -63,10 +64,13 @@
 				>
 					{#snippet button()}
 						<Button
-							title="Assine y Ganhe 10% OFF"
+							title="Assine y Ganhe 15% OFF"
 							size="md"
 							type="sun"
-							url="http://eepurl.com/iW9KH6"
+							action={() => {
+								document.cookie = 'teaserVisible=true; path=/';
+								goto('./?teaser=true');
+							}}
 						>
 							{#snippet icon()}
 								<Send class="lucide-button" />
@@ -87,11 +91,11 @@
 							date={new Date(post.date).toLocaleDateString()}
 							author={{ name: post.author.name, image: post.author.avatar.url }}
 							readingTime="Leitura em 6 min"
-							category={{ url: '/article', title: 'Dica do Chef' }}
+							categories={post.categories}
 						/>
 					{/each}
 				{:else}
-					<p>No posts available.</p>
+					<p>Sem artigos disponíveis.</p>
 				{/if}
 			</div>
 		</div>

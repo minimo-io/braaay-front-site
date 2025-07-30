@@ -50,7 +50,8 @@
 		featuredImage: {
 			mediaItemUrl: category.header.image?.url || '',
 			altText: category.header.image?.altText || ''
-		}
+		},
+		categories: []
 	});
 
 	async function handleLoadMore() {

@@ -18,6 +18,7 @@ export interface Post {
 	plainExcerpt: string;
 	uri: string;
 	author: ArticleCreator;
+	categories: PostBaseCategory[];
 	featuredImage: {
 		mediaItemUrl: string;
 		altText: string;
@@ -36,6 +37,7 @@ export interface BasePost {
 	excerpt: string;
 	uri: string;
 	content?: string;
+	categories: GraphQLPostCategories;
 	author: {
 		node: {
 			name: string;
@@ -53,6 +55,14 @@ export interface BasePost {
 		firstParagraph?: string;
 	};
 	seo?: YoastSeoData;
+}
+
+export interface PostBaseCategory {
+	name: string;
+	uri: string;
+}
+interface GraphQLPostCategories {
+	nodes: PostBaseCategory[];
 }
 
 // And the raw GraphQL node structure for posts:
@@ -84,6 +94,12 @@ export function mapPost(post: GraphQLPostFromList | GraphQLPostSingle): Post {
 		content: postBase.content || undefined,
 		plainExcerpt: stripHtml(postBase.excerpt),
 		uri: postBase.uri,
+		categories: postBase.categories?.nodes.map((graphQLCategory: PostBaseCategory) => {
+			return {
+				name: graphQLCategory.name,
+				uri: graphQLCategory.uri
+			};
+		}),
 		author: {
 			name: postBase.author.node.name,
 			avatar: { url: postBase.author.node.avatar.url }

@@ -1,5 +1,8 @@
 <!-- Card -->
 <script lang="ts">
+	import type { PostBaseCategory } from '$lib/types';
+	import { ChevronRight } from '@lucide/svelte';
+
 	interface Props {
 		author: {
 			name: string;
@@ -7,10 +10,7 @@
 		};
 		date: string;
 		title: string;
-		category: {
-			url: string;
-			title: string;
-		};
+		categories: PostBaseCategory[];
 		readingTime: string;
 		image: string;
 		url: string;
@@ -40,9 +40,23 @@
 		</h3>
 
 		<div class="text-sm mt-2">
-			<a href={props.category.url} class="font-bold text-sun">{props.category.title}</a>
-			<span class="text-grey-medium-dark">•</span>
-			<span class="text-sm font-light text-grey-medium my-2"> {props.readingTime} </span>
+			<div class="flex items-center">
+				{#each props.categories as category, i (i)}
+					{#if category.name != 'Blog'}
+						<span class="text-sun font-bold py-1 rounded">
+							{category.name}
+						</span>
+						{#if i + 1 != props.categories.length}
+							<span class="text-xs font-bold">
+								<ChevronRight class="h-3" />
+							</span>
+						{/if}
+					{/if}
+				{/each}
+			</div>
+
+			<!-- <span class="text-grey-medium-dark">•</span>
+			<span class="text-sm font-light text-grey-medium my-2"> {props.readingTime} </span> -->
 		</div>
 	</div>
 </div>

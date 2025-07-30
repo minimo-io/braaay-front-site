@@ -9,6 +9,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import type { YoastSeoData } from '$lib/types';
 	import SchemaBlogPost from '$components/layout/Schemas/SchemaBlogPost.svelte';
+	import ArticleBreadcrumbs from '$components/ui/articles/components/ArticleBreadcrumbs.svelte';
 	// import type { Post } from '$lib/types';
 
 	let { data }: { data: PageData } = $props();
@@ -34,6 +35,7 @@
 				<!-- Article content -->
 				<div class="md:px-32 px-[30px] max-w-screen-lg mx-auto">
 					<ArticleIntro title={article.header?.title} content={article.header?.content} />
+					<ArticleBreadcrumbs categories={article.categories} />
 
 					<Divider color="blue" />
 					<img
