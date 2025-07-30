@@ -104,7 +104,7 @@
 	]}
 />
 
-<GlobalCategory {products} {category} />
+<GlobalCategory hideCount={true} {products} {category} />
 <LoadMoreButton {isLoading} {pagination} {handleLoadMore} />
 
 <BottomArticle {article} twoColumns={false} />

@@ -12,15 +12,16 @@
 	interface Props {
 		category: Category;
 		products: Product[];
+		hideCount?: boolean;
 	}
-	const { category, products } = $props();
+	const { category, products, hideCount = false }: Props = $props();
 
 	// let products: Product[] = $derived(data.products);
 	// let category: Category = $derived(data.category);
 </script>
 
 <main>
-	<CategoryHeader {category} />
+	<CategoryHeader {category} {hideCount} />
 
 	<FilteringMenu />
 

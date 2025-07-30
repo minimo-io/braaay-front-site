@@ -5,8 +5,8 @@
 </script>
 
 <div>
-	<div class="flex justify-between">
-		<h2 class="text-xl mb-4 font-prata flex gap-1 items-center">
+	<div class="flex justify-start md:justify-between pb-2 md:pb-0">
+		<h2 class="hidden text-xl mb-4 font-prata md:flex gap-1 items-center">
 			<Database class="w-5 h-5 self-center mr-2 mb-[5px]" />
 			<span>{m.myInfo()}</span>
 		</h2>
@@ -24,7 +24,7 @@
 		</div>
 	</div>
 
-	<div>Em breve! Por enquanto entre em contato com nosso atendimento.</div>
+	<div class="text-sm">{m.comingSoonChangeData()}</div>
 </div>
 
 <!-- <Divider color="blue" extraClasses="!my-0" /> -->

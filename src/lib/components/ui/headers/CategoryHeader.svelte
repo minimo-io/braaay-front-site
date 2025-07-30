@@ -6,8 +6,9 @@
 
 	interface Props {
 		category: Category;
+		hideCount?: boolean;
 	}
-	let { category }: Props = $props();
+	let { category, hideCount = false }: Props = $props();
 
 	let categoryImage = $derived(category.header.image?.url || '/images/placeholder-category.png');
 	let categoryAltText = $derived(category.header.image?.altText || 'category-image');
@@ -43,7 +44,9 @@
 				<div
 					class="flex flex-col gap-1 md:flex-row text-grey-medium-dark font-roboto text-[14px] antialiased"
 				>
-					<span>{category.count} produtos</span>
+					{#if hideCount === false}
+						<span>{category.count} produtos</span>
+					{/if}
 					<MoreInfoButton title="CONHEÇA&nbsp;MAIS" />
 				</div>
 			</div>

@@ -27,7 +27,7 @@
 
 <div>
 	<div class="flex justify-between">
-		<h2 class="text-xl mb-4 font-prata flex gap-1 items-center">
+		<h2 class="hidden sm:flex text-xl mb-4 font-prata gap-1 items-center">
 			<Heart class="w-5 h-5 self-center mr-2 mb-[5px]" fill="red" color="red" />
 			<span>{m.myFavorites()}</span>
 		</h2>
@@ -55,7 +55,7 @@
 			</ul>
 		</div>
 	{:else if isLoading}
-		<div class="text-sm text-grey-medium-dark flex items-center">
+		<div class="text-sm text-grey-medium-dark flex items-center mt-2 md:mt-0">
 			<LoaderCircle class="spinner" />
 			<span>
 				{m.loadingFavorites()}
@@ -69,5 +69,3 @@
 		<Button title={m.letsExplore()} size="md" type="light" url={m.letsExploreSlug()} />
 	{/if}
 </div>
-
-<!-- <Divider color="blue" extraClasses="!my-0" /> -->

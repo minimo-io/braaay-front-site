@@ -44,7 +44,7 @@
 </script>
 
 <div
-	class="w-full max-w-full bg-white border border-grey-lighter rounded-xl p-3 sm:p-4 my-2 shadow-sm overflow-hidden"
+	class="w-full max-w-full bg-white border border-grey-lighter rounded-xl p-5 sm:p-4 my-2 shadow-sm overflow-hidden"
 >
 	<!-- Order Header - Always Visible -->
 	<div class="w-full flex flex-col gap-3">
@@ -105,7 +105,7 @@
 			<!-- Details button -->
 			<button
 				onclick={toggleExpanded}
-				class="flex items-center self-center my-2 md:my-0 text-gray-600 hover:text-gray-800 transition-colors flex-shrink-0 md:ml-2"
+				class="flex items-center self-start my-2 md:my-0 text-gray-600 hover:text-gray-800 transition-colors flex-shrink-0 md:ml-2"
 				aria-label={isExpanded ? 'Hide order details' : 'Show order details'}
 			>
 				<span class="text-xs sm:text-sm mr-1 whitespace-nowrap"

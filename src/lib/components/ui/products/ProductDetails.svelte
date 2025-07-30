@@ -10,6 +10,7 @@
 	import { setShippingDetails } from '$stores/shippingDetails.state.svelte';
 	import { AppConfig } from '$config';
 	import { localizeHref } from '$lib/paraglide/runtime';
+	import { drawerState } from '$stores/drawerState.state.svelte';
 
 	interface Props {
 		product: Product;
@@ -176,7 +177,7 @@
 	<ProductAccordion {product} {attributes} {productCategories} />
 
 	<!-- Fixed bottom button -->
-	{#if showFixedButton}
+	{#if showFixedButton && drawerState.active === false}
 		<div
 			class="fixed bottom-0 left-0 right-0 bg-transparent glass px-4 py-3 z-50 md:max-w-screen-lg md:mx-auto rounded-t-lg"
 		>

@@ -92,6 +92,10 @@
 	"viewOnMap": "Ver no mapa",
 
 	"myAccount": "Minha conta",
+	"clientSupport": "Atendimento ao Cliente",
+	"tapToChangeSection": "Toque para alterar seção",
+	"comingSoonChangeData": "Em breve! Por enquanto para alterar seus dados entre em contato com nosso atendimento.",
+	"comingSoonUseCashback": "Em breve! Por enquanto, para utilizar seu cashback, entre em contato com nosso atendimento.",
 
 	"checkoutStep1NoEmail": "E-mail é obrigatório.",
 	"checkoutStep1EnterValidEmail": "Insira um endereço de e-mail válido.",

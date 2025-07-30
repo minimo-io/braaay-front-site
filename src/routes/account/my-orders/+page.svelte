@@ -23,7 +23,7 @@
 
 <div>
 	<div class="flex justify-between">
-		<h2 class="text-xl mb-4 font-prata flex gap-1 items-center">
+		<h2 class="hidden text-xl mb-4 font-prata md:flex gap-1 items-center">
 			<ShoppingBag class="w-5 h-5 self-center mr-2 mb-[5px]" />
 			<span>{m.myOrders()}</span>
 		</h2>
@@ -53,7 +53,7 @@
 			</ul>
 		</div>
 	{:else if isLoading}
-		<div class="text-sm text-grey-medium-dark flex items-center">
+		<div class="text-sm text-grey-medium-dark flex items-center mt-2 md:mt-0">
 			<LoaderCircle class="spinner" />
 			<span>
 				{m.loadingFavorites()}
