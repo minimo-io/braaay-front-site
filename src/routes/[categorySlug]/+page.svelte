@@ -16,7 +16,7 @@
 	import { loadMoreProducts } from '$lib/utils/loadMoreProducts.util.js';
 	import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/products-category.query.js';
 	import Meta from '$components/layout/Meta.svelte';
-	import { m } from '$lib/paraglide/messages.js';
+	import SchemaCategory from '$components/layout/Schemas/SchemaCategory.svelte';
 
 	const { data } = $props();
 
@@ -50,7 +50,8 @@
 		featuredImage: {
 			mediaItemUrl: category.header.image?.url || '',
 			altText: category.header.image?.altText || ''
-		}
+		},
+		categories: []
 	});
 
 	async function handleLoadMore() {
@@ -86,8 +87,22 @@
 	}
 </script>
 
-<!-- <Meta title="{category.name} {m.seoDivider()} {m.seoBase()}" description={category.description} /> -->
+<!-- Meta -->
 <Meta seoData={seo} />
+
+<!-- Schema -->
+<SchemaCategory
+	{seo}
+	{category}
+	breadcrumbs={[
+		{
+			'@type': 'ListItem',
+			position: 2,
+			name: category?.name,
+			item: `${page.url.origin}${category?.uri}`
+		}
+	]}
+/>
 
 <GlobalCategory {products} {category} />
 <LoadMoreButton {isLoading} {pagination} {handleLoadMore} />

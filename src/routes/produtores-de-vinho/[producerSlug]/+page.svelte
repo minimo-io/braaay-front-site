@@ -16,6 +16,7 @@
 	import { WINE_PRODUCER_PRODUCTS } from '$lib/graphql/queries/index';
 	import LoadMoreButton from '$components/ui/buttons/LoadMoreButton.svelte';
 	import Meta from '$components/layout/Meta.svelte';
+	import SchemaCategory from '$components/layout/Schemas/SchemaCategory.svelte';
 
 	const { data } = $props();
 
@@ -48,7 +49,8 @@
 		featuredImage: {
 			mediaItemUrl: category.header.image?.url || '',
 			altText: category.header.image?.altText || ''
-		}
+		},
+		categories: []
 	});
 
 	async function handleLoadMore() {
@@ -80,9 +82,24 @@
 	}
 </script>
 
+<!-- Meta -->
 {#if seo}
 	<Meta seoData={seo} />
 {/if}
+
+<!-- Schema -->
+<SchemaCategory
+	{seo}
+	{category}
+	breadcrumbs={[
+		{
+			'@type': 'ListItem',
+			position: 2,
+			name: category?.name,
+			item: `${page.url.origin}${category?.uri}`
+		}
+	]}
+/>
 
 <GlobalCategory {products} {category} />
 <LoadMoreButton {isLoading} {pagination} {handleLoadMore} />

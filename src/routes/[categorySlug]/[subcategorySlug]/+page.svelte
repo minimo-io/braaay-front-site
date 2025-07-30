@@ -9,6 +9,8 @@
 	import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/products-category.query.js';
 	import Meta from '$components/layout/Meta.svelte';
 	import { m } from '$lib/paraglide/messages.js';
+	import SchemaCategory from '$components/layout/Schemas/SchemaCategory.svelte';
+	import { getLocale } from '$lib/paraglide/runtime.js';
 
 	// Destructure props at the top level
 	let { data } = $props();
@@ -46,7 +48,8 @@
 		featuredImage: {
 			mediaItemUrl: category.header.image?.url || '',
 			altText: category.header.image?.altText || ''
-		}
+		},
+		categories: []
 	}));
 
 	// Function to load more products
@@ -79,13 +82,28 @@
 	}
 </script>
 
-<!-- <Meta title="{category.name} {m.seoDivider()} {m.seoBase()}" description={category.description} /> -->
+<!-- Meta -->
 <Meta seoData={seo} />
-<!-- 
-<svelte:head>
-	<title>{category.name} - Braaay</title>
-	<meta name="description" content={category.description} />
-</svelte:head> -->
+
+<!-- Schema -->
+<SchemaCategory
+	{seo}
+	{category}
+	breadcrumbs={[
+		getLocale() == 'pt' && {
+			'@type': 'ListItem',
+			position: 2,
+			name: 'Vinhos',
+			item: `${page.url.origin}/vinhos/`
+		},
+		{
+			'@type': 'ListItem',
+			position: 3,
+			name: category?.name,
+			item: `${page.url.origin}${category?.uri}`
+		}
+	]}
+/>
 
 <GlobalCategory {products} {category} />
 <LoadMoreButton {isLoading} {pagination} {handleLoadMore} />

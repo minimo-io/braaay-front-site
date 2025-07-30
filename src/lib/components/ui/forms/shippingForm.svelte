@@ -12,7 +12,6 @@
 	import { UPDATE_GUEST_SHIPPING_ADDRESS } from '$lib/graphql/mutations/shipping-update.mutation';
 	import { GET_SHIPPING_ESTIMATES } from '$lib/graphql/mutations/shipping-estimates.mutation';
 	import ZipQueryButton from '../buttons/ZipQueryButton.svelte';
-	import { onMount } from 'svelte';
 	import { CART_ADD_ITEMS_MUTATION } from '$lib/graphql/mutations';
 
 	let { products } = $props();
@@ -48,28 +47,6 @@
 			// let currentSessionToken = sessionToken;
 			let currentSessionToken = '';
 			let addToCartResponse;
-
-			// const addToCartResult = await client
-			// 	.mutation(
-			// 		ADD_TO_CART,
-			// 		{ productId: 131701, quantity: 1 },
-			// 		{
-			// 			// fetchOptions: { headers: sessionHeaders },
-			// 			fetch: (input, init) => {
-			// 				return fetch(input, init).then((response) => {
-			// 					// Capture any new session token if provided
-			// 					const newSession = response.headers.get('woocommerce-session');
-			// 					if (newSession) {
-			// 						currentSessionToken = newSession.replace('Session ', '');
-			// 						// console.log('New session from add to cart:', currentSessionToken);
-			// 					}
-			// 					addToCartResponse = response;
-			// 					return response;
-			// 				});
-			// 			}
-			// 		}
-			// 	)
-			// 	.toPromise();
 
 			const addToCartResult = await client
 				.mutation(

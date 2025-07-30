@@ -1,0 +1,95 @@
+{
+	"pt": [
+		{
+			"name": "Queijos",
+			"uri": "/harmonizacoes/queijos/",
+			"count": 42,
+			"image": {
+				"url": null,
+				"altText": null
+			}
+		},
+		{
+			"name": "Carnes Vermelhas",
+			"uri": "/harmonizacoes/carnes-vermelhas/",
+			"count": 37,
+			"image": {
+				"url": "https://braaay.com/wp-content/uploads/2025/07/carnes-vermelhas.jpg",
+				"altText": "carnes-vermelhas"
+			}
+		},
+		{
+			"name": "Massas",
+			"uri": "/harmonizacoes/massas/",
+			"count": 32,
+			"image": {
+				"url": null,
+				"altText": null
+			}
+		},
+		{
+			"name": "Peixes e Frutos do Mar",
+			"uri": "/harmonizacoes/peixes-e-frutos-do-mar/",
+			"count": 24,
+			"image": {
+				"url": null,
+				"altText": null
+			}
+		},
+		{
+			"name": "Carnes Brancas",
+			"uri": "/harmonizacoes/carnes-brancas/",
+			"count": 14,
+			"image": {
+				"url": null,
+				"altText": null
+			}
+		},
+		{
+			"name": "Risotos",
+			"uri": "/harmonizacoes/risotos/",
+			"count": 12,
+			"image": {
+				"url": "https://braaay.com/wp-content/uploads/2024/10/risoto-harmonizacoes.png",
+				"altText": "risoto-harmonizacoes"
+			}
+		},
+		{
+			"name": "Pizzas",
+			"uri": "/harmonizacoes/pizzas/",
+			"count": 9,
+			"image": {
+				"url": null,
+				"altText": null
+			}
+		},
+		{
+			"name": "Entrada Petiscos",
+			"uri": "/harmonizacoes/entrada-petiscos/",
+			"count": 7,
+			"image": {
+				"url": null,
+				"altText": null
+			}
+		},
+		{
+			"name": "Culinária Japonesa",
+			"uri": "/harmonizacoes/culinaria-japonesa/",
+			"count": 3,
+			"image": {
+				"url": "https://braaay.com/wp-content/uploads/2024/08/culinaria-japonesa.webp",
+				"altText": "culinaria-japonesa"
+			}
+		},
+		{
+			"name": "Hambúrguer",
+			"uri": "/harmonizacoes/hamburguer/",
+			"count": 3,
+			"image": {
+				"url": null,
+				"altText": null
+			}
+		}
+	],
+	"uy": []
+}

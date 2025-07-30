@@ -12,6 +12,7 @@
 	import DrawerCategories from './DrawerCategories.svelte';
 	import DrawerAccount from './DrawerAccount.svelte';
 	import DrawerAccountLoggedIn from './DrawerAccountLoggedIn.svelte';
+	import DrawerPairings from './DrawerPairings.svelte';
 </script>
 
 <div
@@ -42,6 +43,10 @@
 		{:else if drawerState.currentSubmenu === 'grapes'}
 			<div in:fly={{ x: 300, duration: 300, easing: quintOut }} class=" overflow-y-auto">
 				<DrawerUvas />
+			</div>
+		{:else if drawerState.currentSubmenu === 'pairings'}
+			<div in:fly={{ x: 300, duration: 300, easing: quintOut }} class=" overflow-y-auto">
+				<DrawerPairings />
 			</div>
 		{:else if drawerState.currentSubmenu === 'wines'}
 			<div in:fly={{ x: 300, duration: 300, easing: quintOut }} class=" overflow-y-auto">

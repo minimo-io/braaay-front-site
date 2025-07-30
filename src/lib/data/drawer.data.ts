@@ -9,7 +9,8 @@ import {
 	Store,
 	Factory,
 	CalendarDays,
-	Hop
+	Hop,
+	HandPlatter
 } from '@lucide/svelte';
 import type { DrawerData } from '$lib/types';
 // pre-fetched data
@@ -32,6 +33,12 @@ export const drawerData = {
 			name: 'Uvas',
 			icon: Grape,
 			subMenu: true
+		} as DrawerData,
+		{
+			id: 'pairings',
+			name: 'Harmonizações',
+			subMenu: true,
+			icon: HandPlatter
 		} as DrawerData,
 		// {
 		// 	id: 'organic',

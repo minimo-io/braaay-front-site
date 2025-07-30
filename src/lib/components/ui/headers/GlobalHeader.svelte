@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	// import { onMount } from 'svelte';
 	import { drawerState, toggleDrawer } from '$stores/drawerState.state.svelte';
-	import { X, Search, CircleUser, Heart, AlignJustify, User, Circle, Check } from '@lucide/svelte';
+	import { X, CircleUser, Heart, AlignJustify, Check } from '@lucide/svelte';
 
 	import SecondaryMenuGeneral from '$components/ui/menues/SecondaryMenuGeneral.svelte';
 	import SecondaryMenuBlog from '$components/ui/menues/SecondaryMenuBlog.svelte';
@@ -38,17 +38,6 @@
 	let totalCartAmount = $state(0);
 	cart.subscribe((cart) => {
 		totalCartAmount = cart.items.reduce((count, item) => count + item.quantity, 0);
-	});
-
-	// Effect to control page scrolling
-	$effect(() => {
-		if (drawerState.active) {
-			window.scrollTo({
-				top: 0,
-				behavior: 'smooth' // Use 'auto' instead of 'smooth' for instant scrolling
-			});
-		}
-		document.body.style.overflow = drawerState.active ? 'hidden' : '';
 	});
 </script>
 

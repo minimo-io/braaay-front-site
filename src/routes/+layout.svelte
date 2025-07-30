@@ -13,7 +13,7 @@
 	import Header from '$components/layout/Header.svelte';
 
 	import Drawer from '$components/ui/drawer/Drawer.svelte';
-	import { closeDrawer } from '$lib/stores/drawerState.state.svelte';
+	import { closeDrawer, drawerState } from '$lib/stores/drawerState.state.svelte';
 
 	import { isAuthenticated, requiresAuth } from '$lib/graphql/auth';
 	import { localizeHref } from '$lib/paraglide/runtime';
@@ -99,6 +99,14 @@
 			if (timer) clearTimeout(timer);
 			overlayActive = false;
 		}
+		// Drawer state scroll control and smooth click
+		if (drawerState.active) {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth' // Use 'auto' instead of 'smooth' for instant scrolling
+			});
+		}
+		document.body.style.overflow = drawerState.active ? 'hidden' : '';
 	});
 </script>
 

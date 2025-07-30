@@ -16,6 +16,7 @@
 	import popularProducts from '$lib/data/jsons/popular-products.json';
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
+	import { launchToast } from '$lib/utils';
 
 	import { Calendar, ChefHat, MapPin } from '@lucide/svelte';
 
@@ -85,7 +86,7 @@
 					class="rounded-lg w-full h-auto"
 				/>
 				<a
-					href="https://www.instagram.com/p/C-Vex79MV3k/"
+					href="https://www.instagram.com/reel/DDLCPIdPzql/"
 					target="_blank"
 					rel="nofollow noopener"
 					class="play-button not-hover-effect"
@@ -296,7 +297,12 @@
 			experiências."
 		>
 			{#snippet button()}
-				<Button title="Ver todos" size="md" type="sun" url="/" />
+				<Button
+					title="Ver todos"
+					size="md"
+					type="sun"
+					action={() => launchToast(m.soon(), 'info', 2000)}
+				/>
 			{/snippet}
 		</TitleSection>
 

@@ -198,7 +198,7 @@
 					onclick={() => {
 						window.location.href = `${AppConfig.whatsappLink}?text=Olá,%20quero%20conhecer%20sobre%20a%20pré-venda%20do%20vinho%20${product.title}`;
 					}}
-					class="px-8 py-2 text-white rounded-lg uppercase font-roboto text-[13px] tracking-[2.5px] text-center w-full md:w-auto !bg-green-dark font-semibold"
+					class="px-8 py-2 text-white rounded-lg uppercase font-roboto text-[13px] tracking-[2.5px] text-center w-full !bg-green-dark font-semibold"
 					style="background-color: var(--bry-current-color)"
 				>
 					{m.availableViaWhatsapp()}
