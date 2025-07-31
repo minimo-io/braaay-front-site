@@ -1,7 +1,7 @@
 <!-- src/lib/components/ui/checkout/CheckoutCartSummary.svelte -->
 <script lang="ts">
 	import Divider from '../dividers/Divider.svelte';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { clearAllCoupons } from '$stores/cart.store.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { correctPrice } from '$lib/utils';
@@ -189,10 +189,10 @@
 			>
 		</div>
 		<a
-			href="/"
+			href={getLocale() == 'pt' ? localizeHref('/vinhos/') : localizeHref('/uy/cervezas/')}
 			class="bg-white text-xs block text-center font-roboto text-grey-blueish py-2 px-4 rounded-full w-full mt-2"
 		>
-			Continuar comprando
+			{m.continueShopping()}
 		</a>
 	</div>
 </div>
