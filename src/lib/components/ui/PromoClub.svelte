@@ -7,12 +7,13 @@
 		$props();
 </script>
 
-{#if isSquare}
-	<!-- Mostly used on mobile -->
-	<img class={[isRounded && 'rounded-lg']} src="/images/cart-promo-mobile.jpg" alt="cart-promo" />
+<div class="animate__animate animate__pulse animate__infinite block relative">
+	{#if isSquare}
+		<!-- Mostly used on mobile -->
+		<img class={[isRounded && 'rounded-lg']} src="/images/cart-promo-mobile.jpg" alt="cart-promo" />
 
-	<!-- FUTURE CLUB INVITATION -->
-	<!-- <div class="border bg-white rounded-md border-sun shadow-md p-6 max-w-sm md:mt-2">
+		<!-- FUTURE CLUB INVITATION -->
+		<!-- <div class="border bg-white rounded-md border-sun shadow-md p-6 max-w-sm md:mt-2">
 		<div class="text-center">
 			<h2 class="text-xl tracking-widest text-sun font-prata flex justify-center scale-90">
 				<Sparkle class="pr-1" />
@@ -41,11 +42,15 @@
 			</p>
 		</div>
 	</div> -->
-{:else}
-	<!-- Horizontal -->
-	<img class={[isRounded && 'rounded-lg']} src="/images/cart-promo-desktop.jpg" alt="cart-promo" />
-	<!-- FUTURE CLUB INVITATION -->
-	<!-- <div
+	{:else}
+		<!-- Horizontal -->
+		<img
+			class={[isRounded && 'rounded-lg']}
+			src="/images/cart-promo-desktop.jpg"
+			alt="cart-promo"
+		/>
+		<!-- FUTURE CLUB INVITATION -->
+		<!-- <div
 		class="border order-2 bg-white rounded-md border-sun shadow-md p-6 mx-auto mt-6 mb-28 hidden md:block"
 	>
 		<div class="text-center">
@@ -77,4 +82,5 @@
 			</p>
 		</div>
 	</div> -->
-{/if}
+	{/if}
+</div>

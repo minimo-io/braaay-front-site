@@ -20,18 +20,18 @@
 	// CPF Mask
 	let cpfMask: any;
 	let cpfInputElement: HTMLInputElement;
-	let cpfValue = $state(customer?.cpf || '06515267797');
+	let cpfValue = $state(customer?.cpf || '');
 	const cpfPlaceholder = '000.000.000-00';
 
 	// Email
-	let emailValue = $state(customer?.email || 'test@test.com');
+	let emailValue = $state(customer?.email || '');
 
 	// No longer using emailMask
-	let firstName = $state(customer?.firstName || 'Pepe');
-	let lastName = $state(customer?.lastName || 'Gonzales');
+	let firstName = $state(customer?.firstName || '');
+	let lastName = $state(customer?.lastName || '');
 
 	// Date Mask
-	let birthDateValue = $state(customer?.birthDate || '02/01/1988');
+	let birthDateValue = $state(customer?.birthDate || '');
 	let birthDateInputElement: HTMLInputElement;
 	let birthDateMask: any;
 	const datePlaceholder = 'DD/MM/AAAA';
@@ -39,7 +39,7 @@
 	// phone imask
 	let phoneMask: any;
 	let phoneInputElement: HTMLInputElement;
-	let phoneValue = $state(customer?.telephone || '11966090456');
+	let phoneValue = $state(customer?.telephone || '');
 	// const phonePlaceholderLandline = '(00) 0000-0000';
 	const phonePlaceholderMobile = '(00) 0 0000-0000';
 

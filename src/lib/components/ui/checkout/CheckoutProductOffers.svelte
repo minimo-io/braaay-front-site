@@ -26,9 +26,10 @@
 </script>
 
 {#if onSaleForLang.length}
-	<div class="flex items-center justify-between mb-2 pl-2">
+	<div class="flex items-center justify-between mb-2 pl-2 mt-3">
 		<div class="uppercase font-bold font-roboto text-sm">🎉&nbsp;&nbsp;{m.superOffers()}</div>
-		<div class="flex items-center">
+
+		<!-- <div class="flex items-center">
 			<PrevNextButton
 				moveBackward={true}
 				action={() => {
@@ -41,7 +42,7 @@
 					alert("Let's move forward");
 				}}
 			/>
-		</div>
+		</div> -->
 	</div>
 
 	<div class="bg-yellow-light border-grey-light border rounded-lg border-dashed p-5 mb-2">

@@ -9,6 +9,8 @@
 	"searching": "Pesquisando...",
 	"sending": "Enviando...",
 	"back": "Voltar",
+	"backToCart": "Voltar ao carrinho",
+
 	"copy": "Copiar",
 	"copiedToClipboard": "Copiado para a área de transferência",
 	"copiedError": "Erro ao copiar:",
@@ -80,6 +82,7 @@
 	"discountUpdated": "Desconto atualizado!",
 
 	"continue": "Continuar",
+	"continueShopping": "Continuar comprando",
 
 	"addYourZipCode": "Digite seu CEP",
 

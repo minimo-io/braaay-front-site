@@ -31,13 +31,14 @@
 				couponCode = '';
 				closeModal();
 			} else {
-				error = result.error || 'Error inesperado com o código do cupom';
-				console.error(result.error);
-				launchToast(
-					`Error: ${stripHtml(result.error?.replaceAll('&#82;&#36;', 'R$') ?? '')}`,
-					'error',
-					3000
-				);
+				let errorDetails =
+					result.error?.replaceAll('[GraphQL] ', '') ?? 'Error inesperado com o código do cupom';
+
+				errorDetails = stripHtml(errorDetails);
+				errorDetails = errorDetails.replaceAll('&#82;&#36;', 'R$');
+
+				console.error(errorDetails);
+				launchToast(`Error: ${errorDetails}`, 'error', 3000);
 			}
 		} catch (err) {
 			const errorMessage = err instanceof Error ? err.message : String(err);

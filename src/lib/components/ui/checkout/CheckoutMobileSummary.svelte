@@ -1,20 +1,53 @@
+<!-- src/lib/components/ui/checkout/CheckoutMobileSummary.svelte -->
 <script lang="ts">
-	import { CircleChevronDown, ShoppingBag } from '@lucide/svelte';
+	import { CircleChevronDown, CircleChevronUp, ShoppingBag, Gift } from '@lucide/svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages';
-	import { correctPrice } from '$lib/utils';
+	import { correctPrice, subtractPercentage } from '$lib/utils';
 	import { onMount } from 'svelte';
-	import type { PaymentMethod } from '$lib/types';
+	import type { DeliveryUIType, PaymentMethod, ShippingOption } from '$lib/types';
+	import Divider from '../dividers/Divider.svelte';
+	import { clearAllCoupons } from '$stores/cart.store.svelte';
+	import MoreInfoButton from '../buttons/MoreInfoButton.svelte';
+	import { toggleLoader } from '$stores/loaderStore.state.svelte';
+	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
+	import { COUPON_CLEAR_ALL } from '$lib/graphql/mutations';
+	import Button from '../buttons/Button.svelte';
+	import { openModal } from '$stores/modalState.state.svelte';
+	import CouponForm from '../forms/couponForm.svelte';
+	import type { Component } from 'svelte';
 
 	interface Props {
 		cartTotal: number;
+		cartSubTotal: number;
+		items: number;
+		shippingAddress: ShippingOption | undefined;
+		deliveryType: DeliveryUIType | null;
+		couponsCount: number;
+		cartDiscounts: number;
 		paymentMethodSelected: PaymentMethod | undefined;
 	}
 
-	let { cartTotal, paymentMethodSelected }: Props = $props();
+	let {
+		items,
+		cartTotal,
+		cartSubTotal,
+		shippingAddress,
+		deliveryType,
+		couponsCount,
+		cartDiscounts,
+		paymentMethodSelected
+	}: Props = $props();
+
+	// Same calculation as desktop component
+	let cartTotalMinus5 = $derived(subtractPercentage(cartTotal, 5));
 
 	// State to track if the component should be fixed
 	let isFixed = $state(false);
+	// State to track if details are expanded
+	let isExpanded = $state(false);
+	// Flag to prevent scroll handler from closing when we're intentionally opening
+	let isIntentionallyOpening = $state(false);
 	// Reference to the component element
 	let componentElement: HTMLDivElement;
 	// Store the original position of the element
@@ -25,25 +58,51 @@
 
 	// Function to handle scroll events
 	function handleScroll() {
-		// Use window.scrollY to determine scroll position
 		if (window.scrollY > originalOffsetTop) {
+			// Close details when scrolling and make it fixed (unless we're intentionally opening)
+			if (!isIntentionallyOpening) {
+				isExpanded = false;
+			}
 			isFixed = true;
 		} else {
 			isFixed = false;
+			// Reset the flag when we're back to normal position
+			isIntentionallyOpening = false;
 		}
 	}
 
+	// Function to toggle details expansion
+	function toggleDetails() {
+		// If we're expanding from a fixed state, scroll to top first
+		if (!isExpanded && isFixed) {
+			isIntentionallyOpening = true;
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+			// Small delay to let the scroll complete before expanding
+			setTimeout(() => {
+				isExpanded = true;
+			}, 300);
+		} else {
+			isExpanded = !isExpanded;
+		}
+	}
+
+	// Calculate final total (same logic as desktop)
+	let finalTotal = $derived(() => {
+		if (paymentMethodSelected) {
+			return cartTotal + paymentMethodSelected.cost;
+		} else {
+			return cartTotalMinus5;
+		}
+	});
+
 	onMount(() => {
 		if (componentElement) {
-			// Get initial position and dimensions
 			originalOffsetTop = componentElement.offsetTop;
 			componentWidth = componentElement.offsetWidth;
 			componentHeight = componentElement.offsetHeight;
 
-			// Add scroll event listener
 			window.addEventListener('scroll', handleScroll);
 
-			// Clean up the event listener when component is destroyed
 			return () => {
 				window.removeEventListener('scroll', handleScroll);
 			};
@@ -52,34 +111,215 @@
 </script>
 
 <!-- Add a placeholder div that takes up space when the summary is fixed -->
-{#if isFixed}
+{#if isFixed && !isExpanded}
 	<div class="block md:hidden" style="height: {componentHeight}px;"></div>
 {/if}
 
-<!-- Resumo mobile -->
+<!-- Mobile Summary -->
 <div
 	bind:this={componentElement}
 	class="block md:hidden bg-white py-2 mb-4 px-5 border border-grey-lighter rounded-lg mx-3 transition-all duration-200"
-	class:fixed={isFixed}
-	class:top-0={isFixed}
-	class:left-0={isFixed}
-	class:right-0={isFixed}
-	class:z-50={isFixed}
-	class:mx-0={isFixed}
-	class:rounded-none={isFixed}
-	class:shadow-md={isFixed}
-	style={isFixed ? `width: calc(100%);` : ''}
+	class:fixed={isFixed && !isExpanded}
+	class:top-0={isFixed && !isExpanded}
+	class:left-0={isFixed && !isExpanded}
+	class:right-0={isFixed && !isExpanded}
+	class:z-50={isFixed && !isExpanded}
+	class:mx-0={isFixed && !isExpanded}
+	class:rounded-none={isFixed && !isExpanded}
+	class:shadow-md={isFixed && !isExpanded}
+	style={isFixed && !isExpanded ? `width: 100vw; margin-left: 0; margin-right: 0;` : ''}
 >
-	<a class="flex justify-between cursor-pointer" href={localizeHref('/cart/')}>
-		<p class="font-light text-[15px] self-center justify-center flex">
-			<ShoppingBag class="pr-1 h-4 aspect-1 self-center text-sun" />
-			<span class="font-bold font-roboto h-5 self-center">{m.cartSummary()}</span>
-		</p>
-		<p class="font-roboto self-center flex">
-			<span class="text-sm self-center font-bold"
-				>{m.currencySymbol()} {correctPrice(cartTotal)}</span
+	<!-- Summary Header (always visible) -->
+	<div class="w-full py-1">
+		<!-- Main summary line (clickable to toggle) -->
+		<div
+			class="flex justify-between items-center cursor-pointer"
+			onclick={toggleDetails}
+			role="button"
+			tabindex="0"
+			onkeydown={(e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					toggleDetails();
+				}
+			}}
+		>
+			<div class="flex items-center">
+				<ShoppingBag class="h-4 w-4 mr-2 text-sun flex-shrink-0" />
+				<span class="font-bold font-roboto text-[15px]">{m.cartSummary()}</span>
+			</div>
+			<div class="flex items-center gap-2">
+				<div class="text-right">
+					<div class="font-roboto font-bold text-sm">
+						{m.currencySymbol()}
+						{correctPrice(finalTotal())}
+					</div>
+					{#if !paymentMethodSelected}
+						<div class="text-xs text-[#28BA48] font-bold leading-tight">no Pix</div>
+					{/if}
+				</div>
+				{#if isExpanded}
+					<CircleChevronUp class="h-5 w-5 text-sun flex-shrink-0" />
+				{:else}
+					<CircleChevronDown class="h-5 w-5 text-sun flex-shrink-0" />
+				{/if}
+			</div>
+		</div>
+
+		<!-- Cart button row (visible only when collapsed and not fixed) -->
+		{#if !isExpanded && !isFixed}
+			<div class="flex justify-center mt-2">
+				<a
+					href={localizeHref('/cart/')}
+					class="w-full py-2 text-xs bg-grey-background text-blue border border-grey-lighter rounded-md hover:bg-grey-light transition-colors text-center"
+				>
+					{m.backToCart()}
+				</a>
+			</div>
+		{/if}
+	</div>
+
+	<!-- Expanded Details (same as desktop component) -->
+	{#if isExpanded}
+		<div class="mt-4 pt-3 border-t border-grey-lighter">
+			<!-- Sub-total -->
+			<div class="flex justify-between mt-2">
+				<p class="font-light text-[15px] self-center">
+					Sub-total ({items} item{items > 1 ? 's' : ''})
+				</p>
+				<p class="font-roboto self-center">{m.currencySymbol()} {correctPrice(cartSubTotal)}</p>
+			</div>
+
+			<!-- Divider -->
+			<div class="my-4 border-t border-t-grey-lighter"></div>
+
+			<!-- Coupons -->
+			<div class="flex justify-between items-center">
+				<div class="!font-light font-roboto text-[15px] self-center flex flex-col">
+					{m.discountCouponTitle()}
+					{#if couponsCount >= 1}
+						<MoreInfoButton
+							title={m.remove()}
+							action={async () => {
+								toggleLoader();
+								try {
+									await getUrqlClient().client.mutation(COUPON_CLEAR_ALL, {}).toPromise();
+								} catch (err) {
+									console.error('Failed to clear coupons from remote server', err);
+								}
+								clearAllCoupons();
+								toggleLoader();
+							}}
+							customStyles="w-fit !ml-0 mt-2"
+						/>
+					{/if}
+				</div>
+
+				{#if couponsCount < 1}
+					<Button
+						title={m.add()}
+						width="130px"
+						size="sm-short"
+						type="grey"
+						borderDark={true}
+						customPx="max-h-min"
+						action={() => {
+							openModal({
+								header: 'Adicionar cupom',
+								content: CouponForm as Component
+							});
+						}}
+					>
+						{#snippet icon()}
+							<Gift class="lucide-button" />
+						{/snippet}
+					</Button>
+				{:else}
+					<span class="font-roboto text-red-dark">
+						- {m.currencySymbol()}
+						{correctPrice(cartDiscounts)}
+					</span>
+				{/if}
+			</div>
+
+			<!-- Divider -->
+			<div class="my-4 border-t border-t-grey-lighter"></div>
+
+			<!-- Shipping costs -->
+			<div class="flex justify-between mt-2">
+				<p class="font-light text-[15px] self-center">Envío</p>
+				{#if deliveryType == 'PICKUP'}
+					<p class="font-roboto self-center">
+						{m.currencySymbol()}
+						{correctPrice(0)}
+					</p>
+				{:else if shippingAddress}
+					<p class="font-roboto self-center">
+						{m.currencySymbol()}
+						{correctPrice(parseFloat(shippingAddress.cost))}
+					</p>
+				{:else}
+					<p class="font-roboto self-center">A calcular</p>
+				{/if}
+			</div>
+
+			<!-- Payment method discount -->
+			{#if paymentMethodSelected?.cost}
+				<div class="my-4 border-t border-t-grey-lighter"></div>
+				<div class="flex justify-between mt-2">
+					<p class="font-light text-[15px] self-center">
+						Desconto {paymentMethodSelected.title}
+					</p>
+					<p class="font-roboto self-center text-red-dark">
+						{m.currencySymbol()}
+						{correctPrice(paymentMethodSelected.cost)}
+					</p>
+				</div>
+			{:else if paymentMethodSelected == undefined}
+				<div class="my-4 border-t border-t-grey-lighter"></div>
+				<div class="flex justify-between mt-2">
+					<p class="font-light text-[15px] self-center">Desconto PIX</p>
+					<p class="font-roboto self-center text-red-dark">
+						{m.currencySymbol()} -{correctPrice(cartTotal - cartTotalMinus5)}
+					</p>
+				</div>
+			{/if}
+
+			<Divider color="blue" extraClasses="my-4 !border-b-grey-lighter" />
+
+			<!-- Final Total -->
+			<div class="flex justify-between pt-1 mb-2">
+				<p class="font-roboto font-bold">Valor total</p>
+				<div class="flex flex-col font-roboto text-right font-bold">
+					{#if paymentMethodSelected}
+						{m.currencySymbol()} {correctPrice(cartTotal + paymentMethodSelected.cost)}
+					{:else}
+						<span class="font-bold text-[17px]">
+							{m.currencySymbol()}
+							{correctPrice(cartTotalMinus5)} no Pix
+						</span>
+						<span class="text-sm text-[#28BA48] font-bold leading-4">
+							ou 4x de {m.currencySymbol()} 5,99 sem juros<br />no cartão
+						</span>
+					{/if}
+				</div>
+			</div>
+
+			<!-- Action Buttons -->
+			<div class="py-2 mt-4 px-5 border border-grey-lighter rounded-full bg-blue text-white">
+				<a
+					href={localizeHref('/cart/')}
+					class="mt-0 block text-sm font-roboto hover:underline text-center"
+				>
+					{m.backToCart()}
+				</a>
+			</div>
+			<a
+				href="/"
+				class="bg-white text-xs block text-center font-roboto text-grey-blueish py-2 px-4 rounded-full w-full mt-2"
 			>
-			<CircleChevronDown class="pl-2 self-center text-sun" />
-		</p>
-	</a>
+				Continuar comprando
+			</a>
+		</div>
+	{/if}
 </div>

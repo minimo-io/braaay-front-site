@@ -5,6 +5,7 @@ import { localizeHref } from '$lib/paraglide/runtime';
 import { addCoupon, hasCoupon, removeCoupon } from '$stores/cart.store.svelte';
 import { toggleLoader } from '$stores/loaderStore.state.svelte';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
+import { stripHtml } from './html.util';
 import { launchToast } from './launchToast.util';
 
 export async function addCouponToCart() {
@@ -18,11 +19,12 @@ export async function addCouponToCart() {
 			.toPromise();
 
 		if (result.error && result.error.message) {
-			launchToast(
-				`Error: ${result.error.message.replaceAll('[GraphQL]', '').trim()}`,
-				'error',
-				3000
-			);
+			let errorMessage = result.error.message.replaceAll('[GraphQL]', '').trim();
+			errorMessage = stripHtml(errorMessage);
+			errorMessage = errorMessage.replaceAll('&#82;&#36;', 'R$');
+
+			console.error(errorMessage);
+			launchToast(`Error: ${errorMessage}`, 'error', 3000);
 		} else if (result.data.applyCoupon && result.data.applyCoupon.applied.code) {
 			// Coupon was appllied OK!
 			const couponCodeFromDb = result.data.applyCoupon.applied.code;

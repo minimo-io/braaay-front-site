@@ -1,3 +1,4 @@
+<!-- src/lib/components/ui/checkout/CheckoutCartSummary.svelte -->
 <script lang="ts">
 	import Divider from '../dividers/Divider.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
@@ -184,7 +185,7 @@
 		<div class="py-2 mt-4 px-5 border border-grey-lighter rounded-full bg-blue text-white">
 			<a
 				href={localizeHref('/cart/')}
-				class="mt-0 block text-sm font-roboto hover:underline text-center">Voltar ao carrinho</a
+				class="mt-0 block text-sm font-roboto hover:underline text-center">{m.backToCart()}</a
 			>
 		</div>
 		<a

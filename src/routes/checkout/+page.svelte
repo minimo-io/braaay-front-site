@@ -358,14 +358,26 @@
 <main>
 	<div class="max-w-screen-lg mx-[10px] md:mx-auto">
 		<div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-0 md:gap-7">
-			<div class="mt-8">
+			<div class="mt-5 md:mt-8">
+				<!-- Checkout page title -->
 				<div class="flex justify-start mb-3 mx-3 md:mx-1">
 					<h1 class="text-[19px] font-roboto font-extrabold ml-1">Checkout</h1>
 				</div>
 
 				<!-- On mobile -->
-				<CheckoutMobileSummary cartTotal={cartTotalAmount} {paymentMethodSelected} />
+				<!-- <CheckoutMobileSummary cartTotal={cartTotalAmount} {paymentMethodSelected} /> -->
+				<CheckoutMobileSummary
+					items={cartItemsCount}
+					cartTotal={cartTotalAmount}
+					cartSubTotal={cartSubTotalAmount}
+					shippingAddress={shippingOption}
+					{deliveryType}
+					{couponsCount}
+					{cartDiscounts}
+					{paymentMethodSelected}
+				/>
 
+				<!-- Starting stepped process -->
 				<div class="space-y-4 px-3 md:mb-24">
 					<!-- Delivery or Pickup -->
 					<CheckoutChooseDelivery initialValue={deliveryType} onUpdate={handleDeliveryTypeUpdate} />
@@ -374,14 +386,15 @@
 						<Divider color="blue" extraClasses="!border-b-grey-lighter my-7" />
 					</div>
 
-					<!-- Step 1: Client info -->
+					<!-- Step 1: Client info ---------------------------------------------------------------------- -->
 					{#if steps.step1 && !editStep1}
 						<StepOneDone {customer} onActionClick={onActionStepOneDone} />
 					{:else}
 						<StepOnePending {customer} onUpdate={onUpdateStepOne} />
 					{/if}
+					<!-- Step 1: End ------------------------------------------------------------------------------ -->
 
-					<!-- Step 2: Shipping address -->
+					<!-- Step 2: Shipping address ----------------------------------------------------------------- -->
 					{#if deliveryType == 'PICKUP'}
 						<!-- Pickup -->
 						<StepTwoPickup />
@@ -404,8 +417,9 @@
 					{:else}
 						<StepTwoWaiting />
 					{/if}
+					<!-- Step 2: End ------------------------------------------------------------------------------ -->
 
-					<!-- Step 3: Delivery options -->
+					<!-- Step 3: Delivery options ----------------------------------------------------------------- -->
 					{#if deliveryType == 'DELIVERY'}
 						{#if editStep3 || (steps.step1 && steps.step2 && !steps.step3)}
 							<StepThreePending
@@ -432,8 +446,9 @@
 							<StepThreeWaiting />
 						{/if}
 					{/if}
+					<!-- Step 3: End ------------------------------------------------------------------------------ -->
 
-					<!-- Form step 4 -->
+					<!-- Form step 4 ------------------------------------------------------------------------------ -->
 					{#if steps.step1 && steps.step2 && steps.step3}
 						{#key deliveryType}
 							<StepFourPending
@@ -505,10 +520,11 @@
 					{:else}
 						<StepFourWaiting {deliveryType} />
 					{/if}
+					<!-- Step 4: End ------------------------------------------------------------------------------ -->
 				</div>
 			</div>
 
-			<!-- Advertising -->
+			<!-- Desktop Summary & Advertising -->
 			<div class="mt-8">
 				<!-- Promo clube -->
 				<div class="hidden md:block mx-3 md:mx-auto">

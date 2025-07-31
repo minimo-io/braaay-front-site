@@ -11,9 +11,15 @@
 	import { Gift, Sparkle, Truck, X } from '@lucide/svelte';
 	import { openModal } from '$stores/modalState.state.svelte';
 	import CouponForm from '$components/ui/forms/couponForm.svelte';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import CartItemElement from '$components/ui/cart/CartItemElement.svelte';
-	import { addCouponToCart, correctPrice, stripHtml, subtractPercentage } from '$lib/utils';
+	import {
+		addCouponToCart,
+		correctPrice,
+		redirectHref,
+		stripHtml,
+		subtractPercentage
+	} from '$lib/utils';
 	import { MoreInfoButton } from '$components/ui/buttons';
 	import { COUPON_CLEAR_ALL } from '$lib/graphql/mutations';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
@@ -382,10 +388,10 @@
                         </div>
                     </div> -->
 					<Button
-						title="Continuar comprando"
+						title={m.continueShopping()}
 						size="sm"
 						type="light"
-						url={localizeHref('/')}
+						url={getLocale() == 'pt' ? localizeHref('/vinhos/') : localizeHref('/uy/cervezas/')}
 						tracking="normal"
 					/>
 				</div>
