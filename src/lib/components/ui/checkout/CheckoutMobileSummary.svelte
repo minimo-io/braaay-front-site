@@ -41,6 +41,7 @@
 
 	// Same calculation as desktop component
 	let cartTotalMinus5 = $derived(subtractPercentage(cartTotal, 5));
+	let totalCartAmountWithDiscounts = $derived(cartTotal - cartDiscounts);
 
 	// State to track if the component should be fixed
 	let isFixed = $state(false);
@@ -296,10 +297,19 @@
 					{:else}
 						<span class="font-bold text-[17px]">
 							{m.currencySymbol()}
-							{correctPrice(cartTotalMinus5)} no Pix
+							{correctPrice(cartTotalMinus5)} no
+							<span class="relative inline-block">
+								Pix
+								<span
+									class="pill pill-success text-xs px-2 py-0.5 absolute -top-[5px] left-2 ml-1 -translate-y-1/2 whitespace-nowrap scale-90 md:scale-100"
+								>
+									{m.cashDiscountValue()} OFF
+								</span>
+							</span>
 						</span>
 						<span class="text-sm text-[#28BA48] font-bold leading-4">
-							ou 4x de {m.currencySymbol()} 5,99 sem juros<br />no cartão
+							ou 4x de {m.currencySymbol()}
+							{correctPrice(totalCartAmountWithDiscounts / 4)} sem juros<br />no cartão
 						</span>
 					{/if}
 				</div>

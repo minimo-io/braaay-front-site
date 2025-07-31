@@ -15,8 +15,7 @@
 	import CouponForm from '../forms/couponForm.svelte';
 	import type { Component } from 'svelte';
 	import { Gift } from '@lucide/svelte';
-	import { subtractPercentage, calculateDiscountPercentage } from '$lib/utils';
-	import { AppConfig } from '$config';
+	import { subtractPercentage } from '$lib/utils';
 
 	interface Props {
 		items: number;
@@ -41,6 +40,7 @@
 	}: Props = $props();
 
 	let cartTotalMinus5 = $derived(subtractPercentage(cartTotal, 5));
+	let totalCartAmountWithDiscounts = $derived(cartTotal - cartDiscounts);
 	// let cartSubTotalMinus5 = $derived(subtractPercentage(cartSubTotal, 5));
 </script>
 
@@ -167,11 +167,20 @@
 					{cartTotal} - {cartTotalMinus5} -->
 					<span class="font-bold text-[17px]">
 						{m.currencySymbol()}
-						{correctPrice(cartTotalMinus5)} no Pix
+						{correctPrice(cartTotalMinus5)} no
+						<span class="relative inline-block">
+							Pix
+							<span
+								class="pill pill-success text-xs px-2 py-0.5 absolute -top-[5px] left-2 ml-1 -translate-y-1/2 whitespace-nowrap scale-90 md:scale-100"
+							>
+								{m.cashDiscountValue()} OFF
+							</span>
+						</span>
 					</span>
 
 					<span class="text-sm text-[#28BA48] font-bold leading-4">
-						ou 4x de {m.currencySymbol()} 5,99 sem juros
+						ou 4x de {m.currencySymbol()}
+						{correctPrice(totalCartAmountWithDiscounts / 4)} sem juros
 						<br />
 						no cartão
 						<!-- {#if AppConfig.cashbackEnabled}

@@ -8,18 +8,12 @@
 	import { cart, clearAllCoupons } from '$stores/cart.store.svelte';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import Divider from '$components/ui/dividers/Divider.svelte';
-	import { Gift, Sparkle, Truck, X } from '@lucide/svelte';
+	import { Gift, Truck, X } from '@lucide/svelte';
 	import { openModal } from '$stores/modalState.state.svelte';
 	import CouponForm from '$components/ui/forms/couponForm.svelte';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import CartItemElement from '$components/ui/cart/CartItemElement.svelte';
-	import {
-		addCouponToCart,
-		correctPrice,
-		redirectHref,
-		stripHtml,
-		subtractPercentage
-	} from '$lib/utils';
+	import { addCouponToCart, correctPrice, stripHtml, subtractPercentage } from '$lib/utils';
 	import { MoreInfoButton } from '$components/ui/buttons';
 	import { COUPON_CLEAR_ALL } from '$lib/graphql/mutations';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
@@ -298,7 +292,7 @@
 								<div class="flex justify-between items-center">
 									<span
 										class="font-bold text-[10px] mb-2 bg-blue w-fit py-1 px-2 rounded text-white uppercase"
-										>Estimativas de envio</span
+										>{m.shippingEstimates()}</span
 									>
 									<button onclick={() => (shippingDetails.details = [])}
 										><X class="h-3 m-0 p-0 ml-2 mb-2 text-grey-medium" /></button
@@ -327,7 +321,16 @@
 						<div class="flex flex-col font-roboto text-right">
 							<span class="font-bold text-[17px]"
 								>{m.currencySymbol()}
-								{correctPrice(totalCartAmountWithDiscountsAndPixDiscount)} no Pix <br />+ Envio</span
+								{correctPrice(totalCartAmountWithDiscountsAndPixDiscount)} no
+								<span class="relative inline-block">
+									Pix
+									<span
+										class="pill pill-success text-xs px-2 py-0.5 absolute -top-[5px] left-2 ml-1 -translate-y-1/2 whitespace-nowrap scale-90 md:scale-100"
+									>
+										{m.cashDiscountValue()} OFF
+									</span>
+								</span>
+								<br />+ Envio</span
 							>
 							<span class="text-sm text-[#28BA48] font-bold leading-4 pt-2">
 								ou 4x de {m.currencySymbol()}

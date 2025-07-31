@@ -165,6 +165,38 @@ html {
 		@apply !max-w-[100%] !h-full;
 	}
 }
+
+@layer components {
+	.pill {
+		/* Base styles using Tailwind's utility classes */
+		@apply inline-flex items-center justify-center gap-1 
+           rounded-full bg-blue px-2 py-1 
+           text-xs font-medium text-white
+           shadow-sm border;
+	}
+
+	/* Variant overrides – all use @apply for consistency */
+	.pill-primary {
+		@apply bg-sun text-white;
+	}
+
+	/* .pill-success {
+		@apply bg-green-100 text-green-800;
+	}
+
+	.pill-warning {
+		@apply bg-yellow-100 text-yellow-800;
+	}
+
+	.pill-danger {
+		@apply bg-red-100 text-red-800;
+	}
+
+	.pill-neutral {
+		@apply bg-gray-100 text-gray-800;
+	} */
+}
+
 @layer components {
 	.btn {
 		@apply py-2 px-5 bg-white text-blue rounded-full border border-grey-lighter transition-all duration-100 hover:ring-grey-medium font-roboto text-xs tracking-widest;

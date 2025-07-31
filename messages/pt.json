@@ -22,6 +22,7 @@
 	"customer": "Cliente",
 	"payment": "Pagamento",
 	"shipping": "Envío",
+	"shippingEstimates": "Estimativas de envio",
 	"products": "Produtos",
 	"qty": "Qde",
 
@@ -35,6 +36,7 @@
 	"inStock": "Em estoque",
 	"maxStockIs": "Disponíveis {maxStock} produtos em estoque. Para quantidade superior, favor entrar em contato.",
 
+	"cashDiscountValue": "5%",
 	"cashDiscountText": "NO PIX (5% OFF)",
 
 	"onSale": "EM OFERTA",

@@ -3,6 +3,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import { DeliveryUIType } from '$lib/types';
 	import { MapPin } from '@lucide/svelte';
+	import { MoreInfoButton } from '../buttons';
 	interface Props {
 		onUpdate: (deliveryType: DeliveryUIType) => void;
 		initialValue?: DeliveryUIType | null; // Allow null/undefined initial value
@@ -40,14 +41,25 @@
 			class="w-5 h-5 text-sun border-grey-medium focus:ring-sun cursor-pointer"
 		/>
 		<span class="flex flex-col">
-			<div class="flex text-sm">
-				Retirada no Showroom - São Paulo →
-				<div class="flex items-center">
+			<div class="flex text-sm flex-col md:flex-row items-start md:items-center">
+				<span> Retirada no Showroom (São Paulo)</span>
+				<span class="hidden md:inline-block mr-1 ml-1">→</span>
+
+				<MoreInfoButton
+					title={m.viewOnMap()}
+					customStyles="!mx-0 my-1"
+					url={AppConfig.mapLink}
+					newTab={true}
+				/>
+
+				<!-- <div class="flex items-center -left-2 md:left-0 relative">
 					<MapPin class="h-3 !mx-0 !px-0" />
 					<a rel="nofollow noreferrer" target="_blank" href={AppConfig.mapLink}>{m.viewOnMap()}</a>
-				</div>
+				</div> -->
 			</div>
-			<span class="text-xs text-grey-medium"> Seg a Sex, das 09:00 às 18:30, exceto feriados </span>
+			<span class="text-xs text-grey-medium mt-[1px] md:mt-0">
+				Seg a Sex, das 09:00 às 18:30, exceto feriados
+			</span>
 		</span>
 	</label>
 </div>

@@ -22,6 +22,7 @@
 	"customer": "Cliente",
 	"payment": "Pago",
 	"shipping": "Envio",
+	"shippingEstimates": "Estimativa de envio",
 	"products": "Productos",
 	"qty": "Cant.",
 
@@ -35,7 +36,9 @@
 	"inStock": "Con stock",
 	"maxStockIs": "Tenemos {maxStock} producto en stock en este momento. Para más cantidad, contáctanos.",
 
+	"cashDiscountValue": "5%",
 	"cashDiscountText": "EN EFECTIVO (5% OFF)",
+
 	"addCoupon": "Agregar cupon",
 	"coupon": "Cupon",
 	"updatingDiscount": "Actualizando descuento...",

@@ -5,9 +5,10 @@
 		action?: () => void;
 		customStyles?: string;
 		url?: string;
+		newTab?: boolean;
 	}
 
-	let { title, action, customStyles = '', url = '#know-more' }: Props = $props();
+	let { title, action, customStyles = '', url = '#know-more', newTab = false }: Props = $props();
 
 	// This action conditionally delegates to smoothScroll
 	function conditionalSmoothScroll(node: HTMLElement) {
@@ -19,6 +20,7 @@
 
 <a
 	use:conditionalSmoothScroll
+	target={newTab ? '_blank' : null}
 	href={url}
 	onclick={(event) => {
 		if (action) {

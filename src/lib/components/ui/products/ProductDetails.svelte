@@ -137,7 +137,7 @@
 			{m.cashDiscountText()}
 		</h4>
 		{#if AppConfig.cashbackEnabled}
-			<MoreInfoButton title={clubMoreInfoText} customStyles="!mx-0 " url="/clube/" />
+			<MoreInfoButton title={clubMoreInfoText} customStyles="!mx-0 " url={localizeHref('/club/')} />
 		{/if}
 	</div>
 
