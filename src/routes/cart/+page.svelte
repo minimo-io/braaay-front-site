@@ -25,6 +25,7 @@
 	import { trackEvent } from '$components/analytics';
 	import { processCoupon } from '$lib/services';
 	import { launchToast } from '$lib/utils';
+	import PromoClub from '$components/ui/PromoClub.svelte';
 
 	// Cart amount
 	let hasItems = $state(false);
@@ -187,40 +188,8 @@
                                 Aproveite as ofertas
                             </h2> -->
 					<!-- Promo clube main -->
-					<div
-						class="border order-2 bg-white rounded-md border-sun shadow-md p-6 mx-auto mt-6 mb-28 hidden md:block"
-					>
-						<div class="text-center">
-							<h2 class="text-xl tracking-widest text-sun font-prata flex justify-center Xscale-90">
-								<Sparkle class="pr-1" />
-								<span>SEJA PASSPORT!</span>
-								<Sparkle class="pl-1" />
-							</h2>
-							<p class="text-lg font-semibold mt-2 leading-[23px] w-5/6 mx-auto">
-								Ganhe 10% em cashback, fretes grátis e mais!
-							</p>
-							<p class="text-xs text-grey-dark mt-3 leading-2 w-5/6 block mx-auto">
-								Junte-se ao APP do Clube e
-								<strong>Economize, Ganhe, Diverta-se com vinho!</strong>
-								Com cashbacks entre 5 e 10% em toda compra, 3 vinhos top todo mês + fretes grátis! Além
-								de experiências com outros Passport e compras coletivas!
-							</p>
-							<!-- <button class="bg-sun text-white font-medium py-1 px-4 rounded-full mt-4">
-                                Adicionar ao carrinho
-                            </button> -->
-							<div class="w-1/3 py-2 mx-auto">
-								<Button
-									title="Adicionar ao carrinho"
-									type="sun"
-									url={localizeHref('/club/')}
-									tracking="normal"
-									bold={false}
-								/>
-							</div>
-							<p class="text-xs text-gray-500 mt-2">
-								<a href={localizeHref('/club/')} class="text-blue-500 underline">Saiba mais</a>
-							</p>
-						</div>
+					<div class="rounded-2xl order-2 mt-2 hidden md:block">
+						<PromoClub isSquare={false} isRounded={true} />
 					</div>
 				</div>
 			</div>
@@ -388,38 +357,11 @@
 						{/if}
 					</div>
 				</div>
-				<!-- Promo clube lateral -->
-				<div
-					class="border bg-white rounded-md border-sun shadow-md p-6 max-w-sm mx-auto mt-6 md:hidden"
-				>
-					<div class="text-center">
-						<h2 class="text-xl tracking-widest text-sun font-prata flex justify-center scale-90">
-							<Sparkle class="pr-1" />
-							<span>SEJA PASSPORT!</span>
-							<Sparkle class="pl-1" />
-						</h2>
-						<p class="text-lg font-semibold mt-2 leading-[23px]">
-							Ganhe 10% em cashback, fretes grátis e mais!
-						</p>
-						<p class="text-xs text-grey-dark mt-3 leading-2">
-							Junte-se ao APP do Clube e
-							<strong>Economize, Ganhe, Diverta-se com vinho!</strong>
-							Com cashbacks entre 5 e 10% em toda compra, 3 vinhos top todo mês + fretes grátis! Além
-							de experiências com outros Passport e compras coletivas!
-						</p>
-						<div class="mx-11 py-2">
-							<Button
-								title="Adicionar ao carrinho"
-								type="sun"
-								url={localizeHref('/club/')}
-								tracking="normal"
-							/>
-						</div>
-						<p class="text-xs text-gray-500 mt-2">
-							<a href={localizeHref('/club/')} class="text-blue-500 underline">Saiba mais</a>
-						</p>
-					</div>
+				<!-- Promo clube lateral mobile -->
+				<div class="md:hidden mt-5">
+					<PromoClub isSquare={true} isRounded={true} />
 				</div>
+
 				<!-- Extra cart elements -->
 				<div class="mt-5">
 					<!-- <h2 class="text-[19px] font-prata ml-2 mb-4">Entrega grátis</h2>

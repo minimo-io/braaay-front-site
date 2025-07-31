@@ -27,7 +27,7 @@
 
 	import CheckoutMobileSummary from '$components/ui/checkout/CheckoutMobileSummary.svelte';
 	import CheckoutChooseDelivery from '$components/ui/checkout/CheckoutChooseDelivery.svelte';
-	import PromoClub from '$components/ui/checkout/PromoClub.svelte';
+	import PromoClub from '$components/ui/PromoClub.svelte';
 	import CheckoutCartSummary from '$components/ui/checkout/CheckoutCartSummary.svelte';
 
 	// Step 1
@@ -511,7 +511,9 @@
 			<!-- Advertising -->
 			<div class="mt-8">
 				<!-- Promo clube -->
-				<PromoClub />
+				<div class="hidden md:block mx-3 md:mx-auto">
+					<PromoClub isSquare={true} isRounded={true} />
+				</div>
 
 				<!-- Extra cart elements -->
 				<CheckoutCartSummary
