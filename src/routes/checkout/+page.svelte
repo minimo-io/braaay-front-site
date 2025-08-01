@@ -107,21 +107,39 @@
 	});
 
 	// Cart Stuff ------------------------------------------------------------------------------------------------------
+	// cart.subscribe((cart) => {
+	// 	cartItemsCount = cart.items.reduce((count, item) => count + item.quantity, 0);
+	// 	cartSubTotalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
+	// 	if (cart.coupons) {
+	// 		// couponsCount = cart.coupons.length;
+	// 		// for (const couponCode of cart.coupons) {
+	// 		// 	cartDiscounts = calculateDiscount(couponCode);
+	// 		// 	break; // just one coupon allowed
+	// 		// }
+	// 		couponsCount = cart.coupons.length;
+	// 		for (const coupon of cart.coupons) {
+	// 			cartDiscounts = coupon.discount;
+	// 			// couponName = coupon.code;
+	// 			break; // just one coupon allowed
+	// 		}
+	// 	}
+	// });
+
+	// Final solution for the cart totals not updating after removing coupon
 	cart.subscribe((cart) => {
 		cartItemsCount = cart.items.reduce((count, item) => count + item.quantity, 0);
 		cartSubTotalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
-		if (cart.coupons) {
-			// couponsCount = cart.coupons.length;
-			// for (const couponCode of cart.coupons) {
-			// 	cartDiscounts = calculateDiscount(couponCode);
-			// 	break; // just one coupon allowed
-			// }
+
+		if (cart.coupons && cart.coupons.length > 0) {
 			couponsCount = cart.coupons.length;
 			for (const coupon of cart.coupons) {
 				cartDiscounts = coupon.discount;
-				// couponName = coupon.code;
 				break; // just one coupon allowed
 			}
+		} else {
+			// This is the key fix - explicitly set to 0 when no coupons
+			couponsCount = 0;
+			cartDiscounts = 0;
 		}
 	});
 
@@ -130,6 +148,13 @@
 			parseFloat(shippingOption && deliveryType != 'PICKUP' ? shippingOption.cost : '0') -
 			cartDiscounts
 	);
+
+	// Another solution for the cart totals not updating after removing coupon
+	// $effect(() => {
+	// 	if (couponsCount === 0) {
+	// 		cartDiscounts = 0;
+	// 	}
+	// });
 
 	//  End-of Cart Stuff ----------------------------------------------------------------------------------------------
 

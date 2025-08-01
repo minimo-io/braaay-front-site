@@ -4,7 +4,7 @@
 	import { closeModal } from '$stores/modalState.state.svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 
-	import { isNumber, launchToast, stripHtml } from '$lib/utils';
+	import { launchToast, stripHtml } from '$lib/utils';
 	import { processCoupon } from '$lib/services/couponsService';
 
 	// let { initialValue = '' } = $props<{ initialValue?: string }>();

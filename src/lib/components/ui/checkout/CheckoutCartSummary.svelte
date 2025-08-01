@@ -134,7 +134,8 @@
 
 			<div class="flex justify-between mt-2">
 				<p class="font-light text-[15px] self-center">
-					Desconto {paymentMethodSelected.title}
+					{m.discount()}
+					{paymentMethodSelected.title}
 				</p>
 				<p class="font-roboto self-center text-red-dark">
 					{m.currencySymbol()}
@@ -146,9 +147,10 @@
 			<div class="my-4 border-t border-t-grey-lighter"></div>
 
 			<div class="flex justify-between mt-2">
-				<p class="font-light text-[15px] self-center">Desconto PIX</p>
+				<p class="font-light text-[15px] self-center">{m.cashDiscount()}</p>
 				<p class="font-roboto self-center text-red-dark">
 					{m.currencySymbol()}
+
 					-{correctPrice(cartTotal - cartTotalMinus5)}
 				</p>
 			</div>
