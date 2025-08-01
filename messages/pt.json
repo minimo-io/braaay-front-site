@@ -24,6 +24,9 @@
 	"shipping": "Envío",
 	"shippingEstimates": "Estimativas de envio",
 	"shippingOptions": "Opções de envio",
+	"loadingCheckout": "Carregando checkout...",
+	"syncingCart": "Sincronizando carrinho...",
+	"waiting": "Aguarde um momento",
 	"products": "Produtos",
 	"qty": "Qde",
 	"in": "no",
@@ -189,5 +192,8 @@
 
 	"sendToHomeOrWork": "Enviar para casa ou trabalho",
 	"pickup": "Retirada no Showroom (São Paulo)",
-	"pickupWindow": "Seg a Sex, das 09:00 às 18:30, exceto feriados"
+	"pickupWindow": "Seg a Sex, das 09:00 às 18:30, exceto feriados",
+
+	"processingOrder": "Processando pedido...",
+	"completingPurchase": "Finalizando sua compra"
 }

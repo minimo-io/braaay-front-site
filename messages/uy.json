@@ -24,6 +24,10 @@
 	"shipping": "Envio",
 	"shippingEstimates": "Estimativa de envio",
 	"shippingOptions": "Opciones de envio",
+	"loadingCheckout": "Cargando checkout...",
+	"syncingCart": "Sincronizando el carrito...",
+	"waiting": "Aguarde un instante",
+
 	"products": "Productos",
 	"qty": "Cant.",
 	"in": "en",
@@ -185,5 +189,8 @@
 	"superOffers": "Ofertas imperdibles",
 	"sendToHomeOrWork": "Enviar a casa o al trabajo",
 	"pickup": "Retirada en Cordón (Montevideo)",
-	"pickupWindow": "Lunes a Viernes, das 09:00 às 18:00, excepto feriados"
+	"pickupWindow": "Lunes a Viernes, das 09:00 às 18:00, excepto feriados",
+
+	"processingOrder": "Procesando el pedido...",
+	"completingPurchase": "Finalizando su compra"
 }

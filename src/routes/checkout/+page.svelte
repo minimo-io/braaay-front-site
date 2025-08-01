@@ -124,6 +124,7 @@
 	});
 
 	async function initializeCheckout() {
+		// toggleLoader();
 		isInitializing = true;
 		try {
 			if (isAuthenticated()) {
@@ -141,6 +142,7 @@
 			launchToast('Houve um erro tentando obter os dados do cliente', 'error');
 			goto(localizeHref('/cart/'));
 		} finally {
+			// toggleLoader();
 			isInitializing = false;
 		}
 	}
@@ -436,7 +438,7 @@
 					<div
 						class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"
 					></div>
-					<p class="text-gray-600">Carregando checkout...</p>
+					<p class="text-gray-600">{m.loadingCheckout()}</p>
 				</div>
 			</div>
 		</div>
@@ -450,26 +452,32 @@
 
 					<!-- Loading overlay for cart synchronization -->
 					{#if isSynchronizingCart}
-						<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+						<div
+							class="fixed inset-0 flex items-center justify-center z-50"
+							style="background-color: rgba(33, 38, 128, 0.2);"
+						>
 							<div class="bg-white p-6 rounded-lg shadow-lg text-center">
 								<div
 									class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"
 								></div>
-								<p class="text-gray-800">Sincronizando carrinho...</p>
-								<p class="text-sm text-gray-600 mt-2">Aguarde um momento</p>
+								<p class="text-gray-800">{m.syncingCart()}</p>
+								<p class="text-sm text-gray-600 mt-2">{m.waiting()}</p>
 							</div>
 						</div>
 					{/if}
 
 					<!-- Loading overlay for order processing -->
 					{#if isProcessingOrder}
-						<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+						<div
+							class="fixed inset-0 flex items-center justify-center z-50"
+							style="background-color: rgba(33, 38, 128, 0.2);"
+						>
 							<div class="bg-white p-6 rounded-lg shadow-lg text-center">
 								<div
 									class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"
 								></div>
-								<p class="text-gray-800">Processando pedido...</p>
-								<p class="text-sm text-gray-600 mt-2">Finalizando sua compra</p>
+								<p class="text-gray-800">{m.processingOrder()}</p>
+								<p class="text-sm text-gray-600 mt-2">{m.completingPurchase()}</p>
 							</div>
 						</div>
 					{/if}
@@ -549,7 +557,7 @@
 						{/if}
 
 						{#if steps.step1 && steps.step2 && steps.step3}
-							{#key deliveryType}
+							{#key `${deliveryType || 'none'}-${cartTotalAmount}-${cartDiscounts}-${couponsCount}`}
 								<StepFourPending
 									{deliveryType}
 									{sessionToken}
