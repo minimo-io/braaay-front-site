@@ -1,77 +1,74 @@
-<!-- src/lib/components/ui/checkout/StepThreePending.svelte -->
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 	import Button from '../buttons/Button.svelte';
 	import { Lock } from '@lucide/svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { UPDATE_GUEST_SHIPPING_ADDRESS } from '$lib/graphql/mutations/shipping-update.mutation';
 	import { GET_SHIPPING_ESTIMATES } from '$lib/graphql/mutations/shipping-estimates.mutation';
-	import type {
-		CartItem,
-		Customer,
-		CustomerAddress,
-		ShippingOption,
-		ShippingRate
-	} from '$lib/types';
+	import type { Customer, CustomerAddress, ShippingOption, ShippingRate } from '$lib/types';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { launchToast } from '$lib/utils';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
-	import { CART_ADD_ITEMS_MUTATION } from '$lib/graphql/mutations';
+	import { CART_ADD_ITEMS_MUTATION, EMPTY_CART_MUTATION } from '$lib/graphql/mutations';
 	import { cart } from '$stores/cart.store.svelte';
 
 	interface Props {
 		customer: Customer | undefined;
 		shippingAddress: CustomerAddress | null;
+		sessionToken: string | undefined; // The session token is now passed as a prop
 		onUpdate: (shippingOption: ShippingOption | undefined, sessionToken: string) => void;
 	}
-	let { customer, shippingAddress, onUpdate }: Props = $props();
+	let { customer, shippingAddress, sessionToken, onUpdate }: Props = $props();
 
 	let finalShippingDetails: ShippingRate[] = $state([]);
 	let finalShippingValueSelected = $state<ShippingOption>();
 	let loading = $state(false);
 	let error = $state('');
-	let currentSessionToken = $state('');
+
+	let currentSessionToken = $state(sessionToken);
 
 	onMount(async () => {
 		toggleLoader();
 		loading = true;
 		error = '';
-		// console.log('Get shipping options for...');
-		// console.log(shippingAddress);
 
 		try {
-			// Check ------------------------------------------
-			launchToast(`Obtendo parceiros...`, 'info', 2000);
-			const updateResult = await getUrqlClient()
-				.client.mutation(UPDATE_GUEST_SHIPPING_ADDRESS, {
-					input: {
-						shipping: {
-							postcode: shippingAddress!.postcode,
-							country: 'BR',
-							overwrite: true
+			// Step 1: Ensure a session token exists.
+			if (!currentSessionToken) {
+				const updateResult = await getUrqlClient()
+					.client.mutation(UPDATE_GUEST_SHIPPING_ADDRESS, {
+						input: {
+							shipping: {
+								postcode: shippingAddress!.postcode,
+								country: 'BR',
+								overwrite: true
+							}
 						}
-					}
-				})
-				.toPromise();
+					})
+					.toPromise();
 
-			if (updateResult.error) {
-				throw new Error(`Shipping update failed: ${updateResult.error.message}`);
+				if (updateResult.error) {
+					throw new Error(`Shipping update failed: ${updateResult.error.message}`);
+				}
+				currentSessionToken = updateResult.data.updateCustomer.customer.sessionToken;
 			}
 
-			// Get the initial session token
-			const sessionToken = updateResult.data.updateCustomer.customer.sessionToken;
-			// console.log('Session token', sessionToken);
-
-			// Step 2: Add product to cart with this session, but CAPTURE any new session that's created
 			const sessionHeaders = {
 				'Content-Type': 'application/json',
-				'woocommerce-session': `Session ${sessionToken}`
+				'woocommerce-session': `Session ${currentSessionToken}`
 			};
 
-			currentSessionToken = sessionToken;
-			let addToCartResponse;
+			// Step 2: Empty the cart before we add items to prevent duplicates.
+			const emptyCartResult = await getUrqlClient()
+				.client.mutation(EMPTY_CART_MUTATION, {}, { fetchOptions: { headers: sessionHeaders } })
+				.toPromise();
 
-			// let cartItems: CartItem[] = [];
+			if (emptyCartResult.error) {
+				// Log and continue, as the error might just mean the cart was already empty.
+				console.error(`Failed to empty cart: ${emptyCartResult.error.message}`);
+			}
+
+			// Step 3: Add items from the client-side store to the now-empty cart.
 			let cartItemsForGraphQL: { productId: number; quantity: number }[] = [];
 			cart.subscribe((cart) => {
 				cart.items.forEach((item) => {
@@ -81,43 +78,41 @@
 					});
 				});
 			});
-			// console.log(cartItemsForGraphQL);
-			// get all cart items
-			const addToCartResult = await getUrqlClient()
-				.client.mutation(
-					CART_ADD_ITEMS_MUTATION,
-					{
-						items: cartItemsForGraphQL
-					},
-					{
-						fetchOptions: { headers: sessionHeaders },
-						fetch: (input, init) => {
-							return fetch(input, init).then((response) => {
-								// Capture any new session token if provided
-								const newSession = response.headers.get('woocommerce-session');
-								if (newSession) {
-									currentSessionToken = newSession.replace('Session ', '');
-									// console.log('New session from add to cart:', currentSessionToken);
-								}
-								addToCartResponse = response;
-								return response;
-							});
-						}
-					}
-				)
-				.toPromise();
 
-			if (addToCartResult.error) {
-				throw new Error(`Failed to add product: ${addToCartResult.error.message}`);
+			// Only add if there are items to add.
+			if (cartItemsForGraphQL.length > 0) {
+				const addToCartResult = await getUrqlClient()
+					.client.mutation(
+						CART_ADD_ITEMS_MUTATION,
+						{
+							items: cartItemsForGraphQL
+						},
+						{
+							fetchOptions: { headers: sessionHeaders },
+							fetch: (input, init) => {
+								return fetch(input, init).then((response) => {
+									const newSession = response.headers.get('woocommerce-session');
+									if (newSession) {
+										currentSessionToken = newSession.replace('Session ', '');
+									}
+									return response;
+								});
+							}
+						}
+					)
+					.toPromise();
+
+				if (addToCartResult.error) {
+					throw new Error(`Failed to add product: ${addToCartResult.error.message}`);
+				}
 			}
 
-			// Update headers with the latest session token
+			// Step 4: Get shipping estimates using the correct session token.
 			const updatedSessionHeaders = {
 				'Content-Type': 'application/json',
 				'woocommerce-session': `Session ${currentSessionToken}`
 			};
 
-			// Get shipping estimates
 			const estimatesResult = await getUrqlClient()
 				.client.query(
 					GET_SHIPPING_ESTIMATES,
@@ -131,10 +126,15 @@
 				throw new Error('Failed to get shipping estimates');
 			}
 
-			// return shipping data
-			const shippingData = estimatesResult.data.cart.availableShippingMethods[0].rates;
-			// final shipping details
+			// Defensive programming: check if the cart object exists before accessing its properties.
+			const availableShippingMethods = estimatesResult.data?.cart?.availableShippingMethods;
+			if (!availableShippingMethods || availableShippingMethods.length === 0) {
+				throw new Error('No shipping methods available for the current cart.');
+			}
 
+			const shippingData = availableShippingMethods[0].rates;
+
+			finalShippingDetails = [];
 			for (const result of shippingData) {
 				finalShippingDetails.push({
 					id: result.id,
@@ -142,12 +142,7 @@
 					cost: result.cost
 				});
 			}
-
-			// console.log('ALL_SHIPPINGS', finalShippingDetails);
-
 			console.log('currentSessionToken', currentSessionToken);
-
-			// -------------------------------------------------
 		} catch (err) {
 			console.log(`Error from query: ${err}`);
 		}
@@ -163,14 +158,13 @@
 				class="inline-flex items-center justify-center w-5 h-5 bg-sun text-grey-background rounded-full mr-2 text-xs"
 				>3</span
 			>
-			Opções de envio
+			{m.shippingOptions()}
 		</h2>
 		{#if loading}
 			<div class="text-xs">{m.loading()}</div>
 		{:else}
 			<div class="flex flex-col">
 				{#each finalShippingDetails as shipping, i}
-					<!-- {#if !shipping.id.startsWith('local_pickup')} -->
 					<div class="flex flex-row justify-between text-xs items-center my-1">
 						<label
 							class="text-[13px] md:text-[15px] flex cursor-pointer justify-between w-full"
@@ -196,26 +190,24 @@
 							</div>
 						</label>
 					</div>
-					<!-- {/if} -->
 				{/each}
 			</div>
 		{/if}
 	</div>
 
 	<form class="space-y-4">
-		<!-- Error -->
 		{#if error}
 			<div class="text-red-medium text-xs">
 				{error}
 			</div>
 		{/if}
-		<!-- Next -->
 		<div class="py-1">
 			<Button
 				action={() => {
 					// toggleLoader();
 					if (finalShippingValueSelected) {
-						onUpdate(finalShippingValueSelected, currentSessionToken);
+						// Pass the session token back to the parent
+						onUpdate(finalShippingValueSelected, currentSessionToken!);
 					} else {
 						error = 'Seleccione al menos una opción de envío.';
 					}

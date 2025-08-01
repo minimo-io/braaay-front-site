@@ -1,16 +1,11 @@
-<!-- src/lib/components/ui/checkout/StepFourPending.svelte -->
 <script lang="ts">
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
-
-	import Button from '../buttons/Button.svelte';
-	import { Lock } from '@lucide/svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { correctPrice, launchToast, calculateDiscountPercentage } from '$lib/utils';
 	import { Sparkle } from '@lucide/svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import CheckoutProductOffers from './CheckoutProductOffers.svelte';
-
 	import {
 		DeliveryUIType,
 		type CreditCardFormData,
@@ -19,15 +14,15 @@
 		type ProductGraphQL,
 		type ShippingOption
 	} from '$lib/types';
-	import { onMount } from 'svelte';
 	import {
 		CART_ADD_ITEMS_MUTATION,
 		CHECKOUT_PAYMENT_METHODS_MUTATION
 	} from '$lib/graphql/mutations';
-
 	import { cart } from '$stores/cart.store.svelte';
 	import CheckoutCreditCardInfo from './CheckoutCreditCardInfo.svelte';
 	import { AppConfig } from '$config';
+	import Button from '../buttons/Button.svelte';
+	import { Lock } from '@lucide/svelte';
 
 	interface Props {
 		deliveryType: DeliveryUIType | null;
@@ -54,74 +49,39 @@
 	let loading = $state(false);
 	let error = $state('');
 
-	if (!address) {
-		console.log(`NO ADDRESS, DELIVERY TYPE ${deliveryType}`);
-	} else {
-		// alert(address);
-	}
-
 	let countryCode = $state(address ? address.country : 'BR');
 	let postCode = $state(address ? address.postcode : '05411-000');
 	let paymentMethods = $state<PaymentMethod[] | undefined>();
 	let methodSelected = $state<PaymentMethod | undefined>();
 	let newsletter = $state(false);
 
-	onMount(async () => {
-		// console.log('Session', sessionToken);
+	// This state variable acts as a gatekeeper. It's the key to breaking the loop.
+	let lastFetchedShippingId = $state<string | undefined>();
+
+	// This is the core logic to fetch and update payment methods.
+	async function fetchAndSetPaymentMethods(shippingId: string) {
+		// This is a crucial check to prevent fetching when data is not ready
+		if (!address || !shippingId || !sessionToken) {
+			console.log('Missing required data, skipping fetch.');
+			return;
+		}
+
+		console.log('Fetching payment methods for shipping option:', shippingId);
+
 		toggleLoader();
 		loading = true;
 		error = '';
 
-		// If no user session then it's a guest, then we have to create the cart and session ---------------------------
-		let currentSessionToken;
-		if (!sessionToken) {
-			console.log('No session/guest, then creating one...');
-			let cartItemsForGraphQL: ProductGraphQL[] = [];
-			cart.subscribe((cart) => {
-				cart.items.forEach((item) => {
-					cartItemsForGraphQL.push({
-						productId: item.id,
-						quantity: item.quantity
-					});
-				});
-			});
-			// console.log('CART ITEMS:');
-			// console.log(cartItemsForGraphQL);
-			const addToCartResult = await getUrqlClient()
-				.client.mutation(
-					CART_ADD_ITEMS_MUTATION,
-					{
-						items: cartItemsForGraphQL
-					},
-					{
-						// fetchOptions: { headers: sessionHeaders },
-						fetch: (input, init) => {
-							return fetch(input, init).then((response) => {
-								// Capture any new session token if provided
-								const newSession = response.headers.get('woocommerce-session');
-								if (newSession) {
-									currentSessionToken = newSession.replace('Session ', '');
-									// console.log('New session from add to cart:', currentSessionToken);
-								}
-								// addToCartResponse = response;
-								return response;
-							});
-						}
-					}
-				)
-				.toPromise();
-
-			if (addToCartResult.error) {
-				throw new Error(`Failed to add product: ${addToCartResult.error.message}`);
-			}
-			console.log('New session...', currentSessionToken);
-		}
-
-		// -------------------------------------------------------------------------------------------------------------
+		// --- THIS IS THE CRITICAL CHANGE ---
+		// We immediately clear the old data so the template shows a loading state.
+		paymentMethods = undefined;
+		methodSelected = undefined;
+		onUpdatePayment(undefined);
+		// -----------------------------------
 
 		const sessionHeaders = {
 			'Content-Type': 'application/json',
-			'woocommerce-session': `Session ${sessionToken || currentSessionToken}`
+			'woocommerce-session': `Session ${sessionToken}`
 		};
 
 		try {
@@ -131,50 +91,60 @@
 				.client.mutation(
 					CHECKOUT_PAYMENT_METHODS_MUTATION,
 					{
-						// input: {
 						countryCode: countryCode,
 						postCode: postCode,
-						shippingMethodId: shippingOption ? shippingOption.id : '0'
-						// }
+						shippingMethodId: shippingId
 					},
 					{
 						fetchOptions: { headers: sessionHeaders }
 					}
 				)
 				.toPromise();
-			//Result
-			if (updateResult.error && !updateResult.data) {
-				launchToast(`Error obteniendo métodos de pagamento`, 'error', 2000);
-			}
 
-			// paymentMethods = [];
+			if (updateResult.error && !updateResult.data) {
+				launchToast(`Erro obtendo métodos de pagamento`, 'error', 2000);
+			}
 
 			let paymentMethodsRaw =
-				updateResult.data.getAvailablePaymentMethods.shippingPaymentMethods.paymentMethods ||
+				updateResult.data?.getAvailablePaymentMethods?.shippingPaymentMethods?.paymentMethods ||
 				undefined;
 
-			// console.log('RAW', paymentMethodsRaw);
-
 			paymentMethods = [];
-			for (const pm of paymentMethodsRaw) {
-				let methodObject: PaymentMethod = {
-					id: pm.id,
-					title: pm.title,
-					description: pm.description,
-					cost: pm.cost,
-					feeDetails: pm.feeDetails
-				};
-
-				// Add payment method
-				paymentMethods?.push(methodObject);
+			if (paymentMethodsRaw) {
+				for (const pm of paymentMethodsRaw) {
+					let methodObject: PaymentMethod = {
+						id: pm.id,
+						title: pm.title,
+						description: pm.description,
+						cost: pm.cost,
+						feeDetails: pm.feeDetails
+					};
+					paymentMethods?.push(methodObject);
+				}
 			}
-			console.log('Payment methods', paymentMethods);
+
+			console.log('Payment methods updated:', paymentMethods);
 		} catch (err) {
 			console.error(`${err}`);
-			launchToast(`Error obteniendo métodos de pagamento ${err}`, 'error', 2000);
-			// alert(sessionToken);
+			launchToast(`Erro obtendo métodos de pagamento ${err}`, 'error', 2000);
+		} finally {
+			toggleLoader();
+			loading = false;
 		}
-		toggleLoader();
+	}
+
+	// This is the correct, loop-free reactive block.
+	// It will only trigger the fetch function if a new, different ID is provided.
+	$effect(() => {
+		const currentShippingId = shippingOption?.id;
+
+		// We check if a shipping ID exists AND if it has changed since the last fetch.
+		if (currentShippingId && currentShippingId !== lastFetchedShippingId) {
+			fetchAndSetPaymentMethods(currentShippingId);
+			// We immediately set the guard here to prevent the loop
+			// before the async function even returns.
+			lastFetchedShippingId = currentShippingId;
+		}
 	});
 </script>
 

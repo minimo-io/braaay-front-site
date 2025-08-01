@@ -158,7 +158,7 @@
 					{#if !paymentMethodSelected}
 						<div class="text-xs text-[#28BA48] font-bold leading-tight">
 							{m.in()}
-							{m.cash()} + Envío
+							{m.cash()}
 						</div>
 					{/if}
 				</div>
