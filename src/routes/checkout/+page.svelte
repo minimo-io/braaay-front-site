@@ -1,4 +1,3 @@
-<!-- src/routes/checkout/+page.svelte -->
 <script lang="ts">
 	import { AppConfig } from '$config';
 	import Divider from '$components/ui/dividers/Divider.svelte';
@@ -8,7 +7,12 @@
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { CUSTOMER_QUERY, mapCustomerToUser } from '$lib/graphql/queries';
-	import { CHECKOUT_CREATE_ORDER_MUTATION } from '$lib/graphql/mutations';
+	import {
+		CHECKOUT_CREATE_ORDER_MUTATION,
+		CART_ADD_ITEMS_MUTATION,
+		EMPTY_CART_MUTATION
+	} from '$lib/graphql/mutations';
+	import { UPDATE_GUEST_SHIPPING_ADDRESS } from '$lib/graphql/mutations/shipping-update.mutation';
 	import type {
 		CreditCardFormData,
 		Customer,
@@ -59,110 +63,184 @@
 		step3: boolean | object;
 		step4: boolean | object;
 	}
+
+	// State variables
 	let steps: Steps = $state({ step1: false, step2: false, step3: false, step4: false });
 	let editStep1 = $state(false);
 	let editStep2 = $state(false);
 	let editStep3 = $state(false);
 
-	// Initialize as null to have no default selection
 	let deliveryType = $state<DeliveryUIType | null>(DeliveryUIType.DELIVERY);
 	let shippingAddress = $state<CustomerAddress | null>(null);
 	let shippingOption: ShippingOption | undefined = $state();
-	let userSessionToken = $state('');
-
+	let sessionToken = $state<string | null>(null);
 	let paymentMethodSelected = $state<PaymentMethod>();
+	let creditCardData = $state<CreditCardFormData | undefined>();
+	let customer: Customer | undefined = $state();
 
-	// Cart stuff
+	// Loading states for better UX
+	let isInitializing = $state(true);
+	let isSynchronizingCart = $state(false);
+	let isProcessingOrder = $state(false);
+
+	// Cart derived state
 	let cartItemsCount = $state(0);
 	let cartSubTotalAmount = $state(0);
-	// let cartTotalAmount = $state(0);
 	let cartDiscounts = $state(0);
 	let couponsCount = $state(0);
 	let isGuestUser = $state(isAuthenticated() ? false : true);
-	let creditCardData = $state<CreditCardFormData | undefined>();
 
-	let customer: Customer | undefined = $state();
-
-	onMount(async () => {
-		toggleLoader();
-		try {
-			// Check for step 1
-			if (isAuthenticated()) {
-				steps.step1 = true;
-			}
-			// Query customer in database
-			const customerResult = await getUrqlClient().client.query(CUSTOMER_QUERY, {});
-			if (customerResult && customerResult.error) {
-				launchToast('Houve um error tentando obter os dados do cliente 2', 'error');
-				goto(localizeHref('/cart/'));
-			}
-			console.log('CUSTOMER_RESULT', customerResult);
-			customer = mapCustomerToUser(customerResult.data);
-		} catch (err) {
-			console.error(`Error: ${err}`);
-			launchToast('Houve um error tentando obter os dados do cliente 1 (try)', 'error');
-			goto(localizeHref('/cart/'));
-		}
-
-		toggleLoader();
-	});
-
-	// Cart Stuff ------------------------------------------------------------------------------------------------------
-	// cart.subscribe((cart) => {
-	// 	cartItemsCount = cart.items.reduce((count, item) => count + item.quantity, 0);
-	// 	cartSubTotalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
-	// 	if (cart.coupons) {
-	// 		// couponsCount = cart.coupons.length;
-	// 		// for (const couponCode of cart.coupons) {
-	// 		// 	cartDiscounts = calculateDiscount(couponCode);
-	// 		// 	break; // just one coupon allowed
-	// 		// }
-	// 		couponsCount = cart.coupons.length;
-	// 		for (const coupon of cart.coupons) {
-	// 			cartDiscounts = coupon.discount;
-	// 			// couponName = coupon.code;
-	// 			break; // just one coupon allowed
-	// 		}
-	// 	}
-	// });
-
-	// Final solution for the cart totals not updating after removing coupon
-	cart.subscribe((cart) => {
-		cartItemsCount = cart.items.reduce((count, item) => count + item.quantity, 0);
-		cartSubTotalAmount = cart.items.reduce((count, item) => count + item.price * item.quantity, 0);
-
-		if (cart.coupons && cart.coupons.length > 0) {
-			couponsCount = cart.coupons.length;
-			for (const coupon of cart.coupons) {
-				cartDiscounts = coupon.discount;
-				break; // just one coupon allowed
-			}
-		} else {
-			// This is the key fix - explicitly set to 0 when no coupons
-			couponsCount = 0;
-			cartDiscounts = 0;
-		}
-	});
-
+	// Memoized cart total calculation
 	let cartTotalAmount = $derived(
 		cartSubTotalAmount +
 			parseFloat(shippingOption && deliveryType != 'PICKUP' ? shippingOption.cost : '0') -
 			cartDiscounts
 	);
 
-	// Another solution for the cart totals not updating after removing coupon
-	// $effect(() => {
-	// 	if (couponsCount === 0) {
-	// 		cartDiscounts = 0;
-	// 	}
-	// });
+	// Get cart items for GraphQL (memoized)
+	let cartItemsForGraphQL = $derived(() => {
+		let items: { productId: number; quantity: number }[] = [];
+		cart.subscribe((c) => {
+			c.items.forEach((item) => {
+				items.push({ productId: item.id, quantity: item.quantity });
+			});
+		});
+		return items;
+	});
 
-	//  End-of Cart Stuff ----------------------------------------------------------------------------------------------
+	// Get coupons for GraphQL (memoized)
+	let couponsForGraphQL = $derived(() => {
+		let coupons: string[] = [];
+		cart.subscribe((c) => {
+			if (c.coupons && c.coupons.length > 0) {
+				c.coupons.forEach((item) => coupons.push(item.code));
+			}
+		});
+		return coupons;
+	});
+
+	onMount(async () => {
+		await initializeCheckout();
+	});
+
+	async function initializeCheckout() {
+		isInitializing = true;
+		try {
+			if (isAuthenticated()) {
+				steps.step1 = true;
+			}
+
+			const customerResult = await getUrqlClient().client.query(CUSTOMER_QUERY, {});
+			if (customerResult?.error) {
+				throw new Error(customerResult.error.message);
+			}
+
+			customer = mapCustomerToUser(customerResult.data);
+		} catch (err) {
+			console.error(`Error initializing checkout: ${err}`);
+			launchToast('Houve um erro tentando obter os dados do cliente', 'error');
+			goto(localizeHref('/cart/'));
+		} finally {
+			isInitializing = false;
+		}
+	}
+
+	async function synchronizeCart(postcode: string): Promise<string | null> {
+		isSynchronizingCart = true;
+		launchToast('Sincronizando carrinho...', 'info', 1000);
+
+		try {
+			// Update shipping address
+			const updateResult = await getUrqlClient()
+				.client.mutation(UPDATE_GUEST_SHIPPING_ADDRESS, {
+					input: {
+						shipping: {
+							postcode: postcode,
+							country: 'BR',
+							overwrite: true
+						}
+					}
+				})
+				.toPromise();
+
+			if (updateResult.error) {
+				throw new Error(`Shipping update failed: ${updateResult.error.message}`);
+			}
+
+			const currentSessionToken = updateResult.data.updateCustomer.customer.sessionToken;
+			sessionToken = currentSessionToken;
+
+			const sessionHeaders = {
+				'Content-Type': 'application/json',
+				'woocommerce-session': `Session ${currentSessionToken}`
+			};
+
+			// Empty cart
+			await getUrqlClient()
+				.client.mutation(EMPTY_CART_MUTATION, {}, { fetchOptions: { headers: sessionHeaders } })
+				.toPromise();
+
+			// Add items back to cart if any exist
+			if (cartItemsForGraphQL().length > 0) {
+				const addToCartResult = await getUrqlClient()
+					.client.mutation(
+						CART_ADD_ITEMS_MUTATION,
+						{ items: cartItemsForGraphQL() },
+						{ fetchOptions: { headers: sessionHeaders } }
+					)
+					.toPromise();
+
+				if (addToCartResult.error) {
+					throw new Error(`Failed to add products: ${addToCartResult.error.message}`);
+				}
+			}
+
+			launchToast('Carrinho sincronizado com sucesso!', 'success', 1500);
+			return currentSessionToken;
+		} catch (err) {
+			console.error(`Error synchronizing cart: ${err}`);
+			launchToast('Houve um erro ao sincronizar o carrinho', 'error');
+			return null;
+		} finally {
+			isSynchronizingCart = false;
+		}
+	}
+
+	// Subscribe to cart changes once
+	cart.subscribe((cartData) => {
+		cartItemsCount = cartData.items.reduce((count, item) => count + item.quantity, 0);
+		cartSubTotalAmount = cartData.items.reduce(
+			(count, item) => count + item.price * item.quantity,
+			0
+		);
+
+		if (cartData.coupons?.length > 0) {
+			couponsCount = cartData.coupons.length;
+			cartDiscounts = cartData.coupons[0].discount; // Take first coupon discount
+		} else {
+			couponsCount = 0;
+			cartDiscounts = 0;
+		}
+	});
+
+	function resetStepsAfter(step: number) {
+		if (step < 2) {
+			steps.step2 = false;
+			editStep2 = false;
+		}
+		if (step < 3) {
+			steps.step3 = false;
+			editStep3 = false;
+			shippingOption = undefined;
+		}
+		if (step < 4) {
+			paymentMethodSelected = undefined;
+		}
+	}
 
 	function onUpdateStepOne(customerData: Customer) {
 		editStep1 = false;
 		customer = customerData;
-
 		steps.step1 = customer;
 
 		if (deliveryType == 'PICKUP') {
@@ -173,424 +251,361 @@
 
 	function onActionStepOneDone() {
 		editStep1 = true;
-		steps.step1 = false;
-		steps.step2 = false;
-		steps.step3 = false;
-		paymentMethodSelected = undefined;
-		shippingOption = undefined;
+		resetStepsAfter(1);
 	}
 
-	function handleDeliveryTypeUpdate(delivery: DeliveryUIType) {
+	async function handleDeliveryTypeUpdate(delivery: DeliveryUIType) {
 		deliveryType = delivery;
-		paymentMethodSelected = undefined;
 
-		// You might want to do additional logic here
-		// like enabling step2 when a selection is made
 		if (deliveryType == 'PICKUP') {
-			// Only progress to step2 if user is logged in (step1 complete)
-			// if (steps.step1) {
-			if (isGuestUser) userSessionToken = '';
-			editStep2 = false;
-			steps.step2 = true;
-			steps.step3 = true;
-			shippingOption = undefined;
-			// }
+			resetStepsAfter(2);
+			const syncedToken = await synchronizeCart('05411-000');
+			if (syncedToken) {
+				shippingOption = {
+					id: 'local_pickup:11',
+					label: 'Retirada no showroom (São Paulo)',
+					cost: '0.00'
+				};
+				steps.step2 = true;
+				steps.step3 = true;
+			}
 		} else if (deliveryType == 'DELIVERY') {
+			// When switching from pickup to delivery, we need to reset shipping data
+			// and make sure step2 is not completed so the address form shows
+			shippingAddress = null;
+			shippingOption = undefined;
+			paymentMethodSelected = undefined;
+
+			// Reset steps properly for delivery mode
+			steps.step2 = false;
+			steps.step3 = false;
+			editStep2 = false;
+			editStep3 = false;
+		}
+	}
+
+	async function onUpdateShippingData(shippingData: CustomerAddress) {
+		const sessionTokenResult = await synchronizeCart(shippingData.postcode);
+
+		if (sessionTokenResult) {
+			shippingAddress = shippingData;
+			editStep2 = false;
+			resetStepsAfter(3);
+
 			if (steps.step1) {
-				editStep2 = false;
-				steps.step2 = false;
-				steps.step3 = false;
-			} else {
-				editStep2 = false;
-				steps.step1 = false;
-				steps.step2 = false;
-				steps.step3 = false;
+				steps.step2 = true;
 			}
-		}
-	}
-
-	// Update the delivery data, also save in localStorage (in the future)
-	function onUpdateShippingData(shippingData: CustomerAddress) {
-		shippingAddress = shippingData;
-		editStep2 = false;
-		steps.step3 = false;
-
-		shippingOption = undefined;
-		if (steps.step1) {
-			steps.step2 = true;
-		}
-	}
-
-	// Create order ----------------------------------------------------------------------------------------------------
-	async function checkoutCreateOrder() {
-		let currentSessionToken;
-
-		// Prepare products array & cupons
-		let cartItemsForGraphQL: ProductGraphQL[] = [];
-		let couponsForGraphQL: string[] = [];
-		cart.subscribe((cart) => {
-			cart.items.forEach((item) => {
-				cartItemsForGraphQL.push({
-					productId: item.id,
-					quantity: item.quantity
-				});
-			});
-
-			if (cart.coupons && cart.coupons.length > 0) {
-				cart.coupons.forEach((item) => {
-					couponsForGraphQL.push(item.code);
-				});
-			}
-		});
-
-		// Prepare billing address
-		let billingForGraphQL = {};
-		if (deliveryType != 'PICKUP') {
-			console.log('Billing address client');
-
-			billingForGraphQL = {
-				...shippingAddress,
-				email: customer?.email,
-				phone: customer?.telephone
-			};
 		} else {
-			// For pickup defaults
-			console.log('Billing address showroom');
-			// Address is the showroom address
-			billingForGraphQL = {
-				firstName: customer?.firstName,
-				lastName: customer?.lastName,
-				company: '',
-				address1: 'R. Cristiano Viana, 62 - cj 35',
-				address2: 'Cerqueira César',
-				city: 'São Paulo',
-				postcode: '05411-000',
-				country: 'BR',
-				state: 'São Paulo',
-				email: customer?.email,
-				phone: customer?.telephone
-			};
-			// Shipping is pickup
-			shippingOption = {
-				id: 'local_pickup',
-				label: m.checkoutStorePickup(),
-				cost: '0'
-			};
+			launchToast('Não foi possível sincronizar o carrinho. Tente novamente.', 'error');
 		}
+	}
 
-		// const createOrderResult = await getUrqlClient(undefined, true)
-		const orderDataForMutation = {
-			cpf: customer?.cpf,
-			lineItems: cartItemsForGraphQL,
-			couponCodes: couponsForGraphQL,
-			paymentMethod: paymentMethodSelected?.id,
-			customerBilling: billingForGraphQL,
-			shippingLines: [
-				{
-					methodId: shippingOption?.id,
-					methodTitle: shippingOption?.label,
-					total: shippingOption?.cost
-				}
-			]
-		};
-		console.log('ORDER_DATA_FOR_MUTATION');
-		console.log(orderDataForMutation);
-		const createOrderResult = await getUrqlClient()
-			.client.mutation(CHECKOUT_CREATE_ORDER_MUTATION, orderDataForMutation, {
-				fetchOptions: {
-					headers: {
-						authorization: `Basic ${generateBasicAuthorization(PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY)}`
+	async function checkoutCreateOrder() {
+		isProcessingOrder = true;
+		launchToast('Processando pedido...', 'info');
 
-						// 'User-Agent': 'WordPress/6.x; https://braaay.com',
-						// 'X-Requested-With': 'XMLHttpRequest',
-						// Accept: 'application/json',
-						// 'Content-Type': 'application/json',
-						// Referer: 'https://braaay.com' // Your WordPress site URL
-					}
-				},
-				fetch: (input, init) => {
-					return fetch(input, init).then((response) => {
-						// Capture any new session token if provided
-						const newSession = response.headers.get('woocommerce-session');
-						if (newSession) {
-							currentSessionToken = newSession.replace('Session ', '');
-							// console.log('New session from add to cart:', currentSessionToken);
+		try {
+			let currentSessionToken;
+
+			const billingForGraphQL =
+				deliveryType !== 'PICKUP'
+					? {
+							...shippingAddress,
+							email: customer?.email,
+							phone: customer?.telephone
 						}
-						// addToCartResponse = response;
-						return response;
-					});
-				}
-			})
-			.toPromise();
+					: {
+							firstName: customer?.firstName,
+							lastName: customer?.lastName,
+							company: '',
+							address1: 'R. Cristiano Viana, 62 - cj 35',
+							address2: 'Cerqueira César',
+							city: 'São Paulo',
+							postcode: '05411-000',
+							country: 'BR',
+							state: 'São Paulo',
+							email: customer?.email,
+							phone: customer?.telephone
+						};
 
-		console.log('RESULT_CREATE_ORDER:');
-		console.log(createOrderResult);
-		// Check for errors
-		if (createOrderResult.error) {
-			console.error(`Error: ${createOrderResult.error.message}`);
-			console.error('Error details');
-			console.error(createOrderResult.error);
-			goto(localizeHref(`/checkout/error?code=${createOrderResult.error.name}`));
+			if (deliveryType === 'PICKUP') {
+				shippingOption = {
+					id: 'local_pickup',
+					label: m.checkoutStorePickup(),
+					cost: '0'
+				};
+			}
+
+			const orderDataForMutation = {
+				cpf: customer?.cpf,
+				lineItems: cartItemsForGraphQL(),
+				couponCodes: couponsForGraphQL(),
+				paymentMethod: paymentMethodSelected?.id,
+				customerBilling: billingForGraphQL,
+				shippingLines: [
+					{
+						methodId: shippingOption?.id,
+						methodTitle: shippingOption?.label,
+						total: shippingOption?.cost
+					}
+				]
+			};
+
+			const createOrderResult = await getUrqlClient()
+				.client.mutation(CHECKOUT_CREATE_ORDER_MUTATION, orderDataForMutation, {
+					fetchOptions: {
+						headers: {
+							authorization: `Basic ${generateBasicAuthorization(PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY)}`
+						}
+					},
+					fetch: (input, init) => {
+						return fetch(input, init).then((response) => {
+							const newSession = response.headers.get('woocommerce-session');
+							if (newSession) {
+								currentSessionToken = newSession.replace('Session ', '');
+							}
+							return response;
+						});
+					}
+				})
+				.toPromise();
+
+			if (createOrderResult.error) {
+				console.error(`Error: ${createOrderResult.error.message}`);
+				console.error('Error details', createOrderResult.error);
+				goto(localizeHref(`/checkout/error?code=${createOrderResult.error.name}`));
+				return null;
+			}
+
+			return {
+				orderId: createOrderResult.data.createOrder.orderId,
+				orderKey: createOrderResult.data.createOrder.orderKey,
+				session: currentSessionToken
+			};
+		} finally {
+			isProcessingOrder = false;
+		}
+	}
+
+	async function handleCheckoutDone(newsletter: boolean) {
+		if (!paymentMethodSelected) {
+			launchToast('Selecione um método de pagamento', 'error', 2500);
 			return;
 		}
 
-		return {
-			// orderId: createOrderResult.data.createOrder.orderId,
-			orderId: createOrderResult.data.createOrder.orderId,
-			orderKey: createOrderResult.data.createOrder.orderKey,
-			session: currentSessionToken
-		};
-	}
+		// Validate credit card if needed
+		if (paymentMethodSelected.id === 'woo-mercado-pago-custom') {
+			if (
+				!creditCardData ||
+				!creditCardData.cardNumber ||
+				!creditCardData.cardholderName ||
+				!creditCardData.expiryDate ||
+				!creditCardData.securityCode
+			) {
+				launchToast('Adicionar todos os dados do cartão de crédito.', 'error');
+				return;
+			}
 
-	// async function updateCustomerEmail(session: string) {
-	// 	let newSessionAfter = '';
-	// 	const updateCustomerEmailResult = await getUrqlClient()
-	// 		.client.mutation(
-	// 			CHECKOUT_UPDATE_CUSTOMER_EMAIL,
-	// 			{
-	// 				email: customer?.email
-	// 			},
-	// 			{
-	// 				fetchOptions: {
-	// 					headers: {
-	// 						'Content-Type': 'application/json',
-	// 						'woocommerce-session': `Session ${session}`
-	// 					}
-	// 				},
-	// 				fetch: (input, init) => {
-	// 					return fetch(input, init).then((response) => {
-	// 						// Capture any new session token if provided
-	// 						const newSession = response.headers.get('woocommerce-session');
-	// 						if (newSession) {
-	// 							newSessionAfter = newSession.replace('Session ', '');
-	// 							// console.log('New session from add to cart:', currentSessionToken);
-	// 						}
-	// 						// addToCartResponse = response;
-	// 						return response;
-	// 					});
-	// 				}
-	// 			}
-	// 		)
-	// 		.toPromise();
-	// 	console.log('CUSTOMER EMAIL', customer?.email);
-	// 	console.log('UPDATE CUSTOMER EMAIL');
-	// 	console.log(updateCustomerEmailResult);
-	// 	return newSessionAfter;
-	// }
+			if (!validateCreditCard(creditCardData)) {
+				launchToast('Alguns dados do cartão de crédito são inválidos. Verifique.', 'error');
+				return;
+			}
+		}
+
+		const orderCreateResult = await checkoutCreateOrder();
+		if (orderCreateResult?.orderId) {
+			console.log('ORDER SESSION', orderCreateResult.session);
+			goto(
+				localizeHref(
+					`/checkout/pagamento/${orderCreateResult.orderId}/?sess=${orderCreateResult.session}`
+				)
+			);
+		} else {
+			goto(localizeHref('/checkout/error/?code=no-order-id'));
+		}
+	}
 </script>
 
 <Meta title="{m.seoCheckoutTitle()} {m.seoDivider()} {m.seoBase()}" noindex={true} />
 
 <main>
-	<div class="max-w-screen-lg mx-[10px] md:mx-auto">
-		<div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-0 md:gap-7">
-			<div class="mt-5 md:mt-8">
-				<!-- Checkout page title -->
-				<div class="flex justify-start mb-3 mx-3 md:mx-1">
-					<h1 class="text-[19px] font-roboto font-extrabold ml-1">Checkout</h1>
+	{#if isInitializing}
+		<div class="max-w-screen-lg mx-[10px] md:mx-auto py-8">
+			<div class="flex justify-center items-center min-h-[400px]">
+				<div class="text-center">
+					<div
+						class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"
+					></div>
+					<p class="text-gray-600">Carregando checkout...</p>
 				</div>
-
-				<!-- On mobile -->
-				<!-- <CheckoutMobileSummary cartTotal={cartTotalAmount} {paymentMethodSelected} /> -->
-				<CheckoutMobileSummary
-					items={cartItemsCount}
-					cartTotal={cartTotalAmount}
-					cartSubTotal={cartSubTotalAmount}
-					shippingAddress={shippingOption}
-					{deliveryType}
-					{couponsCount}
-					{cartDiscounts}
-					{paymentMethodSelected}
-				/>
-
-				<!-- Starting stepped process -->
-				<div class="space-y-4 px-3 md:mb-24">
-					<!-- Delivery or Pickup -->
-					<CheckoutChooseDelivery initialValue={deliveryType} onUpdate={handleDeliveryTypeUpdate} />
-
-					<div>
-						<Divider color="blue" extraClasses="!border-b-grey-lighter my-7" />
-					</div>
-
-					<!-- Step 1: Client info ---------------------------------------------------------------------- -->
-					{#if steps.step1 && !editStep1}
-						<StepOneDone {customer} onActionClick={onActionStepOneDone} />
-					{:else}
-						<StepOnePending {customer} onUpdate={onUpdateStepOne} />
-					{/if}
-					<!-- Step 1: End ------------------------------------------------------------------------------ -->
-
-					<!-- Step 2: Shipping address ----------------------------------------------------------------- -->
-					{#if deliveryType == 'PICKUP'}
-						<!-- Pickup -->
-						<StepTwoPickup />
-					{:else if steps.step1}
-						<!-- Step 2 Done -->
-						{#if steps.step2 && shippingAddress && !editStep2}
-							<StepTwoDone
-								{shippingAddress}
-								onActionClick={() => {
-									paymentMethodSelected = undefined;
-									editStep2 = true;
-									steps.step2 = false;
-								}}
-							/>
-						{/if}
-						<!-- Step 2 Pending -->
-						{#if !steps.step2 || editStep2}
-							<StepTwoPending {customer} onActionClick={onUpdateShippingData} />
-						{/if}
-					{:else}
-						<StepTwoWaiting />
-					{/if}
-					<!-- Step 2: End ------------------------------------------------------------------------------ -->
-
-					<!-- Step 3: Delivery options ----------------------------------------------------------------- -->
-					{#if deliveryType == 'DELIVERY'}
-						{#if editStep3 || (steps.step1 && steps.step2 && !steps.step3)}
-							<StepThreePending
-								{customer}
-								{shippingAddress}
-								onUpdate={(shippingFetched: ShippingOption | undefined, sessionToken: string) => {
-									userSessionToken = sessionToken;
-									shippingOption = shippingFetched;
-									steps.step3 = true;
-									editStep3 = false;
-								}}
-							/>
-						{:else if steps.step1 && steps.step2 && steps.step3 && !editStep3}
-							<StepThreeDone
-								shippingAddress={shippingOption}
-								onUpdate={() => {
-									paymentMethodSelected = undefined;
-									editStep3 = true;
-									steps.step3 = false;
-									shippingOption = undefined;
-								}}
-							/>
-						{:else}
-							<StepThreeWaiting />
-						{/if}
-					{/if}
-					<!-- Step 3: End ------------------------------------------------------------------------------ -->
-
-					<!-- Form step 4 ------------------------------------------------------------------------------ -->
-					{#if steps.step1 && steps.step2 && steps.step3}
-						{#key deliveryType}
-							<StepFourPending
-								{deliveryType}
-								sessionToken={userSessionToken}
-								address={shippingAddress}
-								cartTotal={cartTotalAmount}
-								{shippingOption}
-								onUpdatePayment={(method: PaymentMethod) => {
-									paymentMethodSelected = method;
-								}}
-								onCreditCardChange={(formData: CreditCardFormData) => {
-									creditCardData = formData;
-								}}
-								onCheckoutDone={async (newsletter: boolean) => {
-									if (!paymentMethodSelected) {
-										launchToast('Selecione um método de pagamento', 'error', 2500);
-									} else {
-										toggleLoader();
-
-										// Credit card validation (IF NEEDED) ------------------------------------------
-										if (paymentMethodSelected.id == 'woo-mercado-pago-custom') {
-											if (
-												!creditCardData ||
-												!creditCardData.cardNumber ||
-												!creditCardData.cardholderName ||
-												!creditCardData.expiryDate ||
-												!creditCardData.securityCode
-											) {
-												launchToast('Adicionar todos os dados do cartão de crédito.', 'error');
-												toggleLoader();
-												return;
-											} else if (!validateCreditCard(creditCardData)) {
-												launchToast(
-													'Alguns dados do cartão de crédito são inválidos. Verifique.',
-													'error'
-												);
-												toggleLoader();
-												return;
-											}
-										}
-										// -----------------------------------------------------------------------------
-
-										let orderCreateResult = await checkoutCreateOrder();
-										if (orderCreateResult && orderCreateResult.orderId) {
-											// console.log(`ORDER ID FINAL STAGE: ${orderId}`);
-
-											// update customer
-											// const updateCustomerSession = await updateCustomerEmail(
-											// 	orderCreateResult.session
-											// );
-
-											console.log('ORDER SESSION', orderCreateResult.session);
-											// console.log('UPDATE CUSTOMER SESSION', updateCustomerSession);
-											// Redirect to payment
-											goto(
-												localizeHref(
-													`/checkout/pagamento/${orderCreateResult.orderId}/?sess=${orderCreateResult.session}`
-												)
-											);
-										} else {
-											goto(localizeHref('/checkout/error/?code=no-order-id'));
-											return;
-										}
-									}
-								}}
-							/>
-						{/key}
-					{:else}
-						<StepFourWaiting {deliveryType} />
-					{/if}
-					<!-- Step 4: End ------------------------------------------------------------------------------ -->
-				</div>
-			</div>
-
-			<!-- Desktop Summary & Advertising -->
-			<div class="mt-8">
-				<!-- Promo clube -->
-				<div class="hidden md:block mx-3 md:mx-auto">
-					<PromoClub isSquare={true} isRounded={true} />
-				</div>
-
-				<!-- Extra cart elements -->
-				<CheckoutCartSummary
-					items={cartItemsCount}
-					cartTotal={cartTotalAmount}
-					cartSubTotal={cartSubTotalAmount}
-					shippingAddress={shippingOption}
-					{deliveryType}
-					{couponsCount}
-					{cartDiscounts}
-					{paymentMethodSelected}
-				/>
-
-				<div class="hidden md:block md:my-36">&nbsp;</div>
 			</div>
 		</div>
-	</div>
+	{:else}
+		<div class="max-w-screen-lg mx-[10px] md:mx-auto">
+			<div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-0 md:gap-7">
+				<div class="mt-5 md:mt-8">
+					<div class="flex justify-start mb-3 mx-3 md:mx-1">
+						<h1 class="text-[19px] font-roboto font-extrabold ml-1">Checkout</h1>
+					</div>
+
+					<!-- Loading overlay for cart synchronization -->
+					{#if isSynchronizingCart}
+						<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+							<div class="bg-white p-6 rounded-lg shadow-lg text-center">
+								<div
+									class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"
+								></div>
+								<p class="text-gray-800">Sincronizando carrinho...</p>
+								<p class="text-sm text-gray-600 mt-2">Aguarde um momento</p>
+							</div>
+						</div>
+					{/if}
+
+					<!-- Loading overlay for order processing -->
+					{#if isProcessingOrder}
+						<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+							<div class="bg-white p-6 rounded-lg shadow-lg text-center">
+								<div
+									class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"
+								></div>
+								<p class="text-gray-800">Processando pedido...</p>
+								<p class="text-sm text-gray-600 mt-2">Finalizando sua compra</p>
+							</div>
+						</div>
+					{/if}
+
+					<CheckoutMobileSummary
+						items={cartItemsCount}
+						cartTotal={cartTotalAmount}
+						cartSubTotal={cartSubTotalAmount}
+						shippingAddress={shippingOption}
+						{deliveryType}
+						{couponsCount}
+						{cartDiscounts}
+						{paymentMethodSelected}
+					/>
+
+					<div class="space-y-4 px-3 md:mb-24">
+						<CheckoutChooseDelivery
+							initialValue={deliveryType}
+							onUpdate={handleDeliveryTypeUpdate}
+						/>
+
+						<div>
+							<Divider color="blue" extraClasses="!border-b-grey-lighter my-7" />
+						</div>
+
+						{#if steps.step1 && !editStep1}
+							<StepOneDone {customer} onActionClick={onActionStepOneDone} />
+						{:else}
+							<StepOnePending {customer} onUpdate={onUpdateStepOne} />
+						{/if}
+
+						{#if deliveryType == 'PICKUP'}
+							<StepTwoPickup />
+						{:else if steps.step1}
+							{#if steps.step2 && shippingAddress && !editStep2}
+								<StepTwoDone
+									{shippingAddress}
+									onActionClick={() => {
+										paymentMethodSelected = undefined;
+										editStep2 = true;
+										steps.step2 = false;
+									}}
+								/>
+							{/if}
+							{#if !steps.step2 || editStep2}
+								<StepTwoPending {customer} onActionClick={onUpdateShippingData} />
+							{/if}
+						{:else}
+							<StepTwoWaiting />
+						{/if}
+
+						{#if deliveryType == 'DELIVERY'}
+							{#if editStep3 || (steps.step1 && steps.step2 && !steps.step3)}
+								<StepThreePending
+									{customer}
+									{shippingAddress}
+									{sessionToken}
+									onUpdate={(shippingFetched: ShippingOption | undefined) => {
+										shippingOption = shippingFetched;
+										steps.step3 = true;
+										editStep3 = false;
+									}}
+								/>
+							{:else if steps.step1 && steps.step2 && steps.step3 && !editStep3}
+								<StepThreeDone
+									shippingAddress={shippingOption}
+									onUpdate={() => {
+										paymentMethodSelected = undefined;
+										editStep3 = true;
+										steps.step3 = false;
+										shippingOption = undefined;
+									}}
+								/>
+							{:else}
+								<StepThreeWaiting />
+							{/if}
+						{/if}
+
+						{#if steps.step1 && steps.step2 && steps.step3}
+							{#key deliveryType}
+								<StepFourPending
+									{deliveryType}
+									{sessionToken}
+									address={shippingAddress}
+									{shippingOption}
+									{cartTotalAmount}
+									onUpdatePayment={(method) => {
+										paymentMethodSelected = method;
+									}}
+									onCreditCardChange={(formData: CreditCardFormData) => {
+										creditCardData = formData;
+									}}
+									onCheckoutDone={handleCheckoutDone}
+								/>
+							{/key}
+						{:else}
+							<StepFourWaiting {deliveryType} />
+						{/if}
+					</div>
+				</div>
+
+				<div class="mt-8">
+					<div class="hidden md:block mx-3 md:mx-auto">
+						<PromoClub isSquare={true} isRounded={true} />
+					</div>
+					<CheckoutCartSummary
+						items={cartItemsCount}
+						cartTotal={cartTotalAmount}
+						cartSubTotal={cartSubTotalAmount}
+						shippingAddress={shippingOption}
+						{deliveryType}
+						{couponsCount}
+						{cartDiscounts}
+						{paymentMethodSelected}
+					/>
+					<div class="hidden md:block md:my-36">&nbsp;</div>
+				</div>
+			</div>
+		</div>
+	{/if}
 </main>
 
 {#if AppConfig.debug}
-	<!-- DEBUG -->
 	<div class="fixed bottom-0 left-0 border z-50 py-5 px-8 bg-white text-xs">
 		<h2 class="font-bold mb-3 text-[15px]">DEBUG</h2>
 		<div class="pb-2 border-b border-grey-light">
-			<strong>Edit (1):</strong>
-			{editStep1} - <strong>Edit (2):</strong>
-			{editStep2} - <strong>Edit (3):</strong>
-			{editStep3}
+			<strong>Loading States:</strong>
+			Init: {isInitializing}, Sync: {isSynchronizingCart}, Order: {isProcessingOrder}
+		</div>
+		<div class="pb-2 border-b border-grey-light">
+			<strong>Edit:</strong>
+			1: {editStep1}, 2: {editStep2}, 3: {editStep3}
 		</div>
 		<div class="py-2 border-b border-grey-light">
-			<strong>Step (1):</strong>
-			{steps.step1} - <strong>Step (2):</strong>
-			{steps.step2} - <strong>Step (3):</strong>
-			{steps.step3} - <strong>Step (4):</strong>
-			{steps.step4}
+			<strong>Steps:</strong>
+			1: {steps.step1}, 2: {steps.step2}, 3: {steps.step3}, 4: {steps.step4}
 		</div>
 		<div class="py-2">
 			<strong>DeliveryType:</strong>
@@ -599,7 +614,7 @@
 		</div>
 		<div class="pb-2">
 			<strong>Session:</strong>
-			{truncate(userSessionToken, 50) || 'undefined'}
+			{sessionToken ? truncate(sessionToken, 50) : 'undefined'}
 		</div>
 		<div class="py-2 border-t border-grey-light">
 			<strong>Credit Card Data:</strong>

@@ -14,10 +14,7 @@
 		type ProductGraphQL,
 		type ShippingOption
 	} from '$lib/types';
-	import {
-		CART_ADD_ITEMS_MUTATION,
-		CHECKOUT_PAYMENT_METHODS_MUTATION
-	} from '$lib/graphql/mutations';
+	import { CHECKOUT_PAYMENT_METHODS_MUTATION } from '$lib/graphql/mutations';
 	import { cart } from '$stores/cart.store.svelte';
 	import CheckoutCreditCardInfo from './CheckoutCreditCardInfo.svelte';
 	import { AppConfig } from '$config';
@@ -26,10 +23,11 @@
 
 	interface Props {
 		deliveryType: DeliveryUIType | null;
-		sessionToken: string;
+		sessionToken: string | null;
 		address: CustomerAddress | null;
 		shippingOption: ShippingOption | undefined;
-		cartTotal: number;
+		// FIX: Renamed prop to match parent component's variable name
+		cartTotalAmount: number;
 		onUpdatePayment: (method) => void;
 		onCheckoutDone: (newsletter: boolean) => void;
 		onCreditCardChange: (creditCardData: CreditCardFormData) => void;
@@ -41,7 +39,8 @@
 		address,
 		onUpdatePayment,
 		shippingOption,
-		cartTotal,
+		// FIX: Destructured the renamed prop
+		cartTotalAmount,
 		onCheckoutDone,
 		onCreditCardChange
 	}: Props = $props();
@@ -55,14 +54,11 @@
 	let methodSelected = $state<PaymentMethod | undefined>();
 	let newsletter = $state(false);
 
-	// This state variable acts as a gatekeeper. It's the key to breaking the loop.
 	let lastFetchedShippingId = $state<string | undefined>();
 
-	// This is the core logic to fetch and update payment methods.
 	async function fetchAndSetPaymentMethods(shippingId: string) {
-		// This is a crucial check to prevent fetching when data is not ready
-		if (!address || !shippingId || !sessionToken) {
-			console.log('Missing required data, skipping fetch.');
+		if (!shippingId || !sessionToken) {
+			console.error('Missing required data, skipping fetch.');
 			return;
 		}
 
@@ -72,12 +68,9 @@
 		loading = true;
 		error = '';
 
-		// --- THIS IS THE CRITICAL CHANGE ---
-		// We immediately clear the old data so the template shows a loading state.
 		paymentMethods = undefined;
 		methodSelected = undefined;
 		onUpdatePayment(undefined);
-		// -----------------------------------
 
 		const sessionHeaders = {
 			'Content-Type': 'application/json',
@@ -133,16 +126,11 @@
 		}
 	}
 
-	// This is the correct, loop-free reactive block.
-	// It will only trigger the fetch function if a new, different ID is provided.
 	$effect(() => {
 		const currentShippingId = shippingOption?.id;
 
-		// We check if a shipping ID exists AND if it has changed since the last fetch.
 		if (currentShippingId && currentShippingId !== lastFetchedShippingId) {
 			fetchAndSetPaymentMethods(currentShippingId);
-			// We immediately set the guard here to prevent the loop
-			// before the async function even returns.
 			lastFetchedShippingId = currentShippingId;
 		}
 	});
@@ -163,8 +151,8 @@
 		{#if paymentMethods}
 			{#each paymentMethods as method, i (i)}
 				{@const discountPercentage = calculateDiscountPercentage(
-					cartTotal,
-					cartTotal + method.cost
+					cartTotalAmount,
+					cartTotalAmount + method.cost
 				)}
 				<div
 					class="bg-grey-background border-grey-light border px-3 py-2 rounded-lg font-roboto mb-2"
@@ -190,9 +178,7 @@
 								</span>
 								/
 							{/if}
-							<!-- CartTotal: {cartTotal} - Method Discount: {method.cost} - {method.feeDetails} - Shipping:{shippingOption?.cost}
-							- -->
-							{m.currencySymbol()}&nbsp;{correctPrice(cartTotal + method.cost)}
+							{m.currencySymbol()}&nbsp;{correctPrice(cartTotalAmount + method.cost)}
 						</div>
 					</label>
 				</div>
@@ -201,21 +187,14 @@
 			<div class="text-xs">{m.checkoutLoadingPayments()}</div>
 		{/if}
 
-		<!-- Method details -->
-		<!-- {#if method.id == 'woo-mercado-pago-pix'} -->
-		{#if methodSelected?.id == 'woo-mercado-pago-pix'}
-			<!-- <div>PIX DETAILS</div> -->
-		{:else if methodSelected?.id == 'woo-mercado-pago-custom'}
-			<!-- <div>CARD DETAILS</div> -->
+		{#if methodSelected?.id == 'woo-mercado-pago-pix'}{:else if methodSelected?.id == 'woo-mercado-pago-custom'}
 			<CheckoutCreditCardInfo
 				onCreditCardChange={(formData: CreditCardFormData) => {
 					onCreditCardChange(formData);
 				}}
 			/>
 		{/if}
-		<!-- {/if} -->
 
-		<!-- Promocoes -->
 		{#if AppConfig.receiveEmailsEnabled}
 			<div class="flex items-center text-sm my-5 px-3">
 				<input
@@ -229,10 +208,6 @@
 			</div>
 		{/if}
 
-		<!-- Offers controls -->
-		<!-- <CheckoutProductOffers /> -->
-
-		<!-- Botão de continuar -->
 		<div class="py-3">
 			<Button
 				type="sun"
@@ -252,7 +227,6 @@
 		</div>
 	</form>
 
-	<!-- Promo -->
 	<div
 		class="border bg-white rounded-md border-sun shadow-md p-6 max-w-sm md:mx-auto mt-4 md:hidden"
 	>
