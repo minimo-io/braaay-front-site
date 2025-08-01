@@ -1,3 +1,4 @@
+<!-- src/lib/components/ui/checkout/StepThreePending.svelte -->
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import Button from '../buttons/Button.svelte';

@@ -1,3 +1,4 @@
+<!-- src/lib/components/ui/checkout/StepFourPending.svelte -->
 <script lang="ts">
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 

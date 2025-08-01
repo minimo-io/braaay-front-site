@@ -1,3 +1,4 @@
+<!-- src/routes/checkout/+page.svelte -->
 <script lang="ts">
 	import { AppConfig } from '$config';
 	import Divider from '$components/ui/dividers/Divider.svelte';
