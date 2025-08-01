@@ -27,7 +27,7 @@
 			name="delivery"
 			class="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500 cursor-pointer"
 		/>
-		<span class="text-sm">Enviar para casa ou trabalho</span>
+		<span class="text-sm">{m.sendToHomeOrWork()}</span>
 	</label>
 
 	<!-- Local Pickup -->
@@ -41,8 +41,10 @@
 			class="w-5 h-5 text-sun border-grey-medium focus:ring-sun cursor-pointer"
 		/>
 		<span class="flex flex-col">
-			<div class="flex text-sm flex-col md:flex-row items-start md:items-center">
-				<span> Retirada no Showroom (São Paulo)</span>
+			<div
+				class="flex text-sm flex-col md:flex-row items-start md:items-center md:-top-[5px] md:relative"
+			>
+				<span> {m.pickup()}</span>
 				<span class="hidden md:inline-block mr-1 ml-1">→</span>
 
 				<MoreInfoButton
@@ -58,7 +60,7 @@
 				</div> -->
 			</div>
 			<span class="text-xs text-grey-medium mt-[1px] md:mt-0">
-				Seg a Sex, das 09:00 às 18:30, exceto feriados
+				{m.pickupWindow()}
 			</span>
 		</span>
 	</label>

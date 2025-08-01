@@ -25,6 +25,9 @@
 	"shippingEstimates": "Estimativas de envio",
 	"products": "Produtos",
 	"qty": "Qde",
+	"in": "no",
+	"noInterests": "Sem juros",
+	"byCard": "no cartão",
 
 	"popularResults": "Mais procurados",
 
@@ -38,6 +41,8 @@
 
 	"cashDiscountValue": "5%",
 	"cashDiscountText": "NO PIX (5% OFF)",
+	"cashDiscount": "Desconto PIX",
+	"cash": "PIX",
 
 	"onSale": "EM OFERTA",
 	"soon": "Em breve",
@@ -57,6 +62,7 @@
 	"noOrders": "Nenhum pedido! Dá uma olhada nas oportunidades!",
 	"order": "Pedido",
 	"discountApplied": "Desconto aplicado",
+	"discount": "Desconto",
 
 	"myInfo": "Meus dados",
 	"myCashback": "Meu cashback",
@@ -75,7 +81,7 @@
 	"addingToCart": "Adicionando...",
 	"addingToCartOk": "Adicionado com sucesso",
 	"cartSummary": "Resumo do carrinho",
-	"cartMyCart": "Meu carrinho",
+	"cartMyCart": "Seu carrinho",
 
 	"discountCouponTitle": "Cupom de desconto",
 	"addCoupon": "Adicionar cupom",
@@ -178,5 +184,9 @@
 	"teaserContent": "Comece sua jornada pelos vinhos especiáis com a Braaay (promocode no primeiro email)",
 	"teaserButton": "Vamos lá — É grátis!",
 
-	"superOffers": "Ofertas imperdíveis"
+	"superOffers": "Ofertas imperdíveis",
+
+	"sendToHomeOrWork": "Enviar para casa ou trabalho",
+	"pickup": "Retirada no Showroom (São Paulo)",
+	"pickupWindow": "Seg a Sex, das 09:00 às 18:30, exceto feriados"
 }

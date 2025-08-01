@@ -25,6 +25,9 @@
 	"shippingEstimates": "Estimativa de envio",
 	"products": "Productos",
 	"qty": "Cant.",
+	"in": "en",
+	"noInterests": "Sin intereses",
+	"byCard": "con tarjeta",
 
 	"popularResults": "Mas buscados",
 
@@ -38,11 +41,14 @@
 
 	"cashDiscountValue": "5%",
 	"cashDiscountText": "EN EFECTIVO (5% OFF)",
+	"cashDiscount": "Descuento Efectivo",
+	"cash": "Efectivo",
 
 	"addCoupon": "Agregar cupon",
 	"coupon": "Cupon",
 	"updatingDiscount": "Actualizando descuento...",
 	"discountUpdated": "¡Descuento actualizado con éxito!",
+	"discount": "Descuento",
 
 	"myInfo": "Mis datos",
 	"myCashback": "Mi cashback",
@@ -78,7 +84,7 @@
 	"add": "Agregar",
 	"addingToCart": "Añadiendo...",
 	"addingToCartOk": "Añadido con éxito",
-	"cartSummary": "Resumen del carrito",
+	"cartSummary": "Resumen del<br />carrito",
 	"cartMyCart": "Mi carrito",
 
 	"discountCouponTitle": "Cupón de descuento",
@@ -175,5 +181,8 @@
 	"teaserContent": "Empieza tu viaje por las cervezas artesanales y vinos boutique con Braaay",
 	"teaserButton": "Genial, ¡quiero!",
 
-	"superOffers": "Ofertas imperdibles"
+	"superOffers": "Ofertas imperdibles",
+	"sendToHomeOrWork": "Enviar a casa o al trabajo",
+	"pickup": "Retirada en Cordón (Montevideo)",
+	"pickupWindow": "Lunes a Viernes, das 09:00 às 18:00, excepto feriados"
 }

@@ -8,6 +8,7 @@
 	import { activateMiniCart, addToCart } from '$stores/cart.store.svelte';
 	import { browser } from '$app/environment';
 	import type { CartItem } from '$lib/types';
+	import { getRandomElements } from '$lib/utils/arrays.util';
 
 	let onSaleForLang = onSaleProducts[getLocale()];
 	let processing = $state(false);
@@ -23,6 +24,8 @@
 		activateMiniCart();
 		processing = false;
 	};
+
+	let randomSuperOffers = getRandomElements(onSaleForLang, 2);
 </script>
 
 {#if onSaleForLang.length}
@@ -48,7 +51,8 @@
 	<div class="bg-yellow-light border-grey-light border rounded-lg border-dashed p-5 mb-2">
 		<div class="flex justify-center align-middle">
 			<div class="flex flex-col md:flex-row">
-				{#each onSaleForLang.slice(0, 2) as product, i (i)}
+				<!-- {#each onSaleForLang.slice(0, 2) as product, i (i)} -->
+				{#each randomSuperOffers as product, i (i)}
 					{#if i == 0}
 						<div class="md:border-r md:border-dashed md:border-grey-light md:mr-4 md:pr-4">
 							<div class="flex items-center md:mx-auto md:justify-center">

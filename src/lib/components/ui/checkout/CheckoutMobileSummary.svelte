@@ -147,16 +147,19 @@
 		>
 			<div class="flex items-center">
 				<ShoppingBag class="h-4 w-4 mr-2 text-sun flex-shrink-0" />
-				<span class="font-bold font-roboto text-[15px]">{m.cartSummary()}</span>
+				<span class="font-bold font-roboto text-sm leading-tight pl-2">{@html m.cartMyCart()}</span>
 			</div>
 			<div class="flex items-center gap-2">
-				<div class="text-right">
+				<div class="text-right mr-2">
 					<div class="font-roboto font-bold text-sm">
 						{m.currencySymbol()}
 						{correctPrice(finalTotal())}
 					</div>
 					{#if !paymentMethodSelected}
-						<div class="text-xs text-[#28BA48] font-bold leading-tight">no Pix</div>
+						<div class="text-xs text-[#28BA48] font-bold leading-tight">
+							{m.in()}
+							{m.cash()} + Envío
+						</div>
 					{/if}
 				</div>
 				{#if isExpanded}
@@ -182,21 +185,24 @@
 
 	<!-- Expanded Details (same as desktop component) -->
 	{#if isExpanded}
-		<div class="mt-4 pt-3 border-t border-grey-lighter">
+		<div class="mt-2 pt-1 border-t border-grey-lighter">
 			<!-- Sub-total -->
-			<div class="flex justify-between mt-2">
-				<p class="font-light text-[15px] self-center">
+			<div class="flex justify-between mt-1">
+				<p class="font-light text-sm self-center">
 					Sub-total ({items} item{items > 1 ? 's' : ''})
 				</p>
-				<p class="font-roboto self-center">{m.currencySymbol()} {correctPrice(cartSubTotal)}</p>
+				<p class="font-roboto self-center text-sm">
+					{m.currencySymbol()}
+					{correctPrice(cartSubTotal)}
+				</p>
 			</div>
 
 			<!-- Divider -->
-			<div class="my-4 border-t border-t-grey-lighter"></div>
+			<div class="my-2 border-t border-t-grey-lighter"></div>
 
 			<!-- Coupons -->
 			<div class="flex justify-between items-center">
-				<div class="!font-light font-roboto text-[15px] self-center flex flex-col">
+				<div class="!font-light font-roboto text-sm self-center flex flex-col">
 					{m.discountCouponTitle()}
 					{#if couponsCount >= 1}
 						<MoreInfoButton
@@ -211,30 +217,32 @@
 								clearAllCoupons();
 								toggleLoader();
 							}}
-							customStyles="w-fit !ml-0 mt-2"
+							customStyles="w-fit !ml-0 mt-1"
 						/>
 					{/if}
 				</div>
 
 				{#if couponsCount < 1}
-					<Button
-						title={m.add()}
-						width="130px"
-						size="sm-short"
-						type="grey"
-						borderDark={true}
-						customPx="max-h-min"
-						action={() => {
-							openModal({
-								header: 'Adicionar cupom',
-								content: CouponForm as Component
-							});
-						}}
-					>
-						{#snippet icon()}
-							<Gift class="lucide-button" />
-						{/snippet}
-					</Button>
+					<div class="scale-90 left-1 relative">
+						<Button
+							title={m.add()}
+							width="130px"
+							size="sm-short"
+							type="grey"
+							borderDark={true}
+							customPx="max-h-min"
+							action={() => {
+								openModal({
+									header: 'Adicionar cupom',
+									content: CouponForm as Component
+								});
+							}}
+						>
+							{#snippet icon()}
+								<Gift class="lucide-button" />
+							{/snippet}
+						</Button>
+					</div>
 				{:else}
 					<span class="font-roboto text-red-dark">
 						- {m.currencySymbol()}
@@ -244,11 +252,11 @@
 			</div>
 
 			<!-- Divider -->
-			<div class="my-4 border-t border-t-grey-lighter"></div>
+			<div class="my-2 border-t border-t-grey-lighter"></div>
 
 			<!-- Shipping costs -->
 			<div class="flex justify-between mt-2">
-				<p class="font-light text-[15px] self-center">Envío</p>
+				<p class="font-light text-sm self-center">Envío</p>
 				{#if deliveryType == 'PICKUP'}
 					<p class="font-roboto self-center">
 						{m.currencySymbol()}
@@ -260,16 +268,17 @@
 						{correctPrice(parseFloat(shippingAddress.cost))}
 					</p>
 				{:else}
-					<p class="font-roboto self-center">A calcular</p>
+					<p class="font-roboto self-center text-sm">A calcular</p>
 				{/if}
 			</div>
 
 			<!-- Payment method discount -->
 			{#if paymentMethodSelected?.cost}
-				<div class="my-4 border-t border-t-grey-lighter"></div>
+				<div class="my-2 border-t border-t-grey-lighter"></div>
 				<div class="flex justify-between mt-2">
 					<p class="font-light text-[15px] self-center">
-						Desconto {paymentMethodSelected.title}
+						{m.discount()}
+						{paymentMethodSelected.title}
 					</p>
 					<p class="font-roboto self-center text-red-dark">
 						{m.currencySymbol()}
@@ -277,16 +286,16 @@
 					</p>
 				</div>
 			{:else if paymentMethodSelected == undefined}
-				<div class="my-4 border-t border-t-grey-lighter"></div>
+				<div class="my-2 border-t border-t-grey-lighter"></div>
 				<div class="flex justify-between mt-2">
-					<p class="font-light text-[15px] self-center">Desconto PIX</p>
-					<p class="font-roboto self-center text-red-dark">
+					<p class="font-light text-sm self-center">{m.cashDiscount()}</p>
+					<p class="font-roboto self-center text-red-dark text-sm">
 						{m.currencySymbol()} -{correctPrice(cartTotal - cartTotalMinus5)}
 					</p>
 				</div>
 			{/if}
 
-			<Divider color="blue" extraClasses="my-4 !border-b-grey-lighter" />
+			<Divider color="blue" extraClasses="my-2 !border-b-grey-lighter" />
 
 			<!-- Final Total -->
 			<div class="flex justify-between pt-1 mb-2">
@@ -297,9 +306,10 @@
 					{:else}
 						<span class="font-bold text-[17px]">
 							{m.currencySymbol()}
-							{correctPrice(cartTotalMinus5)} no
+							{correctPrice(cartTotalMinus5)}
+							{m.in()}
 							<span class="relative inline-block">
-								Pix
+								{m.cash()}
 								<span
 									class="pill pill-success text-xs px-2 py-0.5 absolute -top-[5px] left-2 ml-1 -translate-y-1/2 whitespace-nowrap scale-90 md:scale-100"
 								>
@@ -309,7 +319,11 @@
 						</span>
 						<span class="text-sm text-[#28BA48] font-bold leading-4">
 							ou 4x de {m.currencySymbol()}
-							{correctPrice(totalCartAmountWithDiscounts / 4)} sem juros<br />no cartão
+							{correctPrice(totalCartAmountWithDiscounts / 4)}
+							<span class="lowercase">{m.noInterests()}</span><br />
+							<span>
+								{m.byCard()}
+							</span>
 						</span>
 					{/if}
 				</div>

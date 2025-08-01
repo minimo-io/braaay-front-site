@@ -259,7 +259,7 @@
 		{/if}
 
 		<!-- Offers controls -->
-		<CheckoutProductOffers />
+		<!-- <CheckoutProductOffers /> -->
 
 		<!-- Botão de continuar -->
 		<div class="py-3">
