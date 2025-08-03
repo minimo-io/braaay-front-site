@@ -70,6 +70,16 @@
 			page.url.searchParams.has('agregar-cupon')
 		) {
 			addCouponToCart();
+		} else if (page.url.searchParams.has('open-coupon')) {
+			openModal({
+				header: m.addCoupon(),
+				content: CouponForm as Component
+			});
+
+			// Optional: Clean up the URL parameter after opening the modal
+			// const url = new URL(page.url);
+			// url.searchParams.delete('addCoupon');
+			// history.replaceState({}, '', url.toString());
 		}
 	});
 

@@ -2,7 +2,6 @@
 	import { AppConfig } from '$config';
 	import { m } from '$lib/paraglide/messages';
 	import { DeliveryUIType } from '$lib/types';
-	import { MapPin } from '@lucide/svelte';
 	import { MoreInfoButton } from '../buttons';
 	interface Props {
 		onUpdate: (deliveryType: DeliveryUIType) => void;

@@ -426,6 +426,22 @@
 			goto(localizeHref('/checkout/error/?code=no-order-id'));
 		}
 	}
+
+	// Add this effect to watch for coupon changes and reset Step 4
+	// $effect(() => {
+	// 	// When coupons change, force payment methods to re-fetch without clearing selection
+	// 	if (couponsCount > 0 || cartDiscounts > 0) {
+	// 		// Only reset credit card data, keep the payment method selection
+	// 		creditCardData = undefined;
+
+	// 		// Force StepFourPending to re-fetch payment methods with new totals
+	// 		// by updating a trigger state
+	// 		paymentMethodRefreshTrigger = Date.now();
+	// 	}
+	// });
+
+	// Add this state variable
+	let paymentMethodRefreshTrigger = $state(0);
 </script>
 
 <Meta title="{m.seoCheckoutTitle()} {m.seoDivider()} {m.seoBase()}" noindex={true} />
@@ -560,6 +576,7 @@
 							{#key `${deliveryType || 'none'}-${cartTotalAmount}-${cartDiscounts}-${couponsCount}`}
 								<StepFourPending
 									{deliveryType}
+									couponCode={couponsForGraphQL().length > 0 ? couponsForGraphQL()[0] : ''}
 									{sessionToken}
 									address={shippingAddress}
 									{shippingOption}
@@ -573,6 +590,23 @@
 									onCheckoutDone={handleCheckoutDone}
 								/>
 							{/key}
+
+							<!-- {#key `${deliveryType || 'none'}-${cartTotalAmount}-${cartDiscounts}-${couponsCount}`}
+								<StepFourPending
+									{deliveryType}
+									{sessionToken}
+									address={shippingAddress}
+									{shippingOption}
+									{cartTotalAmount}
+									onUpdatePayment={(method) => {
+										paymentMethodSelected = method;
+									}}
+									onCreditCardChange={(formData) => {
+										creditCardData = formData;
+									}}
+									onCheckoutDone={handleCheckoutDone}
+								/>
+							{/key} -->
 						{:else}
 							<StepFourWaiting {deliveryType} />
 						{/if}

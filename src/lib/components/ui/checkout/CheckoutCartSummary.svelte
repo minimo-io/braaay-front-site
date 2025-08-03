@@ -60,7 +60,7 @@
 		<div class="flex justify-between items-center">
 			<div class="!font-light font-roboto text-[15px] self-center flex flex-col">
 				{m.discountCouponTitle()}
-				{#if couponsCount >= 1}
+				<!-- {#if couponsCount >= 1}
 					<MoreInfoButton
 						title={m.remove()}
 						action={async () => {
@@ -77,11 +77,11 @@
 						}}
 						customStyles="w-fit !ml-0 mt-2"
 					/>
-				{/if}
+				{/if} -->
 			</div>
 
 			{#if couponsCount < 1}
-				<Button
+				<!-- <Button
 					title={m.add()}
 					width="130px"
 					size="sm-short"
@@ -94,6 +94,19 @@
 							content: CouponForm as Component
 						});
 					}}
+				>
+					{#snippet icon()}
+						<Gift class="lucide-button" />
+					{/snippet}
+				</Button> -->
+				<Button
+					title={m.add()}
+					width="130px"
+					size="sm-short"
+					type="grey"
+					borderDark={true}
+					customPx="max-h-min"
+					url={localizeHref('/cart/?open-coupon=1')}
 				>
 					{#snippet icon()}
 						<Gift class="lucide-button" />

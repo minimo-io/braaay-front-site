@@ -6,11 +6,13 @@ export const CHECKOUT_PAYMENT_METHODS_MUTATION = gql`
 		$countryCode: String!
 		$postCode: String!
 		$shippingMethodId: String!
+		$couponCode: String
 	) {
 		getAvailablePaymentMethods(
 			input: {
 				shippingAddress: { country: $countryCode, postcode: $postCode }
 				shippingMethodId: $shippingMethodId
+				couponCode: $couponCode
 			}
 		) {
 			shippingPaymentMethods {

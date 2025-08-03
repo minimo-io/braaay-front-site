@@ -26,6 +26,7 @@
 		sessionToken: string | null;
 		address: CustomerAddress | null;
 		shippingOption: ShippingOption | undefined;
+		couponCode?: string | undefined;
 		// FIX: Renamed prop to match parent component's variable name
 		cartTotalAmount: number;
 		onUpdatePayment: (method) => void;
@@ -42,7 +43,8 @@
 		// FIX: Destructured the renamed prop
 		cartTotalAmount,
 		onCheckoutDone,
-		onCreditCardChange
+		onCreditCardChange,
+		couponCode = ''
 	}: Props = $props();
 
 	let loading = $state(false);
@@ -86,7 +88,8 @@
 					{
 						countryCode: countryCode,
 						postCode: postCode,
-						shippingMethodId: shippingId
+						shippingMethodId: shippingId,
+						couponCode: couponCode
 					},
 					{
 						fetchOptions: { headers: sessionHeaders }
@@ -102,6 +105,8 @@
 				updateResult.data?.getAvailablePaymentMethods?.shippingPaymentMethods?.paymentMethods ||
 				undefined;
 
+			console.log('paymentMethodsRaw', paymentMethodsRaw);
+
 			paymentMethods = [];
 			if (paymentMethodsRaw) {
 				for (const pm of paymentMethodsRaw) {
@@ -116,7 +121,8 @@
 				}
 			}
 
-			console.log('Payment methods updated:', paymentMethods);
+			console.log('Payment methods updated:');
+			console.log(paymentMethods);
 		} catch (err) {
 			console.error(`${err}`);
 			launchToast(`Erro obtendo métodos de pagamento ${err}`, 'error', 2000);
