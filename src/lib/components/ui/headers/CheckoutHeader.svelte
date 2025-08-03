@@ -10,6 +10,7 @@
 	import SearchBar from '../search/SearchBar.svelte';
 
 	let originRoute = $derived(page.url.href);
+	let routeId = $derived(page.route.id);
 	// let currentPage = $derived(page.route.id);
 </script>
 
@@ -70,35 +71,39 @@
 
 		<div class="flex justify-end">
 			<div class="hidden lg:flex lg:flex-none lg:justify-end pl-5">
-				{#if isAuthenticated()}
-					<!-- Account / SignUp -->
-					<Button
-						chevron={true}
-						customPx="!pr-[12px] !pl-3 mr-3"
-						title="Conta"
-						url={localizeHref('/account/')}
-						type="blue"
-						size="xl"
-					>
-						{#snippet icon()}
-							<CircleUser class="lucide-button h-[10px]" />
-						{/snippet}
-					</Button>
-				{:else}
-					<!--Enter -->
-					<Button
-						chevron={false}
-						customPx="!pr-[12px] !pl-3 !pr-[20px] mr-3"
-						title="Conectar"
-						url={localizeHref(`/login/${originRoute ? `?returnUrl=${originRoute}` : ''}`)}
-						type="blue"
-						size="xl"
-					>
-						{#snippet icon()}
-							<CircleUser class="lucide-button h-[10px]" />
-						{/snippet}
-					</Button>
+				{#if routeId != '/checkout'}
+					{#if isAuthenticated()}
+						<!-- Account / SignUp -->
+						<Button
+							chevron={true}
+							customPx="!pr-[12px] !pl-3 mr-3"
+							title="Conta"
+							url={localizeHref('/account/')}
+							type="blue"
+							size="xl"
+						>
+							{#snippet icon()}
+								<CircleUser class="lucide-button h-[10px]" />
+							{/snippet}
+						</Button>
+					{:else}
+						<!--Enter -->
+
+						<Button
+							chevron={false}
+							customPx="!pr-[12px] !pl-3 !pr-[20px] mr-3"
+							title="Conectar"
+							url={localizeHref(`/login/${originRoute ? `?returnUrl=${originRoute}` : ''}`)}
+							type="blue"
+							size="xl"
+						>
+							{#snippet icon()}
+								<CircleUser class="lucide-button h-[10px]" />
+							{/snippet}
+						</Button>
+					{/if}
 				{/if}
+
 				<!-- Atendimento -->
 				<Button
 					title="Atendimento"
