@@ -9,7 +9,7 @@
 	import { Button, MoreInfoButton } from '$components/ui/buttons';
 	import Divider from '$components/ui/dividers/Divider.svelte';
 	import CheckoutPaymentQrSteps from '$components/ui/checkout/CheckoutPaymentQRSteps.svelte';
-	import { generateBasicAuthorization, launchToast } from '$lib/utils';
+	import { calculateCashback, generateBasicAuthorization, launchToast } from '$lib/utils';
 	import { AppConfig } from '$config';
 
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
@@ -214,6 +214,10 @@
 			}
 		}
 	});
+
+	let cashbackValue = $derived(
+		calculateCashback(data.payment.total_amount, AppConfig.cashbackPercentage)
+	);
 </script>
 
 <Meta
@@ -235,10 +239,10 @@
 					</span>
 					<!-- <span>OBRIGADO!&nbsp;</span> -->
 					<!-- Seu pedido está pendente de pagamento -->
-					Pedido pendente de pagamento
+					{m.orderPendingPayment()}
 				</h2>
 				<p class="md:ml-8 mx-6 mt-1 text-center md:text-left leading-tight">
-					Agora e só escanear e realizar o pagamento para finalizar a sua compra
+					{m.orderPendingComment()}
 				</p>
 			</div>
 
@@ -257,7 +261,7 @@
 						</div>
 						<!-- Time -->
 						<div class="flex justify-between mt-2 py-4 border-t border-b border-grey-lighter">
-							<p class="font-light ml-1 text-[15px] self-center">Tempo restante</p>
+							<p class="font-light ml-1 text-[15px] self-center">{m.timeRemaining()}</p>
 							<p
 								class="font-roboto self-center text-[16px] font-bold tracking-wide {timeRemaining <=
 								60
@@ -269,28 +273,30 @@
 						</div>
 						<!-- Status -->
 						<div class="flex justify-between py-4 border-b border-grey-lighter">
-							<p class="font-light ml-1 text-[15px] self-center">Status</p>
+							<p class="font-light ml-1 text-[15px] self-center">{m.status()}</p>
 							<p class="font-roboto self-center text-[16px] font-bold tracking-wide">
 								{data.payment.status_detail}
 							</p>
 						</div>
 						<!-- ID -->
 						<div class="flex justify-between py-4 border-b border-grey-lighter">
-							<p class="font-light ml-1 text-[15px] self-center">Identificador</p>
+							<p class="font-light ml-1 text-[15px] self-center">{m.identifier()}</p>
 							<p class="font-roboto self-center text-[16px] font-bold tracking-wide">
 								#{orderId}
 							</p>
 						</div>
 						<!-- Cashback -->
-						<div class="flex justify-between py-4 border-grey-lighter">
-							<div class="font-light ml-1 text-[15px] flex self-center items-center">
-								<div><Coins class="h-4 text-sun" /></div>
-								<span>Cashback a ganhar</span>
+						{#if AppConfig.cashbackEnabled}
+							<div class="flex justify-between py-4 border-grey-lighter">
+								<div class="font-light ml-1 text-[15px] flex self-center items-center">
+									<div><Coins class="h-4 text-sun" /></div>
+									<span>{m.cashbackToEarn()}</span>
+								</div>
+								<p class="font-roboto self-center text-[16px] font-bold tracking-wide">
+									<span class="font-normal">{m.currencySymbol()}</span>&nbsp;{cashbackValue}
+								</p>
 							</div>
-							<p class="font-roboto self-center text-[16px] font-bold tracking-wide">
-								<span class="font-normal">{m.currencySymbol()}</span>&nbsp;7,03
-							</p>
-						</div>
+						{/if}
 
 						<!-- Divider -->
 						<Divider color="blue" extraClasses="mt-0 mb-4 !border-b-grey-lighter" />
@@ -310,7 +316,7 @@
 							<div
 								class="flex justify-center border-b border-grey-lighter pb-4 text-[19px] md:text-[17px]"
 							>
-								<div class="mr-5 text-blue">Valor a pagar</div>
+								<div class="mr-5 text-blue">{m.amountToBePaid()}</div>
 								<div class="font-bold text-blue">
 									<span class="font-normal text-[17px] md:text-[15px]">{m.currencySymbol()}</span>
 									{data.payment.total_amount}
@@ -321,7 +327,7 @@
 
 							{#if data.payment.qrcode_base64}
 								<div class="flex justify-center pt-4">
-									<div class="text-blue">Escaneie o código QR</div>
+									<div class="text-blue">{m.scanQRCode()}</div>
 								</div>
 								<img
 									src="data:image/png;base64,{data.payment.qrcode_base64}"
@@ -330,14 +336,14 @@
 								/>
 							{/if}
 							<div class="flex justify-center pt-0 text-sm opacity-50 mb-3 text-blue">
-								<div>Válido por {AppConfig.payments.timeout} minutos</div>
+								<div>{m.validForMinutes({ minutes: AppConfig.payments.timeout })}</div>
 							</div>
 							<!-- Copia e Cola -->
 							<div
 								class="flex border-t border-grey-lighter border-b justify-center pt-0 text-sm text-blue"
 							>
 								<div class="opacity-90 my-4">
-									Se preferir, você pode copiar e colar o seguinte código.
+									{m.preferCopyAndPaste()}
 								</div>
 							</div>
 							<!-- Copia e Cola Form -->
@@ -436,8 +442,8 @@
 				{#if data.errors.length > 0}
 					{#each data.errors as error, index}
 						<div class="error-item" class:main-error={index === 0}>
-							<p><strong>Mensaje:</strong> {error.message}</p>
-							<p><strong>Código:</strong> {error.code}</p>
+							<p><strong>{m.message()}:</strong> {error.message}</p>
+							<p><strong>{m.code()}:</strong> {error.code}</p>
 
 							<!-- {#if error.code === 'invalid_email_for_sandbox'}
 								<div class="error-help">
@@ -454,11 +460,11 @@
 					{/each}
 				{/if}
 			</div>
-			<button onclick={() => window.location.reload()}> Intentar nuevamente </button>
+			<button onclick={() => window.location.reload()}> {m.tryAgain()} </button>
 		</div>
 	{:else}
 		<div class="loading">
-			<p>Procesando pago...</p>
+			<p>{m.processingPayment()}</p>
 		</div>
 	{/if}
 </main>

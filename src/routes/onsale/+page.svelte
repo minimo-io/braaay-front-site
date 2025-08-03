@@ -17,6 +17,8 @@
 	import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/products-category.query.js';
 	import Meta from '$components/layout/Meta.svelte';
 	import { m } from '$lib/paraglide/messages.js';
+	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
+	import { localizeHref } from '$lib/paraglide/runtime.js';
 
 	const { data } = $props();
 
@@ -39,7 +41,8 @@
 		seo: seo,
 		header: {
 			title: m.onSale()
-		}
+		},
+		uri: localizeHref('/onsale/')
 	});
 	let isLoading = $state(false);
 
@@ -108,3 +111,5 @@
 <LoadMoreButton {isLoading} {pagination} {handleLoadMore} />
 
 <!-- <BottomArticle {article} twoColumns={false} /> -->
+
+<FunMessageSection />

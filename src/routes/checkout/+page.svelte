@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { AppConfig } from '$config';
 	import Divider from '$components/ui/dividers/Divider.svelte';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { isAuthenticated } from '$lib/graphql/auth';
 	import { onMount } from 'svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
@@ -51,7 +51,7 @@
 	import StepFourPending from '$components/ui/checkout/StepFourPending.svelte';
 	import StepFourWaiting from '$components/ui/checkout/StepFourWaiting.svelte';
 
-	import { cart } from '$stores/cart.store.svelte';
+	import { cart, emptyCart } from '$stores/cart.store.svelte';
 	import { m } from '$lib/paraglide/messages';
 
 	import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
@@ -261,7 +261,7 @@
 
 		if (deliveryType == 'PICKUP') {
 			resetStepsAfter(2);
-			const syncedToken = await synchronizeCart('05411-000');
+			const syncedToken = await synchronizeCart(AppConfig.address[getLocale()].zipCode);
 			if (syncedToken) {
 				shippingOption = {
 					id: 'local_pickup:11',
@@ -303,9 +303,6 @@
 	}
 
 	async function checkoutCreateOrder() {
-		isProcessingOrder = true;
-		launchToast('Processando pedido...', 'info');
-
 		try {
 			let currentSessionToken;
 
@@ -320,23 +317,24 @@
 							firstName: customer?.firstName,
 							lastName: customer?.lastName,
 							company: '',
-							address1: 'R. Cristiano Viana, 62 - cj 35',
-							address2: 'Cerqueira César',
-							city: 'São Paulo',
-							postcode: '05411-000',
-							country: 'BR',
-							state: 'São Paulo',
+							address1: `${AppConfig.address[getLocale()].street}, ${AppConfig.address[getLocale()].number} - ${AppConfig.address[getLocale()].complement}`,
+							address2: AppConfig.address[getLocale()].neighborhood,
+							city: AppConfig.address[getLocale()].city,
+							postcode: AppConfig.address[getLocale()].zipCode,
+							country: AppConfig.address[getLocale()].countryCode,
+							state: AppConfig.address[getLocale()].state,
 							email: customer?.email,
 							phone: customer?.telephone
 						};
 
-			if (deliveryType === 'PICKUP') {
-				shippingOption = {
-					id: 'local_pickup',
-					label: m.checkoutStorePickup(),
-					cost: '0'
-				};
-			}
+			// Already done when choosing
+			// if (deliveryType === 'PICKUP') {
+			// 	shippingOption = {
+			// 		id: 'local_pickup',
+			// 		label: m.checkoutStorePickup(),
+			// 		cost: '0'
+			// 	};
+			// }
 
 			const orderDataForMutation = {
 				cpf: customer?.cpf,
@@ -389,8 +387,117 @@
 		}
 	}
 
+	/**
+	 * Processes the credit card payment by sending the data to a secure backend endpoint.
+	 *
+	 * @param orderData - The created order details from WooCommerce.
+	 * @param cardData - The validated credit card form data.
+	 * @param customerData - The customer information.
+	 * @param totalAmount - The total amount for the transaction.
+	 */
+	export async function processCreditCardPayment(
+		orderData: { orderId: any; orderKey: any },
+		cardData: CreditCardFormData,
+		customerData: Customer,
+		totalAmount: number
+	) {
+		// This function encapsulates the logic to call your backend to process the payment.
+		// IMPORTANT: You MUST create a backend endpoint (e.g., a serverless function)
+		// that securely handles the payment processing with Mercado Pago.
+		// Never expose your Mercado Pago private access token on the client-side.
+		// launchToast(m.sendingPayment(), 'info', 4000);
+
+		try {
+			// 1. Prepare the payload for your backend. Your backend will then use this
+			// information to make a secure call to Mercado Pago's /v1/payments API.
+			const paymentPayload = {
+				orderId: orderData.orderId,
+				orderKey: orderData.orderKey,
+				transaction_amount: totalAmount,
+				description: `Pedido #${orderData.orderId}`,
+				card: {
+					number: cardData.cardNumber.replace(/\s/g, ''),
+					holderName: cardData.cardholderName,
+					expirationMonth: parseInt(cardData.expiryDate.split('/')[0].trim(), 10),
+					expirationYear: parseInt('20' + cardData.expiryDate.split('/')[1].trim(), 10),
+					securityCode: cardData.securityCode
+				},
+				payer: {
+					email: customerData.email,
+					first_name: customerData.firstName,
+					last_name: customerData.lastName,
+					identification: {
+						type: 'CPF',
+						number: customerData.cpf?.replace(/\D/g, '') // Ensure only digits for CPF
+					}
+				}
+			};
+
+			// 2. Call your backend API. Replace with your actual endpoint.
+			const response = await fetch('/api/payments/credit-card', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(paymentPayload)
+			});
+
+			const result = await response.json();
+
+			console.log('CREDT_CARD_RESULT', result);
+			console.log('CREDT_CARD_RESULT_STATUS', result.status);
+
+			if (!response.ok) {
+				// Handle errors from your API, which should ideally forward Mercado Pago's error.
+				const errorMessage = result.message || 'Payment failed. Please try again.';
+				console.error(errorMessage);
+				throw new Error(errorMessage);
+			}
+
+			// 3. Handle the payment status returned from your backend.
+			// These statuses are based on Mercado Pago's API response.
+			switch (result.status) {
+				case 'approved':
+					launchToast('Pagamento aprovado! Redirecionando...', 'success');
+					// cart.clear(); // Clear the cart on successful purchase
+					emptyCart();
+					// goto(localizeHref(`/checkout/obrigado/${orderData.orderId}/?key=${orderData.orderKey}`), {
+					// 	replaceState: true
+					// });
+					break;
+				// case 'in_process':
+				// 	launchToast('Seu pagamento está sendo processado.', 'info');
+				// 	emptyCart();
+				// 	// cart.clear(); // Clear the cart
+				// 	// goto(localizeHref(`/checkout/pagamento/${orderData.orderId}/?status=pending`), {
+				// 	// 	replaceState: true
+				// 	// });
+				// 	break;
+				case 'rejected':
+					launchToast(
+						`Pagamento recusado: ${result.status_detail || 'verifique os dados do cartão.'}`,
+						'error',
+						5000
+					);
+					isProcessingOrder = false; // Re-enable the UI for another attempt
+					break;
+				default:
+					console.error(`Status de pagamento desconhecido: ${result.status}`);
+					throw new Error(`Status de pagamento desconhecido: ${result.status}`);
+			}
+		} catch (error: any) {
+			console.error('Credit card processing error:', error);
+			launchToast(error.message || 'Ocorreu um erro ao processar seu pagamento.', 'error', 5000);
+			isProcessingOrder = false; // Re-enable the UI on error to allow retry
+		}
+	}
+
+	/**
+	 * Finally process the payment
+	 *
+	 * @param newsletter - Will be used for subscription
+	 */
 	async function handleCheckoutDone(newsletter: boolean) {
 		if (!paymentMethodSelected) {
+			console.error(`Selecione um método de pagamento`, paymentMethodSelected);
 			launchToast('Selecione um método de pagamento', 'error', 2500);
 			return;
 		}
@@ -414,34 +521,40 @@
 			}
 		}
 
+		// Create the actual order in woocommerce
+		isProcessingOrder = true;
+		launchToast('Processando pedido...', 'info');
 		const orderCreateResult = await checkoutCreateOrder();
+
+		// Check the result
 		if (orderCreateResult?.orderId) {
-			console.log('ORDER SESSION', orderCreateResult.session);
-			goto(
-				localizeHref(
-					`/checkout/pagamento/${orderCreateResult.orderId}/?sess=${orderCreateResult.session}`
-				)
-			);
+			console.log('ORDER SESSION_FROM_CHECKOUT', orderCreateResult.session);
+
+			// If the payment type is credit card, then we should send this data to mercado pago
+			// CREDIT_CARD PAYMENT
+			if (paymentMethodSelected.id === 'woo-mercado-pago-custom') {
+				console.log('Processing with credit card...');
+				// Credit card stuff
+				await processCreditCardPayment(
+					orderCreateResult,
+					creditCardData!, // Already validated above
+					customer!, // Should exist at this point
+					cartTotalAmount
+				);
+			} else {
+				// Else we redirect to the second step for QR Code Payment (PIX)
+				goto(
+					localizeHref(
+						`/checkout/pagamento/${orderCreateResult.orderId}/?sess=${orderCreateResult.session}`
+					)
+					// { replaceState: true }
+				);
+			}
 		} else {
+			launchToast('Não foi possível criar o pedido. Tente novamente.', 'error');
 			goto(localizeHref('/checkout/error/?code=no-order-id'));
 		}
 	}
-
-	// Add this effect to watch for coupon changes and reset Step 4
-	// $effect(() => {
-	// 	// When coupons change, force payment methods to re-fetch without clearing selection
-	// 	if (couponsCount > 0 || cartDiscounts > 0) {
-	// 		// Only reset credit card data, keep the payment method selection
-	// 		creditCardData = undefined;
-
-	// 		// Force StepFourPending to re-fetch payment methods with new totals
-	// 		// by updating a trigger state
-	// 		paymentMethodRefreshTrigger = Date.now();
-	// 	}
-	// });
-
-	// Add this state variable
-	let paymentMethodRefreshTrigger = $state(0);
 </script>
 
 <Meta title="{m.seoCheckoutTitle()} {m.seoDivider()} {m.seoBase()}" noindex={true} />

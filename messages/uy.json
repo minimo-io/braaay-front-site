@@ -192,5 +192,22 @@
 	"pickupWindow": "Lunes a Viernes, das 09:00 às 18:00, excepto feriados",
 
 	"processingOrder": "Procesando el pedido...",
-	"completingPurchase": "Finalizando su compra"
+	"completingPurchase": "Finalizando su compra",
+	"processingPayment": "Procesando pago...",
+
+	"amountToBePaid": "Valor a pagar",
+	"cashbackToEarn": "Cashback a ganar",
+	"orderPendingPayment": "Pedido pendiente de pago",
+	"orderPendingComment": "Ahora solo escanea y realiza el pago para finalizar tu compra.",
+	"timeRemaining": "Tiempo restante",
+	"status": "Estado",
+	"identifier": "Identificador",
+	"scanQRCode": "Escanea el código QR",
+	"validForMinutes": "Válido por {minutes} minutos",
+	"preferCopyAndPaste": "Si prefieres, puedes copiar y pegar el siguiente código.",
+	"message": "Mensaje",
+	"code": "Código",
+	"tryAgain": "Intentar nuevamente",
+
+	"sendingPayment": "Procesando su pago..."
 }
