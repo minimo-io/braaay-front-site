@@ -204,7 +204,7 @@
 			<div class="flex justify-between items-center">
 				<div class="!font-light font-roboto text-sm self-center flex flex-col">
 					{m.discountCouponTitle()}
-					<!-- {#if couponsCount >= 1}
+					{#if couponsCount >= 1}
 						<MoreInfoButton
 							title={m.remove()}
 							action={async () => {
@@ -219,7 +219,7 @@
 							}}
 							customStyles="w-fit !ml-0 mt-1"
 						/>
-					{/if} -->
+					{/if}
 				</div>
 
 				{#if couponsCount < 1}
