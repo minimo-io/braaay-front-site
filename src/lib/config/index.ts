@@ -13,6 +13,7 @@ export const AppConfig = Object.freeze({
 	showSortingMenu: false,
 
 	payments: {
+		allowedOrigins: ['http://localhost:4000', 'https://braaay.com', 'https://www.braaay.com'],
 		timeout: 30
 	},
 

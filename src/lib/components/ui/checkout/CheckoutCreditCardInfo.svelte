@@ -2,6 +2,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { CreditCardFormData } from '$lib/types';
+	import { getCreditCardBrand, getCardBrandInfo } from '$lib/utils/creditCards.util';
 	import IMask from 'imask';
 
 	// Runes for reactive state
@@ -25,6 +26,9 @@
 	}
 
 	let { onCreditCardChange }: Props = $props();
+
+	// Derived state for card brand detection
+	const cardBrand = $derived(getCreditCardBrand(cardNumber));
 
 	// Derived state for form validation
 	const isValid = $derived(
@@ -113,14 +117,32 @@
 			<label for="cardNumber" class="text-sm font-medium text-gray-700">
 				Número do cartão <span class="text-red-500">*</span>
 			</label>
-			<input
-				bind:this={cardNumberInput}
-				id="cardNumber"
-				type="text"
-				placeholder="0000 0000 0000 0000"
-				class="px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-				required
-			/>
+			<div class="relative">
+				<input
+					bind:this={cardNumberInput}
+					id="cardNumber"
+					type="text"
+					placeholder="0000 0000 0000 0000"
+					class="px-4 py-2 pr-16 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none w-full"
+					required
+				/>
+				{#if cardBrand !== 'unknown' && cardNumber.length >= 4}
+					{@const brandInfo = getCardBrandInfo(cardBrand)}
+					{#if brandInfo}
+						<div
+							class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1"
+						>
+							<span class="text-lg"
+								><img class="h-6 md:h-8" src={brandInfo.flag} alt={brandInfo.name} /></span
+							>
+							<!-- <span class="text-xs font-medium {brandInfo.color}">{brandInfo.name}</span> -->
+						</div>
+					{/if}
+				{/if}
+			</div>
+			{#if cardNumber.length >= 4 && cardBrand === 'unknown'}
+				<p class="text-xs text-amber-600">⚠️ Bandeira do cartão não reconhecida</p>
+			{/if}
 		</div>
 
 		<!-- Cardholder Name -->

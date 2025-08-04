@@ -146,7 +146,7 @@
 <!-- Used when adding an item to the cart -->
 <CartToast bind:showCartToast={miniCart.active} />
 
-<Toasts position="bottom-center" />
+<Toasts position="top-center" />
 
 <!-- Teaser -->
 <Teaser />

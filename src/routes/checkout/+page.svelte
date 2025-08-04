@@ -24,6 +24,7 @@
 	import { DeliveryUIType } from '$lib/types';
 	import {
 		generateBasicAuthorization,
+		getCreditCardBrand,
 		launchToast,
 		truncate,
 		validateCreditCard
@@ -406,17 +407,19 @@
 		// that securely handles the payment processing with Mercado Pago.
 		// Never expose your Mercado Pago private access token on the client-side.
 		// launchToast(m.sendingPayment(), 'info', 4000);
-
+		toggleLoader();
 		try {
 			// 1. Prepare the payload for your backend. Your backend will then use this
 			// information to make a secure call to Mercado Pago's /v1/payments API.
+			const cardNumber = cardData.cardNumber.replace(/\s/g, '');
 			const paymentPayload = {
 				orderId: orderData.orderId,
 				orderKey: orderData.orderKey,
 				transaction_amount: totalAmount,
 				description: `Pedido #${orderData.orderId}`,
 				card: {
-					number: cardData.cardNumber.replace(/\s/g, ''),
+					brand: getCreditCardBrand(cardNumber),
+					number: cardNumber,
 					holderName: cardData.cardholderName,
 					expirationMonth: parseInt(cardData.expiryDate.split('/')[0].trim(), 10),
 					expirationYear: parseInt('20' + cardData.expiryDate.split('/')[1].trim(), 10),
@@ -436,7 +439,7 @@
 			// 2. Call your backend API. Replace with your actual endpoint.
 			const response = await fetch('/api/payments/credit-card', {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
+				headers: { 'Content-Type': 'application/json', 'x-braaay-internal': '819725491' },
 				body: JSON.stringify(paymentPayload)
 			});
 
@@ -462,6 +465,7 @@
 					// goto(localizeHref(`/checkout/obrigado/${orderData.orderId}/?key=${orderData.orderKey}`), {
 					// 	replaceState: true
 					// });
+					goto(localizeHref(`/checkout/confirmation/${orderData.orderId}/`));
 					break;
 				// case 'in_process':
 				// 	launchToast('Seu pagamento está sendo processado.', 'info');
@@ -488,6 +492,7 @@
 			launchToast(error.message || 'Ocorreu um erro ao processar seu pagamento.', 'error', 5000);
 			isProcessingOrder = false; // Re-enable the UI on error to allow retry
 		}
+		toggleLoader();
 	}
 
 	/**
@@ -511,12 +516,12 @@
 				!creditCardData.expiryDate ||
 				!creditCardData.securityCode
 			) {
-				launchToast('Adicionar todos os dados do cartão de crédito.', 'error');
+				launchToast('Adicionar todos os dados do cartão de crédito.', 'error', 2000);
 				return;
 			}
 
 			if (!validateCreditCard(creditCardData)) {
-				launchToast('Alguns dados do cartão de crédito são inválidos. Verifique.', 'error');
+				launchToast('Alguns dados do cartão de crédito são inválidos. Verifique.', 'error', 2000);
 				return;
 			}
 		}
@@ -534,6 +539,7 @@
 			// CREDIT_CARD PAYMENT
 			if (paymentMethodSelected.id === 'woo-mercado-pago-custom') {
 				console.log('Processing with credit card...');
+
 				// Credit card stuff
 				await processCreditCardPayment(
 					orderCreateResult,
