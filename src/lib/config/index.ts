@@ -13,7 +13,12 @@ export const AppConfig = Object.freeze({
 	showSortingMenu: false,
 
 	payments: {
-		allowedOrigins: ['http://localhost:4000', 'https://braaay.com', 'https://www.braaay.com'],
+		allowedOrigins: [
+			'http://localhost:4000',
+			'https://braaay.com',
+			'https://www.braaay.com',
+			'https://braaay-front-site.vercel.app'
+		],
 		timeout: 30
 	},
 
