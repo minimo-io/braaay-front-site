@@ -174,58 +174,72 @@ export async function POST({ request, url }) {
 
 						// order.create({ body, requestOptions }).then(console.log).catch(console.error);
 						console.log('MP trying to create order...');
-						const response = await order.create({ body, requestOptions });
 
-						console.log('MP Response:', response);
-						const payment = response.transactions?.payments?.[0];
+						try {
+							const response = await order.create({ body, requestOptions });
+							console.log('MP Response:', response);
+							const payment = response.transactions?.payments?.[0];
 
-						if (response.id && payment && payment.id) {
-							// Change status on woocommerce order
-							const updateOrderResult = await updateOrderWithMPData(
-								paymentPayload.orderId,
-								response.id,
-								payment.id
-							);
+							if (response.id && payment && payment.id) {
+								// Change status on woocommerce order
+								const updateOrderResult = await updateOrderWithMPData(
+									paymentPayload.orderId,
+									response.id,
+									payment.id
+								);
 
-							// Update to order completed
-							const result = await getUrqlClient()
-								.client.mutation(
-									UPDATE_ORDER_TO_COMPLETED_MUTATION,
-									{
-										orderId: paymentPayload.orderId
-									},
-									{
-										fetchOptions: {
-											headers: {
-												authorization: `Basic ${generateBasicAuthorization(PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY)}`
+								// Update to order completed
+								const result = await getUrqlClient()
+									.client.mutation(
+										UPDATE_ORDER_TO_COMPLETED_MUTATION,
+										{
+											orderId: paymentPayload.orderId
+										},
+										{
+											fetchOptions: {
+												headers: {
+													authorization: `Basic ${generateBasicAuthorization(PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY)}`
+												}
 											}
 										}
-									}
-								)
-								.toPromise();
+									)
+									.toPromise();
 
-							// This is a bad error, but the user actually paid... so redirect and check
-							if (result.error) {
-								console.error(
-									`GraphQL Error updating order status (#${paymentPayload.orderId}):`,
-									result.error.message
+								// This is a bad error, but the user actually paid... so redirect and check
+								if (result.error) {
+									console.error(
+										`GraphQL Error updating order status (#${paymentPayload.orderId}):`,
+										result.error.message
+									);
+								}
+
+								// If we could not update the order then just register the problem
+								// do not cancel because the user actually paid
+								if (!updateOrderResult.success) {
+									console.error(`Error updating WooCommerce order with MP payment data`);
+								}
+
+								return json({ status: 'approved' });
+							} else {
+								console.error(`Payments: Invalid ML response payload: ${response}`);
+								return json(
+									{
+										status: 'rejected',
+										status_detail: 'Invalid ML response payload',
+										message:
+											'Resposta do Mercado Pago inválida. Tente novamente ou entre em contato.'
+									},
+									{ status: 400 }
 								);
 							}
-
-							// If we could not update the order then just register the problem
-							// do not cancel because the user actually paid
-							if (!updateOrderResult.success) {
-								console.error(`Error updating WooCommerce order with MP payment data`);
-							}
-
-							return json({ status: 'approved' });
-						} else {
-							console.error(`Payments: Invalid ML response payload: ${response}`);
+						} catch (err: any) {
+							console.error('Payments: Error on order init', err);
 							return json(
 								{
 									status: 'rejected',
-									status_detail: 'Invalid ML response payload',
-									message: 'Resposta do Mercado Pago inválida. Tente novamente ou entre em contato.'
+									status_detail: `Error while creating payment order`,
+									message:
+										'Erro em quanto tentamos criar a ordem de pagamento. Tente novamente ou entre em contato.'
 								},
 								{ status: 400 }
 							);
