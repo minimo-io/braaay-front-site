@@ -233,7 +233,9 @@ export async function POST({ request, url }) {
 								);
 							}
 						} catch (err: any) {
-							console.error('Payments: Error on order init', err);
+							console.error('Payments: Error on order creation', err);
+							console.error('Details');
+							console.error(err.errors);
 							return json(
 								{
 									status: 'rejected',
@@ -254,7 +256,7 @@ export async function POST({ request, url }) {
 						// 	);
 						// }
 					} catch (err: any) {
-						console.error(`Payments: Error while creating payment order`, err);
+						console.error(`Payments: Error on payment order init`, err);
 						console.error('Details');
 						console.error(err.errors);
 						return json(
