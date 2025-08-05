@@ -57,6 +57,8 @@
 
 	import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
 	import Meta from '$components/layout/Meta.svelte';
+	import type { Items } from 'mercadopago/dist/clients/commonTypes';
+	import type { Item } from 'mercadopago/dist/clients/order/commonTypes';
 
 	interface Steps {
 		step1: boolean | object;
@@ -396,7 +398,7 @@
 	 * @param customerData - The customer information.
 	 * @param totalAmount - The total amount for the transaction.
 	 */
-	export async function processCreditCardPayment(
+	async function processCreditCardPayment_TransparentCheckout(
 		orderData: { orderId: any; orderKey: any },
 		cardData: CreditCardFormData,
 		customerData: Customer,
@@ -452,7 +454,8 @@
 				// Handle errors from your API, which should ideally forward Mercado Pago's error.
 				const errorMessage = result.message || 'Payment failed. Please try again.';
 				console.error(errorMessage);
-				throw new Error(errorMessage);
+				launchToast(errorMessage, 'error', 5000);
+				isProcessingOrder = false; // Re-enable the UI for another attempt
 			}
 
 			// 3. Handle the payment status returned from your backend.
@@ -495,6 +498,50 @@
 		toggleLoader();
 	}
 
+	async function processCreditCardPayment_Redirect(
+		items: Items[],
+		orderData: { orderId: string | number; orderKey: string | number }
+	) {
+		isProcessingOrder = true;
+		let paymentPayload = {
+			items,
+			orderData
+		};
+
+		// Call your backend API. Replace with your actual endpoint.
+		const response = await fetch('/api/payments/credit-card-redirect', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json', 'x-braaay-internal': '819725491' },
+			body: JSON.stringify(paymentPayload)
+		});
+		const result = await response.json();
+
+		// If error
+		if (!response.ok) {
+			// Handle errors from your API, which should ideally forward Mercado Pago's error.
+			const errorMessage = result.message || 'Payment failed. Please try again.';
+			console.error(errorMessage);
+			launchToast(errorMessage, 'error', 5000);
+			isProcessingOrder = false; // Re-enable the UI for another attempt
+		}
+
+		// If ok
+		switch (result.status) {
+			case 'approved':
+				launchToast('Redirecionando para o Mercado Pago...', 'success');
+				window.location = result.init_point;
+				break;
+			case 'rejected':
+				launchToast(
+					`Pagamento recusado: ${result.status_detail || 'verifique os dados do cartão.'}`,
+					'error',
+					5000
+				);
+				isProcessingOrder = false; // Re-enable the UI for another attempt
+				break;
+		}
+	}
+
 	/**
 	 * Finally process the payment
 	 *
@@ -507,8 +554,11 @@
 			return;
 		}
 
-		// Validate credit card if needed
-		if (paymentMethodSelected.id === 'woo-mercado-pago-custom') {
+		// Validate credit card if needed, meaning if credit card mode IS trasparent / local
+		if (
+			paymentMethodSelected.id === 'woo-mercado-pago-custom' &&
+			AppConfig.payments.checkoutCreditCardMode == 'transparent'
+		) {
 			if (
 				!creditCardData ||
 				!creditCardData.cardNumber ||
@@ -538,15 +588,47 @@
 			// If the payment type is credit card, then we should send this data to mercado pago
 			// CREDIT_CARD PAYMENT
 			if (paymentMethodSelected.id === 'woo-mercado-pago-custom') {
-				console.log('Processing with credit card...');
+				console.log('Processing with credit card. Choosing method...');
 
-				// Credit card stuff
-				await processCreditCardPayment(
-					orderCreateResult,
-					creditCardData!, // Already validated above
-					customer!, // Should exist at this point
-					cartTotalAmount
-				);
+				if (AppConfig.payments.checkoutCreditCardMode == 'transparent') {
+					console.log('Transparent checkout chosen from config.');
+					// Credit card stuff for transparent / local checkout
+					await processCreditCardPayment_TransparentCheckout(
+						orderCreateResult,
+						creditCardData!, // Already validated above
+						customer!, // Should exist at this point
+						cartTotalAmount
+					);
+				} else if (AppConfig.payments.checkoutCreditCardMode == 'redirect') {
+					console.log('Redirect checkout chosen from config.');
+
+					// Credit card redirect payment
+					toggleLoader();
+
+					let items: Items[] = [];
+					// Add cart items
+					cart.subscribe((c) => {
+						c.items.forEach((item) => {
+							items.push({
+								unit_price: item.price,
+								title: item.name,
+								quantity: item.quantity,
+								id: item.id.toString()
+							});
+						});
+					});
+					// add shipping
+					items.push({
+						unit_price: parseFloat(shippingOption!.cost),
+						title: shippingOption!.label,
+						quantity: 1,
+						id: shippingOption!.id
+					});
+					// Let's go, do the payload
+					await processCreditCardPayment_Redirect(items, orderCreateResult);
+
+					// toggleLoader();
+				}
 			} else {
 				// Else we redirect to the second step for QR Code Payment (PIX)
 				goto(

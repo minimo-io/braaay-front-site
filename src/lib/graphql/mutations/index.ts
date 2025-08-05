@@ -9,6 +9,7 @@ export * from './checkout-payment-methods.mutation';
 export * from './checkout-create-order.mutation';
 export * from './update-order-mp-data.mutation'; // update order with mercado pago data
 export * from './checkout-complete-order.mutation';
+export * from './checkout-cancel-order.mutation';
 
 export * from './login.mutation';
 export * from './signup.mutation';

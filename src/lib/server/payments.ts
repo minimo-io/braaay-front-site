@@ -1,7 +1,8 @@
 // src/lib/server/payments.ts
 import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
-import { UPDATE_ORDER_MP_DATA } from '$lib/graphql/mutations';
+import { UPDATE_ORDER_MP_DATA, UPDATE_ORDER_TO_CANCELLED_MUTATION } from '$lib/graphql/mutations';
 import { ORDER_QUERY } from '$lib/graphql/queries';
+// import type { CreditCardFormData, Customer } from '$lib/types';
 import { generateBasicAuthorization } from '$lib/utils';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 
@@ -76,3 +77,39 @@ export const updateOrderWithMPData = async (
 		return { success: false, error };
 	}
 };
+
+// Cancel a woocommerce order
+export async function cancelWooCommerceOrder(merchantOrderId: string): Promise<any> {
+	const result = await getUrqlClient('', true)
+		.client.mutation(
+			UPDATE_ORDER_TO_CANCELLED_MUTATION,
+			{
+				orderId: merchantOrderId
+			},
+			{
+				fetchOptions: {
+					headers: {
+						authorization: `Basic ${generateBasicAuthorization(PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY)}`
+					}
+				}
+			}
+		)
+		.toPromise();
+
+	if (result.error) {
+		console.error('GraphQL Error updating order:', result.error.message);
+		return { success: false, error: result.error.message };
+	} else if (result.data?.updateOrder?.order?.status) {
+		console.log(
+			`Order ${result.data.updateOrder.order.id} status updated to: ${result.data.updateOrder.order.status}`
+		);
+		return {
+			success: true,
+			orderId: result.data.updateOrder.order.id,
+			status: result.data.updateOrder.order.status
+		};
+	} else {
+		console.warn('Order status update mutation returned no data or unexpected format.');
+		return { success: false, error: 'Unexpected mutation response format' };
+	}
+}

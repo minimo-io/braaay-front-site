@@ -11,16 +11,24 @@
 	import { AppConfig } from '$config';
 	import Meta from '$components/layout/Meta.svelte';
 
-	const routeId = page.route.id;
-	const orderId = $derived(page.url.searchParams.get('orderId'));
+	// const routeId = page.route.id;
+	const providerCode = $derived(page.url.searchParams.get('provider'));
+	const orderId = $derived(
+		providerCode == 'mp'
+			? page.url.searchParams.get('merchant_order_id')
+			: page.url.searchParams.get('orderId')
+	);
+
 	const errorCode = $derived(page.url.searchParams.get('code'));
 	const details = $derived(page.url.searchParams.get('details'));
 
+	let { data } = $props();
+
 	onMount(() => {
 		loaderActivated.active = false;
+		console.log('Cancellation result', data.cancellationResult);
+		console.log('data', data);
 	});
-
-	// const orderId = $state(page.params.orderId);
 </script>
 
 <Meta
@@ -64,22 +72,24 @@
 				<span class="font-bold">#{orderId}</span>
 			</p>
 		{/if}
+		<!-- Detalhes do erro -->
+		{#if providerCode != 'mp'}
+			<!-- Error code -->
+			{#if orderId}
+				<p class="text-blue opacity-80 font-medium text-sm">
+					CÓDIGO DO ERRO:
 
-		<!-- Error code -->
-		{#if orderId}
-			<p class="text-blue opacity-80 font-medium text-sm">
-				CÓDIGO DO ERRO:
+					<span class="font-bold">{errorCode}</span>
+				</p>
+			{/if}
 
-				<span class="font-bold">{errorCode}</span>
-			</p>
-		{/if}
-
-		<!-- Order ID Section -->
-		{#if details}
-			<p class="text-blue opacity-80 font-medium text-sm">
-				MOTIVO DO ERRO:
-				<span class="font-bold mt-1 block">{details}</span>
-			</p>
+			<!-- Order ID Section -->
+			{#if details}
+				<p class="text-blue opacity-80 font-medium text-sm">
+					MOTIVO DO ERRO:
+					<span class="font-bold mt-1 block">{details}</span>
+				</p>
+			{/if}
 		{/if}
 	</div>
 

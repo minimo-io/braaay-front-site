@@ -1,14 +1,32 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import pkg from './package.json';
+
+const isAnalyze = process.env.ANALYZE === 'true';
 
 export default defineConfig({
 	define: {
 		__APP_VERSION__: JSON.stringify(pkg.version)
 	},
+	build: {
+		// cssCodeSplit: true
+		// cssCodeSplit: false
+	},
+	server: {
+		// host: true,
+		port: 4000
+	},
 	plugins: [
 		sveltekit(),
+		isAnalyze &&
+			visualizer({
+				open: true, // automatically opens in browser
+				gzipSize: true,
+				brotliSize: true,
+				template: 'treemap' // or 'sunburst', 'network'
+			}),
 		paraglideVitePlugin({
 			project: './project.inlang',
 			outdir: './src/lib/paraglide',
@@ -223,12 +241,5 @@ export default defineConfig({
 				}
 			]
 		})
-	],
-	build: {
-		cssCodeSplit: true
-	},
-	server: {
-		// host: true,
-		port: 4000
-	}
+	]
 });

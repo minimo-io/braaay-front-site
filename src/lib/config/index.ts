@@ -7,6 +7,8 @@ export const AppConfig = Object.freeze({
 	statusCheckDuration: 1500,
 	mapLink: 'https://maps.app.goo.gl/C62e1n2KGZmtuMW39',
 	whatsappLink: 'https://wa.me/5511947530340',
+
+	testUrl: 'https://braaay-front-site.vercel.app',
 	// Toggle the filtering menu (mobile & desktop)
 	showProductFilters: false,
 	// Toggle the sorting buttons normally above the filtering menu (mobile & desktop)
@@ -19,6 +21,7 @@ export const AppConfig = Object.freeze({
 			'https://www.braaay.com',
 			'https://braaay-front-site.vercel.app'
 		],
+		checkoutCreditCardMode: 'redirect', // or transparent
 		timeout: 30
 	},
 

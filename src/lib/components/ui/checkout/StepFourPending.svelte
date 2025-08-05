@@ -193,7 +193,7 @@
 			<div class="text-xs">{m.checkoutLoadingPayments()}</div>
 		{/if}
 
-		{#if methodSelected?.id == 'woo-mercado-pago-pix'}{:else if methodSelected?.id == 'woo-mercado-pago-custom'}
+		{#if methodSelected?.id == 'woo-mercado-pago-pix'}{:else if methodSelected?.id == 'woo-mercado-pago-custom' && AppConfig.payments.checkoutCreditCardMode == 'transparent'}
 			<CheckoutCreditCardInfo
 				onCreditCardChange={(formData: CreditCardFormData) => {
 					onCreditCardChange(formData);
