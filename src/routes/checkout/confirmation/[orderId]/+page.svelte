@@ -6,8 +6,15 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { launchToast } from '$lib/utils';
 	import { Check } from '@lucide/svelte';
+	import { onMount } from 'svelte';
 
 	const orderId = $state(page.params.orderId);
+
+	let { data } = $props();
+
+	onMount(() => {
+		console.log('data', data);
+	});
 </script>
 
 <Meta
