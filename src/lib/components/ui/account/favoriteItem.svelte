@@ -51,7 +51,8 @@
 		regularPrice: favorite.product.regularPrice,
 		quantity: 1,
 		maxQuantity: favorite.product.stockQuantity,
-		image: favorite.product.image
+		image: favorite.product.image,
+		virtual: favorite.product.virtual
 	};
 
 	// Optionally, you can provide a wrapper function in case you want to extend the behavior.

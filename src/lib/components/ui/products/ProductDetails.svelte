@@ -41,7 +41,8 @@
 		regularPrice: product.regularPrice,
 		quantity: 1,
 		maxQuantity: product.stockQuantity,
-		image: product.image
+		image: product.image,
+		virtual: product.virtual
 	};
 
 	let processing = $state(false);

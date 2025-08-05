@@ -8,6 +8,7 @@ export interface CartItem {
 	regularPrice: string;
 	quantity: number;
 	maxQuantity: number;
+	virtual: boolean;
 	image: ImageGeneral;
 	sku: string;
 	uri: string;

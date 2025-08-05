@@ -122,24 +122,41 @@
 		return coupons;
 	});
 
+	// Derived to check if you only have virtual products
+	let allVirtualProducts = $derived.by(() => {
+		let allVirtual;
+		cart.subscribe((c) => {
+			allVirtual = c.items.every((item) => item.virtual);
+		});
+
+		return allVirtual;
+	});
+
 	onMount(async () => {
 		await initializeCheckout();
 	});
 
 	async function initializeCheckout() {
-		// toggleLoader();
 		isInitializing = true;
 		try {
+			// Step 1 done if auth, then get the data
 			if (isAuthenticated()) {
 				steps.step1 = true;
+
+				// Query client
+				const customerResult = await getUrqlClient().client.query(CUSTOMER_QUERY, {});
+				if (customerResult?.error) {
+					throw new Error(customerResult.error.message);
+				}
+
+				customer = mapCustomerToUser(customerResult.data);
 			}
 
-			const customerResult = await getUrqlClient().client.query(CUSTOMER_QUERY, {});
-			if (customerResult?.error) {
-				throw new Error(customerResult.error.message);
+			// If only virtual products then no shipping to show
+			if (allVirtualProducts) {
+				setPickUpOrVirtual({ hideShippingSelectorForm: true });
+				deliveryType = DeliveryUIType.PICKUP;
 			}
-
-			customer = mapCustomerToUser(customerResult.data);
 		} catch (err) {
 			console.error(`Error initializing checkout: ${err}`);
 			launchToast('Houve um erro tentando obter os dados do cliente', 'error');
@@ -258,22 +275,27 @@
 		editStep1 = true;
 		resetStepsAfter(1);
 	}
+	async function setPickUpOrVirtual(options: { hideShippingSelectorForm: boolean }) {
+		resetStepsAfter(2);
+		const syncedToken = await synchronizeCart(AppConfig.address[getLocale()].zipCode);
+		if (syncedToken) {
+			shippingOption = {
+				id: 'local_pickup:11',
+				label: 'Retirada no showroom (São Paulo)',
+				cost: '0.00'
+			};
+			steps.step2 = true;
+			steps.step3 = true;
 
+			if (options.hideShippingSelectorForm) {
+			}
+		}
+	}
 	async function handleDeliveryTypeUpdate(delivery: DeliveryUIType) {
 		deliveryType = delivery;
 
 		if (deliveryType == 'PICKUP') {
-			resetStepsAfter(2);
-			const syncedToken = await synchronizeCart(AppConfig.address[getLocale()].zipCode);
-			if (syncedToken) {
-				shippingOption = {
-					id: 'local_pickup:11',
-					label: 'Retirada no showroom (São Paulo)',
-					cost: '0.00'
-				};
-				steps.step2 = true;
-				steps.step3 = true;
-			}
+			await setPickUpOrVirtual({ hideShippingSelectorForm: false });
 		} else if (deliveryType == 'DELIVERY') {
 			// When switching from pickup to delivery, we need to reset shipping data
 			// and make sure step2 is not completed so the address form shows
@@ -503,6 +525,7 @@
 		orderData: { orderId: string | number; orderKey: string | number }
 	) {
 		isProcessingOrder = true;
+		toggleLoader();
 		let paymentPayload = {
 			items,
 			orderData
@@ -666,7 +689,6 @@
 					<div class="flex justify-start mb-3 mx-3 md:mx-1">
 						<h1 class="text-[19px] font-roboto font-extrabold ml-1">Checkout</h1>
 					</div>
-
 					<!-- Loading overlay for cart synchronization -->
 					{#if isSynchronizingCart}
 						<div
@@ -711,10 +733,13 @@
 					/>
 
 					<div class="space-y-4 px-3 md:mb-24">
-						<CheckoutChooseDelivery
-							initialValue={deliveryType}
-							onUpdate={handleDeliveryTypeUpdate}
-						/>
+						<div>
+							<CheckoutChooseDelivery
+								{allVirtualProducts}
+								initialValue={deliveryType}
+								onUpdate={handleDeliveryTypeUpdate}
+							/>
+						</div>
 
 						<div>
 							<Divider color="blue" extraClasses="!border-b-grey-lighter my-7" />

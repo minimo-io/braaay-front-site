@@ -99,7 +99,8 @@
 												url: product.image.mediaItemUrl
 											},
 											sku: product.sku,
-											uri: product.uri
+											uri: product.uri,
+											virtual: product.virtual
 										})}
 								>
 									{#snippet icon()}
@@ -156,7 +157,8 @@
 												url: product.image.mediaItemUrl
 											},
 											sku: product.sku,
-											uri: product.uri
+											uri: product.uri,
+											virtual: product.virtual
 										})}
 								>
 									{#snippet icon()}
