@@ -1,5 +1,6 @@
 import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
 import { UPDATE_ORDER_TO_COMPLETED_MUTATION } from '$lib/graphql/mutations';
+import { updateOrderWithMPData } from '$lib/server/payments';
 import { generateBasicAuthorization } from '$lib/utils';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 import type { PageServerLoad } from './$types';
@@ -85,15 +86,4 @@ async function completeWooCommerceOrder(orderId: string): Promise<any> {
 		console.warn('Order status update mutation returned no data or unexpected format.');
 		return { success: false, error: 'Unexpected mutation response format' };
 	}
-}
-
-// Add your updateOrderWithMPData function - replace with your actual implementation
-async function updateOrderWithMPData(
-	orderId: string,
-	responseId: string,
-	paymentId: string
-): Promise<any> {
-	// Call your existing updateOrderWithMPData function
-	const updateOrderResult = await updateOrderWithMPData(orderId, responseId, paymentId);
-	return updateOrderResult;
 }
