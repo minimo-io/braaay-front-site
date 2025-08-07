@@ -11,7 +11,7 @@
       "quantity": 1,
       "maxQuantity": 4,
       "image": {
-        "mediaItemUrl": "https://braaay.com/wp-content/uploads/2025/03/don-adelio-ariano-oak-barrel-tannat.png",
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2025/03/don-adelio-ariano-oak-barrel-tannat.png",
         "altText": "don-adelio-ariano-oak-barrel-tannat"
       }
     },
@@ -26,7 +26,7 @@
       "quantity": 1,
       "maxQuantity": null,
       "image": {
-        "mediaItemUrl": "https://braaay.com/wp-content/uploads/2024/11/Kit-Vinho-Don-Pascual-Tannat-com-Castanhas.png",
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/11/Kit-Vinho-Don-Pascual-Tannat-com-Castanhas.png",
         "altText": ""
       }
     },
@@ -41,7 +41,7 @@
       "quantity": 1,
       "maxQuantity": 4,
       "image": {
-        "mediaItemUrl": "https://braaay.com/wp-content/uploads/2024/11/kit-artesana-tannat-1.png",
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/11/kit-artesana-tannat-1.png",
         "altText": ""
       }
     },
@@ -54,9 +54,9 @@
       "regularPrice": "R$450,00",
       "price": 405,
       "quantity": 1,
-      "maxQuantity": 6,
+      "maxQuantity": 5,
       "image": {
-        "mediaItemUrl": "https://braaay.com/wp-content/uploads/2024/09/Pizzato-99-Merlot.webp",
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/09/Pizzato-99-Merlot.webp",
         "altText": "Pizzato 99 Merlot"
       }
     },
@@ -71,7 +71,7 @@
       "quantity": 1,
       "maxQuantity": 1,
       "image": {
-        "mediaItemUrl": "https://braaay.com/wp-content/uploads/2024/08/BraccoBosca-1-1.webp",
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/08/BraccoBosca-1-1.webp",
         "altText": "BraccoBosca (1)"
       }
     }

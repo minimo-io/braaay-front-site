@@ -1,27 +1,10 @@
+User-agent: *
+Disallow: /
+
 # START YOAST BLOCK
 # ---------------------------
 User-agent: *
-Crawl-delay: 5 #1 page per 10 seconds
-
-# User-Agent:  FacebookBot                              
-
-
-Disallow: /wp-admin/
-Disallow: /wp-json/
-Disallow: /produtores-de-vinho/los-lirios/
-Disallow: /*?*
-# Disallow: /?s=*
-# Disallow: /*/?filter_pais=*
-# Disallow: /*/?filter_produtores-de-vinho=*
-# Disallow: /*/?max_price=*
-# Disallow: /*/?filter_pais=*
-# Disallow: /*/?tax_uva=*
-# Disallow: /*/?filter_produtores-de-vinho=*
-Disallow: /*?filter_pais=
-Disallow: /*?orderby=
-Disallow: /*?tax_product_cat=
-Disallow: /*?tax_uva=
-Disallow: /*?*unfilter=1
+Crawl-delay: 5 #1 page per 10 seconds                            
 
 
 
@@ -54,5 +37,3 @@ User-agent: magpie-crawler
 Disallow: /
 
 # Generated Sitemaps for Front-End
-Sitemap: https://braaay-front-site.vercel.app/sitemap_index.xml
-Sitemap: https://braaay-front-site.vercel.app/uy/sitemap_index.xml

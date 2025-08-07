@@ -70,8 +70,8 @@ const ONSALE_PRODUCTS = gql`
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outputDir = path.join(__dirname, '../src/lib/data/jsons/');
 
-const PT_GRAPHQL_URL = 'https://braaay.com/graphql';
-const UY_GRAPHQL_URL = 'https://braaay.com/uy/graphql';
+const PT_GRAPHQL_URL = 'https://api.braaay.com/graphql';
+const UY_GRAPHQL_URL = 'https://api.braaay.com/uy/graphql';
 
 const ptClient = createClient({
 	url: PT_GRAPHQL_URL,

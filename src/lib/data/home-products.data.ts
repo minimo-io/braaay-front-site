@@ -12,7 +12,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/vinho-branco-alvarinho-atlantico-sur-deicas-uruguai/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/wp-content/uploads/2025/02/vinho-alvarinho-atlantico-sur-deicas-2.png',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2025/02/vinho-alvarinho-atlantico-sur-deicas-2.png',
 						alt: 'vinho-alvarinho-atlantico-sur-deicas-2'
 					}
 				},
@@ -23,7 +23,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/vinho-branco-bouza-albarino-2024-uruguai/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/wp-content/uploads/2025/05/vinho-albarinho-bouza.png',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2025/05/vinho-albarinho-bouza.png',
 						alt: 'vinho-albarinho-bouza'
 					}
 				},
@@ -34,7 +34,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/vinho-familia-deicas-massimo-tannat/',
 					score: '5.0',
 					image: {
-						src: 'https://braaay.com/wp-content/uploads/2024/09/vinho-massimo-familia-deicas.png',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/09/vinho-massimo-familia-deicas.png',
 						alt: 'massimo-tannat-familia-deicas'
 					}
 				},
@@ -45,7 +45,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/vinhedos-do-monte-agudo-sublime/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/wp-content/uploads/2024/08/Sublime-1.webp',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/08/Sublime-1.webp',
 						alt: 'Sublime (1)'
 					}
 				},
@@ -56,7 +56,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/vinho-pizzato-concentus-gran-reserva/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/wp-content/uploads/2024/08/PIZZATO-concentus.webp',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/08/PIZZATO-concentus.webp',
 						alt: 'PIZZATO concentus'
 					}
 				}
@@ -69,7 +69,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/kit-vinho-pinot-noir-premium-flores-naturais/',
 					score: '4.8',
 					image: {
-						src: 'https://braaay.com/wp-content/uploads/2024/11/kit-vina-eden-flores-naturais-blur.png',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/11/kit-vina-eden-flores-naturais-blur.png',
 						alt: 'kit-vina-eden-flores-naturais-blur'
 					}
 				},
@@ -80,7 +80,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/kit-x6-espumantes-brut-cume-sacola/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/wp-content/uploads/2024/11/kit-presente-espumante-cume.jpg',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/11/kit-presente-espumante-cume.jpg',
 						alt: 'kit-presente-espumante-cume'
 					}
 				},
@@ -91,7 +91,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/kit-x3-espumantes-taca/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/wp-content/uploads/2024/11/kit-taca-espumantes-prod.jpg',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/11/kit-taca-espumantes-prod.jpg',
 						alt: 'kit-taca-espumantes-prod'
 					}
 				},
@@ -103,7 +103,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/kit-vinho-artesana-tannat-queijos-brie-e-gouda-pistache-e-caixa/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/wp-content/uploads/2024/11/kit-artesana-tannat-1.png',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/11/kit-artesana-tannat-1.png',
 						alt: 'kit-vinho-e-queijo'
 					}
 				},
@@ -114,7 +114,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/kit-espumante-pizzato-brut-rose-com-chocolates-dengo/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/wp-content/uploads/2024/11/kit-pizzato-brut-choco-dengo.png',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/11/kit-pizzato-brut-choco-dengo.png',
 						alt: 'kit-espumante-pizzato-chocolate'
 					}
 				}
@@ -130,7 +130,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/uy/producto/cerveza-el-bananero-japi-beer-lager/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/uy/wp-content/uploads/sites/2/2024/12/japi-beer-uruguay-lager-el-bananero.png',
+						src: 'https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/12/japi-beer-uruguay-lager-el-bananero.png',
 						alt: 'Japi-beer-lager-el-bananero'
 					}
 				},
@@ -141,7 +141,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/uy/producto/cerveza-sin-alcohol-rebelion-ipa/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/uy/wp-content/uploads/sites/2/2024/11/cerveza-rebelion-ipa.png',
+						src: 'https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/11/cerveza-rebelion-ipa.png',
 						alt: 'cerveza-rebelion-ip-sin-alcohol'
 					}
 				},
@@ -152,7 +152,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/uy/producto/cerveza-cabesas-bier-ipa-atomica/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/uy/wp-content/uploads/sites/2/2024/12/cabesas-bier-ipa-atomica.png',
+						src: 'https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/12/cabesas-bier-ipa-atomica.png',
 						alt: 'cabesas-bier-ipa-atomica'
 					}
 				},
@@ -163,7 +163,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/uy/producto/cerveza-the-endless-sour-xcs/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/uy/wp-content/uploads/sites/2/2024/11/the-endless-sour-cerveza-por-culpa-de-sam.png',
+						src: 'https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/11/the-endless-sour-cerveza-por-culpa-de-sam.png',
 						alt: 'por-culpa-de-sam-endless-sour'
 					}
 				},
@@ -174,7 +174,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/uy/producto/cerveza-american-pils-xcs/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/uy/wp-content/uploads/sites/2/2024/12/cerveza-por-culpa-de-sam-pils.png',
+						src: 'https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/12/cerveza-por-culpa-de-sam-pils.png',
 						alt: 'american-pils'
 					}
 				}
@@ -187,7 +187,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/uy/producto/vino-familia-deicas-alvarinho-atlantico-sur-750ml/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/uy/wp-content/uploads/sites/2/2025/04/vinho-alvarinho-atlantico-sur-deicas-2.webp',
+						src: 'https://api.braaay.com/uy/wp-content/uploads/sites/2/2025/04/vinho-alvarinho-atlantico-sur-deicas-2.webp',
 						alt: 'familia-deicas-alvarinho'
 					}
 				},
@@ -198,7 +198,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/uy/producto/cerveza-davok-ipa/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/uy/wp-content/uploads/sites/2/2024/04/cerveza-davok-ipa-braaay.webp',
+						src: 'https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/04/cerveza-davok-ipa-braaay.webp',
 						alt: 'davok-ipa'
 					}
 				},
@@ -209,7 +209,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/uy/producto/cerveza-artesanal-equilibrio-neipa/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/uy/wp-content/uploads/sites/2/2024/03/equilibrio-neipa-la-fuerza.webp',
+						src: 'https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/03/equilibrio-neipa-la-fuerza.webp',
 						alt: 'equilibrio-neipa'
 					}
 				},
@@ -220,7 +220,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/uy/producto/cerveza-capitan-fumasa-hemp-ipa-cannabica/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/uy/wp-content/uploads/sites/2/2024/03/cerveza-indica-hemp-ipa-fumasa.webp',
+						src: 'https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/03/cerveza-indica-hemp-ipa-fumasa.webp',
 						alt: 'capitan-fumasa-hemp-ipa'
 					}
 				},
@@ -231,7 +231,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/uy/producto/cerveza-artesanal-mastra-american-stout/',
 					score: '',
 					image: {
-						src: 'https://braaay.com/uy/wp-content/uploads/sites/2/2024/02/cerveza-mastra-american-stout.webp',
+						src: 'https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/02/cerveza-mastra-american-stout.webp',
 						alt: 'mastra-stout'
 					}
 				}

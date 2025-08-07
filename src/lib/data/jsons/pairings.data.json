@@ -14,7 +14,7 @@
 			"uri": "/harmonizacoes/carnes-vermelhas/",
 			"count": 37,
 			"image": {
-				"url": "https://braaay.com/wp-content/uploads/2025/07/carnes-vermelhas.jpg",
+				"url": "https://api.braaay.com/wp-content/uploads/2025/07/carnes-vermelhas.jpg",
 				"altText": "carnes-vermelhas"
 			}
 		},
@@ -50,7 +50,7 @@
 			"uri": "/harmonizacoes/risotos/",
 			"count": 12,
 			"image": {
-				"url": "https://braaay.com/wp-content/uploads/2024/10/risoto-harmonizacoes.png",
+				"url": "https://api.braaay.com/wp-content/uploads/2024/10/risoto-harmonizacoes.png",
 				"altText": "risoto-harmonizacoes"
 			}
 		},
@@ -77,7 +77,7 @@
 			"uri": "/harmonizacoes/culinaria-japonesa/",
 			"count": 3,
 			"image": {
-				"url": "https://braaay.com/wp-content/uploads/2024/08/culinaria-japonesa.webp",
+				"url": "https://api.braaay.com/wp-content/uploads/2024/08/culinaria-japonesa.webp",
 				"altText": "culinaria-japonesa"
 			}
 		},

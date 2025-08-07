@@ -4,37 +4,37 @@
       "name": "Brasil",
       "url": "/pais/brasil/",
       "count": 69,
-      "flag": "https://braaay.com/wp-content/uploads/2023/05/brasil-flag.png"
+      "flag": "https://api.braaay.com/wp-content/uploads/2023/05/brasil-flag.png"
     },
     {
       "name": "Uruguai",
       "url": "/pais/uruguai/",
       "count": 48,
-      "flag": "https://braaay.com/wp-content/uploads/2023/05/uruguai-flag.png"
+      "flag": "https://api.braaay.com/wp-content/uploads/2023/05/uruguai-flag.png"
     },
     {
       "name": "Chile",
       "url": "/pais/chile/",
       "count": 18,
-      "flag": "https://braaay.com/wp-content/uploads/2023/05/chile-flag.png"
+      "flag": "https://api.braaay.com/wp-content/uploads/2023/05/chile-flag.png"
     },
     {
       "name": "Argentina",
       "url": "/pais/argentina/",
       "count": 10,
-      "flag": "https://braaay.com/wp-content/uploads/2023/05/argentina-flag.png"
+      "flag": "https://api.braaay.com/wp-content/uploads/2023/05/argentina-flag.png"
     },
     {
       "name": "Italia",
       "url": "/pais/italia/",
       "count": 6,
-      "flag": "https://braaay.com/wp-content/uploads/2025/04/italy.png"
+      "flag": "https://api.braaay.com/wp-content/uploads/2025/04/italy.png"
     },
     {
       "name": "Portugal",
       "url": "/pais/portugal/",
       "count": 5,
-      "flag": "https://braaay.com/wp-content/uploads/2023/05/portugal-flag.png"
+      "flag": "https://api.braaay.com/wp-content/uploads/2023/05/portugal-flag.png"
     }
   ],
   "uy": []

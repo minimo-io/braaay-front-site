@@ -264,7 +264,7 @@
 			/>
 			<section class="bg-white max-w-screen-lg-2x py-10 mx-[20px] lg:mx-auto">
 				<div class="bry-product-list">
-					{#each mostPopularProducts as product}
+					{#each mostPopularProducts.slice(0, 10) as product, i (i)}
 						<WineBox
 							image={{ src: product.image.src, alt: product.image.alt }}
 							wine={{

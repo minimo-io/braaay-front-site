@@ -6,7 +6,7 @@ import { createClient, cacheExchange, fetchExchange, gql } from '@urql/core';
 const POPULAR_PRODUCTS_QUERY = gql`
 	query MostSoldWines {
 		products(
-			first: 10
+			first: 15
 			where: {
 				orderby: { order: ASC, field: POPULARITY }
 				stockStatus: IN_STOCK
@@ -35,8 +35,8 @@ const POPULAR_PRODUCTS_QUERY = gql`
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outputDir = path.join(__dirname, '../src/lib/data/jsons/');
 
-const PT_GRAPHQL_URL = 'https://braaay.com/graphql';
-const UY_GRAPHQL_URL = 'https://braaay.com/uy/graphql';
+const PT_GRAPHQL_URL = 'https://api.braaay.com/graphql';
+const UY_GRAPHQL_URL = 'https://api.braaay.com/uy/graphql';
 
 const ptClient = createClient({
 	url: PT_GRAPHQL_URL,
@@ -57,17 +57,19 @@ function transformData(data: any) {
 		return [];
 	}
 
-	return data.products.nodes.map((node: any) => ({
-		id: node.databaseId,
-		title: node.name,
-		url: node.uri,
-		price: node.price,
-		regularPrice: node.regularPrice,
-		image: {
-			alt: node.image.altText,
-			src: node.image.mediaItemUrl
-		}
-	}));
+	return data.products.nodes
+		.filter((node: any) => node.image) // keep only nodes with image
+		.map((node: any) => ({
+			id: node.databaseId,
+			title: node.name,
+			url: node.uri,
+			price: node.price,
+			regularPrice: node.regularPrice,
+			image: {
+				alt: node.image.altText ?? 'imagem',
+				src: node.image.mediaItemUrl
+			}
+		}));
 }
 
 async function fetchPtData() {

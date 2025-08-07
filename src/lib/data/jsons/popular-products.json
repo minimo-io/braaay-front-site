@@ -8,18 +8,7 @@
       "regularPrice": "R$28,73",
       "image": {
         "alt": "vinho-sierra-batuco-chileno-carmenere",
-        "src": "https://braaay.com/wp-content/uploads/2023/08/vinho-sierra-batuco-chileno-carmenere.webp"
-      }
-    },
-    {
-      "id": 130746,
-      "title": "Frisante Rosé Monte Paschoal (250ml)",
-      "url": "/produto/frisante-rose-monte-paschoal-250ml/",
-      "price": "R$15,00",
-      "regularPrice": "R$15,00",
-      "image": {
-        "alt": "frisante-rose-monte-paschoal-250ml",
-        "src": "https://braaay.com/wp-content/uploads/2024/03/frisante-rose-monte-paschoal-250ml.webp"
+        "src": "https://api.braaay.com/wp-content/uploads/2023/08/vinho-sierra-batuco-chileno-carmenere.webp"
       }
     },
     {
@@ -30,7 +19,7 @@
       "regularPrice": "R$32,90",
       "image": {
         "alt": "vinho-don-nicolas-malbec-argentino",
-        "src": "https://braaay.com/wp-content/uploads/2023/09/vinho-don-nicolas-malbec-argentino.webp"
+        "src": "https://api.braaay.com/wp-content/uploads/2023/09/vinho-don-nicolas-malbec-argentino.webp"
       }
     },
     {
@@ -41,7 +30,7 @@
       "regularPrice": "R$48,00",
       "image": {
         "alt": "fisante-mayos-pink-monte-paschoal",
-        "src": "https://braaay.com/wp-content/uploads/2023/11/fisante-mayos-pink-monte-paschoal.webp"
+        "src": "https://api.braaay.com/wp-content/uploads/2023/11/fisante-mayos-pink-monte-paschoal.webp"
       }
     },
     {
@@ -52,7 +41,7 @@
       "regularPrice": "R$48,00",
       "image": {
         "alt": "vinho-frisante-mayos-green",
-        "src": "https://braaay.com/wp-content/uploads/2023/11/vinho-frisante-mayos-green.webp"
+        "src": "https://api.braaay.com/wp-content/uploads/2023/11/vinho-frisante-mayos-green.webp"
       }
     },
     {
@@ -63,7 +52,7 @@
       "regularPrice": "R$47,90",
       "image": {
         "alt": "vinho-don-pascual-cabernet-merlot",
-        "src": "https://braaay.com/wp-content/uploads/2023/08/vinho-don-pascual-cabernet-merlot.webp"
+        "src": "https://api.braaay.com/wp-content/uploads/2023/08/vinho-don-pascual-cabernet-merlot.webp"
       }
     },
     {
@@ -74,7 +63,7 @@
       "regularPrice": "R$171,19",
       "image": {
         "alt": "vinho-capoani-merlot-4-small",
-        "src": "https://braaay.com/wp-content/uploads/2023/06/vinho-capoani-merlot-4-small.webp"
+        "src": "https://api.braaay.com/wp-content/uploads/2023/06/vinho-capoani-merlot-4-small.webp"
       }
     },
     {
@@ -85,7 +74,7 @@
       "regularPrice": "R$179,00",
       "image": {
         "alt": "vinho-tinto-casal-da-coelheira-reserva-3",
-        "src": "https://braaay.com/wp-content/uploads/2023/06/vinho-tinto-casal-da-coelheira-reserva-3.webp"
+        "src": "https://api.braaay.com/wp-content/uploads/2023/06/vinho-tinto-casal-da-coelheira-reserva-3.webp"
       }
     },
     {
@@ -96,7 +85,7 @@
       "regularPrice": "R$177,00",
       "image": {
         "alt": "vinho-tannat-reserve-bracco-bosca",
-        "src": "https://braaay.com/wp-content/uploads/2025/03/vinho-tannat-reserve-bracco-bosca.png"
+        "src": "https://api.braaay.com/wp-content/uploads/2025/03/vinho-tannat-reserve-bracco-bosca.png"
       }
     },
     {
@@ -107,7 +96,62 @@
       "regularPrice": "R$190,00",
       "image": {
         "alt": "vinho-artesana-tannat-reserva",
-        "src": "https://braaay.com/wp-content/uploads/2024/03/vinho-artesana-tannat-reserva.webp"
+        "src": "https://api.braaay.com/wp-content/uploads/2024/03/vinho-artesana-tannat-reserva.webp"
+      }
+    },
+    {
+      "id": 130743,
+      "title": "Frisante Moscato Branco Monte Paschoal (250ml)",
+      "url": "/produto/frisante-moscato-branco-monte-paschoal-250ml/",
+      "price": "R$15,00",
+      "regularPrice": "R$15,00",
+      "image": {
+        "alt": "frisante-branco-monte-paschoal-250ml",
+        "src": "https://api.braaay.com/wp-content/uploads/2024/03/frisante-branco-monte-paschoal-250ml.webp"
+      }
+    },
+    {
+      "id": 130669,
+      "title": "Pizzato Merlot de Merlots",
+      "url": "/produto/vinho-pizzato-merlot-de-merlots/",
+      "price": "R$139,40",
+      "regularPrice": "R$139,40",
+      "image": {
+        "alt": "vinho-pizzato-merlot-de-merlots-dovv",
+        "src": "https://api.braaay.com/wp-content/uploads/2023/11/vinho-pizzato-merlot-de-merlots-dovv.webp"
+      }
+    },
+    {
+      "id": 130664,
+      "title": "Espumante Mayos Brut (Charmat)",
+      "url": "/produto/espumante-mayos-brut-charmat/",
+      "price": "R$48,00",
+      "regularPrice": "R$48,00",
+      "image": {
+        "alt": "espumante-mayos-brut-charmat",
+        "src": "https://api.braaay.com/wp-content/uploads/2023/11/espumante-mayos-brut-charmat.webp"
+      }
+    },
+    {
+      "id": 119561,
+      "title": "Picarón Aresti Cabernet Sauvignon",
+      "url": "/produto/vinho-picaron-aresti-cabernet-sauvignon/",
+      "price": "R$33,83",
+      "regularPrice": "R$33,83",
+      "image": {
+        "alt": "vinho-picaron-cabernet-sauvignon-chile",
+        "src": "https://api.braaay.com/wp-content/uploads/2023/08/vinho-picaron-cabernet-sauvignon-chile.webp"
+      }
+    },
+    {
+      "id": 119509,
+      "title": "Don Pascual Tannat Merlot",
+      "url": "/produto/vinho-uruguaio-don-pascual-tannat-merlot/",
+      "price": "R$47,90",
+      "regularPrice": "R$47,90",
+      "image": {
+        "alt": "vinho-don-pascual-tannat-merlot",
+        "src": "https://api.braaay.com/wp-content/uploads/2023/08/vinho-don-pascual-tannat-merlot.webp"
       }
     }
   ],
@@ -120,7 +164,7 @@
       "regularPrice": "$499.00",
       "image": {
         "alt": "vinho-alvarinho-atlantico-sur-deicas-2",
-        "src": "https://braaay.com/uy/wp-content/uploads/sites/2/2025/04/vinho-alvarinho-atlantico-sur-deicas-2.webp"
+        "src": "https://api.braaay.com/uy/wp-content/uploads/sites/2/2025/04/vinho-alvarinho-atlantico-sur-deicas-2.webp"
       }
     },
     {
@@ -131,7 +175,7 @@
       "regularPrice": "$300.00",
       "image": {
         "alt": "antica-brown-ale-corsario",
-        "src": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/12/antica-brown-ale-corsario.png"
+        "src": "https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/12/antica-brown-ale-corsario.png"
       }
     },
     {
@@ -140,7 +184,7 @@
       "url": "/producto/cerveza-davok-blonde/",
       "image": {
         "alt": "cerveza-artesanak-davok-blonde",
-        "src": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/04/cerveza-artesanak-davok-blonde.webp"
+        "src": "https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/04/cerveza-artesanak-davok-blonde.webp"
       }
     },
     {
@@ -149,7 +193,7 @@
       "url": "/producto/cerveza-davok-ipa/",
       "image": {
         "alt": "cerveza-davok-ipa-braaay",
-        "src": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/04/cerveza-davok-ipa-braaay.webp"
+        "src": "https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/04/cerveza-davok-ipa-braaay.webp"
       }
     }
   ]

@@ -11,8 +11,8 @@ import { cacheExchange, fetchExchange } from '@urql/core';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outputPath = path.join(__dirname, '../src/lib/data/jsons/wine-subcategories.json');
 // GraphQL endpoint URLs from environment variables
-const PT_GRAPHQL_URL = 'https://braaay.com/graphql'; // process.env.PUBLIC_GRAPHQL_SERVER_PT;
-const UY_GRAPHQL_URL = 'https://braaay.com/uy/graphql'; // process.env.PUBLIC_GRAPHQL_SERVER_UY;
+const PT_GRAPHQL_URL = 'https://api.braaay.com/graphql'; // process.env.PUBLIC_GRAPHQL_SERVER_PT;
+const UY_GRAPHQL_URL = 'https://api.braaay.com/uy/graphql'; // process.env.PUBLIC_GRAPHQL_SERVER_UY;
 // Create urql clients for both endpoints
 const ptClient = createClient({
     url: PT_GRAPHQL_URL,

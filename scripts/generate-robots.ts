@@ -3,8 +3,8 @@ import { writeFileSync, mkdirSync, readFileSync, readdirSync, statSync } from 'f
 import { join } from 'path';
 
 // Configuration
-const API_DOMAIN = 'https://braaay.com';
-const FRONT_DOMAIN = 'https://braaay-front-site.vercel.app'; // No trailing slash
+const API_DOMAIN = 'https://api.braaay.com';
+const FRONT_DOMAIN = 'https://braaay.com'; // No trailing slash
 const REQUEST_DELAY = 100; // ms between requests
 
 async function fetchContent(url: string): Promise<string> {
