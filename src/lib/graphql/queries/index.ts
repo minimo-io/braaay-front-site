@@ -7,6 +7,7 @@ export * from './product-get.query'; // single
 export * from './products-category.query';
 export * from './products-country.query';
 export * from './products-wine-producer.query';
+export * from './products-beer-producer.query';
 export * from './products-pairing.query';
 export * from './products-uva.query';
 export * from './products-tag.query';

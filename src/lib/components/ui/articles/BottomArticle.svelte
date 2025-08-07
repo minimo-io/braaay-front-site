@@ -23,7 +23,8 @@
 
 <!-- <article class="relative bg-white py-10 mt-14"> -->
 {#if content}
-	<article class="relative bg-white pb-10 md:mt-14">
+	<FunMessageSection />
+	<article class="relative bg-white pb-10 md:pt-14">
 		<SectionDivider color="green" />
 		<div id="know-more" class="max-w-screen-lg mx-auto relative">
 			<!-- General title header -->

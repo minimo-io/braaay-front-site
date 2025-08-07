@@ -27,7 +27,7 @@
 		stockStatus = `<span>${m.inStock()}</span>`;
 	}
 	const cashbackValue = calculateCashback(product.floatPrice, AppConfig.cashbackPercentage);
-	const clubMoreInfoText = `Ganhe <strong>${m.currencySymbol()}${correctPrice(cashbackValue)}</strong> em cashback no Clube`;
+	const clubMoreInfoText = `${m.earn()} <strong>${m.currencySymbol()}${correctPrice(cashbackValue)}</strong> ${m.inCashbackAtTheClub()}`;
 
 	let reversedCategories: ProductCategory[] = [...(productCategories ?? [])].reverse() ?? [];
 
@@ -132,9 +132,9 @@
 		{/if}
 		<span class="text-2xl font-bold text-grey-darkest font-roboto">{product.price}</span>
 		<h4 class="!text-[13px] font-bold mb-2">
-			<span class="text-green-dark"
-				>{m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)}</span
-			>
+			<span class="text-green-dark">
+				{m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)}
+			</span>
 			{m.cashDiscountText()}
 		</h4>
 		{#if AppConfig.cashbackEnabled}

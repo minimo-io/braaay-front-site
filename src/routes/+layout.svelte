@@ -16,7 +16,7 @@
 	import { closeDrawer, drawerState } from '$lib/stores/drawerState.state.svelte';
 
 	import { isAuthenticated, requiresAuth } from '$lib/graphql/auth';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 
 	// Modal
 	import { modalState } from '$stores/modalState.state.svelte';
@@ -26,7 +26,7 @@
 	import { Toasts } from 'svoast';
 
 	// Loader
-	import { navigating } from '$app/state';
+	import { navigating, page } from '$app/state';
 	import { loaderActivated } from '$stores/loaderStore.state.svelte';
 
 	let { children } = $props();
@@ -42,6 +42,14 @@
 	import Teaser from '$components/ui/Teaser.svelte';
 	import Debugger from '$components/Debugger.svelte';
 	import { AppConfig } from '$config';
+	import { onMount } from 'svelte';
+	import { launchToast } from '$lib/utils';
+
+	// onMount(() => {
+	// 	if (page.url.searchParams.has('soon')) {
+	// 		launchToast('En breve vamos a lanzar esta funcionalidad.', 'info', 3000);
+	// 	}
+	// });
 
 	afterNavigate(() => {
 		// Close drawer if active
@@ -149,7 +157,9 @@
 <Toasts position="top-center" />
 
 <!-- Teaser -->
-<Teaser />
+{#if getLocale() == 'pt'}
+	<Teaser />
+{/if}
 
 <!-- Local Storage Debugger -->
 {#if AppConfig.debug}

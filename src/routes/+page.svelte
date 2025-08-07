@@ -16,16 +16,57 @@
 	import popularProducts from '$lib/data/jsons/popular-products.json';
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
-	import { launchToast } from '$lib/utils';
+	import LatestBlogSection from '$components/ui/blog/LatestBlogSection.svelte';
 
 	import { Calendar, ChefHat, MapPin } from '@lucide/svelte';
 
 	let pageCountries = $state(allCountries[getLocale()]);
 	let mostPopularProducts = $state(popularProducts[getLocale()]);
 
-	let homeProducts = HomeProducts();
-	// console.log('HomeProducts', homeProducts);
+	let pageLocale = $state(getLocale());
+	let homeProducts = HomeProducts(pageLocale);
 </script>
+
+{#snippet partnersSection()}
+	<div>
+		<TitleSection
+			title={m.partnersTitle()}
+			subTitle={m.partnersSubtitle()}
+			description={m.partnersDescription()}
+		>
+			<!-- {#snippet button()}
+				<Button
+					title="Ver todos"
+					size="md"
+					type="sun"
+					action={() => launchToast(m.soon(), 'info', 2000)}
+				/>
+			{/snippet} -->
+		</TitleSection>
+
+		<PartnersList />
+	</div>
+{/snippet}
+
+{#snippet blogSection()}
+	<div>
+		<TitleSection
+			title={m.blogSectionTitle()}
+			subTitle={m.blogSectionSubtitle()}
+			description={m.partnersDescription()}
+		>
+			{#snippet button()}
+				<Button title={m.goToBlog()} size="md" type="sun" url={localizeHref('/blog/')} />
+			{/snippet}
+		</TitleSection>
+
+		<LatestBlogSection />
+	</div>
+{/snippet}
+
+<!-- {#snippet brandSection()}
+
+{/if} -->
 
 <Meta
 	title="{m.seoBase()} {m.seoDivider()} {m.seoHomeTitle()}"
@@ -38,100 +79,113 @@
 	<Carrousel />
 
 	<div class="my-5">
-		<TitleSection
-			title="Vinhos & Encontros"
-			subTitle="Showroom"
-			description="Seu próximo vinho, espumante ou evento privado com curadoría da nossa sommelier. Somos especialistas no melhor de 🇺🇾 Uruguai, do 🇧🇷 Brasil e do Mundo. Visite nosso showroom; venha descobrir o inesperado!"
-		>
-			{#snippet button()}
-				<div
-					class="mt-2 md:mt-0 flex flex-row md:flex-col gap-2 md:top-7 relative items-end scale-95 md:scale-100 -left-[3%] md:-left-0"
-				>
-					<div class="">
-						<Button
-							title="Reserve o espaço"
-							size="md"
-							type="sun"
-							url={AppConfig.whatsappLink}
-							newTab
-						>
-							{#snippet icon()}
-								<div class="hidden md:block">
-									<Calendar class="lucide-button" />
-								</div>
-							{/snippet}
-						</Button>
-					</div>
+		<!-- Partners section on top on uy -->
+		{#if pageLocale == 'uy'}
+			{@render partnersSection()}
+		{/if}
 
-					<div class="w-fit">
-						<Button title="Onde fica?" size="md" type="blue" url={AppConfig.mapLink} newTab>
-							{#snippet icon()}
-								<MapPin class="lucide-button" />
-							{/snippet}
-						</Button>
+		{#if pageLocale == 'pt'}
+			<!-- Brand section -->
+			<TitleSection
+				title="Vinhos & Encontros"
+				subTitle="Showroom"
+				description="Seu próximo vinho, espumante ou evento privado com curadoría da nossa sommelier. Somos especialistas no melhor de 🇺🇾 Uruguai, do 🇧🇷 Brasil e do Mundo. Visite nosso showroom; venha descobrir o inesperado!"
+			>
+				{#snippet button()}
+					<div
+						class="mt-2 md:mt-0 flex flex-row md:flex-col gap-2 md:top-7 relative items-end scale-95 md:scale-100 -left-[3%] md:-left-0"
+					>
+						<div class="">
+							<Button
+								title="Reserve o espaço"
+								size="md"
+								type="sun"
+								url={AppConfig.whatsappLink}
+								newTab
+							>
+								{#snippet icon()}
+									<div class="hidden md:block">
+										<Calendar class="lucide-button" />
+									</div>
+								{/snippet}
+							</Button>
+						</div>
+
+						<div class="w-fit">
+							<Button title="Onde fica?" size="md" type="blue" url={AppConfig.mapLink} newTab>
+								{#snippet icon()}
+									<MapPin class="lucide-button" />
+								{/snippet}
+							</Button>
+						</div>
 					</div>
-				</div>
-			{/snippet}
-		</TitleSection>
+				{/snippet}
+			</TitleSection>
+		{/if}
 	</div>
 
 	<!-- Home images -->
-	<div class="max-w-screen-lg-2x mx-[30px] lg:mx-auto items-center flex justify-between">
-		<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-			<!-- Image 1 with play button overlay -->
-			<div class="relative">
-				<img
-					src="/images/home-video-braaay-erika.png"
-					alt="1 description"
-					class="rounded-lg w-full h-auto"
-				/>
-				<a
-					href="https://www.instagram.com/reel/DDLCPIdPzql/"
-					target="_blank"
-					rel="nofollow noopener"
-					class="play-button not-hover-effect"
-					aria-label="play-button"
-					role="button"
-				>
-					<span>&nbsp;</span>
-				</a>
-			</div>
+	{#if pageLocale == 'pt'}
+		<div class="max-w-screen-lg-2x mx-[30px] lg:mx-auto items-center flex justify-between">
+			<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+				<!-- Image 1 with play button overlay -->
+				<div class="relative">
+					<img
+						src="/images/home-video-braaay-erika.png"
+						alt="1 description"
+						class="rounded-lg w-full h-auto"
+					/>
+					<a
+						href="https://www.instagram.com/reel/DDLCPIdPzql/"
+						target="_blank"
+						rel="nofollow noopener"
+						class="play-button not-hover-effect"
+						aria-label="play-button"
+						role="button"
+					>
+						<span>&nbsp;</span>
+					</a>
+				</div>
 
-			<!-- Image 2 -->
-			<div>
-				<img
-					src="/images/home-braaay-2-2.webp"
-					alt="2 description"
-					class="rounded-lg w-full h-auto"
-				/>
-			</div>
+				<!-- Image 2 -->
+				<div>
+					<img
+						src="/images/home-braaay-2-2.webp"
+						alt="2 description"
+						class="rounded-lg w-full h-auto"
+					/>
+				</div>
 
-			<!-- Image 3 -->
-			<div>
-				<img
-					src="/images/braaay-homepage-3.webp"
-					alt=" 3 description"
-					class="rounded-lg w-full h-auto"
-				/>
-			</div>
+				<!-- Image 3 -->
+				<div>
+					<img
+						src="/images/braaay-homepage-3.webp"
+						alt=" 3 description"
+						class="rounded-lg w-full h-auto"
+					/>
+				</div>
 
-			<!-- Image 4 -->
-			<PresenteSlide />
+				<!-- Image 4 -->
+				<PresenteSlide />
+			</div>
 		</div>
-	</div>
+	{/if}
 
 	<!-- Section with white background and divider -->
 	<section class="relative bg-white pb-4 md:py-8 mt-14">
 		<SectionDivider color="green" />
 
 		<TitleSection
-			title="Novidades: Vinhos & Presentes"
+			title={m.newsSectionTitle()}
 			subTitle="E-Commerce"
-			description="Dê uma olhada em nossa seleção com os melhores vinhos uruguaios e brasileiros e nossas
-			sugestões para presentes empresariais."
+			description={m.newsSectionDescription()}
 		>
 			{#snippet button()}
-				<Button title="Ver todos" size="md" type="sun" url={localizeHref('/vinhos/')} />
+				{#if pageLocale == 'pt'}
+					<Button title="Ver todos" size="md" type="sun" url={localizeHref('/vinhos/')} />
+				{:else}
+					<Button title="Ver todas" size="md" type="sun" url={localizeHref('/uy/cervezas/')} />
+				{/if}
 			{/snippet}
 		</TitleSection>
 
@@ -139,44 +193,48 @@
 		<section class="bg-white max-w-screen-lg-2x py-10 mx-[20px] lg:mx-auto">
 			<div class="bry-product-list">
 				<!-- Wines -->
-				{#each homeProducts.products as product, i (i)}
-					<WineBox
-						image={{
-							src: product.image.src
-						}}
-						wine={{
-							title: product.title,
-							price: product.price,
-							regularPrice: product.regularPrice,
-							url: product.url,
-							score: product.score,
-							isFavorited: false,
-							productId: 0
-						}}
-						discount=""
-						hideFavs={true}
-					/>
-				{/each}
+				{#if homeProducts?.products}
+					{#each homeProducts.products as product, i (i)}
+						<WineBox
+							image={{
+								src: product.image.src
+							}}
+							wine={{
+								title: product.title,
+								price: product.price,
+								regularPrice: product.regularPrice,
+								url: product.url,
+								score: product.score,
+								isFavorited: false,
+								productId: 0
+							}}
+							discount=""
+							hideFavs={true}
+						/>
+					{/each}
+				{/if}
 
 				<!-- Kits -->
-				{#each homeProducts.kits as product, i (i)}
-					<WineBox
-						image={{
-							src: product.image.src
-						}}
-						wine={{
-							title: product.title,
-							price: product.price,
-							regularPrice: product.regularPrice,
-							url: product.url,
-							score: product.score,
-							isFavorited: false,
-							productId: 0
-						}}
-						discount=""
-						hideFavs={true}
-					/>
-				{/each}
+				{#if homeProducts?.kits}
+					{#each homeProducts.kits as product, i (i)}
+						<WineBox
+							image={{
+								src: product.image.src
+							}}
+							wine={{
+								title: product.title,
+								price: product.price,
+								regularPrice: product.regularPrice,
+								url: product.url,
+								score: product.score,
+								isFavorited: false,
+								productId: 0
+							}}
+							discount=""
+							hideFavs={true}
+						/>
+					{/each}
+				{/if}
 			</div>
 		</section>
 
@@ -198,7 +256,7 @@
 		{/if}
 
 		<!-- Header section: Popular products -->
-		{#if mostPopularProducts.length > 0}
+		{#if mostPopularProducts.length > 0 && pageLocale == 'pt'}
 			<TitleSection
 				title="Os Queridinhos"
 				subTitle="Oportunidades"
@@ -224,89 +282,80 @@
 		{/if}
 
 		<!-- Header section: Harmonizacoes -->
-		<TitleSection
-			title="Harmonizações"
-			subTitle="Revista"
-			description="Acompanhe aqui uma seleção dos nossos melhores vinhos e espumantes uruguaios e brasileiros
+		{#if pageLocale == 'pt'}
+			<TitleSection
+				title="Harmonizações"
+				subTitle="Revista"
+				description="Acompanhe aqui uma seleção dos nossos melhores vinhos e espumantes uruguaios e brasileiros
 			para harmonizar com seus pratos favoritos."
-		>
-			{#snippet button()}
-				<Button title="Ver todas" size="md" type="sun" url="/">
-					{#snippet icon()}
-						<ChefHat class="lucide-button" />
-					{/snippet}
-				</Button>
-			{/snippet}
-		</TitleSection>
+			>
+				{#snippet button()}
+					<Button title="Ver todas" size="md" type="sun" url="/">
+						{#snippet icon()}
+							<ChefHat class="lucide-button" />
+						{/snippet}
+					</Button>
+				{/snippet}
+			</TitleSection>
 
-		<!-- Harmonizacoes -->
-		<div class="max-w-screen-lg-2x mx-[30px] my-10 lg:mx-auto items-center flex justify-between">
-			<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-				<!-- Image 1 with play button overlay -->
-				<div class="relative">
-					<a title="Carnes vermelhas" href="/harmonizacoes/carnes-vermelhas/">
-						<img
-							src="/images/harmonizacoes/carnes-vermelhas-2.webp"
-							alt="1 description"
-							class="rounded-lg w-full h-auto"
-						/>
-					</a>
-				</div>
+			<!-- Harmonizacoes -->
+			<div class="max-w-screen-lg-2x mx-[30px] my-10 lg:mx-auto items-center flex justify-between">
+				<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+					<!-- Image 1 with play button overlay -->
+					<div class="relative">
+						<a title="Carnes vermelhas" href="/harmonizacoes/carnes-vermelhas/">
+							<img
+								src="/images/harmonizacoes/carnes-vermelhas-2.webp"
+								alt="1 description"
+								class="rounded-lg w-full h-auto"
+							/>
+						</a>
+					</div>
 
-				<!-- Image 2 -->
-				<div>
-					<a title="Vegetariano" href="/harmonizacoes/vegetariano/">
-						<img
-							src="/images/harmonizacoes/harmonizacoes-vegetariano.png"
-							alt="2 description"
-							class="rounded-lg w-full h-auto"
-						/>
-					</a>
-				</div>
+					<!-- Image 2 -->
+					<div>
+						<a title="Vegetariano" href="/harmonizacoes/vegetariano/">
+							<img
+								src="/images/harmonizacoes/harmonizacoes-vegetariano.png"
+								alt="2 description"
+								class="rounded-lg w-full h-auto"
+							/>
+						</a>
+					</div>
 
-				<!-- Image 3 -->
-				<div>
-					<a title="Culinaria japonesa" href="/harmonizacoes/culinaria-japonesa/">
-						<img
-							src="/images/harmonizacoes/culinaria-japonesa-2.webp"
-							alt="3 description"
-							class="rounded-lg w-full h-auto"
-						/>
-					</a>
-				</div>
+					<!-- Image 3 -->
+					<div>
+						<a title="Culinaria japonesa" href="/harmonizacoes/culinaria-japonesa/">
+							<img
+								src="/images/harmonizacoes/culinaria-japonesa-2.webp"
+								alt="3 description"
+								class="rounded-lg w-full h-auto"
+							/>
+						</a>
+					</div>
 
-				<!-- Image 4 -->
-				<div>
-					<a title="Culinaria japonesa" href="/harmonizacoes/carnes-brancas/">
-						<img
-							src="/images/harmonizacoes/harmonizacao-carnes-brancas.webp"
-							alt="4 description"
-							class="rounded-lg w-full h-auto"
-						/>
-					</a>
+					<!-- Image 4 -->
+					<div>
+						<a title="Culinaria japonesa" href="/harmonizacoes/carnes-brancas/">
+							<img
+								src="/images/harmonizacoes/harmonizacao-carnes-brancas.webp"
+								alt="4 description"
+								class="rounded-lg w-full h-auto"
+							/>
+						</a>
+					</div>
 				</div>
 			</div>
-		</div>
+		{/if}
 
 		<!-- Header section: Parceiros -->
+		{#if pageLocale == 'pt'}
+			{@render partnersSection()}
+		{/if}
 
-		<TitleSection
-			title="Parceiros destacados"
-			subTitle="Produtores"
-			description="	Os melhores produtores do Uruguai e do Brasil estão na Braaay compartilhando suas
-			experiências."
-		>
-			{#snippet button()}
-				<Button
-					title="Ver todos"
-					size="md"
-					type="sun"
-					action={() => launchToast(m.soon(), 'info', 2000)}
-				/>
-			{/snippet}
-		</TitleSection>
-
-		<PartnersList />
+		{#if pageLocale == 'uy'}
+			{@render blogSection()}
+		{/if}
 	</section>
 </main>
 

@@ -57,6 +57,21 @@ export interface ProductsForWineProducerQueryResult {
 	};
 	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
 }
+// Brewery
+export interface ProductsForBeerProducerQueryResult {
+	allPaCerveceria: {
+		nodes: GraphQLCategory[];
+	};
+	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
+}
+
+// Stores
+export interface ProductsForStoreQueryResult {
+	allPaTiendas: {
+		nodes: GraphQLCategory[];
+	};
+	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };
+}
 
 export interface ProductsOnSaleQueryResult {
 	products: { pageInfo: GraphQLPagination; edges: GraphQLProductNode[] };

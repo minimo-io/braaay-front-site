@@ -4,12 +4,18 @@
 	"companyDocumentType": "RUT",
 	"zipCodeName": "CP",
 
+	"knowMore": "CONOCÉ&nbsp;MAS",
 	"loading": "Cargando...",
 	"search": "Buscar...",
 	"searching": "Buscando...",
 	"sending": "Enviando...",
 	"back": "Volver",
 	"backToCart": "Volver al carrito",
+
+	"creditCard": "TARJETA DE CRÉDITO",
+	"interestFree": "sin intereses",
+
+	"paymentMethods": "FORMAS DE PAGO",
 
 	"copy": "Copiar",
 	"copiedToClipboard": "Copiado al portapapeles",
@@ -44,6 +50,7 @@
 	"inStock": "Con stock",
 	"maxStockIs": "Tenemos {maxStock} producto en stock en este momento. Para más cantidad, contáctanos.",
 
+	"updated": "actualizado",
 	"cashDiscountValue": "5%",
 	"cashDiscountText": "EN EFECTIVO (5% OFF)",
 	"cashDiscount": "Descuento Efectivo",
@@ -128,6 +135,9 @@
 	"checkoutAreYouSureToLeave": "¿Estás seguro de que quieres volver? Tu pago aún se está procesando.",
 	"checkoutStorePickup": "Retiro en el showroom",
 
+	"checkoutSafePayPix": "Después de hacer clic en Finalizar, serás redirigido al pago vía PIX.<br />¡Escanea el código QR y listo!",
+	"checkoutSafePayCard": "Después de hacer clic en \"Finalizar compra\", serás redirigido al pago seguro con tarjeta.",
+
 	"seoBase": "Braaay",
 
 	"seoHomeTitle": "🍻 Cervezas locales y vinos boutique, unite a lo artesanal",
@@ -196,6 +206,8 @@
 	"processingPayment": "Procesando pago...",
 
 	"amountToBePaid": "Valor a pagar",
+	"earn": "Gane",
+	"inCashbackAtTheClub": "en cashback en el Club",
 	"cashbackToEarn": "Cashback a ganar",
 	"orderPendingPayment": "Pedido pendiente de pago",
 	"orderPendingComment": "Ahora solo escanea y realiza el pago para finalizar tu compra.",
@@ -209,5 +221,42 @@
 	"code": "Código",
 	"tryAgain": "Intentar nuevamente",
 
-	"sendingPayment": "Procesando su pago..."
+	"sendingPayment": "Procesando su pago...",
+	"Error404Title": "Página no encontrada",
+	"Error404Text": "La página que estás buscando no existe.",
+
+	"Error500Title": "Error interno del servidor",
+	"Error500Text": "Algo salió mal. Inténtalo de nuevo más tarde.",
+
+	"partnersTitle": "Cervezas artesanales uruguayas",
+	"partnersDescription": "¡Somos la comunidad de lo artesanal! Promovemos cervezas artesanales locales y vinos boutique de vinícolas familiaries. Mirá lo mas destacado en Uruguay hoy.",
+
+	"newsSectionTitle": "Birras artesanales & Vinos Boutique",
+	"newsSectionDescription": "Mirá las últimas novedades y lanzamientos en cervezas artesanales y vinos boutique de productores locales en Uruguay ¡Unite a lo artesanal!",
+
+	"blogSectionTitle": "Blog",
+	"blogSectionSubtitle": "No te quedas por fuera",
+	"blogSectionDescription": "Somos mas que otra tienda de cervezas artesanales, en Braaay queremos promover la cervecería local y artesanal: entrevistas, eventos, nuevas cervecerías, eventos y más.",
+
+	"goToBlog": "Ir al blog",
+
+	"joinTheClub": "Unite al club!",
+
+	"footerSupport": "AYUDA",
+	"footerSupportShipping": "POLÍTICA DE ENVIOS",
+	"footerSupportReturns": "CAMBIOS Y DEVOLUCIONES",
+
+	"footerBraaayClub": "CLUB",
+
+	"footerSocials": "REDES SOCIALES",
+
+	"footerDisclaimer1": "La venta de bebidas alcohólicas está prohibida para menores de 18 años",
+	"footerDisclaimer2": "Todos los derechos reservados. Conozca nuestras:",
+	"footerDisclaimer3": "Envío gratis: Consulta las condiciones",
+	"footerDisclaimer4": "La venta de bebidas alcohólicas <br />está prohibida para menores de 18 años.",
+
+	"footerDeveloper1": "Futurewise, creación de tienda virtual",
+	"footerDeveloper2": "¡Creá la tuya ahora!",
+
+	"funMessage1": "Gracias por ser genial 😀"
 }

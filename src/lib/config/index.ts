@@ -81,6 +81,12 @@ export const AppConfig = Object.freeze({
 		uy: '+55 11 94753-0340'
 	},
 
+	// Email
+	email: {
+		pt: 'contacto@braaay.com',
+		uy: 'contacto@braaay.com'
+	},
+
 	// Socials
 	socials: {
 		pt: {

@@ -2,8 +2,9 @@
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import Button from '$components/ui/buttons/Button.svelte';
 	import type { Post } from '$lib/types';
-	import { ArrowRight, ChevronRight } from '@lucide/svelte';
+	import { ChevronRight } from '@lucide/svelte';
 	import { formatDate } from '$lib/utils';
+	import { m } from '$lib/paraglide/messages';
 	interface Props {
 		post: Post;
 	}
@@ -42,7 +43,7 @@
 				<div class="text-grey-medium">
 					{formatDate(post.date)}
 					{#if post.date !== post.modified}
-						<span class="hidden md:inline">(atualizado)</span>
+						<span class="hidden md:inline">({m.updated()})</span>
 					{/if}
 				</div>
 			{/if}

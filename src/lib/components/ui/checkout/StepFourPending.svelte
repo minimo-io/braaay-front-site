@@ -20,6 +20,7 @@
 	import { AppConfig } from '$config';
 	import Button from '../buttons/Button.svelte';
 	import { Lock } from '@lucide/svelte';
+	import NoticeBox from '../NoticeBox.svelte';
 
 	interface Props {
 		deliveryType: DeliveryUIType | null;
@@ -175,9 +176,9 @@
 									onUpdatePayment(method);
 								}}
 							/>
-							<span class="ml-2 text-grey-blueish">{method.title}</span>
+							<span class="ml-2 text-grey-blueish md:text-base">{method.title}</span>
 						</div>
-						<div class="font-bold font-roboto">
+						<div class="font-bold font-roboto md:text-base">
 							{#if discountPercentage > 0}
 								<span class="text-green-medium font-medium">
 									{discountPercentage}% OFF
@@ -193,13 +194,21 @@
 			<div class="text-xs">{m.checkoutLoadingPayments()}</div>
 		{/if}
 
-		{#if methodSelected?.id == 'woo-mercado-pago-pix'}{:else if methodSelected?.id == 'woo-mercado-pago-custom' && AppConfig.payments.checkoutCreditCardMode == 'transparent'}
+		{#if methodSelected?.id == 'woo-mercado-pago-pix'}
+			<NoticeBox>
+				{@html m.checkoutSafePayPix()}
+			</NoticeBox>
+		{:else if methodSelected?.id == 'woo-mercado-pago-custom' && AppConfig.payments.checkoutCreditCardMode == 'redirect'}
+			<NoticeBox>{@html m.checkoutSafePayCard()}</NoticeBox>
+		{:else if methodSelected?.id == 'woo-mercado-pago-custom' && AppConfig.payments.checkoutCreditCardMode == 'transparent'}
 			<CheckoutCreditCardInfo
 				onCreditCardChange={(formData: CreditCardFormData) => {
 					onCreditCardChange(formData);
 				}}
 			/>
 		{/if}
+
+		<img src="/images/safe-site.svg" alt="site-seguro" class="h-7 md:h-9 ml-1 my-5" />
 
 		{#if AppConfig.receiveEmailsEnabled}
 			<div class="flex items-center text-sm my-5 px-3">

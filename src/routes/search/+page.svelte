@@ -110,6 +110,7 @@
 
 <SearchHeader
 	title={loadingSearch ? `${m.searching()}` : `Resultados: "${searchTermTyped}"`}
+	{loadingSearch}
 	count={productsCount}
 	showCount={!loadingSearch}
 />

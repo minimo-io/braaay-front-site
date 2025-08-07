@@ -4,19 +4,45 @@ export function correctPrice(price: number): string {
 }
 
 // We use this function to chage a price from string format to a floating number
+// export function toFloatPrice(price: string): number {
+// 	// console.log('📱 toFloatPrice input:', price);
+// 	if (!price) return 0;
+// 	const unsignedPrice = price
+// 		.replaceAll('R$', '')
+// 		.replaceAll('$', '')
+// 		.replaceAll(' ', '')
+// 		.replaceAll('.', '') // Remove thousands separator FIRST
+// 		.replaceAll(',', '.');
+// 	// console.log('📱 toFloatPrice processed:', unsignedPrice);
+// 	const result = parseFloat(unsignedPrice);
+// 	// console.log('📱 toFloatPrice output:', result);
+// 	return result;
+// }
+
 export function toFloatPrice(price: string): number {
-	// console.log('📱 toFloatPrice input:', price);
 	if (!price) return 0;
-	const unsignedPrice = price
-		.replaceAll('R$', '')
-		.replaceAll('$', '')
-		.replaceAll(' ', '')
-		.replaceAll('.', '') // Remove thousands separator FIRST
-		.replaceAll(',', '.');
-	// console.log('📱 toFloatPrice processed:', unsignedPrice);
-	const result = parseFloat(unsignedPrice);
-	// console.log('📱 toFloatPrice output:', result);
-	return result;
+
+	// Check if it's Brazilian format by looking for R$
+	const isBrazilianFormat = price.includes('R$');
+
+	if (isBrazilianFormat) {
+		// Brazilian format: R$285,00
+		const unsignedPrice = price
+			.replaceAll('R$', '')
+			.replaceAll('$', '')
+			.replaceAll(' ', '')
+			.replaceAll('.', '') // Remove thousands separator
+			.replaceAll(',', '.'); // Replace decimal comma with dot
+		return parseFloat(unsignedPrice);
+	} else {
+		// Uruguayan format: $186.00
+		const unsignedPrice = price
+			.replaceAll('R$', '')
+			.replaceAll('$', '')
+			.replaceAll(' ', '')
+			.replaceAll(',', ''); // Remove any commas (shouldn't be there in UY format)
+		return parseFloat(unsignedPrice);
+	}
 }
 
 export function isNumber(value) {

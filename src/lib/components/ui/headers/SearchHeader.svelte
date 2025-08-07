@@ -3,13 +3,15 @@
 	import { fade } from 'svelte/transition';
 	import MoreInfoButton from '../buttons/MoreInfoButton.svelte';
 	import type { Category } from '$lib/types';
+	import { LoaderCircle } from '@lucide/svelte';
 
 	interface Props {
 		title: string;
 		count: number;
 		showCount: boolean;
+		loadingSearch?: boolean;
 	}
-	let { title, count, showCount }: Props = $props();
+	let { title, count, showCount, loadingSearch = false }: Props = $props();
 
 	let headerImage = '/images/placeholder-category.png';
 	let headerAltText = 'category-search';
@@ -29,11 +31,14 @@
 					<div class="flex">
 						<span
 							class={[
-								'self-center font-roboto font-extrabold align-bottom pt-1 text-left text-[18px] md:text-[22px] text-wrap',
+								'flex items-center self-center font-roboto font-extrabold align-bottom pt-1 text-left text-[18px] md:text-[22px] text-wrap',
 								title.split(' ').length > 1 && 'md:max-w-max max-w-[87%] leading-tight'
 							]}
 						>
-							{title}
+							{#if loadingSearch}
+								<LoaderCircle class="h-10 spinner mr-3" />
+							{/if}
+							<span>{title}</span>
 						</span>
 					</div>
 				</h1>

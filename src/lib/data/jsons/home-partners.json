@@ -100,5 +100,138 @@
 			"count": 0
 		}
 	],
-	"uy": []
+	"uy": [
+		{
+			"name": "Por Culpa de Sam",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/11/cerveza-por-culpa-de-sam-logo.png",
+			"url": "/uy/cerveceria/por-culpa-de-sam/",
+			"count": 0
+		},
+		{
+			"name": "Rebelion",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/11/cerveza-rebelion-logo.png",
+			"url": "/uy/cerveceria/rebelion/",
+			"count": 0
+		},
+		{
+			"name": "Avante Brewing",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/02/avante-brewing-logo.webp",
+			"url": "/uy/cerveceria/avante-brewing/",
+			"count": 0
+		},
+		{
+			"name": "Indica Beer Bar",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/03/indica-beer-logo.webp",
+			"url": "/uy/cerveceria/indica-beer-bar/",
+			"count": 0
+		},
+		{
+			"name": "Colectivo La Fuerza",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/02/cerveceria-colectivo-la-fuerza.webp",
+			"url": "/uy/cerveceria/colectivo-la-fuerza/",
+			"count": 0
+		},
+		{
+			"name": "Davok",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/02/cerveceria-davok-logo.webp",
+			"url": "/uy/cerveceria/davok/",
+			"count": 0
+		},
+		{
+			"name": "Boar",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/12/boar-cerveceria-logo.png",
+			"url": "/uy/cerveceria/boar/",
+			"count": 0
+		},
+		{
+			"name": "Malafama",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/02/cerveceria-malafama-logo.webp",
+			"url": "/uy/cerveceria/malafama/",
+			"count": 0
+		},
+		{
+			"name": "Rocco Beer",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/12/rocco-beer-logo.png",
+			"url": "/uy/cerveceria/rocco-beer/",
+			"count": 0
+		},
+		{
+			"name": "Ariscona",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/02/ariscona-logo.webp",
+			"url": "/uy/cerveceria/ariscona/",
+			"count": 0
+		},
+		{
+			"name": "Volcanica",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/02/cerveceria-volcanica.webp",
+			"url": "/uy/cerveceria/volcanica/",
+			"count": 0
+		},
+		{
+			"name": "Bimba Bruder",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/03/bimba-bruder-logo.webp",
+			"url": "/uy/cerveceria/bimba-bruder/",
+			"count": 0
+		},
+		{
+			"name": "Barbot",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2025/03/barbot-brew-pub-logo.png",
+			"url": "/uy/cerveceria/barbot/",
+			"count": 0
+		},
+		{
+			"name": "Moss Beer",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2025/03/moss-beer-logo.png",
+			"url": "/uy/cerveceria/moss-beer/",
+			"count": 0
+		},
+		{
+			"name": "Mastra",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/02/cerveceria-mastra-logo.webp",
+			"url": "/uy/cerveceria/mastra/",
+			"count": 0
+		},
+		{
+			"name": "Pinos Beer",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/12/pinos-beer-uruguay.png",
+			"url": "/uy/cerveceria/pinos-beer/",
+			"count": 0
+		},
+		{
+			"name": "Cabesas Bier",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/12/cabesas-bier-logo.png",
+			"url": "/uy/producto/cerveza-cabesas-bier-ipa-atomica/",
+			"count": 0
+		},
+		{
+			"name": "Beerbros",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/12/beerbros-logo-2.png",
+			"url": "/uy/cerveceria/beerbros/",
+			"count": 0
+		},
+		{
+			"name": "Carlinas Beer",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/03/carlinas-beer-logo.webp",
+			"url": "/uy/cerveceria/carlinas-beer/",
+			"count": 0
+		},
+		{
+			"name": "Dabier Brewery",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/11/dabier-brewery-logo.png",
+			"url": "/uy/cerveceria/dabier-brewery/",
+			"count": 0
+		},
+		{
+			"name": "Hemp Beer Company",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2024/12/hemp-beer-company-logo.png",
+			"url": "/uy/cerveceria/hemp-beer-company/",
+			"count": 0
+		},
+		{
+			"name": "Novillos",
+			"logo": "https://braaay.com/uy/wp-content/uploads/sites/2/2025/04/cerveceria-novillos-logo.png",
+			"url": "/uy/cerveceria/novillos/",
+			"count": 0
+		}
+	]
 }

@@ -4,12 +4,18 @@
 	"companyDocumentType": "CNPJ",
 	"zipCodeName": "CEP",
 
+	"knowMore": "CONHEÇA&nbsp;MAIS",
 	"loading": "Carregando...",
 	"search": "Pesquisar...",
 	"searching": "Pesquisando...",
 	"sending": "Enviando...",
 	"back": "Voltar",
 	"backToCart": "Voltar ao carrinho",
+
+	"creditCard": "CARTÃO DE CRÉDITO",
+	"interestFree": "sem juros",
+
+	"paymentMethods": "FORMAS DE PAGAMENTO",
 
 	"copy": "Copiar",
 	"copiedToClipboard": "Copiado para a área de transferência",
@@ -91,6 +97,7 @@
 	"addCoupon": "Adicionar cupom",
 	"coupon": "Cupom",
 	"updatingDiscount": "Atualizando desconto...",
+	"updated": "atualizado",
 	"discountUpdated": "Desconto atualizado!",
 
 	"continue": "Continuar",
@@ -128,6 +135,9 @@
 
 	"checkoutAreYouSureToLeave": "Tem certeza de que quer voltar? Seu pagamento ainda está sendo processado.",
 	"checkoutStorePickup": "Retirada no showroom",
+
+	"checkoutSafePayPix": "Após clicar em Finalizar, você será redirecionado para o pagamento via PIX.<br />Escaneie o código qr e pronto!",
+	"checkoutSafePayCard": "Após clicar em \"Finalizar compra\", você será redirecionado para o pagamento seguro com cartão.",
 
 	"seoBase": "Braaay",
 	"seoDivider": "-",
@@ -199,6 +209,8 @@
 	"processingPayment": "Processando pagamento...",
 
 	"amountToBePaid": "Valor a ser pago",
+	"earn": "Ganhe",
+	"inCashbackAtTheClub": "em cashback no Clube",
 	"cashbackToEarn": "Cashback a ganhar",
 	"orderPendingPayment": "Pedido pendente de pagamento",
 	"orderPendingComment": "Agora e só escanear e realizar o pagamento para finalizar a sua compra",
@@ -212,5 +224,44 @@
 	"code": "Código",
 	"tryAgain": "Tentar novamente",
 
-	"sendingPayment": "Procesando seu pagamento..."
+	"sendingPayment": "Procesando seu pagamento...",
+
+	"Error404Title": "Página não encontrada",
+	"Error404Text": "A página que você procura não existe.",
+
+	"Error500Title": "Erro interno do servidor",
+	"Error500Text": "Algo deu errado. Tente novamente mais tarde.",
+
+	"partnersTitle": "Parceiros destacados",
+	"partnersSubtitle": "Produtores",
+	"partnersDescription": "Os melhores produtores do Uruguai e do Brasil estão na Braaay compartilhando suas experiências.",
+
+	"newsSectionTitle": "Destaques: Vinhos & Presentes",
+	"newsSectionDescription": "Dê uma olhada em nossa seleção com os melhores vinhos uruguaios e brasileiros e nossas sugestões para presentes empresariais.",
+
+	"blogSectionTitle": "Blog",
+	"blogSectionSubtitle": "Não fique de fora",
+	"blogSectionDescription": "Somos mais do que apenas mais uma loja de vinhos finos e cervejas artesanais. Na Braaay, queremos promover as cervejarias e vinícolas locais e artesanais: entrevistas, eventos, novas cervejarias, acontecimentos e muito mais.",
+
+	"goToBlog": "Ir para o blog",
+
+	"joinTheClub": "Faça parte do clube!",
+
+	"footerSupport": "SUPORTE",
+	"footerSupportShipping": "POLÍTICA DE FRETES",
+	"footerSupportReturns": "TROCAS E DEVOLUÇÕES",
+
+	"footerBraaayClub": "CLUBE",
+
+	"footerSocials": "REDES SOCIAIS",
+
+	"footerDisclaimer1": "A venda de bebidas alcoólicas é proibida para menores de 18 anos",
+	"footerDisclaimer2": "Todos os direitos reservados. Conheça nossas:",
+	"footerDisclaimer3": "Frete Grátis: Confira as regras",
+	"footerDisclaimer4": "A venda de bebidas alcoólicas <br />é proibida para menores de 18 anos.",
+
+	"footerDeveloper1": "Futurewise, criação de loja virtual",
+	"footerDeveloper2": "Monte a sua agora!",
+
+	"funMessage1": "Obrigado por ser genial 😀"
 }

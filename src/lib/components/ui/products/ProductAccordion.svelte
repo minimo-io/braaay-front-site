@@ -13,7 +13,7 @@
 	} from '@lucide/svelte';
 	import { slide } from 'svelte/transition';
 	import { m } from '$lib/paraglide/messages';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { AppConfig } from '$config';
 	import { Button } from '../buttons';
 	import { openModal } from '$stores/modalState.state.svelte';
@@ -316,7 +316,7 @@
 			<div class="flex items-center">
 				<CreditCard class="lucide-icon" />
 				<span class="font-roboto text-[13px] tracking-[1.1px] font-semibold text-grey-blueish">
-					FORMAS DE PAGAMENTO
+					{m.paymentMethods()}
 				</span>
 			</div>
 			{#if activeAccordion === 'pagamento'}
@@ -335,29 +335,35 @@
 					<div class="text-left">
 						<div class="mb-3">
 							<h4 class="!text-[13px] mb-2">
-								<span class="font-bold">PIX:</span>
+								<span class="font-bold">{m.cash()}:</span>
 								<span>{m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)}</span> (5% OFF)
 							</h4>
 						</div>
-						<div class="mt-3">
-							<h4 class="!text-[13px] mb-2">
-								<span class="font-bold">BOLETO:</span>
-								{product.price}
-							</h4>
-						</div>
-						<h3 class="text-[13px] font-bold mb-3">CARTÃO DE CRÉDITO</h3>
+						{#if getLocale() == 'pt'}
+							<div class="mt-3">
+								<h4 class="!text-[13px] mb-2">
+									<span class="font-bold">BOLETO:</span>
+									{product.price}
+								</h4>
+							</div>
+						{/if}
+						<h3 class="text-[13px] font-bold mb-3">{m.creditCard()}</h3>
 						<ul class="space-y-1">
 							<li class="font-light text-[12px] normal-case">
-								1x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 1)}</strong> sem juros
+								1x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 1)}</strong>
+								{m.interestFree()}
 							</li>
 							<li class="font-light text-[12px] normal-case">
-								2x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 2)}</strong> sem juros
+								2x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 2)}</strong>
+								{m.interestFree()}
 							</li>
 							<li class="font-light text-[12px] normal-case">
-								3x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 3)}</strong> sem juros
+								3x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 3)}</strong>
+								{m.interestFree()}
 							</li>
 							<li class="font-light text-[12px] normal-case">
-								4x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 4)}</strong> sem juros
+								4x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 4)}</strong>
+								{m.interestFree()}
 							</li>
 						</ul>
 					</div>

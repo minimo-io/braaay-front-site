@@ -10,7 +10,7 @@ import {
 	Droplets,
 	Gem,
 	Factory,
-	Store
+	Pencil
 } from '@lucide/svelte';
 import type { MenuCategory } from '$lib/types';
 import WineSubcategories from '$data/jsons/wine-subcategories.json';
@@ -53,33 +53,39 @@ export function getSiteCategories(site: 'pt' | 'uy' = 'pt') {
 			{
 				id: 0,
 				name: 'Packs',
-				url: '/uy/packs/',
+				url: '/?soon',
 				icon: PackageOpen
 			},
 			{
 				id: 0,
 				name: 'Choperas',
-				url: '/uy/choperas/',
+				url: '/?soon',
 				icon: Droplets
 			},
 			{
 				id: 0,
 				name: 'Cristalería',
-				url: '/uy/cristaleria/',
+				url: '/?soon',
 				icon: Gem
 			},
 			{
 				id: 0,
 				name: 'Cervecerías',
-				url: '/uy/cervecerias/',
+				url: '/?soon',
 				icon: Factory
 			},
 			{
 				id: 0,
-				name: 'Bares',
-				url: '/uy/bares/',
-				icon: Store
+				name: 'Blog',
+				url: '/uy/blog/',
+				icon: Pencil
 			}
+			// {
+			// 	id: 0,
+			// 	name: 'Bares',
+			// 	url: '/?soon',
+			// 	icon: Store
+			// }
 		]
 	};
 

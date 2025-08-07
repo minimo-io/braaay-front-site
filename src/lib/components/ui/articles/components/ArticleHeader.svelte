@@ -6,8 +6,9 @@
 		useCurrentColor?: boolean;
 		article: Post;
 		showAuthor?: boolean;
+		size?: 'regular' | 'small';
 	}
-	let { fullWidth, useCurrentColor = false, article }: Props = $props();
+	let { fullWidth, useCurrentColor = false, article, size = 'regular' }: Props = $props();
 
 	let author: ArticleCreator = article.author;
 
@@ -40,10 +41,14 @@
 {:else}
 	<!-- Mostly for products and categories -->
 	<div
-		class="bry-header mx-auto h-[200px] max-h-[200px] bg-[#d1d1d0] relative md:rounded-2xl mb-36"
+		class={[
+			'bry-header mx-auto h-[200px] max-h-[200px] relative md:rounded-2xl mb-36',
+			size == 'small' && 'w-full md:!max-w-[80%]'
+		]}
 	>
+		<!-- -->
 		<div
-			class="absolute inset-0 opacity-70 z-0 md:rounded-2xl"
+			class="absolute inset-0 opacity-100 z-0 md:rounded-2xl"
 			style="
                     background-size: cover;
                     background-image: url({articleFinalImage}){useCurrentColor ? ',' : ';'}
@@ -53,7 +58,7 @@
                     background-blend-mode: multiply;
                 "
 		>
-			<div class="glass border w-full h-full absolute top-0 left-0 md:rounded-2xl"></div>
+			<!-- <div class="glass border w-full h-full absolute top-0 left-0 md:rounded-2xl"></div> -->
 		</div>
 
 		<h3 class="bry-header-deck">

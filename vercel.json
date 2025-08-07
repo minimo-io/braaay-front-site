@@ -9,5 +9,101 @@
 				}
 			]
 		}
+	],
+	"redirects": [
+		{
+			"source": "/cervejas-artesanais/",
+			"destination": "https://braaay.com/cervejas/",
+			"permanent": true
+		},
+		{
+			"source": "/uva/albarino/",
+			"destination": "https://braaay.com/uva/alvarinho/",
+			"permanent": true
+		},
+		{
+			"source": "/blog/em-destaque/",
+			"destination": "https://braaay.com/tag/oportunidades/",
+			"permanent": true
+		},
+		{
+			"source": "/lista-de-desejos/",
+			"destination": "https://braaay.com",
+			"permanent": true
+		},
+		{
+			"source": "/catalogo/",
+			"destination": "https://braaay.com/vinhos/",
+			"permanent": true
+		},
+
+		{
+			"source": "/blog/sobre-vinho/o-vinho-cordero-con-piel-de-lobo-e-bom/",
+			"destination": "https://braaay.com/produto/vinho-cordero-con-piel-de-lobo-malbec/",
+			"permanent": true
+		},
+		{
+			"source": "/businesscard",
+			"destination": "https://wa.me/5511947530340",
+			"permanent": true
+		},
+
+		{
+			"source": "/promocoes/10-desconto-para-compras-recorrentes-pelo-whatsapp-vinhos-cervejas-artesanais/",
+			"destination": "https://braaay.com/promocoes/10-de-desconto-na-primeira-compra-pelo-whatsapp/",
+			"permanent": true
+		},
+		{
+			"source": "/vinhos/tintos/cabernet-sauvignon/",
+			"destination": "https://braaay.com/uva/cabernet-sauvignon/",
+			"permanent": true
+		},
+		{
+			"source": "/uncategorized/",
+			"destination": "https://braaay.com/vinhos/",
+			"permanent": true
+		},
+		{
+			"source": "/page_category/demo-shop/",
+			"destination": "https://braaay.com/",
+			"permanent": true
+		},
+		{
+			"source": "/sales",
+			"destination": "https://wa.me/5511947530340",
+			"permanent": true
+		},
+
+		{
+			"source": "/loja/",
+			"destination": "https://braaay.com/vinhos/",
+			"permanent": true
+		},
+
+		{
+			"source": "/uy/tag/destacado/",
+			"destination": "https://braaay.com/uy/blog/",
+			"permanent": true
+		},
+		{
+			"source": "/uy/instagram/",
+			"destination": "https://www.instagram.com/hops_uy/",
+			"permanent": false
+		},
+		{
+			"source": "/uy/ventas/",
+			"destination": "https://wa.me/5511947530340",
+			"permanent": false
+		},
+		{
+			"source": "/businesscard",
+			"destination": "https://linktr.ee/braaay_com",
+			"permanent": false
+		},
+		{
+			"source": "/sales",
+			"destination": "https://wa.me/5511988307374",
+			"permanent": false
+		}
 	]
 }

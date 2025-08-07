@@ -186,6 +186,24 @@ export default defineConfig({
 					]
 				},
 
+				// Brewery
+				{
+					pattern: '/cerveceria/:id/',
+					localized: [
+						['pt', '/cerveceria/:id/'],
+						['uy', '/uy/cerveceria/:id/']
+					]
+				},
+
+				// Stores
+				{
+					pattern: '/stores/:id/',
+					localized: [
+						['pt', '/lojas/:id/'],
+						['uy', '/uy/tiendas/:id/']
+					]
+				},
+
 				// Harmonizacoes
 				{
 					pattern: '/harmonizacoes/:id/',

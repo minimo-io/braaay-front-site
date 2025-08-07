@@ -102,14 +102,11 @@
 			{:else if locale == 'uy'}
 				<!-- -->
 				<li class="glide__slide w-full">
-					<a
-						href={localizeHref('/produto/confraria-entre-tacas-e-mulheres/')}
-						class="not-hover-effect"
-					>
+					<a href={localizeHref('/uy/cervezas/')} class="not-hover-effect">
 						<picture>
 							<!-- Mobile image: for screens up to 767px -->
 							<source
-								srcset="/images/carousel/braaay-carousel-mobile-1.jpg"
+								srcset="/images/carousel/braaay-carousel-mobile-uy-1.jpg"
 								media="(max-width: 767px)"
 							/>
 							<!-- Desktop image: for screens 768px and above -->

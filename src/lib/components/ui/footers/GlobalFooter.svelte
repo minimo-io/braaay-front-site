@@ -51,7 +51,7 @@
 				<h3
 					class="text-grey-medium text-center md:text-left font-medium italic font-prata text-[20px] mb-0"
 				>
-					Faça parte do clube!
+					{m.joinTheClub()}
 				</h3>
 				<h2 class="text-2xl font-bold mb-4 text-center md:text-left">APP DE CASHBACK</h2>
 				<div class="flex gap-4 justify-center md:justify-start">
@@ -69,7 +69,7 @@
 				class="bry-footer-grid grid flex-shrink-0 grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 md:flex-1 mx-auto justify-center items-center"
 			>
 				<div class="text-center">
-					<h3>SUPORTE</h3>
+					<h3>{m.footerSupport()}</h3>
 					<ul>
 						<li>
 							<a
@@ -78,16 +78,16 @@
 								target="_blank"
 								class="!text-black font-bold"
 							>
-								+55 11 94753-0340
+								{AppConfig.tel[getLocale()]}
 							</a>
 						</li>
 						<li>
 							<a class="!text-black font-bold" href="mailto:contato@braaay.com">
-								contato@braaay.com
+								{AppConfig.email[getLocale()]}
 							</a>
 						</li>
-						<li><a href="/">POLÍTICA DE FRETES</a></li>
-						<li><a href="/">TROCAS E DEVOLUÇÕES</a></li>
+						<li><a href="/">{m.footerSupportShipping()}</a></li>
+						<li><a href="/">{m.footerSupportReturns()}</a></li>
 					</ul>
 				</div>
 				<!-- Company Links -->
@@ -101,12 +101,12 @@
 							>
 						</li>
 						<li><a href={localizeHref('/blog/')}>BLOG</a></li>
-						<li><a href={localizeHref('/club/')}>CLUBE</a></li>
+						<li><a href={localizeHref('/club/')}>{m.footerBraaayClub()}</a></li>
 					</ul>
 				</div>
 				<!-- Social Media -->
 				<div class="hidden md:block text-center">
-					<h3>REDES SOCIAIS</h3>
+					<h3>{m.footerSocials()}</h3>
 					<ul>
 						<li><a href="https://www.instagram.com/braaay_com">INSTAGRAM</a></li>
 						<li><a href="/">YOUTUBE</a></li>
@@ -120,16 +120,17 @@
 		<hr class="border-b-1 border-grey-lighter mt-10 mb-5 w-full relative" />
 
 		<div
-			class="mx-auto px-[30px] text-center text-[14px] leading-5 font-roboto text-grey-medium mb-5"
+			class="mx-auto px-[30px] text-center text-[13px] leading-5 font-roboto text-grey-medium mb-5"
 		>
 			<p>
-				A venda de bebidas alcoólicas é proibida para menores de 18 anos © {AppConfig.foundingDate}-{currentYear}
+				{AppConfig.foundingDate}-{currentYear}
 				• Braaay • {m.companyDocumentType()}:
 				{AppConfig.legal[getLocale()].code}. • {m.zipCodeName()}: {AppConfig.address[getLocale()]
-					.zipCode}. Todos os direitos reservados. Conheça nossas:
-				<a href="/" class="text-black font-medium">Trocas e devoluções</a>
+					.zipCode}. <br />
+				{m.footerDisclaimer2()}
+				<a href="/" class="text-black font-medium capitalize">{m.footerSupportReturns()}</a>
 				|
-				<a href="/" class="text-black font-medium">*Frete Grátis: Confira as regras</a>
+				<a href="/" class="text-black font-medium">*{m.footerDisclaimer3()}</a>
 			</p>
 			<!-- Locales -->
 			<div class="text-center my-2">
@@ -155,11 +156,11 @@
 			</div>
 		</div>
 		<!-- Futurewise -->
-		<div class="border-t border-grey-lighter py-5 flex flex-col md:flex-row justify-between">
+		<div class="border-t border-grey-lighter py-5 grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
 			<div
-				class="text-xs text-grey-medium flex flex-col justify-center mb-4 text-center md:text-left"
+				class="text-xs text-grey-medium flex flex-col justify-center md:mb-4 text-center md:text-left"
 			>
-				<span> Futurewise, criação de loja virtual. </span>
+				<span> {m.footerDeveloper1()}. </span>
 
 				<a
 					onclick={() => handleFwClick}
@@ -168,21 +169,26 @@
 					rel="noopener"
 					class="underline text-grey-darkest"
 				>
-					Monte a sua agora!
+					{m.footerDeveloper2()}
 				</a>
 			</div>
-			<div class="text-xs text-grey-medium text-center -top-1 relative mb-2 md:mb-0">
+			<div class="text-xs text-grey-medium text-center flex flex-col justify-center">
 				v{__APP_VERSION__}<br />
-				A venda de bebidas alcoólicas <br />é proibida para menores de 18 anos.
+				{@html m.footerDisclaimer4()}
 			</div>
 
 			<!-- Futurewise logo -->
-			<div class={['text-xs text-center', isProductPage?.startsWith('/produto/') && 'mb-14']}>
-				<div class="text-right justify-center md:justify-end self-end flex relative md:-top-2">
+			<div
+				class={[
+					'text-xs text-center flex flex-col justify-center',
+					isProductPage?.startsWith('/produto/') && 'mb-14'
+				]}
+			>
+				<div class="text-right justify-center md:justify-end self-center md:self-end flex">
 					<a
 						target="_blank"
 						rel="noopener"
-						href="https://futurewise.lat"
+						href="https://futurewise.lat  "
 						onclick={() => handleFwClick}
 					>
 						<img src="/images/futurewise-logo-2.svg" class="h-10" alt="futurewise-bagity" />

@@ -3,6 +3,7 @@
 	import { fade } from 'svelte/transition';
 	import MoreInfoButton from '../buttons/MoreInfoButton.svelte';
 	import type { Category } from '$lib/types';
+	import { m } from '$lib/paraglide/messages';
 
 	interface Props {
 		category: Category;
@@ -47,7 +48,7 @@
 					{#if hideCount === false}
 						<span>{category.count} produtos</span>
 					{/if}
-					<MoreInfoButton title="CONHEÇA&nbsp;MAIS" />
+					<MoreInfoButton title={m.knowMore()} />
 				</div>
 			</div>
 			<div class="block">
