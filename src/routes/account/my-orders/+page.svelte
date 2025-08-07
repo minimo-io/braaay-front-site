@@ -56,7 +56,7 @@
 		<div class="text-sm text-grey-medium-dark flex items-center mt-2 md:mt-0">
 			<LoaderCircle class="spinner" />
 			<span>
-				{m.loadingFavorites()}
+				{m.loadingOrders()}
 			</span>
 		</div>
 	{/if}
