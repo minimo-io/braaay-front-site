@@ -5,6 +5,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import { launchToast } from '$lib/utils';
+	import { emptyCart } from '$stores/cart.store.svelte.js';
 	import { Check } from '@lucide/svelte';
 	import { onMount } from 'svelte';
 
@@ -12,8 +13,9 @@
 
 	let { data } = $props();
 
-	onMount(() => {
+	onMount(async () => {
 		console.log('data', data);
+		await emptyCart();
 	});
 </script>
 
