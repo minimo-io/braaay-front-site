@@ -13,11 +13,7 @@
 
 	// const routeId = page.route.id;
 	const providerCode = $derived(page.url.searchParams.get('provider'));
-	const orderId = $derived(
-		providerCode == 'mp'
-			? page.url.searchParams.get('merchant_order_id')
-			: page.url.searchParams.get('orderId')
-	);
+	const orderId = $derived(page.url.searchParams.get('orderId'));
 
 	const errorCode = $derived(page.url.searchParams.get('code'));
 	const details = $derived(page.url.searchParams.get('details'));
