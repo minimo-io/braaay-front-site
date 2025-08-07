@@ -4,7 +4,10 @@ import type { PageServerLoad } from './$types';
 export const load: PageServerLoad = async ({ url }) => {
 	// Get the provider and merchant_order_id from URL search params
 	const provider = url.searchParams.get('provider');
-	const merchantOrderId = url.searchParams.get('merchant_order_id');
+	let merchantOrderId = url.searchParams.get('merchant_order_id');
+	if (!merchantOrderId) {
+		merchantOrderId = url.searchParams.get('orderId');
+	}
 
 	let cancellationResult: {
 		success: boolean;
@@ -31,6 +34,8 @@ export const load: PageServerLoad = async ({ url }) => {
 				error: error instanceof Error ? error.message : String(error)
 			};
 		}
+	} else {
+		console.log(`No order id to cancel.`);
 	}
 
 	// Return minimal data to the page component
