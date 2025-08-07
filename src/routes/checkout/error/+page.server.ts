@@ -5,7 +5,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	// Get the provider and merchant_order_id from URL search params
 	const provider = url.searchParams.get('provider');
 	let merchantOrderId = url.searchParams.get('merchant_order_id');
-	if (!merchantOrderId) {
+	if (!merchantOrderId || merchantOrderId == 'null') {
 		merchantOrderId = url.searchParams.get('orderId');
 	}
 
