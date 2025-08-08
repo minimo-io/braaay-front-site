@@ -102,9 +102,9 @@
 		image: pageImage,
 		description: stripHtml(product?.shortDescription || seo?.metaDesc || '').replaceAll('\n', ''),
 		brand: {
-			'@type': 'Thing',
+			'@type': 'Brand',
 			name: productProducerName,
-			mainEntityOfPage: productProducerUrl
+			url: productProducerUrl
 		},
 		offers: [
 			{
