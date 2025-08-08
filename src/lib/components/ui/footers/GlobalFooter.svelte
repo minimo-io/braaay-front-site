@@ -16,11 +16,12 @@
 	}
 
 	// let isProductPage: string | null = $state('');
-	let isProductPage = $state<string | null>(null);
+	let isProductPage = $state<boolean>(false);
 	const currentYear = new Date().getFullYear();
 
 	$effect(() => {
-		isProductPage = page.route?.id;
+		isProductPage = page.route?.id == '/produto/[productSlug]';
+		console.log(isProductPage);
 	});
 </script>
 
@@ -155,10 +156,20 @@
 				{/if}
 			</div>
 		</div>
+
 		<!-- Futurewise -->
-		<div class="border-t border-grey-lighter py-5 grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
+		<div
+			class={[
+				'border-t border-grey-lighter py-5 grid grid-cols-1 md:grid-cols-3 gap-4',
+				isProductPage && 'md:mb-20 md:!py-0'
+			]}
+		>
+			<!-- CTA -->
 			<div
-				class="text-xs text-grey-medium flex flex-col justify-center md:mb-4 text-center md:text-left"
+				class={[
+					'text-xs text-grey-medium flex flex-col justify-center md:mb-4 text-center md:text-left',
+					isProductPage && 'md:mt-5'
+				]}
 			>
 				<span> {m.footerDeveloper1()}. </span>
 
@@ -172,7 +183,14 @@
 					{m.footerDeveloper2()}
 				</a>
 			</div>
-			<div class="text-xs text-grey-medium text-center flex flex-col justify-center">
+
+			<!-- Middle version -->
+			<div
+				class={[
+					'text-xs text-grey-medium text-center flex flex-col justify-center',
+					isProductPage && 'md:mt-5'
+				]}
+			>
 				v{__APP_VERSION__}<br />
 				{@html m.footerDisclaimer4()}
 			</div>
@@ -181,7 +199,7 @@
 			<div
 				class={[
 					'text-xs text-center flex flex-col justify-center',
-					isProductPage?.startsWith('/produto/') && 'mb-14'
+					isProductPage && 'mb-16 md:mb-0 md:mt-5'
 				]}
 			>
 				<div class="text-right justify-center md:justify-end self-center md:self-end flex">
