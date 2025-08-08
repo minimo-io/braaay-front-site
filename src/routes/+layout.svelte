@@ -44,12 +44,15 @@
 	import { AppConfig } from '$config';
 	import { onMount } from 'svelte';
 	import { launchToast } from '$lib/utils';
+	import { clearAllCache } from '$stores/urqlClient.state.svelte';
 
-	// onMount(() => {
-	// 	if (page.url.searchParams.has('soon')) {
-	// 		launchToast('En breve vamos a lanzar esta funcionalidad.', 'info', 3000);
-	// 	}
-	// });
+	onMount(() => {
+		if (page.url.searchParams.has('clearCache')) {
+			// launchToast('En breve vamos a lanzar esta funcionalidad.', 'info', 3000);
+			console.log('Clearning cache...');
+			clearAllCache();
+		}
+	});
 
 	afterNavigate(() => {
 		// Close drawer if active

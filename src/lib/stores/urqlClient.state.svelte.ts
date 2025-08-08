@@ -79,6 +79,44 @@ export const urqlClientPtLoggedIn = $state({
 	})
 });
 
+// --- START: Cache Clearing Method ---
+/**
+ * Recreates all urql client instances, effectively clearing the entire cache
+ * for all clients and forcing all active queries to re-execute.
+ */
+export function clearAllCache() {
+	console.log('Clearing all urql caches by recreating clients...');
+
+	// Re-initialize each client individually by mutating the client property.
+	urqlClientUyLoggedOut.client = createClient({
+		url: PUBLIC_GRAPHQL_SERVER_UY,
+		exchanges: [cacheExchange, fetchExchange, loggerExchange],
+		requestPolicy: 'cache-first',
+		fetchOptions: () => ({})
+	});
+	urqlClientUyLoggedIn.client = createClient({
+		url: PUBLIC_GRAPHQL_SERVER_UY,
+		exchanges: [cacheExchange, authExchange, fetchExchange, loggerExchange],
+		requestPolicy: 'network-only',
+		fetchOptions: () => ({})
+	});
+	urqlClientPtLoggedOut.client = createClient({
+		url: PUBLIC_GRAPHQL_SERVER_PT,
+		exchanges: [cacheExchange, fetchExchange, loggerExchange],
+		requestPolicy: 'cache-first',
+		fetchOptions: {
+			// credentials: 'include'
+		}
+	});
+	urqlClientPtLoggedIn.client = createClient({
+		url: PUBLIC_GRAPHQL_SERVER_PT,
+		exchanges: [cacheExchange, authExchange, fetchExchange, loggerExchange],
+		requestPolicy: 'network-only',
+		fetchOptions: () => ({})
+	});
+}
+// --- END: Cache Clearing Method ---
+
 /**
  * We use different clients for logged-in (network only) vs logged-out (cache-first) users.
  * @param authToken is for when we check session from the server Locals
