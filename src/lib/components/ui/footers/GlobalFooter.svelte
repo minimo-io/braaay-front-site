@@ -21,7 +21,6 @@
 
 	$effect(() => {
 		isProductPage = page.route?.id == '/produto/[productSlug]';
-		console.log(isProductPage);
 	});
 </script>
 
