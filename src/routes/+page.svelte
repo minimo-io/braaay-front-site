@@ -316,7 +316,7 @@
 					<div>
 						<a title="Vegetariano" href="/harmonizacoes/vegetariano/">
 							<img
-								src="/images/harmonizacoes/harmonizacoes-vegetariano.png"
+								src="/images/harmonizacoes/harmonizacoes-vegetariano.jpeg"
 								alt="2 description"
 								class="rounded-lg w-full h-auto"
 							/>

@@ -80,17 +80,17 @@
 						<picture>
 							<!-- Mobile image: for screens up to 767px -->
 							<source
-								srcset="/images/carousel/frete-gratis-2025-mobile.png"
+								srcset="/images/carousel/frete-gratis-2025-mobile.jpeg"
 								media="(max-width: 767px)"
 							/>
 							<!-- Desktop image: for screens 768px and above -->
 							<source
-								srcset="/images/carousel/frete-gratis-2025-desktop.png"
+								srcset="/images/carousel/frete-gratis-2025-desktop.jpeg"
 								media="(min-width: 768px)"
 							/>
 							<!-- Fallback image -->
 							<img
-								src="/images/carousel/frete-gratis-2025-desktop.png"
+								src="/images/carousel/frete-gratis-2025-desktop.jpeg"
 								alt="placeholder 2"
 								class="carousel-image w-full"
 								width="800"
