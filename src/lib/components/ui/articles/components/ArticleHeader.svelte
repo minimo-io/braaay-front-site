@@ -48,7 +48,7 @@
 	>
 		<!-- -->
 		<div
-			class="absolute inset-0 opacity-100 z-0 md:rounded-2xl"
+			class="absolute inset-0 opacity-70 z-0 md:rounded-2xl"
 			style="
                     background-size: cover;
                     background-image: url({articleFinalImage}){useCurrentColor ? ',' : ';'}
