@@ -33,6 +33,7 @@
 		<!-- Logo -->
 		<div class="flex justify-center mb-12">
 			<img
+				height="36"
 				src="/images/logo-braaay-desktop.svg"
 				alt="BRAAAY Logo"
 				class="h-10 lg:h-9 object-contain mt-14"
@@ -208,7 +209,13 @@
 						href="https://futurewise.lat  "
 						onclick={() => handleFwClick}
 					>
-						<img src="/images/futurewise-logo-2.svg" class="h-10" alt="futurewise-bagity" />
+						<img
+							src="/images/futurewise-logo-2.svg"
+							width="100"
+							height="40"
+							class="h-10"
+							alt="futurewise-bagity"
+						/>
 					</a>
 				</div>
 			</div>

@@ -65,13 +65,15 @@
 			</button>
 			<div class="flex lg:flex-none pr-0 md:pr-8 justify-start">
 				<a href={localizeHref('/')} class="">
-					<span class="sr-only">Braaay</span>
+					<span class="sr-only">{m.seoBase()}</span>
 					<img
 						class="h-[38px] w-auto hidden lg:block"
 						src="/images/logo-braaay-desktop.svg"
 						alt="braaay-logo-desktop"
+						height="38"
 					/>
 					<img
+						height="21"
 						class="h-[21px] w-auto lg:hidden"
 						src="/images/logo-braaay-mobile.svg"
 						alt="braaay-logo-mobile"
