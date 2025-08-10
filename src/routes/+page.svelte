@@ -305,7 +305,7 @@
 					<div class="relative">
 						<a title="Carnes vermelhas" href="/harmonizacoes/carnes-vermelhas/">
 							<img
-								src="/images/harmonizacoes/carnes-vermelhas-2.webp"
+								src="/images/harmonizacoes/carnes-vermelhas-2.jpeg"
 								alt="1 description"
 								class="rounded-lg w-full h-auto"
 							/>
