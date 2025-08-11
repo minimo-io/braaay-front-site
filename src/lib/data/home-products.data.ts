@@ -69,7 +69,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/kit-vinho-pinot-noir-premium-flores-naturais/',
 					score: '4.8',
 					image: {
-						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/11/kit-vina-eden-flores-naturais-blur.png',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/11/kit-vina-eden-flores-naturais-blur.jpeg',
 						alt: 'kit-vina-eden-flores-naturais-blur'
 					}
 				},
