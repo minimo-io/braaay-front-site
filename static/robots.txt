@@ -1,12 +1,12 @@
 # START YOAST BLOCK
 # ---------------------------
 User-agent: *
-Crawl-delay: 5 #1 page per 10 seconds                            
-
-
-
+Crawl-delay: 2  #1 page per 10 seconds                            
 # ---------------------------
 # END YOAST BLOCK
+
+Sitemap: https://braaay.com/sitemap_index.xml
+Sitemap: https://braaay.com/uy/sitemap_index.xml
 
 # banned bots.
 User-agent: Vegi bot

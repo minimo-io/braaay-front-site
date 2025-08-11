@@ -1,130 +1,144 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//braaay.com/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//api.braaay.com/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/ariano-hermanos/</loc>
-		<lastmod>2025-07-28T18:18:22+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/ariano-hermanos/</loc>
+		<lastmod>2025-08-10T03:06:44+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/azienda-agricola-castorani/</loc>
+		<loc>https://braaay.com/produtores-de-vinho/azienda-agricola-castorani/</loc>
 		<lastmod>2025-07-29T22:20:20+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/baoba-vino/</loc>
+		<loc>https://braaay.com/produtores-de-vinho/baoba-vino/</loc>
 		<lastmod>2025-06-09T19:31:57+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/bestias/</loc>
-		<lastmod>2025-07-24T17:34:53+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/bestias/</loc>
+		<lastmod>2025-08-06T17:41:31+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/bodega-artesana/</loc>
+		<loc>https://braaay.com/produtores-de-vinho/bodega-artesana/</loc>
 		<lastmod>2025-07-24T17:37:25+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/bodega-bouza/</loc>
-		<lastmod>2025-07-30T18:58:41+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/bodega-bouza/</loc>
+		<lastmod>2025-08-08T01:10:24+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/bodega-cerro-chapeu/</loc>
-		<lastmod>2025-06-09T19:15:34+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/bodega-cerro-chapeu/</loc>
+		<lastmod>2025-08-06T18:13:25+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/bodega-cerro-del-toro/</loc>
+		<loc>https://braaay.com/produtores-de-vinho/bodega-cerro-del-toro/</loc>
 		<lastmod>2025-05-29T21:34:31+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/bodega-garzon/</loc>
-		<lastmod>2025-06-09T19:20:04+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/bodega-garzon/</loc>
+		<lastmod>2025-08-06T18:31:48+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/bodegas-tagua/</loc>
+		<loc>https://braaay.com/produtores-de-vinho/bodegas-tagua/</loc>
 		<lastmod>2025-07-31T18:30:04+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/vinicola-bracco-bosca/</loc>
-		<lastmod>2025-07-17T15:19:58+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/vinicola-bracco-bosca/</loc>
+		<lastmod>2025-08-07T14:14:02+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/vinicola-casa-eva/</loc>
-		<lastmod>2025-07-31T18:30:04+00:00</lastmod>
-		
+		<loc>https://braaay.com/produtores-de-vinho/vinicola-casa-eva/</loc>
+		<lastmod>2025-08-06T15:30:30+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/divider-green.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/casa-perini/</loc>
-		<lastmod>2025-07-25T20:59:26+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/casa-perini/</loc>
+		<lastmod>2025-08-07T15:33:44+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/cerros-de-san-juan/</loc>
+		<loc>https://braaay.com/produtores-de-vinho/cerros-de-san-juan/</loc>
 		<lastmod>2025-06-17T18:08:55+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/don-nicolas/</loc>
-		<lastmod>2025-07-16T19:27:55+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/don-nicolas/</loc>
+		<lastmod>2025-08-06T17:55:53+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/don-pascual/</loc>
-		<lastmod>2025-07-29T22:18:03+00:00</lastmod>
-		
+		<loc>https://braaay.com/produtores-de-vinho/don-pascual/</loc>
+		<lastmod>2025-08-10T03:06:44+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/divider-green.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/familia-deicas/</loc>
-		<lastmod>2025-07-16T20:37:52+00:00</lastmod>
-		
+		<loc>https://braaay.com/produtores-de-vinho/familia-deicas/</loc>
+		<lastmod>2025-08-06T18:12:53+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/divider-green.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/manus/</loc>
-		<lastmod>2025-07-15T03:01:10+00:00</lastmod>
-		
+		<loc>https://braaay.com/produtores-de-vinho/manus/</loc>
+		<lastmod>2025-08-06T18:34:27+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/divider-green.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/menhir-salento/</loc>
+		<loc>https://braaay.com/produtores-de-vinho/menhir-salento/</loc>
 		<lastmod>2025-06-09T19:23:08+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/monte-paschoal/</loc>
+		<loc>https://braaay.com/produtores-de-vinho/monte-paschoal/</loc>
 		<lastmod>2025-03-10T13:58:09+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/mosquita-muerta/</loc>
+		<loc>https://braaay.com/produtores-de-vinho/mosquita-muerta/</loc>
 		<lastmod>2025-04-14T15:08:40+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/nova-alianca/</loc>
-		<lastmod>2025-07-08T16:57:21+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/nova-alianca/</loc>
+		<lastmod>2025-08-06T18:58:19+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/pizzato/</loc>
-		<lastmod>2025-07-28T18:16:52+00:00</lastmod>
-		
+		<loc>https://braaay.com/produtores-de-vinho/pizzato/</loc>
+		<lastmod>2025-08-10T23:39:17+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/divider-green.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/quinta-dos-termos/</loc>
-		<lastmod>2025-06-09T19:16:13+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/quinta-dos-termos/</loc>
+		<lastmod>2025-08-06T18:13:47+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/rio-sol/</loc>
+		<loc>https://braaay.com/produtores-de-vinho/rio-sol/</loc>
 		<lastmod>2025-07-08T16:06:02+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/tapiz-winery/</loc>
-		<lastmod>2025-07-31T18:30:04+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/tapiz-winery/</loc>
+		<lastmod>2025-08-06T18:57:13+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/vina-eden/</loc>
-		<lastmod>2025-02-27T19:38:44+00:00</lastmod>
-		
+		<loc>https://braaay.com/produtores-de-vinho/vina-eden/</loc>
+		<lastmod>2025-08-10T23:42:45+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/divider-green.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/vinhedos-do-monte-agudo/</loc>
-		<lastmod>2025-07-15T03:01:10+00:00</lastmod>
-		
+		<loc>https://braaay.com/produtores-de-vinho/vinhedos-do-monte-agudo/</loc>
+		<lastmod>2025-08-06T18:35:53+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/divider-green.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/vinicola-settesoli/</loc>
-		<lastmod>2025-02-21T15:48:59+00:00</lastmod>
+		<loc>https://braaay.com/produtores-de-vinho/vinicola-settesoli/</loc>
+		<lastmod>2025-08-06T18:59:28+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produtores-de-vinho/vinicula-giaretta/</loc>
+		<loc>https://braaay.com/produtores-de-vinho/vinicula-giaretta/</loc>
 		<lastmod>2025-06-09T19:20:39+00:00</lastmod>
 	</url>
 </urlset>

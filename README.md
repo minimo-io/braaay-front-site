@@ -1,6 +1,6 @@
 # Braaay Front Site
 
-👨‍💻 Development version [here](https://braaay-front-site.vercel.app/).
+👨‍💻 Development version [here](https://braaay.com/).
 <br />
 ✅ Production site [here](https://braaay.com).
 

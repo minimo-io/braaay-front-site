@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//braaay.com/uy/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uy/</loc>
+		<loc>https://braaay.com/uy/</loc>
 		<lastmod>2024-12-09T20:20:10+00:00</lastmod>
 		
 		
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uy/nosotros/</loc>
+		<loc>https://braaay.com/uy/nosotros/</loc>
 		<lastmod>2024-10-30T17:42:13+00:00</lastmod>
 		
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uy/shop/</loc>
+		<loc>https://braaay.com/uy/shop/</loc>
 		<lastmod>2024-10-30T17:42:14+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uy/muy-pronto/</loc>
+		<loc>https://braaay.com/uy/muy-pronto/</loc>
 		<lastmod>2024-12-09T19:55:29+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uy/tipos-de-cervezas-artesanales/</loc>
+		<loc>https://braaay.com/uy/tipos-de-cervezas-artesanales/</loc>
 		<lastmod>2024-12-09T20:36:45+00:00</lastmod>
 		
 		
 		
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uy/mapa-cervecero/</loc>
+		<loc>https://braaay.com/uy/mapa-cervecero/</loc>
 		<lastmod>2025-03-09T16:46:03+00:00</lastmod>
 		
 	</url>

@@ -1,712 +1,1016 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//braaay.com/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//api.braaay.com/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>https://braaay-front-site.vercel.app/loja/</loc>
-		<lastmod>2025-08-05T14:05:42+00:00</lastmod>
+		<loc>https://braaay.com/loja/</loc>
+		<lastmod>2025-08-10T23:42:45+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/presente-vinho-premium/</loc>
+		<loc>https://braaay.com/produto/presente-vinho-premium/</loc>
 		<lastmod>2024-08-14T20:31:57+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/gift-test-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-presente-vinho-taca-pistache/</loc>
+		<loc>https://braaay.com/produto/kit-presente-vinho-taca-pistache/</loc>
 		<lastmod>2024-08-14T20:31:57+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/kit-presente-cerro-de-toro.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-presente-champagne-capoani-chocolates-dengo/</loc>
+		<loc>https://braaay.com/produto/kit-presente-champagne-capoani-chocolates-dengo/</loc>
 		<lastmod>2024-08-14T20:31:57+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/kit-presente-champagne-capoani-chocolate.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-presente-espumante-taca-c-chocolate/</loc>
+		<loc>https://braaay.com/produto/kit-presente-espumante-taca-c-chocolate/</loc>
 		<lastmod>2024-08-14T20:31:57+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/kit-presente-pizzato-2-tacas-v3.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/pueblo-del-sol-roble-cabernet-sauvignon-2021/</loc>
+		<loc>https://braaay.com/produto/pueblo-del-sol-roble-cabernet-sauvignon-2021/</loc>
 		<lastmod>2024-08-14T20:32:03+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/05/pueblo-de-sol-cabernet-sauvignon-3.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-argentino-torero-malbec/</loc>
+		<loc>https://braaay.com/produto/vinho-argentino-torero-malbec/</loc>
 		<lastmod>2024-08-26T19:48:27+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/vinho-argentino-torero-staphyle.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-tierra-sagrada-rose-de-merlot/</loc>
+		<loc>https://braaay.com/produto/vinho-tierra-sagrada-rose-de-merlot/</loc>
 		<lastmod>2024-08-26T19:50:00+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/vinho-tierra-sagrada-chile-tagua-tagua.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-brut-rose-alianca/</loc>
+		<loc>https://braaay.com/produto/espumante-brut-rose-alianca/</loc>
 		<lastmod>2024-09-04T18:41:21+00:00</lastmod>
-		
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/Espumante-Alianca-Brut-Rose-2.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/espumante-alianca.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguai-tannat-ombu-bracco-bosca/</loc>
+		<loc>https://braaay.com/produto/vinho-uruguai-tannat-ombu-bracco-bosca/</loc>
 		<lastmod>2024-09-05T13:43:22+00:00</lastmod>
-		
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/08/bracco-bosca-tannat-ombu-uruguai-2.webp</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/08/monte-de-ombues-rocha-150x150.jpg</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chupasangre-malbec-familia-kretschmar/</loc>
+		<loc>https://braaay.com/produto/vinho-chupasangre-malbec-familia-kretschmar/</loc>
 		<lastmod>2024-09-05T13:45:17+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-chupasangre-familia-kretschmar-4.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/evento-inauguracao-showroom-braaay-pizzato/</loc>
+		<loc>https://braaay.com/produto/evento-inauguracao-showroom-braaay-pizzato/</loc>
 		<lastmod>2024-09-10T19:13:01+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/evento-inauguracao-3.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-torero-rose-malbec/</loc>
+		<loc>https://braaay.com/produto/vinho-torero-rose-malbec/</loc>
 		<lastmod>2024-09-25T21:52:47+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/03/torero-rose-malbec.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-zinfandel-reserva-edicao-limitada/</loc>
+		<loc>https://braaay.com/produto/vinho-artesana-zinfandel-reserva-edicao-limitada/</loc>
 		<lastmod>2024-09-26T00:49:42+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/Zinfandel-Reserva.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/experiencia-happy-wine/</loc>
+		<loc>https://braaay.com/produto/experiencia-happy-wine/</loc>
 		<lastmod>2024-11-04T12:49:48+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/10/Happy-Wine-Out-24-produto.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-x3-espumantes-taca/</loc>
-		<lastmod>2024-11-18T23:16:49+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-3-vinhos-brancos-irmaos-x3/</loc>
+		<loc>https://braaay.com/produto/kit-3-vinhos-brancos-irmaos-x3/</loc>
 		<lastmod>2024-11-19T13:03:07+00:00</lastmod>
-		
-		
-		
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/kit-3-vinhos-brancos-irmaos-2.webp</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-branco-goup-sauvignon-blanc-2-150x150.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-branco-chardonnay-capoani-2-150x150.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/vinho-branco-albarinho-bodega-garzon-uruguai-2-150x150.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-espumante-manus-nature-com-tacas/</loc>
+		<loc>https://braaay.com/produto/kit-espumante-manus-nature-com-tacas/</loc>
 		<lastmod>2024-11-22T14:22:49+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/Kit-Espumante-Manus-Nature.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-espumante-pizzato-brut-rose-com-chocolates-dengo/</loc>
-		<lastmod>2024-11-22T14:22:58+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-goup-rose-brut-brasileiro/</loc>
+		<loc>https://braaay.com/produto/espumante-goup-rose-brut-brasileiro/</loc>
 		<lastmod>2024-11-25T13:56:55+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/12/espumante-brut-rose-goup.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-tierra-sagrada-selection-carmenere/</loc>
+		<loc>https://braaay.com/produto/vinho-chileno-tierra-sagrada-selection-carmenere/</loc>
 		<lastmod>2024-11-25T14:28:14+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/12/vinho-chileno-tierra-sagrada-carmenere.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-moscato-giallo-champenoise/</loc>
+		<loc>https://braaay.com/produto/espumante-capoani-moscato-giallo-champenoise/</loc>
 		<lastmod>2024-11-28T10:28:20+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/11/espumante-capoani-moscato-giallo.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/evento-festa-do-espumante-brasileiro/</loc>
+		<loc>https://braaay.com/produto/evento-festa-do-espumante-brasileiro/</loc>
 		<lastmod>2024-12-06T16:53:36+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/aula-espumante-brasileiro-5-evento.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-uruguai-cerro-del-toro-tannat/</loc>
+		<loc>https://braaay.com/produto/vinho-tinto-uruguai-cerro-del-toro-tannat/</loc>
 		<lastmod>2024-12-09T18:43:45+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-tannat-cerro-del-toro-uruguai-3.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/terrenus-tinto-suave-premium/</loc>
+		<loc>https://braaay.com/produto/terrenus-tinto-suave-premium/</loc>
 		<lastmod>2024-12-16T18:31:25+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-de-mesa-terrenus-brasil-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-pizzato-brut-rose/</loc>
+		<loc>https://braaay.com/produto/espumante-pizzato-brut-rose/</loc>
 		<lastmod>2024-12-26T12:17:56+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/espumante-pizzato-brut-rose-2.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-giaretta-nature-homenagem/</loc>
+		<loc>https://braaay.com/produto/espumante-giaretta-nature-homenagem/</loc>
 		<lastmod>2025-01-09T15:29:54+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/espumante-giaretta-nature-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-don-nicolas-cabernet-sauvignon/</loc>
+		<loc>https://braaay.com/produto/vinho-don-nicolas-cabernet-sauvignon/</loc>
 		<lastmod>2025-01-09T16:22:39+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/don-nicolas-vinho-tinto-argentino.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-kabbalah-selecao-especial-carmenere/</loc>
+		<loc>https://braaay.com/produto/vinho-kabbalah-selecao-especial-carmenere/</loc>
 		<lastmod>2025-01-16T00:21:01+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-kabbalah-carmenere-chile-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kabbalah-selecao-especial-cabernet-sauvignon/</loc>
+		<loc>https://braaay.com/produto/kabbalah-selecao-especial-cabernet-sauvignon/</loc>
 		<lastmod>2025-01-30T14:47:10+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-branco-kabbalah-cabernet-sauvignon-chile-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-bestia-collection-carmenere-chile/</loc>
+		<loc>https://braaay.com/produto/vinho-bestia-collection-carmenere-chile/</loc>
 		<lastmod>2025-01-30T14:51:24+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/08/vinho-bestia-collection-carmenere.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-sol-sul-malbec-mendoza-argentina/</loc>
+		<loc>https://braaay.com/produto/vinho-sol-sul-malbec-mendoza-argentina/</loc>
 		<lastmod>2025-01-30T14:52:20+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/vinho-sol-sul-malbec-argentino-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-alentejo-terracos-do-tejo/</loc>
+		<loc>https://braaay.com/produto/vinho-tinto-alentejo-terracos-do-tejo/</loc>
 		<lastmod>2025-01-30T14:53:26+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-terracos-do-tejo-alentejo-3.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-tannat-rose/</loc>
+		<loc>https://braaay.com/produto/vinho-artesana-tannat-rose/</loc>
 		<lastmod>2025-01-30T15:10:01+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/03/vinho-artesana-tannat-rose.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-vina-eden-tannat-cement-kosher/</loc>
+		<loc>https://braaay.com/produto/vinho-uruguaio-vina-eden-tannat-cement-kosher/</loc>
 		<lastmod>2025-01-31T17:49:05+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/10/Vina-Eden-Marselan-1.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-moscatel-rose-cume-vinicola-nova-alianca/</loc>
+		<loc>https://braaay.com/produto/espumante-moscatel-rose-cume-vinicola-nova-alianca/</loc>
 		<lastmod>2025-01-31T18:10:18+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/espumante-cume-mostacal-rose-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-vinho-pinot-noir-premium-flores-naturais/</loc>
-		<lastmod>2025-02-04T19:11:54+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/evento-confraria-dos-vinhos/</loc>
+		<loc>https://braaay.com/produto/evento-confraria-dos-vinhos/</loc>
 		<lastmod>2025-02-20T19:58:36+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/02/Confraria.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-passio-nero-davola-sicilia-doc-settesoli/</loc>
-		<lastmod>2025-02-21T15:48:59+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-vina-eden-pueblo-eden-kosher/</loc>
+		<loc>https://braaay.com/produto/vinho-uruguaio-vina-eden-pueblo-eden-kosher/</loc>
 		<lastmod>2025-02-27T19:38:44+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/10/Vina-Eden-tannat.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-premium-bouza-uva-chardonnay-uruguai/</loc>
+		<loc>https://braaay.com/produto/vinho-branco-premium-bouza-uva-chardonnay-uruguai/</loc>
 		<lastmod>2025-02-28T21:16:24+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/09/Bouza-Chardonay.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/cerveja-especial-4reasons-apa-for-all-lata/</loc>
+		<loc>https://braaay.com/produto/cerveja-especial-4reasons-apa-for-all-lata/</loc>
 		<lastmod>2025-03-10T13:25:08+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/braaay-cerveja-4reasons-apa-for-all.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/cerveja-dogma-american-pale-ale-apa/</loc>
+		<loc>https://braaay.com/produto/cerveja-dogma-american-pale-ale-apa/</loc>
 		<lastmod>2025-03-10T13:25:08+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/12/cerveja-dogma-hop-summer-hits.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/cerveja-especial-4reasons-blonde-tropical/</loc>
+		<loc>https://braaay.com/produto/cerveja-especial-4reasons-blonde-tropical/</loc>
 		<lastmod>2025-03-10T13:25:09+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/4reasons-beer-blonde-tropical-2.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/cerveja-weizen-premium-lata-4reasons-beer/</loc>
+		<loc>https://braaay.com/produto/cerveja-weizen-premium-lata-4reasons-beer/</loc>
 		<lastmod>2025-03-10T13:25:09+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/cerveja-especial-4reasons-weizen-3.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/cerveja-artesanal-4-reasons-session-ipa-lata-473ml/</loc>
+		<loc>https://braaay.com/produto/cerveja-artesanal-4-reasons-session-ipa-lata-473ml/</loc>
 		<lastmod>2025-03-10T13:25:10+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/4reasons-beer-session-ipa-2.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-frisantes-monte-paschoal-c-taca-e-caixa/</loc>
+		<loc>https://braaay.com/produto/kit-frisantes-monte-paschoal-c-taca-e-caixa/</loc>
 		<lastmod>2025-03-10T13:58:09+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/Kit-Frisantes-Monte-Paschoal-Taca-Caixa-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-zinfandel-uruguai/</loc>
+		<loc>https://braaay.com/produto/vinho-artesana-zinfandel-uruguai/</loc>
 		<lastmod>2025-03-11T18:03:45+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/Tannat-Zinfandel-2023.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-casa-eva-rose/</loc>
+		<loc>https://braaay.com/produto/vinho-casa-eva-rose/</loc>
 		<lastmod>2025-03-24T13:36:52+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/11/vinho-casa-eva-rose-2023.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-brut-cume-nova-alianca/</loc>
+		<loc>https://braaay.com/produto/espumante-brut-cume-nova-alianca/</loc>
 		<lastmod>2025-03-24T18:25:29+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/espumante-cume-brut-branco-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-x6-espumantes-brut-cume-sacola/</loc>
+		<loc>https://braaay.com/produto/kit-x6-espumantes-brut-cume-sacola/</loc>
 		<lastmod>2025-03-24T18:25:51+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/kit-presente-espumante-cume.jpg</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-garzon-pinot-noir-rose-reserva/</loc>
+		<loc>https://braaay.com/produto/vinho-garzon-pinot-noir-rose-reserva/</loc>
 		<lastmod>2025-03-27T17:42:54+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/vinho-garzon-rose-pinot-noir-reserva-2.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-terrenus-branco-suave/</loc>
+		<loc>https://braaay.com/produto/vinho-terrenus-branco-suave/</loc>
 		<lastmod>2025-04-14T12:44:12+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/vinho-terrenus-branco-suave.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-cordero-con-piel-de-lobo-malbec/</loc>
+		<loc>https://braaay.com/produto/vinho-cordero-con-piel-de-lobo-malbec/</loc>
 		<lastmod>2025-04-14T15:08:40+00:00</lastmod>
-		
-		
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/07/cordero-con-piel-de-lobo-vinho-argentina-small.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/codero-con-piel-de-lobo-garrafa-150x150.webp</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/premios-mosquita-muerta-150x150.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-garzon-albarino-reserva/</loc>
+		<loc>https://braaay.com/produto/vinho-branco-garzon-albarino-reserva/</loc>
 		<lastmod>2025-04-17T00:42:46+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/vinho-branco-albarinho-bodega-garzon-uruguai-2.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-seco-ricominciare-malbec-argentina/</loc>
+		<loc>https://braaay.com/produto/vinho-tinto-seco-ricominciare-malbec-argentina/</loc>
 		<lastmod>2025-04-17T00:42:46+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/ricominciare-malbec-argentino-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-pizzato-chardonnay/</loc>
+		<loc>https://braaay.com/produto/vinho-branco-pizzato-chardonnay/</loc>
 		<lastmod>2025-04-17T00:42:59+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/11/vinho-branco-pizzato-chardonnay.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-fino-garzon-estate-cabernet-de-corte/</loc>
+		<loc>https://braaay.com/produto/vinho-ariano-tannat-uruguaio/</loc>
 		<lastmod>2025-04-17T00:42:59+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-tinto-ariano-tannat-uruguai-3.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-ariano-tannat-uruguaio/</loc>
-		<lastmod>2025-04-17T00:42:59+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-braccobosca-lacertilia-tannat-uruguaio-750ml/</loc>
-		<lastmod>2025-04-17T00:43:08+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-nacional-casa-eva-pinot-noir/</loc>
+		<loc>https://braaay.com/produto/vinho-tinto-nacional-casa-eva-pinot-noir/</loc>
 		<lastmod>2025-05-08T16:01:00+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/05/casa-eva-pinot-noir.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-brasileiro-santropa-rose-suave/</loc>
+		<loc>https://braaay.com/produto/vinho-brasileiro-santropa-rose-suave/</loc>
 		<lastmod>2025-05-08T16:02:59+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/09/Santropa-Rose.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-presente-cerveja-artesanal/</loc>
+		<loc>https://braaay.com/produto/kit-presente-cerveja-artesanal/</loc>
 		<lastmod>2025-05-29T17:30:55+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/kit-presente-cerveja-amendoim.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-cabernet-franc-merlot-reserva/</loc>
+		<loc>https://braaay.com/produto/vinho-artesana-cabernet-franc-merlot-reserva/</loc>
 		<lastmod>2025-05-29T17:31:39+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/vinho-artensana-cabernet-franc-merlot.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-cerro-del-toro-cabernet-franc-merlot-reserva/</loc>
+		<loc>https://braaay.com/produto/vinho-uruguaio-cerro-del-toro-cabernet-franc-merlot-reserva/</loc>
 		<lastmod>2025-05-29T21:34:31+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-cerro-del-toro-merot-cabernet-franc-uruguai-5.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-pizzato-merlot-de-merlots/</loc>
-		<lastmod>2025-06-04T17:49:08+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/frisante-rose-monte-paschoal-250ml/</loc>
-		<lastmod>2025-06-06T15:20:39+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-rose-capoani-pinot-noir-gamay/</loc>
+		<loc>https://braaay.com/produto/vinho-rose-capoani-pinot-noir-gamay/</loc>
 		<lastmod>2025-06-06T16:52:22+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-capoani-rose-pinot-noir-gamay-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-manus-sur-lie-rio-grande-do-sul/</loc>
+		<loc>https://braaay.com/produto/espumante-manus-sur-lie-rio-grande-do-sul/</loc>
 		<lastmod>2025-06-09T12:49:22+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/manus-espumante-sur-lie.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-artesana-tannat-zinfandel-reserva/</loc>
+		<loc>https://braaay.com/produto/vinho-uruguaio-artesana-tannat-zinfandel-reserva/</loc>
 		<lastmod>2025-06-09T18:58:07+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/vinho-artesana-tannat-zinfandel-uruguai.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-capoani-chardonnay-2022/</loc>
+		<loc>https://braaay.com/produto/vinho-capoani-chardonnay-2022/</loc>
 		<lastmod>2025-06-09T19:04:42+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-branco-chardonnay-capoani-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-baoba-vino-brut-rose-750ml/</loc>
+		<loc>https://braaay.com/produto/espumante-baoba-vino-brut-rose-750ml/</loc>
 		<lastmod>2025-06-09T19:10:48+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/ESPUMANTE-BAOBA-VINO-BRUT-ROSE-750ml.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-pizzato-brut-branco-tradicional/</loc>
-		<lastmod>2025-06-09T19:14:49+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-folklore-manseng-noir-cerro-chapeu-750ml/</loc>
-		<lastmod>2025-06-09T19:15:34+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-portugues-forja-do-ferreiro-organico/</loc>
-		<lastmod>2025-06-09T19:16:13+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/frisante-mayos-green-poucas-calorias/</loc>
-		<lastmod>2025-06-09T19:17:06+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-frisante-mayos-pink-monte-paschoal/</loc>
-		<lastmod>2025-06-09T19:17:21+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/frisante-moscato-branco-monte-paschoal-250ml/</loc>
+		<loc>https://braaay.com/produto/frisante-moscato-branco-monte-paschoal-250ml/</loc>
 		<lastmod>2025-06-09T19:17:50+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/03/frisante-branco-monte-paschoal-250ml.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-garzon-estate-viognier-de-corte/</loc>
+		<loc>https://braaay.com/produto/vinho-branco-garzon-estate-viognier-de-corte/</loc>
 		<lastmod>2025-06-09T19:20:04+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/vinho-branco-garzon-viognier-de-corte-2-2.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-giaretta-gran-reserva-corte-homenagem/</loc>
+		<loc>https://braaay.com/produto/vinho-tinto-giaretta-gran-reserva-corte-homenagem/</loc>
 		<lastmod>2025-06-09T19:20:39+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-tinto-giaretta-gran-reserva-corte-3.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-mayos-jovem-rose/</loc>
-		<lastmod>2025-06-09T19:22:41+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-pizzato-legno-chardonnay/</loc>
+		<loc>https://braaay.com/produto/vinho-branco-pizzato-legno-chardonnay/</loc>
 		<lastmod>2025-06-09T19:24:53+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/Pizzato-Legno-Chardonnay.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-tannat-reserva-artesana-uruguai/</loc>
+		<loc>https://braaay.com/produto/vinho-tannat-reserva-artesana-uruguai/</loc>
 		<lastmod>2025-06-09T19:29:32+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/03/vinho-artesana-tannat-reserva.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-terranoble-cabernet-sauvignon-375ml/</loc>
-		<lastmod>2025-06-09T19:31:14+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-baoba-vino-cabernet-sauvignon-750ml/</loc>
+		<loc>https://braaay.com/produto/vinho-baoba-vino-cabernet-sauvignon-750ml/</loc>
 		<lastmod>2025-06-09T19:31:57+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/vinho-baoba-cabernet-sauvignon-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-don-pascual-tannat-merlot/</loc>
-		<lastmod>2025-06-10T18:16:53+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-presente-vinho-pinot-noir-premium-flores/</loc>
+		<loc>https://braaay.com/produto/kit-presente-vinho-pinot-noir-premium-flores/</loc>
 		<lastmod>2025-06-12T16:56:49+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/braaay-chardonnay-flores.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-maderos-tannat-gran-reserva-single-vineyard-750ml/</loc>
+		<loc>https://braaay.com/produto/vinho-uruguaio-maderos-tannat-gran-reserva-single-vineyard-750ml/</loc>
 		<lastmod>2025-06-17T18:08:55+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/06/maderos-tannat-cerros-de-san-juan.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-bouza-tannat-b6-parcela-unica-uruguai/</loc>
-		<lastmod>2025-06-18T19:55:40+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-braccobosca-tannat-reserva-ombu-single-block/</loc>
+		<loc>https://braaay.com/produto/vinho-braccobosca-tannat-reserva-ombu-single-block/</loc>
 		<lastmod>2025-07-01T13:55:38+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/03/vinho-tannat-reserve-bracco-bosca.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-rio-sol-tradition-750ml-braaay/</loc>
+		<loc>https://braaay.com/produto/espumante-rio-sol-tradition-750ml-braaay/</loc>
 		<lastmod>2025-07-01T20:48:28+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/ESPUMANTE_RIO_SOL_TRADITION_750ML-braaay-1.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-familia-deicas-massimo-tannat/</loc>
-		<lastmod>2025-07-02T18:57:26+00:00</lastmod>
-		
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-familia-deicas-preludio-barrel-select-blend/</loc>
+		<loc>https://braaay.com/produto/vinho-familia-deicas-preludio-barrel-select-blend/</loc>
 		<lastmod>2025-07-02T18:59:00+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/Deica-2-1.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-santa-magdalena-reserva-cabernet-sauvignon/</loc>
+		<loc>https://braaay.com/produto/vinho-tinto-santa-magdalena-reserva-cabernet-sauvignon/</loc>
 		<lastmod>2025-07-08T16:06:02+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-tinto-santa-magdalena-cabernet-sauvignon-chile-3.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-tinto-chileno-kasta-carmenere/</loc>
+		<loc>https://braaay.com/produto/vinho-tinto-chileno-kasta-carmenere/</loc>
 		<lastmod>2025-07-08T16:06:03+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-tinto-chileno-kasta-carmenere-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-deicas-atlantico-sur-reserve-pinot-noir/</loc>
+		<loc>https://braaay.com/produto/vinho-deicas-atlantico-sur-reserve-pinot-noir/</loc>
 		<lastmod>2025-07-08T16:06:18+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/Deica.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-extra-brut/</loc>
+		<loc>https://braaay.com/produto/espumante-capoani-extra-brut/</loc>
 		<lastmod>2025-07-08T16:48:41+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/11/espumante-capoani-extra-brut.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-terrenus-tinto-fino-meio-seco-serra-gaucha/</loc>
-		<lastmod>2025-07-08T16:57:21+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-italiano-majolica-cerasuolo-dabruzzo-doc/</loc>
+		<loc>https://braaay.com/produto/vinho-italiano-majolica-cerasuolo-dabruzzo-doc/</loc>
 		<lastmod>2025-07-09T03:00:36+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/05/vinho-itaiano-majolica-cerasuolo-drabuzzo-doc.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-vinhedos-do-monte-agudo-cabernet-sauvignon-merlot-750ml/</loc>
+		<loc>https://braaay.com/produto/vinho-vinhedos-do-monte-agudo-cabernet-sauvignon-merlot-750ml/</loc>
 		<lastmod>2025-07-15T03:01:10+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/09/Agudos-Cabernet-S.-Merlot-1.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-pizzato-concentus-gran-reserva/</loc>
-		<lastmod>2025-07-15T03:01:11+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-mayos-cabernet-sauvignon-reserva/</loc>
-		<lastmod>2025-07-16T14:59:59+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-don-pascual-tannat-varietal/</loc>
-		<lastmod>2025-07-16T19:22:42+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-don-pascual-cabernet-merlot/</loc>
-		<lastmod>2025-07-16T19:22:42+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-sierra-batuco-carmenere-chile/</loc>
+		<loc>https://braaay.com/produto/vinho-sierra-batuco-carmenere-chile/</loc>
 		<lastmod>2025-07-16T19:27:55+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/08/vinho-sierra-batuco-chileno-carmenere.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-don-nicolas-malbec-argentino/</loc>
-		<lastmod>2025-07-16T19:27:55+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-casa-eva-marselan-2022-serra-gaucha/</loc>
+		<loc>https://braaay.com/produto/vinho-branco-alvarinho-atlantico-sur-deicas-uruguai/</loc>
 		<lastmod>2025-07-16T20:37:52+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/02/vinho-alvarinho-atlantico-sur-deicas-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-alvarinho-atlantico-sur-deicas-uruguai/</loc>
+		<loc>https://braaay.com/produto/vinho-artesana-uruguai-tannat/</loc>
 		<lastmod>2025-07-16T20:37:52+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/Tannat.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-mayos-jovem-branco/</loc>
-		<lastmod>2025-07-16T20:37:52+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-uruguai-tannat/</loc>
-		<lastmod>2025-07-16T20:37:52+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-aresti-picaron-sauvignon-blanc-chile/</loc>
+		<loc>https://braaay.com/produto/vinho-aresti-picaron-sauvignon-blanc-chile/</loc>
 		<lastmod>2025-07-16T20:38:06+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/vinho-branco-picaron-sauvignon-blanc-chile.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-braccobosca-cabernet-franc-ombu-gran-reserva/</loc>
+		<loc>https://braaay.com/produto/vinho-braccobosca-cabernet-franc-ombu-gran-reserva/</loc>
 		<lastmod>2025-07-17T15:19:58+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/BraccoBosca-1-1.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-go-up-carmenere-reserva/</loc>
+		<loc>https://braaay.com/produto/vinho-chileno-go-up-carmenere-reserva/</loc>
 		<lastmod>2025-07-24T17:01:47+00:00</lastmod>
-		
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/vinho-tinto-seco-goup-carmenere-3.webp</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/goupwines-vinho-carmenere-chile-150x150.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-go-up-sauvignon-blanc-reserva/</loc>
+		<loc>https://braaay.com/produto/vinho-chileno-go-up-sauvignon-blanc-reserva/</loc>
 		<lastmod>2025-07-24T17:04:07+00:00</lastmod>
-		
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-branco-goup-sauvignon-blanc-2.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/goup-vinho-sauvignon-blanc-chile-150x150.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/go-up-cabernet-sauvignon-reserva/</loc>
+		<loc>https://braaay.com/produto/go-up-cabernet-sauvignon-reserva/</loc>
 		<lastmod>2025-07-24T17:04:37+00:00</lastmod>
-		
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-tinto-seco-goup-cabernet-sauvignon-chile-2.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/goup-vinho-cabernet-sauvignon-150x150.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-picaron-aresti-cabernet-sauvignon/</loc>
+		<loc>https://braaay.com/produto/vinho-picaron-aresti-cabernet-sauvignon/</loc>
 		<lastmod>2025-07-24T17:34:52+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/08/vinho-picaron-cabernet-sauvignon-chile.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-picaron-carmenere/</loc>
-		<lastmod>2025-07-24T17:34:52+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-economico-4-unidades/</loc>
-		<lastmod>2025-07-24T17:34:53+00:00</lastmod>
-		
-		
-		
-		
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-chileno-bestia-collection-cabernet-sauvignon/</loc>
-		<lastmod>2025-07-24T17:34:53+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-artesana-chardonnay-petit-manseng/</loc>
+		<loc>https://braaay.com/produto/vinho-artesana-chardonnay-petit-manseng/</loc>
 		<lastmod>2025-07-24T17:37:25+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/09/Artesana-Chardonnay-Petit-Manseng.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/mayos-moscatel-rose-espumante-nacional/</loc>
-		<lastmod>2025-07-25T01:13:55+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-mayos-brut-charmat/</loc>
+		<loc>https://braaay.com/produto/espumante-mayos-brut-charmat/</loc>
 		<lastmod>2025-07-25T14:53:57+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/11/espumante-mayos-brut-charmat.webp</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-nacional-brut-casa-perini-charmat/</loc>
-		<lastmod>2025-07-25T20:59:26+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-vinho-don-pascual-tannat-castanhas/</loc>
-		<lastmod>2025-07-28T03:00:55+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-capoani-merlot/</loc>
-		<lastmod>2025-07-28T17:31:31+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-blanc-de-blanc-brut/</loc>
-		<lastmod>2025-07-28T18:06:16+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/espumante-capoani-rose-brut/</loc>
-		<lastmod>2025-07-28T18:10:20+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/kit-vinho-artesana-tannat-queijos-brie-e-gouda-pistache-e-caixa/</loc>
-		<lastmod>2025-07-28T18:15:06+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-uruguaio-don-adelio-ariano-tannat/</loc>
-		<lastmod>2025-07-28T18:18:22+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/confraria-entre-tacas-e-mulheres/</loc>
-		<lastmod>2025-07-29T16:19:37+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-casal-da-coelheira-reserva/</loc>
-		<lastmod>2025-07-29T22:06:22+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-don-pascual-coastal-white-750ml-uruguai/</loc>
+		<loc>https://braaay.com/produto/vinho-branco-don-pascual-coastal-white-750ml-uruguai/</loc>
 		<lastmod>2025-07-29T22:18:03+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/07/vinho-uruguai-don-pascual-coastal-white.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-italiano-tinto-castorani-majolica-montepulciano-dabruzzo-2020/</loc>
+		<loc>https://braaay.com/produto/vinho-italiano-tinto-castorani-majolica-montepulciano-dabruzzo-2020/</loc>
 		<lastmod>2025-07-29T22:20:20+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/05/vinho-matteo-sangiovese-de-puglia.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-bouza-albarino-2024-uruguai/</loc>
-		<lastmod>2025-07-30T18:58:41+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-casa-eva-viognier-safra-2023/</loc>
-		<lastmod>2025-07-31T18:30:03+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-argentino-tapiz-cabernet-sauvignon/</loc>
+		<loc>https://braaay.com/produto/vinho-rose-de-merlot-kasta/</loc>
 		<lastmod>2025-07-31T18:30:04+00:00</lastmod>
-		
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-rose-kasta-rose-de-merlot-chile-2.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-branco-casa-eva-chardonnay/</loc>
-		<lastmod>2025-07-31T18:30:04+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/vinho-rose-de-merlot-kasta/</loc>
-		<lastmod>2025-07-31T18:30:04+00:00</lastmod>
-		
-	</url>
-	<url>
-		<loc>https://braaay-front-site.vercel.app/produto/test-product/</loc>
+		<loc>https://braaay.com/produto/test-product/</loc>
 		<lastmod>2025-08-05T14:05:42+00:00</lastmod>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-branco-casa-eva-viognier-safra-2023/</loc>
+		<lastmod>2025-08-06T15:30:29+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/11/vinho-brasileiro-casa-eva-viognier.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-casa-eva-marselan-2022-serra-gaucha/</loc>
+		<lastmod>2025-08-06T15:30:30+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/vinho-casa-eva-marselan.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-branco-casa-eva-chardonnay/</loc>
+		<lastmod>2025-08-06T15:30:30+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/05/casa-eva-chardonnay.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-capoani-merlot/</loc>
+		<lastmod>2025-08-06T16:03:15+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-capoani-merlot-4-small.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/espumante-capoani-blanc-de-blanc-brut/</loc>
+		<lastmod>2025-08-06T16:03:15+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/espumante-blanc-de-blanc-brut-capoani-2.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/espumante-capoani-rose-brut/</loc>
+		<lastmod>2025-08-06T16:03:16+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/espumante-capoani-rose-brut-2.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-chileno-bestia-collection-cabernet-sauvignon/</loc>
+		<lastmod>2025-08-06T17:41:31+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/08/vinho-chileno-bestia-cabernet-sauvignon.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-bouza-tannat-b6-parcela-unica-uruguai/</loc>
+		<lastmod>2025-08-06T17:42:33+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/Parcela-unica.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-casal-da-coelheira-reserva/</loc>
+		<lastmod>2025-08-06T17:49:37+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/06/vinho-tinto-casal-da-coelheira-reserva-3.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-don-nicolas-malbec-argentino/</loc>
+		<lastmod>2025-08-06T17:55:53+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/vinho-don-nicolas-malbec-argentino.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/kit-economico-4-unidades/</loc>
+		<lastmod>2025-08-06T17:55:54+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/braaay-kit-economico-2.webp</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/09/vinho-don-nicolas-malbec-argentino-150x150.webp</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/08/vinho-chileno-bestia-cabernet-sauvignon-150x150.webp</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/08/vinho-sierra-batuco-chileno-carmenere-150x150.webp</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/08/vinho-picaron-cabernet-sauvignon-chile-150x150.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-don-pascual-cabernet-merlot/</loc>
+		<lastmod>2025-08-06T17:56:33+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/08/vinho-don-pascual-cabernet-merlot.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-uruguaio-don-pascual-tannat-varietal/</loc>
+		<lastmod>2025-08-06T17:56:59+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/Don-Pascual-1.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-uruguaio-don-pascual-tannat-merlot/</loc>
+		<lastmod>2025-08-06T17:57:26+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/08/vinho-don-pascual-tannat-merlot.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/mayos-moscatel-rose-espumante-nacional/</loc>
+		<lastmod>2025-08-06T18:07:13+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/MAYOS.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/espumante-pizzato-brut-branco-tradicional/</loc>
+		<lastmod>2025-08-06T18:09:51+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/pizzato-brut-dovv.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-familia-deicas-massimo-tannat/</loc>
+		<lastmod>2025-08-06T18:12:53+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/09/vinho-massimo-familia-deicas.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/09/familia-deicas-anforas-150x150.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-uruguaio-folklore-manseng-noir-cerro-chapeu-750ml/</loc>
+		<lastmod>2025-08-06T18:13:25+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/05/manseng-noir-cerro-chapeu.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-portugues-forja-do-ferreiro-organico/</loc>
+		<lastmod>2025-08-06T18:13:47+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/03/vinho-forja-do-ferreiro-portugal.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/frisante-mayos-green-poucas-calorias/</loc>
+		<lastmod>2025-08-06T18:29:14+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/11/vinho-frisante-mayos-green.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-frisante-mayos-pink-monte-paschoal/</loc>
+		<lastmod>2025-08-06T18:29:49+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/11/fisante-mayos-pink-monte-paschoal.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/frisante-rose-monte-paschoal-250ml/</loc>
+		<lastmod>2025-08-06T18:30:35+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/03/frisante-rose-monte-paschoal-250ml.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-tinto-fino-garzon-estate-cabernet-de-corte/</loc>
+		<lastmod>2025-08-06T18:31:48+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/vinho-garzon-uruguai-cabernet-de-corte-3.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-mayos-cabernet-sauvignon-reserva/</loc>
+		<lastmod>2025-08-06T18:33:26+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/11/vinho-mayos-cabernet-sauvignon-reserva.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-mayos-jovem-branco/</loc>
+		<lastmod>2025-08-06T18:33:55+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/02/vinho-mayos-jovem-branco.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-mayos-jovem-rose/</loc>
+		<lastmod>2025-08-06T18:35:01+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/02/mayos-jovem-rose.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-chileno-picaron-carmenere/</loc>
+		<lastmod>2025-08-06T18:36:35+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/12/vinho-chileno-picaron-carmenere.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-pizzato-concentus-gran-reserva/</loc>
+		<lastmod>2025-08-06T18:37:06+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/PIZZATO-concentus.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-pizzato-merlot-de-merlots/</loc>
+		<lastmod>2025-08-06T18:38:03+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/11/vinho-pizzato-merlot-de-merlots-dovv.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-argentino-tapiz-cabernet-sauvignon/</loc>
+		<lastmod>2025-08-06T18:57:13+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/07/vinho-tinto-argentino-seco-tapiz-cabernet-sauvignon-2.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-chileno-terranoble-cabernet-sauvignon-375ml/</loc>
+		<lastmod>2025-08-06T18:57:47+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/09/terranoble-reserve-cabernet-sauvignon.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-terrenus-tinto-fino-meio-seco-serra-gaucha/</loc>
+		<lastmod>2025-08-06T18:58:19+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/10/vinho-terrenus-meio-seco-nova-alianca.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-passio-nero-davola-sicilia-doc-settesoli/</loc>
+		<lastmod>2025-08-06T18:59:28+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2023/12/vinho-italiano-passio-nero-davola-apassimento-sicilia-DOC.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-braccobosca-lacertilia-tannat-uruguaio-750ml/</loc>
+		<lastmod>2025-08-07T14:14:02+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/BraccoBosca.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/espumante-nacional-brut-casa-perini-charmat/</loc>
+		<lastmod>2025-08-07T15:33:44+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/05/casa-perini-espumante-brut-charmat-compress.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-branco-bouza-albarino-2024-uruguai/</loc>
+		<lastmod>2025-08-08T01:10:24+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/05/vinho-albarinho-bouza.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/confraria-entre-tacas-e-mulheres/</loc>
+		<lastmod>2025-08-08T14:51:51+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/09/confraria-braaay-5-desktop.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/vinho-uruguaio-don-adelio-ariano-tannat/</loc>
+		<lastmod>2025-08-10T03:06:44+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/03/don-adelio-ariano-oak-barrel-tannat.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/kit-vinho-artesana-tannat-queijos-brie-e-gouda-pistache-e-caixa/</loc>
+		<lastmod>2025-08-10T03:06:44+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/kit-artesana-tannat-1.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/kit-vinho-don-pascual-tannat-castanhas/</loc>
+		<lastmod>2025-08-10T03:06:44+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/Kit-Vinho-Don-Pascual-Tannat-com-Castanhas.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/kit-espumante-pizzato-brut-rose-com-chocolates-dengo/</loc>
+		<lastmod>2025-08-10T23:39:17+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/kit-pizzato-brut-choco-dengo.jpeg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/kit-x3-espumantes-taca/</loc>
+		<lastmod>2025-08-10T23:41:03+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/kit-taca-espumantes-prod.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://braaay.com/produto/kit-vinho-pinot-noir-premium-flores-naturais/</loc>
+		<lastmod>2025-08-10T23:42:45+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/11/kit-vina-eden-flores-naturais-blur.jpeg</image:loc>
+		</image:image>
 	</url>
 </urlset>
 <!-- XML Sitemap generated by Yoast SEO -->

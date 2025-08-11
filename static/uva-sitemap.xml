@@ -1,139 +1,147 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//braaay.com/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//api.braaay.com/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/alentejo/</loc>
+		<loc>https://braaay.com/uva/alentejo/</loc>
 		<lastmod>2025-01-30T14:53:26+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/ancellotta/</loc>
+		<loc>https://braaay.com/uva/ancellotta/</loc>
 		<lastmod>2025-06-09T19:20:39+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/cabernet-franc/</loc>
-		<lastmod>2025-07-17T15:19:58+00:00</lastmod>
+		<loc>https://braaay.com/uva/cabernet-franc/</loc>
+		<lastmod>2025-08-06T18:31:48+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/cabernet-sauvignon/</loc>
-		<lastmod>2025-07-31T18:30:04+00:00</lastmod>
-		
+		<loc>https://braaay.com/uva/cabernet-sauvignon/</loc>
+		<lastmod>2025-08-06T18:58:19+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/divider-green.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/carmenere/</loc>
-		<lastmod>2025-07-24T17:34:53+00:00</lastmod>
+		<loc>https://braaay.com/uva/carmenere/</loc>
+		<lastmod>2025-08-06T18:36:35+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/gamay/</loc>
+		<loc>https://braaay.com/uva/gamay/</loc>
 		<lastmod>2025-06-06T16:52:22+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/jaen/</loc>
-		<lastmod>2025-06-09T19:16:13+00:00</lastmod>
+		<loc>https://braaay.com/uva/jaen/</loc>
+		<lastmod>2025-08-06T18:13:47+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/malbec/</loc>
-		<lastmod>2025-07-31T18:30:04+00:00</lastmod>
+		<loc>https://braaay.com/uva/malbec/</loc>
+		<lastmod>2025-08-06T18:35:53+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/malvasia/</loc>
+		<loc>https://braaay.com/uva/malvasia/</loc>
 		<lastmod>2025-07-25T14:53:57+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/manseng-noir/</loc>
-		<lastmod>2025-06-09T19:15:34+00:00</lastmod>
+		<loc>https://braaay.com/uva/manseng-noir/</loc>
+		<lastmod>2025-08-06T18:13:25+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/marselan/</loc>
-		<lastmod>2025-07-16T20:37:52+00:00</lastmod>
+		<loc>https://braaay.com/uva/marselan/</loc>
+		<lastmod>2025-08-06T15:30:30+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/marufo/</loc>
-		<lastmod>2025-06-09T19:16:13+00:00</lastmod>
+		<loc>https://braaay.com/uva/marufo/</loc>
+		<lastmod>2025-08-06T18:13:47+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/merlot/</loc>
-		<lastmod>2025-07-31T18:30:04+00:00</lastmod>
-		
+		<loc>https://braaay.com/uva/merlot/</loc>
+		<lastmod>2025-08-10T03:06:44+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/divider-green.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/montepulciano/</loc>
+		<loc>https://braaay.com/uva/montepulciano/</loc>
 		<lastmod>2025-07-29T22:20:20+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/moscato-bianco/</loc>
-		<lastmod>2025-07-25T14:53:57+00:00</lastmod>
+		<loc>https://braaay.com/uva/moscato-bianco/</loc>
+		<lastmod>2025-08-06T18:33:55+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/moscato-giallo/</loc>
+		<loc>https://braaay.com/uva/moscato-giallo/</loc>
 		<lastmod>2025-06-09T19:17:50+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/moscato-hamburgo/</loc>
-		<lastmod>2025-06-09T19:22:41+00:00</lastmod>
+		<loc>https://braaay.com/uva/moscato-hamburgo/</loc>
+		<lastmod>2025-08-06T18:35:01+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/nero-davola/</loc>
-		<lastmod>2025-03-24T13:36:53+00:00</lastmod>
+		<loc>https://braaay.com/uva/nero-davola/</loc>
+		<lastmod>2025-08-06T18:59:28+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/pinot-grigio/</loc>
-		<lastmod>2025-07-29T22:18:03+00:00</lastmod>
+		<loc>https://braaay.com/uva/pinot-grigio/</loc>
+		<lastmod>2025-08-06T18:12:10+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/pinot-noir/</loc>
-		<lastmod>2025-07-28T18:10:20+00:00</lastmod>
+		<loc>https://braaay.com/uva/pinot-noir/</loc>
+		<lastmod>2025-08-06T18:32:55+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/primitivo/</loc>
+		<loc>https://braaay.com/uva/primitivo/</loc>
 		<lastmod>2025-06-09T19:23:08+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/prosecco/</loc>
+		<loc>https://braaay.com/uva/prosecco/</loc>
 		<lastmod>2025-07-25T14:53:57+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/riesling/</loc>
-		<lastmod>2025-07-25T20:59:26+00:00</lastmod>
+		<loc>https://braaay.com/uva/riesling/</loc>
+		<lastmod>2025-08-07T15:33:44+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/rufete/</loc>
-		<lastmod>2025-06-09T19:16:13+00:00</lastmod>
+		<loc>https://braaay.com/uva/rufete/</loc>
+		<lastmod>2025-08-06T18:13:47+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/sauvignon-blanc/</loc>
+		<loc>https://braaay.com/uva/sauvignon-blanc/</loc>
 		<lastmod>2025-07-24T17:04:07+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/syrah/</loc>
+		<loc>https://braaay.com/uva/syrah/</loc>
 		<lastmod>2024-08-19T18:12:49+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/tannat/</loc>
-		<lastmod>2025-07-28T18:18:22+00:00</lastmod>
-		
+		<loc>https://braaay.com/uva/tannat/</loc>
+		<lastmod>2025-08-10T03:06:44+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/divider-green.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/tinta-roriz/</loc>
-		<lastmod>2025-06-09T19:16:13+00:00</lastmod>
+		<loc>https://braaay.com/uva/tinta-roriz/</loc>
+		<lastmod>2025-08-06T18:13:47+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/touriga-nacional/</loc>
-		<lastmod>2025-06-09T19:16:13+00:00</lastmod>
+		<loc>https://braaay.com/uva/touriga-nacional/</loc>
+		<lastmod>2025-08-06T18:13:47+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/trebiano/</loc>
+		<loc>https://braaay.com/uva/trebiano/</loc>
 		<lastmod>2025-07-25T14:53:57+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/chardonnay/</loc>
-		<lastmod>2025-07-31T18:30:04+00:00</lastmod>
-		
+		<loc>https://braaay.com/uva/chardonnay/</loc>
+		<lastmod>2025-08-07T15:33:44+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2024/08/divider-green.png</image:loc>
+		</image:image>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/viognier/</loc>
-		<lastmod>2025-07-31T18:30:03+00:00</lastmod>
+		<loc>https://braaay.com/uva/viognier/</loc>
+		<lastmod>2025-08-06T15:30:29+00:00</lastmod>
 	</url>
 	<url>
-		<loc>https://braaay-front-site.vercel.app/uva/zinfandel/</loc>
+		<loc>https://braaay.com/uva/zinfandel/</loc>
 		<lastmod>2025-06-09T18:58:07+00:00</lastmod>
 	</url>
 </urlset>

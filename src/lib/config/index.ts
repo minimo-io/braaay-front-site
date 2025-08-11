@@ -8,18 +8,14 @@ export const AppConfig = Object.freeze({
 	mapLink: 'https://maps.app.goo.gl/C62e1n2KGZmtuMW39',
 	whatsappLink: 'https://wa.me/5511947530340',
 
-	testUrl: 'https://braaay-front-site.vercel.app',
+	testUrl: 'https://braaay.com',
 	// Toggle the filtering menu (mobile & desktop)
 	showProductFilters: false,
 	// Toggle the sorting buttons normally above the filtering menu (mobile & desktop)
 	showSortingMenu: false,
 
 	payments: {
-		allowedOrigins: [
-			'https://braaay.com',
-			'https://www.braaay.com',
-			'https://braaay-front-site.vercel.app'
-		],
+		allowedOrigins: ['https://braaay.com', 'https://www.braaay.com', 'https://braaay.com'],
 		checkoutCreditCardMode: 'redirect', // or transparent
 		timeout: 30
 	},
