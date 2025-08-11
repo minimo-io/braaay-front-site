@@ -23,3 +23,35 @@ export function formatDate(dateString) {
 
 	return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
+
+// Add this helper function at the top of your script, before the validation function:
+
+export function isValidBirthDate(dateString: string): boolean {
+	if (!dateString || dateString.trim() === '') return false;
+
+	const dateParts = dateString.split('/');
+	if (dateParts.length !== 3) return false;
+
+	const day = parseInt(dateParts[0], 10);
+	const month = parseInt(dateParts[1], 10);
+	const year = parseInt(dateParts[2], 10);
+
+	// Basic range checks
+	if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1900) return false;
+
+	// Create date object (month is 0-indexed in JavaScript)
+	const parsedDate = new Date(year, month - 1, day);
+
+	// Check if the date is valid by comparing the parsed values
+	// This handles cases like February 30th, which would be auto-corrected
+	const isValidDate =
+		parsedDate.getFullYear() === year &&
+		parsedDate.getMonth() === month - 1 &&
+		parsedDate.getDate() === day;
+
+	// Optional: Check if birthdate is not in the future
+	const today = new Date();
+	const isNotFuture = parsedDate <= today;
+
+	return isValidDate && isNotFuture;
+}

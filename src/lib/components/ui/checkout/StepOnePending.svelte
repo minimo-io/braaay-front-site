@@ -8,7 +8,13 @@
 	import type { Customer } from '$lib/types';
 	import { onMount, onDestroy } from 'svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
-	import { launchToast, isValidEmail, alphaOnly, isValidCellphone } from '$lib/utils';
+	import {
+		launchToast,
+		isValidEmail,
+		alphaOnly,
+		isValidCellphone,
+		isValidBirthDate
+	} from '$lib/utils';
 	import { cpf } from 'cpf-cnpj-validator';
 
 	interface Props {
@@ -174,9 +180,13 @@
 		// }
 
 		// Birth date
+		// console.log('BIRTH_DATE', values.birthDate);
 		if (values.birthDate.trim() === '') {
 			errors.birthDate = m.checkoutStep1NoBirthDate();
-		} else if (isNaN(Date.parse(values.birthDate))) {
+			// } else if (isNaN(Date.parse(values.birthDate))) {
+		} else if (!isValidBirthDate(values.birthDate)) {
+			console.log(isNaN(Date.parse(values.birthDate)));
+			console.log('DATE', Date.parse(values.birthDate));
 			errors.birthDate = m.checkoutStep1BirthDateInvalid();
 		}
 
@@ -268,7 +278,7 @@
 			<input
 				bind:this={birthDateInputElement}
 				type="tel"
-				placeholder={datePlaceholder}
+				placeholder="Data de nascimento"
 				class="w-full px-4 py-2 border border-grey-light rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			/>
 		</div>
