@@ -39,8 +39,8 @@ export const urqlClientUyLoggedOut = $state({
 	client: createClient({
 		url: PUBLIC_GRAPHQL_SERVER_UY,
 		exchanges: [cacheExchange, fetchExchange, loggerExchange],
-		requestPolicy: 'cache-first',
-		// requestPolicy: 'network-only',
+		// requestPolicy: 'cache-first',
+		requestPolicy: 'network-only',
 		fetchOptions: () => {
 			return {};
 		}
@@ -61,8 +61,8 @@ export const urqlClientPtLoggedOut = $state({
 	client: createClient({
 		url: PUBLIC_GRAPHQL_SERVER_PT,
 		exchanges: [cacheExchange, fetchExchange, loggerExchange],
-		requestPolicy: 'cache-first',
-		// requestPolicy: 'network-only',
+		// requestPolicy: 'cache-first',
+		requestPolicy: 'network-only',
 		fetchOptions: {
 			// credentials: 'include'
 		}

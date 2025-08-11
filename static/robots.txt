@@ -1,36 +1,79 @@
 # START YOAST BLOCK
 # ---------------------------
 User-agent: *
-Crawl-delay: 2  #1 page per 10 seconds                            
+Disallow:
+Crawl-delay: 2
 # ---------------------------
 # END YOAST BLOCK
 
+# Sitemaps
 Sitemap: https://braaay.com/sitemap_index.xml
 Sitemap: https://braaay.com/uy/sitemap_index.xml
 
-# banned bots.
+# Block specific unwanted bots from crawling the entire site
 User-agent: Vegi bot
-User-agent: seostats
-User-agent: MauiBot
-User-agent: TechSEO360
-# User-agent: AhrefsBot
-User-agent: MJ12bot
-User-agent: dotbot
-User-agent: serpstatbot
-User-agent: Amazonbot
-User-agent: Nuclei
-User-agent: WikiDo
-User-agent: Riddler
-User-agent: PetalBot
-User-agent: Zoominfobot
-User-agent: Go-http-client
-User-agent: Node/simplecrawler
-User-agent: CazoodleBot
-User-agent: dotbot/1.0
-User-agent: Gigabot
-User-agent: Barkrowler
-User-agent: BLEXBot
-User-agent: magpie-crawler
 Disallow: /
 
-# Generated Sitemaps for Front-End
+User-agent: seostats
+Disallow: /
+
+User-agent: MauiBot
+Disallow: /
+
+User-agent: TechSEO360
+Disallow: /
+
+# AhrefsBot is allowed
+# User-agent: AhrefsBot
+# Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: dotbot
+Disallow: /
+
+User-agent: serpstatbot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Nuclei
+Disallow: /
+
+User-agent: WikiDo
+Disallow: /
+
+User-agent: Riddler
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Zoominfobot
+Disallow: /
+
+User-agent: Go-http-client
+Disallow: /
+
+User-agent: Node/simplecrawler
+Disallow: /
+
+User-agent: CazoodleBot
+Disallow: /
+
+User-agent: dotbot/1.0
+Disallow: /
+
+User-agent: Gigabot
+Disallow: /
+
+User-agent: Barkrowler
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: magpie-crawler
+Disallow: /
