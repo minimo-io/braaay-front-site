@@ -109,6 +109,7 @@ async function processSitemapFile(sitemapUrl, staticDir) {
  * and represent the root sitemaps to be listed.
  * @returns The generated robots.txt content.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function generateRobotsTxt(originalRobotsText, newDomain, topLevelSitemapUrls) {
     let newRobots = originalRobotsText;
     // Remove ALL existing Sitemap entries to start fresh with our new ones
@@ -171,6 +172,7 @@ async function main() {
     mkdirSync(staticDir, { recursive: true });
     // 1. Fetch original robots.txt (for other directives like User-agent, Disallow etc.)
     const robotsTxtUrl = `${API_DOMAIN}/robots.txt`;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const originalRobotsText = await fetchContent(robotsTxtUrl);
     // 2. Discover all top-level sitemap URLs from the original robots.txt
     const topLevelSitemapUrlsFromRobotsTxt = await fetchRobotsTxtSitemapUrls(robotsTxtUrl);
@@ -185,11 +187,15 @@ async function main() {
     }
     console.log('✅ First pass complete: All sitemap files generated.');
     // 4. Generate robots.txt for the front-end site
-    console.log('\n🤖 Generating robots.txt for the front-end...');
-    const newRobotsTxtContent = generateRobotsTxt(originalRobotsText, FRONT_DOMAIN, topLevelSitemapUrlsFromRobotsTxt);
-    const robotsPath = join(staticDir, 'robots.txt');
-    writeFileSync(robotsPath, newRobotsTxtContent, 'utf8');
-    console.log(`✅ Generated robots.txt`);
+    // console.log('\n🤖 Generating robots.txt for the front-end...');
+    // const newRobotsTxtContent = generateRobotsTxt(
+    // 	originalRobotsText,
+    // 	FRONT_DOMAIN,
+    // 	topLevelSitemapUrlsFromRobotsTxt
+    // );
+    // const robotsPath = join(staticDir, 'robots.txt');
+    // writeFileSync(robotsPath, newRobotsTxtContent, 'utf8');
+    // console.log(`✅ Generated robots.txt`);
     // 5. POST-PROCESSING: Remove image tags from all generated XML files
     console.log('\n🧹 Starting post-processing: Removing image tags from XML files...');
     const allXmlFiles = findXmlFiles(staticDir);
