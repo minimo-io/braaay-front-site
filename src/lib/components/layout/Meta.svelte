@@ -75,7 +75,7 @@
 
 	<!-- Robots -->
 	{#if isNoIndex}
-		<!-- <meta name="robots" content="noindex, nofollow" /> -->
+		<meta name="robots" content="noindex, nofollow" />
 	{/if}
 
 	<!-- Open Graph / Facebook -->
