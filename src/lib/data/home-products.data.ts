@@ -114,7 +114,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					url: '/produto/kit-espumante-pizzato-brut-rose-com-chocolates-dengo/',
 					score: '',
 					image: {
-						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/11/kit-pizzato-brut-choco-dengo.png',
+						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/11/kit-pizzato-brut-choco-dengo.jpeg',
 						alt: 'kit-espumante-pizzato-chocolate'
 					}
 				}
