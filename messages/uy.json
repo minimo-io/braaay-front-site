@@ -4,6 +4,8 @@
 	"companyDocumentType": "RUT",
 	"zipCodeName": "CP",
 
+	"hello": "¡Hola!",
+
 	"knowMore": "CONOCÉ&nbsp;MAS",
 	"loading": "Cargando...",
 	"search": "Buscar...",
@@ -258,5 +260,7 @@
 	"footerDeveloper1": "Futurewise, creación de tienda virtual",
 	"footerDeveloper2": "¡Creá la tuya ahora!",
 
-	"funMessage1": "Gracias por ser genial 😀"
+	"funMessage1": "Gracias por ser genial 😀",
+
+	"whatsappShareMessage": "Encontré algo especial que quiero compartir contigo: "
 }

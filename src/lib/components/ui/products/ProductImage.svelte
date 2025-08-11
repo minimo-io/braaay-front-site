@@ -28,8 +28,8 @@
 		if (navigator.share) {
 			navigator
 				.share({
-					title: 'Check this out!',
-					text: 'This is some cool content I wanted to share with you.',
+					title: m.hello(),
+					text: m.whatsappShareMessage(),
 					url: window.location.href
 				})
 				.then(() => console.log('Successful share'))

@@ -4,6 +4,8 @@
 	"companyDocumentType": "CNPJ",
 	"zipCodeName": "CEP",
 
+	"hello": "Oi!",
+
 	"knowMore": "CONHEÇA&nbsp;MAIS",
 	"loading": "Carregando...",
 	"search": "Pesquisar...",
@@ -263,5 +265,7 @@
 	"footerDeveloper1": "Futurewise, criação de loja virtual",
 	"footerDeveloper2": "Monte a sua agora!",
 
-	"funMessage1": "Obrigado por ser genial 😀"
+	"funMessage1": "Obrigado por ser genial 😀",
+
+	"whatsappShareMessage": "Encontrei algo especial que quero compartilhar com você: "
 }
