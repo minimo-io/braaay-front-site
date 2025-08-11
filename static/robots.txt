@@ -1,10 +1,5 @@
-# START YOAST BLOCK
-# ---------------------------
 User-agent: *
 Disallow:
-Crawl-delay: 2
-# ---------------------------
-# END YOAST BLOCK
 
 # Sitemaps
 Sitemap: https://braaay.com/sitemap_index.xml
