@@ -26,14 +26,13 @@ export async function loadMoreProducts({
 
 	try {
 		// Query for additional products.
+		const loadMoreQuery = {
+			first: AppConfig.catalogs_initial_query_limit,
+			after: pagination.endCursor,
+			...params
+		};
 		const result = await getUrqlClient()
-			.client.query<ProductsForCategoryQueryResult>(query, {
-				first: AppConfig.catalogs_initial_query_limit,
-				after: pagination.endCursor,
-				...params
-				// categorySlug: slug,
-				// categoryId: slug
-			})
+			.client.query<ProductsForCategoryQueryResult>(query, loadMoreQuery)
 			.toPromise();
 
 		if (result.error || !result.data) {

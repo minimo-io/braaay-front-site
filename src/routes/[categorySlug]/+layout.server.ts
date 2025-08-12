@@ -1,4 +1,4 @@
-// src/routes/[categorySlug]/+page.server.ts
+// src/routes/[categorySlug]/+layout.server.ts
 import type { LayoutServerLoad } from './$types';
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/index';
@@ -15,8 +15,10 @@ import {
 } from '$lib/types/index';
 import { error } from '@sveltejs/kit';
 import { AppConfig } from '$config';
+import type { FilterState } from '$stores/filters.store.svelte';
+import { buildGraphQLFilters } from '$lib/services';
 
-export const load: LayoutServerLoad = async ({ params, locals }) => {
+export const load: LayoutServerLoad = async ({ params, locals, url }) => {
 	const { subcategorySlug } = params;
 	let { categorySlug } = params;
 
@@ -24,13 +26,29 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 		categorySlug = subcategorySlug;
 	}
 
+	// Parse filters from URL params
+	const filters: FilterState = {
+		variety: url.searchParams.get('variety')?.split(',') || [],
+		country: url.searchParams.get('country')?.split(',') || [],
+		priceRange: {
+			min: parseInt(url.searchParams.get('price_min') || '10'),
+			max: parseInt(url.searchParams.get('price_max') || '500')
+		},
+		taste: url.searchParams.get('taste')?.split(',') || [],
+		shipping: url.searchParams.get('shipping') || '',
+		size: url.searchParams.get('size')?.split(',') || []
+	};
+
+	const graphqlFilters = buildGraphQLFilters(filters);
+
 	const result = await getUrqlClient(locals.authToken)
 		.client.query<ProductsForCategoryQueryResult>(
 			CATEGORY_PRODUCTS,
 			{
 				first: AppConfig.catalogs_initial_query_limit,
 				categorySlug: categorySlug,
-				categoryId: categorySlug
+				categoryId: categorySlug,
+				...graphqlFilters
 			},
 			{ context: { authToken: locals.authToken } }
 		)

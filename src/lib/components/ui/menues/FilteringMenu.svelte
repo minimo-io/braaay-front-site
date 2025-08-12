@@ -1,3 +1,4 @@
+<!-- src/lib/components/ui/menues/FilteringMenu.svelte -->
 <script lang="ts">
 	import {
 		SlidersHorizontal,
@@ -10,8 +11,106 @@
 		Truck,
 		Ruler
 	} from '@lucide/svelte';
+	import { filtersInitialState } from '$stores/filters.store.svelte';
 	import { toggleDrawer } from '$stores/drawerState.state.svelte';
+	import { filterState, updateFilter, resetFilters } from '$stores/filters.store.svelte';
 	import { AppConfig } from '$config';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+	import { page } from '$app/state';
+	import { afterNavigate, goto } from '$app/navigation';
+	import { m } from '$lib/paraglide/messages';
+
+	let currentFilters = $derived($filterState);
+
+	// Separate effect for updating component state
+	// $effect(() => {
+	// 	currentFilters = $filterState;
+	// });
+
+	// Call updateURL when filters change, but be careful about loops
+	let lastFilterState = $state(JSON.stringify($filterState));
+
+	$effect(() => {
+		const currentFilterState = JSON.stringify($filterState);
+		if (currentFilterState !== lastFilterState) {
+			lastFilterState = currentFilterState;
+			updateURL();
+		}
+	});
+
+	// Subscribe to filter changes and update URL
+	// $effect(() => {
+	// 	// This will re-run whenever filterState changes
+	// 	currentFilters = $filterState;
+
+	// 	if (browser) {
+	// 		updateURL();
+	// 	}
+	// });
+
+	function updateURL() {
+		const url = new URL(page.url);
+		const searchParams = new URLSearchParams();
+
+		// Add current category path
+		const basePath = url.pathname;
+
+		// Add filters to search params
+		if (currentFilters.variety.length > 0) {
+			searchParams.set('variety', currentFilters.variety.join(','));
+		}
+		if (currentFilters.country.length > 0) {
+			searchParams.set('country', currentFilters.country.join(','));
+		}
+		if (currentFilters.priceRange.min > 10 || currentFilters.priceRange.max < 500) {
+			searchParams.set('price_min', currentFilters.priceRange.min.toString());
+			searchParams.set('price_max', currentFilters.priceRange.max.toString());
+		}
+		if (currentFilters.taste.length > 0) {
+			searchParams.set('taste', currentFilters.taste.join(','));
+		}
+		if (currentFilters.shipping) {
+			searchParams.set('shipping', currentFilters.shipping);
+		}
+		if (currentFilters.size.length > 0) {
+			searchParams.set('size', currentFilters.size.join(','));
+		}
+
+		const newURL = searchParams.toString() ? `${basePath}?${searchParams}` : basePath;
+		goto(newURL, { replaceState: true });
+	}
+
+	// function handlePriceChange(event: Event) {
+	// 	const target = event.target as HTMLInputElement;
+	// 	const value = parseInt(target.value);
+	// 	updateFilter('priceRange', { ...currentFilters.priceRange, max: value });
+	// 	currentFilters.priceRange.max = value;
+	// }
+
+	// Add this to your script
+	let priceDebounceTimer = $state<NodeJS.Timeout | null>(null);
+
+	function handlePriceChange(event: Event) {
+		const target = event.target as HTMLInputElement;
+		const value = parseInt(target.value);
+
+		// Clear existing timer
+		if (priceDebounceTimer) {
+			clearTimeout(priceDebounceTimer);
+		}
+
+		// Set new timer
+		priceDebounceTimer = setTimeout(() => {
+			updateFilter('priceRange', { ...currentFilters.priceRange, max: value });
+		}, 300); // 300ms delay
+	}
+
+	onMount(() => {
+		if (browser) {
+			updateURL();
+		}
+	});
 </script>
 
 <!-- Filtering menu -->
@@ -19,7 +118,7 @@
 	<div class="pb-0 md:pb-8 border-b border-b-grey-lighter">
 		<div class="bry-filtering-inline relative">
 			<!-- All Filters Button -->
-			<button
+			<!-- <button
 				class="!bg-sun !shadow-none active:shadow-none !text-white !border-none shine-effect filtering-button-primary"
 				onclick={() => {
 					// toggleFilterDrawer();
@@ -29,17 +128,16 @@
 					<SlidersHorizontal class="lucide-button w-5 h-5 mr-2" />
 					Todos os filtros
 				</div>
-			</button>
+			</button> -->
 
 			<!-- Menu button -->
-			<div class="relative group filtering-button">
+			<!-- <div class="relative group filtering-button">
 				<button class="shine-effect">
 					<Grape class="lucide-button w-5 h-5 mr-2" />
 					Variedade
 					<ChevronDown class="lucide-button w-5 h-5 mr-2" />
 				</button>
 
-				<!-- Invisible bridge to prevent accidental mouseout -->
 				<div class="absolute left-0 w-full h-4 bg-transparent"></div>
 				<div
 					class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-y-auto hidden group-hover:block"
@@ -88,16 +186,15 @@
 						</a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 			<!-- Menu button -->
-			<div class="relative group filtering-button">
+			<!-- <div class="relative group filtering-button">
 				<button class="shine-effect">
 					<Globe class="lucide-button w-5 h-5 mr-2" />
 					País
 					<ChevronDown class="lucide-button w-5 h-5 mr-2" />
 				</button>
-				<!-- Invisible bridge to prevent accidental mouseout -->
 				<div class="absolute left-0 w-full h-4 bg-transparent"></div>
 				<div
 					class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-y-auto hidden group-hover:block"
@@ -208,16 +305,21 @@
 						</a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
-			<!-- Menu button -->
+			<!-- Price -->
 			<div class="relative group filtering-button">
 				<button class="shine-effect">
 					<DollarSign class="lucide-button w-5 h-5 mr-2" />
 					Preço
+					{#if currentFilters.priceRange.min > 10 || currentFilters.priceRange.max < 500}
+						<span class="bg-sun text-white text-xs px-2 py-1 rounded-full ml-1">
+							{m.currencySymbol()}{currentFilters.priceRange.min}-{currentFilters.priceRange.max}
+						</span>
+					{/if}
 					<ChevronDown class="lucide-button w-5 h-5 mr-2" />
 				</button>
-				<!-- Invisible bridge to prevent accidental mouseout -->
+
 				<div class="absolute left-0 w-full h-4 bg-transparent"></div>
 				<div
 					class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-y-auto px-10 py-5 hidden group-hover:block"
@@ -228,25 +330,37 @@
 						<input
 							id="labels-range-input"
 							type="range"
-							value="0"
+							bind:value={currentFilters.priceRange.max}
 							min="10"
 							max="500"
+							step="10"
 							class="w-full fill-black h-2 bg-grey-light rounded-lg appearance-none cursor-pointer"
+							onchange={handlePriceChange}
 						/>
 						<span class="text-xs text-grey-medium absolute start-0 -bottom-6">R$10</span>
 						<span class="text-xs text-grey-medium absolute end-0 -bottom-6">R$500</span>
 					</div>
+					<div class="text-center text-sm text-grey-dark">
+						R${currentFilters.priceRange.min} - R${currentFilters.priceRange.max}
+					</div>
+					<!-- <div class="flex justify-between text-xs text-grey-medium mt-2">
+						<span>R$10</span>
+						<span>R$100</span>
+						<span>R$200</span>
+						<span>R$300</span>
+						<span>R$400</span>
+						<span>R$500</span>
+					</div> -->
 				</div>
 			</div>
 
 			<!-- Menu button -->
-			<div class="relative group filtering-button">
+			<!-- <div class="relative group filtering-button">
 				<button class="shine-effect">
 					<Smile class="lucide-button w-5 h-5 mr-2" />
 					Paladar Típico
 					<ChevronDown class="lucide-button w-5 h-5 mr-2" />
 				</button>
-				<!-- Invisible bridge to prevent accidental mouseout -->
 				<div class="absolute left-0 w-full h-4 bg-transparent"></div>
 				<div
 					class="absolute bg-white border border-grey-light z-50 shadow-lg mt-2 rounded-lg w-48 text-left hidden group-hover:block"
@@ -314,16 +428,15 @@
 						</a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 			<!-- Menu button -->
-			<div class="relative group filtering-button">
+			<!-- <div class="relative group filtering-button">
 				<button class="shine-effect">
 					<Truck class="lucide-button w-5 h-5 mr-2" />
 					Envío
 					<ChevronDown class="lucide-button w-5 h-5 mr-2" />
 				</button>
-				<!-- Invisible bridge to prevent accidental mouseout -->
 				<div class="absolute left-0 w-full h-4 bg-transparent"></div>
 				<div
 					class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-y-auto px-5 py-5 text-xs hidden group-hover:block"
@@ -365,16 +478,15 @@
 						</label>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 			<!-- Menu button -->
-			<div class="relative group filtering-button">
+			<!-- <div class="relative group filtering-button">
 				<button class="shine-effect">
 					<Ruler class="lucide-button w-5 h-5 mr-2" />
 					Tamanho
 					<ChevronDown class="lucide-button w-5 h-5 mr-2" />
 				</button>
-				<!-- Invisible bridge to prevent accidental mouseout -->
 				<div class="absolute left-0 w-full h-4 bg-transparent"></div>
 				<div
 					class="absolute bg-white border border-grey-light z-50 shadow-lg mt-2 rounded-lg w-48 text-left hidden group-hover:block"
@@ -386,7 +498,7 @@
 						<li class="px-4 py-2 hover:bg-gray-100">Bag-in-box (3000ml)</li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 {/if}

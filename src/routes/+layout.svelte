@@ -45,6 +45,7 @@
 	import { onMount } from 'svelte';
 	import { launchToast } from '$lib/utils';
 	import { clearAllCache } from '$stores/urqlClient.state.svelte';
+	import { resetFilters } from '$stores/filters.store.svelte';
 
 	onMount(() => {
 		if (page.url.searchParams.has('clearCache')) {
@@ -59,6 +60,9 @@
 		closeDrawer();
 		// reset horizontal scroll on menu if exsits
 		const secondaryMenus = document.querySelectorAll('.bry-secondary-menu');
+
+		// Reset filters on navigation
+		// resetFilters();
 
 		secondaryMenus.forEach((menu) => {
 			if (menu instanceof HTMLElement) {

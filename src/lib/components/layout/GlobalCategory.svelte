@@ -1,4 +1,4 @@
-<!-- src/lib/components/layout/Category.svelte -->
+<!-- src/lib/components/layout/GlobalCategory.svelte -->
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import FilteringMenu from '$components/ui/menues/FilteringMenu.svelte';
@@ -8,6 +8,7 @@
 	import WineBox from '$components/ui/products/WineBox.svelte';
 	import type { Category, Product } from '$lib/types';
 	import { localizeHref } from '$lib/paraglide/runtime.js';
+	import { page } from '$app/state';
 
 	interface Props {
 		category: Category;
@@ -16,14 +17,20 @@
 	}
 	const { category, products, hideCount = false }: Props = $props();
 
-	// let products: Product[] = $derived(data.products);
-	// let category: Category = $derived(data.category);
+	let isCategoryOrSub =
+		page.route.id == '/[categorySlug]/[subcategorySlug]' || page.route.id == '/[categorySlug]';
+
+	const pathname = $derived.by(() => page.url?.pathname ?? '');
 </script>
 
 <main>
 	<CategoryHeader {category} {hideCount} />
 
-	<FilteringMenu />
+	{#if isCategoryOrSub}
+		{#key pathname}
+			<FilteringMenu />
+		{/key}
+	{/if}
 
 	<SortingMenu />
 

@@ -435,7 +435,9 @@ html {
 	}
 
 	/* Filtering */
-
+	.bry-filtering-inline {
+		@apply !justify-start;
+	}
 	.bry-filtering-inline .filtering-button-primary {
 		@apply w-full md:w-auto text-center justify-center;
 	}

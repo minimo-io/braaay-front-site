@@ -7,7 +7,14 @@ import {
 } from './fragments/index';
 
 export const CATEGORY_PRODUCTS = gql`
-	query LatestProducts($first: Int!, $categorySlug: String!, $categoryId: ID!, $after: String) {
+	query LatestProducts(
+		$first: Int!, 
+		$categorySlug: String!, 
+		$categoryId: ID!, 
+		$after: String,
+		$minPrice: Float
+		$maxPrice: Float		
+		) {
 		productCategory(id: $categoryId, idType: SLUG) {
 			${CATEGORY_HEADER_FRAGMENT}
 		}
@@ -15,7 +22,14 @@ export const CATEGORY_PRODUCTS = gql`
 		products(
 			first: $first
 			after: $after
-			where: { category: $categorySlug, orderby: { field: DATE, order: DESC } }
+			where: { 
+				category: $categorySlug, 
+				orderby: { field: DATE, order: DESC },
+				
+        		minPrice: $minPrice
+       			maxPrice: $maxPrice
+
+			}
 		) {
 			${PAGINATION_INFO_FRAGMENT}
 			edges {

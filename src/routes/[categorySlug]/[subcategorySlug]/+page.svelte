@@ -11,6 +11,8 @@
 	import { m } from '$lib/paraglide/messages.js';
 	import SchemaCategory from '$components/layout/Schemas/SchemaCategory.svelte';
 	import { getLocale } from '$lib/paraglide/runtime.js';
+	import { buildGraphQLFilters } from '$lib/services/filtersService.js';
+	import { filterState } from '$stores/filters.store.svelte.js';
 
 	// Destructure props at the top level
 	let { data } = $props();
@@ -20,6 +22,9 @@
 	let category: Category = $state(data.category);
 	let pagination: Pagination = $state(data.pagination);
 	let seo: YoastSeoData | undefined = $state(data.category.seo!);
+
+	// Get current filters and convert to GraphQL format
+	let graphqlFilters = $derived.by(() => buildGraphQLFilters($filterState));
 
 	$effect(() => {
 		products = data.products;
@@ -67,7 +72,8 @@
 				query: CATEGORY_PRODUCTS,
 				params: {
 					categorySlug: currentCategorySlug,
-					categoryId: currentCategorySlug
+					categoryId: currentCategorySlug,
+					...graphqlFilters
 				}
 			});
 

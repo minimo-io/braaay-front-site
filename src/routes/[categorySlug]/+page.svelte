@@ -17,6 +17,9 @@
 	import { CATEGORY_PRODUCTS } from '$lib/graphql/queries/products-category.query.js';
 	import Meta from '$components/layout/Meta.svelte';
 	import SchemaCategory from '$components/layout/Schemas/SchemaCategory.svelte';
+	import { buildGraphQLFilters } from '$lib/services/filtersService.js';
+	import { filterState, resetFilters } from '$stores/filters.store.svelte.js';
+	import { onMount } from 'svelte';
 
 	const { data } = $props();
 
@@ -32,6 +35,9 @@
 		pagination = data.pagination;
 		seo = data.category.seo;
 	});
+
+	// Get current filters and convert to GraphQL format
+	let graphqlFilters = $derived.by(() => buildGraphQLFilters($filterState));
 
 	let article: Post = $derived({
 		id: '0',
@@ -65,14 +71,18 @@
 				subcategorySlug && subcategorySlug !== '' ? subcategorySlug : categorySlug;
 
 			// Use the abstracted function.
+
+			const queryParams = {
+				categorySlug: categorySlug,
+				categoryId: categorySlug,
+				...graphqlFilters
+			};
+
 			const result = await loadMoreProducts({
 				products,
 				pagination,
 				query: CATEGORY_PRODUCTS,
-				params: {
-					categorySlug: categorySlug,
-					categoryId: categorySlug
-				}
+				params: queryParams
 			});
 
 			products = result.products;
@@ -105,6 +115,7 @@
 />
 
 <GlobalCategory hideCount={true} {products} {category} />
+
 <LoadMoreButton {isLoading} {pagination} {handleLoadMore} />
 
 <BottomArticle {article} twoColumns={false} />

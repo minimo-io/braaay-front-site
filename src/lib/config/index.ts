@@ -10,7 +10,7 @@ export const AppConfig = Object.freeze({
 
 	testUrl: 'https://braaay.com',
 	// Toggle the filtering menu (mobile & desktop)
-	showProductFilters: false,
+	showProductFilters: true,
 	// Toggle the sorting buttons normally above the filtering menu (mobile & desktop)
 	showSortingMenu: false,
 
