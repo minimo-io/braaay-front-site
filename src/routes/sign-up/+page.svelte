@@ -8,7 +8,14 @@
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
-	import { alphaOnly, isValidCellphone, isValidEmail, launchToast, redirectHref } from '$lib/utils';
+	import {
+		alphaOnly,
+		isValidBirthDate,
+		isValidCellphone,
+		isValidEmail,
+		launchToast,
+		redirectHref
+	} from '$lib/utils';
 	import { onDestroy, onMount } from 'svelte';
 	import IMask from 'imask';
 	import { fade, slide } from 'svelte/transition';
@@ -257,7 +264,8 @@
 		// Birth date (string válida para Date.parse)
 		if (values.birthDate.trim() === '') {
 			errors.birthDate = m.checkoutStep1NoBirthDate();
-		} else if (isNaN(Date.parse(values.birthDate))) {
+			// } else if (isNaN(Date.parse(values.birthDate))) {
+		} else if (!isValidBirthDate(values.birthDate)) {
 			errors.birthDate = m.checkoutStep1BirthDateInvalid();
 		}
 
