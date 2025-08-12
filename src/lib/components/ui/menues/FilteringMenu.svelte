@@ -21,7 +21,7 @@
 	import { afterNavigate, goto } from '$app/navigation';
 	import { m } from '$lib/paraglide/messages';
 
-	let currentFilters = $derived($filterState);
+	let currentFilters = $state($filterState);
 
 	// Separate effect for updating component state
 	// $effect(() => {
