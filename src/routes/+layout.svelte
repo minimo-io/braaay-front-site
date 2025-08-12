@@ -46,6 +46,7 @@
 	import { launchToast } from '$lib/utils';
 	import { clearAllCache } from '$stores/urqlClient.state.svelte';
 	import { resetFilters } from '$stores/filters.store.svelte';
+	import WhatsappButtonFloating from '$components/ui/buttons/WhatsappButtonFloating.svelte';
 
 	onMount(() => {
 		if (page.url.searchParams.has('clearCache')) {
@@ -172,6 +173,8 @@
 {#if AppConfig.debug}
 	<!-- <Debugger /> -->
 {/if}
+
+<WhatsappButtonFloating phoneNumber={AppConfig.tel[getLocale()]} />
 
 <style global>
 	:root {

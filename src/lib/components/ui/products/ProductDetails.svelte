@@ -148,6 +148,7 @@
 	<div class="flex items-center mb-4">
 		{#if product.stockStatus == 'IN_STOCK'}
 			<button
+				id="bry-buy-button"
 				bind:this={originalButtonRef}
 				onclick={() => handleAddToCart()}
 				class="px-8 py-2 text-white rounded-lg uppercase font-roboto text-[13px] tracking-[2.5px] text-center w-full md:w-auto"
@@ -162,6 +163,7 @@
 			</button>
 		{:else}
 			<button
+				id="bry-buy-button"
 				bind:this={originalButtonRef}
 				onclick={() => {
 					window.location.href = `${AppConfig.whatsappLink}?text=Olá,%20quero%20conhecer%20sobre%20a%20pré-venda%20do%20vinho%20${product.title}`;
