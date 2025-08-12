@@ -49,12 +49,53 @@
 	// 	}
 	// });
 
+	// function updateURL() {
+	// 	const url = new URL(page.url);
+	// 	const searchParams = new URLSearchParams();
+
+	// 	// Add current category path
+	// 	const basePath = url.pathname;
+
+	// 	// Add filters to search params
+	// 	if (currentFilters.variety.length > 0) {
+	// 		searchParams.set('variety', currentFilters.variety.join(','));
+	// 	}
+	// 	if (currentFilters.country.length > 0) {
+	// 		searchParams.set('country', currentFilters.country.join(','));
+	// 	}
+	// 	if (currentFilters.priceRange.min > 10 || currentFilters.priceRange.max < 500) {
+	// 		searchParams.set('price_min', currentFilters.priceRange.min.toString());
+	// 		searchParams.set('price_max', currentFilters.priceRange.max.toString());
+	// 	}
+	// 	if (currentFilters.taste.length > 0) {
+	// 		searchParams.set('taste', currentFilters.taste.join(','));
+	// 	}
+	// 	if (currentFilters.shipping) {
+	// 		searchParams.set('shipping', currentFilters.shipping);
+	// 	}
+	// 	if (currentFilters.size.length > 0) {
+	// 		searchParams.set('size', currentFilters.size.join(','));
+	// 	}
+
+	// 	const newURL = searchParams.toString() ? `${basePath}?${searchParams}` : basePath;
+	// 	goto(newURL, { replaceState: true });
+	// }
+
 	function updateURL() {
 		const url = new URL(page.url);
-		const searchParams = new URLSearchParams();
+		const searchParams = new URLSearchParams(url.searchParams); // Start with existing params
 
 		// Add current category path
 		const basePath = url.pathname;
+
+		// Remove existing filter params first (to avoid duplicates)
+		searchParams.delete('variety');
+		searchParams.delete('country');
+		searchParams.delete('price_min');
+		searchParams.delete('price_max');
+		searchParams.delete('taste');
+		searchParams.delete('shipping');
+		searchParams.delete('size');
 
 		// Add filters to search params
 		if (currentFilters.variety.length > 0) {
@@ -80,13 +121,6 @@
 		const newURL = searchParams.toString() ? `${basePath}?${searchParams}` : basePath;
 		goto(newURL, { replaceState: true });
 	}
-
-	// function handlePriceChange(event: Event) {
-	// 	const target = event.target as HTMLInputElement;
-	// 	const value = parseInt(target.value);
-	// 	updateFilter('priceRange', { ...currentFilters.priceRange, max: value });
-	// 	currentFilters.priceRange.max = value;
-	// }
 
 	// Add this to your script
 	let priceDebounceTimer = $state<NodeJS.Timeout | null>(null);

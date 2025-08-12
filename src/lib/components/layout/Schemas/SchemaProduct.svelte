@@ -101,11 +101,13 @@
 		sku: product?.sku,
 		image: pageImage,
 		description: stripHtml(product?.shortDescription || seo?.metaDesc || '').replaceAll('\n', ''),
-		brand: {
-			'@type': 'Brand',
-			name: productProducerName,
-			url: productProducerUrl
-		},
+		...(productProducerName && {
+			brand: {
+				'@type': 'Brand',
+				name: productProducerName,
+				url: productProducerUrl
+			}
+		}),
 		offers: [
 			{
 				'@type': 'Offer',
