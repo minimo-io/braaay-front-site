@@ -31,7 +31,7 @@
 	});
 </script>
 
-<Meta title={m.seoLoginTitle()} description={m.seoLoginDescription()} />
+<Meta title={m.seoLoginTitle()} noindex description={m.seoLoginDescription()} />
 
 <main class="w-full mx-auto">
 	<!-- Header menu -->

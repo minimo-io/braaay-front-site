@@ -260,6 +260,8 @@ export function mapProduct(data: GraphQLProductNode): Product {
 		averageRating = data.node.averageRating.toFixed(1);
 	}
 
+	console.log('NODE_SEO', data.node.seo);
+
 	const floatPrice = toFloatPrice(data.node.price) ?? 0;
 
 	return {
@@ -299,10 +301,10 @@ export function mapProduct(data: GraphQLProductNode): Product {
 		},
 		reviewCount: data.node.reviewCount,
 		header: {
-			title: data.node.header?.firstSubtitle,
-			content: data.node.header?.firstParagraph
+			title: data.node?.header?.firstSubtitle,
+			content: data.node?.header?.firstParagraph
 		},
-		seo: data.node.seo
+		seo: data.node?.seo
 	};
 }
 

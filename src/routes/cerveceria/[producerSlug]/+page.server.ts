@@ -32,7 +32,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		)
 		.toPromise();
 
-	console.log('result', result);
 	if (result.error || !result.data) {
 		console.error(`Failed to fetch the products: ${result.error}`);
 		throw error(404, `Failed to fetch the products: ${result.error}`);
@@ -55,6 +54,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			seo
 		};
 	} catch (err) {
+		console.log('ERROR: ', err);
 		throw error(404, `Failed to fetch the category: ${err}`);
 	}
 };
