@@ -111,7 +111,7 @@
 				// Close modal after a delay
 				setTimeout(() => {
 					closeTeaserModal();
-				}, 2000);
+				}, 5000);
 			} else if (result.type === 'failure') {
 				submitStatus = 'error';
 
@@ -224,7 +224,7 @@
 
 				<!-- Email form using form action -->
 				<div class="space-y-4">
-					<form method="POST" action="?/subscribe" use:enhance={enhanceSubscribe}>
+					<form method="POST" action="/?/subscribe" use:enhance={enhanceSubscribe}>
 						<div>
 							<input
 								type="email"
