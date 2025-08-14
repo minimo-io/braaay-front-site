@@ -14,6 +14,8 @@ const config = {
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter(),
 
+		inlineStyleThreshold: Infinity,
+
 		// prerender: {
 		// 	handleHttpError: 'ignore',
 		// 	// Instead of failing when an element is missing for a fragment, warn and continue.
@@ -28,7 +30,6 @@ const config = {
 		// },
 
 		// Prevent CSS inlining by setting the threshold to 0
-		inlineStyleThreshold: 0,
 		alias: {
 			$components: path.resolve('src/lib/components'),
 			$stores: path.resolve('src/lib/stores'),
@@ -39,7 +40,7 @@ const config = {
 	},
 	compilerOptions: {
 		// Extract CSS into separate files
-		css: 'external'
+		// css: 'external'
 	}
 };
 

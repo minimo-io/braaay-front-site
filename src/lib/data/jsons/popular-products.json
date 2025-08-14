@@ -34,17 +34,6 @@
       }
     },
     {
-      "id": 130646,
-      "title": "Frisante Mayos Green",
-      "url": "/produto/frisante-mayos-green-poucas-calorias/",
-      "price": "R$48,00",
-      "regularPrice": "R$48,00",
-      "image": {
-        "alt": "vinho-frisante-mayos-green",
-        "src": "https://api.braaay.com/wp-content/uploads/2023/11/vinho-frisante-mayos-green.webp"
-      }
-    },
-    {
       "id": 119457,
       "title": "Don Pascual Cabernet Merlot",
       "url": "/produto/vinho-don-pascual-cabernet-merlot/",
@@ -53,6 +42,17 @@
       "image": {
         "alt": "vinho-don-pascual-cabernet-merlot",
         "src": "https://api.braaay.com/wp-content/uploads/2023/08/vinho-don-pascual-cabernet-merlot.webp"
+      }
+    },
+    {
+      "id": 130646,
+      "title": "Frisante Mayos Green",
+      "url": "/produto/frisante-mayos-green-poucas-calorias/",
+      "price": "R$48,00",
+      "regularPrice": "R$48,00",
+      "image": {
+        "alt": "vinho-frisante-mayos-green",
+        "src": "https://api.braaay.com/wp-content/uploads/2023/11/vinho-frisante-mayos-green.webp"
       }
     },
     {
@@ -153,6 +153,17 @@
         "alt": "vinho-don-pascual-tannat-merlot",
         "src": "https://api.braaay.com/wp-content/uploads/2023/08/vinho-don-pascual-tannat-merlot.webp"
       }
+    },
+    {
+      "id": 119173,
+      "title": "Artesana Tannat/Zinfandel Reserva",
+      "url": "/produto/vinho-uruguaio-artesana-tannat-zinfandel-reserva/",
+      "price": "R$175,00",
+      "regularPrice": "R$175,00",
+      "image": {
+        "alt": "vinho-artesana-tannat-zinfandel-uruguai",
+        "src": "https://api.braaay.com/wp-content/uploads/2023/07/vinho-artesana-tannat-zinfandel-uruguai.png"
+      }
     }
   ],
   "uy": [
@@ -176,24 +187,6 @@
       "image": {
         "alt": "antica-brown-ale-corsario",
         "src": "https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/12/antica-brown-ale-corsario.png"
-      }
-    },
-    {
-      "id": 325,
-      "title": "Davok Blonde",
-      "url": "/producto/cerveza-davok-blonde/",
-      "image": {
-        "alt": "cerveza-artesanak-davok-blonde",
-        "src": "https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/04/cerveza-artesanak-davok-blonde.webp"
-      }
-    },
-    {
-      "id": 318,
-      "title": "Davok IPA",
-      "url": "/producto/cerveza-davok-ipa/",
-      "image": {
-        "alt": "cerveza-davok-ipa-braaay",
-        "src": "https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/04/cerveza-davok-ipa-braaay.webp"
       }
     }
   ]
