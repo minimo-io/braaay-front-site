@@ -16,6 +16,11 @@
 			"permanent": true
 		},
 		{
+			"source": "/produto/vinho-uruguaio-icone-balastro/",
+			"destination": "https://braaay.com/produto/vinho-uruguaio-icone-balasto/",
+			"permanent": true
+		},
+		{
 			"source": "/lista-de-desejos/",
 			"destination": "https://braaay.com",
 			"permanent": true
