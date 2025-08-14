@@ -30,7 +30,7 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 				{
 					title: '⭐️ Balastro 2020',
 					price: `${m.currencySymbol()}1.275,00`,
-					regularPrice: `${m.currencySymbol()}1.1500,00`,
+					regularPrice: `${m.currencySymbol()}1.500,00`,
 					url: '/produto/vinho-uruguaio-icone-balastro/',
 					score: '5.0',
 					image: {
