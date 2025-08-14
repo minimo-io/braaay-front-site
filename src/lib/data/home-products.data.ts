@@ -28,14 +28,14 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					}
 				},
 				{
-					title: 'Família Deicas Massimo Tannat 750ml',
-					price: `${m.currencySymbol()}1.199,00`,
-					regularPrice: `${m.currencySymbol()}1.199,00`,
-					url: '/produto/vinho-familia-deicas-massimo-tannat/',
+					title: '⭐️ Balastro 2020',
+					price: `${m.currencySymbol()}1.275,00`,
+					regularPrice: `${m.currencySymbol()}1.1500,00`,
+					url: '/produto/vinho-uruguaio-icone-balastro/',
 					score: '5.0',
 					image: {
-						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/09/vinho-massimo-familia-deicas.png',
-						alt: 'massimo-tannat-familia-deicas'
+						src: 'https://api.braaay.com/wp-content/uploads/2025/08/garzon-balastro-2.png',
+						alt: 'balastro-2020-blend'
 					}
 				},
 				{
