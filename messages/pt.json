@@ -6,6 +6,10 @@
 
 	"hello": "Oi!",
 
+	"price": "Preço",
+
+	"resetFilter": "Resetar",
+
 	"knowMore": "CONHEÇA&nbsp;MAIS",
 	"loading": "Carregando...",
 	"search": "Pesquisar...",

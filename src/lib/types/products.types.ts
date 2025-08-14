@@ -260,8 +260,6 @@ export function mapProduct(data: GraphQLProductNode): Product {
 		averageRating = data.node.averageRating.toFixed(1);
 	}
 
-	console.log('NODE_SEO', data.node.seo);
-
 	const floatPrice = toFloatPrice(data.node.price) ?? 0;
 
 	return {

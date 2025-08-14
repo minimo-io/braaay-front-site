@@ -36,10 +36,13 @@ export const load: LayoutServerLoad = async ({ params, locals, url }) => {
 		},
 		taste: url.searchParams.get('taste')?.split(',') || [],
 		shipping: url.searchParams.get('shipping') || '',
-		size: url.searchParams.get('size')?.split(',') || []
+		size: url.searchParams.get('size')?.split(',') || [],
+		grape: url.searchParams.get('grape')?.split(',') || []
 	};
 
 	const graphqlFilters = buildGraphQLFilters(filters);
+
+	console.log('GRAPH_FILTERS', graphqlFilters);
 
 	const result = await getUrqlClient(locals.authToken)
 		.client.query<ProductsForCategoryQueryResult>(

@@ -8,6 +8,7 @@ export interface FilterState {
 	taste: string[];
 	shipping: string;
 	size: string[];
+	grape: string[]; // Add grape filter
 }
 
 export const filtersInitialState: FilterState = {
@@ -16,7 +17,8 @@ export const filtersInitialState: FilterState = {
 	priceRange: { min: 10, max: 500 },
 	taste: [],
 	shipping: '',
-	size: []
+	size: [],
+	grape: [] // Initialize grape as empty array
 };
 
 export const filterState = writable<FilterState>(filtersInitialState);
@@ -31,7 +33,3 @@ export const updateFilter = (key: keyof FilterState, value: any) => {
 export const resetFilters = () => {
 	filterState.set(filtersInitialState);
 };
-
-// export const resetFilters = () => {
-// 	filterState.set({ ...initialState });
-// };

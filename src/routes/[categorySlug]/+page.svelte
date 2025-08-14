@@ -71,7 +71,7 @@
 				subcategorySlug && subcategorySlug !== '' ? subcategorySlug : categorySlug;
 
 			// Use the abstracted function.
-
+			console.log('QUERY_FILTERS', graphqlFilters);
 			const queryParams = {
 				categorySlug: categorySlug,
 				categoryId: categorySlug,

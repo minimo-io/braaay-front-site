@@ -24,7 +24,7 @@ export const AppConfig = Object.freeze({
 	kitsImageCategories: ['kits', 'experiencias'],
 
 	// Number of products to get fromt the catalog on page load
-	catalogs_initial_query_limit: 15,
+	catalogs_initial_query_limit: 16,
 
 	// Enable/Disable cashback site wide
 	cashbackEnabled: true,
