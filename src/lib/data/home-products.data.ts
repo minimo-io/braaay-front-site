@@ -28,14 +28,14 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 					}
 				},
 				{
-					title: '⭐️ Balastro 2020',
+					title: '⭐️ Balasto 2020',
 					price: `${m.currencySymbol()}1.275,00`,
 					regularPrice: `${m.currencySymbol()}1.500,00`,
-					url: '/produto/vinho-uruguaio-icone-balastro/',
+					url: '/produto/vinho-uruguaio-icone-balasto/',
 					score: '5.0',
 					image: {
 						src: 'https://api.braaay.com/wp-content/uploads/2025/08/garzon-balastro-2.png',
-						alt: 'balastro-2020-blend'
+						alt: 'balasto-2020-blend'
 					}
 				},
 				{
