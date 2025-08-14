@@ -19,9 +19,12 @@
 					itemtype="https://schema.org/ListItem"
 				>
 					<div class="flex items-center">
-						<div class="text-sun font-bold py-1 rounded" itemprop="name">
+						<!-- <div class="text-sun font-bold py-1 rounded" itemprop="name">
 							{category.name}
-						</div>
+						</div> -->
+						<a itemprop="item" href={category.uri} class="text-sun font-bold py-1 rounded">
+							<span itemprop="name">{category.name}</span>
+						</a>
 						<meta itemprop="position" content={(i + 1).toString()} />
 						{#if i + 1 != props.categories.length}
 							<span class="text-xs font-bold">

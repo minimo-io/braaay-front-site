@@ -10,7 +10,7 @@ export interface MenuCategory {
 	icon: typeof IconType; // Type of the icon component
 	subcategories?: MenuCategory[]; // Optional subcategories
 	external?: boolean; // Optional external link flag
-	color?: 'green' | 'red';
+	color?: 'green' | 'red' | 'sun' | 'blue';
 	count?: number;
 }
 

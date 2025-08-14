@@ -119,6 +119,8 @@
 						href={category.url}
 						class={[
 							category.color == 'green' && '!text-bra',
+							category.color == 'sun' && '!text-sun',
+							category.color == 'blue' && '!text-blue',
 							category.color == 'red' && '!text-[red]'
 						]}
 					>

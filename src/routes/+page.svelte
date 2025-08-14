@@ -53,7 +53,7 @@
 		<TitleSection
 			title={m.blogSectionTitle()}
 			subTitle={m.blogSectionSubtitle()}
-			description={m.partnersDescription()}
+			description={m.blogSectionDescription()}
 		>
 			{#snippet button()}
 				<Button title={m.goToBlog()} size="md" type="sun" url={localizeHref('/blog/')} />
@@ -353,7 +353,7 @@
 			{@render partnersSection()}
 		{/if}
 
-		{#if pageLocale == 'uy'}
+		{#if pageLocale == 'uy' || pageLocale == 'pt'}
 			{@render blogSection()}
 		{/if}
 	</section>

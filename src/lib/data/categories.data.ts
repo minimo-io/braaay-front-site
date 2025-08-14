@@ -3,17 +3,18 @@ import {
 	Gift,
 	PackageOpen,
 	CalendarDays,
-	Leaf,
 	Award,
 	Wine,
 	Beer,
 	Droplets,
 	Gem,
 	Factory,
-	Pencil
+	Pencil,
+	BriefcaseBusiness
 } from '@lucide/svelte';
 import type { MenuCategory } from '$lib/types';
 import WineSubcategories from '$data/jsons/wine-subcategories.json';
+import { AppConfig } from '$config';
 
 export function getSiteCategories(site: 'pt' | 'uy' = 'pt') {
 	const categories: { [key: string]: MenuCategory[] } = {
@@ -34,8 +35,15 @@ export function getSiteCategories(site: 'pt' | 'uy' = 'pt') {
 				url: '/experiencias/',
 				icon: CalendarDays
 			},
-			{ id: 104, name: 'Orgânicos', url: '/tag/vinhos-organicos/', icon: Leaf, color: 'green' },
-			{ id: 105, name: 'Premium', url: '/tag/premium/', icon: Award }
+			{ id: 105, name: 'Premium', url: '/tag/premium/', icon: Award },
+			// { id: 104, name: 'Orgânicos', url: '/tag/vinhos-organicos/', icon: Leaf, color: 'green' }
+			{
+				id: 104,
+				name: 'Serviços PJ',
+				url: AppConfig.whatsappLink,
+				icon: BriefcaseBusiness,
+				color: 'blue'
+			}
 		],
 		uy: [
 			{
