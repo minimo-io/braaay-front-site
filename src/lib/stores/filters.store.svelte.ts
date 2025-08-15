@@ -1,5 +1,6 @@
 // src/lib/stores/filters.store.svelte.ts
 import { AppConfig } from '$config';
+import { getLocale } from '$lib/paraglide/runtime';
 import { writable } from 'svelte/store';
 
 export interface FilterState {
@@ -15,7 +16,10 @@ export interface FilterState {
 export const filtersInitialState: FilterState = {
 	variety: [],
 	country: [],
-	priceRange: { min: AppConfig.catalog_filter_min_price, max: AppConfig.catalog_filter_max_price },
+	priceRange: {
+		min: AppConfig.catalog_filter[getLocale()].catalog_filter_min_price,
+		max: AppConfig.catalog_filter[getLocale()].catalog_filter_max_price
+	},
 	taste: [],
 	shipping: '',
 	size: [],

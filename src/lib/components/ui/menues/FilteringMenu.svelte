@@ -71,8 +71,9 @@
 			searchParams.set('country', currentFilters.country.join(','));
 		}
 		if (
-			currentFilters.priceRange.min > AppConfig.catalog_filter_min_price ||
-			currentFilters.priceRange.max < AppConfig.catalog_filter_max_price
+			currentFilters.priceRange.min >
+				AppConfig.catalog_filter[getLocale()].catalog_filter_min_price ||
+			currentFilters.priceRange.max < AppConfig.catalog_filter[getLocale()].catalog_filter_max_price
 		) {
 			searchParams.set('price_min', currentFilters.priceRange.min.toString());
 			searchParams.set('price_max', currentFilters.priceRange.max.toString());
@@ -171,7 +172,7 @@
 	// Check if grape is selected
 	function isGrapeSelected(grapeUrl: string): boolean {
 		const grapeSlug = getGrapeSlug(grapeUrl);
-		console.log('SELECTED_GRAPE', currentFilters.grape.includes(grapeSlug));
+		// console.log('SELECTED_GRAPE', currentFilters.grape.includes(grapeSlug));
 		return currentFilters.grape.includes(grapeSlug);
 	}
 
@@ -216,7 +217,7 @@
 				<button class="shine-effect">
 					<DollarSign class="lucide-button w-5 h-5 mr-2" />
 					{m.price()}
-					{#if currentFilters.priceRange.min > AppConfig.catalog_filter_min_price || currentFilters.priceRange.max < AppConfig.catalog_filter_max_price}
+					{#if currentFilters.priceRange.min > AppConfig.catalog_filter[getLocale()].catalog_filter_min_price || currentFilters.priceRange.max < AppConfig.catalog_filter[getLocale()].catalog_filter_max_price}
 						<span class="bg-sun text-white text-xs px-2 py-1 rounded-full ml-1">
 							{m.currencySymbol()}{currentFilters.priceRange.min}-{currentFilters.priceRange.max}
 						</span>
@@ -236,9 +237,10 @@
 							id="min-range-input"
 							type="range"
 							bind:value={currentFilters.priceRange.min}
-							min={AppConfig.catalog_filter_min_price}
-							max={AppConfig.catalog_filter_max_price - AppConfig.catalog_filter_step}
-							step={AppConfig.catalog_filter_step}
+							min={AppConfig.catalog_filter[getLocale()].catalog_filter_min_price}
+							max={AppConfig.catalog_filter[getLocale()].catalog_filter_max_price -
+								AppConfig.catalog_filter[getLocale()].catalog_filter_step}
+							step={AppConfig.catalog_filter[getLocale()].catalog_filter_step}
 							class="w-full fill-black h-2 bg-grey-light rounded-lg appearance-none cursor-pointer mb-4"
 							onchange={handleMinPriceChange}
 							oninput={handleMinPriceInput}
@@ -252,18 +254,20 @@
 							id="max-range-input"
 							type="range"
 							bind:value={currentFilters.priceRange.max}
-							min={AppConfig.catalog_filter_step}
-							max={AppConfig.catalog_filter_max_price}
-							step={AppConfig.catalog_filter_step}
+							min={AppConfig.catalog_filter[getLocale()].catalog_filter_step}
+							max={AppConfig.catalog_filter[getLocale()].catalog_filter_max_price}
+							step={AppConfig.catalog_filter[getLocale()].catalog_filter_step}
 							class="w-full fill-black h-2 bg-grey-light rounded-lg appearance-none cursor-pointer"
 							onchange={handlePriceChange}
 							oninput={handleMaxPriceInput}
 						/>
 						<span class="text-xs text-grey-medium absolute start-0 -bottom-6"
-							>{m.currencySymbol()}{AppConfig.catalog_filter_min_price}</span
+							>{m.currencySymbol()}{AppConfig.catalog_filter[getLocale()]
+								.catalog_filter_min_price}</span
 						>
 						<span class="text-xs text-grey-medium absolute end-0 -bottom-6"
-							>{m.currencySymbol()}{AppConfig.catalog_filter_max_price}</span
+							>{m.currencySymbol()}{AppConfig.catalog_filter[getLocale()]
+								.catalog_filter_max_price}</span
 						>
 					</div>
 					<div class="text-center text-sm text-grey-dark">
@@ -363,7 +367,7 @@
 			<!-- Reset Filters Button -->
 			{#if Object.values(currentFilters).some((filter) => {
 				if (Array.isArray(filter)) return filter.length > 0;
-				if (typeof filter === 'object' && filter !== null && 'min' in filter && 'max' in filter) return filter.min > 10 || filter.max < 500;
+				if (typeof filter === 'object' && filter !== null && 'min' in filter && 'max' in filter) return filter.min > AppConfig.catalog_filter[getLocale()].catalog_filter_min_price || filter.max < AppConfig.catalog_filter[getLocale()].catalog_filter_max_price;
 				return !!filter;
 			})}
 				<div class="filtering-button">

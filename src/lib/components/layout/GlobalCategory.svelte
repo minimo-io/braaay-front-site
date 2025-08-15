@@ -9,6 +9,7 @@
 	import type { Category, Product } from '$lib/types';
 	import { localizeHref } from '$lib/paraglide/runtime.js';
 	import { page } from '$app/state';
+	import { AppConfig } from '$config';
 
 	interface Props {
 		category: Category;
@@ -26,7 +27,7 @@
 <main>
 	<CategoryHeader {category} {hideCount} />
 
-	{#if isCategoryOrSub}
+	{#if isCategoryOrSub && !AppConfig.catalog_filter_disallow.includes(page.params.categorySlug)}
 		{#key pathname}
 			<FilteringMenu />
 		{/key}

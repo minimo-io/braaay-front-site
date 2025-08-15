@@ -25,10 +25,21 @@ export const AppConfig = Object.freeze({
 
 	// Number of products to get fromt the catalog on page load
 	catalogs_initial_query_limit: 15,
-	catalog_filter_min_price: 10,
-	catalog_filter_max_price: 1500,
-	catalog_filter_step: 10,
-
+	// Catalog filter
+	catalog_filter: {
+		pt: {
+			catalog_filter_min_price: 10,
+			catalog_filter_max_price: 1500,
+			catalog_filter_step: 10
+		},
+		uy: {
+			catalog_filter_min_price: 50,
+			catalog_filter_max_price: 500,
+			catalog_filter_step: 10
+		}
+	},
+	// Disable filter for this urls
+	catalog_filter_disallow: ['cervejas', 'experiencias'],
 	// Enable/Disable cashback site wide
 	cashbackEnabled: true,
 	// Cashback value
