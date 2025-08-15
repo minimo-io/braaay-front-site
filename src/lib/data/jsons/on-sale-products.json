@@ -1,6 +1,51 @@
 {
   "pt": [
     {
+      "id": 132566,
+      "sku": "UY-26-27-132566",
+      "uri": "/produto/vinho-uruguaio-icone-balasto/",
+      "name": "Balasto 2020",
+      "priceString": "R$1.275,00",
+      "regularPrice": "R$1.500,00",
+      "price": 1275,
+      "quantity": 1,
+      "maxQuantity": 1,
+      "image": {
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2025/08/garzon-balastro-2.png",
+        "altText": "garzon-balastro-2"
+      }
+    },
+    {
+      "id": 132143,
+      "sku": "BR-26-30-132143",
+      "uri": "/produto/espumante-nacional-brut-casa-perini-charmat/",
+      "name": "Espumante Brut Perini Método Charmat 750ml",
+      "priceString": "R$60,35",
+      "regularPrice": "R$71,00",
+      "price": 60.35,
+      "quantity": 1,
+      "maxQuantity": 6,
+      "image": {
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2025/05/casa-perini-espumante-brut-charmat-compress.png",
+        "altText": "casa-perini-espumante-brut-charmat-compress"
+      }
+    },
+    {
+      "id": 132126,
+      "sku": "IT-tinto-132126",
+      "uri": "/produto/vinho-italiano-tinto-castorani-majolica-montepulciano-dabruzzo-2020/",
+      "name": "Castorani Majolica Montepulciano d'Abruzzo 2020",
+      "priceString": "R$113,90",
+      "regularPrice": "R$125,00",
+      "price": 113.9,
+      "quantity": 1,
+      "maxQuantity": 3,
+      "image": {
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2025/05/vinho-matteo-sangiovese-de-puglia.png",
+        "altText": "vinho-matteo-sangiovese-de-puglia"
+      }
+    },
+    {
       "id": 131417,
       "sku": "UY-26-27-131417",
       "uri": "/produto/vinho-braccobosca-cabernet-franc-ombu-gran-reserva/",

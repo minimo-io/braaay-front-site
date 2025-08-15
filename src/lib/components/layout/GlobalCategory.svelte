@@ -27,7 +27,7 @@
 <main>
 	<CategoryHeader {category} {hideCount} />
 
-	{#if isCategoryOrSub && !AppConfig.catalog_filter_disallow.includes(page.params.categorySlug)}
+	{#if isCategoryOrSub && page.params.categorySlug && !AppConfig.catalog_filter_disallow.includes(page.params.categorySlug)}
 		{#key pathname}
 			<FilteringMenu />
 		{/key}

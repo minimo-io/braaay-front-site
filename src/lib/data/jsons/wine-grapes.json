@@ -3,7 +3,7 @@
     {
       "name": "Tannat",
       "url": "/uva/tannat/",
-      "count": 29
+      "count": 31
     },
     {
       "name": "Uva Chardonnay",
@@ -48,7 +48,12 @@
     {
       "name": "Cabernet Franc",
       "url": "/uva/cabernet-franc/",
-      "count": 5
+      "count": 6
+    },
+    {
+      "name": "Marselan",
+      "url": "/uva/marselan/",
+      "count": 4
     },
     {
       "name": "Moscato Hamburgo",
@@ -63,11 +68,6 @@
     {
       "name": "Pinot Grigio",
       "url": "/uva/pinot-grigio/",
-      "count": 3
-    },
-    {
-      "name": "Marselan",
-      "url": "/uva/marselan/",
       "count": 3
     },
     {
@@ -98,6 +98,11 @@
     {
       "name": "Barbera",
       "url": "/uva/barbera/",
+      "count": 2
+    },
+    {
+      "name": "Petit Verdot",
+      "url": "/uva/petit-verdot/",
       "count": 2
     },
     {
@@ -148,11 +153,6 @@
     {
       "name": "Moscato",
       "url": "/uva/moscato/",
-      "count": 1
-    },
-    {
-      "name": "Petit Verdot",
-      "url": "/uva/petit-verdot/",
       "count": 1
     },
     {
