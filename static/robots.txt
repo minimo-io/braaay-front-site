@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 
+# Disaable all parameters
+Disallow: /*?*
+
 # Sitemaps
 Sitemap: https://braaay.com/sitemap_index.xml
 Sitemap: https://braaay.com/uy/sitemap_index.xml
