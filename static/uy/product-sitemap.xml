@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//braaay.com/uy/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+	<url>
+		<loc>https://braaay.com/produto/vinho-bouza-tannat-a6-parcela-unica-2021-uruguai/</loc>
+		<lastmod>2025-08-15T15:13:37+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/08/bouza-a6-parcela-unica-2021.png</image:loc>
+		</image:image>
+	</url>
 	<url>
 		<loc>https://braaay.com/uy/shop/</loc>
 		<lastmod>2025-07-28T20:00:31+00:00</lastmod>
