@@ -25,6 +25,9 @@ export const AppConfig = Object.freeze({
 
 	// Number of products to get fromt the catalog on page load
 	catalogs_initial_query_limit: 15,
+	catalog_filter_min_price: 10,
+	catalog_filter_max_price: 1500,
+	catalog_filter_step: 10,
 
 	// Enable/Disable cashback site wide
 	cashbackEnabled: true,

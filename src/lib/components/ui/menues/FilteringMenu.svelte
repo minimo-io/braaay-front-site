@@ -10,10 +10,9 @@
 		Smile,
 		Truck,
 		Ruler,
-		X
+		X,
+		Search
 	} from '@lucide/svelte';
-	import { filtersInitialState } from '$stores/filters.store.svelte';
-	import { toggleDrawer } from '$stores/drawerState.state.svelte';
 	import { filterState, updateFilter, resetFilters } from '$stores/filters.store.svelte';
 	import { AppConfig } from '$config';
 	import { onMount } from 'svelte';
@@ -25,6 +24,7 @@
 	import { grapes } from '$data/grapes.data';
 
 	let grapesForLanguage = $state(grapes[getLocale()]);
+	let grapeSearchQuery = $state('');
 
 	let currentFilters = $state($filterState);
 
@@ -70,7 +70,10 @@
 		if (currentFilters.country.length > 0) {
 			searchParams.set('country', currentFilters.country.join(','));
 		}
-		if (currentFilters.priceRange.min > 10 || currentFilters.priceRange.max < 500) {
+		if (
+			currentFilters.priceRange.min > AppConfig.catalog_filter_min_price ||
+			currentFilters.priceRange.max < AppConfig.catalog_filter_max_price
+		) {
 			searchParams.set('price_min', currentFilters.priceRange.min.toString());
 			searchParams.set('price_max', currentFilters.priceRange.max.toString());
 		}
@@ -93,6 +96,37 @@
 
 	// Add this to your script
 	let priceDebounceTimer = $state<NodeJS.Timeout | null>(null);
+	let minPriceDebounceTimer = $state<NodeJS.Timeout | null>(null);
+
+	function handleMinPriceChange(event: Event) {
+		const target = event.target as HTMLInputElement;
+		let value = parseInt(target.value);
+
+		// Prevent min from exceeding max
+		if (value >= currentFilters.priceRange.max) {
+			value = currentFilters.priceRange.max - 10;
+			target.value = value.toString();
+		}
+
+		// Clear existing timer
+		if (minPriceDebounceTimer) {
+			clearTimeout(minPriceDebounceTimer);
+		}
+
+		// Set new timer
+		minPriceDebounceTimer = setTimeout(() => {
+			updateFilter('priceRange', { ...currentFilters.priceRange, min: value });
+		}, 300); // 300ms delay
+	}
+	function handleMinPriceInput(event: Event) {
+		const target = event.target as HTMLInputElement;
+		let value = parseInt(target.value);
+
+		if (value >= currentFilters.priceRange.max) {
+			value = currentFilters.priceRange.max - 10;
+			updateFilter('priceRange', { ...currentFilters.priceRange, min: value });
+		}
+	}
 
 	function handlePriceChange(event: Event) {
 		const target = event.target as HTMLInputElement;
@@ -129,6 +163,9 @@
 		}
 
 		updateFilter('grape', currentGrapes);
+
+		// Clear search field for clarity after selection
+		grapeSearchQuery = '';
 	}
 
 	// Check if grape is selected
@@ -136,6 +173,31 @@
 		const grapeSlug = getGrapeSlug(grapeUrl);
 		console.log('SELECTED_GRAPE', currentFilters.grape.includes(grapeSlug));
 		return currentFilters.grape.includes(grapeSlug);
+	}
+
+	// Filter and sort grapes: selected first, then by original order (wine count)
+	function getFilteredAndSortedGrapes() {
+		// First filter by search query
+		let filtered = grapesForLanguage.filter((grape) =>
+			grape.name.toLowerCase().includes(grapeSearchQuery.toLowerCase())
+		);
+
+		// Then sort: selected grapes first, maintaining original order within each group
+		const selected = filtered.filter((grape) => isGrapeSelected(grape.url));
+		const unselected = filtered.filter((grape) => !isGrapeSelected(grape.url));
+
+		// Combine selected first, then unselected (both maintain original order from grapesForLanguage)
+		return [...selected, ...unselected];
+	}
+
+	function handleMaxPriceInput(event: Event) {
+		const target = event.target as HTMLInputElement;
+		let value = parseInt(target.value);
+
+		if (value <= currentFilters.priceRange.min) {
+			value = currentFilters.priceRange.min + 10;
+			updateFilter('priceRange', { ...currentFilters.priceRange, max: value });
+		}
 	}
 
 	onMount(() => {
@@ -154,7 +216,7 @@
 				<button class="shine-effect">
 					<DollarSign class="lucide-button w-5 h-5 mr-2" />
 					{m.price()}
-					{#if currentFilters.priceRange.min > 10 || currentFilters.priceRange.max < 500}
+					{#if currentFilters.priceRange.min > AppConfig.catalog_filter_min_price || currentFilters.priceRange.max < AppConfig.catalog_filter_max_price}
 						<span class="bg-sun text-white text-xs px-2 py-1 rounded-full ml-1">
 							{m.currencySymbol()}{currentFilters.priceRange.min}-{currentFilters.priceRange.max}
 						</span>
@@ -162,25 +224,47 @@
 					<ChevronDown class="lucide-button w-5 h-5 mr-2" />
 				</button>
 
-				<div class="absolute left-0 w-full h-4 bg-transparent"></div>
+				<div class="absolute left-0 w-full h-4 bg-transparent" role="presentation"></div>
 				<div
 					class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-y-auto px-10 py-5 hidden group-hover:block"
 					style="max-height: calc(55vh - 170px)"
+					role="menu"
 				>
 					<div class="relative mb-6">
-						<label for="labels-range-input" class="sr-only">Faixa de preço</label>
+						<label for="min-range-input" class="sr-only">Preço mínimo</label>
 						<input
-							id="labels-range-input"
+							id="min-range-input"
+							type="range"
+							bind:value={currentFilters.priceRange.min}
+							min={AppConfig.catalog_filter_min_price}
+							max={AppConfig.catalog_filter_max_price - AppConfig.catalog_filter_step}
+							step={AppConfig.catalog_filter_step}
+							class="w-full fill-black h-2 bg-grey-light rounded-lg appearance-none cursor-pointer mb-4"
+							onchange={handleMinPriceChange}
+							oninput={handleMinPriceInput}
+						/>
+						<span class="text-xs text-grey-medium mb-4 block"
+							>Mínimo: {m.currencySymbol()}{currentFilters.priceRange.min}</span
+						>
+
+						<label for="max-range-input" class="sr-only">Preço máximo</label>
+						<input
+							id="max-range-input"
 							type="range"
 							bind:value={currentFilters.priceRange.max}
-							min="10"
-							max="500"
-							step="10"
+							min={AppConfig.catalog_filter_step}
+							max={AppConfig.catalog_filter_max_price}
+							step={AppConfig.catalog_filter_step}
 							class="w-full fill-black h-2 bg-grey-light rounded-lg appearance-none cursor-pointer"
 							onchange={handlePriceChange}
+							oninput={handleMaxPriceInput}
 						/>
-						<span class="text-xs text-grey-medium absolute start-0 -bottom-6">R$10</span>
-						<span class="text-xs text-grey-medium absolute end-0 -bottom-6">R$500</span>
+						<span class="text-xs text-grey-medium absolute start-0 -bottom-6"
+							>{m.currencySymbol()}{AppConfig.catalog_filter_min_price}</span
+						>
+						<span class="text-xs text-grey-medium absolute end-0 -bottom-6"
+							>{m.currencySymbol()}{AppConfig.catalog_filter_max_price}</span
+						>
 					</div>
 					<div class="text-center text-sm text-grey-dark">
 						R${currentFilters.priceRange.min} - R${currentFilters.priceRange.max}
@@ -202,49 +286,75 @@
 						<ChevronDown class="lucide-button w-5 h-5 mr-2" />
 					</button>
 
-					<div class="absolute left-0 w-full h-4 bg-transparent"></div>
+					<div class="absolute left-0 w-full h-4 bg-transparent" role="presentation"></div>
 					<div
-						class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-y-auto hidden group-hover:block"
+						class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-hidden hidden group-hover:block"
 						style="max-height: calc(55vh - 170px)"
+						role="menu"
 					>
-						<div class="text-xs px-3 flex flex-col">
-							{#each grapesForLanguage as grape}
-								<button
-									type="button"
-									onclick={() => handleGrapeToggle(grape.url)}
-									class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] hover:bg-grey-lighter transition-colors
-								{isGrapeSelected(grape.url) ? 'bg-sun-light' : ''}"
-								>
-									<div class="text-left self-center flex items-center">
-										<!-- Checkbox visual indicator -->
-										<div
-											class="w-4 h-4 mr-3 border-2 border-grey-dark rounded-sm flex items-center justify-center
-										{isGrapeSelected(grape.url) ? 'bg-sun border-sun' : ''}"
-										>
-											{#if isGrapeSelected(grape.url)}
-												<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-													<path
-														fill-rule="evenodd"
-														d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-														clip-rule="evenodd"
-													></path>
-												</svg>
-											{/if}
+						<!-- Search Box -->
+						<div class="sticky top-0 bg-white border-b border-grey-lighter p-3">
+							<div class="relative">
+								<Search
+									class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-grey-medium"
+								/>
+								<input
+									type="text"
+									bind:value={grapeSearchQuery}
+									placeholder="Buscar uvas..."
+									class="w-full pl-10 pr-4 py-2 text-sm border border-grey-light rounded-lg focus:outline-none focus:ring-2 focus:ring-sun focus:border-transparent"
+								/>
+							</div>
+						</div>
+
+						<!-- Grapes List -->
+						<div class="overflow-y-auto" style="max-height: calc(55vh - 220px)">
+							<div class="text-xs px-3 flex flex-col">
+								{#each getFilteredAndSortedGrapes() as grape}
+									<button
+										type="button"
+										onclick={() => handleGrapeToggle(grape.url)}
+										class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] hover:bg-grey-lighter transition-colors
+									{isGrapeSelected(grape.url) ? 'bg-sun-light' : ''}"
+									>
+										<div class="text-left self-center flex items-center">
+											<!-- Checkbox visual indicator -->
+											<div
+												class="w-4 h-4 mr-3 border-2 border-grey-dark rounded-sm flex items-center justify-center
+											{isGrapeSelected(grape.url) ? 'bg-sun border-sun' : ''}"
+											>
+												{#if isGrapeSelected(grape.url)}
+													<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+														<path
+															fill-rule="evenodd"
+															d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+															clip-rule="evenodd"
+														></path>
+													</svg>
+												{/if}
+											</div>
+											<span
+												class="self-center {isGrapeSelected(grape.url)
+													? 'font-semibold text-sun'
+													: ''}"
+											>
+												{grape.name}
+											</span>
 										</div>
-										<span
-											class="self-center {isGrapeSelected(grape.url)
-												? 'font-semibold text-sun'
-												: ''}"
-										>
-											{grape.name}
-										</span>
+										<div class="text-grey-medium flex flex-row align-middle self-center">
+											<span class="self-center mr-3 text-xs">{grape.count || 0}</span>
+											<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+										</div>
+									</button>
+								{/each}
+
+								<!-- No results message -->
+								{#if getFilteredAndSortedGrapes().length === 0}
+									<div class="py-6 text-center text-grey-medium text-sm">
+										Nenhuma uva encontrada
 									</div>
-									<div class="text-grey-medium flex flex-row align-middle self-center">
-										<span class="self-center mr-3 text-xs">{grape.count || 0}</span>
-										<ChevronRight class="w-4 aspect-1 text-grey-dark" />
-									</div>
-								</button>
-							{/each}
+								{/if}
+							</div>
 						</div>
 					</div>
 				</div>
