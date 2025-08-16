@@ -22,9 +22,13 @@
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import { grapes } from '$data/grapes.data';
+	import { bottleSizes } from '$data/bottle-sizes.data';
 
 	let grapesForLanguage = $state(grapes[getLocale()]);
 	let grapeSearchQuery = $state('');
+
+	// Get bottle sizes
+	let bottleSizesForLanguage = $state(bottleSizes[getLocale()]);
 
 	let currentFilters = $state($filterState);
 
@@ -60,7 +64,7 @@
 		searchParams.delete('price_max');
 		searchParams.delete('taste');
 		searchParams.delete('shipping');
-		searchParams.delete('size');
+		searchParams.delete('bottleSize');
 		searchParams.delete('grape'); // Add grape to cleanup
 
 		// Add filters to search params
@@ -84,8 +88,8 @@
 		if (currentFilters.shipping) {
 			searchParams.set('shipping', currentFilters.shipping);
 		}
-		if (currentFilters.size.length > 0) {
-			searchParams.set('size', currentFilters.size.join(','));
+		if (currentFilters.bottleSize.length > 0) {
+			searchParams.set('bottleSize', currentFilters.bottleSize.join(','));
 		}
 		if (currentFilters.grape.length > 0) {
 			searchParams.set('grape', currentFilters.grape.join(','));
@@ -167,6 +171,25 @@
 
 		// Clear search field for clarity after selection
 		grapeSearchQuery = '';
+	}
+
+	// Handle bottle size selection
+	function handleBottleSizeToggle(bottleSize: string) {
+		const currentBottleSizes = [...currentFilters.bottleSize];
+		const index = currentBottleSizes.indexOf(bottleSize);
+		if (index > -1) {
+			// Remove grape if already selected
+			currentBottleSizes.splice(index, 1);
+		} else {
+			// Add grape if not selected
+			currentBottleSizes.push(bottleSize);
+		}
+
+		updateFilter('bottleSize', currentBottleSizes);
+	}
+	// Check if grape is selected
+	function isBottleSizeSelected(bottleSize: string): boolean {
+		return currentFilters.bottleSize.includes(bottleSize);
 	}
 
 	// Check if grape is selected
@@ -358,6 +381,83 @@
 										Nenhuma uva encontrada
 									</div>
 								{/if}
+							</div>
+						</div>
+					</div>
+				</div>
+			{/if}
+
+			<!-- BottleSize Filter -->
+			{#if bottleSizesForLanguage.length > 0}
+				<div class="relative group filtering-button">
+					<button class="shine-effect">
+						<Ruler class="lucide-button w-5 h-5 mr-2" />
+						{m.size()}
+						{#if currentFilters.bottleSize.length > 0}
+							<span class="bg-sun text-white text-xs px-2 py-1 rounded-full ml-1">
+								{currentFilters.bottleSize.length}
+							</span>
+						{/if}
+						<ChevronDown class="lucide-button w-5 h-5 mr-2" />
+					</button>
+
+					<div class="absolute left-0 w-full h-4 bg-transparent" role="presentation"></div>
+					<div
+						class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-hidden hidden group-hover:block"
+						style="max-height: calc(55vh - 170px)"
+						role="menu"
+					>
+						<!-- Search Box -->
+						<!-- <div class="sticky top-0 bg-white border-b border-grey-lighter p-3">
+							<div class="relative">
+								<Search
+									class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-grey-medium"
+								/>
+								<input
+									type="text"
+									bind:value={grapeSearchQuery}
+									placeholder="Buscar uvas..."
+									class="w-full pl-10 pr-4 py-2 text-sm border border-grey-light rounded-lg focus:outline-none focus:ring-2 focus:ring-sun focus:border-transparent"
+								/>
+							</div>
+						</div> -->
+
+						<!-- Sizes List -->
+						<div class="overflow-y-auto" style="max-height: calc(55vh - 220px)">
+							<div class="text-xs px-3 flex flex-col">
+								{#each bottleSizesForLanguage as bottle}
+									<button
+										type="button"
+										onclick={() => handleBottleSizeToggle(bottle)}
+										class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] hover:bg-grey-lighter transition-colors
+									{isBottleSizeSelected(bottle) ? 'bg-sun-light' : ''}"
+									>
+										<div class="text-left self-center flex items-center">
+											<!-- Checkbox visual indicator -->
+											<div
+												class="w-4 h-4 mr-3 border-2 border-grey-dark rounded-sm flex items-center justify-center
+											{isBottleSizeSelected(bottle) ? 'bg-sun border-sun' : ''}"
+											>
+												{#if isBottleSizeSelected(bottle)}
+													<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+														<path
+															fill-rule="evenodd"
+															d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+															clip-rule="evenodd"
+														></path>
+													</svg>
+												{/if}
+											</div>
+											<span
+												class="self-center {isBottleSizeSelected(bottle)
+													? 'font-semibold text-sun'
+													: ''}"
+											>
+												{bottle}
+											</span>
+										</div>
+									</button>
+								{/each}
 							</div>
 						</div>
 					</div>

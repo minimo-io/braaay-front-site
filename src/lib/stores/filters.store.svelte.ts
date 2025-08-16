@@ -9,7 +9,7 @@ export interface FilterState {
 	priceRange: { min: number; max: number };
 	taste: string[];
 	shipping: string;
-	size: string[];
+	bottleSize: string[];
 	grape: string[]; // Add grape filter
 }
 
@@ -22,7 +22,7 @@ export const filtersInitialState: FilterState = {
 	},
 	taste: [],
 	shipping: '',
-	size: [],
+	bottleSize: [],
 	grape: [] // Initialize grape as empty array
 };
 

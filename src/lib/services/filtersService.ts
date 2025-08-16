@@ -1,3 +1,5 @@
+import { AppConfig } from '$config';
+import { getLocale } from '$lib/paraglide/runtime';
 import type { FilterState } from '$stores/filters.store.svelte';
 
 export interface GraphQLFilters {
@@ -26,10 +28,16 @@ export const buildGraphQLFilters = (filters: FilterState): GraphQLFilters => {
 	}
 
 	// Price range - with safety checks
-	if (filters.priceRange?.min && filters.priceRange.min > 10) {
+	if (
+		filters.priceRange?.min &&
+		filters.priceRange.min > AppConfig.catalog_filter[getLocale()].catalog_filter_min_price
+	) {
 		graphqlFilters.minPrice = filters.priceRange.min;
 	}
-	if (filters.priceRange?.max && filters.priceRange.max < 500) {
+	if (
+		filters.priceRange?.max &&
+		filters.priceRange.max < AppConfig.catalog_filter[getLocale()].catalog_filter_max_price
+	) {
 		graphqlFilters.maxPrice = filters.priceRange.max;
 	}
 
@@ -40,6 +48,14 @@ export const buildGraphQLFilters = (filters: FilterState): GraphQLFilters => {
 		taxonomyFilters.push({
 			taxonomy: 'UVA',
 			terms: filters.grape
+		});
+	}
+
+	// Add taxonomy filter for bottleSize (PA_GARRAFA)
+	if (filters.bottleSize && Array.isArray(filters.bottleSize) && filters.bottleSize.length > 0) {
+		taxonomyFilters.push({
+			taxonomy: 'PA_GARRAFA',
+			terms: filters.bottleSize
 		});
 	}
 
@@ -73,12 +89,12 @@ export const buildGraphQLFilters = (filters: FilterState): GraphQLFilters => {
 		});
 	}
 
-	if (filters.size && Array.isArray(filters.size) && filters.size.length > 0) {
-		attributes.push({
-			taxonomy: 'pa_size',
-			terms: filters.size
-		});
-	}
+	// if (filters.size && Array.isArray(filters.size) && filters.size.length > 0) {
+	// 	attributes.push({
+	// 		taxonomy: 'pa_size',
+	// 		terms: filters.size
+	// 	});
+	// }
 
 	if (attributes.length > 0) {
 		graphqlFilters.attributes = attributes;
