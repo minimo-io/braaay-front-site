@@ -1,7 +1,13 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
 	import type { Wine } from '$lib/types';
-	import { calculatePercentageDifference, capitalize, launchToast } from '$lib/utils';
+	import {
+		calculatePercentageDifference,
+		capitalize,
+		correctPrice,
+		launchToast,
+		toFloatPrice
+	} from '$lib/utils';
 	import { Heart } from '@lucide/svelte';
 	import Button from '../buttons/Button.svelte';
 	import { addProductToFavorites, removeProductFromFavorites } from '$lib/services/index';
@@ -91,7 +97,9 @@
 				>{wine.regularPrice}</span
 			>
 		{/if}
-		{wine.price}
+		<!-- {wine.price} -->
+		{m.currencySymbol()}
+		{correctPrice(toFloatPrice(wine.price) * 0.95)}
 	</div>
 
 	<!-- <a href={wine.url} class="wine-button">VER DETALHES</a> -->
