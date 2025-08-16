@@ -49,8 +49,8 @@ export function isBlogPost(path: string) {
 	return /^\/(uy\/)?blog\/[^/]+$/.test(path);
 }
 
-export function redirectLocale(newLocale: string) {
-	logout();
+export async function redirectLocale(newLocale: string) {
+	await logout();
 	window.location.href = localizeHref('/', { locale: newLocale });
 }
 

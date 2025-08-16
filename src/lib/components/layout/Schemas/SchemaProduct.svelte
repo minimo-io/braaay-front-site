@@ -121,7 +121,41 @@
 				priceValidUntil: productValidThrough, // Duplicated from priceSpecification validThrough, but good to have
 				availability: 'https://schema.org/InStock', // Use the full URL for clarity
 				url: pageUrl,
-				seller: { '@type': 'Organization', name: m.seoBase(), url: basePath }
+				seller: { '@type': 'Organization', name: m.seoBase(), url: basePath },
+				...(getLocale() == 'pt' && {
+					hasMerchantReturnPolicy: {
+						'@type': 'MerchantReturnPolicy',
+						applicableCountry: 'BR',
+						returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+						merchantReturnDays: 7,
+						returnMethod: 'https://schema.org/ReturnByMail',
+						returnFees: 'https://schema.org/ReturnShippingFees',
+						returnShippingFeesAmount: {
+							'@type': 'MonetaryAmount',
+							value: 0.0,
+							currency: 'BRL'
+						},
+						returnPolicyText:
+							'Nos termos do art. 49 do Código de Defesa do Consumidor, o consumidor dispõe de 7 dias corridos, a contar do recebimento do produto, para exercer o direito de arrependimento.'
+					}
+				}),
+				...(getLocale() == 'uy' && {
+					hasMerchantReturnPolicy: {
+						'@type': 'MerchantReturnPolicy',
+						applicableCountry: 'UY',
+						returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+						merchantReturnDays: 5,
+						returnMethod: 'https://schema.org/ReturnByMail',
+						returnFees: 'https://schema.org/ReturnShippingFees',
+						returnShippingFeesAmount: {
+							'@type': 'MonetaryAmount',
+							value: 0.0,
+							currency: 'UYU'
+						},
+						returnPolicyText:
+							'Según el artículo 16 de la Ley Nº 17.250 y normativa aplicable, el consumidor tiene derecho a desistir de compras a distancia dentro de 5 días hábiles desde la formalización del contrato o la recepción del producto; en caso de ejercicio. Excepciones legales (bienes perecederos, personalizados, higiene sellada, etc.) pueden aplicar.'
+					}
+				})
 			}
 		]
 	})}

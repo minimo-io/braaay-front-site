@@ -57,7 +57,7 @@
 				<div class="flex items-center">
 					<Truck class="lucide-icon" />
 					<span class="font-roboto text-[13px] tracking-[1.1px] font-semibold text-grey-blueish">
-						FRETE E PRAZOS
+						{m.shippingAndDeadlines()}
 					</span>
 				</div>
 				<div>
@@ -142,7 +142,11 @@
 					<div class="flex items-center">
 						<Grape class="lucide-icon" />
 						<span class="font-roboto text-[13px] tracking-[1.1px] font-semibold text-grey-blueish">
-							CARACTERÍSTICAS DO VINHO
+							{#if getLocale() == 'uy'}
+								CARACTERÍSTICAS
+							{:else}
+								CARACTERÍSTICAS DO VINHO
+							{/if}
 						</span>
 					</div>
 					{#if activeAccordion === 'caracteristicas'}

@@ -36,6 +36,10 @@ const config = {
 			$data: path.resolve('src/lib/data'),
 			$config: path.resolve('src/lib/config')
 			// $types: path.resolve('src/lib/types.ts')
+		},
+
+		output: {
+			bundleStrategy: 'single'
 		}
 	},
 	compilerOptions: {

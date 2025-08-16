@@ -7,6 +7,7 @@
 	import { trackEvent } from '$components/analytics';
 	import FeaturesFooter from './FeaturesFooter.svelte';
 	import { page } from '$app/state';
+	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 
 	function handleFwClick() {
 		trackEvent('button_click_external', {
@@ -96,11 +97,15 @@
 					<h3>BRAAAY</h3>
 					<ul>
 						<li><a href="/">{m.sobreNos()}</a></li>
-						<li>
-							<a href="/blog/tannat-day-150-anos-dos-melhores-tannat-do-mundo-14-de-abril/"
-								>TANNAT DAY</a
-							>
-						</li>
+						{#if getLocale() == 'pt'}
+							<li>
+								<a href="/uva/tannat/">TANNAT</a>
+							</li>
+						{:else if getLocale() == 'uy'}
+							<li>
+								<a href="/uy/cervezas/">CERVEZAS</a>
+							</li>
+						{/if}
 						<li><a href={localizeHref('/blog/')}>BLOG</a></li>
 						<li><a href={localizeHref('/club/')}>{m.footerBraaayClub()}</a></li>
 					</ul>
@@ -139,7 +144,10 @@
 					{#each locales as locale, i}
 						<button
 							type="button"
-							onclick={() => redirectLocale(locale)}
+							onclick={async () => {
+								toggleLoader();
+								await redirectLocale(locale);
+							}}
 							class="text-black text-xs cursor-pointer bg-transparent border-none p-0"
 						>
 							<img
