@@ -86,5 +86,6 @@
 	<meta property="og:site_name" content={m.seoBase()} />
 	{#if finalOgImage}
 		<meta property="og:image" content={finalOgImage} />
+		<link rel="prefetch" href={finalOgImage} as="image" />
 	{/if}
 </svelte:head>

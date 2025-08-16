@@ -72,7 +72,9 @@
 	title="{m.seoBase()} {m.seoDivider()} {m.seoHomeTitle()}"
 	description={m.seoHomeDescription()}
 />
-
+<svelte:head>
+	<link rel="prefetch" href="/images/carousel/braaay-carousel-desktop-1.jpg" as="image" />
+</svelte:head>
 <SchemaHomepage />
 
 <main>
@@ -305,6 +307,7 @@
 					<div class="relative">
 						<a title="Carnes vermelhas" href="/harmonizacoes/carnes-vermelhas/">
 							<img
+								loading="lazy"
 								src="/images/harmonizacoes/carnes-vermelhas-2.jpeg"
 								alt="1 description"
 								class="rounded-lg w-full h-auto"
@@ -316,6 +319,7 @@
 					<div>
 						<a title="Vegetariano" href="/harmonizacoes/vegetariano/">
 							<img
+								loading="lazy"
 								src="/images/harmonizacoes/harmonizacoes-vegetariano.jpeg"
 								alt="2 description"
 								class="rounded-lg w-full h-auto"
@@ -327,6 +331,7 @@
 					<div>
 						<a title="Culinaria japonesa" href="/harmonizacoes/culinaria-japonesa/">
 							<img
+								loading="lazy"
 								src="/images/harmonizacoes/culinaria-japonesa-2.webp"
 								alt="3 description"
 								class="rounded-lg w-full h-auto"
@@ -338,6 +343,7 @@
 					<div>
 						<a title="Culinaria japonesa" href="/harmonizacoes/carnes-brancas/">
 							<img
+								loading="lazy"
 								src="/images/harmonizacoes/harmonizacao-carnes-brancas.webp"
 								alt="4 description"
 								class="rounded-lg w-full h-auto"

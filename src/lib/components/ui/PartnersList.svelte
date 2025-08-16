@@ -10,7 +10,12 @@
 	{#each getMappedPartnersForPT as partner}
 		<div>
 			<a href={localizeHref(partner.url)} title={partner.name}>
-				<img src={partner.logo} alt={partner.name} class="w-full h-full object-contain" />
+				<img
+					src={partner.logo}
+					alt={partner.name}
+					loading="lazy"
+					class="w-full h-full object-contain"
+				/>
 			</a>
 		</div>
 	{/each}
