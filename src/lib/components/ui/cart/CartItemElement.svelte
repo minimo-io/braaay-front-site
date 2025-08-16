@@ -165,7 +165,7 @@
 			<Plus class="h-4 pl-1" />
 		</button>
 	</div>
-	<div class="flex w-[100px] flex-col self-center justify-center pr-0 md:pr-3">
+	<div class="flex w-[120px] flex-col self-center justify-center pr-0 md:pr-3">
 		<div class="relative Xh-[25px] overflow-hidden">
 			<!-- Regular price -->
 			{#if hasPriceDiscount}
@@ -178,11 +178,21 @@
 
 			{#key currentPrice}
 				<p
-					class="font-semibold text-center md:text-right text-lg md:text-base"
+					class="font-semibold text-center md:text-right text-lg md:text-base flex flex-col"
 					transition:slide={{ duration: 150, axis: 'y' }}
 				>
-					{m.currencySymbol()}
-					{correctPrice(currentPrice)}
+					<span>
+						{m.currencySymbol()}
+						{correctPrice(currentPrice)}
+					</span>
+
+					<span class="text-green-dark text-xs">
+						{m.currencySymbol()}
+						{correctPrice(currentPrice * 0.95)}
+						<!-- {m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)} -->
+						{m.in()}
+						{m.cash()}
+					</span>
 				</p>
 			{/key}
 		</div>

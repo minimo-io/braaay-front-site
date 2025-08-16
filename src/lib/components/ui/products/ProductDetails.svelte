@@ -49,6 +49,8 @@
 	let originalButtonRef: HTMLButtonElement | null = $state(null);
 	let showFixedButton = $state(false);
 
+	let derivedCashPrice = $derived(correctPrice(product.floatPrice * 0.95));
+
 	// Track button visibility with Intersection Observer
 	$effect(() => {
 		if (browser && originalButtonRef) {
@@ -131,7 +133,7 @@
 			>
 		{/if}
 		<span class="text-2xl font-bold text-grey-darkest font-roboto flex items-center gap-2">
-			{m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)}
+			{m.currencySymbol()}{derivedCashPrice}
 			<h4 class="!text-lg font-bold relative">
 				<span class="text-green-dark">
 					<!-- {m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)} -->
@@ -146,6 +148,8 @@
 				4x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 4)}</strong>
 				{m.interestFree()}
 				{m.byCard()}
+				<br />
+				{product.price} total
 			</span>
 		</h4>
 		{#if AppConfig.cashbackEnabled}
@@ -213,7 +217,7 @@
 	<!-- Fixed bottom button -->
 	{#if showFixedButton && drawerState.active === false}
 		<div
-			class="fixed bottom-0 left-0 right-0 bg-transparent glass px-4 py-3 z-50 md:max-w-screen-lg md:mx-auto rounded-t-lg"
+			class="fixed bottom-0 md:bottom-5 left-0 right-0 bg-transparent glass px-4 py-3 z-50 md:max-w-screen-lg md:mx-auto rounded-xl"
 		>
 			{#if product.stockStatus == 'IN_STOCK'}
 				<button
@@ -225,7 +229,10 @@
 					{#if processing}
 						{m.addingToCart()}
 					{:else}
-						{m.addToCart()} — {product.price}
+						<!-- {m.addToCart()} — {product.price} -->
+						{m.addToCart()}
+						<!-- <span class="font-bold">{m.add()}</span> — {m.currencySymbol()}{derivedCashPrice}
+						{m.cashDiscountText()} -->
 					{/if}
 				</button>
 			{:else}
