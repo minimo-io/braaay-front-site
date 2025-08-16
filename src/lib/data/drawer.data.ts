@@ -54,16 +54,16 @@ export const drawerData = {
 			url: '/kits/'
 		} as DrawerData,
 		{
-			id: 'beers',
-			name: 'Cervejas',
-			icon: Beer,
-			url: '/cervejas/'
-		} as DrawerData,
-		{
 			id: 'experiences',
 			name: 'Experiências',
 			url: '/experiencias/',
 			icon: CalendarDays
+		} as DrawerData,
+		{
+			id: 'beers',
+			name: 'Cervejas',
+			icon: Beer,
+			url: '/cervejas/'
 		} as DrawerData
 	],
 	uy: [

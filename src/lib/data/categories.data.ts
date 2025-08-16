@@ -27,14 +27,15 @@ export function getSiteCategories(site: 'pt' | 'uy' = 'pt') {
 				subcategories: WineSubcategories['pt'] as MenuCategory[]
 			},
 			{ id: 101, name: 'Presentes & Kits', url: '/kits/', icon: Gift },
-			{ id: 101, name: 'Cervejas', url: '/cervejas/', icon: Beer },
-			// { id: 102, name: 'Kits', url: '/kits/', icon: PackageOpen },
 			{
 				id: 103,
 				name: 'Experiências',
 				url: '/experiencias/',
 				icon: CalendarDays
 			},
+			{ id: 101, name: 'Cervejas', url: '/cervejas/', icon: Beer },
+			// { id: 102, name: 'Kits', url: '/kits/', icon: PackageOpen },
+
 			{ id: 105, name: 'Premium', url: '/tag/premium/', icon: Award },
 			// { id: 104, name: 'Orgânicos', url: '/tag/vinhos-organicos/', icon: Leaf, color: 'green' }
 			{
