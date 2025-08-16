@@ -6,6 +6,19 @@ export const HomeLatestPosts = (locale: Locale = 'pt') => {
 	if (locale == 'pt') {
 		return [
 			{
+				url: '/blog/tannat-a-uva-emblematica-do-uruguai-em-evolucao/',
+				media: 'https://api.braaay.com/wp-content/uploads/2025/08/tannat-uruguaio.jpg',
+				title: 'Tannat: a uva emblemática do Uruguai em evolução',
+				date: '2025-08-15T12:41:00',
+				author: {
+					name: 'BRAAAY',
+					image:
+						'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
+				},
+				readingTime: 'Lectura em 8 min',
+				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
+			},
+			{
 				url: '/blog/inovacao-no-terroir-uruguaio-francisco-carrau-cerro-chapeu-e-a-uva-manseng-noir/',
 				media:
 					'https://api.braaay.com/wp-content/uploads/2025/04/manseng-noir-folklore-cerro-chapeu.jpg',
@@ -31,20 +44,20 @@ export const HomeLatestPosts = (locale: Locale = 'pt') => {
 				},
 				readingTime: 'Lectura em 5 min',
 				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
-			},
-			{
-				url: '/blog/como-combinar-vinho-com-comida-harmonizacoes/',
-				media: 'https://api.braaay.com/wp-content/uploads/2025/03/combinar-vinhos-com-comida.jpg',
-				title: 'Cómo combinar vinho com comida',
-				date: '2025-08-14T10:09:12',
-				author: {
-					name: 'BRAAAY',
-					image:
-						'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
-				},
-				readingTime: 'Lectura em 10 min',
-				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
 			}
+			// {
+			// 	url: '/blog/como-combinar-vinho-com-comida-harmonizacoes/',
+			// 	media: 'https://api.braaay.com/wp-content/uploads/2025/03/combinar-vinhos-com-comida.jpg',
+			// 	title: 'Cómo combinar vinho com comida',
+			// 	date: '2025-08-14T10:09:12',
+			// 	author: {
+			// 		name: 'BRAAAY',
+			// 		image:
+			// 			'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
+			// 	},
+			// 	readingTime: 'Lectura em 10 min',
+			// 	categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
+			// }
 		];
 	} else if (locale == 'uy') {
 		return [
