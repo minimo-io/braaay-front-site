@@ -130,7 +130,38 @@
 				>{product.regularPrice}</span
 			>
 		{/if}
-		<span class="text-2xl font-bold text-grey-darkest font-roboto">{product.price}</span>
+		<span class="text-2xl font-bold text-grey-darkest font-roboto flex items-center gap-2">
+			{m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)}
+			<h4 class="!text-lg font-bold relative">
+				<span class="text-green-dark">
+					<!-- {m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)} -->
+					{m.cashDiscountText()}
+				</span>
+			</h4>
+			<!-- {product.price} -->
+		</span>
+		<h4 class="!text-[13px] font-bold mb-2">
+			<span class="text-grey-darkest">
+				<!-- {m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)} -->
+				4x {m.currencySymbol()} <strong>{correctPrice(product.floatPrice / 4)}</strong>
+				{m.interestFree()}
+				{m.byCard()}
+			</span>
+		</h4>
+		{#if AppConfig.cashbackEnabled}
+			<MoreInfoButton title={clubMoreInfoText} customStyles="!mx-0 " url={localizeHref('/club/')} />
+		{/if}
+	</div>
+
+	<!-- <div class="mb-4">
+		{#if product.regularPrice != product.price}
+			<span class="line-through text-gray-500 mr-2 text-grey-darkest font-roboto"
+				>{product.regularPrice}</span
+			>
+		{/if}
+		<span class="text-2xl font-bold text-grey-darkest font-roboto">
+			{product.price}
+		</span>
 		<h4 class="!text-[13px] font-bold mb-2">
 			<span class="text-green-dark">
 				{m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)}
@@ -140,7 +171,7 @@
 		{#if AppConfig.cashbackEnabled}
 			<MoreInfoButton title={clubMoreInfoText} customStyles="!mx-0 " url={localizeHref('/club/')} />
 		{/if}
-	</div>
+	</div> -->
 
 	{#if stockStatus}
 		<p class="text-grey-medium-dark font-roboto text-[15px] mb-4">{@html stockStatus}</p>
