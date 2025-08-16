@@ -343,14 +343,14 @@
 								<span>{m.currencySymbol()}{correctPrice(product.floatPrice * 0.95)}</span> (5% OFF)
 							</h4>
 						</div>
-						{#if getLocale() == 'pt'}
+						<!-- {#if getLocale() == 'pt'}
 							<div class="mt-3">
 								<h4 class="!text-[13px] mb-2">
 									<span class="font-bold">BOLETO:</span>
 									{product.price}
 								</h4>
 							</div>
-						{/if}
+						{/if} -->
 						<h3 class="text-[13px] font-bold mb-3">{m.creditCard()}</h3>
 						<ul class="space-y-1">
 							<li class="font-light text-[12px] normal-case">
