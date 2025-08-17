@@ -1,6 +1,11 @@
 {
 	"redirects": [
 		{
+			"source": "/uy/blog/novedades/",
+			"destination": "https://braaay.com/uy/blog/",
+			"permanent": true
+		},
+		{
 			"source": "/cervejas-artesanais/",
 			"destination": "https://braaay.com/cervejas/",
 			"permanent": true
