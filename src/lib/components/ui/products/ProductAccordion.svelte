@@ -196,12 +196,12 @@
 											>{attributes?.typicalPalate}</td
 										>
 									</tr>
-									<tr>
+									<!-- <tr>
 										<td class="px-4 py-1 text-left text-gray-700 normal-case">Serviço</td>
 										<td class="px-4 py-1 text-left text-gray-700 font-light"
 											>{attributes?.servingTemperature}</td
 										>
-									</tr>
+									</tr> -->
 									<tr>
 										<td class="px-4 py-1 text-left text-gray-700 normal-case">País</td>
 										<td class="px-4 py-1 text-left text-gray-700 font-light">
