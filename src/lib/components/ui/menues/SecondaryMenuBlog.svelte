@@ -168,7 +168,7 @@
 					</div> -->
 					<div class="flex flex-col gap-0 self-center">
 						<span class="text-xs text-left leading-none">{m.productsUpTo()}</span>
-						<span class="text-sm font-bold text-left leading-5">15% OFF</span>
+						<span class="text-sm font-bold text-left leading-5">Oportunidades</span>
 					</div>
 				</a>
 			</li>

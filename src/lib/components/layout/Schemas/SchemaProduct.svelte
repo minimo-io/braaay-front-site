@@ -129,12 +129,7 @@
 						returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
 						merchantReturnDays: 7,
 						returnMethod: 'https://schema.org/ReturnByMail',
-						returnFees: 'https://schema.org/ReturnShippingFees',
-						returnShippingFeesAmount: {
-							'@type': 'MonetaryAmount',
-							value: 0.0,
-							currency: 'BRL'
-						},
+						returnFees: 'https://schema.org/FreeReturn',
 						returnPolicyText:
 							'Nos termos do art. 49 do Código de Defesa do Consumidor, o consumidor dispõe de 7 dias corridos, a contar do recebimento do produto, para exercer o direito de arrependimento.'
 					}
@@ -149,7 +144,7 @@
 						returnFees: 'https://schema.org/ReturnShippingFees',
 						returnShippingFeesAmount: {
 							'@type': 'MonetaryAmount',
-							value: 0.0,
+							value: 100.0,
 							currency: 'UYU'
 						},
 						returnPolicyText:
