@@ -122,6 +122,72 @@
 				availability: 'https://schema.org/InStock', // Use the full URL for clarity
 				url: pageUrl,
 				seller: { '@type': 'Organization', name: m.seoBase(), url: basePath },
+
+				...(getLocale() == 'pt' && {
+					shippingDetails: [
+						{
+							// Rule 1: Specific rule for Same-Day in São Paulo
+							'@type': 'OfferShippingDetails',
+							shippingDestination: {
+								'@type': 'DefinedRegion',
+								addressCountry: 'BR',
+								addressRegion: 'BR-SP' // ISO 3166-2 code for the state of São Paulo
+							},
+							deliveryTime: {
+								'@type': 'ShippingDeliveryTime',
+								cutoffTime: '15:00:00-03:00', // The new cutoff time property (3 PM in São Paulo)
+								transitTime: {
+									'@type': 'QuantitativeValue',
+									minValue: 0,
+									maxValue: 1,
+									unitCode: 'DAY'
+								}
+							},
+							shippingRate: {
+								'@type': 'MonetaryAmount',
+								currency: 'BRL',
+								value: '30.00'
+							}
+						},
+						{
+							// Rule 2: General "catch-all" rule for the rest of Brazil
+							'@type': 'OfferShippingDetails',
+							shippingDestination: {
+								'@type': 'DefinedRegion',
+								addressCountry: 'BR'
+							}
+							// Note: We intentionally omit the shippingRate here to indicate it's calculated later
+						}
+					]
+				}),
+				...(getLocale() == 'uy' && {
+					shippingDetails: [
+						{
+							// Rule 1: Specific rule for Montevideo
+							'@type': 'OfferShippingDetails',
+							shippingDestination: {
+								'@type': 'DefinedRegion',
+								addressCountry: 'UY',
+								addressRegion: 'UY-MO' // ISO 3166-2 code for Montevideo Department
+							},
+							shippingRate: {
+								'@type': 'MonetaryAmount',
+								currency: 'UYU', // ISO 4217 code for Uruguayan Peso
+								value: '200.00'
+							}
+						},
+						{
+							// Rule 2: General "catch-all" rule for the rest of Uruguay
+							'@type': 'OfferShippingDetails',
+							shippingDestination: {
+								'@type': 'DefinedRegion',
+								addressCountry: 'UY'
+							}
+							// Note: We intentionally omit the shippingRate here
+						}
+					]
+				}),
+
 				...(getLocale() == 'pt' && {
 					hasMerchantReturnPolicy: {
 						'@type': 'MerchantReturnPolicy',
@@ -129,9 +195,7 @@
 						returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
 						merchantReturnDays: 7,
 						returnMethod: 'https://schema.org/ReturnByMail',
-						returnFees: 'https://schema.org/FreeReturn',
-						returnPolicyText:
-							'Nos termos do art. 49 do Código de Defesa do Consumidor, o consumidor dispõe de 7 dias corridos, a contar do recebimento do produto, para exercer o direito de arrependimento.'
+						returnFees: 'https://schema.org/FreeReturn'
 					}
 				}),
 				...(getLocale() == 'uy' && {
@@ -146,9 +210,7 @@
 							'@type': 'MonetaryAmount',
 							value: 100.0,
 							currency: 'UYU'
-						},
-						returnPolicyText:
-							'Según el artículo 16 de la Ley Nº 17.250 y normativa aplicable, el consumidor tiene derecho a desistir de compras a distancia dentro de 5 días hábiles desde la formalización del contrato o la recepción del producto; en caso de ejercicio. Excepciones legales (bienes perecederos, personalizados, higiene sellada, etc.) pueden aplicar.'
+						}
 					}
 				})
 			}
