@@ -28,6 +28,7 @@ const GET_ALL_POSTS = gql`
 					content
 					categories {
 						nodes {
+							databaseId
 							name
 							uri
 						}
@@ -53,22 +54,66 @@ const GET_ALL_POSTS = gql`
 	}
 `;
 
-// Helper function to insert or update authors using databaseId and avatar_url
 async function upsertAuthor(
-	authorDatabaseId: number,
+	authorGraphqlId: number,
 	authorName: string,
-	avatarUrl: string | null
-) {
+	avatarUrl: string | null,
+	languageCode: 'pt' | 'uy'
+): Promise<number | null> {
 	try {
-		await turso.execute({
-			sql: `INSERT INTO authors (id, name, avatar_url) VALUES (?, ?, ?)
-                  ON CONFLICT(id) DO UPDATE SET
-                  name=excluded.name, avatar_url=excluded.avatar_url;`,
-			args: [authorDatabaseId, authorName, avatarUrl]
+		const existingAuthor = await turso.execute({
+			sql: `SELECT id FROM authors WHERE graphql_id = ? AND language_code = ?`,
+			args: [authorGraphqlId, languageCode]
 		});
-		return authorDatabaseId;
+
+		if (existingAuthor.rows.length > 0) {
+			const authorId = existingAuthor.rows[0].id as number;
+			await turso.execute({
+				sql: `UPDATE authors SET name = ?, avatar_url = ? WHERE id = ?`,
+				args: [authorName, avatarUrl, authorId]
+			});
+			return authorId;
+		} else {
+			const result = await turso.execute({
+				sql: `INSERT INTO authors (graphql_id, name, avatar_url, language_code) VALUES (?, ?, ?, ?)`,
+				args: [authorGraphqlId, authorName, avatarUrl, languageCode]
+			});
+			return result.lastInsertRowid ? Number(result.lastInsertRowid) : null;
+		}
 	} catch (err) {
 		console.error(`Error upserting author ${authorName}:`, err);
+		return null;
+	}
+}
+
+async function upsertCategory(
+	name: string,
+	uri: string,
+	graphql_id: number,
+	languageCode: 'pt' | 'uy'
+): Promise<number | null> {
+	try {
+		const existingCategory = await turso.execute({
+			sql: 'SELECT id FROM categories WHERE graphql_id = ? AND language_code = ?',
+			args: [graphql_id, languageCode]
+		});
+
+		if (existingCategory.rows.length > 0) {
+			const categoryId = existingCategory.rows[0].id as number;
+			await turso.execute({
+				sql: 'UPDATE categories SET name = ?, uri = ? WHERE id = ?',
+				args: [name, uri, categoryId]
+			});
+			return categoryId;
+		} else {
+			const result = await turso.execute({
+				sql: 'INSERT INTO categories (name, uri, graphql_id, language_code) VALUES (?, ?, ?, ?)',
+				args: [name, uri, graphql_id, languageCode]
+			});
+			return result.lastInsertRowid ? Number(result.lastInsertRowid) : null;
+		}
+	} catch (err) {
+		console.error(`Error upserting category ${name}:`, err);
 		return null;
 	}
 }
@@ -88,31 +133,27 @@ async function migrateForLanguage(wpClient: Client, languageCode: 'pt' | 'uy') {
 		const posts = res.data.posts.edges.map((edge: { node: any }) => edge.node);
 
 		for (const post of posts) {
-			// Updated to include the `content` field
 			const { databaseId, title, uri, excerpt, date, modified, content } = post;
 			const featured_image_url = post.featuredImage?.node?.mediaItemUrl || null;
 			const featured_image_alt = post.featuredImage?.node?.altText || null;
 			const author = post.author?.node;
-
-			// Extract the avatar URL from the author node
-			const avatar_url = author?.avatar?.url || null;
+			const categories = post.categories?.nodes || [];
 
 			const author_id = author
-				? await upsertAuthor(author.databaseId, author.name, avatar_url)
+				? await upsertAuthor(author.databaseId, author.name, author.avatar?.url || null, languageCode)
 				: null;
 
-			await turso.execute({
-				sql: `INSERT INTO posts (id, title, uri, content, excerpt, featured_image_url, featured_image_alt, author_id, created_at, modified_at, language_code)
+			const postResult = await turso.execute({
+				sql: `INSERT INTO posts (graphql_id, title, uri, content, excerpt, featured_image_url, featured_image_alt, author_id, created_at, modified_at, language_code)
                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                      ON CONFLICT(id) DO UPDATE SET
-                      title = excluded.title, uri = excluded.uri, content = excluded.content, excerpt = excluded.excerpt,
+                      ON CONFLICT(uri) DO UPDATE SET
+                      title = excluded.title, content = excluded.content, excerpt = excluded.excerpt,
                       featured_image_url = excluded.featured_image_url, featured_image_alt = excluded.featured_image_alt,
-                      author_id = excluded.author_id, created_at = excluded.created_at, modified_at = excluded.modified_at, language_code = excluded.language_code;`,
+                      author_id = excluded.author_id, created_at = excluded.created_at, modified_at = excluded.modified_at, language_code = excluded.language_code, graphql_id = excluded.graphql_id;`,
 				args: [
 					databaseId,
 					title,
 					uri,
-					// Use the content variable here
 					content,
 					excerpt,
 					featured_image_url,
@@ -123,6 +164,41 @@ async function migrateForLanguage(wpClient: Client, languageCode: 'pt' | 'uy') {
 					languageCode
 				]
 			});
+
+			let postId: number | null = null;
+			if (postResult.lastInsertRowid && Number(postResult.lastInsertRowid) > 0) {
+				postId = Number(postResult.lastInsertRowid);
+			} else {
+				const existingPost = await turso.execute({
+					sql: 'SELECT id FROM posts WHERE uri = ?',
+					args: [uri]
+				});
+				if (existingPost.rows.length > 0) {
+					postId = existingPost.rows[0].id as number;
+				}
+			}
+
+			if (postId && categories.length > 0) {
+				await turso.execute({
+					sql: 'DELETE FROM posts_categories WHERE post_id = ?',
+					args: [postId]
+				});
+
+				for (const category of categories) {
+					const categoryId = await upsertCategory(
+						category.name,
+						category.uri,
+						category.databaseId,
+						languageCode
+					);
+					if (categoryId) {
+						await turso.execute({
+							sql: 'INSERT INTO posts_categories (post_id, category_id) VALUES (?, ?) ON CONFLICT DO NOTHING',
+							args: [postId, categoryId]
+						});
+					}
+				}
+			}
 
 			total++;
 			console.log(`Migrated post for ${languageCode}: ${title}`);
