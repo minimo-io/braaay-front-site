@@ -59,6 +59,15 @@ export const buildGraphQLFilters = (filters: FilterState): GraphQLFilters => {
 		});
 	}
 
+	// Add taxonomy filter for taste (PA_PALADAR_TIPICO)
+	if (filters.taste && Array.isArray(filters.taste) && filters.taste.length > 0) {
+		const tasteFilter = {
+			taxonomy: 'PA_PALADAR_TIPICO',
+			terms: filters.taste
+		};
+		taxonomyFilters.push(tasteFilter);
+	}
+
 	if (taxonomyFilters.length > 0) {
 		graphqlFilters.taxonomyFilter = {
 			filters: taxonomyFilters
@@ -82,12 +91,12 @@ export const buildGraphQLFilters = (filters: FilterState): GraphQLFilters => {
 		});
 	}
 
-	if (filters.taste && Array.isArray(filters.taste) && filters.taste.length > 0) {
-		attributes.push({
-			taxonomy: 'pa_taste',
-			terms: filters.taste
-		});
-	}
+	// if (filters.taste && Array.isArray(filters.taste) && filters.taste.length > 0) {
+	// 	attributes.push({
+	// 		taxonomy: 'pa_taste',
+	// 		terms: filters.taste
+	// 	});
+	// }
 
 	// if (filters.size && Array.isArray(filters.size) && filters.size.length > 0) {
 	// 	attributes.push({
@@ -104,6 +113,6 @@ export const buildGraphQLFilters = (filters: FilterState): GraphQLFilters => {
 	if (filters.shipping && typeof filters.shipping === 'string') {
 		graphqlFilters.shippingClasses = [filters.shipping];
 	}
-
+	console.log('GRAPHQL_FILTERS', graphqlFilters);
 	return graphqlFilters;
 };

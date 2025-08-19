@@ -17,7 +17,8 @@
 		"update-countries.ts",
 		"generate-robots.ts",
 		"update-popular-products.ts",
-		"prefetch-on-sale-products.ts"
+		"prefetch-on-sale-products.ts",
+		"migrate-to-turso-posts.ts"
 	],
 	// "include": [
 	// 	"./**/*.ts", // <--- Add this line to include all .ts files in the current directory and subdirectories

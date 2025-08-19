@@ -136,6 +136,12 @@
 							deliveryTime: {
 								'@type': 'ShippingDeliveryTime',
 								cutoffTime: '15:00:00-03:00', // The new cutoff time property (3 PM in São Paulo)
+								handlingTime: {
+									'@type': 'QuantitativeValue',
+									minValue: 0,
+									maxValue: 1,
+									unitCode: 'DAY'
+								},
 								transitTime: {
 									'@type': 'QuantitativeValue',
 									minValue: 0,
@@ -148,15 +154,6 @@
 								currency: 'BRL',
 								value: '30.00'
 							}
-						},
-						{
-							// Rule 2: General "catch-all" rule for the rest of Brazil
-							'@type': 'OfferShippingDetails',
-							shippingDestination: {
-								'@type': 'DefinedRegion',
-								addressCountry: 'BR'
-							}
-							// Note: We intentionally omit the shippingRate here to indicate it's calculated later
 						}
 					]
 				}),
@@ -170,20 +167,27 @@
 								addressCountry: 'UY',
 								addressRegion: 'UY-MO' // ISO 3166-2 code for Montevideo Department
 							},
+							deliveryTime: {
+								'@type': 'ShippingDeliveryTime',
+								cutoffTime: '15:00:00-03:00', // The new cutoff time property (3 PM in Montevideo)
+								handlingTime: {
+									'@type': 'QuantitativeValue',
+									minValue: 0,
+									maxValue: 1,
+									unitCode: 'DAY'
+								},
+								transitTime: {
+									'@type': 'QuantitativeValue',
+									minValue: 0,
+									maxValue: 2,
+									unitCode: 'DAY'
+								}
+							},
 							shippingRate: {
 								'@type': 'MonetaryAmount',
 								currency: 'UYU', // ISO 4217 code for Uruguayan Peso
 								value: '200.00'
 							}
-						},
-						{
-							// Rule 2: General "catch-all" rule for the rest of Uruguay
-							'@type': 'OfferShippingDetails',
-							shippingDestination: {
-								'@type': 'DefinedRegion',
-								addressCountry: 'UY'
-							}
-							// Note: We intentionally omit the shippingRate here
 						}
 					]
 				}),

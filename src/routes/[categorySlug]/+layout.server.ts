@@ -17,6 +17,7 @@ import { error } from '@sveltejs/kit';
 import { AppConfig } from '$config';
 import type { FilterState } from '$stores/filters.store.svelte';
 import { buildGraphQLFilters } from '$lib/services';
+import { getLocale } from '$lib/paraglide/runtime';
 
 export const load: LayoutServerLoad = async ({ params, locals, url }) => {
 	const { subcategorySlug } = params;
@@ -31,14 +32,22 @@ export const load: LayoutServerLoad = async ({ params, locals, url }) => {
 		variety: url.searchParams.get('variety')?.split(',') || [],
 		country: url.searchParams.get('country')?.split(',') || [],
 		priceRange: {
-			min: parseInt(url.searchParams.get('price_min') || '10'),
-			max: parseInt(url.searchParams.get('price_max') || '500')
+			min: parseInt(
+				url.searchParams.get('price_min') ||
+					`${AppConfig.catalog_filter[getLocale()].catalog_filter_min_price}`
+			),
+			max: parseInt(
+				url.searchParams.get('price_max') ||
+					`${AppConfig.catalog_filter[getLocale()].catalog_filter_max_price}`
+			)
 		},
 		taste: url.searchParams.get('taste')?.split(',') || [],
 		shipping: url.searchParams.get('shipping') || '',
 		bottleSize: url.searchParams.get('bottleSize')?.split(',') || [],
 		grape: url.searchParams.get('grape')?.split(',') || []
 	};
+
+	console.log('F_FILTERS', filters);
 
 	const graphqlFilters = buildGraphQLFilters(filters);
 

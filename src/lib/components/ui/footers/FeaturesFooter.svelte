@@ -84,7 +84,7 @@
 		</div>
 		<!-- Dots for Slide Navigation -->
 
-		<div class="glide__bullets absolute -bottom-1 transform right-10" data-glide-el="controls[nav]">
+		<!-- <div class="glide__bullets absolute -bottom-1 transform right-10" data-glide-el="controls[nav]">
 			<button class="glide__bullet !w-[8px] !h-[8px]" aria-label="bullet" data-glide-dir="=0"
 				>&nbsp;</button
 			>
@@ -94,6 +94,6 @@
 			<button class="glide__bullet !w-[8px] !h-[8px]" aria-label="bullet" data-glide-dir="=2"
 				>&nbsp;</button
 			>
-		</div>
+		</div> -->
 	</div>
 {:else if pageLocale == 'uy'}{/if}

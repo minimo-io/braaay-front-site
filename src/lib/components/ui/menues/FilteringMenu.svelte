@@ -23,6 +23,7 @@
 	import { getLocale } from '$lib/paraglide/runtime';
 	import { grapes } from '$data/grapes.data';
 	import { bottleSizes } from '$data/bottle-sizes.data';
+	import { tasteOptions } from '$data/taste-options.data';
 
 	let grapesForLanguage = $state(grapes[getLocale()]);
 	let grapeSearchQuery = $state('');
@@ -34,6 +35,8 @@
 
 	// Call updateURL when filters change, but be careful about loops
 	let lastFilterState = $state(JSON.stringify($filterState));
+
+	let tasteOptionsForLanguage = $state(tasteOptions[getLocale()]);
 
 	$effect(() => {
 		const unsubscribe = filterState.subscribe((value) => {
@@ -222,6 +225,34 @@
 			value = currentFilters.priceRange.min + 10;
 			updateFilter('priceRange', { ...currentFilters.priceRange, max: value });
 		}
+	}
+
+	// Convert array of objects to a flat structure for easier handling
+	function getTasteEntries() {
+		return tasteOptionsForLanguage.flatMap((item) =>
+			Object.entries(item).map(([key, value]) => ({ key, value }))
+		);
+	}
+
+	// Handle taste selection - use the key (GraphQL value) for the filter
+	function handleTasteToggle(tasteKey: string) {
+		const currentTastes = [...currentFilters.taste];
+		const index = currentTastes.indexOf(tasteKey);
+
+		if (index > -1) {
+			// Remove taste if already selected
+			currentTastes.splice(index, 1);
+		} else {
+			// Add taste if not selected
+			currentTastes.push(tasteKey);
+		}
+
+		updateFilter('taste', currentTastes);
+	}
+
+	// Check if taste is selected - check against the key
+	function isTasteSelected(tasteKey: string): boolean {
+		return currentFilters.taste.includes(tasteKey);
 	}
 
 	onMount(() => {
@@ -454,6 +485,67 @@
 													: ''}"
 											>
 												{bottle}
+											</span>
+										</div>
+									</button>
+								{/each}
+							</div>
+						</div>
+					</div>
+				</div>
+			{/if}
+
+			<!-- Paladar típico -->
+			<!-- Paladar típico -->
+			{#if getLocale() == 'pt' && getTasteEntries().length > 0}
+				<div class="relative group filtering-button">
+					<button class="shine-effect">
+						<Smile class="lucide-button w-5 h-5 mr-2" />
+						{m.typicalTaste()}
+						{#if currentFilters.taste.length > 0}
+							<span class="bg-sun text-white text-xs px-2 py-1 rounded-full ml-1">
+								{currentFilters.taste.length}
+							</span>
+						{/if}
+						<ChevronDown class="lucide-button w-5 h-5 mr-2" />
+					</button>
+
+					<div class="absolute left-0 w-full h-4 bg-transparent" role="presentation"></div>
+					<div
+						class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-hidden hidden group-hover:block"
+						style="max-height: calc(55vh - 170px)"
+						role="menu"
+					>
+						<!-- Tastes List -->
+						<div class="overflow-y-auto" style="max-height: calc(55vh - 170px)">
+							<div class="text-xs px-3 flex flex-col">
+								{#each getTasteEntries() as { key, value }}
+									<button
+										type="button"
+										onclick={() => handleTasteToggle(key)}
+										class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] hover:bg-grey-lighter transition-colors
+						{isTasteSelected(key) ? 'bg-sun-light' : ''}"
+									>
+										<div class="text-left self-center flex items-center">
+											<!-- Checkbox visual indicator -->
+											<div
+												class="w-4 h-4 mr-3 border-2 border-grey-dark rounded-sm flex items-center justify-center
+								{isTasteSelected(key) ? 'bg-sun border-sun' : ''}"
+											>
+												{#if isTasteSelected(key)}
+													<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+														<path
+															fill-rule="evenodd"
+															d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+															clip-rule="evenodd"
+														></path>
+													</svg>
+												{/if}
+											</div>
+											<span
+												class="self-center {isTasteSelected(key) ? 'font-semibold text-sun' : ''}"
+											>
+												{value}
 											</span>
 										</div>
 									</button>
