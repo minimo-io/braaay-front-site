@@ -1,3 +1,4 @@
+// src/lib/data/partners.data.ts
 import { type Partner, type RawPartner, type MappedPartnersByLang } from '$lib/types';
 import rawPartnerData from './jsons/home-partners.json';
 

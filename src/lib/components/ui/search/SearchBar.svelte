@@ -1,3 +1,4 @@
+<!-- src/lib/components/ui/search/SearchBar.svelte -->
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
@@ -5,10 +6,10 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import popularProducts from '$data/jsons/popular-products.json';
-	import { Search as SearchIcon } from '@lucide/svelte'; // Import Search icon
+	import partnersData from '$data/jsons/home-partners.json'; // Add this import
+	import { Search as SearchIcon } from '@lucide/svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 
-	// New prop: 'mobile' to toggle between desktop and mobile presentation
 	let { mobile = false }: { mobile?: boolean } = $props();
 
 	let searchInput: HTMLInputElement | null = null;
@@ -17,14 +18,40 @@
 	let query = $state('');
 	let selectedIndex = $state(-1);
 
-	let POPULAR_SEARCHES = popularProducts[getLocale()]; // these are fetched on pre-build
-	let filteredResults = $state<Array<{ title: string; url: string }>>([]);
+	// Simple interface - just add 'type' to your existing structure
+	interface SearchResult {
+		title: string;
+		url: string;
+		type?: 'popular' | 'partner'; // Optional, defaults to 'popular'
+		image?: string; // General image property for all types
+	}
+
+	let currentLocale = getLocale();
+
+	// Map popular products to match our interface
+	let POPULAR_SEARCHES: SearchResult[] = (popularProducts[currentLocale] || []).map((item) => ({
+		title: item.title,
+		url: item.url,
+		type: 'popular' as const,
+		image: item.image?.src // Extract src from image object
+	}));
+
+	let PARTNERS: SearchResult[] = (partnersData[currentLocale] || []).map((partner) => ({
+		title: partner.name,
+		url: partner.url,
+		type: 'partner' as const,
+		image: partner.logo // Map logo to image for consistency
+	}));
+
+	// Combine all search sources
+	let ALL_SEARCH_ITEMS: SearchResult[] = [...POPULAR_SEARCHES, ...PARTNERS];
+
+	let filteredResults = $state<SearchResult[]>([]);
 
 	onMount(() => {
 		isMac = /Mac/i.test(navigator.userAgent);
 
 		const handleKeydown = (e: KeyboardEvent) => {
-			// Only allow shortcut if not in mobile mode
 			if (!mobile && (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
 				e.preventDefault();
 				searchInput?.focus();
@@ -47,18 +74,19 @@
 			if (isFocused) {
 				const searchQuery = query.trim().toLowerCase();
 				if (searchQuery) {
-					filteredResults = POPULAR_SEARCHES.filter((item) =>
+					filteredResults = ALL_SEARCH_ITEMS.filter((item) =>
 						item.title.toLowerCase().includes(searchQuery)
-					);
+					).slice(0, 8); // Limit results
 				} else {
-					filteredResults = POPULAR_SEARCHES.slice(); // Create a copy
+					// Show mix when no query - 4 popular (ordered) + 4 random partners
+					const randomPartners = [...PARTNERS].sort(() => Math.random() - 0.5).slice(0, 4);
+					filteredResults = [...POPULAR_SEARCHES.slice(0, 4), ...randomPartners];
 				}
 			} else {
 				filteredResults = [];
 			}
 
 			selectedIndex = -1;
-
 			previousFocused = isFocused;
 			previousQuery = query;
 		}
@@ -78,7 +106,6 @@
 	}
 
 	function handleBlur() {
-		// Increase timeout to prevent premature closing when clicking on results
 		setTimeout(() => {
 			isFocused = false;
 			selectedIndex = -1;
@@ -119,7 +146,6 @@
 	function handleSearchSubmit() {
 		if (query.trim()) {
 			const searchUrl = localizeHref(`/search/?s=${encodeURIComponent(query.trim())}`);
-			console.log('Navigating to search:', searchUrl);
 			goto(searchUrl);
 		}
 	}
@@ -129,47 +155,30 @@
 		handleSearchSubmit();
 	}
 
-	async function navigateToItem(item: { title: string; url: string }) {
-		// The URL from JSON is already correct for the locale, so let's use it directly
-		const url = item.url;
-
-		// Let's also try localizeHref to see what it produces
-		const localizedUrl = localizeHref(item.url);
-
-		// Force close the dropdown immediately
+	async function navigateToItem(item: SearchResult) {
 		isFocused = false;
 		selectedIndex = -1;
 
 		try {
 			toggleLoader();
-			window.location.href = url;
-			// document.location = url;
-			// const result = await goto(url, {
-			// 	invalidateAll: true
-			// });
-			// console.log('Navigation result:', result);
+			window.location.href = item.url;
 		} catch (error) {
-			console.error('Direct URL navigation failed, trying localized URL:', error);
-			window.location.href = url;
+			console.error('Navigation failed:', error);
+			window.location.href = item.url;
 		}
 	}
 
-	function handleResultClick(item: { title: string; url: string }) {
-		console.log('handleResultClick called for:', item.title, item.url);
-
-		// Prevent the blur event from interfering
+	function handleResultClick(item: SearchResult) {
 		if (searchInput) {
 			searchInput.blur();
 		}
 
-		// Prevent event bubbling and default behavior
 		if (event) {
 			event.preventDefault();
 			event.stopPropagation();
 			event.stopImmediatePropagation();
 		}
 
-		// Navigate immediately without waiting for state changes
 		navigateToItem(item);
 	}
 
@@ -177,7 +186,7 @@
 		selectedIndex = index;
 	}
 
-	function handleResultKeyDown(e: KeyboardEvent, item: { title: string; url: string }) {
+	function handleResultKeyDown(e: KeyboardEvent, item: SearchResult) {
 		if (e.key === 'Enter' || e.key === ' ') {
 			e.preventDefault();
 			e.stopPropagation();
@@ -246,21 +255,18 @@
 			aria-label="Search suggestions"
 			class="absolute top-full left-0 right-0 md:mt-1 bg-white border border-grey-lighter md:rounded-lg shadow-lg max-h-60 overflow-auto text-sm z-50"
 		>
-			<!-- Title -->
 			<h2 class="font-bold py-3 mb-2 px-5 border-b border-grey-lighter">{m.popularResults()}</h2>
 
-			<!-- Popular results -->
 			{#each filteredResults as item, i (item.url)}
 				<li
 					role="option"
 					aria-selected={selectedIndex === i}
 					tabindex={selectedIndex === i ? 0 : -1}
-					class="search-result-item px-5 py-2 cursor-pointer hover:bg-sun hover:text-white truncate transition-colors duration-150
+					class="search-result-item px-5 py-2 cursor-pointer hover:bg-sun hover:text-white transition-colors duration-150
                         {selectedIndex === i
 						? 'bg-sun text-white selected'
 						: 'bg-white text-grey-darker'}"
 					onmousedown={(e) => {
-						// Use mousedown instead of click to prevent blur interference
 						e.preventDefault();
 						e.stopPropagation();
 						handleResultClick(item);
@@ -269,7 +275,24 @@
 					onmouseover={() => handleResultMouseOver(i)}
 					onfocus={() => handleResultMouseOver(i)}
 				>
-					{item.title}
+					<div class="flex items-center gap-3">
+						<!-- Show image for partners, nothing for popular items (keeps it simple) -->
+						{#if item.image}
+							<img
+								src={item.image}
+								alt={item.title}
+								class="w-6 h-6 rounded object-cover flex-shrink-0"
+								loading="lazy"
+							/>
+						{/if}
+
+						<span class="truncate flex-1">{item.title}</span>
+
+						<!-- Optional: small type indicator -->
+						{#if item.type === 'partner'}
+							<span class="text-xs opacity-60 flex-shrink-0">Produtor</span>
+						{/if}
+					</div>
 				</li>
 			{/each}
 		</ul>
