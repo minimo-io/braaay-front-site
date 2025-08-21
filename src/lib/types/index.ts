@@ -17,6 +17,7 @@ export * from './partners.types';
 export * from './seo.types';
 export * from './favoriteProduct.type';
 export * from './search.type';
+export * from './page.types';
 // export * from './schema.types';
 
 export interface Wine {

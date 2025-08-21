@@ -1,6 +1,11 @@
 {
 	"redirects": [
 		{
+			"source": "/sobre-nos/",
+			"destination": "https://braaay.com/p/sobre-nos/",
+			"permanent": true
+		},
+		{
 			"source": "/uy/blog/novedades/",
 			"destination": "https://braaay.com/uy/blog/",
 			"permanent": true

@@ -1,3 +1,4 @@
+// src/lib/graphql/queries/fragments/seo.fragment.ts
 export const SEO_FRAGMENT = `
     seo{
         title

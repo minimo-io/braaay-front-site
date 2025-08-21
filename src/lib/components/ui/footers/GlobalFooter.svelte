@@ -96,7 +96,7 @@
 				<div class="md:block text-center">
 					<h3>BRAAAY</h3>
 					<ul>
-						<li><a href="/">{m.sobreNos()}</a></li>
+						<li><a href={localizeHref('/p/sobre-nos/')}>{m.sobreNos()}</a></li>
 						{#if getLocale() == 'pt'}
 							<li>
 								<a href="/uva/tannat/">TANNAT</a>

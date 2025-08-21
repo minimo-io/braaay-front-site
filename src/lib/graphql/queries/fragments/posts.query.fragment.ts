@@ -1,3 +1,4 @@
+// src/lib/graphql/queries/fragments/posts.query.fragment.ts
 export const POST_QUERY_FRAGMENT = `
     id
     title

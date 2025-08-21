@@ -52,8 +52,9 @@
 			</div>
 		</a>
 	</div>
-	<!-- {/if} -->
 {/if}
+
+<!-- {/if} -->
 
 <style lang="postcss">
 	.bry-banner {

@@ -3,11 +3,13 @@
 	import GlobalHeader from '$components/ui/headers/GlobalHeader.svelte';
 	import CheckoutHeader from '$components/ui/headers/CheckoutHeader.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
+	import LittleMasterTopHeader from '$components/ui/headers/LittleMasterTopHeader.svelte';
 </script>
 
 <!-- Top header -->
 {#if page.url.pathname.startsWith(localizeHref('/cart/')) || page.url.pathname.startsWith(localizeHref('/checkout/')) || page.url.pathname.startsWith(localizeHref('/thank-you/'))}
 	<CheckoutHeader />
 {:else}
+	<LittleMasterTopHeader />
 	<GlobalHeader />
 {/if}

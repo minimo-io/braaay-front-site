@@ -13,6 +13,7 @@
 	import SignupBenefits from '../SignupBenefits.svelte';
 	import ResetPasswordForm from '../forms/resetPasswordForm.svelte';
 	import { page } from '$app/state';
+	import { m } from '$lib/paraglide/messages';
 
 	// State for toggling between login and reset password forms
 	let showReset = $state(false);
@@ -181,9 +182,7 @@
 		showBottomBorder && '!border-b'
 	]}
 >
-	<strong class="uppercase">Precisar de ajuda?</strong>
-	<span class="text-grey-medium-dark my-2"
-		>Entre em contato com nossa equipe através do botão abaixo e nós o ajudaremos.</span
-	>
+	<strong class="uppercase">{m.needHelp()}</strong>
+	<span class="text-grey-medium-dark my-2">{m.needHelpContent()}</span>
 	<div class="relative w-fit"><WhatsappButton /></div>
 </div>

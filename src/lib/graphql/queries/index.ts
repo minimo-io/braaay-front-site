@@ -1,6 +1,8 @@
 export * from './posts-latest.query';
 export * from './post-get.query';
 
+export * from './page.query';
+
 export * from './product-get.query'; // single
 
 // categories
