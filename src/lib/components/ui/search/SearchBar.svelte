@@ -287,8 +287,7 @@
 				<button
 					type="button"
 					class={[
-						'absolute top-1/2 -translate-y-1/2 p-1 text-grey-medium hover:text-grey-darker transition-colors duration-150',
-						mobile ? 'right-[30px]' : 'right-3'
+						'absolute top-1/2 -translate-y-1/2 p-1 text-grey-medium hover:text-grey-darker transition-colors duration-150 right-[30px]'
 					]}
 					onmousedown={handleClearMouseDown}
 					aria-label="Clear search"
