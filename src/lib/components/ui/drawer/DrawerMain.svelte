@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { ChevronRight, CircleUser, Headset, Truck, Heart, Sparkle } from '@lucide/svelte';
+	import {
+		ChevronRight,
+		CircleUser,
+		Headset,
+		Truck,
+		Heart,
+		Sparkle,
+		PenLine
+	} from '@lucide/svelte';
 	import { openSubmenu } from '$stores/drawerState.state.svelte';
 	import { drawerData } from '$lib/data/drawer.data';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
@@ -100,6 +108,7 @@
 			</div>
 		</a> -->
 	{/if}
+
 	<!-- Favorites -->
 	<a
 		href={localizeHref('/account/my-favorites/')}
@@ -123,6 +132,17 @@
 		</div>
 		<div class="text-grey-medium flex flex-row align-middle self-center">
 			<ChevronRight class="w-4 aspect-1 text-grey-dark" />
+		</div>
+	</a>
+
+	<!-- Blog -->
+	<a
+		href={localizeHref('/blog/')}
+		class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] w-full"
+	>
+		<div class="text-left self-center flex align-middle justify-center">
+			<PenLine class="w-4 h-4 self-center mr-2" />
+			<span class="self-center font-semibold">Blog</span>
 		</div>
 	</a>
 
