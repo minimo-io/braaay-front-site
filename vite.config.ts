@@ -240,6 +240,15 @@ export default defineConfig({
 					]
 				},
 
+				// Page
+				{
+					pattern: '/p/:id',
+					localized: [
+						['pt', '/p/:id(.*)?'],
+						['uy', '/uy/p/:id(.*)?']
+					]
+				},
+
 				{
 					// pattern: '/produto/:id',
 					pattern: '/produto/:id',

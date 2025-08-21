@@ -6,6 +6,38 @@
 			"permanent": true
 		},
 		{
+			"source": "/termos-e-condicoes/",
+			"destination": "https://braaay.com/p/termos-e-condicoes/",
+			"permanent": true
+		},
+		{
+			"source": "/em-breve/",
+			"destination": "https://braaay.com/p/em-breve/",
+			"permanent": true
+		},
+
+		{
+			"source": "/uy/tipos-de-cervezas-artesanales/",
+			"destination": "https://braaay.com/uy/p/tipos-de-cervezas-artesanales/",
+			"permanent": true
+		},
+		{
+			"source": "/uy/muy-pronto/",
+			"destination": "https://braaay.com/uy/p/muy-pronto/",
+			"permanent": true
+		},
+		{
+			"source": "/uy/nosotros/",
+			"destination": "https://braaay.com/uy/p/nosotros/",
+			"permanent": true
+		},
+		{
+			"source": "/uy/mapa-cervecero/",
+			"destination": "https://braaay.com/uy/p/mapa-cervecero/",
+			"permanent": true
+		},
+
+		{
 			"source": "/uy/blog/novedades/",
 			"destination": "https://braaay.com/uy/blog/",
 			"permanent": true
