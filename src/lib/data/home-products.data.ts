@@ -73,17 +73,30 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 						alt: 'kit-vina-eden-flores-naturais-blur'
 					}
 				},
+				// {
+				// 	title: 'Kit x6 espumantes Brut Cume + Sacola',
+				// 	price: `${m.currencySymbol()}299,40`,
+				// 	regularPrice: `${m.currencySymbol()}299,40`,
+				// 	url: '/produto/kit-x6-espumantes-brut-cume-sacola/',
+				// 	score: '',
+				// 	image: {
+				// 		src: 'https://api.braaay.com/wp/wp-content/uploads/2024/11/kit-presente-espumante-cume.jpg',
+				// 		alt: 'kit-presente-espumante-cume'
+				// 	}
+				// },
+
 				{
-					title: 'Kit x6 espumantes Brut Cume + Sacola',
-					price: `${m.currencySymbol()}299,40`,
-					regularPrice: `${m.currencySymbol()}299,40`,
-					url: '/produto/kit-x6-espumantes-brut-cume-sacola/',
+					title: 'Kit Três Paixões: Vinho+Azeite+Café',
+					price: `${m.currencySymbol()}360,00`,
+					regularPrice: `${m.currencySymbol()}360,00`,
+					url: '/produto/kit-paixoes/',
 					score: '',
 					image: {
-						src: 'https://api.braaay.com/wp/wp-content/uploads/2024/11/kit-presente-espumante-cume.jpg',
-						alt: 'kit-presente-espumante-cume'
+						src: 'https://api.braaay.com/wp-content/uploads/2025/08/kit-minha-paixoes-braaay.jpeg',
+						alt: 'kit-paixoes-tannat-cafe'
 					}
 				},
+
 				{
 					title: 'Kit x3 Espumantes Especiáis + Taça',
 					price: `${m.currencySymbol()}300,00`,

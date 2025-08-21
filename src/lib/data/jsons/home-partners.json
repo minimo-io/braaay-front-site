@@ -1,6 +1,12 @@
 {
 	"pt": [
 		{
+			"name": "Bouza",
+			"logo": "/images/partners/vinicola-bouza.png",
+			"url": "/produtores-de-vinho/bodega-bouza/",
+			"count": 0
+		},
+		{
 			"name": "Viña Edén",
 			"logo": "/images/partners/vina-eden-logo.webp",
 			"url": "/produtores-de-vinho/vina-eden/",
