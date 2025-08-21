@@ -5,9 +5,10 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import { beforeNavigate, afterNavigate } from '$app/navigation';
 	import popularProducts from '$data/jsons/popular-products.json';
 	import partnersData from '$data/jsons/home-partners.json'; // Add this import
-	import { Search as SearchIcon } from '@lucide/svelte';
+	import { Search as SearchIcon, X } from '@lucide/svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
 
 	let { mobile = false }: { mobile?: boolean } = $props();
@@ -63,6 +64,13 @@
 		return () => window.removeEventListener('keydown', handleKeydown);
 	});
 
+	// Clear search on navigation
+	beforeNavigate(() => {
+		query = '';
+		isFocused = false;
+		selectedIndex = -1;
+	});
+
 	let previousFocused = $state(false);
 	let previousQuery = $state('');
 
@@ -105,10 +113,14 @@
 		isFocused = true;
 	}
 
+	let clearingSearch = $state(false);
+
 	function handleBlur() {
 		setTimeout(() => {
-			isFocused = false;
-			selectedIndex = -1;
+			if (!clearingSearch) {
+				isFocused = false;
+				selectedIndex = -1;
+			}
 		}, 200);
 	}
 
@@ -124,6 +136,18 @@
 				if (filteredResults.length > 0) {
 					e.preventDefault();
 					selectedIndex = selectedIndex <= 0 ? filteredResults.length - 1 : selectedIndex - 1;
+				}
+				break;
+			case 'Tab':
+				if (filteredResults.length > 0) {
+					e.preventDefault();
+					if (e.shiftKey) {
+						// Shift+Tab goes up
+						selectedIndex = selectedIndex <= 0 ? filteredResults.length - 1 : selectedIndex - 1;
+					} else {
+						// Tab goes down
+						selectedIndex = (selectedIndex + 1) % filteredResults.length;
+					}
 				}
 				break;
 			case 'Enter':
@@ -193,6 +217,30 @@
 			navigateToItem(item);
 		}
 	}
+
+	// Clear search function
+	function clearSearch() {
+		query = '';
+		selectedIndex = -1;
+		// Ensure suggestions show by keeping focus
+		isFocused = true;
+	}
+
+	// Handle clear button mousedown (prevents blur)
+	function handleClearMouseDown(e: MouseEvent) {
+		e.preventDefault();
+		e.stopPropagation();
+		clearingSearch = true;
+		clearSearch();
+
+		// Reset flag and refocus after clearing
+		setTimeout(() => {
+			clearingSearch = false;
+			if (searchInput) {
+				searchInput.focus();
+			}
+		}, 10);
+	}
 </script>
 
 <div class="relative w-full" style="z-index: 10">
@@ -216,13 +264,13 @@
 			{/if}
 			<input
 				id="search"
-				type="search"
+				type="text"
 				minlength="3"
 				class={[
 					'w-full text-sm placeholder:tracking-wide placeholder:text-grey-medium font-roboto placeholder:font-light',
 					mobile
-						? 'h-[50px] rounded-none focus:ring-0 focus-visible:outline-none bg-white border-t border-grey-lighter pl-[60px] pr-[30px]'
-						: 'rounded-3xl focus:ring-1 h-[45px] ring-sun border border-grey-lighter px-5 py-2.5 shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]'
+						? 'h-[50px] rounded-none focus:ring-0 focus-visible:outline-none bg-white border-t border-grey-lighter pl-[60px] pr-[60px]'
+						: 'rounded-3xl focus:ring-1 h-[45px] ring-sun border border-grey-lighter pl-5 pr-12 py-2.5 shadow-[inset_0_2px_1px_rgba(0,0,0,0.025)]'
 				]}
 				placeholder={m.search()}
 				bind:this={searchInput}
@@ -234,7 +282,22 @@
 				autocomplete="off"
 			/>
 
-			{#if !mobile && isMac !== null}
+			<!-- Clear button (X) - only show when there's text -->
+			{#if query.trim()}
+				<button
+					type="button"
+					class={[
+						'absolute top-1/2 -translate-y-1/2 p-1 text-grey-medium hover:text-grey-darker transition-colors duration-150',
+						mobile ? 'right-[30px]' : 'right-3'
+					]}
+					onmousedown={handleClearMouseDown}
+					aria-label="Clear search"
+					tabindex="-1"
+				>
+					<X class="h-4 w-4" />
+				</button>
+			{:else if !mobile && isMac !== null}
+				<!-- Keyboard shortcut indicator - only show when no text and not mobile -->
 				{#if isMac}
 					<kbd class="bry-search-kbd">
 						<abbr title="Command" class="no-underline">⌘</abbr>
