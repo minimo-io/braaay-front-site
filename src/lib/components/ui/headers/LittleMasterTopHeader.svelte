@@ -20,10 +20,12 @@
 		aria-label="Cabecalho global"
 	>
 		<ul class="text-xs text-right flex gap-3 items-center">
-			<li class="flex items-center">
-				<WhatsappButton noBorders={true} />
-			</li>
-			<li class="text-grey-light">/</li>
+			{#if getLocale() == 'pt'}
+				<li class="flex items-center">
+					<WhatsappButton noBorders={true} />
+				</li>
+				<li class="text-grey-light">/</li>
+			{/if}
 			<li><a href={localizeHref('/blog/')}>BLOG</a></li>
 			<li class="text-grey-light">/</li>
 			<li><a href={localizeHref('/p/sobre-nos/')}>{m.sobreNos()}</a></li>

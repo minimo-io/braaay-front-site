@@ -7,15 +7,17 @@
 	const pageLocale = $derived(getLocale());
 
 	onMount(async () => {
-		let glide = new Glide('#glide-footer', {
-			type: 'carousel',
-			perView: 1,
-			autoplay: 5000,
-			hoverpause: true,
-			gap: 0
-		});
+		if (pageLocale == 'pt') {
+			let glide = new Glide('#glide-footer', {
+				type: 'carousel',
+				perView: 1,
+				autoplay: 5000,
+				hoverpause: true,
+				gap: 0
+			});
 
-		glide.mount();
+			glide.mount();
+		}
 	});
 </script>
 
