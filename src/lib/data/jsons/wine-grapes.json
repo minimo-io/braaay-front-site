@@ -3,12 +3,12 @@
     {
       "name": "Tannat",
       "url": "/uva/tannat/",
-      "count": 31
+      "count": 34
     },
     {
       "name": "Uva Chardonnay",
       "url": "/uva/chardonnay/",
-      "count": 26
+      "count": 27
     },
     {
       "name": "Cabernet Sauvignon",
@@ -18,12 +18,12 @@
     {
       "name": "Merlot",
       "url": "/uva/merlot/",
-      "count": 20
+      "count": 21
     },
     {
       "name": "Pinot Noir",
       "url": "/uva/pinot-noir/",
-      "count": 17
+      "count": 19
     },
     {
       "name": "Malbec",
@@ -36,6 +36,11 @@
       "count": 9
     },
     {
+      "name": "Cabernet Franc",
+      "url": "/uva/cabernet-franc/",
+      "count": 7
+    },
+    {
       "name": "Alvarinho",
       "url": "/uva/alvarinho/",
       "count": 6
@@ -46,13 +51,18 @@
       "count": 6
     },
     {
-      "name": "Cabernet Franc",
-      "url": "/uva/cabernet-franc/",
-      "count": 6
+      "name": "Riesling",
+      "url": "/uva/riesling/",
+      "count": 5
     },
     {
       "name": "Marselan",
       "url": "/uva/marselan/",
+      "count": 4
+    },
+    {
+      "name": "Moscato Giallo",
+      "url": "/uva/moscato-giallo/",
       "count": 4
     },
     {
@@ -78,16 +88,6 @@
     {
       "name": "Zinfandel",
       "url": "/uva/zinfandel/",
-      "count": 3
-    },
-    {
-      "name": "Moscato Giallo",
-      "url": "/uva/moscato-giallo/",
-      "count": 3
-    },
-    {
-      "name": "Riesling",
-      "url": "/uva/riesling/",
       "count": 3
     },
     {

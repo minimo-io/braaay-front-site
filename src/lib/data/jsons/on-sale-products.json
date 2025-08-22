@@ -1,6 +1,36 @@
 {
   "pt": [
     {
+      "id": 132617,
+      "sku": "BR-26-28-132617",
+      "uri": "/produto/espumante-manus-virgo-moscato-giallo-2024/",
+      "name": "Manus Virgo Moscato Giallo 2024 (750ml)",
+      "priceString": "R$81,00",
+      "regularPrice": "R$90,00",
+      "price": 81,
+      "quantity": 1,
+      "maxQuantity": 4,
+      "image": {
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2025/08/espumante-manus-virgo-moscato-giallo-2024.png",
+        "altText": "espumante-manus-virgo-moscato-giallo-2024"
+      }
+    },
+    {
+      "id": 132592,
+      "sku": "BR-26-28-132592",
+      "uri": "/produto/vinho-branco-manus-classico-chardonnay-750ml/",
+      "name": "Manus Clássico Chardonnay 2023 (750ml)",
+      "priceString": "R$180,00",
+      "regularPrice": "R$199,99",
+      "price": 180,
+      "quantity": 1,
+      "maxQuantity": 2,
+      "image": {
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2025/08/vinho-manus-chardonnay-classico.png",
+        "altText": "vinho-manus-chardonnay-classico"
+      }
+    },
+    {
       "id": 132566,
       "sku": "UY-26-27-132566",
       "uri": "/produto/vinho-uruguaio-icone-balasto/",
@@ -24,7 +54,7 @@
       "regularPrice": "R$71,00",
       "price": 60.35,
       "quantity": 1,
-      "maxQuantity": 6,
+      "maxQuantity": 5,
       "image": {
         "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2025/05/casa-perini-espumante-brut-charmat-compress.png",
         "altText": "casa-perini-espumante-brut-charmat-compress"

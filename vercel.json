@@ -1,6 +1,99 @@
 {
 	"redirects": [
 		{
+			"source": "/uy/p/muy-pronto/",
+			"destination": "https://braaay.com/uy/p/muy-pronto/",
+			"permanent": true
+		},
+
+		{
+			"source": "/blog/sobre-vinho/vinhos-brancos-as-diferencas-entre-sauvignon-blanc-chardonnay-e-riesling/",
+			"destination": "https://braaay.com/blog/vinhos-brancos-as-diferencas-entre-sauvignon-blanc-chardonnay-e-riesling/",
+			"permanent": true
+		},
+		{
+			"source": "/uy/cervecerias/bimba-bruder/",
+			"destination": "https://braaay.com/uy/cerveceria/bimba-bruder/",
+			"permanent": true
+		},
+		{
+			"source": "/tag/premiados/",
+			"destination": "https://braaay.com/tag/premium/",
+			"permanent": true
+		},
+		{
+			"source": "/promocoes/",
+			"destination": "https://braaay.com/",
+			"permanent": true
+		},
+		{
+			"source": "/blog/sobre-vinho/vinhos-uruguaios-bons-e-baratos/",
+			"destination": "https://braaay.com/blog/vinhos-uruguaios-bons-e-baratos/",
+			"permanent": true
+		},
+
+		{
+			"source": "/produto/vinho-braccobosca-lacertilia-tannat/",
+			"destination": "https://braaay.com/produto/vinho-braccobosca-lacertilia-tannat-uruguaio-750ml/",
+			"permanent": true
+		},
+		{
+			"source": "/vinos/blancos/",
+			"destination": "https://braaay.com/uy/vinos/",
+			"permanent": true
+		},
+		{
+			"source": "/blog/entendendo-de-vinhos/sur-lie-a-alquimia-microscopica-dos-espumantes/",
+			"destination": "https://braaay.com/blog/sur-lie-a-alquimia-microscopica-dos-espumantes/",
+			"permanent": true
+		},
+		{
+			"source": "/blog/analise-de-produto/a-melhor-adega-de-vinho-comparacao/",
+			"destination": "https://braaay.com/blog/a-melhor-adega-de-vinho-comparacao/",
+			"permanent": true
+		},
+		{
+			"source": "/uy/shop/",
+			"destination": "https://braaay.com/uy/",
+			"permanent": true
+		},
+		{
+			"source": "/cursos/",
+			"destination": "https://braaay.com/",
+			"permanent": true
+		},
+		{
+			"source": "/producto/cerveza-antica-brown-ipa/",
+			"destination": "https://braaay.com/uy/producto/cerveza-antica-brown-ipa/",
+			"permanent": true
+		},
+
+		{
+			"source": "/blog/sobre-vinho/melhores-vinhos-uruguaios-2023/",
+			"destination": "https://braaay.com/blog/melhores-vinhos-uruguaios-2023/",
+			"permanent": true
+		},
+		{
+			"source": "/produto/terranoble-camenere-375ml/",
+			"destination": "https://braaay.com/produto/vinho-chileno-terranoble-camenere-375ml/",
+			"permanent": true
+		},
+		{
+			"source": "/uy/blog/novedades/pintadaily-la-fuente-de-noticias-sobre-cerveza-artesanal/",
+			"destination": "https://braaay.com/uy/blog/pintadaily-la-fuente-de-noticias-sobre-cerveza-artesanal/",
+			"permanent": true
+		},
+		{
+			"source": "/cervezas/artesanales/",
+			"destination": "https://braaay.com/uy/cervezas/",
+			"permanent": true
+		},
+		{
+			"source": "/uy/producto/volcanica-dark-ale-cerveza-artesanal/",
+			"destination": "https://braaay.com/uy/producto/cerveza-volcanica-dark-ale-cerveza-artesanal/",
+			"permanent": true
+		},
+		{
 			"source": "/uva/albarino/",
 			"destination": "https://braaay.com/uva/alvarinho/",
 			"permanent": true

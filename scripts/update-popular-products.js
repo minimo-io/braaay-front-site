@@ -46,16 +46,19 @@ const uyClient = createClient({
     requestPolicy: 'network-only',
     fetchOptions: () => ({})
 });
-function transformData(data) {
+function transformData(data, lang = 'pt') {
     if (!data || !data.products || !data.products.nodes) {
         return [];
     }
+    let langPrefix = '';
+    if (lang && lang == 'uy')
+        langPrefix = '/uy';
     return data.products.nodes
         .filter((node) => node.image) // keep only nodes with image
         .map((node) => ({
         id: node.databaseId,
         title: node.name,
-        url: node.uri,
+        url: `${langPrefix}${node.uri}`,
         price: node.price,
         regularPrice: node.regularPrice,
         image: {
@@ -87,7 +90,7 @@ async function fetchUyData() {
             console.error('Error fetching UY data:', result.error);
             return [];
         }
-        return transformData(result.data);
+        return transformData(result.data, 'uy');
     }
     catch (error) {
         console.error('Failed to fetch UY data:', error);

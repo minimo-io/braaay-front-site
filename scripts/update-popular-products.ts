@@ -52,17 +52,18 @@ const uyClient = createClient({
 	fetchOptions: () => ({})
 });
 
-function transformData(data: any) {
+function transformData(data, lang = 'pt') {
 	if (!data || !data.products || !data.products.nodes) {
 		return [];
 	}
-
+	let langPrefix = '';
+	if (lang && lang == 'uy') langPrefix = '/uy';
 	return data.products.nodes
-		.filter((node: any) => node.image) // keep only nodes with image
-		.map((node: any) => ({
+		.filter((node) => node.image) // keep only nodes with image
+		.map((node) => ({
 			id: node.databaseId,
 			title: node.name,
-			url: node.uri,
+			url: `${langPrefix}${node.uri}`,
 			price: node.price,
 			regularPrice: node.regularPrice,
 			image: {
@@ -99,7 +100,7 @@ async function fetchUyData() {
 			return [];
 		}
 
-		return transformData(result.data);
+		return transformData(result.data, 'uy');
 	} catch (error) {
 		console.error('Failed to fetch UY data:', error);
 		return [];
