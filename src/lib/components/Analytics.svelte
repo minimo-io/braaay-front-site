@@ -3,9 +3,13 @@
 	import { onMount } from 'svelte';
 	import { afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
+	import { getLocale } from '$lib/paraglide/runtime';
 
 	// Seu ID de Métrica do Google Analytics 4
-	const measurement_id = 'G-JFT0HP0T17';
+	let measurement_id = $state('G-JFT0HP0T17');
+	if (getLocale() == 'uy') {
+		measurement_id = 'G-2LQPN26WNJ';
+	}
 
 	onMount(() => {
 		// Apenas executamos no browser

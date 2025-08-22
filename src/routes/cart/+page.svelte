@@ -65,6 +65,9 @@
 	);
 
 	onMount(() => {
+		// Analytics
+		trackEvent('view_cart');
+
 		if (
 			page.url.searchParams.has('adicionar-cupom') ||
 			page.url.searchParams.has('agregar-cupon')

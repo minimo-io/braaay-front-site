@@ -59,6 +59,7 @@
 	import Meta from '$components/layout/Meta.svelte';
 	import type { Items } from 'mercadopago/dist/clients/commonTypes';
 	import type { Item } from 'mercadopago/dist/clients/order/commonTypes';
+	import { trackEvent } from '$components/analytics';
 
 	interface Steps {
 		step1: boolean | object;
@@ -133,6 +134,8 @@
 	});
 
 	onMount(async () => {
+		// Analytics
+		trackEvent('begin_checkout', {});
 		await initializeCheckout();
 	});
 
