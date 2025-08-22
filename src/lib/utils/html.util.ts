@@ -21,3 +21,159 @@ export function createExcerpt(input: string, maxChars: number): string {
 	// no space found, hard cut
 	return text.slice(0, maxChars).trimEnd() + '…';
 }
+
+// /**
+//  * Transforms anchor tags in HTML content to handle internal vs external links
+//  * Internal links: removes target="_blank", adds data-sveltekit-reload, and cleans GA tracking parameters
+//  * Internal links are defined as:
+//  * - Links starting with / (relative paths)
+//  * - Links starting with https://braaay.com or http://braaay.com
+//  * @param content - HTML content to transform
+//  * @param baseUrl - Optional base URL to replace internal links with (e.g., 'http://localhost:5173')
+//  */
+// export function transformLinks(content: string, baseUrl?: string): string {
+// 	if (!content) return content;
+
+// 	const linkRegex = /<a\s+([^>]*?)>/gi;
+
+// 	return content.replace(linkRegex, (match) => {
+// 		const hrefMatch = match.match(/href=["']([^"']+)["']/i);
+// 		if (!hrefMatch) return match;
+
+// 		let href = hrefMatch[1];
+
+// 		const isInternal =
+// 			href.startsWith('/') ||
+// 			href.startsWith('https://braaay.com') ||
+// 			href.startsWith('http://braaay.com');
+
+// 		if (!isInternal) return match;
+
+// 		let result = match;
+
+// 		// Replace internal links with baseUrl if provided
+// 		if (baseUrl) {
+// 			let newHref = href;
+
+// 			// Convert braaay.com links to relative paths first
+// 			if (href.startsWith('https://braaay.com') || href.startsWith('http://braaay.com')) {
+// 				newHref = href.replace(/https?:\/\/braaay\.com/, '');
+// 			}
+
+// 			// If it's a relative path, prepend baseUrl
+// 			if (newHref.startsWith('/')) {
+// 				newHref = baseUrl.replace(/\/$/, '') + newHref;
+// 			}
+
+// 			href = newHref;
+// 			result = result.replace(/href=["']([^"']+)["']/i, `href="${href}"`);
+// 		}
+
+// 		// Remove target="_blank" from internal links
+// 		result = result.replace(/\s*target=["']_blank["']/gi, '');
+
+// 		// Remove rel="noopener" from internal links (GA might use this as tracking signal)
+// 		result = result.replace(/\s*rel=["']noopener["']/gi, '');
+
+// 		// Add data-sveltekit-reload
+// 		if (!result.includes('data-sveltekit-reload')) {
+// 			result = result.slice(0, -1) + ' data-sveltekit-reload>';
+// 		}
+
+// 		return result;
+// 	});
+// }
+
+/**
+ * Transforms anchor tags in HTML content to handle internal vs external links
+ * Internal links: removes target="_blank", adds data-sveltekit-reload, and cleans GA tracking parameters
+ * Internal links are defined as:
+ * - Links starting with / (relative paths)
+ * - Links starting with https://braaay.com or http://braaay.com
+ * @param content - HTML content to transform
+ * @param baseUrl - Optional base URL to replace internal links with (e.g., 'http://localhost:5173')
+ * @param currentRoute - Current route path to compare for data-sveltekit-reload (e.g., '/blog/my-post')
+ */
+export function transformLinks(content: string, baseUrl?: string, currentRoute?: string): string {
+	if (!content) return content;
+
+	const linkRegex = /<a\s+([^>]*?)>/gi;
+
+	return content.replace(linkRegex, (match) => {
+		const hrefMatch = match.match(/href=["']([^"']+)["']/i);
+		if (!hrefMatch) return match;
+
+		let href = hrefMatch[1];
+
+		const isInternal =
+			href.startsWith('/') ||
+			href.startsWith('https://braaay.com') ||
+			href.startsWith('http://braaay.com');
+
+		if (!isInternal) return match;
+
+		let result = match;
+
+		// Get the path part of the href for route comparison
+		let linkPath = href;
+		if (href.startsWith('https://braaay.com') || href.startsWith('http://braaay.com')) {
+			linkPath = href.replace(/https?:\/\/braaay\.com/, '');
+		}
+		// Remove query parameters and hash for route comparison
+		linkPath = linkPath.split('?')[0].split('#')[0];
+
+		// Extract base route (e.g., '/blog/' from '/blog/some-post')
+		const getBaseRoute = (path: string): string => {
+			const segments = path.split('/').filter(Boolean);
+			return segments.length > 0 ? `/${segments[0]}/` : '/';
+		};
+
+		const linkBaseRoute = getBaseRoute(linkPath);
+		const currentBaseRoute = currentRoute ? getBaseRoute(currentRoute) : '';
+
+		// Replace internal links with baseUrl if provided
+		if (baseUrl) {
+			let newHref = href;
+
+			// Convert braaay.com links to relative paths first
+			if (href.startsWith('https://braaay.com') || href.startsWith('http://braaay.com')) {
+				newHref = href.replace(/https?:\/\/braaay\.com/, '');
+			}
+
+			// If it's a relative path, prepend baseUrl
+			if (newHref.startsWith('/')) {
+				newHref = baseUrl.replace(/\/$/, '') + newHref;
+			}
+
+			href = newHref;
+			result = result.replace(/href=["']([^"']+)["']/i, `href="${href}"`);
+		}
+
+		// Clean GA parameters if present
+		if (href.includes('?')) {
+			const [baseUrlPart, queryString] = href.split('?');
+			if (queryString) {
+				const params = queryString.split('&').filter((param) => {
+					const paramName = param.split('=')[0];
+					return !paramName.startsWith('_gl') && !paramName.startsWith('_ga');
+				});
+				const cleanHref = params.length > 0 ? `${baseUrlPart}?${params.join('&')}` : baseUrlPart;
+				result = result.replace(/href=["']([^"']+)["']/i, `href="${cleanHref}"`);
+			}
+		}
+
+		// Remove target="_blank" from internal links
+		result = result.replace(/\s*target=["']_blank["']/gi, '');
+
+		// Add data-sveltekit-reload ONLY if the link base route matches current base route
+		if (
+			currentRoute &&
+			linkBaseRoute === currentBaseRoute &&
+			!result.includes('data-sveltekit-reload')
+		) {
+			result = result.slice(0, -1) + ' data-sveltekit-reload>';
+		}
+
+		return result;
+	});
+}

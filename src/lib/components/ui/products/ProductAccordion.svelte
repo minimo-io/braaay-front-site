@@ -227,9 +227,16 @@
 										<td class="px-4 py-1 text-left text-gray-700 font-light">{attributes?.abv}</td>
 									</tr>
 									<tr>
-										<td class="px-4 py-1 text-left text-gray-700 normal-case"
-											>Potencial de guarda</td
-										>
+										<td class="px-4 py-1 text-left text-gray-700 normal-case">
+											<a
+												class="underline"
+												href={localizeHref(
+													'/blog/potencial-de-guarda-do-vinho-quando-abrir-a-garrafa/'
+												)}
+											>
+												Potencial de guarda
+											</a>
+										</td>
 										<td class="px-4 py-1 text-left text-gray-700 font-light"
 											>{attributes?.agingPotential}</td
 										>

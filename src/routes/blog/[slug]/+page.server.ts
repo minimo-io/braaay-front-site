@@ -9,7 +9,7 @@ import { error } from '@sveltejs/kit';
 
 import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 
-export const load: PageServerLoad = async ({ params, locals }) => {
+export const load: PageServerLoad = async ({ params, locals, url }) => {
 	const { slug } = params;
 
 	// const locale = getLocale();
@@ -30,7 +30,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 
 	// Map the raw GraphQL data to your Post interface.
 	try {
-		const post: Post = mapPost(result.data);
+		const post: Post = mapPost(result.data, url.origin, url.pathname);
 		const seo: YoastSeoData | undefined = result.data.post.seo;
 
 		return { post, seo };

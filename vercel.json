@@ -1,6 +1,11 @@
 {
 	"redirects": [
 		{
+			"source": "/uva/albarino/",
+			"destination": "https://braaay.com/uva/alvarinho/",
+			"permanent": true
+		},
+		{
 			"source": "/sobre-nos/",
 			"destination": "https://braaay.com/p/sobre-nos/",
 			"permanent": true

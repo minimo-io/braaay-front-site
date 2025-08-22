@@ -6,7 +6,6 @@
 
 	import type { PageData } from './$types';
 	import Meta from '$components/layout/Meta.svelte';
-	import { m } from '$lib/paraglide/messages';
 	import type { YoastSeoData } from '$lib/types';
 	import SchemaBlogPost from '$components/layout/Schemas/SchemaBlogPost.svelte';
 	import ArticleBreadcrumbs from '$components/ui/articles/components/ArticleBreadcrumbs.svelte';

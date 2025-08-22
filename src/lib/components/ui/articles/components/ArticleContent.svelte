@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { removeWPBakeryShortcodes } from '$lib/utils/index';
+	import { page } from '$app/state';
+	import { removeWPBakeryShortcodes, transformLinks } from '$lib/utils/index';
 	interface Props {
 		content: string;
 	}
@@ -7,5 +8,5 @@
 </script>
 
 <div class="w-full">
-	{@html removeWPBakeryShortcodes(content)}
+	{@html removeWPBakeryShortcodes(transformLinks(content, page.url.origin, page.url.pathname))}
 </div>

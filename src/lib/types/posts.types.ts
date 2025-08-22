@@ -1,5 +1,5 @@
 import type { ArticleCreator } from './article-creator.types';
-import { stripHtml } from '$lib/utils/index';
+import { stripHtml, transformLinks } from '$lib/utils/index';
 import type { YoastSeoData } from './seo.types';
 
 // For list of posts
@@ -75,7 +75,11 @@ export interface GraphQLPostSingle {
 	post: BasePost;
 }
 
-export function mapPost(post: GraphQLPostFromList | GraphQLPostSingle): Post {
+export function mapPost(
+	post: GraphQLPostFromList | GraphQLPostSingle,
+	baseUrl?: string,
+	urlPathname?: string
+): Post {
 	let postBase: BasePost;
 	if ('node' in post) {
 		// Handle GraphQLPostFromList
@@ -91,7 +95,7 @@ export function mapPost(post: GraphQLPostFromList | GraphQLPostSingle): Post {
 		date: postBase.date,
 		modified: postBase.modified,
 		excerpt: postBase.excerpt,
-		content: postBase.content || undefined,
+		content: transformLinks(postBase.content ?? '', baseUrl, urlPathname),
 		plainExcerpt: stripHtml(postBase.excerpt),
 		uri: postBase.uri,
 		categories: postBase.categories?.nodes.map((graphQLCategory: PostBaseCategory) => {
@@ -110,7 +114,7 @@ export function mapPost(post: GraphQLPostFromList | GraphQLPostSingle): Post {
 		},
 		header: {
 			title: postBase.header?.firstSubtitle,
-			content: postBase.header?.firstParagraph
+			content: transformLinks(postBase.header?.firstParagraph ?? '', baseUrl, urlPathname)
 		}
 	};
 }

@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { page } from '$app/state';
+	import { transformLinks } from '$lib/utils';
+
 	interface Props {
 		title?: string;
 		content?: string;
@@ -16,6 +19,6 @@
 {/if}
 {#if content}
 	<p class="bry-article-main-p">
-		{@html content}
+		{@html transformLinks(content, page.url.origin, page.url.pathname)}
 	</p>
 {/if}
