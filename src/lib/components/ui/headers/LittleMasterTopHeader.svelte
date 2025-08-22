@@ -28,7 +28,8 @@
 			{/if}
 			<li><a href={localizeHref('/blog/')}>BLOG</a></li>
 			<li class="text-grey-light">/</li>
-			<li><a href={localizeHref('/p/sobre-nos/')}>{m.sobreNos()}</a></li>
+
+			<li><a href={localizeHref(AppConfig.pages[getLocale()].aboutUs)}>{m.sobreNos()}</a></li>
 			<li class="text-grey-light">/</li>
 			<li>
 				<a

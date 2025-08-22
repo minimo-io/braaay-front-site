@@ -104,5 +104,14 @@ export const AppConfig = Object.freeze({
 		uy: {
 			instagram: 'https://www.instagram.com/hops_uy'
 		}
+	},
+
+	pages: {
+		pt: {
+			aboutUs: '/p/sobre-nos/'
+		},
+		uy: {
+			aboutUs: '/p/nosotros/'
+		}
 	}
 });
