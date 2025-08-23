@@ -1,6 +1,11 @@
 {
 	"redirects": [
 		{
+			"source": "/blog/sobre-vinho/vinhos-de-pequenos-produtores/",
+			"destination": "https://braaay.com/blog/vinhos-de-pequenos-produtores/",
+			"permanent": true
+		},
+		{
 			"source": "/uy/p/muy-pronto/",
 			"destination": "https://braaay.com/uy/p/muy-pronto/",
 			"permanent": true
