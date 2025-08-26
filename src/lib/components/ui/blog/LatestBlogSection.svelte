@@ -5,8 +5,6 @@
 	import ArticleCard from '../articles/components/ArticleCard.svelte';
 
 	let articles = HomeLatestPosts(getLocale());
-
-	console.log(articles);
 </script>
 
 <div class="max-w-screen-lg mx-auto my-5 px-[30px] md:px-0">

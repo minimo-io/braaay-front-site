@@ -6,6 +6,20 @@ export const HomeLatestPosts = (locale: Locale = 'pt') => {
 	if (locale == 'pt') {
 		return [
 			{
+				url: '/blog/harmonizacao-com-vinho-tannat/',
+				media:
+					'https://api.braaay.com/wp-content/uploads/2025/08/harmonizacoes-com-vinho-tannat.png',
+				title: 'Harmonização com vinho tannat',
+				date: '2025-08-26T22:54:06+00:00',
+				author: {
+					name: 'BRAAAY',
+					image:
+						'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
+				},
+				readingTime: 'Lectura em 5 min',
+				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
+			},
+			{
 				url: '/blog/tannat-a-uva-emblematica-do-uruguai-em-evolucao/',
 				media: 'https://api.braaay.com/wp-content/uploads/2025/08/tannat-uruguaio.jpg',
 				title: 'Tannat: a uva emblemática do Uruguai em evolução',
@@ -31,20 +45,20 @@ export const HomeLatestPosts = (locale: Locale = 'pt') => {
 				},
 				readingTime: 'Lectura em 10 min',
 				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
-			},
-			{
-				url: '/blog/tannat-day-150-anos-dos-melhores-tannat-do-mundo-14-de-abril/',
-				media: 'https://api.braaay.com/wp-content/uploads/2025/04/tannat-day-uruguai.jpeg',
-				title: 'Tannat day, 150 anos dos melhores tannat do mundo',
-				date: '2025-04-14T11:54:02',
-				author: {
-					name: 'BRAAAY',
-					image:
-						'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
-				},
-				readingTime: 'Lectura em 5 min',
-				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
 			}
+			// {
+			// 	url: '/blog/tannat-day-150-anos-dos-melhores-tannat-do-mundo-14-de-abril/',
+			// 	media: 'https://api.braaay.com/wp-content/uploads/2025/04/tannat-day-uruguai.jpeg',
+			// 	title: 'Tannat day, 150 anos dos melhores tannat do mundo',
+			// 	date: '2025-04-14T11:54:02',
+			// 	author: {
+			// 		name: 'BRAAAY',
+			// 		image:
+			// 			'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
+			// 	},
+			// 	readingTime: 'Lectura em 5 min',
+			// 	categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
+			// }
 			// {
 			// 	url: '/blog/como-combinar-vinho-com-comida-harmonizacoes/',
 			// 	media: 'https://api.braaay.com/wp-content/uploads/2025/03/combinar-vinhos-com-comida.jpg',
