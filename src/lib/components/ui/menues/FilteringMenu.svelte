@@ -11,7 +11,8 @@
 		Truck,
 		Ruler,
 		X,
-		Search
+		Search,
+		ChefHat
 	} from '@lucide/svelte';
 	import { filterState, updateFilter, resetFilters } from '$stores/filters.store.svelte';
 	import { AppConfig } from '$config';
@@ -24,6 +25,7 @@
 	import { grapes } from '$data/grapes.data';
 	import { bottleSizes } from '$data/bottle-sizes.data';
 	import { tasteOptions } from '$data/taste-options.data';
+	import { pairingOptions } from '$data/pairing-options.data';
 
 	let grapesForLanguage = $state(grapes[getLocale()]);
 	let grapeSearchQuery = $state('');
@@ -37,6 +39,7 @@
 	let lastFilterState = $state(JSON.stringify($filterState));
 
 	let tasteOptionsForLanguage = $state(tasteOptions[getLocale()]);
+	let pairingOptionsForLanguage = $state(pairingOptions[getLocale()]);
 
 	$effect(() => {
 		const unsubscribe = filterState.subscribe((value) => {
@@ -67,6 +70,7 @@
 		searchParams.delete('price_max');
 		searchParams.delete('taste');
 		searchParams.delete('shipping');
+		searchParams.delete('pairings');
 		searchParams.delete('bottleSize');
 		searchParams.delete('grape'); // Add grape to cleanup
 
@@ -93,6 +97,9 @@
 		}
 		if (currentFilters.bottleSize.length > 0) {
 			searchParams.set('bottleSize', currentFilters.bottleSize.join(','));
+		}
+		if (currentFilters.pairings.length > 0) {
+			searchParams.set('pairings', currentFilters.pairings.join(','));
 		}
 		if (currentFilters.grape.length > 0) {
 			searchParams.set('grape', currentFilters.grape.join(','));
@@ -234,6 +241,14 @@
 		);
 	}
 
+	// Convert array of objects to a flat structure for easier handling
+	function getPairingEntries() {
+		return pairingOptionsForLanguage.map((item) => ({
+			key: item.slug,
+			value: item.name
+		}));
+	}
+
 	// Handle taste selection - use the key (GraphQL value) for the filter
 	function handleTasteToggle(tasteKey: string) {
 		const currentTastes = [...currentFilters.taste];
@@ -250,9 +265,30 @@
 		updateFilter('taste', currentTastes);
 	}
 
+	// Handle taste selection - use the key (GraphQL value) for the filter
+	function handlePairingToggle(pairingKey: string) {
+		const currentPairings = [...currentFilters.pairings];
+		const index = currentPairings.indexOf(pairingKey);
+
+		if (index > -1) {
+			// Remove taste if already selected
+			currentPairings.splice(index, 1);
+		} else {
+			// Add taste if not selected
+			currentPairings.push(pairingKey);
+		}
+
+		updateFilter('pairings', currentPairings);
+	}
+
 	// Check if taste is selected - check against the key
 	function isTasteSelected(tasteKey: string): boolean {
 		return currentFilters.taste.includes(tasteKey);
+	}
+
+	// Check if taste is selected - check against the key
+	function isPairingSelected(pairingKey: string): boolean {
+		return currentFilters.pairings.includes(pairingKey);
 	}
 
 	onMount(() => {
@@ -496,7 +532,6 @@
 			{/if}
 
 			<!-- Paladar típico -->
-			<!-- Paladar típico -->
 			{#if getLocale() == 'pt' && getTasteEntries().length > 0}
 				<div class="relative group filtering-button">
 					<button class="shine-effect">
@@ -544,6 +579,66 @@
 											</div>
 											<span
 												class="self-center {isTasteSelected(key) ? 'font-semibold text-sun' : ''}"
+											>
+												{value}
+											</span>
+										</div>
+									</button>
+								{/each}
+							</div>
+						</div>
+					</div>
+				</div>
+			{/if}
+
+			<!-- Pairing -->
+			{#if getLocale() == 'pt' && getPairingEntries().length > 0}
+				<div class="relative group filtering-button">
+					<button class="shine-effect">
+						<ChefHat class="lucide-button w-5 h-5 mr-2" />
+						{m.pairings()}
+						{#if currentFilters.pairings.length > 0}
+							<span class="bg-sun text-white text-xs px-2 py-1 rounded-full ml-1">
+								{currentFilters.pairings.length}
+							</span>
+						{/if}
+						<ChevronDown class="lucide-button w-5 h-5 mr-2" />
+					</button>
+
+					<div class="absolute left-0 w-full h-4 bg-transparent" role="presentation"></div>
+					<div
+						class="absolute z-10 bg-white border border-grey-lighter shadow-lg mt-2 rounded-2xl md:w-[300px] w-48 origin-top overflow-hidden hidden group-hover:block"
+						style="max-height: calc(55vh - 170px)"
+						role="menu"
+					>
+						<!-- Pairings List -->
+						<div class="overflow-y-auto" style="max-height: calc(55vh - 170px)">
+							<div class="text-xs px-3 flex flex-col">
+								{#each getPairingEntries() as { key, value }}
+									<button
+										type="button"
+										onclick={() => handlePairingToggle(key)}
+										class="py-3 border-b border-grey-lighter text-left text-sm font-roboto text-grey-dark flex justify-between align-middle shine-effect px-[30px] hover:bg-grey-lighter transition-colors
+						{isPairingSelected(key) ? 'bg-sun-light' : ''}"
+									>
+										<div class="text-left self-center flex items-center">
+											<!-- Checkbox visual indicator -->
+											<div
+												class="w-4 h-4 mr-3 border-2 border-grey-dark rounded-sm flex items-center justify-center
+								{isPairingSelected(key) ? 'bg-sun border-sun' : ''}"
+											>
+												{#if isPairingSelected(key)}
+													<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+														<path
+															fill-rule="evenodd"
+															d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+															clip-rule="evenodd"
+														></path>
+													</svg>
+												{/if}
+											</div>
+											<span
+												class="self-center {isPairingSelected(key) ? 'font-semibold text-sun' : ''}"
 											>
 												{value}
 											</span>

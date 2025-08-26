@@ -59,6 +59,14 @@ export const buildGraphQLFilters = (filters: FilterState): GraphQLFilters => {
 		});
 	}
 
+	// Add taxonomy filter for pairings (PA_HARMONIZACOES)
+	if (filters.pairings && Array.isArray(filters.pairings) && filters.pairings.length > 0) {
+		taxonomyFilters.push({
+			taxonomy: 'PA_HARMONIZACOES',
+			terms: filters.pairings
+		});
+	}
+
 	// Add taxonomy filter for taste (PA_PALADAR_TIPICO)
 	if (filters.taste && Array.isArray(filters.taste) && filters.taste.length > 0) {
 		const tasteFilter = {
@@ -90,13 +98,6 @@ export const buildGraphQLFilters = (filters: FilterState): GraphQLFilters => {
 			terms: filters.country
 		});
 	}
-
-	// if (filters.taste && Array.isArray(filters.taste) && filters.taste.length > 0) {
-	// 	attributes.push({
-	// 		taxonomy: 'pa_taste',
-	// 		terms: filters.taste
-	// 	});
-	// }
 
 	// if (filters.size && Array.isArray(filters.size) && filters.size.length > 0) {
 	// 	attributes.push({

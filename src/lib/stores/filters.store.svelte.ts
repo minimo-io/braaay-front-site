@@ -10,6 +10,7 @@ export interface FilterState {
 	taste: string[];
 	shipping: string;
 	bottleSize: string[];
+	pairings: string[];
 	grape: string[]; // Add grape filter
 }
 
@@ -23,6 +24,7 @@ export const filtersInitialState: FilterState = {
 	taste: [],
 	shipping: '',
 	bottleSize: [],
+	pairings: [],
 	grape: [] // Initialize grape as empty array
 };
 
