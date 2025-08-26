@@ -5,6 +5,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import { AppConfig } from '$config';
 	import { trackEvent } from '$components/analytics';
+	import LittleMasterTopHeaderMarquee from './LittleMasterTopHeaderMarquee.svelte';
 
 	function handleInstagramClick() {
 		trackEvent('button_click', {
@@ -16,9 +17,11 @@
 
 <header class="bg-white relative border-b border-grey-lighter hidden md:block">
 	<nav
-		class="mx-[30px] lg:mx-auto flex justify-end max-w-screen-lg items-center h-[30px]"
+		class="mx-[30px] lg:mx-auto flex justify-between max-w-screen-lg items-center h-[30px]"
 		aria-label="Cabecalho global"
 	>
+		<LittleMasterTopHeaderMarquee />
+
 		<ul class="text-xs text-right flex gap-3 items-center">
 			{#if getLocale() == 'pt'}
 				<li class="flex items-center">

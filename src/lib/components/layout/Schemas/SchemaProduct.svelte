@@ -3,7 +3,13 @@
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import type { Product, ProductAttributes, ProductCategory, YoastSeoData } from '$lib/types';
-	import { addYearsAndFormat, mapLocale, serializeSchema, stripHtml } from '$lib/utils';
+	import {
+		addYearsAndFormat,
+		correctPrice,
+		mapLocale,
+		serializeSchema,
+		stripHtml
+	} from '$lib/utils';
 
 	interface Props {
 		product?: Product;
@@ -32,24 +38,16 @@
 
 	// Product
 	// --- Price Transformation ---
-	let productSchemaPrice = $derived.by(() => {
-		const price = product?.price;
-		if (!price) {
-			return undefined;
-		}
-
+	let derivedCashPrice = $derived.by(() => {
+		let finalPrice = `${correctPrice(product!.floatPrice * 0.95)}`;
 		let numericPrice;
-
-		// Remove currency symbols (R$, $) and whitespace
-		const cleanedString = price.replace(/[R$\s]/g, '');
-
 		// Check if the format uses a comma for the decimal (e.g., 1.199,00)
-		if (cleanedString.lastIndexOf(',') > cleanedString.lastIndexOf('.')) {
-			const parsableString = cleanedString.replaceAll('.', '').replace(',', '.');
+		if (finalPrice.lastIndexOf(',') > finalPrice.lastIndexOf('.')) {
+			const parsableString = finalPrice.replaceAll('.', '').replace(',', '.');
 			numericPrice = parseFloat(parsableString);
 		} else {
 			// Assumes a dot is the decimal (e.g., 200.00)
-			const parsableString = cleanedString.replaceAll(',', '');
+			const parsableString = finalPrice.replaceAll(',', '');
 			numericPrice = parseFloat(parsableString);
 		}
 
@@ -57,6 +55,33 @@
 		// Otherwise, return undefined.
 		return !isNaN(numericPrice) ? numericPrice.toFixed(2) : undefined;
 	});
+
+	// let productSchemaPrice = $derived.by(() => {
+	// 	const price = product?.price;
+	// 	const discountedPrice = product?.floatPrice;
+	// 	if (!price) {
+	// 		return undefined;
+	// 	}
+
+	// 	let numericPrice;
+
+	// 	// Remove currency symbols (R$, $) and whitespace
+	// 	const cleanedString = price.replace(/[R$\s]/g, '');
+
+	// 	// Check if the format uses a comma for the decimal (e.g., 1.199,00)
+	// 	if (cleanedString.lastIndexOf(',') > cleanedString.lastIndexOf('.')) {
+	// 		const parsableString = cleanedString.replaceAll('.', '').replace(',', '.');
+	// 		numericPrice = parseFloat(parsableString);
+	// 	} else {
+	// 		// Assumes a dot is the decimal (e.g., 200.00)
+	// 		const parsableString = cleanedString.replaceAll(',', '');
+	// 		numericPrice = parseFloat(parsableString);
+	// 	}
+
+	// 	// If parsing was successful, format the number to a string with 2 decimals.
+	// 	// Otherwise, return undefined.
+	// 	return !isNaN(numericPrice) ? numericPrice.toFixed(2) : undefined;
+	// });
 
 	// --- Currency Definition ---
 	let productSchemaPriceCurrency = $derived.by(() => {
@@ -113,7 +138,8 @@
 				'@type': 'Offer',
 				priceSpecification: {
 					'@type': 'UnitPriceSpecification',
-					price: productSchemaPrice,
+					// price: productSchemaPrice,
+					price: derivedCashPrice,
 					priceCurrency: productSchemaPriceCurrency,
 					valueAddedTaxIncluded: false,
 					validThrough: productValidThrough // Consider if this "validThrough" date is always applicable or should be dynamic

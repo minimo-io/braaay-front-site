@@ -72,31 +72,6 @@
 		});
 	});
 
-	// beforeNavigate((navigation) => {
-	// 	if (navigation.to && navigation.to.route) {
-	// 		// Erase the search field on navigation
-	// 		if (navigation.to.route.id != '/search') {
-	// 			let searchEl: HTMLInputElement | null = document.querySelector<HTMLInputElement>('#search');
-	// 			if (searchEl) {
-	// 				searchEl.value = '';
-	// 			}
-	// 		}
-
-	// 		miniCart.active = false;
-	// 		const isAuthTo = requiresAuth(`${navigation.to.route.id}`);
-	// 		const isUserAuth = isAuthenticated();
-	// 		if (isAuthTo && isUserAuth == false) {
-	// 			const returnUrl = new URL(window.location.href);
-
-	// 			goto(`/login/?returnUrl=${returnUrl.pathname}`);
-	// 		}
-
-	// 		if (navigation.to.route.id == '/login' && isUserAuth) {
-	// 			goto(localizeHref(`/account/`));
-	// 		}
-	// 	}
-	// });
-
 	beforeNavigate((navigation) => {
 		if (navigation.to && navigation.to.route) {
 			// Erase the search field on navigation
