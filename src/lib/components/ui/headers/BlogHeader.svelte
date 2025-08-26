@@ -50,9 +50,9 @@
 		</div>
 
 		<!-- Title -->
-		<h2 class="text-lg md:text-xl mb-4 font-prata mt-5 uppercase">
+		<h1 class="text-lg md:text-xl mb-4 font-prata mt-5 uppercase">
 			<a href={localizeHref(post.uri)}>{post.title}</a>
-		</h2>
+		</h1>
 
 		<!-- Description -->
 
