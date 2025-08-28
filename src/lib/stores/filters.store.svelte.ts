@@ -1,7 +1,7 @@
 // src/lib/stores/filters.store.svelte.ts
 import { AppConfig } from '$config';
 import { getLocale } from '$lib/paraglide/runtime';
-import { writable } from 'svelte/store';
+import { derived, writable } from 'svelte/store';
 
 export interface FilterState {
 	variety: string[];
@@ -40,3 +40,30 @@ export const updateFilter = (key: keyof FilterState, value: any) => {
 export const resetFilters = () => {
 	filterState.set(filtersInitialState);
 };
+
+// 👇 ADD THIS DERIVED STORE
+export const appliedFiltersCount = derived(filterState, ($filters) => {
+	let count = 0;
+
+	// Count filters that are arrays and are not empty
+	if ($filters.variety.length > 0) count++;
+	if ($filters.country.length > 0) count++;
+	if ($filters.taste.length > 0) count++;
+	if ($filters.bottleSize.length > 0) count++;
+	if ($filters.pairings.length > 0) count++;
+	if ($filters.grape.length > 0) count++;
+
+	// Count string-based filters that are not their default empty value
+	if ($filters.shipping !== filtersInitialState.shipping) count++;
+
+	// Count the price range if it has been changed from the initial state
+	const initialPrice = filtersInitialState.priceRange;
+	if (
+		$filters.priceRange.min !== initialPrice.min ||
+		$filters.priceRange.max !== initialPrice.max
+	) {
+		count++;
+	}
+
+	return count;
+});

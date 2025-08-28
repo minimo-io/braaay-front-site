@@ -83,12 +83,19 @@
 			if (isFocused) {
 				const searchQuery = query.trim().toLowerCase();
 				if (searchQuery) {
+					// Split search query into individual terms
+					const searchTerms = searchQuery.split(/\s+/).filter((term) => term.length > 0);
+
+					// Function to check if all search terms are found in the title
+					const matchesAllTerms = (title: string) => {
+						const titleLower = title.toLowerCase();
+						return searchTerms.every((term) => titleLower.includes(term));
+					};
+
 					// Filter and prioritize grapes first
-					const filteredGrapes = GRAPES.filter((item) =>
-						item.title.toLowerCase().includes(searchQuery)
-					);
+					const filteredGrapes = GRAPES.filter((item) => matchesAllTerms(item.title));
 					const filteredOthers = [...POPULAR_SEARCHES, ...PARTNERS].filter((item) =>
-						item.title.toLowerCase().includes(searchQuery)
+						matchesAllTerms(item.title)
 					);
 
 					// Combine with grapes first, then others
@@ -361,13 +368,10 @@
 
 						<!-- Type indicators with count for grapes -->
 						{#if item.type === 'partner'}
-							<span class="text-xs opacity-60 flex-shrink-0">{m.partner()}</span>
-						{:else if item.type == 'popular'}
-							<span class="text-xs opacity-60 flex-shrink-0">{m.product()}</span>
+							<span class="text-xs opacity-60 flex-shrink-0">Produtor</span>
 						{:else if item.type === 'grape'}
 							<span class="text-xs opacity-60 flex-shrink-0">
-								Uva
-								<!-- {#if item.count}({item.count}){/if} -->
+								Uva {#if item.count}({item.count}){/if}
 							</span>
 						{/if}
 					</div>

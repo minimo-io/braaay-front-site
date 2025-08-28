@@ -47,6 +47,7 @@
 	import { clearAllCache } from '$stores/urqlClient.state.svelte';
 	import { resetFilters } from '$stores/filters.store.svelte';
 	import WhatsappButtonFloating from '$components/ui/buttons/WhatsappButtonFloating.svelte';
+	import { filterDrawerState } from '$stores/filterDrawer.state.svelte';
 
 	onMount(() => {
 		if (page.url.searchParams.has('clearCache')) {
@@ -61,6 +62,8 @@
 		closeDrawer();
 		// reset horizontal scroll on menu if exsits
 		const secondaryMenus = document.querySelectorAll('.bry-secondary-menu');
+
+		filterDrawerState.isOpen = false;
 
 		// Reset filters on navigation
 		// resetFilters();
