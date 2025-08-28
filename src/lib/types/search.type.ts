@@ -1,10 +1,12 @@
 // src/lib/types/search.types.ts
 
+// Simple interface - just add 'type' to your existing structure
 export interface SearchResult {
 	title: string;
 	url: string;
-	type?: 'popular' | 'partner'; // Optional, defaults to 'popular'
-	image?: string; // General image property for all types
+	type: 'popular' | 'partner' | 'grape';
+	image?: string;
+	count?: number; // For grapes - shows how many wines use this grape
 }
 
 // export interface UnifiedSearchResult {

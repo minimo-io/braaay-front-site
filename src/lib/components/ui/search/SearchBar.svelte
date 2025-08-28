@@ -4,12 +4,13 @@
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { page } from '$app/state';
 	import { beforeNavigate, afterNavigate } from '$app/navigation';
 	import popularProducts from '$data/jsons/popular-products.json';
-	import partnersData from '$data/jsons/home-partners.json'; // Add this import
+	import partnersData from '$data/jsons/home-partners.json';
+	import { grapes } from '$lib/data/grapes.data'; // Add this import
 	import { Search as SearchIcon, X } from '@lucide/svelte';
 	import { toggleLoader } from '$stores/loaderStore.state.svelte';
+	import type { SearchResult } from '$lib/types';
 
 	let { mobile = false }: { mobile?: boolean } = $props();
 
@@ -18,14 +19,6 @@
 	let isFocused = $state(false);
 	let query = $state('');
 	let selectedIndex = $state(-1);
-
-	// Simple interface - just add 'type' to your existing structure
-	interface SearchResult {
-		title: string;
-		url: string;
-		type?: 'popular' | 'partner'; // Optional, defaults to 'popular'
-		image?: string; // General image property for all types
-	}
 
 	let currentLocale = getLocale();
 
@@ -44,8 +37,16 @@
 		image: partner.logo // Map logo to image for consistency
 	}));
 
+	// Map grapes to match our interface
+	let GRAPES: SearchResult[] = (grapes[currentLocale] || []).map((grape) => ({
+		title: grape.name,
+		url: grape.url,
+		type: 'grape' as const,
+		count: grape.count // Include count for potential display
+	}));
+
 	// Combine all search sources
-	let ALL_SEARCH_ITEMS: SearchResult[] = [...POPULAR_SEARCHES, ...PARTNERS];
+	let ALL_SEARCH_ITEMS: SearchResult[] = [...POPULAR_SEARCHES, ...PARTNERS, ...GRAPES];
 
 	let filteredResults = $state<SearchResult[]>([]);
 
@@ -82,13 +83,21 @@
 			if (isFocused) {
 				const searchQuery = query.trim().toLowerCase();
 				if (searchQuery) {
-					filteredResults = ALL_SEARCH_ITEMS.filter((item) =>
+					// Filter and prioritize grapes first
+					const filteredGrapes = GRAPES.filter((item) =>
 						item.title.toLowerCase().includes(searchQuery)
-					).slice(0, 8); // Limit results
+					);
+					const filteredOthers = [...POPULAR_SEARCHES, ...PARTNERS].filter((item) =>
+						item.title.toLowerCase().includes(searchQuery)
+					);
+
+					// Combine with grapes first, then others
+					filteredResults = [...filteredGrapes, ...filteredOthers].slice(0, 8);
 				} else {
-					// Show mix when no query - 4 popular (ordered) + 4 random partners
-					const randomPartners = [...PARTNERS].sort(() => Math.random() - 0.5).slice(0, 4);
-					filteredResults = [...POPULAR_SEARCHES.slice(0, 4), ...randomPartners];
+					// Show mix when no query - 3 top grapes by count first, then 2 popular + 3 random partners
+					const topGrapes = [...GRAPES].sort((a, b) => (b.count || 0) - (a.count || 0)).slice(0, 3);
+					const randomPartners = [...PARTNERS].sort(() => Math.random() - 0.5).slice(0, 3);
+					filteredResults = [...topGrapes, ...POPULAR_SEARCHES.slice(0, 2), ...randomPartners];
 				}
 			} else {
 				filteredResults = [];
@@ -338,7 +347,7 @@
 					onfocus={() => handleResultMouseOver(i)}
 				>
 					<div class="flex items-center gap-3">
-						<!-- Show image for partners, nothing for popular items (keeps it simple) -->
+						<!-- Show image for partners, nothing for popular items and grapes -->
 						{#if item.image}
 							<img
 								src={item.image}
@@ -350,9 +359,16 @@
 
 						<span class="truncate flex-1">{item.title}</span>
 
-						<!-- Optional: small type indicator -->
+						<!-- Type indicators with count for grapes -->
 						{#if item.type === 'partner'}
-							<span class="text-xs opacity-60 flex-shrink-0">Produtor</span>
+							<span class="text-xs opacity-60 flex-shrink-0">{m.partner()}</span>
+						{:else if item.type == 'popular'}
+							<span class="text-xs opacity-60 flex-shrink-0">{m.product()}</span>
+						{:else if item.type === 'grape'}
+							<span class="text-xs opacity-60 flex-shrink-0">
+								Uva
+								<!-- {#if item.count}({item.count}){/if} -->
+							</span>
 						{/if}
 					</div>
 				</li>

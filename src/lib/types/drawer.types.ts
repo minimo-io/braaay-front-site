@@ -1,3 +1,4 @@
+// src/lib/types/drawer.types.ts
 import { type Icon as IconType } from '@lucide/svelte';
 
 export interface DrawerData {
