@@ -74,6 +74,7 @@
 />
 <svelte:head>
 	<link rel="prefetch" href="/images/carousel/braaay-carousel-desktop-1.jpg" as="image" />
+	<link rel="prefetch" href="/images/carousel/braaay-carousel-mobile-1.jpg" as="image" />
 </svelte:head>
 <SchemaHomepage />
 
