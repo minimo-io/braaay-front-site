@@ -19,7 +19,7 @@
 	let isPost = $state(isBlogPost(page.url.pathname));
 
 	let backParams = $state<BackLink>({
-		text: 'Voltar á loja',
+		text: m.backToStore(),
 		href: '/'
 	});
 
@@ -31,7 +31,7 @@
 		// Then update the voltar object based on isPost
 		backParams = isPost
 			? { text: 'Voltar ao blog', href: localizeHref('/blog/') }
-			: { text: 'Voltar á loja', href: localizeHref('/') };
+			: { text: m.backToStore(), href: localizeHref('/') };
 	});
 
 	onMount(() => {

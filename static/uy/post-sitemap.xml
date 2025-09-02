@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//braaay.com/uy/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
+		<loc>https://braaay.com/uy/blog/se-expande-la-cerveceria-de-minas-que-fabrica-la-cerveza-del-bananero/</loc>
+		<lastmod>2025-09-02T14:37:33+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/uy/wp-content/uploads/sites/2/2024/12/el-bananero.png</image:loc>
+		</image:image>
+	</url>
+	<url>
 		<loc>https://braaay.com/blog/tannat-a-uva-emblematica-do-uruguai-em-evolucao/</loc>
 		<lastmod>2025-08-15T15:41:00+00:00</lastmod>
 		<image:image>
