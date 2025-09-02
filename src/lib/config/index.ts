@@ -92,7 +92,7 @@ export const AppConfig = Object.freeze({
 
 	// Email
 	email: {
-		pt: 'contacto@braaay.com',
+		pt: 'contato@braaay.com',
 		uy: 'contacto@braaay.com'
 	},
 
