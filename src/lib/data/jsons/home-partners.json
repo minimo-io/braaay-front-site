@@ -1,6 +1,12 @@
 {
 	"pt": [
 		{
+			"name": "Família Capoani",
+			"logo": "/images/partners/capoani-logo-3.webp",
+			"url": "/produtores-de-vinho/familia-capoani/",
+			"count": 0
+		},
+		{
 			"name": "Bouza",
 			"logo": "/images/partners/vinicola-bouza.png",
 			"url": "/produtores-de-vinho/bodega-bouza/",
