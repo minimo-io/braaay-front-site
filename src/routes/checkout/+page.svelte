@@ -60,6 +60,7 @@
 	import type { Items } from 'mercadopago/dist/clients/commonTypes';
 	import type { Item } from 'mercadopago/dist/clients/order/commonTypes';
 	import { trackEvent } from '$components/analytics';
+	import { isCustomerDataComplete } from '$lib/services';
 
 	interface Steps {
 		step1: boolean | object;
@@ -139,20 +140,56 @@
 		await initializeCheckout();
 	});
 
+	// async function initializeCheckout() {
+	// 	isInitializing = true;
+	// 	try {
+	// 		// Step 1 done if auth, then get the data
+	// 		if (isAuthenticated()) {
+	// 			steps.step1 = true;
+
+	// 			// Query client
+	// 			const customerResult = await getUrqlClient().client.query(CUSTOMER_QUERY, {});
+	// 			if (customerResult?.error) {
+	// 				throw new Error(customerResult.error.message);
+	// 			}
+
+	// 			customer = mapCustomerToUser(customerResult.data);
+	// 		}
+
+	// 		// If only virtual products then no shipping to show
+	// 		if (allVirtualProducts) {
+	// 			setPickUpOrVirtual({ hideShippingSelectorForm: true });
+	// 			deliveryType = DeliveryUIType.PICKUP;
+	// 		}
+	// 	} catch (err) {
+	// 		console.error(`Error initializing checkout: ${err}`);
+	// 		launchToast('Houve um erro tentando obter os dados do cliente', 'error');
+	// 		goto(localizeHref('/cart/'));
+	// 	} finally {
+	// 		// toggleLoader();
+	// 		isInitializing = false;
+	// 	}
+	// }
+
 	async function initializeCheckout() {
 		isInitializing = true;
 		try {
-			// Step 1 done if auth, then get the data
+			// If user is authenticated, get their data and validate completeness
 			if (isAuthenticated()) {
-				steps.step1 = true;
-
-				// Query client
+				// Query client to get customer data
 				const customerResult = await getUrqlClient().client.query(CUSTOMER_QUERY, {});
 				if (customerResult?.error) {
 					throw new Error(customerResult.error.message);
 				}
 
 				customer = mapCustomerToUser(customerResult.data);
+
+				// Check if customer has all required data for step 1
+				if (customer && isCustomerDataComplete(customer)) {
+					steps.step1 = true;
+				}
+				// If customer data is incomplete, step1 will remain false
+				// and the StepOnePending component will show to collect missing data
 			}
 
 			// If only virtual products then no shipping to show
@@ -165,7 +202,6 @@
 			launchToast('Houve um erro tentando obter os dados do cliente', 'error');
 			goto(localizeHref('/cart/'));
 		} finally {
-			// toggleLoader();
 			isInitializing = false;
 		}
 	}

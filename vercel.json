@@ -1,6 +1,11 @@
 {
 	"redirects": [
 		{
+			"source": "/produto/familia-deicas-preludio-branco/",
+			"destination": "https://braaay.com/produto/vinho-uruguaio-familia-deicas-preludio-branco/",
+			"permanent": true
+		},
+		{
 			"source": "/blog/sobre-vinho/vinhos-de-pequenos-produtores/",
 			"destination": "https://braaay.com/blog/vinhos-de-pequenos-produtores/",
 			"permanent": true

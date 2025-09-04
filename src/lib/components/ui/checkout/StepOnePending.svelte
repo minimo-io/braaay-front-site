@@ -1,3 +1,4 @@
+<!-- src/lib/components/ui/checkout/StepOnePending.svelte -->
 <script lang="ts">
 	import Button from '../buttons/Button.svelte';
 	import { Lock } from '@lucide/svelte';

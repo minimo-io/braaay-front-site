@@ -44,7 +44,7 @@
 				<br />
 				<span>{customer?.firstName} {customer?.lastName}</span>
 
-				- <span>({customer?.databaseId ? `#${customer.databaseId}` : 'Convidado'})</span>
+				<span>{customer?.databaseId ? ` - (#${customer.databaseId})` : ''}</span>
 				- <span class="font-bold">CPF:</span>
 				{#if customer.cpf}
 					<span> {formatCpf(customer?.cpf)}</span>
