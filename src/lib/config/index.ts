@@ -41,7 +41,7 @@ export const AppConfig = Object.freeze({
 	// Disable filter for this urls
 	catalog_filter_disallow: ['cervejas', 'experiencias'],
 	// Enable/Disable cashback site wide
-	cashbackEnabled: true,
+	cashbackEnabled: false,
 	// Cashback value
 	cashbackPercentage: 5,
 

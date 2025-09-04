@@ -7,6 +7,19 @@ export const HomeLatestPosts = (locale: Locale = 'pt') => {
 		return [
 			{
 				url: '/blog/harmonizacao-com-vinho-tannat/',
+				media: 'https://api.braaay.com/wp-content/uploads/2023/10/uvas-cabernet-sauvignon.webp',
+				title: 'Tannat ou Cabernet Sauvignon?',
+				date: '2025-09-04T10:54:54+00:00',
+				author: {
+					name: 'BRAAAY',
+					image:
+						'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
+				},
+				readingTime: 'Lectura em 8 min',
+				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
+			},
+			{
+				url: '/blog/harmonizacao-com-vinho-tannat/',
 				media:
 					'https://api.braaay.com/wp-content/uploads/2025/08/harmonizacoes-com-vinho-tannat.png',
 				title: 'Harmonização com vinho tannat',
@@ -31,21 +44,22 @@ export const HomeLatestPosts = (locale: Locale = 'pt') => {
 				},
 				readingTime: 'Lectura em 8 min',
 				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
-			},
-			{
-				url: '/blog/inovacao-no-terroir-uruguaio-francisco-carrau-cerro-chapeu-e-a-uva-manseng-noir/',
-				media:
-					'https://api.braaay.com/wp-content/uploads/2025/04/manseng-noir-folklore-cerro-chapeu.jpg',
-				title: 'Inovação no Terroir uruguaio: Francisco Carrau, Cerro Chapeu e a uva Manseng Noir',
-				date: '2025-08-14T10:08:56',
-				author: {
-					name: 'BRAAAY',
-					image:
-						'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
-				},
-				readingTime: 'Lectura em 10 min',
-				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
 			}
+			// {
+			// 	url: '/blog/inovacao-no-terroir-uruguaio-francisco-carrau-cerro-chapeu-e-a-uva-manseng-noir/',
+			// 	media:
+			// 		'https://api.braaay.com/wp-content/uploads/2025/04/manseng-noir-folklore-cerro-chapeu.jpg',
+			// 	title: 'Inovação no Terroir uruguaio: Francisco Carrau, Cerro Chapeu e a uva Manseng Noir',
+			// 	date: '2025-08-14T10:08:56',
+			// 	author: {
+			// 		name: 'BRAAAY',
+			// 		image:
+			// 			'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
+			// 	},
+			// 	readingTime: 'Lectura em 10 min',
+			// 	categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
+			// }
+
 			// {
 			// 	url: '/blog/tannat-day-150-anos-dos-melhores-tannat-do-mundo-14-de-abril/',
 			// 	media: 'https://api.braaay.com/wp-content/uploads/2025/04/tannat-day-uruguai.jpeg',
