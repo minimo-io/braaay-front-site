@@ -5,15 +5,26 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 	if (locale == 'pt') {
 		return {
 			products: [
+				// {
+				// 	title: 'Familia Deicas Alvarinho Atlántico Sur 750ml',
+				// 	price: `${m.currencySymbol()}148,00`,
+				// 	regularPrice: `${m.currencySymbol()}148,00`,
+				// 	url: '/produto/vinho-branco-alvarinho-atlantico-sur-deicas-uruguai/',
+				// 	score: '',
+				// 	image: {
+				// 		src: 'https://api.braaay.com/wp/wp-content/uploads/2025/02/vinho-alvarinho-atlantico-sur-deicas-2.png',
+				// 		alt: 'vinho-alvarinho-atlantico-sur-deicas-2'
+				// 	}
+				// },
 				{
-					title: 'Familia Deicas Alvarinho Atlántico Sur 750ml',
-					price: `${m.currencySymbol()}148,00`,
-					regularPrice: `${m.currencySymbol()}148,00`,
-					url: '/produto/vinho-branco-alvarinho-atlantico-sur-deicas-uruguai/',
+					title: 'Miolo Single Vineyard Gewurztraminer 750ml',
+					price: `${m.currencySymbol()}86,00`,
+					regularPrice: `${m.currencySymbol()}86,00`,
+					url: '/produto/vinho-branco-miolo-single-vineyard-gewurztraminer-750ml/',
 					score: '',
 					image: {
-						src: 'https://api.braaay.com/wp/wp-content/uploads/2025/02/vinho-alvarinho-atlantico-sur-deicas-2.png',
-						alt: 'vinho-alvarinho-atlantico-sur-deicas-2'
+						src: 'https://api.braaay.com/wp-content/uploads/2025/09/miolo-single-vineyard-gewurztraminer.png',
+						alt: 'miolo-single-vineyard-gewurztraminer'
 					}
 				},
 				{
