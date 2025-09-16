@@ -1,14 +1,15 @@
+<!-- src/lib/components/ui/products/ProductImage.svelte -->
 <script lang="ts">
 	import { AppConfig } from '$config';
 	import { addProductToFavorites, removeProductFromFavorites } from '$lib/services/index';
 	import { m } from '$lib/paraglide/messages';
 	import type { PageCustomColors, ImageGeneral, ProductCategory, Product } from '$lib/types';
 	import { calculatePercentageDifference, capitalize, launchToast } from '$lib/utils';
-	import { Heart, Share2, Youtube } from '@lucide/svelte';
+	import { Heart, Share2, Youtube, X } from '@lucide/svelte';
+	import { onMount } from 'svelte';
 
 	interface Props {
 		colors?: PageCustomColors;
-
 		image: ImageGeneral;
 		productCategories?: ProductCategory[];
 		product?: Product;
@@ -18,11 +19,27 @@
 	let hasPriceDiscount = product && product.regularPrice != product.price;
 	let isLoading = $state(false);
 	let isFavorite = $state(product?.isFavorited);
+	let showVideoModal = $state(false);
+	let isDesktop = $state(false);
 
 	// For kits
 	const isFullImage = productCategories?.some((category) =>
 		AppConfig.kitsImageCategories.includes(category.slug)
 	);
+
+	onMount(() => {
+		// Check if we're on desktop
+		const checkIsDesktop = () => {
+			isDesktop = window.innerWidth >= 768; // md breakpoint
+		};
+
+		checkIsDesktop();
+		window.addEventListener('resize', checkIsDesktop);
+
+		return () => {
+			window.removeEventListener('resize', checkIsDesktop);
+		};
+	});
 
 	function shareContent() {
 		if (navigator.share) {
@@ -63,7 +80,46 @@
 			isLoading = false;
 		}
 	}
+
+	function handleVideoClick(event: Event) {
+		if (isDesktop) {
+			event.preventDefault();
+			showVideoModal = true;
+			// Prevent body scrolling when modal is open
+			document.body.style.overflow = 'hidden';
+		}
+		// On mobile, let the default behavior happen (open in new tab)
+	}
+
+	function handleVideoKeydown(event: KeyboardEvent) {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			handleVideoClick(event);
+		}
+	}
+
+	function closeVideoModal() {
+		showVideoModal = false;
+		document.body.style.overflow = 'auto';
+	}
+
+	function getYouTubeEmbedUrl(url: string): string {
+		// Convert YouTube watch URL to embed URL
+		const videoId = url.match(
+			/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/
+		)?.[1];
+		return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0` : url;
+	}
+
+	// Close modal on Escape key
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && showVideoModal) {
+			closeVideoModal();
+		}
+	}
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <div
 	class={['flex items-center relative', isFullImage ? 'p-0' : 'p-8']}
@@ -136,6 +192,8 @@
 					target="_blank"
 					rel="noopener noreferrer"
 					class="flex gap-1 items-center"
+					onclick={handleVideoClick}
+					onkeydown={handleVideoKeydown}
 				>
 					<Youtube class="w-[23px]" />
 					<span class="text-[13px] text-blue">{m.watchVideo()}</span>
@@ -153,3 +211,47 @@
 		height="578"
 	/>
 </div>
+
+<!-- Video Modal -->
+{#if showVideoModal && product?.pageCustomColors.youtubeVideo}
+	<!-- Modal Backdrop -->
+	<div class="fixed inset-0 bg-black bg-opacity-90 z-50">
+		<!-- Close backdrop (invisible but covers full screen) -->
+		<button
+			class="absolute inset-0 w-full h-full cursor-default"
+			onclick={closeVideoModal}
+			aria-label="Close video modal"
+			style="background: transparent; border: none;"
+		></button>
+
+		<!-- Modal Content Container -->
+		<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+			<!-- Modal Content -->
+			<div
+				class="relative w-full h-full max-w-6xl max-h-[90vh] mx-4 my-8 pointer-events-auto"
+				role="dialog"
+				aria-modal="true"
+				aria-labelledby="video-modal-title"
+			>
+				<!-- Close button -->
+				<button
+					onclick={closeVideoModal}
+					class="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
+					aria-label="Close video"
+				>
+					<X class="w-8 h-8" />
+				</button>
+
+				<!-- Video iframe -->
+				<iframe
+					src={getYouTubeEmbedUrl(product.pageCustomColors.youtubeVideo)}
+					title="Product video"
+					class="w-full h-full rounded-lg"
+					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen
+				></iframe>
+			</div>
+		</div>
+	</div>
+{/if}
