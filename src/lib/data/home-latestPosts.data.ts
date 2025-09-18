@@ -6,6 +6,19 @@ export const HomeLatestPosts = (locale: Locale = 'pt') => {
 	if (locale == 'pt') {
 		return [
 			{
+				url: '/blog/decantadores-de-vinho-entenda-o-papel-e-como-escolher-o-seu/',
+				media: 'https://api.braaay.com/wp-content/uploads/2025/09/decantador-vinho.jpg',
+				title: 'Decantadores de vinho: Entenda o papel e como escolher o seu',
+				date: '2025-09-18T21:02:13+00:00',
+				author: {
+					name: 'BRAAAY',
+					image:
+						'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
+				},
+				readingTime: 'Lectura em 5 min',
+				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
+			},
+			{
 				url: '/blog/harmonizacao-com-vinho-tannat/',
 				media: 'https://api.braaay.com/wp-content/uploads/2023/10/uvas-cabernet-sauvignon.webp',
 				title: 'Tannat ou Cabernet Sauvignon?',
@@ -31,20 +44,21 @@ export const HomeLatestPosts = (locale: Locale = 'pt') => {
 				},
 				readingTime: 'Lectura em 5 min',
 				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
-			},
-			{
-				url: '/blog/tannat-a-uva-emblematica-do-uruguai-em-evolucao/',
-				media: 'https://api.braaay.com/wp-content/uploads/2025/08/tannat-uruguaio.jpg',
-				title: 'Tannat: a uva emblemática do Uruguai em evolução',
-				date: '2025-08-15T12:41:00',
-				author: {
-					name: 'BRAAAY',
-					image:
-						'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
-				},
-				readingTime: 'Lectura em 8 min',
-				categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
 			}
+
+			// {
+			// 	url: '/blog/tannat-a-uva-emblematica-do-uruguai-em-evolucao/',
+			// 	media: 'https://api.braaay.com/wp-content/uploads/2025/08/tannat-uruguaio.jpg',
+			// 	title: 'Tannat: a uva emblemática do Uruguai em evolução',
+			// 	date: '2025-08-15T12:41:00',
+			// 	author: {
+			// 		name: 'BRAAAY',
+			// 		image:
+			// 			'https://api.braaay.com/wp-content/uploads/2024/10/cropped-braaay-map-logo-96x96.jpg'
+			// 	},
+			// 	readingTime: 'Lectura em 8 min',
+			// 	categories: [{ name: 'Blog', uri: '/blog/' }] as PostBaseCategory[]
+			// }
 			// {
 			// 	url: '/blog/inovacao-no-terroir-uruguaio-francisco-carrau-cerro-chapeu-e-a-uva-manseng-noir/',
 			// 	media:
