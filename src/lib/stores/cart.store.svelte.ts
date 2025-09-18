@@ -6,8 +6,9 @@ import { AppConfig } from '$config';
 import { shippingDetails, setShippingDetails } from './shippingDetails.state.svelte';
 import { getUrqlClient } from './urqlClient.state.svelte';
 import { EMPTY_CART_MUTATION } from '$lib/graphql/mutations';
-import { launchToast } from '$lib/utils';
+import { getCurrencyFromPrice, launchToast } from '$lib/utils';
 import { m } from '$lib/paraglide/messages';
+import { trackEvent } from '$components/analytics';
 
 // Main cart
 const initialCart: Cart = browser
@@ -33,12 +34,30 @@ if (browser) {
 export const addToCart = (item: CartItem, callback?: (updatedCart: Cart) => void) => {
 	cart.update((currentCart: Cart) => {
 		const existingIndex = currentCart.items.findIndex((i) => i.id === item.id);
+		let finalQuantity = 1;
+
 		if (existingIndex !== -1) {
 			currentCart.items[existingIndex].quantity += 1;
+			finalQuantity = currentCart.items[existingIndex].quantity;
 		} else {
 			// When adding a new item, ensure its initial quantity is 1.
 			currentCart.items.push({ ...item, quantity: 1 });
+			finalQuantity = 1;
 		}
+
+		// Add to cart analytics
+		trackEvent('add_to_cart', {
+			currency: getCurrencyFromPrice(item.priceString), // string
+			value: item.price * finalQuantity, // number (price * quantity)
+			items: [
+				{
+					item_id: item.sku, // string
+					item_name: item.name, // string
+					quantity: finalQuantity, // number
+					price: item.price // number (unit price)
+				}
+			]
+		});
 
 		// If a callback is provided, call it with the updated cart
 		if (callback) {

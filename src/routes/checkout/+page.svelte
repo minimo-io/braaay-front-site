@@ -25,6 +25,7 @@
 	import {
 		generateBasicAuthorization,
 		getCreditCardBrand,
+		getCurrencyFromPrice,
 		launchToast,
 		truncate,
 		validateCreditCard
@@ -135,8 +136,23 @@
 	});
 
 	onMount(async () => {
-		// Analytics
-		trackEvent('begin_checkout', {});
+		// Analytics - Enhanced begin_checkout with proper cart data
+		if ($cart.items.length > 0) {
+			// Get currency from first item (assuming all items have same currency)
+			const currency = getCurrencyFromPrice($cart.items[0].priceString);
+
+			trackEvent('begin_checkout', {
+				currency: currency,
+				value: cartSubTotalAmount, // Using your existing calculated total
+				items: $cart.items.map((item) => ({
+					item_id: item.sku,
+					item_name: item.name,
+					quantity: item.quantity,
+					price: item.price
+				}))
+			});
+		}
+
 		await initializeCheckout();
 	});
 

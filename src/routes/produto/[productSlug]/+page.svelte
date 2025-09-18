@@ -7,6 +7,10 @@
 	import FunMessageSection from '$components/layout/FunMessageSection.svelte';
 	import Meta from '$components/layout/Meta.svelte';
 	import SchemaProduct from '$components/layout/Schemas/SchemaProduct.svelte';
+	import { onMount } from 'svelte';
+	import { trackEvent } from '$components/analytics';
+	import { m } from '$lib/paraglide/messages';
+	import { getCurrencyFromPrice } from '$lib/utils';
 
 	let { data }: { data: PageData } = $props();
 
@@ -19,6 +23,23 @@
 	const attributes = $state(data.attributes);
 
 	const seo = $state(data.seo);
+
+	// 1. VIEW_ITEM - Product page onMount
+	onMount(() => {
+		trackEvent('view_item', {
+			currency: getCurrencyFromPrice(`${m.currencySymbol()}`), // string
+			value: Number(product?.floatPrice), // number (no quotes, no commas)
+			items: [
+				{
+					item_id: `${product?.sku}`, // string
+					item_name: `${product?.title}`, // string
+					// category: `${productCategories![0].name ?? ''}`, // string
+					quantity: 1, // number
+					price: Number(product?.floatPrice) // number (no quotes, no commas)
+				}
+			]
+		});
+	});
 
 	const article: Post = {
 		id: '',
@@ -37,7 +58,8 @@
 		featuredImage: {
 			mediaItemUrl: product?.pageCustomColors.bgImage || '',
 			altText: ''
-		}
+		},
+		categories: []
 	};
 </script>
 

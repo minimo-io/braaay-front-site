@@ -140,3 +140,16 @@ export function calculateCashback(value: number, cashbackPercentage: number): nu
 	const cashbackAmount = value * (cashbackPercentage / 100);
 	return parseFloat(cashbackAmount.toFixed(2));
 }
+
+export function getCurrencyFromPrice(priceString?: string): string {
+	if (!priceString) return 'USD';
+
+	if (priceString.includes('R$')) {
+		return 'BRL'; // Brazilian Real
+	} else if (priceString.includes('$')) {
+		return 'UYU'; // Uruguayan Peso
+	}
+
+	// Default to USD if no specific currency symbol is found
+	return 'USD';
+}

@@ -13,7 +13,13 @@
 	import CouponForm from '$components/ui/forms/couponForm.svelte';
 	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import CartItemElement from '$components/ui/cart/CartItemElement.svelte';
-	import { addCouponToCart, correctPrice, stripHtml, subtractPercentage } from '$lib/utils';
+	import {
+		addCouponToCart,
+		correctPrice,
+		getCurrencyFromPrice,
+		stripHtml,
+		subtractPercentage
+	} from '$lib/utils';
 	import { MoreInfoButton } from '$components/ui/buttons';
 	import { COUPON_CLEAR_ALL } from '$lib/graphql/mutations';
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
@@ -64,10 +70,26 @@
 		subtractPercentage(totalAmount, 5) - discounts
 	);
 
+	// On mount
 	onMount(() => {
-		// Analytics
-		trackEvent('view_cart');
+		// Analytics - Enhanced view_cart with proper data
+		if ($cart.items.length > 0) {
+			// Get currency from first item (assuming all items have same currency)
+			const currency = getCurrencyFromPrice($cart.items[0].priceString);
 
+			trackEvent('view_cart', {
+				currency: currency,
+				value: totalAmount, // Using your existing totalAmount variable
+				items: $cart.items.map((item) => ({
+					item_id: item.sku,
+					item_name: item.name,
+					quantity: item.quantity,
+					price: item.price
+				}))
+			});
+		}
+
+		// Your existing URL parameter handling
 		if (
 			page.url.searchParams.has('adicionar-cupom') ||
 			page.url.searchParams.has('agregar-cupon')
@@ -78,11 +100,6 @@
 				header: m.addCoupon(),
 				content: CouponForm as Component
 			});
-
-			// Optional: Clean up the URL parameter after opening the modal
-			// const url = new URL(page.url);
-			// url.searchParams.delete('addCoupon');
-			// history.replaceState({}, '', url.toString());
 		}
 	});
 

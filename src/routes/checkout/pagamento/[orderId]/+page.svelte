@@ -11,12 +11,15 @@
 	import CheckoutPaymentQrSteps from '$components/ui/checkout/CheckoutPaymentQRSteps.svelte';
 	import { calculateCashback, generateBasicAuthorization, launchToast } from '$lib/utils';
 	import { AppConfig } from '$config';
+	import { cart } from '$stores/cart.store.svelte';
+	import { getCurrencyFromPrice } from '$lib/utils';
 
 	import { getUrqlClient } from '$stores/urqlClient.state.svelte';
 	import { ORDER_QUERY_STATUS } from '$lib/graphql/queries/order-get-status.query';
 	import { PUBLIC_APP_PASSWORD_EMAIL, PUBLIC_APP_PASSWORD_KEY } from '$env/static/public';
 	import { emptyCart } from '$stores/cart.store.svelte';
 	import Meta from '$components/layout/Meta.svelte';
+	import { trackEvent } from '$components/analytics';
 
 	const orderId = page.params.orderId;
 	const data = $derived(page.data);
@@ -136,6 +139,23 @@
 	// --- END NEW FUNCTION ---
 
 	onMount(() => {
+		// Add payment info analytics - PIX selected with cart data
+		if (data.success && data.payment && $cart.items.length > 0) {
+			const currency = getCurrencyFromPrice($cart.items[0].priceString);
+
+			trackEvent('add_payment_info', {
+				currency: currency,
+				value: parseFloat(data.payment.total_amount),
+				payment_type: 'pix',
+				items: $cart.items.map((item) => ({
+					item_id: item.sku,
+					item_name: item.name,
+					quantity: item.quantity,
+					price: item.price
+				}))
+			});
+		}
+
 		// Handle the pushState call asynchronously but don't make onMount async
 		(async () => {
 			// Wait for the next tick to ensure the router is initialized

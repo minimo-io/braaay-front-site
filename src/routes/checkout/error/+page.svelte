@@ -10,6 +10,7 @@
 	import { Check, X } from '@lucide/svelte';
 	import { AppConfig } from '$config';
 	import Meta from '$components/layout/Meta.svelte';
+	import { trackEvent } from '$components/analytics.js';
 
 	// const routeId = page.route.id;
 	const providerCode = $derived(page.url.searchParams.get('provider'));
@@ -21,6 +22,11 @@
 	let { data } = $props();
 
 	onMount(() => {
+		trackEvent('checkout_error', {
+			error_type: 'payment_failed', // or get from URL params
+			payment_method: 'credit_card' // or 'credit_card'
+		});
+
 		loaderActivated.active = false;
 		console.log('Cancellation result', data.cancellationResult);
 		console.log('data', data);

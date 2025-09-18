@@ -2,7 +2,7 @@
 import { browser } from '$app/environment';
 
 interface GtagEventParams {
-	[key: string]: string | number | undefined;
+	[key: string]: string | number | undefined | any[];
 }
 
 /**

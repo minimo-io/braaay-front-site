@@ -1,3 +1,4 @@
+<!-- src/routes/checkout/confirmation/[orderId]/+page.svelte -->
 <script lang="ts">
 	import { page } from '$app/state';
 	import Meta from '$components/layout/Meta.svelte';
@@ -8,13 +9,34 @@
 	import { emptyCart } from '$stores/cart.store.svelte.js';
 	import { Check } from '@lucide/svelte';
 	import { onMount } from 'svelte';
+	import { cart } from '$stores/cart.store.svelte';
+	import { getCurrencyFromPrice } from '$lib/utils';
+	import { trackEvent } from '$components/analytics';
 
 	const orderId = $state(page.params.orderId);
 
 	let { data } = $props();
 
 	onMount(async () => {
-		console.log('data', data);
+		// Purchase analytics - track before clearing cart
+		if ($cart.items.length > 0) {
+			// Calculate total from cart
+			const cartTotal = $cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+			const currency = getCurrencyFromPrice($cart.items[0].priceString);
+
+			trackEvent('purchase', {
+				transaction_id: orderId,
+				currency: currency,
+				value: cartTotal, // Total from cart items
+				items: $cart.items.map((item) => ({
+					item_id: item.sku,
+					item_name: item.name,
+					quantity: item.quantity,
+					price: item.price
+				}))
+			});
+		}
+		// console.log('data', data);
 		await emptyCart();
 	});
 </script>
@@ -67,7 +89,7 @@
 				type="sun"
 				action={() => {
 					navigator.clipboard
-						.writeText(orderId)
+						.writeText(orderId!)
 						.then(() => {
 							launchToast(m.copiedToClipboard(), 'success', 2000);
 							// console.log('Copied to clipboard');
