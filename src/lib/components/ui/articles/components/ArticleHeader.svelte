@@ -18,7 +18,7 @@
 {#if fullWidth}
 	<!-- Mostly for Blog Articles -->
 	<div class="bry-header w-full h-[250px] max-h-[250px] bg-[#d1d1d0] relative mb-36">
-		<div
+		<!-- <div
 			class="absolute inset-0 opacity-70 z-0"
 			style="
     background-size: cover;
@@ -26,12 +26,13 @@
       linear-gradient(to bottom, var(--bry-current-color), var(--bry-current-color));
     background-blend-mode: multiply;
   "
+		></div> -->
+
+		<div
+			class="absolute inset-0 opacity-70 z-0"
+			style="background-image: linear-gradient(to bottom, var(--bry-current-color), var(--bry-current-color));background-blend-mode: multiply;"
 		></div>
-		<!-- Header deck -->
-		<!-- <h3 class="bry-header-deck">
-                <a href="#" style="border-color: var(--bry-current-color)">Blog</a>
-            </h3> -->
-		<!-- Header title -->
+
 		<h2 class="bry-header-title max-w-screen-lg !pt-0">
 			{article.title}
 		</h2>

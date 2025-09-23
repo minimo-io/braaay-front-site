@@ -40,6 +40,7 @@
 					<img
 						src={article.featuredImage.mediaItemUrl}
 						alt={article.featuredImage.altText}
+						fetchpriority="high"
 						class="rounded-xl w-full"
 					/>
 					<Divider color="green" extraClasses="mb-2" />
