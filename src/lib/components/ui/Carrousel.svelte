@@ -26,7 +26,9 @@
 			{#if locale == 'pt'}
 				<li class="glide__slide w-full">
 					<a
-						href={localizeHref('/produto/evento-braaay-x-miolo-rota-dos-terroirs-com-elcio-iliuk/')}
+						href={localizeHref(
+							'/produto/6a-edicao-da-confraria-entre-tacas-e-mulheres-rose-na-taca-poder-no-olhar/'
+						)}
 						class="not-hover-effect"
 					>
 						<picture>
