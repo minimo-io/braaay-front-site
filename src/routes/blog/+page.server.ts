@@ -29,40 +29,9 @@ import type { PageServerLoad } from './$types';
 
 import { TURSO_AUTH_TOKEN, TURSO_URL } from '$env/static/private';
 import { createClient } from '@libsql/client';
-import type { Post } from '$lib/types';
+import type { Post, SqlitePost } from '$lib/types';
 import { getLocale } from '$lib/paraglide/runtime';
-import he from 'he';
-
-interface SqlitePost {
-	id: string;
-	title: string;
-	uri: string;
-	content?: string;
-	excerpt: string;
-	featured_image_url: string;
-	featured_image_alt: string;
-	author_id: string;
-	author_name: string;
-	author_avatar: string;
-	date: string;
-	modified: string;
-	categories_json: string | null;
-}
-
-const stripHtmlForPage = (html: string): string => {
-	if (!html) {
-		return '';
-	}
-
-	// First, decode all HTML entities.
-	const decodedHtml = he.decode(html);
-
-	// Then, strip any remaining HTML tags
-	const withoutTags = decodedHtml.replace(/<[^>]+>/g, '');
-
-	// Finally, remove WordPress-style excerpt ellipsis `[&hellip;]` or `[...]`
-	return withoutTags.replace(/\[(&hellip;|\.\.\.)\]/g, '…').trim();
-};
+import { stripHtmlEnhanced } from '$lib/utils';
 
 export const load: PageServerLoad = async () => {
 	const sqliteDb = createClient({
@@ -97,7 +66,7 @@ export const load: PageServerLoad = async () => {
 
 	const posts: Post[] = postsRows.map((post: SqlitePost) => {
 		const categories = post.categories_json ? JSON.parse(post.categories_json) : [];
-		const cleanedExcerpt = stripHtmlForPage(post.excerpt);
+		const cleanedExcerpt = stripHtmlEnhanced(post.excerpt);
 
 		return {
 			id: post.id,

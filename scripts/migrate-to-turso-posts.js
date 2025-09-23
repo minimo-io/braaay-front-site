@@ -1,3 +1,4 @@
+// scripts/migrate-to-turso-posts.ts
 import { createClient as createUrqlClient, gql } from '@urql/core';
 import { cacheExchange, fetchExchange } from '@urql/core';
 import { createClient as createTursoClient } from '@libsql/client';
@@ -9,19 +10,24 @@ const turso = createTursoClient({
     url: process.env.TURSO_URL,
     authToken: process.env.TURSO_AUTH_TOKEN
 });
-// GraphQL query to fetch all posts
+// GraphQL query to fetch all posts with SEO data
 const GET_ALL_POSTS = gql `
 	query LatestPosts {
 		posts(first: 100000, where: { status: PUBLISH, orderby: { field: DATE, order: DESC } }) {
 			edges {
 				node {
 					uri
+					slug
 					databaseId
 					title
 					date
 					modified
 					excerpt
 					content
+					header {
+						firstSubtitle
+						firstParagraph
+					}
 					categories {
 						nodes {
 							databaseId
@@ -43,6 +49,24 @@ const GET_ALL_POSTS = gql `
 								url
 							}
 						}
+					}
+					seo {
+						title
+						metaDesc
+						canonical
+						opengraphTitle
+						opengraphDescription
+						opengraphImage {
+							sourceUrl
+						}
+						twitterTitle
+						twitterDescription
+						twitterImage {
+							sourceUrl
+						}
+						metaKeywords
+						metaRobotsNoindex
+						metaRobotsNofollow
 					}
 				}
 			}
@@ -103,6 +127,149 @@ async function upsertCategory(name, uri, graphql_id, languageCode) {
         return null;
     }
 }
+async function upsertPost(databaseId, title, uri, slug, content, excerpt, featured_image_url, featured_image_alt, author_id, date, modified, languageCode, seo = null, headerFirstSubtitle, headerFirstParagraph) {
+    try {
+        // First, check if post exists by URI or graphql_id and get its modified_at date
+        const existingPost = await turso.execute({
+            sql: 'SELECT id, modified_at FROM posts WHERE uri = ? OR (graphql_id = ? AND language_code = ?)',
+            args: [uri, databaseId, languageCode]
+        });
+        if (existingPost.rows.length > 0) {
+            const postId = existingPost.rows[0].id;
+            const existingModified = existingPost.rows[0].modified_at;
+            // Force update to add SEO data (or check if SEO data is missing)
+            const seoCheck = await turso.execute({
+                sql: 'SELECT seo_title, header_first_paragraph, slug FROM posts WHERE id = ?',
+                args: [postId]
+            });
+            const needsSeoUpdate = !seoCheck.rows[0]?.seo_title;
+            const needsFirstParagraphUpdate = !seoCheck.rows[0]?.header_first_paragraph;
+            const needsSlugUpdate = !seoCheck.rows[0]?.slug;
+            // Update if modified date is different OR if SEO data is missing
+            if (existingModified !== modified ||
+                needsSeoUpdate ||
+                needsFirstParagraphUpdate ||
+                needsSlugUpdate) {
+                await turso.execute({
+                    sql: `UPDATE posts SET 
+						graphql_id = ?, 
+						title = ?, 
+						uri = ?, 
+						slug = ?,
+						content = ?, 
+						excerpt = ?, 
+						featured_image_url = ?, 
+						featured_image_alt = ?, 
+						author_id = ?, 
+						created_at = ?, 
+						modified_at = ?, 
+						language_code = ?,
+						seo_title = ?,
+						seo_description = ?,
+						seo_canonical_url = ?,
+						seo_og_title = ?,
+						seo_og_description = ?,
+						seo_og_image = ?,
+						seo_twitter_title = ?,
+						seo_twitter_description = ?,
+						seo_twitter_image = ?,
+						seo_keywords = ?,
+						seo_noindex = ?,
+						seo_nofollow = ?,
+						header_first_subtitle = ?,
+						header_first_paragraph = ?
+
+						WHERE id = ?`,
+                    args: [
+                        databaseId,
+                        title,
+                        uri,
+                        slug,
+                        content,
+                        excerpt,
+                        featured_image_url,
+                        featured_image_alt,
+                        author_id,
+                        date,
+                        modified,
+                        languageCode,
+                        seo?.title || null,
+                        seo?.metaDesc || null,
+                        seo?.canonical || null,
+                        seo?.opengraphTitle || null,
+                        seo?.opengraphDescription || null,
+                        seo?.opengraphImage?.sourceUrl || null,
+                        seo?.twitterTitle || null,
+                        seo?.twitterDescription || null,
+                        seo?.twitterImage?.sourceUrl || null,
+                        seo?.metaKeywords || null,
+                        seo?.metaRobotsNoindex || null,
+                        seo?.metaRobotsNofollow || null,
+                        headerFirstSubtitle || null,
+                        headerFirstParagraph || null,
+                        postId
+                    ]
+                });
+                if (needsSeoUpdate) {
+                    console.log(`Updated existing post (added SEO data): ${title}`);
+                }
+                else {
+                    console.log(`Updated existing post (modified): ${title}`);
+                }
+            }
+            else {
+                console.log(`Skipped post (no changes): ${title}`);
+            }
+            return postId;
+        }
+        else {
+            // Insert new post
+            const result = await turso.execute({
+                sql: `INSERT INTO posts (
+					graphql_id, title, uri, content, excerpt, featured_image_url, featured_image_alt, 
+					author_id, created_at, modified_at, language_code,
+					seo_title, seo_description, seo_canonical_url, seo_og_title, seo_og_description, 
+					seo_og_image, seo_twitter_title, seo_twitter_description, seo_twitter_image,
+					seo_keywords, seo_noindex, seo_nofollow, header_first_subtitle = ?, header_first_paragraph = ?
+				) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                args: [
+                    databaseId,
+                    title,
+                    uri,
+                    slug,
+                    content,
+                    excerpt,
+                    featured_image_url,
+                    featured_image_alt,
+                    author_id,
+                    date,
+                    modified,
+                    languageCode,
+                    seo?.title || null,
+                    seo?.metaDesc || null,
+                    seo?.canonical || null,
+                    seo?.opengraphTitle || null,
+                    seo?.opengraphDescription || null,
+                    seo?.opengraphImage?.sourceUrl || null,
+                    seo?.twitterTitle || null,
+                    seo?.twitterDescription || null,
+                    seo?.twitterImage?.sourceUrl || null,
+                    seo?.metaKeywords || null,
+                    seo?.metaRobotsNoindex || null,
+                    seo?.metaRobotsNofollow || null,
+                    headerFirstSubtitle || null,
+                    headerFirstParagraph || null
+                ]
+            });
+            console.log(`Inserted new post: ${title}`);
+            return result.lastInsertRowid ? Number(result.lastInsertRowid) : null;
+        }
+    }
+    catch (err) {
+        console.error(`Error upserting post ${title}:`, err);
+        return null;
+    }
+}
 async function migrateForLanguage(wpClient, languageCode) {
     console.log(`Starting migration for ${languageCode}...`);
     let total = 0;
@@ -113,54 +280,29 @@ async function migrateForLanguage(wpClient, languageCode) {
             return;
         }
         const posts = res.data.posts.edges.map((edge) => edge.node);
+        console.log(`Found ${posts.length} posts to migrate for ${languageCode}`);
         for (const post of posts) {
-            const { databaseId, title, uri, excerpt, date, modified, content } = post;
+            const { databaseId, title, uri, excerpt, date, modified, content, seo, slug } = post;
             const featured_image_url = post.featuredImage?.node?.mediaItemUrl || null;
             const featured_image_alt = post.featuredImage?.node?.altText || null;
             const author = post.author?.node;
             const categories = post.categories?.nodes || [];
+            const headerFirstSubtitle = post.header.firstSubtitle;
+            const headerFirstParagraph = post.header.firstParagraph;
+            // Upsert author first
             const author_id = author
                 ? await upsertAuthor(author.databaseId, author.name, author.avatar?.url || null, languageCode)
                 : null;
-            const postResult = await turso.execute({
-                sql: `INSERT INTO posts (graphql_id, title, uri, content, excerpt, featured_image_url, featured_image_alt, author_id, created_at, modified_at, language_code)
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                      ON CONFLICT(uri) DO UPDATE SET
-                      title = excluded.title, content = excluded.content, excerpt = excluded.excerpt,
-                      featured_image_url = excluded.featured_image_url, featured_image_alt = excluded.featured_image_alt,
-                      author_id = excluded.author_id, created_at = excluded.created_at, modified_at = excluded.modified_at, language_code = excluded.language_code, graphql_id = excluded.graphql_id;`,
-                args: [
-                    databaseId,
-                    title,
-                    uri,
-                    content,
-                    excerpt,
-                    featured_image_url,
-                    featured_image_alt,
-                    author_id,
-                    date,
-                    modified,
-                    languageCode
-                ]
-            });
-            let postId = null;
-            if (postResult.lastInsertRowid && Number(postResult.lastInsertRowid) > 0) {
-                postId = Number(postResult.lastInsertRowid);
-            }
-            else {
-                const existingPost = await turso.execute({
-                    sql: 'SELECT id FROM posts WHERE uri = ?',
-                    args: [uri]
-                });
-                if (existingPost.rows.length > 0) {
-                    postId = existingPost.rows[0].id;
-                }
-            }
+            // Upsert post with SEO data
+            const postId = await upsertPost(databaseId, title, uri, slug, content, excerpt, featured_image_url, featured_image_alt, author_id, date, modified, languageCode, seo, headerFirstSubtitle, headerFirstParagraph);
+            // Handle categories if post was successfully upserted
             if (postId && categories.length > 0) {
+                // Clear existing categories for this post
                 await turso.execute({
                     sql: 'DELETE FROM posts_categories WHERE post_id = ?',
                     args: [postId]
                 });
+                // Insert updated categories
                 for (const category of categories) {
                     const categoryId = await upsertCategory(category.name, category.uri, category.databaseId, languageCode);
                     if (categoryId) {
@@ -172,7 +314,9 @@ async function migrateForLanguage(wpClient, languageCode) {
                 }
             }
             total++;
-            console.log(`Migrated post for ${languageCode}: ${title}`);
+            if (total % 10 === 0) {
+                console.log(`Progress for ${languageCode}: ${total} posts processed`);
+            }
         }
         console.log(`Migration for ${languageCode} completed. Total posts migrated: ${total}`);
     }
@@ -181,6 +325,7 @@ async function migrateForLanguage(wpClient, languageCode) {
     }
 }
 async function migratePosts() {
+    console.log('Starting post migration...');
     if (process.env.PUBLIC_GRAPHQL_SERVER_PT) {
         const ptClient = createUrqlClient({
             url: process.env.PUBLIC_GRAPHQL_SERVER_PT,
@@ -205,5 +350,6 @@ async function migratePosts() {
     else {
         console.log('Skipping UY migration, PUBLIC_GRAPHQL_SERVER_UY not set.');
     }
+    console.log('Migration completed!');
 }
 migratePosts().catch(console.error);

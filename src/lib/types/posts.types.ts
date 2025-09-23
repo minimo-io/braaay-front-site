@@ -2,6 +2,22 @@ import type { ArticleCreator } from './article-creator.types';
 import { stripHtml, transformLinks } from '$lib/utils/index';
 import type { YoastSeoData } from './seo.types';
 
+export interface SqlitePost {
+	id: string;
+	title: string;
+	uri: string;
+	content?: string;
+	excerpt: string;
+	featured_image_url: string;
+	featured_image_alt: string;
+	author_id: string;
+	author_name: string;
+	author_avatar: string;
+	date: string;
+	modified: string;
+	categories_json: string | null;
+}
+
 // For list of posts
 export interface PostsQueryResult {
 	posts: { edges: GraphQLPostFromList[] };
