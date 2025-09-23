@@ -2,40 +2,10 @@
 import type { PageServerLoad } from './$types';
 import { TURSO_AUTH_TOKEN, TURSO_URL } from '$env/static/private';
 import { createClient } from '@libsql/client';
-import type { Post, YoastSeoData } from '$lib/types';
+import type { Post, YoastSeoData, SqlitePostSingle } from '$lib/types';
 import { error } from '@sveltejs/kit';
 import { getLocale } from '$lib/paraglide/runtime';
-import { stripHtmlEnhanced } from '$lib/utils';
-
-interface SqlitePostSingle {
-	id: number;
-	title: string;
-	uri: string;
-	excerpt: string;
-	content: string;
-	featured_image_url: string | null;
-	featured_image_alt: string | null;
-	date: string;
-	modified: string;
-	author_id: number;
-	author_name: string;
-	author_avatar: string | null;
-	categories_json: string;
-	seo_title: string | null;
-	seo_description: string | null;
-	seo_canonical_url: string | null;
-	seo_og_title: string | null;
-	seo_og_description: string | null;
-	seo_og_image: string | null;
-	seo_twitter_title: string | null;
-	seo_twitter_description: string | null;
-	seo_twitter_image: string | null;
-	seo_keywords: string | null;
-	seo_noindex: string | null;
-	seo_nofollow: string | null;
-	header_first_subtitle: string | null;
-	header_first_paragraph: string | null;
-}
+import { removeWPBakeryShortcodes, stripHtmlEnhanced, transformLinks } from '$lib/utils';
 
 export const load: PageServerLoad = async ({ params, url }) => {
 	const { slug } = params;
@@ -84,6 +54,7 @@ export const load: PageServerLoad = async ({ params, url }) => {
 	try {
 		const categories = postRow.categories_json ? JSON.parse(postRow.categories_json) : [];
 		const cleanedExcerpt = stripHtmlEnhanced(postRow.excerpt);
+		const transformedContent = transformLinks(removeWPBakeryShortcodes(postRow.content));
 
 		const post: Post = {
 			id: String(postRow.id),
@@ -91,7 +62,7 @@ export const load: PageServerLoad = async ({ params, url }) => {
 			date: postRow.date,
 			modified: postRow.modified,
 			excerpt: cleanedExcerpt,
-			content: postRow.content,
+			content: transformedContent,
 			plainExcerpt: cleanedExcerpt,
 			uri: postRow.uri,
 			author: {

@@ -54,6 +54,29 @@ export function transformLinks(content: string, baseUrl?: string, currentRoute?:
 
 	const linkRegex = /<a\s+([^>]*?)>/gi;
 
+	// Transform standalone YouTube URLs to iframes (simple approach)
+	content = content.replace(
+		/(https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+))([^\s\]<]*)/g,
+		(fullMatch, urlPart, videoId, extraPart) => {
+			// Skip if it's inside href attribute
+			if (content.includes(`href="${urlPart}"`) || content.includes(`href='${urlPart}'`)) {
+				return fullMatch;
+			}
+
+			const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+			return `<div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; margin: 1rem 0;">
+			<iframe 
+				src="${embedUrl}" 
+				style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+				frameborder="0" 
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+				allowfullscreen>
+			</iframe>
+		</div>${extraPart}`;
+		}
+	);
+
+	// Correct links
 	return content.replace(linkRegex, (match) => {
 		const hrefMatch = match.match(/href=["']([^"']+)["']/i);
 		if (!hrefMatch) return match;

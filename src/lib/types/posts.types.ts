@@ -18,6 +18,36 @@ export interface SqlitePost {
 	categories_json: string | null;
 }
 
+export interface SqlitePostSingle {
+	id: number;
+	title: string;
+	uri: string;
+	excerpt: string;
+	content: string;
+	featured_image_url: string | null;
+	featured_image_alt: string | null;
+	date: string;
+	modified: string;
+	author_id: number;
+	author_name: string;
+	author_avatar: string | null;
+	categories_json: string;
+	seo_title: string | null;
+	seo_description: string | null;
+	seo_canonical_url: string | null;
+	seo_og_title: string | null;
+	seo_og_description: string | null;
+	seo_og_image: string | null;
+	seo_twitter_title: string | null;
+	seo_twitter_description: string | null;
+	seo_twitter_image: string | null;
+	seo_keywords: string | null;
+	seo_noindex: string | null;
+	seo_nofollow: string | null;
+	header_first_subtitle: string | null;
+	header_first_paragraph: string | null;
+}
+
 // For list of posts
 export interface PostsQueryResult {
 	posts: { edges: GraphQLPostFromList[] };

@@ -8,5 +8,6 @@
 </script>
 
 <div class="w-full">
-	{@html removeWPBakeryShortcodes(transformLinks(content, page.url.origin, page.url.pathname))}
+	<!-- {@html removeWPBakeryShortcodes(transformLinks(content, page.url.origin, page.url.pathname))} -->
+	{@html transformLinks(removeWPBakeryShortcodes(content), page.url.origin, page.url.pathname)}
 </div>
