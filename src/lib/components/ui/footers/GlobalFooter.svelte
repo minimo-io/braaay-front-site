@@ -58,10 +58,22 @@
 				<h2 class="text-2xl font-bold mb-4 text-center md:text-left">APP DE CASHBACK</h2>
 				<div class="flex gap-4 justify-center md:justify-start">
 					<a href="/">
-						<img src="/images/store-appstore.png" alt="apple-store" width="130" height="27" />
+						<img
+							src="/images/store-appstore.png"
+							loading="lazy"
+							alt="apple-store"
+							width="130"
+							height="27"
+						/>
 					</a>
 					<a href="/">
-						<img src="/images/store-googleplay.png" alt="apple-store" width="130" height="27" />
+						<img
+							src="/images/store-googleplay.png"
+							loading="lazy"
+							alt="apple-store"
+							width="130"
+							height="27"
+						/>
 					</a>
 				</div>
 			</div>
@@ -151,6 +163,7 @@
 							class="text-black text-xs cursor-pointer bg-transparent border-none p-0"
 						>
 							<img
+								loading="lazy"
 								src={locale === 'pt' ? '/images/flags/brazil.png' : '/images/flags/uruguay.png'}
 								alt="flag-{locale}"
 								class="inline w-[13px] h-[13px] mb-[3px] mr-[1px]"
@@ -183,7 +196,7 @@
 
 				<a
 					onclick={() => handleFwClick}
-					href="https://futurewise.lat/bagity"
+					href="https://futurewise.lat/store"
 					target="_blank"
 					rel="noopener"
 					class="underline text-grey-darkest"
@@ -214,7 +227,7 @@
 					<a
 						target="_blank"
 						rel="noopener"
-						href="https://futurewise.lat  "
+						href="https://futurewise.lat"
 						onclick={() => handleFwClick}
 					>
 						<img
@@ -222,7 +235,7 @@
 							width="100"
 							height="40"
 							class="h-10"
-							alt="futurewise-bagity"
+							alt="futurewise-store-ecommerce"
 						/>
 					</a>
 				</div>

@@ -11,6 +11,7 @@
 	<div class="flex flex-col text-center font-roboto text-blue items-center">
 		<div class="">
 			<img
+				loading="lazy"
 				width="70"
 				height="70"
 				src={country.flag.url}
