@@ -3,19 +3,44 @@
 	import { page } from '$app/state';
 	import { AppConfig } from '$config';
 	import { drawerState } from '$stores/drawerState.state.svelte';
+	import { ChevronUp } from '@lucide/svelte';
 
 	let { phoneNumber = '', message = 'Hello!' } = $props();
 
 	let needsExtraBottomPadding = $state(false);
 	let showFixedButton = $state(false);
-
 	let observer;
 	let originalButton;
 
-	// Effect to react to route changes and set up observer
+	// ✨ START: Back to Top Button Logic
+	let showBackToTop = $state(false);
+
 	$effect(() => {
 		if (!browser) return;
 
+		const handleScroll = () => {
+			showBackToTop = window.scrollY > 200;
+		};
+
+		window.addEventListener('scroll', handleScroll);
+
+		// Cleanup function to remove event listener
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	});
+
+	function scrollToTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	}
+	// ✨ END: Back to Top Button Logic
+
+	// Effect to react to route changes and set up observer for product pages
+	$effect(() => {
+		if (!browser) return;
 		const routesWithFixedBottomButton = ['/produto/[productSlug]', '/product/[productSlug]'];
 		const isProductPage = routesWithFixedBottomButton.includes(page.route?.id || '');
 
@@ -33,7 +58,6 @@
 				document.querySelector('[data-original-button]') ||
 				document.querySelector('button[bind\\:this]') ||
 				document.querySelector('.bry-product-title')?.parentElement?.querySelector('button');
-
 			if (originalButton) {
 				observer = new IntersectionObserver(
 					([entry]) => {
@@ -69,12 +93,26 @@
 
 	function openWhatsApp() {
 		const encodedMessage = encodeURIComponent(message);
-		const url = `${AppConfig.whatsappLink}`; // Fixed extra space
+		const url = `${AppConfig.whatsappLink}`;
 		window.open(url, '_blank');
 	}
 </script>
 
 {#if !drawerState.active}
+	{#if showBackToTop}
+		<button
+			onclick={scrollToTop}
+			class={`fixed right-4 md:right-6 z-50 bg-grey-background border border-grey-light shadow-lg
+		${needsExtraBottomPadding ? 'bottom-[140px]' : 'bottom-[77px]'} md:bottom-[90px] rounded-full p-3 md:p-4
+		shadow-lg hover:shadow-xl transition-all duration-200
+		flex items-center justify-center
+		w-12 h-12 md:w-14 md:h-14 px-0 mx-0 shine-effect`}
+			aria-label="Back to top"
+		>
+			<ChevronUp class="h-5 !mr-0" />
+		</button>
+	{/if}
+
 	<button
 		onclick={openWhatsApp}
 		class={`fixed right-4 md:right-6 z-50 bg-green-dark 
