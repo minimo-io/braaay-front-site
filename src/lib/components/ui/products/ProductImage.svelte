@@ -204,7 +204,7 @@
 
 	<img
 		id="primaryimage"
-		src={image.url}
+		src="/api/imgs-proxy/{image.url}/"
 		alt={image.altText}
 		class={['mx-auto max-w-[50%] md:max-w-[70%]', isFullImage && 'bry-image-kits']}
 		width="680"

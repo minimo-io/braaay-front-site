@@ -28,8 +28,6 @@
 	let isFavorite = $state(wine.isFavorited);
 	let justFavorited = $state(false);
 
-	console.log(wine);
-
 	async function handleFavoriteClick() {
 		isLoading = true;
 		const action = isFavorite ? 'removendo' : 'adicionando';

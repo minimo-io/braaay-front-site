@@ -85,6 +85,7 @@ function generateProductXML(product: any): string {
 	);
 	const link = `${STORE_CONFIG.link}/produto/${product.slug}`;
 	const imageLink = product.featuredImage?.node?.mediaItemUrl || '';
+	const proxyImageLink = `${STORE_CONFIG.link}/api/imgs-proxy/${imageLink}/`;
 	const availability = mapAvailability(product.stockStatus);
 	const price = formatPrice(product.price);
 	const brand = product.allPaProdutoresDeVinho?.nodes?.[0]?.name || 'Braaay';
@@ -95,7 +96,7 @@ function generateProductXML(product: any): string {
 			<g:title>${title}</g:title>
 			<g:description>${removeWPBakeryShortcodes(description)}</g:description>
 			<g:link>${link}</g:link>
-			<g:image_link>${imageLink}</g:image_link>
+			<g:image_link>${proxyImageLink}</g:image_link>
 			<g:condition>new</g:condition>
 			<g:availability>${availability}</g:availability>
 			<g:price>${price}</g:price>
