@@ -1,7 +1,15 @@
+# Allow Googlebots full access for Merchant Center and Search
+User-agent: Googlebot
+Disallow:
+
+User-agent: Googlebot-Image
+Disallow:
+
+# General rule for all other bots
 User-agent: *
 Allow: /
-
-# Disaable all parameters
+# You can keep this line if you want to block other bots from crawling parameterized URLs
+# but it is not necessary and could be removed if you prefer.
 Disallow: /*?*
 
 # Sitemaps

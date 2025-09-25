@@ -48,6 +48,17 @@
 		// Otherwise, just cut at 155
 		return lastSpace > 135 ? truncated.substring(0, lastSpace) + '...' : truncated + '...';
 	}
+	// Remove params from canonicals
+	function removeParams(url: string): string {
+		try {
+			const u = new URL(url);
+			u.search = ''; // removes all query parameters
+			u.hash = ''; // optional: also drop #anchors
+			return u.toString();
+		} catch {
+			return url; // fallback if url is invalid
+		}
+	}
 
 	// Reactive computations using runes - prioritize Yoast SEO data
 	const finalTitle = $derived(stripHtml(seoData?.title || title || defaultTitle));
@@ -55,7 +66,9 @@
 		truncateDescription(seoData?.metaDesc || description || defaultDescription)
 	);
 	const finalOgUrl = $derived(ogUrl || page.url.href);
-	const finalCanonicalUrl = $derived(seoData?.canonical || canonicalUrl || page.url.href);
+	const finalCanonicalUrl = $derived(
+		removeParams(seoData?.canonical || canonicalUrl || page.url.href)
+	);
 	const finalOgImage = $derived(seoData?.opengraphImage?.sourceUrl || ogImage || '');
 	const finalKeywords = $derived(seoData?.focuskw || keywords || '');
 	const isNoIndex = $derived(seoData?.metaRobotsNoindex === 'noindex' || noindex);
