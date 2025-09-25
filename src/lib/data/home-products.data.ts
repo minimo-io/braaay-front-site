@@ -149,8 +149,8 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 			products: [
 				{
 					title: 'El Bananero Japi Beer (Lager)',
-					price: `${m.currencySymbol()}190,00`,
-					regularPrice: `${m.currencySymbol()}190,00`,
+					price: `${m.currencySymbol()}190.00`,
+					regularPrice: `${m.currencySymbol()}190.00`,
 					url: '/uy/producto/cerveza-el-bananero-japi-beer-lager/',
 					score: '',
 					image: {
@@ -160,8 +160,8 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 				},
 				{
 					title: 'Rebelión IPA (Sin alcohol)',
-					price: `${m.currencySymbol()}200,00`,
-					regularPrice: `${m.currencySymbol()}200,00`,
+					price: `${m.currencySymbol()}200.00`,
+					regularPrice: `${m.currencySymbol()}200.00`,
 					url: '/uy/producto/cerveza-sin-alcohol-rebelion-ipa/',
 					score: '',
 					image: {
@@ -171,8 +171,8 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 				},
 				{
 					title: 'Cabesas Bier IPA Atómica',
-					price: `${m.currencySymbol()}186,00`,
-					regularPrice: `${m.currencySymbol()}186,00`,
+					price: `${m.currencySymbol()}186.00`,
+					regularPrice: `${m.currencySymbol()}186.00`,
 					url: '/uy/producto/cerveza-cabesas-bier-ipa-atomica/',
 					score: '',
 					image: {
@@ -182,8 +182,8 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 				},
 				{
 					title: 'The Endless Sour',
-					price: `${m.currencySymbol()}200,00`,
-					regularPrice: `${m.currencySymbol()}200,00`,
+					price: `${m.currencySymbol()}200.00`,
+					regularPrice: `${m.currencySymbol()}200.00`,
 					url: '/uy/producto/cerveza-the-endless-sour-xcs/',
 					score: '',
 					image: {
@@ -193,8 +193,8 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 				},
 				{
 					title: 'American Pils XCS',
-					price: `${m.currencySymbol()}150,00`,
-					regularPrice: `${m.currencySymbol()}150,00`,
+					price: `${m.currencySymbol()}150.00`,
+					regularPrice: `${m.currencySymbol()}150.00`,
 					url: '/uy/producto/cerveza-american-pils-xcs/',
 					score: '',
 					image: {
@@ -206,8 +206,8 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 			kits: [
 				{
 					title: 'Familia Deicas Alvarinho Atlántico Sur 750ml',
-					price: `${m.currencySymbol()}150,00`,
-					regularPrice: `${m.currencySymbol()}150,00`,
+					price: `${m.currencySymbol()}150.00`,
+					regularPrice: `${m.currencySymbol()}150.00`,
 					url: '/uy/producto/vino-familia-deicas-alvarinho-atlantico-sur-750ml/',
 					score: '',
 					image: {
@@ -217,8 +217,8 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 				},
 				{
 					title: 'Davok IPA',
-					price: `${m.currencySymbol()}150,00`,
-					regularPrice: `${m.currencySymbol()}150,00`,
+					price: `${m.currencySymbol()}150.00`,
+					regularPrice: `${m.currencySymbol()}150.00`,
 					url: '/uy/producto/cerveza-davok-ipa/',
 					score: '',
 					image: {
@@ -228,8 +228,8 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 				},
 				{
 					title: 'Equilibrio NEIPA',
-					price: `${m.currencySymbol()}200,00`,
-					regularPrice: `${m.currencySymbol()}200,00`,
+					price: `${m.currencySymbol()}200.00`,
+					regularPrice: `${m.currencySymbol()}200.00`,
 					url: '/uy/producto/cerveza-artesanal-equilibrio-neipa/',
 					score: '',
 					image: {
@@ -239,8 +239,8 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 				},
 				{
 					title: 'Capitan Fumasa Hemp IPA',
-					price: `${m.currencySymbol()}200,00`,
-					regularPrice: `${m.currencySymbol()}200,00`,
+					price: `${m.currencySymbol()}200.00`,
+					regularPrice: `${m.currencySymbol()}200.00`,
 					url: '/uy/producto/cerveza-capitan-fumasa-hemp-ipa-cannabica/',
 					score: '',
 					image: {
@@ -250,8 +250,8 @@ export const HomeProducts = (locale: Locale = 'pt') => {
 				},
 				{
 					title: 'Mastra Stout',
-					price: `${m.currencySymbol()}200,00`,
-					regularPrice: `${m.currencySymbol()}200,00`,
+					price: `${m.currencySymbol()}200.00`,
+					regularPrice: `${m.currencySymbol()}200.00`,
 					url: '/uy/producto/cerveza-artesanal-mastra-american-stout/',
 					score: '',
 					image: {

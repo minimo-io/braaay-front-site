@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
-	import type { YoastSeoData } from '$lib/types';
+	// import type { YoastSeoData } from '$lib/types';
 	import { stripHtml } from '$lib/utils';
 
 	// interface Props {

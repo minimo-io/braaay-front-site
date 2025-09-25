@@ -75,7 +75,6 @@ export const load: LayoutServerLoad = async ({ params, locals, url }) => {
 
 	try {
 		const productCategory: Category = mapCategory(result.data.productCategory);
-		console.log(productCategory);
 		const pagination: Pagination = mapPagination(result.data.products.pageInfo);
 		const seo: YoastSeoData | undefined = productCategory.seo;
 

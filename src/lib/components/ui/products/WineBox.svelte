@@ -28,6 +28,8 @@
 	let isFavorite = $state(wine.isFavorited);
 	let justFavorited = $state(false);
 
+	console.log(wine);
+
 	async function handleFavoriteClick() {
 		isLoading = true;
 		const action = isFavorite ? 'removendo' : 'adicionando';
@@ -94,7 +96,7 @@
 		{#if hasPriceDiscount}
 			<span
 				class="line-through text-gray-500 font-normal text-sm mr-2 text-grey-darkest font-roboto"
-				>{wine.regularPrice}</span
+				>{wine.regularPrice}!</span
 			>
 		{/if}
 		<!-- {wine.price} -->

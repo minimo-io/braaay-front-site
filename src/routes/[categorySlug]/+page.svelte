@@ -18,8 +18,7 @@
 	import Meta from '$components/layout/Meta.svelte';
 	import SchemaCategory from '$components/layout/Schemas/SchemaCategory.svelte';
 	import { buildGraphQLFilters } from '$lib/services/filtersService.js';
-	import { filterState, resetFilters } from '$stores/filters.store.svelte.js';
-	import { onMount } from 'svelte';
+	import { filterState } from '$stores/filters.store.svelte.js';
 
 	const { data } = $props();
 
@@ -66,9 +65,9 @@
 		toggleLoader();
 		try {
 			// Determine current category slug
-			const { categorySlug, subcategorySlug } = page.params;
-			const currentCategorySlug =
-				subcategorySlug && subcategorySlug !== '' ? subcategorySlug : categorySlug;
+			const { categorySlug } = page.params;
+			// const currentCategorySlug =
+			// 	subcategorySlug && subcategorySlug !== '' ? subcategorySlug : categorySlug;
 
 			// Use the abstracted function.
 			// console.log('QUERY_FILTERS', graphqlFilters);
