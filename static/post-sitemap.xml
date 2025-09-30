@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//api.braaay.com/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
+		<loc>https://braaay.com/blog/dica-de-um-bom-vinho-para-presente/</loc>
+		<lastmod>2025-09-18T30:16:00+00:00</lastmod>
+		<image:image>
+			<image:loc>https://api.braaay.com/wp-content/uploads/2025/07/braaay-carousel-mobile-2.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
 		<loc>https://braaay.com/blog/decantadores-de-vinho-entenda-o-papel-e-como-escolher-o-seu/</loc>
 		<lastmod>2025-09-18T21:02:13+00:00</lastmod>
 		<image:image>

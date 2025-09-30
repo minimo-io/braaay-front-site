@@ -178,7 +178,6 @@ async function upsertPost(databaseId, title, uri, slug, content, excerpt, featur
 						seo_nofollow = ?,
 						header_first_subtitle = ?,
 						header_first_paragraph = ?
-
 						WHERE id = ?`,
                     args: [
                         databaseId,
@@ -226,12 +225,12 @@ async function upsertPost(databaseId, title, uri, slug, content, excerpt, featur
             // Insert new post
             const result = await turso.execute({
                 sql: `INSERT INTO posts (
-					graphql_id, title, uri, content, excerpt, featured_image_url, featured_image_alt, 
+					graphql_id, title, uri, slug, content, excerpt, featured_image_url, featured_image_alt, 
 					author_id, created_at, modified_at, language_code,
 					seo_title, seo_description, seo_canonical_url, seo_og_title, seo_og_description, 
 					seo_og_image, seo_twitter_title, seo_twitter_description, seo_twitter_image,
-					seo_keywords, seo_noindex, seo_nofollow, header_first_subtitle = ?, header_first_paragraph = ?
-				) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+					seo_keywords, seo_noindex, seo_nofollow, header_first_subtitle, header_first_paragraph
+				) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
                 args: [
                     databaseId,
                     title,
@@ -287,8 +286,8 @@ async function migrateForLanguage(wpClient, languageCode) {
             const featured_image_alt = post.featuredImage?.node?.altText || null;
             const author = post.author?.node;
             const categories = post.categories?.nodes || [];
-            const headerFirstSubtitle = post.header.firstSubtitle;
-            const headerFirstParagraph = post.header.firstParagraph;
+            const headerFirstSubtitle = post.header?.firstSubtitle || null;
+            const headerFirstParagraph = post.header?.firstParagraph || null;
             // Upsert author first
             const author_id = author
                 ? await upsertAuthor(author.databaseId, author.name, author.avatar?.url || null, languageCode)
