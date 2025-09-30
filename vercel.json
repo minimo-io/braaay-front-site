@@ -1,6 +1,52 @@
 {
 	"redirects": [
 		{
+			"source": "/blog/novidades/o-que-fazer-em-sao-paulo/",
+			"destination": "https://braaay.com/blog/o-que-fazer-em-sao-paulo/",
+			"permanent": true
+		},
+
+		{
+			"source": "/produto/mayos-moscatel-rose/",
+			"destination": "https://braaay.com/produto/mayos-moscatel-rose-espumante-nacional/",
+			"permanent": true
+		},
+		{
+			"source": "/blog/sobre-vinho/potencial-de-guarda-do-vinho-quando-abrir-a-garrafa/",
+			"destination": "https://braaay.com/blog/potencial-de-guarda-do-vinho-quando-abrir-a-garrafa/",
+			"permanent": true
+		},
+		{
+			"source": "/produto/braccobosca-ombu-gran-reserva/",
+			"destination": "https://braaay.com/produto/vinho-braccobosca-cabernet-franc-ombu-gran-reserva/",
+			"permanent": true
+		},
+		{
+			"source": "/produto/artesana-zinfandel-reserva-edicao-limitada/",
+			"destination": "https://braaay.com/produto/vinho-artesana-zinfandel-reserva-edicao-limitada/",
+			"permanent": true
+		},
+		{
+			"source": "/produto/vinhedos-do-monte-agudo-cabernet-sauvignon-merlot/",
+			"destination": "https://braaay.com/produto/vinho-vinhedos-do-monte-agudo-cabernet-sauvignon-merlot-750ml/",
+			"permanent": true
+		},
+		{
+			"source": "/blog/harmonizacoes/vinhos-brasileiros-e-a-culinaria-local/",
+			"destination": "https://braaay.com/blog/vinhos-brasileiros-e-a-culinaria-local/",
+			"permanent": true
+		},
+		{
+			"source": "/blog/sobre-vinho/como-armazenar-vinhos-para-preservar-a-sua-qualidade-estudo/",
+			"destination": "https://braaay.com/blog/como-armazenar-vinhos-para-preservar-a-sua-qualidade-estudo/",
+			"permanent": true
+		},
+		{
+			"source": "/uy/cerveceria/cerveceria-boar/",
+			"destination": "https://braaay.com/uy/cerveceria/boar/",
+			"permanent": true
+		},
+		{
 			"source": "/uy/bares/birra-brava/",
 			"destination": "https://braaay.com/uy/cervezas/",
 			"permanent": true
