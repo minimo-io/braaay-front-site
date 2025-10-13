@@ -27,7 +27,7 @@
 				<li class="glide__slide w-full">
 					<a
 						href={localizeHref(
-							'/produto/6a-edicao-da-confraria-entre-tacas-e-mulheres-rose-na-taca-poder-no-olhar/'
+							'/produto/7a-edicao-confraria-entre-tacas-e-mulheres-borbulhas-brilhos/'
 						)}
 						class="not-hover-effect"
 					>
