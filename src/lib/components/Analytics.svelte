@@ -11,6 +11,9 @@
 		measurement_id = 'G-2LQPN26WNJ';
 	}
 
+	// ID do Google Ads Conversion
+	const ads_conversion_id = 'AW-17646560957';
+
 	onMount(() => {
 		// Apenas executamos no browser
 		if (browser) {
@@ -25,7 +28,13 @@
 				window.dataLayer.push(arguments);
 			};
 			window.gtag('js', new Date());
+
+			// window.gtag('config', measurement_id);
+			// Configura o GA4
 			window.gtag('config', measurement_id);
+
+			// Configura o Google Ads
+			window.gtag('config', ads_conversion_id);
 		}
 	});
 
