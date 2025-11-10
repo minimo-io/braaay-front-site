@@ -47,6 +47,7 @@ export async function POST({ request, url }) {
 				items: paymentPayload.items,
 				statement_descriptor: 'Braaay',
 				payment_methods: {
+					default_payment_method_id: 'pix',
 					// excluded_payment_methods: [
 					// 	{
 					// 		id: 'master'
@@ -59,8 +60,8 @@ export async function POST({ request, url }) {
 						// {
 						// 	id: 'bank_transfer'
 						// },
-						{ id: 'debit_card' },
-						{ id: 'credit_card' }
+						// { id: 'debit_card' },
+						// { id: 'credit_card' }
 					]
 					// installments: 4
 				},
