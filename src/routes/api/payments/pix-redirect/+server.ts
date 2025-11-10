@@ -56,9 +56,9 @@ export async function POST({ request, url }) {
 						// {
 						// 	id: 'ticket'
 						// },
-						{
-							id: 'bank_transfer'
-						},
+						// {
+						// 	id: 'bank_transfer'
+						// },
 						{ id: 'debit_card' },
 						{ id: 'credit_card' }
 					]
