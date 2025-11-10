@@ -4,19 +4,19 @@
       "id": 27,
       "name": "Tintos",
       "url": "/vinhos/tintos/",
-      "count": 95
+      "count": 99
     },
     {
       "id": 30,
       "name": "Espumantes",
       "url": "/vinhos/espumantes/",
-      "count": 25
+      "count": 31
     },
     {
       "id": 28,
       "name": "Brancos",
       "url": "/vinhos/brancos/",
-      "count": 25
+      "count": 27
     },
     {
       "id": 29,
@@ -34,7 +34,7 @@
       "id": 416,
       "name": "Fortificados",
       "url": "/vinhos/fortificados/",
-      "count": 2
+      "count": 3
     }
   ],
   "uy": []

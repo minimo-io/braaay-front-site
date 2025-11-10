@@ -4,7 +4,7 @@
       "id": 132617,
       "sku": "BR-26-28-132617",
       "uri": "/produto/espumante-manus-virgo-moscato-giallo-2024/",
-      "name": "Manus Virgo Moscato Giallo 2024 (750ml)",
+      "name": "Espumante Manus Virgo Moscato Giallo 2024 (750ml)",
       "priceString": "R$81,00",
       "regularPrice": "R$90,00",
       "price": 81,
@@ -13,21 +13,6 @@
       "image": {
         "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2025/08/espumante-manus-virgo-moscato-giallo-2024.png",
         "altText": "espumante-manus-virgo-moscato-giallo-2024"
-      }
-    },
-    {
-      "id": 132592,
-      "sku": "BR-26-28-132592",
-      "uri": "/produto/vinho-branco-manus-classico-chardonnay-750ml/",
-      "name": "Manus Clássico Chardonnay 2023 (750ml)",
-      "priceString": "R$180,00",
-      "regularPrice": "R$199,99",
-      "price": 180,
-      "quantity": 1,
-      "maxQuantity": 2,
-      "image": {
-        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2025/08/vinho-manus-chardonnay-classico.png",
-        "altText": "vinho-manus-chardonnay-classico"
       }
     },
     {
@@ -46,48 +31,123 @@
       }
     },
     {
-      "id": 132143,
-      "sku": "BR-26-30-132143",
-      "uri": "/produto/espumante-nacional-brut-casa-perini-charmat/",
-      "name": "Espumante Brut Perini Método Charmat 750ml",
-      "priceString": "R$60,35",
-      "regularPrice": "R$71,00",
-      "price": 60.35,
+      "id": 131868,
+      "sku": "BR-26-30-131868",
+      "uri": "/produto/espumante-manus-sur-lie-rio-grande-do-sul/",
+      "name": "Espumante Manus Sur Lie",
+      "priceString": "R$162,00",
+      "regularPrice": "R$180,00",
+      "price": 162,
       "quantity": 1,
-      "maxQuantity": 5,
+      "maxQuantity": 10,
       "image": {
-        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2025/05/casa-perini-espumante-brut-charmat-compress.png",
-        "altText": "casa-perini-espumante-brut-charmat-compress"
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/11/manus-espumante-sur-lie.png",
+        "altText": "manus-espumante-sur-lie"
       }
     },
     {
-      "id": 132126,
-      "sku": "IT-tinto-132126",
-      "uri": "/produto/vinho-italiano-tinto-castorani-majolica-montepulciano-dabruzzo-2020/",
-      "name": "Castorani Majolica Montepulciano d'Abruzzo 2020",
-      "priceString": "R$113,90",
-      "regularPrice": "R$125,00",
-      "price": 113.9,
+      "id": 131803,
+      "sku": "BR-RIOSOL-0001",
+      "uri": "/produto/espumante-rio-sol-demi-sec-750ml-braaay/",
+      "name": "Espumante Rio Sol Demi Sec 750ml",
+      "priceString": "R$45,00",
+      "regularPrice": "R$50,00",
+      "price": 45,
       "quantity": 1,
       "maxQuantity": 3,
       "image": {
-        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2025/05/vinho-matteo-sangiovese-de-puglia.png",
-        "altText": "vinho-matteo-sangiovese-de-puglia"
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/11/rio_sol_demi_sec_braaay-1.png",
+        "altText": ""
       }
     },
     {
-      "id": 131417,
-      "sku": "UY-26-27-131417",
-      "uri": "/produto/vinho-braccobosca-cabernet-franc-ombu-gran-reserva/",
-      "name": "Braccobosca Cabernet Franc Ombú Gran Reserva",
-      "priceString": "R$455,00",
-      "regularPrice": "R$501,99",
-      "price": 455,
+      "id": 131802,
+      "sku": "BR-RIOTR-001",
+      "uri": "/produto/espumante-rio-sol-tradition-750ml-braaay/",
+      "name": "Espumante Rio Sol Tradition 750ml",
+      "priceString": "R$85,50",
+      "regularPrice": "R$95,00",
+      "price": 85.5,
+      "quantity": 1,
+      "maxQuantity": 2,
+      "image": {
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/11/ESPUMANTE_RIO_SOL_TRADITION_750ML-braaay-1.png",
+        "altText": ""
+      }
+    },
+    {
+      "id": 131421,
+      "sku": "BR-26-30-131421",
+      "uri": "/produto/pizzato-nature-branco/",
+      "name": "Espumante Pizzato Nature Branco",
+      "priceString": "R$153,00",
+      "regularPrice": "R$170,00",
+      "price": 153,
+      "quantity": 1,
+      "maxQuantity": 4,
+      "image": {
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/08/Pizzato-Nature-Branco.png",
+        "altText": "Pizzato Nature Branco"
+      }
+    },
+    {
+      "id": 131400,
+      "sku": "BR-26-30-131400",
+      "uri": "/produto/mayos-moscatel-rose-espumante-nacional/",
+      "name": "Espumante Mayos Moscatel Rosé",
+      "priceString": "R$49,50",
+      "regularPrice": "R$55,00",
+      "price": 49.5,
+      "quantity": 1,
+      "maxQuantity": 13,
+      "image": {
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/08/MAYOS.webp",
+        "altText": "MAYOS"
+      }
+    },
+    {
+      "id": 131384,
+      "sku": "BR-26-30-131384",
+      "uri": "/produto/manus-blanc-de-blanc-nature/",
+      "name": "Manus Blanc de Blanc Nature",
+      "priceString": "R$162,00",
+      "regularPrice": "R$180,00",
+      "price": 162,
+      "quantity": 1,
+      "maxQuantity": 7,
+      "image": {
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/08/Manus-Blanc-de-Blanc.webp",
+        "altText": "Manus Blanc de Blanc"
+      }
+    },
+    {
+      "id": 131367,
+      "sku": "BR-26-29-131367",
+      "uri": "/produto/vinho-manus-brut-rose/",
+      "name": "Manus Virgo Brut Rosé",
+      "priceString": "R$126,00",
+      "regularPrice": "R$140,00",
+      "price": 126,
+      "quantity": 1,
+      "maxQuantity": 4,
+      "image": {
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/08/Manus-Brut-Rose.png",
+        "altText": "Manus Brut Rose"
+      }
+    },
+    {
+      "id": 130674,
+      "sku": "BR-26-30-222-130674",
+      "uri": "/produto/espumante-capoani-moscato-giallo-champenoise/",
+      "name": "Espumante Capoani Moscato Giallo",
+      "priceString": "R$121,50",
+      "regularPrice": "R$135,00",
+      "price": 121.5,
       "quantity": 1,
       "maxQuantity": 1,
       "image": {
-        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2024/08/BraccoBosca-1-1.webp",
-        "altText": "BraccoBosca (1)"
+        "mediaItemUrl": "https://api.braaay.com/wp-content/uploads/2023/11/espumante-capoani-moscato-giallo.webp",
+        "altText": "espumante-capoani-moscato-giallo"
       }
     }
   ],

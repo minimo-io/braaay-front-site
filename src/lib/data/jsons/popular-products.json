@@ -34,17 +34,6 @@
       }
     },
     {
-      "id": 119457,
-      "title": "Don Pascual Cabernet Merlot",
-      "url": "/produto/vinho-don-pascual-cabernet-merlot/",
-      "price": "R$47,90",
-      "regularPrice": "R$47,90",
-      "image": {
-        "alt": "vinho-don-pascual-cabernet-merlot",
-        "src": "https://api.braaay.com/wp-content/uploads/2023/08/vinho-don-pascual-cabernet-merlot.webp"
-      }
-    },
-    {
       "id": 130646,
       "title": "Frisante Mayos Green",
       "url": "/produto/frisante-mayos-green-poucas-calorias/",
@@ -89,6 +78,17 @@
       }
     },
     {
+      "id": 131655,
+      "title": "TerraNoble Caménère (375ml)",
+      "url": "/produto/vinho-chileno-terranoble-camenere-375ml/",
+      "price": "R$31,00",
+      "regularPrice": "R$31,00",
+      "image": {
+        "alt": "terranoble-reserve-carmenere",
+        "src": "https://api.braaay.com/wp-content/uploads/2024/09/terranoble-reserve-carmenere.png"
+      }
+    },
+    {
       "id": 130753,
       "title": "Artesana Tannat Reserva",
       "url": "/produto/vinho-tannat-reserva-artesana-uruguai/",
@@ -122,17 +122,6 @@
       }
     },
     {
-      "id": 130664,
-      "title": "Espumante Mayos Brut (Charmat)",
-      "url": "/produto/espumante-mayos-brut-charmat/",
-      "price": "R$48,00",
-      "regularPrice": "R$48,00",
-      "image": {
-        "alt": "espumante-mayos-brut-charmat",
-        "src": "https://api.braaay.com/wp-content/uploads/2023/11/espumante-mayos-brut-charmat.webp"
-      }
-    },
-    {
       "id": 119561,
       "title": "Picarón Aresti Cabernet Sauvignon",
       "url": "/produto/vinho-picaron-aresti-cabernet-sauvignon/",
@@ -163,6 +152,17 @@
       "image": {
         "alt": "vinho-artesana-tannat-zinfandel-uruguai",
         "src": "https://api.braaay.com/wp-content/uploads/2023/07/vinho-artesana-tannat-zinfandel-uruguai.png"
+      }
+    },
+    {
+      "id": 132376,
+      "title": "Don Pascual Coastal White 750ml",
+      "url": "/produto/vinho-branco-don-pascual-coastal-white-750ml-uruguai/",
+      "price": "R$81,50",
+      "regularPrice": "R$81,50",
+      "image": {
+        "alt": "vinho-uruguai-don-pascual-coastal-white",
+        "src": "https://api.braaay.com/wp-content/uploads/2025/07/vinho-uruguai-don-pascual-coastal-white.png"
       }
     }
   ],

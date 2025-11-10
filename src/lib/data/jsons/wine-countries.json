@@ -3,13 +3,13 @@
     {
       "name": "Brasil",
       "url": "/pais/brasil/",
-      "count": 77,
+      "count": 88,
       "flag": "https://api.braaay.com/wp-content/uploads/2023/05/brasil-flag.png"
     },
     {
       "name": "Uruguai",
       "url": "/pais/uruguai/",
-      "count": 51,
+      "count": 52,
       "flag": "https://api.braaay.com/wp-content/uploads/2023/05/uruguai-flag.png"
     },
     {
@@ -21,7 +21,7 @@
     {
       "name": "Argentina",
       "url": "/pais/argentina/",
-      "count": 10,
+      "count": 11,
       "flag": "https://api.braaay.com/wp-content/uploads/2023/05/argentina-flag.png"
     },
     {

@@ -6,34 +6,39 @@
       "count": 34
     },
     {
-      "name": "Uva Chardonnay",
+      "name": "Chardonnay",
       "url": "/uva/chardonnay/",
-      "count": 27
+      "count": 30
     },
     {
       "name": "Cabernet Sauvignon",
       "url": "/uva/cabernet-sauvignon/",
-      "count": 23
+      "count": 24
     },
     {
       "name": "Merlot",
       "url": "/uva/merlot/",
-      "count": 21
+      "count": 23
     },
     {
       "name": "Pinot Noir",
       "url": "/uva/pinot-noir/",
-      "count": 19
+      "count": 21
     },
     {
       "name": "Malbec",
       "url": "/uva/malbec/",
-      "count": 10
+      "count": 12
     },
     {
-      "name": "Carmènére",
+      "name": "Carménère",
       "url": "/uva/carmenere/",
       "count": 9
+    },
+    {
+      "name": "Riesling",
+      "url": "/uva/riesling/",
+      "count": 7
     },
     {
       "name": "Cabernet Franc",
@@ -51,13 +56,23 @@
       "count": 6
     },
     {
-      "name": "Riesling",
-      "url": "/uva/riesling/",
-      "count": 5
+      "name": "Moscato",
+      "url": "/uva/moscato/",
+      "count": 4
+    },
+    {
+      "name": "Syrah",
+      "url": "/uva/syrah/",
+      "count": 4
     },
     {
       "name": "Marselan",
       "url": "/uva/marselan/",
+      "count": 4
+    },
+    {
+      "name": "Viognier",
+      "url": "/uva/viognier/",
       "count": 4
     },
     {
@@ -71,24 +86,24 @@
       "count": 4
     },
     {
-      "name": "Syrah",
-      "url": "/uva/syrah/",
-      "count": 3
-    },
-    {
       "name": "Pinot Grigio",
       "url": "/uva/pinot-grigio/",
-      "count": 3
-    },
-    {
-      "name": "Viognier",
-      "url": "/uva/viognier/",
       "count": 3
     },
     {
       "name": "Zinfandel",
       "url": "/uva/zinfandel/",
       "count": 3
+    },
+    {
+      "name": "Sauvignon Blanc",
+      "url": "/uva/sauvignon-blanc/",
+      "count": 3
+    },
+    {
+      "name": "Gewurztraminer",
+      "url": "/uva/gewurztraminer/",
+      "count": 2
     },
     {
       "name": "Montepulciano",
@@ -111,6 +126,11 @@
       "count": 2
     },
     {
+      "name": "Chenin",
+      "url": "/uva/chenin/",
+      "count": 2
+    },
+    {
       "name": "Touriga Nacional",
       "url": "/uva/touriga-nacional/",
       "count": 2
@@ -123,11 +143,6 @@
     {
       "name": "Malvasia",
       "url": "/uva/malvasia/",
-      "count": 2
-    },
-    {
-      "name": "Sauvignon Blanc",
-      "url": "/uva/sauvignon-blanc/",
       "count": 2
     },
     {
@@ -151,18 +166,8 @@
       "count": 1
     },
     {
-      "name": "Moscato",
-      "url": "/uva/moscato/",
-      "count": 1
-    },
-    {
       "name": "Alicante Bouschet",
       "url": "/uva/alicante-bouschet/",
-      "count": 1
-    },
-    {
-      "name": "Chenin",
-      "url": "/uva/chenin/",
       "count": 1
     },
     {
