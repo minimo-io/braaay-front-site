@@ -17,6 +17,7 @@ export const AppConfig = Object.freeze({
 	payments: {
 		allowedOrigins: ['https://braaay.com', 'https://www.braaay.com', 'https://braaay.com'],
 		checkoutCreditCardMode: 'redirect', // or transparent
+		checkoutPixMode: 'redirect', // or transparent
 		timeout: 30
 	},
 

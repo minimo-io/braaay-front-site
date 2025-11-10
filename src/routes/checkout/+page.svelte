@@ -575,6 +575,7 @@
 		toggleLoader();
 	}
 
+	// Credit card redirect
 	async function processCreditCardPayment_Redirect(
 		items: Items[],
 		orderData: { orderId: string | number; orderKey: string | number }
@@ -612,6 +613,54 @@
 			case 'rejected':
 				launchToast(
 					`Pagamento recusado: ${result.status_detail || 'verifique os dados do cartão.'}`,
+					'error',
+					5000
+				);
+				isProcessingOrder = false; // Re-enable the UI for another attempt
+				break;
+		}
+	}
+
+	// Pix payment redirect
+	async function processPixPayment_Redirect(
+		items: Items[],
+		orderData: { orderId: string | number; orderKey: string | number }
+	) {
+		isProcessingOrder = true;
+		toggleLoader();
+		let paymentPayload = {
+			items,
+			orderData
+		};
+
+		// Call your backend API. Replace with your actual endpoint.
+		const response = await fetch('/api/payments/pix-redirect', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json', 'x-braaay-internal': '819725491' },
+			body: JSON.stringify(paymentPayload)
+		});
+		const result = await response.json();
+
+		console.log('PIX REDIRECT STARTED...');
+
+		// If error
+		if (!response.ok) {
+			// Handle errors from your API, which should ideally forward Mercado Pago's error.
+			const errorMessage = result.message || 'Payment failed. Please try again.';
+			console.error(errorMessage);
+			launchToast(errorMessage, 'error', 5000);
+			isProcessingOrder = false; // Re-enable the UI for another attempt
+		}
+
+		// If ok
+		switch (result.status) {
+			case 'approved':
+				launchToast('Redirecionando para o Mercado Pago...', 'success');
+				window.location = result.init_point;
+				break;
+			case 'rejected':
+				launchToast(
+					`Pagamento pix recusado: ${result.status_detail || 'verifique os dados.'}`,
 					'error',
 					5000
 				);
@@ -709,12 +758,42 @@
 				}
 			} else {
 				// Else we redirect to the second step for QR Code Payment (PIX)
-				goto(
-					localizeHref(
-						`/checkout/pagamento/${orderCreateResult.orderId}/?sess=${orderCreateResult.session}`
-					)
-					// { replaceState: true }
-				);
+				if (AppConfig.payments.checkoutPixMode == 'transparent') {
+					goto(
+						localizeHref(
+							`/checkout/pagamento/${orderCreateResult.orderId}/?sess=${orderCreateResult.session}`
+						)
+						// { replaceState: true }
+					);
+				} else if (AppConfig.payments.checkoutPixMode == 'redirect') {
+					// redirect pix mode
+					console.log('Pix redirect chosen from config.');
+
+					// Credit card redirect payment
+					toggleLoader();
+
+					let items: Items[] = [];
+					// Add cart items
+					cart.subscribe((c) => {
+						c.items.forEach((item) => {
+							items.push({
+								unit_price: item.price,
+								title: item.name,
+								quantity: item.quantity,
+								id: item.id.toString()
+							});
+						});
+					});
+					// add shipping
+					items.push({
+						unit_price: parseFloat(shippingOption!.cost),
+						title: shippingOption!.label,
+						quantity: 1,
+						id: shippingOption!.id
+					});
+					// Let's go, do the payload
+					await processPixPayment_Redirect(items, orderCreateResult);
+				}
 			}
 		} else {
 			launchToast('Não foi possível criar o pedido. Tente novamente.', 'error');
