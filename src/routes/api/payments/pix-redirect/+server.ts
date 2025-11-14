@@ -47,22 +47,22 @@ export async function POST({ request, url }) {
 				items: paymentPayload.items,
 				statement_descriptor: 'Braaay',
 				payment_methods: {
-					default_payment_method_id: 'pix',
+					default_payment_method_id: 'Pix'
 					// excluded_payment_methods: [
 					// 	{
 					// 		id: 'master'
 					// 	}
 					// ],
-					excluded_payment_types: [
-						// {
-						// 	id: 'ticket'
-						// },
-						// {
-						// 	id: 'bank_transfer'
-						// },
-						// { id: 'debit_card' },
-						// { id: 'credit_card' }
-					]
+					// excluded_payment_types: [
+					// {
+					// 	id: 'ticket'
+					// },
+					// {
+					// 	id: 'bank_transfer'
+					// },
+					// { id: 'debit_card' },
+					// { id: 'credit_card' }
+					// ]
 					// installments: 4
 				},
 				back_urls: {

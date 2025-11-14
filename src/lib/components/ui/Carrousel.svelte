@@ -24,7 +24,7 @@
 	<div class="glide__track" data-glide-el="track">
 		<ul class="glide__slides">
 			{#if locale == 'pt'}
-				<li class="glide__slide w-full">
+				<!-- <li class="glide__slide w-full">
 					<a
 						href={localizeHref(
 							'/produto/7a-edicao-confraria-entre-tacas-e-mulheres-borbulhas-brilhos/'
@@ -32,17 +32,14 @@
 						class="not-hover-effect"
 					>
 						<picture>
-							<!-- Mobile image: for screens up to 767px -->
 							<source
 								srcset="/images/carousel/braaay-carousel-mobile-1.jpg"
 								media="(max-width: 767px)"
 							/>
-							<!-- Desktop image: for screens 768px and above -->
 							<source
 								srcset="/images/carousel/braaay-carousel-desktop-1.jpg"
 								media="(min-width: 768px)"
 							/>
-							<!-- Fallback image -->
 							<img
 								src="/images/carousel/braaay-carousel-desktop-1.jpg"
 								alt="placeholder 2"
@@ -52,7 +49,7 @@
 							/>
 						</picture>
 					</a>
-				</li>
+				</li> -->
 				<li class="glide__slide w-full">
 					<a href={localizeHref('/kits/')} class="not-hover-effect">
 						<picture>
@@ -137,7 +134,7 @@
 		class="glide__bullets absolute bottom-4 left-1/2 transform -translate-x-1/2"
 		data-glide-el="controls[nav]"
 	>
-		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=0">&nbsp;</button>
+		<!-- <button class="glide__bullet" aria-label="bullet" data-glide-dir="=0">&nbsp;</button> -->
 		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=1">&nbsp;</button>
 		<button class="glide__bullet" aria-label="bullet" data-glide-dir="=2">&nbsp;</button>
 	</div>
